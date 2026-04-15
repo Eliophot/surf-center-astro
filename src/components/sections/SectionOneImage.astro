@@ -1,8 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import ListIcon from '../ListIcon.astro';
-
 interface ListItem {
   text: string;
   icon?: string;
@@ -50,7 +48,7 @@ const titleId = `${sectionId}-title`;
         <ul class="s1__list" role="list">
           {list.map((item) => (
             <li>
-              {item.icon && <ListIcon name={item.icon} />}
+              <span class="s1__dash" aria-hidden="true">—</span>
               <span>{item.text}</span>
             </li>
           ))}
@@ -125,7 +123,12 @@ const titleId = `${sectionId}-title`;
     line-height: 1.5;
   }
 
-  .s1__list li > span {
+  .s1__dash {
+    color: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .s1__list li > span:last-child {
     padding-top: 1px;
   }
 

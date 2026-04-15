@@ -264,6 +264,7 @@ p { text-wrap: pretty; }
 /* ===== Buttons ===== */
 
 .btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -278,11 +279,11 @@ p { text-wrap: pretty; }
   text-decoration: none;
   border: 1.5px solid transparent;
   cursor: pointer;
-  transition: all var(--t-fast) var(--ease);
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.btn:hover { transform: translateY(-2px); }
-.btn:active { transform: translateY(0) scale(0.97); }
+.btn:active { transform: scale(0.97); }
 
 .btn--primary {
   background: var(--c-orange);
@@ -290,10 +291,33 @@ p { text-wrap: pretty; }
   border-color: var(--c-orange);
 }
 .btn--primary:hover {
-  background: var(--c-orange-dark);
-  border-color: var(--c-orange-dark);
-  box-shadow: var(--shadow-glow);
   color: #fff;
+}
+
+.btn-flip__inner {
+  display: grid;
+  grid-template: 1fr / 1fr;
+  overflow: hidden;
+  height: 1.1em;
+  perspective: 200px;
+}
+.btn-flip__front,
+.btn-flip__back {
+  grid-area: 1 / 1;
+  backface-visibility: hidden;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease;
+}
+.btn-flip__back {
+  transform: rotateX(90deg) translateZ(0.55em);
+  opacity: 0;
+}
+.btn:hover .btn-flip__front {
+  transform: rotateX(-90deg) translateZ(0.55em);
+  opacity: 0;
+}
+.btn:hover .btn-flip__back {
+  transform: rotateX(0deg);
+  opacity: 1;
 }
 
 .btn--secondary {
@@ -304,6 +328,7 @@ p { text-wrap: pretty; }
 .btn--secondary:hover {
   background: var(--c-btn-secondary-hover-bg);
   color: var(--c-btn-secondary-hover-color);
+  box-shadow: 0 0 0 3px rgb(0 0 0 / 0.06);
 }
 
 .btn--ghost {
@@ -312,8 +337,9 @@ p { text-wrap: pretty; }
   border-color: rgb(255 255 255 / 0.35);
 }
 .btn--ghost:hover {
-  border-color: #fff;
-  background: rgb(255 255 255 / 0.1);
+  border-color: rgb(255 255 255 / 0.7);
+  background: rgb(255 255 255 / 0.08);
+  box-shadow: 0 0 0 3px rgb(255 255 255 / 0.08);
 }
 
 .btn--outline {
@@ -324,6 +350,7 @@ p { text-wrap: pretty; }
 .btn--outline:hover {
   border-color: var(--c-orange);
   color: var(--c-orange);
+  box-shadow: 0 0 0 3px rgb(247 123 70 / 0.1);
 }
 
 .btn--sm {

@@ -59,7 +59,7 @@ const titleId = `${sectionId}-title`;
 
       {cta && (
         cta.booking
-          ? <button type="button" class="btn btn--primary" data-booking>{cta.label}</button>
+          ? <button type="button" class="btn btn--primary" data-booking><span class="btn-flip__inner"><span class="btn-flip__front">{cta.label}</span><span class="btn-flip__back">{cta.label}</span></span></button>
           : <a href={cta.href} class="btn btn--primary">{cta.label}</a>
       )}
     </div>

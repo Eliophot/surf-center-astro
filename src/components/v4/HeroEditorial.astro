@@ -1,0 +1,148 @@
+<section class="hedit" data-hero aria-label="Surf Center — base nautique au lac de Sainte-Croix">
+  <div class="container hedit__inner">
+    <div class="hedit__top">
+      <p class="hedit__location">Les Salles-sur-Verdon, Provence</p>
+      <div class="hedit__rule" aria-hidden="true"></div>
+      <p class="hedit__tagline">Base nautique · Lac de Sainte-Croix</p>
+    </div>
+
+    <h1 class="hedit__title">
+      <span class="hedit__title-line">Surf</span>
+      <span class="hedit__title-line hedit__title-line--indent">Center</span>
+    </h1>
+
+    <div class="hedit__bottom">
+      <div class="hedit__caption">
+        <p>Location bateaux & activités nautiques au cœur des Gorges du Verdon. Depuis plus de 10 ans.</p>
+        <div class="hedit__actions">
+          <button type="button" class="btn btn--primary" data-booking>Réserver</button>
+          <a href="#activites" class="hedit__link">Découvrir ↓</a>
+        </div>
+      </div>
+      <div class="hedit__frame">
+        <img
+          src="/GettyImages-577312024 (1).jpg"
+          alt="Kayak sur les eaux turquoise des Gorges du Verdon"
+          width="960" height="640"
+          loading="eager" fetchpriority="high" decoding="async"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hedit {
+    padding: calc(var(--header-h) + var(--s-10)) 0 var(--s-16);
+    background: var(--c-bg);
+  }
+
+  .hedit__top {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    margin-bottom: var(--s-12);
+  }
+
+  .hedit__location,
+  .hedit__tagline {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    white-space: nowrap;
+  }
+
+  .hedit__rule {
+    flex: 1;
+    height: 1px;
+    background: var(--c-border);
+  }
+
+  .hedit__title {
+    font-size: clamp(5rem, 18vw, 16rem);
+    font-weight: 200;
+    line-height: 0.85;
+    letter-spacing: -0.06em;
+    text-transform: uppercase;
+    color: var(--c-text);
+    margin-bottom: var(--s-12);
+  }
+
+  .hedit__title-line {
+    display: block;
+    animation: hedit-fade 800ms var(--ease-smooth) both;
+  }
+
+  .hedit__title-line--indent {
+    padding-left: clamp(3rem, 12vw, 14rem);
+    animation-delay: 200ms;
+  }
+
+  @keyframes hedit-fade {
+    from { opacity: 0; transform: translateY(0.3em); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hedit__bottom {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+    align-items: end;
+  }
+
+  .hedit__caption {
+    max-width: 320px;
+  }
+
+  .hedit__caption p {
+    font-size: 0.88rem;
+    color: var(--c-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--s-8);
+  }
+
+  .hedit__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+  }
+
+  .hedit__link {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    transition: color var(--t-fast);
+  }
+
+  .hedit__link:hover { color: var(--c-orange); }
+
+  .hedit__frame {
+    overflow: hidden;
+    border-radius: var(--r-sm);
+  }
+
+  .hedit__frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    animation: hedit-fade 1s var(--ease-smooth) 500ms both;
+  }
+
+  @media (min-width: 900px) {
+    .hedit__bottom {
+      grid-template-columns: 280px 1fr;
+      gap: var(--s-16);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hedit__title-line,
+    .hedit__frame img { animation: none; }
+  }
+</style>

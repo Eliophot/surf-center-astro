@@ -1,0 +1,102 @@
+---
+import { meshLinks } from '../../data/home';
+---
+
+<section class="alinks" aria-labelledby="v5-mesh-title">
+  <div class="container alinks__head reveal">
+    <h2 id="v5-mesh-title" class="alinks__title">Explorer</h2>
+  </div>
+
+  <div class="alinks__list">
+    {meshLinks.map((link, i) => (
+      <a href={link.href} class="alinks__row reveal" style={`--delay: ${i * 60}ms`}>
+        <span class="alinks__idx">{String(i + 1).padStart(2, '0')}</span>
+        <span class="alinks__name">{link.title}</span>
+        <span class="alinks__arrow">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <path d="M8 20L20 8M20 8H10M20 8v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .alinks {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+    overflow: hidden;
+  }
+
+  .alinks__head {
+    margin-bottom: var(--s-8);
+  }
+
+  .alinks__title {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .alinks__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .alinks__row {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    padding: var(--s-6) var(--s-6);
+    border-bottom: 1px solid var(--c-border-light);
+    color: var(--c-text);
+    transition: all var(--t-fast);
+  }
+
+  .alinks__row:first-child {
+    border-top: 1px solid var(--c-border-light);
+  }
+
+  .alinks__row:hover {
+    background: var(--c-bg);
+    padding-left: var(--s-8);
+  }
+
+  .alinks__idx {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--c-text-muted);
+    min-width: 2rem;
+  }
+
+  .alinks__name {
+    flex: 1;
+    font-size: clamp(1.2rem, 3vw, 2.2rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    transition: color var(--t-fast);
+  }
+
+  .alinks__row:hover .alinks__name { color: var(--c-orange); }
+
+  .alinks__arrow {
+    flex-shrink: 0;
+    color: var(--c-text-muted);
+    transition: transform var(--t-fast) var(--ease), color var(--t-fast);
+  }
+
+  .alinks__row:hover .alinks__arrow {
+    transform: translate(4px, -4px);
+    color: var(--c-orange);
+  }
+
+  @media (min-width: 768px) {
+    .alinks__row { padding: var(--s-8) var(--s-8); }
+    .alinks__row:hover { padding-left: var(--s-12); }
+  }
+</style>

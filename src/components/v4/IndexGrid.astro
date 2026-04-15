@@ -1,0 +1,122 @@
+---
+import { meshLinks } from '../../data/home';
+---
+
+<section class="idxgrid" aria-labelledby="v4-mesh-title">
+  <div class="container">
+    <div class="idxgrid__head reveal">
+      <span class="idxgrid__label">Explorer</span>
+      <div class="idxgrid__rule" aria-hidden="true"></div>
+      <h2 id="v4-mesh-title" class="idxgrid__title">Index</h2>
+    </div>
+
+    <div class="idxgrid__list">
+      {meshLinks.map((link, i) => (
+        <a href={link.href} class="idxgrid__row reveal" style={`--delay: ${i * 60}ms`}>
+          <span class="idxgrid__num">{String(i + 1).padStart(2, '0')}</span>
+          <span class="idxgrid__name">{link.title}</span>
+          <span class="idxgrid__desc">{link.description}</span>
+          <span class="idxgrid__arrow">→</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .idxgrid {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+  }
+
+  .idxgrid__head {
+    margin-bottom: var(--s-12);
+  }
+
+  .idxgrid__label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+  }
+
+  .idxgrid__rule {
+    height: 1px;
+    background: var(--c-border);
+    margin: var(--s-5) 0;
+  }
+
+  .idxgrid__title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 200;
+    letter-spacing: -0.04em;
+    text-transform: none;
+  }
+
+  .idxgrid__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .idxgrid__row {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr auto;
+    gap: var(--s-4);
+    align-items: baseline;
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid var(--c-border-light);
+    color: var(--c-text);
+    transition: all var(--t-fast);
+  }
+
+  .idxgrid__row:first-child {
+    border-top: 1px solid var(--c-border-light);
+  }
+
+  .idxgrid__row:hover {
+    padding-left: var(--s-3);
+  }
+
+  .idxgrid__num {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--c-text-muted);
+  }
+
+  .idxgrid__name {
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    transition: color var(--t-fast);
+  }
+
+  .idxgrid__row:hover .idxgrid__name { color: var(--c-orange); }
+
+  .idxgrid__desc {
+    display: none;
+    font-size: 0.72rem;
+    color: var(--c-text-muted);
+  }
+
+  .idxgrid__arrow {
+    font-size: 1rem;
+    color: var(--c-text-muted);
+    transition: transform var(--t-fast) var(--ease), color var(--t-fast);
+  }
+
+  .idxgrid__row:hover .idxgrid__arrow {
+    transform: translateX(4px);
+    color: var(--c-orange);
+  }
+
+  @media (min-width: 768px) {
+    .idxgrid__row {
+      grid-template-columns: 2.5rem 1fr 1fr auto;
+      padding: var(--s-6) 0;
+    }
+    .idxgrid__desc { display: block; }
+    .idxgrid__name { font-size: 1.4rem; }
+  }
+</style>

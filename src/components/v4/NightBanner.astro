@@ -1,0 +1,119 @@
+<section class="nbanner" aria-labelledby="v4-events-title">
+  <div class="container nbanner__inner">
+    <div class="nbanner__left reveal">
+      <span class="nbanner__label">Événements</span>
+      <h2 id="v4-events-title" class="nbanner__title">Soirées & concerts au lac</h2>
+      <div class="nbanner__rule" aria-hidden="true"></div>
+      <p class="nbanner__text">Concerts acoustiques les pieds dans le sable, soirées thématiques, couchers de soleil musicaux — une programmation estivale unique.</p>
+      <div class="nbanner__tags">
+        <span>Live</span>
+        <span>Coucher de soleil</span>
+        <span>DJ sets</span>
+        <span>Privatisation</span>
+      </div>
+      <a href="/groupes-evenements" class="nbanner__cta">Découvrir →</a>
+    </div>
+
+    <div class="nbanner__right reveal reveal-d1">
+      <img src="/concert-surfcenter-lac-sainte-croix.png" alt="Concert live au Surf Center" width="600" height="800" loading="lazy" decoding="async" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .nbanner {
+    background: var(--c-dark);
+    padding: var(--s-section) 0;
+    overflow: hidden;
+  }
+
+  .nbanner__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+    align-items: center;
+  }
+
+  .nbanner__label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+  }
+
+  .nbanner__title {
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    text-transform: none;
+    color: #fff;
+    margin-top: var(--s-4);
+    margin-bottom: var(--s-5);
+  }
+
+  .nbanner__rule {
+    height: 1px;
+    background: rgb(255 255 255 / 0.1);
+    margin-bottom: var(--s-6);
+  }
+
+  .nbanner__text {
+    font-size: 0.88rem;
+    color: rgb(255 255 255 / 0.5);
+    line-height: 1.7;
+    max-width: 36ch;
+    margin-bottom: var(--s-6);
+  }
+
+  .nbanner__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    margin-bottom: var(--s-8);
+  }
+
+  .nbanner__tags span {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.35);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    padding: 4px 12px;
+    border-radius: var(--r-full);
+  }
+
+  .nbanner__cta {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.6);
+    transition: color var(--t-fast);
+  }
+
+  .nbanner__cta:hover { color: #fff; }
+
+  .nbanner__right {
+    overflow: hidden;
+    border-radius: var(--r-sm);
+  }
+
+  .nbanner__right img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    max-height: 500px;
+  }
+
+  @media (min-width: 900px) {
+    .nbanner__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-16);
+    }
+
+    .nbanner__right img { max-height: none; }
+  }
+</style>

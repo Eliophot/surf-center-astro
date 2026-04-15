@@ -1,0 +1,119 @@
+---
+import { brandValues } from '../../data/home';
+---
+
+<section class="bstmt" aria-labelledby="v5-brand-title">
+  <div class="container">
+    <span class="bstmt__label reveal">L'esprit Surf Center</span>
+
+    <h2 id="v5-brand-title" class="bstmt__words reveal">
+      <span class="bstmt__word">Depuis</span>
+      <span class="bstmt__word bstmt__word--accent">plus de dix ans,</span>
+      <span class="bstmt__word">un rendez-vous</span>
+      <span class="bstmt__word">au bord du lac</span>
+      <span class="bstmt__word bstmt__word--light">pour celles et ceux</span>
+      <span class="bstmt__word bstmt__word--light">qui aiment l'eau,</span>
+      <span class="bstmt__word bstmt__word--accent">le soleil</span>
+      <span class="bstmt__word">et les grands espaces.</span>
+    </h2>
+
+    <div class="bstmt__values reveal reveal-d2">
+      {brandValues.map((v) => (
+        <div class="bstmt__val">
+          <span class="bstmt__val-dot" aria-hidden="true"></span>
+          <div>
+            <strong>{v.title}</strong>
+            <p>{v.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .bstmt {
+    padding: var(--s-section) 0;
+    background: var(--c-dark);
+    overflow: hidden;
+  }
+
+  .bstmt__label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    margin-bottom: var(--s-12);
+  }
+
+  .bstmt__words {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: var(--s-16);
+  }
+
+  .bstmt__word {
+    display: block;
+    font-size: clamp(2rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    text-transform: none;
+    color: #fff;
+  }
+
+  .bstmt__word--accent {
+    color: var(--c-orange);
+  }
+
+  .bstmt__word--light {
+    font-weight: 200;
+    color: rgb(255 255 255 / 0.4);
+  }
+
+  .bstmt__values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+    padding-top: var(--s-10);
+    border-top: 1px solid rgb(255 255 255 / 0.08);
+  }
+
+  .bstmt__val {
+    display: flex;
+    gap: var(--s-3);
+    align-items: flex-start;
+  }
+
+  .bstmt__val-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c-orange);
+    flex-shrink: 0;
+    margin-top: 0.35rem;
+  }
+
+  .bstmt__val strong {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+
+  .bstmt__val p {
+    font-size: 0.78rem;
+    color: rgb(255 255 255 / 0.4);
+    line-height: 1.5;
+  }
+
+  @media (min-width: 768px) {
+    .bstmt__values { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>

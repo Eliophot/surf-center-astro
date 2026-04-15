@@ -1,0 +1,149 @@
+---
+import { reviews } from '../../data/home';
+---
+
+<section class="vslide" aria-labelledby="v5-reviews-title">
+  <div class="container">
+    <h2 id="v5-reviews-title" class="sr-only">Témoignages</h2>
+
+    <div class="vslide__wrap" data-vslide>
+      {reviews.map((r, i) => (
+        <blockquote class:list={['vslide__item', { 'is-active': i === 0 }]} data-vslide-item={i}>
+          <p class="vslide__quote">{r.quote}</p>
+          <footer class="vslide__meta">
+            <cite class="vslide__author">{r.author}</cite>
+            <span class="vslide__ctx">{r.context}</span>
+          </footer>
+        </blockquote>
+      ))}
+
+      <div class="vslide__nav">
+        <span class="vslide__current" data-vslide-current>01</span>
+        <div class="vslide__bar"><span class="vslide__progress" data-vslide-progress></span></div>
+        <span class="vslide__total">{String(reviews.length).padStart(2, '0')}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-vslide]').forEach((wrap) => {
+    const items = wrap.querySelectorAll('[data-vslide-item]');
+    const currentEl = wrap.querySelector('[data-vslide-current]');
+    const progressEl = wrap.querySelector('[data-vslide-progress]') as HTMLElement;
+    let active = 0;
+    const total = items.length;
+
+    function show(idx: number) {
+      items.forEach((el, i) => el.classList.toggle('is-active', i === idx));
+      if (currentEl) currentEl.textContent = String(idx + 1).padStart(2, '0');
+      if (progressEl) progressEl.style.width = ((idx + 1) / total * 100) + '%';
+      active = idx;
+    }
+
+    show(0);
+    setInterval(() => show((active + 1) % total), 5000);
+  });
+</script>
+
+<style>
+  .vslide {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .vslide__wrap {
+    position: relative;
+    min-height: 300px;
+  }
+
+  .vslide__item {
+    margin: 0;
+    border: none;
+    padding: 0;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s var(--ease);
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .vslide__item.is-active {
+    opacity: 1;
+    position: relative;
+    pointer-events: auto;
+  }
+
+  .vslide__quote {
+    font-size: clamp(1.8rem, 5vw, 4rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--c-text);
+    max-width: 18ch;
+    margin-bottom: var(--s-8);
+  }
+
+  .vslide__meta {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-4);
+  }
+
+  .vslide__author {
+    font-style: normal;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--c-text);
+  }
+
+  .vslide__ctx {
+    font-size: 0.68rem;
+    color: var(--c-text-muted);
+  }
+
+  .vslide__nav {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    margin-top: var(--s-12);
+    max-width: 300px;
+  }
+
+  .vslide__current,
+  .vslide__total {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--c-text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .vslide__bar {
+    flex: 1;
+    height: 2px;
+    background: var(--c-border-light);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+
+  .vslide__progress {
+    display: block;
+    height: 100%;
+    width: 33%;
+    background: var(--c-orange);
+    border-radius: 1px;
+    transition: width 0.4s var(--ease);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vslide__item { transition: none; }
+    .vslide__progress { transition: none; }
+  }
+</style>

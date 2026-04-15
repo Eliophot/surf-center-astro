@@ -1,0 +1,102 @@
+---
+import { reviews } from '../../data/home';
+const doubled = [...reviews, ...reviews];
+---
+
+<section class="mtesti" aria-label="Témoignages clients">
+  <h2 class="sr-only">Témoignages</h2>
+  <div class="mtesti__rule" aria-hidden="true"></div>
+  <div class="mtesti__track" data-marquee-testi>
+    <div class="mtesti__scroll">
+      {doubled.map((r, i) => (
+        <blockquote class="mtesti__item" aria-hidden={i >= reviews.length ? 'true' : undefined}>
+          <p class="mtesti__quote">&ldquo;{r.quote}&rdquo;</p>
+          <footer class="mtesti__meta">
+            <cite class="mtesti__author">{r.author}</cite>
+            <span class="mtesti__ctx">{r.context}</span>
+          </footer>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+  <div class="mtesti__rule" aria-hidden="true"></div>
+</section>
+
+<style>
+  .mtesti {
+    padding: var(--s-16) 0;
+    background: var(--c-surface);
+    overflow: hidden;
+  }
+
+  .mtesti__rule {
+    height: 1px;
+    background: var(--c-border);
+    max-width: var(--max-w);
+    margin-inline: auto;
+    padding-inline: var(--s-6);
+  }
+
+  .mtesti__track {
+    padding: var(--s-12) 0;
+  }
+
+  .mtesti__scroll {
+    display: flex;
+    gap: var(--s-16);
+    animation: mtesti-slide 40s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes mtesti-slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .mtesti__item {
+    min-width: 420px;
+    max-width: 500px;
+    flex-shrink: 0;
+    margin: 0;
+    border: none;
+    padding: 0;
+  }
+
+  .mtesti__quote {
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--c-text);
+    margin-bottom: var(--s-4);
+  }
+
+  .mtesti__meta {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-3);
+  }
+
+  .mtesti__author {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-text);
+  }
+
+  .mtesti__ctx {
+    font-size: 0.65rem;
+    color: var(--c-text-muted);
+  }
+
+  @media (max-width: 600px) {
+    .mtesti__item { min-width: 300px; }
+    .mtesti__quote { font-size: 0.95rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mtesti__scroll { animation: none; flex-wrap: wrap; }
+  }
+</style>

@@ -5,6 +5,8 @@ const versions = [
   { label: 'Standard', href: '/' },
   { label: 'Design', href: '/v2' },
   { label: 'Immersive', href: '/v3' },
+  { label: 'Editorial', href: '/v4' },
+  { label: 'Expressive', href: '/v5' },
 ];
 
 function isActive(href: string): boolean {
@@ -68,8 +70,8 @@ const activeIdx = versions.findIndex((v) => isActive(v.href));
     position: absolute;
     left: 4px;
     right: 4px;
-    height: calc(100% / 3 - 4px * 2 / 3);
-    top: calc(4px + var(--active-idx) * (100% / 3));
+    height: calc(100% / 5 - 4px * 2 / 5);
+    top: calc(4px + var(--active-idx) * (100% / 5));
     background: rgb(255 255 255 / 0.1);
     border-radius: 10px;
     transition: top 350ms var(--ease);
@@ -138,8 +140,8 @@ const activeIdx = versions.findIndex((v) => isActive(v.href));
       top: 4px;
       bottom: 4px;
       height: auto;
-      width: calc(100% / 3 - 4px * 2 / 3);
-      left: calc(4px + var(--active-idx) * (100% / 3));
+      width: calc(100% / 5 - 4px * 2 / 5);
+      left: calc(4px + var(--active-idx) * (100% / 5));
       right: auto;
       transition: left 350ms var(--ease);
     }

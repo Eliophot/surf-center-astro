@@ -1,0 +1,96 @@
+---
+import { brandValues } from '../../data/home';
+---
+
+<section class="pquote" aria-labelledby="v4-brand-title">
+  <div class="container">
+    <div class="pquote__rule" aria-hidden="true"></div>
+
+    <div class="pquote__body reveal">
+      <span class="pquote__label">L'esprit Surf Center</span>
+      <h2 id="v4-brand-title" class="pquote__text">
+        Depuis plus de dix ans, un rendez-vous au bord du lac pour celles et ceux qui aiment l'eau, le soleil et les grands espaces.
+      </h2>
+    </div>
+
+    <div class="pquote__rule" aria-hidden="true"></div>
+
+    <div class="pquote__values reveal reveal-d1">
+      {brandValues.map((v) => (
+        <div class="pquote__val">
+          <span class="pquote__val-title">{v.title}</span>
+          <span class="pquote__val-text">{v.text}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pquote {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+  }
+
+  .pquote__rule {
+    height: 1px;
+    background: var(--c-border);
+  }
+
+  .pquote__body {
+    padding: var(--s-20) 0;
+    max-width: 900px;
+  }
+
+  .pquote__label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    margin-bottom: var(--s-8);
+  }
+
+  .pquote__text {
+    font-size: clamp(1.6rem, 4vw, 3.4rem);
+    font-weight: 200;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    text-transform: none;
+    color: var(--c-text);
+  }
+
+  .pquote__values {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-8) var(--s-10);
+    padding-top: var(--s-10);
+  }
+
+  .pquote__val {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .pquote__val-title {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--c-text);
+  }
+
+  .pquote__val-text {
+    font-size: 0.82rem;
+    color: var(--c-text-muted);
+    line-height: 1.5;
+  }
+
+  @media (min-width: 768px) {
+    .pquote__values {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

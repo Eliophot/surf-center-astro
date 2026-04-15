@@ -1,0 +1,121 @@
+<section class="strip" aria-labelledby="v5-anims-title">
+  <div class="container strip__top reveal">
+    <span class="strip__label">Animations</span>
+    <h2 id="v5-anims-title" class="strip__title">Des moments à partager</h2>
+  </div>
+
+  <div class="strip__band reveal reveal-d1">
+    <div class="strip__item">
+      <img src="/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg" alt="Cours de yoga au bord du lac de Sainte-Croix" width="600" height="400" loading="lazy" decoding="async" />
+      <span class="strip__cap">01 — Yoga</span>
+    </div>
+    <div class="strip__item">
+      <img src="/location-paddle-lac-sainte-croix-surfcenter.jpeg" alt="Stand-up paddle sur le lac de Sainte-Croix" width="600" height="400" loading="lazy" decoding="async" />
+      <span class="strip__cap">02 — Paddle</span>
+    </div>
+    <div class="strip__item">
+      <img src="/location-planche-a-voile-windsurf-lac-sainte-croix.png" alt="Planche à voile sur le lac de Sainte-Croix" width="600" height="400" loading="lazy" decoding="async" />
+      <span class="strip__cap">03 — Windsurf</span>
+    </div>
+  </div>
+
+  <div class="container strip__bottom reveal reveal-d2">
+    <p class="strip__desc">Yoga au lever du soleil, cours de paddle, initiations au windsurf — chaque journée est une invitation à bouger.</p>
+    <a href="/animations" class="btn btn--primary">Découvrir</a>
+  </div>
+</section>
+
+<style>
+  .strip {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+    overflow: hidden;
+  }
+
+  .strip__top {
+    margin-bottom: var(--s-10);
+  }
+
+  .strip__label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    margin-bottom: var(--s-4);
+  }
+
+  .strip__title {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 0.95;
+  }
+
+  .strip__band {
+    display: flex;
+    gap: var(--s-3);
+    padding: 0 var(--s-6);
+    margin-bottom: var(--s-10);
+  }
+
+  .strip__item {
+    flex: 1;
+    overflow: hidden;
+    border-radius: var(--r-md);
+    position: relative;
+  }
+
+  .strip__item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .strip__item:hover img { transform: scale(1.04); }
+
+  .strip__cap {
+    position: absolute;
+    bottom: var(--s-3);
+    left: var(--s-3);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgb(0 0 0 / 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 4px 10px;
+    border-radius: var(--r-sm);
+  }
+
+  .strip__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-8);
+    flex-wrap: wrap;
+  }
+
+  .strip__desc {
+    font-size: 0.88rem;
+    color: var(--c-text-secondary);
+    line-height: 1.7;
+    max-width: 44ch;
+  }
+
+  @media (max-width: 600px) {
+    .strip__band { flex-direction: column; }
+    .strip__item img { aspect-ratio: 16 / 9; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .strip__item img { transition: none; }
+  }
+</style>

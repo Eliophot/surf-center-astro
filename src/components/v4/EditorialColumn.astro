@@ -1,0 +1,146 @@
+<section class="edcol" aria-labelledby="v4-anims-title">
+  <div class="container">
+    <div class="edcol__head reveal">
+      <span class="edcol__label">Animations</span>
+      <div class="edcol__rule" aria-hidden="true"></div>
+    </div>
+
+    <div class="edcol__layout">
+      <div class="edcol__text reveal">
+        <h2 id="v4-anims-title" class="edcol__title">Des moments à partager</h2>
+        <p class="edcol__desc">Yoga au lever du soleil, cours de paddle, initiations au windsurf — chaque journée au Surf Center est une invitation à bouger, respirer, s'amuser.</p>
+        <ul class="edcol__list" role="list">
+          <li><span class="edcol__list-num">01</span> Yoga face au lac</li>
+          <li><span class="edcol__list-num">02</span> Cours de paddle & windsurf</li>
+          <li><span class="edcol__list-num">03</span> Bouée tractée & sensations</li>
+          <li><span class="edcol__list-num">04</span> Balades encadrées</li>
+        </ul>
+        <a href="/animations" class="edcol__cta">Découvrir →</a>
+      </div>
+
+      <div class="edcol__visual reveal reveal-d1">
+        <img class="edcol__img edcol__img--main" src="/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg" alt="Cours de yoga au bord du lac de Sainte-Croix" width="600" height="400" loading="lazy" decoding="async" />
+        <div class="edcol__pair">
+          <img class="edcol__img" src="/location-paddle-lac-sainte-croix-surfcenter.jpeg" alt="Stand-up paddle sur le lac de Sainte-Croix" width="300" height="200" loading="lazy" decoding="async" />
+          <img class="edcol__img" src="/location-planche-a-voile-windsurf-lac-sainte-croix.png" alt="Planche à voile sur le lac de Sainte-Croix" width="300" height="200" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .edcol {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .edcol__head {
+    margin-bottom: var(--s-12);
+  }
+
+  .edcol__label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+  }
+
+  .edcol__rule {
+    height: 1px;
+    background: var(--c-border);
+    margin-top: var(--s-5);
+  }
+
+  .edcol__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+  }
+
+  .edcol__title {
+    font-weight: 200;
+    text-transform: none;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--s-6);
+  }
+
+  .edcol__desc {
+    font-size: 0.9rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    max-width: 40ch;
+    margin-bottom: var(--s-8);
+  }
+
+  .edcol__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    margin-bottom: var(--s-10);
+  }
+
+  .edcol__list li {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    font-size: 0.85rem;
+    color: var(--c-text-secondary);
+  }
+
+  .edcol__list-num {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--c-text-muted);
+    min-width: 1.5rem;
+  }
+
+  .edcol__cta {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-text);
+    transition: color var(--t-fast);
+  }
+
+  .edcol__cta:hover { color: var(--c-orange); }
+
+  .edcol__visual {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .edcol__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: var(--r-sm);
+  }
+
+  .edcol__img--main { aspect-ratio: 3 / 2; }
+
+  .edcol__pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-3);
+  }
+
+  .edcol__pair .edcol__img { aspect-ratio: 3 / 2; }
+
+  @media (min-width: 900px) {
+    .edcol__layout {
+      grid-template-columns: 0.45fr 1fr;
+      gap: var(--s-16);
+      align-items: start;
+    }
+    .edcol__text {
+      position: sticky;
+      top: calc(var(--header-h) + var(--s-8));
+    }
+  }
+</style>

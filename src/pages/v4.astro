@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroEditorial from '../components/v4/HeroEditorial.astro';
+import EditorialGrid from '../components/v4/EditorialGrid.astro';
+import PullQuote from '../components/v4/PullQuote.astro';
+import DiptychResto from '../components/v4/DiptychResto.astro';
+import MarqueeTestimonial from '../components/v4/MarqueeTestimonial.astro';
+import EditorialColumn from '../components/v4/EditorialColumn.astro';
+import NightBanner from '../components/v4/NightBanner.astro';
+import IndexGrid from '../components/v4/IndexGrid.astro';
+import { jsonLd, seoMeta } from '../data/jsonld';
+---
+
+<Layout title={seoMeta.title} description={seoMeta.description} jsonLd={jsonLd}>
+  <HeroEditorial />
+  <EditorialGrid />
+  <PullQuote />
+  <DiptychResto />
+  <MarqueeTestimonial />
+  <EditorialColumn />
+  <NightBanner />
+  <IndexGrid />
+</Layout>

@@ -1,0 +1,136 @@
+<section class="ovlap" aria-labelledby="v5-resto-title">
+  <div class="container">
+    <div class="ovlap__layout">
+      <div class="ovlap__img-block reveal">
+        <img class="ovlap__img" src="/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg" alt="Vue aérienne du snack Surf Center" width="800" height="600" loading="lazy" decoding="async" />
+        <div class="ovlap__float">
+          <span class="ovlap__float-label">Ouvert en saison</span>
+          <span class="ovlap__float-sub">11h — 18h30</span>
+        </div>
+      </div>
+
+      <div class="ovlap__copy reveal reveal-d1">
+        <span class="ovlap__eyebrow">Restauration</span>
+        <h2 id="v5-resto-title" class="ovlap__title">Pizzas,<br/>snack &<br/>vue sur<br/>le lac</h2>
+        <p class="ovlap__text">Pause gourmande à notre snack-pizzeria. Pizzas artisanales au feu de bois, salades fraîches, glaces — vue directe sur le lac.</p>
+        <div class="ovlap__tags">
+          <span>Feu de bois</span>
+          <span>Terrasse lac</span>
+          <span>Salades</span>
+          <span>Glaces</span>
+        </div>
+        <a href="/restauration" class="btn btn--primary">Voir la carte</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ovlap {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+    overflow: hidden;
+  }
+
+  .ovlap__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+  }
+
+  .ovlap__img-block {
+    position: relative;
+  }
+
+  .ovlap__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--r-md);
+  }
+
+  .ovlap__float {
+    position: absolute;
+    bottom: var(--s-4);
+    right: var(--s-4);
+    background: var(--c-dark);
+    color: #fff;
+    padding: var(--s-3) var(--s-5);
+    border-radius: var(--r-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .ovlap__float-label {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .ovlap__float-sub {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: rgb(255 255 255 / 0.5);
+  }
+
+  .ovlap__eyebrow {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    margin-bottom: var(--s-5);
+  }
+
+  .ovlap__title {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    text-transform: uppercase;
+    margin-bottom: var(--s-6);
+  }
+
+  .ovlap__text {
+    font-size: 0.9rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    max-width: 34ch;
+    margin-bottom: var(--s-6);
+  }
+
+  .ovlap__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    margin-bottom: var(--s-8);
+  }
+
+  .ovlap__tags span {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    background: var(--c-bg);
+    padding: 5px 14px;
+    border-radius: var(--r-full);
+  }
+
+  @media (min-width: 900px) {
+    .ovlap__layout {
+      grid-template-columns: 1.3fr 1fr;
+      gap: var(--s-16);
+      align-items: center;
+    }
+
+    .ovlap__img-block {
+      margin-right: calc(var(--s-16) * -1);
+    }
+  }
+</style>

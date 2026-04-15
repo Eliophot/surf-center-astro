@@ -1,0 +1,142 @@
+<section class="dipt" aria-labelledby="v4-resto-title">
+  <div class="container">
+    <div class="dipt__head reveal">
+      <span class="dipt__label">Restauration</span>
+      <div class="dipt__rule" aria-hidden="true"></div>
+    </div>
+
+    <div class="dipt__grid">
+      <div class="dipt__images reveal">
+        <div class="dipt__img dipt__img--left">
+          <img src="/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg" alt="Vue aérienne du snack Surf Center avec le lac de Sainte-Croix" width="600" height="800" loading="lazy" decoding="async" />
+        </div>
+        <div class="dipt__img dipt__img--right">
+          <img src="/esprit.png" alt="Ambiance conviviale Surf Center" width="600" height="800" loading="lazy" decoding="async" />
+        </div>
+      </div>
+
+      <div class="dipt__copy reveal reveal-d1">
+        <h2 id="v4-resto-title" class="dipt__title">Pizzas, snack & vue sur le lac</h2>
+        <p class="dipt__text">Pause gourmande à notre snack-pizzeria. Pizzas artisanales au feu de bois, salades fraîches, glaces — vue directe sur le lac.</p>
+        <ul class="dipt__list" role="list">
+          <li>Pizzas au feu de bois</li>
+          <li>Terrasse face au lac</li>
+          <li>Salades, snacking, glaces</li>
+          <li>Service continu en saison</li>
+        </ul>
+        <a href="/restauration" class="dipt__cta">Voir la carte →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .dipt {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .dipt__head {
+    margin-bottom: var(--s-12);
+  }
+
+  .dipt__label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+  }
+
+  .dipt__rule {
+    height: 1px;
+    background: var(--c-border);
+    margin-top: var(--s-5);
+  }
+
+  .dipt__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+  }
+
+  .dipt__images {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--s-3);
+  }
+
+  .dipt__img {
+    overflow: hidden;
+    border-radius: var(--r-sm);
+  }
+
+  .dipt__img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .dipt__img--left img { aspect-ratio: 3 / 4; }
+  .dipt__img--right img { aspect-ratio: 3 / 4; }
+
+  .dipt__img--right {
+    margin-top: var(--s-10);
+  }
+
+  .dipt__title {
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    text-transform: none;
+    margin-bottom: var(--s-5);
+  }
+
+  .dipt__text {
+    font-size: 0.9rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    max-width: 38ch;
+    margin-bottom: var(--s-6);
+  }
+
+  .dipt__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-bottom: var(--s-8);
+  }
+
+  .dipt__list li {
+    font-size: 0.78rem;
+    color: var(--c-text-muted);
+    padding-left: var(--s-5);
+    position: relative;
+  }
+
+  .dipt__list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--c-border);
+  }
+
+  .dipt__cta {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-text);
+    transition: color var(--t-fast);
+  }
+
+  .dipt__cta:hover { color: var(--c-orange); }
+
+  @media (min-width: 900px) {
+    .dipt__grid {
+      grid-template-columns: 1.4fr 1fr;
+      gap: var(--s-16);
+      align-items: center;
+    }
+  }
+</style>

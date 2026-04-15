@@ -1,0 +1,142 @@
+---
+import { locations } from '../../data/home';
+---
+
+<section id="activites" class="scards" aria-labelledby="v5-activities-title">
+  <div class="scards__header container reveal">
+    <h2 id="v5-activities-title" class="scards__title">Locations</h2>
+    <p class="scards__count">{String(locations.length).padStart(2, '0')} activités</p>
+  </div>
+
+  <div class="scards__track" data-scards-track>
+    {locations.map((loc, i) => (
+      <button type="button" class="scards__card" data-product-book data-tag={loc.tag} aria-label={`Réserver ${loc.title}`}>
+        <div class="scards__visual">
+          <img src={loc.image} alt={loc.alt} width="600" height="800" loading="lazy" decoding="async" />
+          <span class="scards__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+        </div>
+        <div class="scards__info">
+          <h3 class="scards__name">{loc.title}</h3>
+          <span class="scards__price">dès {loc.price}€</span>
+        </div>
+      </button>
+    ))}
+  </div>
+</section>
+
+<style>
+  .scards {
+    padding: var(--s-section) 0 var(--s-16);
+    background: var(--c-bg);
+    overflow: hidden;
+  }
+
+  .scards__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--s-10);
+  }
+
+  .scards__title {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .scards__count {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+  }
+
+  .scards__track {
+    display: flex;
+    gap: var(--s-4);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 var(--s-6);
+    scroll-snap-type: x mandatory;
+  }
+
+  .scards__track::-webkit-scrollbar { display: none; }
+
+  .scards__card {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--c-text);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .scards__visual {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--r-md);
+    margin-bottom: var(--s-4);
+  }
+
+  .scards__visual img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .scards__card:hover .scards__visual img { transform: scale(1.04); }
+
+  .scards__num {
+    position: absolute;
+    top: var(--s-4);
+    left: var(--s-4);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(255 255 255 / 0.3);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .scards__info {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-4);
+    padding: 0 var(--s-1);
+  }
+
+  .scards__name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .scards__price {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--c-orange);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 600px) { .scards__card { flex: 0 0 48%; } }
+  @media (min-width: 900px) { .scards__card { flex: 0 0 35%; } }
+  @media (min-width: 1200px) { .scards__card { flex: 0 0 28%; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scards__visual img { transition: none; }
+  }
+</style>

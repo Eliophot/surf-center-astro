@@ -1,0 +1,129 @@
+<section class="hexp" data-hero aria-label="Surf Center — base nautique au lac de Sainte-Croix">
+  <img class="hexp__bg" src="/GettyImages-577312024 (1).jpg" alt="Kayak sur les eaux turquoise des Gorges du Verdon" width="1920" height="1080" loading="eager" fetchpriority="high" decoding="async" />
+  <div class="hexp__overlay" aria-hidden="true"></div>
+
+  <div class="hexp__content">
+    <div class="hexp__titles">
+      <span class="hexp__outline" aria-hidden="true">Surf</span>
+      <h1 class="hexp__solid">Surf Center</h1>
+      <span class="hexp__outline hexp__outline--right" aria-hidden="true">Center</span>
+    </div>
+
+    <div class="hexp__bar">
+      <p class="hexp__sub">Location bateaux & activités nautiques — Lac de Sainte-Croix, Gorges du Verdon</p>
+      <div class="hexp__actions">
+        <button type="button" class="btn btn--primary" data-booking>Réserver</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hexp {
+    position: relative;
+    height: 100svh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .hexp__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    opacity: 0.5;
+  }
+
+  .hexp__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.4) 0%, rgb(0 0 0 / 0.1) 40%, rgb(0 0 0 / 0.6) 100%);
+  }
+
+  .hexp__content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .hexp__titles {
+    overflow: hidden;
+    padding: 0 var(--s-6);
+    margin-bottom: var(--s-10);
+  }
+
+  .hexp__outline {
+    display: block;
+    font-size: clamp(5rem, 20vw, 22rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.06em;
+    line-height: 0.78;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgb(255 255 255 / 0.25);
+    user-select: none;
+    animation: hexp-slide-in 1s var(--ease-smooth) both;
+  }
+
+  .hexp__outline--right {
+    text-align: right;
+    animation-delay: 300ms;
+  }
+
+  .hexp__solid {
+    font-size: clamp(4rem, 16vw, 18rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    line-height: 0.82;
+    color: #fff;
+    padding-left: clamp(1rem, 8vw, 10rem);
+    animation: hexp-slide-in 1s var(--ease-smooth) 150ms both;
+  }
+
+  @keyframes hexp-slide-in {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hexp__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-6);
+    flex-wrap: wrap;
+    padding: var(--s-5) var(--s-6);
+    background: rgb(255 255 255 / 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgb(255 255 255 / 0.08);
+    animation: hexp-slide-in 1s var(--ease-smooth) 600ms both;
+  }
+
+  .hexp__sub {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: rgb(255 255 255 / 0.5);
+    max-width: 44ch;
+  }
+
+  @media (max-width: 600px) {
+    .hexp__bar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hexp__outline,
+    .hexp__solid,
+    .hexp__bar { animation: none; }
+  }
+</style>

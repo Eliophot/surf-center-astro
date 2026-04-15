@@ -1,0 +1,146 @@
+---
+import { locations } from '../../data/home';
+---
+
+<section id="activites" class="edgrid" aria-labelledby="v4-activities-title">
+  <div class="container">
+    <div class="edgrid__head reveal">
+      <span class="edgrid__label">Nos locations</span>
+      <div class="edgrid__rule" aria-hidden="true"></div>
+      <h2 id="v4-activities-title" class="edgrid__title">Tout le lac, à votre façon</h2>
+    </div>
+
+    <div class="edgrid__list">
+      {locations.map((loc, i) => (
+        <button type="button" class="edgrid__item reveal" data-product-book data-tag={loc.tag} aria-label={`Réserver ${loc.title}`} style={`--delay: ${i * 80}ms`}>
+          <span class="edgrid__num">{String(i + 1).padStart(2, '0')}</span>
+          <div class="edgrid__photo">
+            <img src={loc.image} alt={loc.alt} width="400" height="300" loading="lazy" decoding="async" />
+          </div>
+          <div class="edgrid__info">
+            <h3 class="edgrid__name">{loc.title}</h3>
+            <p class="edgrid__desc">{loc.description}</p>
+          </div>
+          <span class="edgrid__price">dès {loc.price}€</span>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .edgrid {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .edgrid__head {
+    margin-bottom: var(--s-16);
+  }
+
+  .edgrid__label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+  }
+
+  .edgrid__rule {
+    height: 1px;
+    background: var(--c-border);
+    margin: var(--s-5) 0;
+  }
+
+  .edgrid__title {
+    font-weight: 200;
+    letter-spacing: -0.03em;
+    text-transform: none;
+  }
+
+  .edgrid__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .edgrid__item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--s-6);
+    align-items: center;
+    padding: var(--s-6) 0;
+    border: none;
+    border-bottom: 1px solid var(--c-border-light);
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+    color: var(--c-text);
+    transition: all var(--t-fast);
+    -webkit-tap-highlight-color: transparent;
+    transition-delay: var(--delay);
+  }
+
+  .edgrid__item:first-child {
+    border-top: 1px solid var(--c-border-light);
+  }
+
+  .edgrid__item:hover {
+    padding-left: var(--s-4);
+  }
+
+  .edgrid__num {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--c-text-muted);
+    min-width: 2rem;
+  }
+
+  .edgrid__photo {
+    display: none;
+  }
+
+  .edgrid__photo img {
+    width: 80px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: var(--r-sm);
+    display: block;
+  }
+
+  .edgrid__info {
+    flex: 1;
+  }
+
+  .edgrid__name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    margin-bottom: 2px;
+    text-transform: none;
+    transition: color var(--t-fast);
+  }
+
+  .edgrid__item:hover .edgrid__name { color: var(--c-orange); }
+
+  .edgrid__desc {
+    font-size: 0.72rem;
+    color: var(--c-text-muted);
+  }
+
+  .edgrid__price {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--c-orange);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 768px) {
+    .edgrid__item {
+      grid-template-columns: 2.5rem 80px 1fr auto;
+    }
+    .edgrid__photo { display: block; }
+    .edgrid__name { font-size: 1.25rem; }
+  }
+</style>

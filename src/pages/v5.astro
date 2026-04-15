@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroExpressive from '../components/v5/HeroExpressive.astro';
+import ScrollCards from '../components/v5/ScrollCards.astro';
+import BigStatement from '../components/v5/BigStatement.astro';
+import OverlapGrid from '../components/v5/OverlapGrid.astro';
+import VoiceSlider from '../components/v5/VoiceSlider.astro';
+import StripImages from '../components/v5/StripImages.astro';
+import EventBlock from '../components/v5/EventBlock.astro';
+import ArrowLinks from '../components/v5/ArrowLinks.astro';
+import { jsonLd, seoMeta } from '../data/jsonld';
+---
+
+<Layout title={seoMeta.title} description={seoMeta.description} jsonLd={jsonLd}>
+  <HeroExpressive />
+  <ScrollCards />
+  <BigStatement />
+  <OverlapGrid />
+  <VoiceSlider />
+  <StripImages />
+  <EventBlock />
+  <ArrowLinks />
+</Layout>

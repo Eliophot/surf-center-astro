@@ -1,0 +1,159 @@
+---
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const versions = [
+  { label: 'Standard', href: '/' },
+  { label: 'Design', href: '/v2' },
+  { label: 'Immersive', href: '/v3' },
+];
+
+function isActive(href: string): boolean {
+  const clean = currentPath === '' ? '/' : currentPath;
+  if (href === '/') return clean === '/';
+  return clean.startsWith(href);
+}
+
+const activeIdx = versions.findIndex((v) => isActive(v.href));
+---
+
+<nav class="vsw" aria-label="Changer de version">
+  <div class="vsw__bar" style={`--active-idx: ${activeIdx}`}>
+    <span class="vsw__indicator" aria-hidden="true"></span>
+    {versions.map((v) => (
+      <a
+        href={v.href}
+        class:list={['vsw__link', { 'is-active': isActive(v.href) }]}
+        aria-current={isActive(v.href) ? 'page' : undefined}
+      >
+        {v.label}
+      </a>
+    ))}
+  </div>
+  <span class="vsw__badge">preprod</span>
+</nav>
+
+<style>
+  .vsw {
+    position: fixed;
+    left: var(--s-5);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    animation: vsw-enter 600ms var(--ease-smooth) 800ms both;
+  }
+
+  @keyframes vsw-enter {
+    from { opacity: 0; transform: translateY(-50%) translateX(-16px); }
+    to { opacity: 1; transform: translateY(-50%) translateX(0); }
+  }
+
+  .vsw__bar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    background: #111;
+    border-radius: 14px;
+    border: 1px solid rgb(255 255 255 / 0.06);
+    box-shadow:
+      0 10px 40px rgb(0 0 0 / 0.35),
+      inset 0 1px 0 rgb(255 255 255 / 0.04);
+  }
+
+  .vsw__indicator {
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    height: calc(100% / 3 - 4px * 2 / 3);
+    top: calc(4px + var(--active-idx) * (100% / 3));
+    background: rgb(255 255 255 / 0.1);
+    border-radius: 10px;
+    transition: top 350ms var(--ease);
+    pointer-events: none;
+    border: 1px solid rgb(255 255 255 / 0.05);
+  }
+
+  .vsw__link {
+    position: relative;
+    z-index: 1;
+    display: block;
+    padding: 10px 20px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgb(255 255 255 / 0.28);
+    white-space: nowrap;
+    text-align: center;
+    transition: color 250ms var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .vsw__link:hover {
+    color: rgb(255 255 255 / 0.6);
+  }
+
+  .vsw__link.is-active {
+    color: #fff;
+  }
+
+  .vsw__badge {
+    align-self: center;
+    font-size: 0.42rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    opacity: 0.6;
+  }
+
+  /* ── Mobile ── */
+
+  @media (max-width: 768px) {
+    .vsw {
+      left: 50%;
+      top: auto;
+      bottom: var(--s-5);
+      transform: translateX(-50%);
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+    }
+
+    @keyframes vsw-enter {
+      from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    .vsw__bar {
+      flex-direction: row;
+    }
+
+    .vsw__indicator {
+      top: 4px;
+      bottom: 4px;
+      height: auto;
+      width: calc(100% / 3 - 4px * 2 / 3);
+      left: calc(4px + var(--active-idx) * (100% / 3));
+      right: auto;
+      transition: left 350ms var(--ease);
+    }
+
+    .vsw__link {
+      padding: 9px 14px;
+      font-size: 0.55rem;
+    }
+
+    .vsw__badge { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vsw { animation: none; }
+    .vsw__indicator { transition: none; }
+  }
+</style>

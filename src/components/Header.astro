@@ -59,22 +59,6 @@ const navLinks = [
         </svg>
       </button>
 
-      <button
-        class="header__cart-icon"
-        type="button"
-        data-cart
-        aria-label="Voir le panier"
-      >
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-          <path d="M6 6h12l-1.5 7H7.5L6 6Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-          <path d="M6 6L5 3H2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="8.5" cy="16.5" r="1" fill="currentColor"/>
-          <circle cx="14.5" cy="16.5" r="1" fill="currentColor"/>
-        </svg>
-      </button>
-
-      <button type="button" class="btn btn--outline btn--sm header__cart-btn" data-cart>Mon panier</button>
-
       <button type="button" class="btn btn--primary btn--sm header__cta" data-booking>Réserver</button>
 
       <button
@@ -227,6 +211,7 @@ const navLinks = [
     align-items: center;
     justify-content: space-between;
     height: 100%;
+    gap: var(--s-10);
   }
 
   .header__logo {
@@ -260,21 +245,24 @@ const navLinks = [
   .header__nav { display: none; }
   .header__nav ul {
     display: flex;
+    align-items: center;
     gap: var(--s-8);
+    flex-wrap: nowrap;
   }
   .header__nav a,
   .header__nav-btn {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     color: rgb(255 255 255 / 0.7);
     transition: color var(--t-fast);
     background: none;
     border: none;
-    padding: 0;
+    padding: var(--s-2) 0;
     cursor: pointer;
     font-family: inherit;
+    white-space: nowrap;
   }
   .header__nav a:hover,
   .header__nav-btn:hover { color: #fff; }
@@ -287,10 +275,9 @@ const navLinks = [
   .header__end {
     display: flex;
     align-items: center;
-    gap: var(--s-4);
+    gap: var(--s-3);
     z-index: 101;
   }
-  .header__cta { display: none; }
 
   .header__theme {
     display: flex;
@@ -313,43 +300,6 @@ const navLinks = [
   .header__theme-icon--moon { display: block; }
   :global([data-theme='dark']) .header__theme-icon--sun { display: block; }
   :global([data-theme='dark']) .header__theme-icon--moon { display: none; }
-
-  .header__cart-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    color: rgb(255 255 255 / 0.7);
-    transition: color var(--t-fast);
-  }
-  .header__cart-icon:hover { color: #fff; }
-  .header.is-scrolled .header__cart-icon { color: var(--c-header-text); }
-  .header.is-scrolled .header__cart-icon:hover { color: var(--c-header-text-hover); }
-
-  .header__cart-btn {
-    display: none;
-    color: rgb(255 255 255 / 0.7);
-    border-color: rgb(255 255 255 / 0.25);
-  }
-  .header__cart-btn:hover {
-    color: #fff;
-    border-color: rgb(255 255 255 / 0.5);
-    background: rgb(255 255 255 / 0.08);
-  }
-  .header.is-scrolled .header__cart-btn {
-    color: var(--c-header-text);
-    border-color: var(--c-btn-outline-border);
-  }
-  .header.is-scrolled .header__cart-btn:hover {
-    color: var(--c-orange);
-    border-color: var(--c-orange);
-    background: transparent;
-  }
 
   .header__burger {
     display: flex;
@@ -539,11 +489,11 @@ const navLinks = [
     color: var(--c-text-muted);
   }
 
-  @media (min-width: 1024px) {
+  .header__cta { display: none; }
+
+  @media (min-width: 960px) {
     .header__nav { display: block; }
     .header__cta { display: inline-flex; }
-    .header__cart-btn { display: inline-flex; }
-    .header__cart-icon { display: none; }
     .header__burger { display: none; }
   }
 

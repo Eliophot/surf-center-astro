@@ -1,0 +1,147 @@
+<div class="sact" data-sticky-actions>
+  <button type="button" class="sact__btn sact__btn--book" data-booking aria-label="Réserver">
+    <svg class="sact__icon" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <rect x="2.5" y="3.5" width="13" height="12" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M2.5 7.5h13" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M6 1.5v3M12 1.5v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+    <span class="sact__label">Réserver</span>
+  </button>
+
+  <button type="button" class="sact__btn sact__btn--cart" data-cart aria-label="Mon panier">
+    <svg class="sact__icon" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <path d="M5.5 5.5h11l-1.3 6H6.7L5.5 5.5Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M5.5 5.5L4.5 3H2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="7.5" cy="15" r="0.9" fill="currentColor"/>
+      <circle cx="13" cy="15" r="0.9" fill="currentColor"/>
+    </svg>
+    <span class="sact__label">Panier</span>
+  </button>
+</div>
+
+<style>
+  .sact {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    animation: sact-in 500ms var(--ease-smooth) 1200ms both;
+  }
+
+  @keyframes sact-in {
+    from { opacity: 0; transform: translateY(-50%) translateX(8px); }
+    to { opacity: 1; transform: translateY(-50%) translateX(0); }
+  }
+
+  .sact__btn {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    overflow: hidden;
+    transition: all 300ms var(--ease);
+    -webkit-tap-highlight-color: transparent;
+    border-left: 1px solid transparent;
+  }
+
+  .sact__btn--book {
+    background: var(--c-orange);
+    color: #fff;
+    border-radius: var(--r-lg) 0 0 0;
+    border-left-color: rgb(255 255 255 / 0.1);
+  }
+
+  .sact__btn--book:hover {
+    padding-left: 14px;
+    padding-right: 14px;
+    gap: 8px;
+    background: var(--c-orange-dark);
+  }
+
+  .sact__btn--cart {
+    background: rgb(10 10 10 / 0.8);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    color: rgb(255 255 255 / 0.7);
+    border-radius: 0 0 0 var(--r-lg);
+    border-left-color: rgb(255 255 255 / 0.06);
+  }
+
+  .sact__btn--cart:hover {
+    padding-left: 14px;
+    padding-right: 14px;
+    gap: 8px;
+    color: #fff;
+    background: rgb(10 10 10 / 0.92);
+  }
+
+  .sact__icon {
+    flex-shrink: 0;
+  }
+
+  .sact__label {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 300ms var(--ease);
+  }
+
+  .sact__btn:hover .sact__label {
+    max-width: 80px;
+    opacity: 1;
+  }
+
+  /* ── Mobile: bottom right, horizontal ── */
+
+  @media (max-width: 768px) {
+    .sact {
+      top: auto;
+      right: var(--s-4);
+      bottom: var(--s-5);
+      transform: none;
+      flex-direction: row;
+      gap: 3px;
+    }
+
+    @keyframes sact-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .sact__btn--book {
+      border-radius: var(--r-lg) 0 0 var(--r-lg);
+    }
+
+    .sact__btn--cart {
+      border-radius: 0 var(--r-lg) var(--r-lg) 0;
+      border-left-color: rgb(255 255 255 / 0.06);
+    }
+
+    .sact__label {
+      max-width: none;
+      opacity: 1;
+    }
+
+    .sact__btn {
+      gap: 6px;
+      padding: 10px 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sact { animation: none; }
+    .sact__btn, .sact__label { transition: none; }
+  }
+</style>

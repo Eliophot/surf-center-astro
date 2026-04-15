@@ -3,6 +3,8 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import UniversalModal from '../components/UniversalModal.astro';
+import VersionSwitcher from '../components/VersionSwitcher.astro';
+import StickyActions from '../components/StickyActions.astro';
 
 interface Props {
   title: string;
@@ -82,6 +84,8 @@ const siteUrl = 'https://surfcenter-verdon.fr';
     </main>
     <Footer />
     <UniversalModal />
+    <VersionSwitcher />
+    <StickyActions />
 
     <button class="spct" id="scrollPct" type="button" aria-label="Retour en haut">
       <span class="spct__left">

@@ -1,12 +1,12 @@
 <section class="section" aria-labelledby="v2-anims-title">
-  <div class="container sticky">
-    <div class="sticky__text reveal">
+  <div class="container sscroll">
+    <div class="sscroll__text reveal">
       <span class="section__eyebrow">Animations</span>
       <h2 id="v2-anims-title">Des moments<br/>à partager</h2>
-      <p class="sticky__desc">
+      <p class="sscroll__desc">
         Yoga au lever du soleil, cours de paddle, initiations au windsurf — chaque journée au Surf Center est une invitation à bouger, respirer, s'amuser.
       </p>
-      <ul class="sticky__list" role="list">
+      <ul class="sscroll__list" role="list">
         <li>Yoga face au lac</li>
         <li>Cours de paddle & windsurf</li>
         <li>Bouée tractée & sensations</li>
@@ -15,26 +15,26 @@
       <a href="/animations" class="btn btn--primary">Découvrir</a>
     </div>
 
-    <div class="sticky__images">
-      <img class="sticky__img reveal" src="/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg" alt="Cours de yoga au bord du lac de Sainte-Croix" width="600" height="750" loading="lazy" decoding="async" />
-      <img class="sticky__img reveal reveal-d1" src="/location-paddle-lac-sainte-croix-surfcenter.jpeg" alt="Stand-up paddle sur le lac de Sainte-Croix" width="600" height="750" loading="lazy" decoding="async" />
-      <img class="sticky__img reveal reveal-d2" src="/location-planche-a-voile-windsurf-lac-sainte-croix.png" alt="Planche à voile et windsurf" width="600" height="750" loading="lazy" decoding="async" />
+    <div class="sscroll__images">
+      <img class="sscroll__img reveal" src="/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg" alt="Cours de yoga au bord du lac de Sainte-Croix" width="600" height="750" loading="lazy" decoding="async" />
+      <img class="sscroll__img reveal reveal-d1" src="/location-paddle-lac-sainte-croix-surfcenter.jpeg" alt="Stand-up paddle sur le lac de Sainte-Croix" width="600" height="750" loading="lazy" decoding="async" />
+      <img class="sscroll__img reveal reveal-d2" src="/location-planche-a-voile-windsurf-lac-sainte-croix.png" alt="Planche à voile et windsurf" width="600" height="750" loading="lazy" decoding="async" />
     </div>
   </div>
 </section>
 
 <style>
-  .sticky {
+  .sscroll {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--s-12);
   }
 
-  .sticky__text {
+  .sscroll__text {
     max-width: 480px;
   }
 
-  .sticky__desc {
+  .sscroll__desc {
     font-size: 1rem;
     color: var(--c-text-secondary);
     line-height: 1.75;
@@ -43,14 +43,14 @@
     max-width: 36ch;
   }
 
-  .sticky__list {
+  .sscroll__list {
     display: flex;
     flex-direction: column;
     gap: var(--s-3);
     margin-bottom: var(--s-10);
   }
 
-  .sticky__list li {
+  .sscroll__list li {
     font-size: 0.85rem;
     color: var(--c-text-secondary);
     line-height: 1.5;
@@ -58,7 +58,7 @@
     position: relative;
   }
 
-  .sticky__list li::before {
+  .sscroll__list li::before {
     content: '';
     position: absolute;
     left: 0;
@@ -69,13 +69,13 @@
     border-radius: 1px;
   }
 
-  .sticky__images {
+  .sscroll__images {
     display: flex;
     flex-direction: column;
     gap: var(--s-6);
   }
 
-  .sticky__img {
+  .sscroll__img {
     width: 100%;
     height: auto;
     display: block;
@@ -85,13 +85,13 @@
   }
 
   @media (min-width: 900px) {
-    .sticky {
+    .sscroll {
       grid-template-columns: 0.45fr 1fr;
       gap: var(--s-20);
       align-items: start;
     }
 
-    .sticky__text {
+    .sscroll__text {
       position: sticky;
       top: calc(var(--header-h) + var(--s-8));
     }

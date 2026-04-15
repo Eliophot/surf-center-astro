@@ -1,4 +1,12 @@
-User-agent: *
-Allow: /
+# Surf Center — Indexation bloquée (pré-production)
+# Retirer ces règles et remettre Allow: / avant la mise en ligne
 
-Sitemap: https://surfcenter.fr/sitemap.xml
+User-agent: *
+Disallow: /
+
+# Fichiers LLM pour GEO (Generative Engine Optimization)
+# Ces fichiers restent accessibles pour préparer le référencement IA
+# Décommenter les lignes ci-dessous à la mise en ligne :
+# Allow: /llms.txt
+# Allow: /llms-full.txt
+# Sitemap: https://surfcenter-verdon.fr/sitemap-index.xml

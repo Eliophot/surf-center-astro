@@ -59,7 +59,6 @@ const navLinks = [
         </svg>
       </button>
 
-      <!-- Mobile: icon only -->
       <button
         class="header__cart-icon"
         type="button"
@@ -74,7 +73,6 @@ const navLinks = [
         </svg>
       </button>
 
-      <!-- Desktop: text button -->
       <button type="button" class="btn btn--outline btn--sm header__cart-btn" data-cart>Mon panier</button>
 
       <button type="button" class="btn btn--primary btn--sm header__cta" data-booking>Réserver</button>
@@ -92,21 +90,45 @@ const navLinks = [
     </div>
   </div>
 
-  <div class="header__mobile" id="mobile-menu" hidden>
-    <nav aria-label="Navigation mobile">
-      <ul role="list">
-        {navLinks.map((link) => (
-          <li>
-            {link.modal
-              ? <button type="button" class="header__mobile-btn" data-shop>{link.label}</button>
-              : <a href={link.href}>{link.label}</a>}
-          </li>
-        ))}
-        <li class="header__mobile-cta">
-          <button type="button" class="btn btn--primary" data-booking>Réserver</button>
-        </li>
-      </ul>
-    </nav>
+  <div class="mmenu" id="mobile-menu" hidden>
+    <div class="mmenu__inner">
+      <nav class="mmenu__nav" aria-label="Navigation mobile">
+        <ul role="list">
+          {navLinks.map((link, i) => (
+            <li class="mmenu__item" style={`--delay: ${i * 60}ms`}>
+              {link.modal
+                ? <button type="button" class="mmenu__link" data-shop>
+                    <span class="mmenu__link-label">{link.label}</span>
+                    <svg class="mmenu__link-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                : <a href={link.href} class="mmenu__link">
+                    <span class="mmenu__link-label">{link.label}</span>
+                    <svg class="mmenu__link-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>}
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="mmenu__actions" style="--delay: 300ms">
+        <button type="button" class="btn btn--primary mmenu__book" data-booking>Réserver une activité</button>
+        <button type="button" class="btn btn--outline mmenu__cart" data-cart>Mon panier</button>
+      </div>
+
+      <div class="mmenu__footer" style="--delay: 400ms">
+        <a href="tel:+33492771450" class="mmenu__contact">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M6.5 2.5H4a1.5 1.5 0 0 0-1.5 1.5A9.5 9.5 0 0 0 12 13.5a1.5 1.5 0 0 0 1.5-1.5v-2.5l-3-1.5-1.5 1.5a7.5 7.5 0 0 1-3.5-3.5L7 4.5l-.5-2Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          </svg>
+          04 92 77 14 50
+        </a>
+        <p class="mmenu__address">Les Salles-sur-Verdon · Gorges du Verdon</p>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -130,6 +152,11 @@ const navLinks = [
       toggle.setAttribute('aria-expanded', String(open));
       mobileMenu.hidden = !open;
       document.body.style.overflow = open ? 'hidden' : '';
+      if (open) {
+        mobileMenu.classList.add('is-open');
+      } else {
+        mobileMenu.classList.remove('is-open');
+      }
     };
 
     toggle.addEventListener('click', () => {
@@ -148,7 +175,6 @@ const navLinks = [
     );
   }
 
-  /* Theme toggle */
   const themeToggle = document.querySelector('[data-theme-toggle]') as HTMLButtonElement;
 
   if (themeToggle) {
@@ -215,18 +241,15 @@ const navLinks = [
     object-fit: contain;
   }
 
-  /* Over hero: always white logo */
   .header__logo-img--light {
     filter: brightness(0) invert(1);
     display: block;
   }
   .header__logo-img--dark { display: none; }
 
-  /* Scrolled light: dark logo */
   .header.is-scrolled .header__logo-img--light { display: none; }
   .header.is-scrolled .header__logo-img--dark { display: block; }
 
-  /* Scrolled dark: keep white logo */
   :global([data-theme='dark']) .header.is-scrolled .header__logo-img--light {
     display: block;
   }
@@ -269,7 +292,6 @@ const navLinks = [
   }
   .header__cta { display: none; }
 
-  /* Theme toggle */
   .header__theme {
     display: flex;
     align-items: center;
@@ -287,7 +309,6 @@ const navLinks = [
   .header.is-scrolled .header__theme { color: var(--c-header-text); }
   .header.is-scrolled .header__theme:hover { color: var(--c-header-text-hover); }
 
-  /* Show sun in dark mode, moon in light mode */
   .header__theme-icon--sun { display: none; }
   .header__theme-icon--moon { display: block; }
   :global([data-theme='dark']) .header__theme-icon--sun { display: block; }
@@ -359,36 +380,164 @@ const navLinks = [
     transform: translateY(-3.5px) rotate(-45deg);
   }
 
-  .header__mobile {
+  /* =============================================
+     Mobile menu — Full screen overlay
+     ============================================= */
+
+  .mmenu {
     position: fixed;
     inset: 0;
     z-index: 99;
     background: var(--c-bg);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mmenu[hidden] { display: none; }
+
+  .mmenu__inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: calc(var(--header-h) + var(--s-8)) var(--s-6) var(--s-8);
+  }
+
+  .mmenu__nav { flex: 1; }
+
+  .mmenu__nav ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mmenu__item {
+    border-bottom: 1px solid var(--c-border-light);
+    opacity: 0;
+    transform: translateX(20px);
+    transition:
+      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay);
+  }
+
+  .mmenu.is-open .mmenu__item {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .mmenu__link {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--s-5) 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--c-text);
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color var(--t-fast);
+    -webkit-tap-highlight-color: transparent;
   }
-  .header__mobile[hidden] { display: none; }
-  .header__mobile ul {
+
+  .mmenu__link:hover,
+  .mmenu__link:active {
+    color: var(--c-orange);
+  }
+
+  .mmenu__link-label {
+    flex: 1;
+    text-align: left;
+  }
+
+  .mmenu__link-arrow {
+    flex-shrink: 0;
+    color: var(--c-text-muted);
+    transition: transform var(--t-fast) var(--ease), color var(--t-fast);
+  }
+
+  .mmenu__link:hover .mmenu__link-arrow,
+  .mmenu__link:active .mmenu__link-arrow {
+    color: var(--c-orange);
+    transform: translateX(4px);
+  }
+
+  .mmenu__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-top: var(--s-8);
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay);
+  }
+
+  .mmenu.is-open .mmenu__actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mmenu__book {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .mmenu__cart {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .mmenu__footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--s-10);
+    gap: var(--s-2);
+    margin-top: var(--s-10);
+    padding-top: var(--s-6);
+    border-top: 1px solid var(--c-border-light);
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay);
   }
-  .header__mobile a,
-  .header__mobile-btn {
-    font-size: 1.5rem;
+
+  .mmenu.is-open .mmenu__footer {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mmenu__contact {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: 0.82rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
     color: var(--c-text);
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font-family: inherit;
+    text-decoration: none;
+    transition: color var(--t-fast);
   }
-  .header__mobile-cta { margin-top: var(--s-6); }
+
+  .mmenu__contact:hover { color: var(--c-orange); }
+
+  .mmenu__address {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+  }
 
   @media (min-width: 1024px) {
     .header__nav { display: block; }
@@ -396,5 +545,15 @@ const navLinks = [
     .header__cart-btn { display: inline-flex; }
     .header__cart-icon { display: none; }
     .header__burger { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mmenu__item,
+    .mmenu__actions,
+    .mmenu__footer {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
   }
 </style>

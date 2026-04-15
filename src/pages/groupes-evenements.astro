@@ -5,6 +5,7 @@ import EventIntro from '../components/events/EventIntro.astro';
 import FormulaTable from '../components/events/FormulaTable.astro';
 import ContactForm from '../components/events/ContactForm.astro';
 import BookingCTA from '../components/locations/BookingCTA.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { proFormulas, privateFormulas } from '../data/events';
 
 const title = 'Groupes & Événements — Team building, EVJF, concerts | Surf Center Verdon';
@@ -56,6 +57,10 @@ const jsonLd = [
 
 <Layout title={title} description={description} jsonLd={jsonLd}>
   <EventHero />
+  <Breadcrumbs items={[
+    { label: 'Accueil', href: '/' },
+    { label: 'Groupes & Événements' },
+  ]} />
   <EventIntro />
   <FormulaTable
     eyebrow="Professionnels"

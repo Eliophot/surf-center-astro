@@ -1,0 +1,213 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { meshLinks } from '../data/home';
+
+const title = 'Page introuvable — Surf Center';
+const description = 'La page que vous recherchez n\'existe pas ou a été déplacée. Retrouvez toutes nos activités nautiques au lac de Sainte-Croix.';
+---
+
+<Layout title={title} description={description}>
+  <section class="e404" data-hero>
+    <div class="e404__waves" aria-hidden="true">
+      <svg class="e404__wave e404__wave--1" viewBox="0 0 1440 180" preserveAspectRatio="none" fill="none">
+        <path d="M0 80c240-60 480 40 720 20s480-80 720-20v180H0Z" fill="currentColor" opacity="0.06"/>
+      </svg>
+      <svg class="e404__wave e404__wave--2" viewBox="0 0 1440 180" preserveAspectRatio="none" fill="none">
+        <path d="M0 100c200 50 440-30 720 10s520-50 720 10v60H0Z" fill="currentColor" opacity="0.04"/>
+      </svg>
+    </div>
+
+    <div class="container e404__inner">
+      <span class="e404__code">404</span>
+      <h1 class="e404__title">Page introuvable</h1>
+      <p class="e404__text">
+        L'eau est claire, mais cette page a disparu dans le lac.<br />
+        Pas de panique, le Surf Center est toujours là.
+      </p>
+      <div class="e404__actions">
+        <a href="/" class="btn btn--primary">Retour à l'accueil</a>
+        <a href="/nos-locations" class="btn btn--secondary">Nos locations</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="e404-explore">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Explorer</span>
+        <h2 id="e404-explore">Où souhaitez-vous aller ?</h2>
+      </header>
+
+      <div class="e404-grid">
+        {meshLinks.slice(0, 4).map((link, i) => (
+          <a href={link.href} class={`e404-grid__card reveal`} style={`--d:${i * 80}ms`}>
+            <img src={link.image} alt={link.alt} width="600" height="400" loading="lazy" decoding="async" />
+            <div class="e404-grid__overlay"></div>
+            <div class="e404-grid__content">
+              <h3 class="e404-grid__title">{link.title}</h3>
+              <p class="e404-grid__desc">{link.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .e404 {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding-top: calc(var(--header-h) + var(--s-16));
+    padding-bottom: var(--s-16);
+  }
+
+  .e404__waves {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    color: var(--c-orange);
+  }
+
+  .e404__wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+  }
+
+  .e404__wave--1 {
+    animation: e404-drift 8s ease-in-out infinite alternate;
+  }
+
+  .e404__wave--2 {
+    animation: e404-drift 12s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes e404-drift {
+    from { transform: translateX(-2%); }
+    to { transform: translateX(2%); }
+  }
+
+  .e404__inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 600px;
+    margin-inline: auto;
+  }
+
+  .e404__code {
+    display: block;
+    font-size: clamp(6rem, 18vw, 12rem);
+    font-weight: 800;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    color: var(--c-border);
+    margin-bottom: var(--s-4);
+    user-select: none;
+  }
+
+  [data-theme='dark'] .e404__code {
+    color: var(--c-surface-alt);
+  }
+
+  .e404__title {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    margin-bottom: var(--s-5);
+  }
+
+  .e404__text {
+    font-size: 0.95rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    margin-bottom: var(--s-10);
+  }
+
+  .e404__actions {
+    display: flex;
+    gap: var(--s-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Exploration grid */
+  .e404-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+
+  .e404-grid__card {
+    position: relative;
+    display: block;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .e404-grid__card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease);
+  }
+
+  .e404-grid__card:hover img {
+    transform: scale(1.05);
+  }
+
+  .e404-grid__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgb(0 0 0 / 0.65) 0%, rgb(0 0 0 / 0.05) 60%);
+  }
+
+  .e404-grid__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--s-6);
+    z-index: 1;
+  }
+
+  .e404-grid__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .e404-grid__desc {
+    font-size: 0.75rem;
+    color: rgb(255 255 255 / 0.6);
+    letter-spacing: 0.04em;
+  }
+
+  @media (min-width: 600px) {
+    .e404-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 1000px) {
+    .e404-grid { grid-template-columns: repeat(4, 1fr); }
+    .e404-grid__card { aspect-ratio: 3 / 4; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .e404__wave--1, .e404__wave--2 { animation: none; }
+    .e404-grid__card img { transition: none; }
+  }
+</style>

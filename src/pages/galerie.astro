@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import LocationHero from '../components/locations/LocationHero.astro';
 import BookingCTA from '../components/locations/BookingCTA.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 const title = 'Galerie photos — Lac de Sainte-Croix | Surf Center Verdon';
 const description = 'Découvrez le Surf Center en images : lac de Sainte-Croix, Gorges du Verdon, activités nautiques, concerts, couchers de soleil. Galerie photos de notre base nautique.';
@@ -55,6 +56,10 @@ const jsonLd = [
     image="/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg"
     alt="Vue panoramique du lac de Sainte-Croix — Gorges du Verdon"
   />
+  <Breadcrumbs items={[
+    { label: 'Accueil', href: '/' },
+    { label: 'Galerie photos' },
+  ]} />
 
   <section class="section" aria-labelledby="mosaic-title">
     <div class="container">

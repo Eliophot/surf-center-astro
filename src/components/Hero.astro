@@ -1,13 +1,20 @@
+---
+import { Image } from 'astro:assets';
+import heroImg from '../assets/images/hero-home.jpg';
+---
+
 <section class="hero" data-hero aria-label="Surf Center — base nautique au lac de Sainte-Croix">
-  <img
+  <Image
     class="hero__img"
-    src="/GettyImages-577312024 (1).jpg"
+    src={heroImg}
     alt="Kayak sur les eaux turquoise des Gorges du Verdon, falaises et végétation méditerranéenne"
-    width="1920"
-    height="1080"
+    widths={[640, 1024, 1440, 1920]}
+    sizes="100vw"
     loading="eager"
     fetchpriority="high"
     decoding="async"
+    format="webp"
+    quality={80}
   />
   <div class="hero__overlay" aria-hidden="true"></div>
 

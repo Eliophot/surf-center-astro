@@ -1,10 +1,17 @@
 ---
+import { Image } from 'astro:assets';
+import imgPlanche from '../assets/images/location-planche-a-voile.png';
+import imgBateau from '../assets/images/location-bateau-electrique.jpeg';
+import imgPedalo from '../assets/images/location-pedalo.jpg';
+import imgPaddle from '../assets/images/location-paddle.jpeg';
+import imgCanoe from '../assets/images/location-canoe.jpeg';
+
 const locations = [
   {
     title: "Planche à voile",
     description: "Adrénaline · Vent du Verdon",
     price: 20,
-    image: "/location-planche-a-voile-windsurf-lac-sainte-croix.png",
+    image: imgPlanche,
     alt: "Planche à voile sur le lac de Sainte-Croix",
     tag: "7a524907-97b7-42bd-bfdc-deb401767b21",
   },
@@ -12,7 +19,7 @@ const locations = [
     title: "Bateau électrique",
     description: "Sans permis · Jusqu'à 7 pers.",
     price: 55,
-    image: "/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg",
+    image: imgBateau,
     alt: "Bateau électrique sur le lac de Sainte-Croix",
     tag: "62329049-d954-482c-82a1-faa16321e3bf",
   },
@@ -20,7 +27,7 @@ const locations = [
     title: "Pédalo",
     description: "En famille · Criques secrètes",
     price: 15,
-    image: "/pedalos_lac_sainte_croix.jpg",
+    image: imgPedalo,
     alt: "Pédalos sur le lac de Sainte-Croix",
     tag: "03a55e88-44ac-4161-ad03-aa857b1d0dc0",
   },
@@ -28,7 +35,7 @@ const locations = [
     title: "Paddle board",
     description: "Accessible à tous · Vue garantie",
     price: 15,
-    image: "/location-paddle-lac-sainte-croix-surfcenter.jpeg",
+    image: imgPaddle,
     alt: "Paddle board sur le lac de Sainte-Croix",
     tag: "52bf76b6-6f0a-43ff-b0a2-4c1332d5ede5",
   },
@@ -36,7 +43,7 @@ const locations = [
     title: "Canoë",
     description: "Exploration · Face aux falaises",
     price: 10,
-    image: "/canoe.jpeg",
+    image: imgCanoe,
     alt: "Canoë sur le lac de Sainte-Croix",
     tag: "e57bf5a3-2296-4226-94a8-06295b1415d8",
   },
@@ -61,14 +68,16 @@ const locations = [
               data-tag={loc.tag}
               aria-label={`Réserver ${loc.title}`}
             >
-              <img
+              <Image
                 class="slider__img"
                 src={loc.image}
                 alt={loc.alt}
-                width="600"
-                height="800"
+                width={600}
+                height={800}
                 loading="lazy"
                 decoding="async"
+                format="webp"
+                quality={75}
               />
               <div class="slider__overlay"></div>
               <div class="slider__price">

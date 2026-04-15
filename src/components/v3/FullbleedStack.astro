@@ -2,16 +2,10 @@
 import { locations } from '../../data/home';
 ---
 
-<section id="activites" aria-labelledby="v3-activities-title">
+<section id="activites" class="fbs-section" aria-labelledby="v3-activities-title">
   <h2 id="v3-activities-title" class="sr-only">Nos locations</h2>
   {locations.map((loc, i) => (
-    <button
-      type="button"
-      class:list={['fbs', { 'fbs--right': i % 2 !== 0 }]}
-      data-product-book
-      data-tag={loc.tag}
-      aria-label={`Réserver ${loc.title}`}
-    >
+    <div class:list={['fbs', { 'fbs--right': i % 2 !== 0 }]}>
       <img class="fbs__img" src={loc.image} alt={loc.alt} width="1920" height="800" loading="lazy" decoding="async" />
       <div class="fbs__overlay"></div>
       <div class="fbs__content">
@@ -20,12 +14,18 @@ import { locations } from '../../data/home';
         <p class="fbs__desc">{loc.description}</p>
         <span class="fbs__price">dès {loc.price}€</span>
       </div>
-      <span class="fbs__cta">Réserver <span aria-hidden="true">→</span></span>
-    </button>
+      <button type="button" class="fbs__cta" data-product-book data-tag={loc.tag}>Réserver <span aria-hidden="true">→</span></button>
+    </div>
   ))}
 </section>
 
 <style>
+  .fbs-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
   .fbs {
     position: relative;
     display: flex;
@@ -34,10 +34,6 @@ import { locations } from '../../data/home';
     height: 60vh;
     min-height: 400px;
     overflow: hidden;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font-family: inherit;
     text-align: left;
     color: #fff;
     -webkit-tap-highlight-color: transparent;
@@ -107,7 +103,7 @@ import { locations } from '../../data/home';
 
   .fbs__cta {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     bottom: var(--s-8);
     right: var(--s-6);
     font-size: 0.7rem;
@@ -115,9 +111,18 @@ import { locations } from '../../data/home';
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: rgb(255 255 255 / 0.4);
+    background: none;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    font-family: inherit;
     opacity: 0;
     transform: translateX(-8px);
     transition: all var(--t-normal) var(--ease);
+  }
+
+  .fbs__cta:hover {
+    color: var(--c-orange);
   }
 
   .fbs--right .fbs__cta {

@@ -4,6 +4,7 @@ import LocationHero from '../components/locations/LocationHero.astro';
 import SectionOneImage from '../components/sections/SectionOneImage.astro';
 import Maillage from '../components/Maillage.astro';
 import BookingCTA from '../components/locations/BookingCTA.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 const title = 'Animations — Yoga, cours nautiques, concerts | Surf Center Verdon';
 const description = 'Yoga face au lac, cours de paddle et windsurf, concerts live et soirées coucher de soleil. Toutes les animations et événements du Surf Center au lac de Sainte-Croix, Gorges du Verdon.';
@@ -54,6 +55,10 @@ const jsonLd = [
     image="/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg"
     alt="Cours de yoga au lever du soleil au bord du lac de Sainte-Croix — Surf Center"
   />
+  <Breadcrumbs items={[
+    { label: 'Accueil', href: '/' },
+    { label: 'Animations' },
+  ]} />
 
   <!-- Présentation types d'animations -->
   <SectionOneImage

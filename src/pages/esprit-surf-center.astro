@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import SectionOneImage from '../components/sections/SectionOneImage.astro';
 import Maillage from '../components/Maillage.astro';
 import BookingCTA from '../components/locations/BookingCTA.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { locationDetails } from '../data/locations';
 
 const title = "L'esprit Surf Center — Notre histoire & nos valeurs | Surf Center Verdon";
@@ -43,6 +44,10 @@ const jsonLd = [
       <h1 class="espvideo__title">L'esprit<br/>Surf Center</h1>
     </div>
   </section>
+  <Breadcrumbs items={[
+    { label: 'Accueil', href: '/' },
+    { label: "L'esprit Surf Center" },
+  ]} />
 
   <!-- Ambiance / Esprit -->
   <SectionOneImage

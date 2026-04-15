@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import LocationHero from '../components/locations/LocationHero.astro';
 import Maillage from '../components/Maillage.astro';
 import BookingCTA from '../components/locations/BookingCTA.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 const title = 'Accès & Contact — Surf Center | Les Salles-sur-Verdon, Gorges du Verdon';
 const description = 'Comment venir au Surf Center : adresse, itinéraire, contact, horaires. Base nautique aux Salles-sur-Verdon, lac de Sainte-Croix, Gorges du Verdon. Formulaire de contact.';
@@ -44,6 +45,10 @@ const jsonLd = [
     image="/location-lac-sainte-croix-gorges-verdon.png"
     alt="Vue aérienne du lac de Sainte-Croix — Les Salles-sur-Verdon"
   />
+  <Breadcrumbs items={[
+    { label: 'Accueil', href: '/' },
+    { label: 'Accès & Contact' },
+  ]} />
 
   <!-- Adresse + Formulaire contact -->
   <section class="section" aria-labelledby="contact-title">

@@ -5,6 +5,7 @@ import SectionOneImage from '../components/sections/SectionOneImage.astro';
 import SectionTwoImages from '../components/sections/SectionTwoImages.astro';
 import Maillage from '../components/Maillage.astro';
 import BookingCTA from '../components/locations/BookingCTA.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 const title = 'Restauration — Snack-pizzeria face au lac | Surf Center Verdon';
 const description = 'Pizzas artisanales au feu de bois, salades fraîches, glaces et boissons avec terrasse face au lac de Sainte-Croix. Snack-pizzeria Surf Center, Les Salles-sur-Verdon, Gorges du Verdon.';
@@ -54,6 +55,10 @@ const jsonLd = [
     image="/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg"
     alt="Vue aérienne du snack-pizzeria Surf Center au lac de Sainte-Croix"
   />
+  <Breadcrumbs items={[
+    { label: 'Accueil', href: '/' },
+    { label: 'Restauration' },
+  ]} />
 
   <!-- Le Snack -->
   <SectionOneImage

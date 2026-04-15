@@ -7,6 +7,7 @@ import Itineraries from '../../components/locations/Itineraries.astro';
 import PricingSlots from '../../components/locations/PricingSlots.astro';
 import OtherLocations from '../../components/locations/OtherLocations.astro';
 import BookingCTA from '../../components/locations/BookingCTA.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { locationDetails, getLocationBySlug, getOtherLocations } from '../../data/locations';
 
 export function getStaticPaths() {
@@ -66,6 +67,11 @@ const jsonLd = [
     image={loc.heroImage}
     alt={loc.heroAlt}
   />
+  <Breadcrumbs items={[
+    { label: 'Accueil', href: '/' },
+    { label: 'Nos locations', href: '/nos-locations' },
+    { label: loc.title },
+  ]} />
   <LocationDetail
     title={loc.shortTitle}
     description={loc.longDescription}

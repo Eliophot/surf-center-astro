@@ -1,33 +1,53 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import LocationHero from '../components/locations/LocationHero.astro';
 import BookingCTA from '../components/locations/BookingCTA.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+import imgBateauxLac from '../assets/images/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg';
+import imgPaddleBateaux from '../assets/images/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg';
+import imgYoga from '../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import imgGetty from '../assets/images/GettyImages-577312024.jpg';
+import imgSnack from '../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import imgBateau from '../assets/images/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg';
+import imgConcertJoulik from '../assets/images/concert-joulik-lac-sainte-croix-surfcenter.jpg';
+import imgPedaloPlage from '../assets/images/location-pedalo-lac-sainte-croix-plage-surfcenter.jpeg';
+import imgPaddle from '../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+import imgFramboise from '../assets/images/framboise-et-ceatera-lac-sainte-croix-concert-surfcenter.jpg';
+import imgCanoeLac from '../assets/images/location-canoe-lac-sainte-croix-surfcenter.jpg';
+import imgVoile from '../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+import imgEsprit from '../assets/images/esprit.png';
+import imgLac from '../assets/images/location-lac-sainte-croix-gorges-verdon.png';
+import imgSunset from '../assets/images/IMG20220618204351.jpg';
+import imgEvjf from '../assets/images/location-bateau-electriques-evjf-lac-sainte-croix.jpg';
+import imgPedalo from '../assets/images/location-pedalo-lac-sainte-croix.jpeg';
+import imgTrophee from '../assets/images/trophee-hobie-shop-lac-sainte-croix-surf-center.jpeg';
 
 const title = 'Galerie photos — Lac de Sainte-Croix | Surf Center Verdon';
 const description = 'Découvrez le Surf Center en images : lac de Sainte-Croix, Gorges du Verdon, activités nautiques, concerts, couchers de soleil. Galerie photos de notre base nautique.';
 
 const siteUrl = 'https://surfcenter-verdon.fr';
 
-const photos = [
-  { src: '/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg', alt: 'Bateaux électriques sur le lac de Sainte-Croix — Gorges du Verdon', span: 'wide' },
-  { src: '/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg', alt: 'Paddle et bateaux au lac de Sainte-Croix', span: '' },
-  { src: '/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg', alt: 'Yoga au lever du soleil — Surf Center', span: '' },
-  { src: '/GettyImages-577312024 (1).jpg', alt: 'Kayak dans les Gorges du Verdon', span: 'tall' },
-  { src: '/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg', alt: 'Vue drone snack et pédalos — Surf Center', span: '' },
-  { src: '/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg', alt: 'Bateau électrique au Surf Center', span: '' },
-  { src: '/concert-joulik-lac-sainte-croix-surfcenter.jpg', alt: 'Concert Joulik au Surf Center', span: 'wide' },
-  { src: '/location-pedalo-lac-sainte-croix-plage-surfcenter.jpeg', alt: 'Pédalos sur la plage du lac de Sainte-Croix', span: '' },
-  { src: '/location-paddle-lac-sainte-croix-surfcenter.jpeg', alt: 'Paddle sur le lac de Sainte-Croix', span: '' },
-  { src: '/framboise-et-ceatera-lac-sainte-croix-concert-surfcenter.jpg', alt: 'Concert Framboise & Cætera — Surf Center', span: '' },
-  { src: '/location-canoe-lac-sainte-croix-surfcenter.jpg', alt: 'Canoë sur le lac de Sainte-Croix', span: 'tall' },
-  { src: '/location-planche-a-voile-windsurf-lac-sainte-croix.png', alt: 'Planche à voile au lac de Sainte-Croix', span: '' },
-  { src: '/esprit.png', alt: 'Ambiance conviviale au Surf Center', span: '' },
-  { src: '/location-lac-sainte-croix-gorges-verdon.png', alt: 'Vue aérienne du lac de Sainte-Croix', span: 'wide' },
-  { src: '/IMG20220618204351.jpg', alt: 'Coucher de soleil au Surf Center', span: '' },
-  { src: '/location-bateau-electriques-evjf-lac-sainte-croix.jpg', alt: 'EVJF en bateau électrique', span: '' },
-  { src: '/location-pedalo-lac-sainte-croix.jpeg', alt: 'Pédalos colorés — lac de Sainte-Croix', span: '' },
-  { src: '/trophee-hobie-shop-lac-sainte-croix-surf-center.jpeg', alt: 'Trophée Hobie au Surf Center', span: '' },
+const photos: { src: ImageMetadata; alt: string; span: string }[] = [
+  { src: imgBateauxLac, alt: 'Bateaux électriques sur le lac de Sainte-Croix — Gorges du Verdon', span: 'wide' },
+  { src: imgPaddleBateaux, alt: 'Paddle et bateaux au lac de Sainte-Croix', span: '' },
+  { src: imgYoga, alt: 'Yoga au lever du soleil — Surf Center', span: '' },
+  { src: imgGetty, alt: 'Kayak dans les Gorges du Verdon', span: 'tall' },
+  { src: imgSnack, alt: 'Vue drone snack et pédalos — Surf Center', span: '' },
+  { src: imgBateau, alt: 'Bateau électrique au Surf Center', span: '' },
+  { src: imgConcertJoulik, alt: 'Concert Joulik au Surf Center', span: 'wide' },
+  { src: imgPedaloPlage, alt: 'Pédalos sur la plage du lac de Sainte-Croix', span: '' },
+  { src: imgPaddle, alt: 'Paddle sur le lac de Sainte-Croix', span: '' },
+  { src: imgFramboise, alt: 'Concert Framboise & Cætera — Surf Center', span: '' },
+  { src: imgCanoeLac, alt: 'Canoë sur le lac de Sainte-Croix', span: 'tall' },
+  { src: imgVoile, alt: 'Planche à voile au lac de Sainte-Croix', span: '' },
+  { src: imgEsprit, alt: 'Ambiance conviviale au Surf Center', span: '' },
+  { src: imgLac, alt: 'Vue aérienne du lac de Sainte-Croix', span: 'wide' },
+  { src: imgSunset, alt: 'Coucher de soleil au Surf Center', span: '' },
+  { src: imgEvjf, alt: 'EVJF en bateau électrique', span: '' },
+  { src: imgPedalo, alt: 'Pédalos colorés — lac de Sainte-Croix', span: '' },
+  { src: imgTrophee, alt: 'Trophée Hobie au Surf Center', span: '' },
 ];
 
 const jsonLd = [
@@ -53,7 +73,7 @@ const jsonLd = [
   <LocationHero
     title="Galerie photos"
     tagline="Lac de Sainte-Croix · Gorges du Verdon"
-    image="/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg"
+    image={imgBateauxLac}
     alt="Vue panoramique du lac de Sainte-Croix — Gorges du Verdon"
   />
   <Breadcrumbs items={[
@@ -72,7 +92,7 @@ const jsonLd = [
       <div class="galmosaic">
         {photos.map((p, i) => (
           <div class:list={['galmosaic__item', { 'galmosaic__item--wide': p.span === 'wide', 'galmosaic__item--tall': p.span === 'tall' }, `reveal`]} style={`--d:${Math.min(i, 6) * 50}ms`}>
-            <img src={p.src} alt={p.alt} width="800" height="600" loading={i < 4 ? 'eager' : 'lazy'} decoding="async" />
+            <Image src={p.src} alt={p.alt} width={800} height={600} loading={i < 4 ? 'eager' : 'lazy'} decoding="async" format="webp" quality={75} />
           </div>
         ))}
       </div>

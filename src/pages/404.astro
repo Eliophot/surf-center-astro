@@ -1,6 +1,22 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import Layout from '../layouts/Layout.astro';
 import { meshLinks } from '../data/home';
+
+import imgBateau from '../assets/images/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg';
+import imgEsprit from '../assets/images/esprit.png';
+import imgSnack from '../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import imgYoga from '../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import imgConcert from '../assets/images/concert-surfcenter-lac-sainte-croix.png';
+
+const meshImageMap: Record<string, ImageMetadata> = {
+  '/nos-locations': imgBateau,
+  '/esprit-surf-center': imgEsprit,
+  '/restauration': imgSnack,
+  '/animations': imgYoga,
+  '/groupes-evenements': imgConcert,
+};
 
 const title = 'Page introuvable — Surf Center';
 const description = 'La page que vous recherchez n\'existe pas ou a été déplacée. Retrouvez toutes nos activités nautiques au lac de Sainte-Croix.';
@@ -41,7 +57,11 @@ const description = 'La page que vous recherchez n\'existe pas ou a été dépla
       <div class="e404-grid">
         {meshLinks.slice(0, 4).map((link, i) => (
           <a href={link.href} class={`e404-grid__card reveal`} style={`--d:${i * 80}ms`}>
-            <img src={link.image} alt={link.alt} width="600" height="400" loading="lazy" decoding="async" />
+            {meshImageMap[link.href] ? (
+              <Image src={meshImageMap[link.href]} alt={link.alt} width={600} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
+            ) : (
+              <img src={link.image} alt={link.alt} width="600" height="400" loading="lazy" decoding="async" />
+            )}
             <div class="e404-grid__overlay"></div>
             <div class="e404-grid__content">
               <h3 class="e404-grid__title">{link.title}</h3>

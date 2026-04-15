@@ -1,5 +1,21 @@
+---
+import { Image } from 'astro:assets';
+import heroImg from '../../assets/images/concert-surfcenter-lac-sainte-croix.png';
+---
+
 <section class="evthero" data-hero aria-label="Groupes & Événements au Surf Center">
-  <img class="evthero__bg" src="/concert-surfcenter-lac-sainte-croix.png" alt="Concert au coucher de soleil au Surf Center — lac de Sainte-Croix" width="1920" height="900" loading="eager" fetchpriority="high" decoding="async" />
+  <Image
+    class="evthero__bg"
+    src={heroImg}
+    alt="Concert au coucher de soleil au Surf Center — lac de Sainte-Croix"
+    widths={[640, 1024, 1440, 1920]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+    format="webp"
+    quality={80}
+  />
   <div class="evthero__overlay" aria-hidden="true"></div>
   <div class="container evthero__content">
     <span class="evthero__tag">Lac de Sainte-Croix · Gorges du Verdon</span>

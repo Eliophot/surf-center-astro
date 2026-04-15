@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import LocationHero from '../components/locations/LocationHero.astro';
 import SectionOneImage from '../components/sections/SectionOneImage.astro';
@@ -6,6 +7,11 @@ import SectionTwoImages from '../components/sections/SectionTwoImages.astro';
 import Maillage from '../components/Maillage.astro';
 import BookingCTA from '../components/locations/BookingCTA.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+import imgSnack from '../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import imgEsprit from '../assets/images/esprit.png';
+import imgBar from '../assets/images/IMG20220610131419.jpg';
+import imgSunset from '../assets/images/IMG20220618204351.jpg';
 
 const title = 'Restauration — Snack-pizzeria face au lac | Surf Center Verdon';
 const description = 'Pizzas artisanales au feu de bois, salades fraîches, glaces et boissons avec terrasse face au lac de Sainte-Croix. Snack-pizzeria Surf Center, Les Salles-sur-Verdon, Gorges du Verdon.';
@@ -52,7 +58,7 @@ const jsonLd = [
   <LocationHero
     title="Restauration"
     tagline="Snack-pizzeria · Terrasse face au lac"
-    image="/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg"
+    image={imgSnack}
     alt="Vue aérienne du snack-pizzeria Surf Center au lac de Sainte-Croix"
   />
   <Breadcrumbs items={[
@@ -66,7 +72,7 @@ const jsonLd = [
     eyebrow="Le snack"
     title="Pause gourmande<br/>face au lac"
     text="Notre snack-pizzeria vous accueille tout au long de la journée, directement sur la plage du lac de Sainte-Croix. Commandez au comptoir, installez-vous en terrasse les pieds dans le sable et profitez de la vue."
-    image={{ src: '/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg', alt: 'Terrasse du snack Surf Center face au lac de Sainte-Croix' }}
+    image={{ src: imgSnack, alt: 'Terrasse du snack Surf Center face au lac de Sainte-Croix' }}
     list={[
       { text: 'Service continu de 11h à 18h30', icon: 'clock' },
       { text: 'Terrasse vue lac', icon: 'sun' },
@@ -81,7 +87,7 @@ const jsonLd = [
     eyebrow="Les pizzas"
     title="Au feu de bois,<br/>comme en Italie"
     text="Nos pizzas sont préparées chaque jour avec des ingrédients frais et cuites au feu de bois. Pâte faite maison, mozzarella di bufala, légumes de saison — le goût de l'Italie face au lac de Sainte-Croix."
-    image={{ src: '/esprit.png', alt: 'Pizzas artisanales au feu de bois — Surf Center' }}
+    image={{ src: imgEsprit, alt: 'Pizzas artisanales au feu de bois — Surf Center' }}
     list={[
       { text: 'Pâte fraîche maison', icon: 'star' },
       { text: 'Cuisson au feu de bois', icon: 'flame' },
@@ -98,7 +104,7 @@ const jsonLd = [
     eyebrow="Le bar"
     title="Boissons fraîches<br/>& glaces"
     text="Jus de fruits pressés, smoothies, bières artisanales, rosé de Provence et glaces artisanales — tout ce qu'il faut pour se rafraîchir entre deux sessions nautiques."
-    image={{ src: '/IMG20220610131419.jpg', alt: 'Boissons et glaces au bar Surf Center' }}
+    image={{ src: imgBar, alt: 'Boissons et glaces au bar Surf Center' }}
     list={[
       { text: 'Jus frais & smoothies', icon: 'leaf' },
       { text: 'Bières artisanales & rosé', icon: 'star' },
@@ -140,7 +146,7 @@ const jsonLd = [
       </div>
 
       <div class="restoinfo__visual reveal reveal-d2">
-        <img src="/IMG20220618204351.jpg" alt="Coucher de soleil au Surf Center — restauration face au lac" width="640" height="800" loading="lazy" decoding="async" />
+        <Image src={imgSunset} alt="Coucher de soleil au Surf Center — restauration face au lac" width={640} height={800} loading="lazy" decoding="async" format="webp" quality={75} />
       </div>
     </div>
   </section>

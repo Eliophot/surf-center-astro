@@ -1,10 +1,18 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import LocationHero from '../components/locations/LocationHero.astro';
 import SectionOneImage from '../components/sections/SectionOneImage.astro';
 import Maillage from '../components/Maillage.astro';
 import BookingCTA from '../components/locations/BookingCTA.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+import imgYoga from '../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import imgPaddle from '../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+import imgConcertJoulik from '../assets/images/concert-joulik-lac-sainte-croix-surfcenter.jpg';
+import imgFramboise from '../assets/images/framboise-et-ceatera-lac-sainte-croix-concert-surfcenter.jpg';
+import imgWindsurf from '../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+import imgSunset from '../assets/images/IMG20220618204351.jpg';
 
 const title = 'Animations — Yoga, cours nautiques, concerts | Surf Center Verdon';
 const description = 'Yoga face au lac, cours de paddle et windsurf, concerts live et soirées coucher de soleil. Toutes les animations et événements du Surf Center au lac de Sainte-Croix, Gorges du Verdon.';
@@ -20,13 +28,13 @@ const upcomingEvents = [
   { date: '16 Août', title: 'Régate des familles', type: 'Sport' },
 ];
 
-const galleryImages = [
-  { src: '/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg', alt: 'Yoga au lever du soleil — Surf Center' },
-  { src: '/concert-joulik-lac-sainte-croix-surfcenter.jpg', alt: 'Concert Joulik — Surf Center' },
-  { src: '/location-paddle-lac-sainte-croix-surfcenter.jpeg', alt: 'Cours de paddle — lac de Sainte-Croix' },
-  { src: '/framboise-et-ceatera-lac-sainte-croix-concert-surfcenter.jpg', alt: 'Concert Framboise & Cætera — Surf Center' },
-  { src: '/location-planche-a-voile-windsurf-lac-sainte-croix.png', alt: 'Windsurf au lac de Sainte-Croix' },
-  { src: '/IMG20220618204351.jpg', alt: 'Coucher de soleil au Surf Center' },
+const galleryImages: { src: ImageMetadata; alt: string }[] = [
+  { src: imgYoga, alt: 'Yoga au lever du soleil — Surf Center' },
+  { src: imgConcertJoulik, alt: 'Concert Joulik — Surf Center' },
+  { src: imgPaddle, alt: 'Cours de paddle — lac de Sainte-Croix' },
+  { src: imgFramboise, alt: 'Concert Framboise & Cætera — Surf Center' },
+  { src: imgWindsurf, alt: 'Windsurf au lac de Sainte-Croix' },
+  { src: imgSunset, alt: 'Coucher de soleil au Surf Center' },
 ];
 
 const jsonLd = [
@@ -52,7 +60,7 @@ const jsonLd = [
   <LocationHero
     title="Animations"
     tagline="Yoga · Cours · Concerts · Soirées"
-    image="/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg"
+    image={imgYoga}
     alt="Cours de yoga au lever du soleil au bord du lac de Sainte-Croix — Surf Center"
   />
   <Breadcrumbs items={[
@@ -66,7 +74,7 @@ const jsonLd = [
     eyebrow="Activités"
     title="Bien plus qu'une<br/>base nautique"
     text="Au Surf Center, chaque journée propose son lot d'expériences : cours encadrés, ateliers bien-être, animations sportives et soirées musicales. Le tout face au lac de Sainte-Croix, dans un cadre exceptionnel."
-    image={{ src: '/location-paddle-lac-sainte-croix-surfcenter.jpeg', alt: 'Activités nautiques encadrées au Surf Center' }}
+    image={{ src: imgPaddle, alt: 'Activités nautiques encadrées au Surf Center' }}
     list={[
       { text: 'Cours de paddle & windsurf', icon: 'waves' },
       { text: 'Yoga & bien-être au lever du soleil', icon: 'yoga' },
@@ -82,7 +90,7 @@ const jsonLd = [
     eyebrow="Bien-être"
     title="Yoga face au lac"
     text="Chaque matin d'été, notre professeure Sarah vous accueille pour une session de yoga face au lac de Sainte-Croix. Au lever du soleil, dans le calme absolu, reconnectez-vous à la nature."
-    image={{ src: '/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg', alt: 'Sarah — cours de yoga au Surf Center, lac de Sainte-Croix' }}
+    image={{ src: imgYoga, alt: 'Sarah — cours de yoga au Surf Center, lac de Sainte-Croix' }}
     list={[
       { text: 'Sessions sunrise 7h30 — 8h30', icon: 'sunset' },
       { text: 'Tous niveaux bienvenus', icon: 'users' },
@@ -99,7 +107,7 @@ const jsonLd = [
     eyebrow="Concerts"
     title="Live au<br/>coucher du soleil"
     text="Le Surf Center accueille des artistes tout l'été pour des concerts acoustiques, DJ sets et soirées thématiques les pieds dans le sable, face au coucher de soleil sur le lac."
-    image={{ src: '/concert-joulik-lac-sainte-croix-surfcenter.jpg', alt: 'Concert live Joulik au Surf Center — lac de Sainte-Croix' }}
+    image={{ src: imgConcertJoulik, alt: 'Concert live Joulik au Surf Center — lac de Sainte-Croix' }}
     list={[
       { text: 'Concerts acoustiques live', icon: 'music' },
       { text: 'DJ sets coucher de soleil', icon: 'disc' },
@@ -140,7 +148,7 @@ const jsonLd = [
       <div class="anigal__grid">
         {galleryImages.map((img, i) => (
           <div class={`anigal__item reveal reveal-d${Math.min(i + 1, 4)}`}>
-            <img src={img.src} alt={img.alt} width="600" height="400" loading="lazy" decoding="async" />
+            <Image src={img.src} alt={img.alt} width={600} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
           </div>
         ))}
       </div>

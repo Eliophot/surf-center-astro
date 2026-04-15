@@ -5,6 +5,8 @@ import LocationHero from '../../components/locations/LocationHero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import BookingCTA from '../../components/locations/BookingCTA.astro';
 
+import imgHeroBlog from '../../assets/images/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg';
+
 const title = 'Blog — Actualités & guides | Surf Center Verdon';
 const description = 'Guides pratiques, bons plans et actualités du Surf Center : activités nautiques, événements, criques secrètes et conseils pour profiter du lac de Sainte-Croix.';
 
@@ -42,7 +44,7 @@ function formatDate(date: Date): string {
   <LocationHero
     title="Blog"
     tagline="Guides · Actualités · Bons plans"
-    image="/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg"
+    image={imgHeroBlog}
     alt="Vue panoramique du lac de Sainte-Croix — Gorges du Verdon"
   />
   <Breadcrumbs items={[

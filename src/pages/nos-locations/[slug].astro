@@ -1,4 +1,5 @@
 ---
+import type { ImageMetadata } from 'astro';
 import Layout from '../../layouts/Layout.astro';
 import LocationHero from '../../components/locations/LocationHero.astro';
 import LocationDetail from '../../components/locations/LocationDetail.astro';
@@ -9,6 +10,34 @@ import OtherLocations from '../../components/locations/OtherLocations.astro';
 import BookingCTA from '../../components/locations/BookingCTA.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { locationDetails, getLocationBySlug, getOtherLocations } from '../../data/locations';
+
+import imgHeroBateau from '../../assets/images/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg';
+import imgHeroPaddle from '../../assets/images/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg';
+import imgHeroPedalo from '../../assets/images/location-pedalo-lac-sainte-croix-plage-surfcenter.jpeg';
+import imgHeroCanoe from '../../assets/images/location-canoe-lac-sainte-croix-surfcenter.jpg';
+import imgHeroVoile from '../../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+
+import imgDetailBateau from '../../assets/images/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg';
+import imgDetailPaddle from '../../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+import imgDetailPedalo from '../../assets/images/location-pedalo-lac-sainte-croix.jpeg';
+import imgDetailCanoe from '../../assets/images/canoe.jpeg';
+import imgDetailVoile from '../../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+
+const heroImageMap: Record<string, ImageMetadata> = {
+  'bateau-electrique': imgHeroBateau,
+  'paddle': imgHeroPaddle,
+  'pedalo': imgHeroPedalo,
+  'canoe': imgHeroCanoe,
+  'planche-a-voile': imgHeroVoile,
+};
+
+const detailImageMap: Record<string, ImageMetadata> = {
+  'bateau-electrique': imgDetailBateau,
+  'paddle': imgDetailPaddle,
+  'pedalo': imgDetailPedalo,
+  'canoe': imgDetailCanoe,
+  'planche-a-voile': imgDetailVoile,
+};
 
 export function getStaticPaths() {
   return locationDetails.map((loc) => ({
@@ -64,7 +93,7 @@ const jsonLd = [
   <LocationHero
     title={loc.title}
     tagline={loc.tagline}
-    image={loc.heroImage}
+    image={heroImageMap[loc.slug] || loc.heroImage}
     alt={loc.heroAlt}
   />
   <Breadcrumbs items={[
@@ -75,7 +104,7 @@ const jsonLd = [
   <LocationDetail
     title={loc.shortTitle}
     description={loc.longDescription}
-    image={loc.detailImage}
+    image={detailImageMap[loc.slug] || loc.detailImage}
     alt={loc.detailAlt}
     price={loc.price}
     priceUnit={loc.priceUnit}

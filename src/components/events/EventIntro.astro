@@ -1,3 +1,8 @@
+---
+import { Image } from 'astro:assets';
+import imgConcert from '../../assets/images/framboise-et-ceatera-lac-sainte-croix-concert-surfcenter.jpg';
+---
+
 <section class="evtintro section" aria-labelledby="evtintro-title">
   <div class="container evtintro__layout">
     <div class="evtintro__content reveal">
@@ -14,7 +19,7 @@
     </div>
 
     <div class="evtintro__visual reveal reveal-d2">
-      <img src="/framboise-et-ceatera-lac-sainte-croix-concert-surfcenter.jpg" alt="Ambiance concert au Surf Center — lac de Sainte-Croix" width="640" height="800" loading="lazy" decoding="async" />
+      <Image src={imgConcert} alt="Ambiance concert au Surf Center — lac de Sainte-Croix" width={640} height={800} loading="lazy" decoding="async" format="webp" quality={75} />
     </div>
   </div>
 </section>

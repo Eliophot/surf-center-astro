@@ -8,6 +8,8 @@ import Maillage from '../../components/Maillage.astro';
 import BookingCTA from '../../components/locations/BookingCTA.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
+import imgHeroLocations from '../../assets/images/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg';
+
 const title = 'Nos locations — Bateaux, paddle, pédalo, canoë | Surf Center Verdon';
 const description = 'Location de bateaux électriques sans permis, paddle, pédalo, canoë et planche à voile au lac de Sainte-Croix. Tarifs, créneaux et réservation en ligne — Surf Center, Gorges du Verdon.';
 
@@ -43,7 +45,7 @@ const jsonLd = [
   <LocationHero
     title="Nos locations"
     tagline="Lac de Sainte-Croix · Gorges du Verdon"
-    image="/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg"
+    image={imgHeroLocations}
     alt="Paddle et bateaux électriques sur le lac de Sainte-Croix — Surf Center"
   />
   <Breadcrumbs items={[

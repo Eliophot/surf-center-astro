@@ -1,8 +1,11 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
   title: string;
   description: string;
-  image: string;
+  image: string | ImageMetadata;
   alt: string;
   price: number;
   priceUnit: string;
@@ -19,7 +22,11 @@ const { title, description, image, alt, price, priceUnit, capacity, duration, le
 <section class="locdet section" aria-labelledby="locdet-title">
   <div class="container locdet__layout">
     <div class="locdet__visual reveal">
-      <img src={image} alt={alt} width="640" height="800" loading="lazy" decoding="async" />
+      {typeof image === 'string' ? (
+        <img src={image} alt={alt} width="640" height="800" loading="lazy" decoding="async" />
+      ) : (
+        <Image src={image} alt={alt} width={640} height={800} loading="lazy" decoding="async" format="webp" quality={75} />
+      )}
     </div>
 
     <div class="locdet__content reveal reveal-d1">

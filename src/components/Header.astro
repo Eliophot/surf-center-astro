@@ -82,47 +82,48 @@ const navLinks = [
     </div>
   </div>
 
-  <div class="mmenu" id="mobile-menu" hidden>
-    <div class="mmenu__inner">
-      <nav class="mmenu__nav" aria-label="Navigation mobile">
-        <ul role="list">
-          {navLinks.map((link, i) => (
-            <li class="mmenu__item" style={`--delay: ${i * 60}ms`}>
-              {link.modal
-                ? <button type="button" class="mmenu__link" data-shop>
-                    <span class="mmenu__link-label">{link.label}</span>
-                    <svg class="mmenu__link-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                      <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </button>
-                : <a href={link.href} class="mmenu__link">
-                    <span class="mmenu__link-label">{link.label}</span>
-                    <svg class="mmenu__link-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                      <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </a>}
-            </li>
-          ))}
-        </ul>
-      </nav>
+</header>
 
-      <div class="mmenu__actions" style="--delay: 300ms">
-        <button type="button" class="btn btn--primary mmenu__book" data-booking>Réserver une activité</button>
-        <button type="button" class="btn btn--outline mmenu__cart" data-cart>Mon panier</button>
-      </div>
+<div class="mmenu" id="mobile-menu" hidden>
+  <div class="mmenu__inner">
+    <nav class="mmenu__nav" aria-label="Navigation mobile">
+      <ul role="list">
+        {navLinks.map((link, i) => (
+          <li class="mmenu__item" style={`--delay: ${i * 60}ms`}>
+            {link.modal
+              ? <button type="button" class="mmenu__link" data-shop>
+                  <span class="mmenu__link-label">{link.label}</span>
+                  <svg class="mmenu__link-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              : <a href={link.href} class="mmenu__link">
+                  <span class="mmenu__link-label">{link.label}</span>
+                  <svg class="mmenu__link-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>}
+          </li>
+        ))}
+      </ul>
+    </nav>
 
-      <div class="mmenu__footer" style="--delay: 400ms">
-        <a href="tel:+33492771450" class="mmenu__contact">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M6.5 2.5H4a1.5 1.5 0 0 0-1.5 1.5A9.5 9.5 0 0 0 12 13.5a1.5 1.5 0 0 0 1.5-1.5v-2.5l-3-1.5-1.5 1.5a7.5 7.5 0 0 1-3.5-3.5L7 4.5l-.5-2Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-          </svg>
-          04 92 77 14 50
-        </a>
-        <p class="mmenu__address">Les Salles-sur-Verdon · Gorges du Verdon</p>
-      </div>
+    <div class="mmenu__actions" style="--delay: 300ms">
+      <button type="button" class="btn btn--primary mmenu__book" data-booking>Réserver une activité</button>
+      <button type="button" class="btn btn--outline mmenu__cart" data-cart>Mon panier</button>
+    </div>
+
+    <div class="mmenu__footer" style="--delay: 400ms">
+      <a href="tel:+33492771450" class="mmenu__contact">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M6.5 2.5H4a1.5 1.5 0 0 0-1.5 1.5A9.5 9.5 0 0 0 12 13.5a1.5 1.5 0 0 0 1.5-1.5v-2.5l-3-1.5-1.5 1.5a7.5 7.5 0 0 1-3.5-3.5L7 4.5l-.5-2Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+        04 92 77 14 50
+      </a>
+      <p class="mmenu__address">Les Salles-sur-Verdon · Gorges du Verdon</p>
     </div>
   </div>
-</header>
+</div>
 
 <script>
   const header = document.querySelector('[data-header]') as HTMLElement;
@@ -313,29 +314,45 @@ const navLinks = [
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 6px;
-    width: 2rem;
-    height: 2rem;
-    background: none;
-    border: none;
+    align-items: center;
+    gap: 5px;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgb(0 0 0 / 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: 8px;
     cursor: pointer;
     padding: 0;
+    transition: background var(--t-fast), border-color var(--t-fast);
+  }
+  .header.is-scrolled .header__burger {
+    background: var(--c-surface);
+    border-color: var(--c-border-light);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
   .header__burger span {
     display: block;
-    width: 1.4rem;
-    height: 1px;
+    width: 1.1rem;
+    height: 1.5px;
     background: #fff;
+    border-radius: 1px;
     transition: all var(--t-normal) var(--ease);
     transform-origin: center;
   }
   .header.is-scrolled .header__burger span { background: var(--c-header-burger); }
+  .header__burger[aria-expanded='true'] {
+    background: transparent;
+    border-color: transparent;
+  }
   .header__burger[aria-expanded='true'] span { background: var(--c-text) !important; }
   .header__burger[aria-expanded='true'] span:first-child {
-    transform: translateY(3.5px) rotate(45deg);
+    transform: translateY(3.25px) rotate(45deg);
   }
   .header__burger[aria-expanded='true'] span:last-child {
-    transform: translateY(-3.5px) rotate(-45deg);
+    transform: translateY(-3.25px) rotate(-45deg);
   }
 
   /* =============================================

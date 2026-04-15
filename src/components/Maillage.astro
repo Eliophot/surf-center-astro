@@ -1,38 +1,47 @@
 ---
-const links = [
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+import imgBateau from '../assets/images/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg';
+import imgEsprit from '../assets/images/esprit.png';
+import imgSnack from '../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import imgYoga from '../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import imgConcert from '../assets/images/concert-surfcenter-lac-sainte-croix.png';
+
+const links: { title: string; description: string; href: string; image: ImageMetadata; alt: string }[] = [
   {
     title: "Nos locations",
     description: "Bateaux, paddle, pédalo, canoë",
     href: "/nos-locations",
-    image: "/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg",
+    image: imgBateau,
     alt: "Location de bateaux — Surf Center",
   },
   {
     title: "L'esprit Surf Center",
     description: "Notre histoire & nos valeurs",
     href: "/esprit-surf-center",
-    image: "/esprit.png",
+    image: imgEsprit,
     alt: "L'esprit Surf Center — lac de Sainte-Croix",
   },
   {
     title: "Restauration",
     description: "Snack-pizzeria face au lac",
     href: "/restauration",
-    image: "/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg",
+    image: imgSnack,
     alt: "Restaurant Surf Center",
   },
   {
     title: "Animations",
     description: "Yoga, cours & activités",
     href: "/animations",
-    image: "/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg",
+    image: imgYoga,
     alt: "Yoga au Surf Center",
   },
   {
     title: "Groupes & Événements",
     description: "Concerts, soirées & privatisation",
     href: "/groupes-evenements",
-    image: "/concert-surfcenter-lac-sainte-croix.png",
+    image: imgConcert,
     alt: "Concert au Surf Center",
   },
 ];
@@ -48,14 +57,16 @@ const links = [
     <div class="mesh-grid">
       {links.map((link, i) => (
         <a href={link.href} class={`mesh-card reveal reveal-d${Math.min(i + 1, 4)}`}>
-          <img
+          <Image
             class="mesh-card__img"
             src={link.image}
             alt={link.alt}
-            width="400"
-            height="300"
+            width={400}
+            height={300}
             loading="lazy"
             decoding="async"
+            format="webp"
+            quality={75}
           />
           <div class="mesh-card__overlay"></div>
           <div class="mesh-card__content">

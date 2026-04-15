@@ -1,5 +1,20 @@
 ---
+import { Image } from 'astro:assets';
 import type { LocationDetail } from '../../data/locations';
+
+import imgBateau from '../../assets/images/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg';
+import imgPaddle from '../../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+import imgPedalo from '../../assets/images/location-pedalo-lac-sainte-croix.jpeg';
+import imgCanoe from '../../assets/images/canoe.jpeg';
+import imgVoile from '../../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+
+const imageMap: Record<string, ImageMetadata> = {
+  'bateau-electrique': imgBateau,
+  'paddle': imgPaddle,
+  'pedalo': imgPedalo,
+  'canoe': imgCanoe,
+  'planche-a-voile': imgVoile,
+};
 
 interface Props {
   locations: LocationDetail[];
@@ -18,7 +33,11 @@ const { locations } = Astro.props;
     <div class="otherloc__grid">
       {locations.map((loc, i) => (
         <a href={`/nos-locations/${loc.slug}`} class={`otherloc__card reveal reveal-d${Math.min(i + 1, 4)}`}>
-          <img src={loc.detailImage} alt={loc.heroAlt} width="400" height="300" loading="lazy" decoding="async" />
+          {imageMap[loc.slug] ? (
+            <Image src={imageMap[loc.slug]} alt={loc.heroAlt} width={400} height={300} loading="lazy" decoding="async" format="webp" quality={75} />
+          ) : (
+            <img src={loc.detailImage} alt={loc.heroAlt} width="400" height="300" loading="lazy" decoding="async" />
+          )}
           <div class="otherloc__overlay"></div>
           <div class="otherloc__content">
             <h3 class="otherloc__name">{loc.title}</h3>

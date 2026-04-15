@@ -1,10 +1,30 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import SectionOneImage from '../components/sections/SectionOneImage.astro';
 import Maillage from '../components/Maillage.astro';
 import BookingCTA from '../components/locations/BookingCTA.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { locationDetails } from '../data/locations';
+
+import imgEsprit from '../assets/images/esprit.png';
+import imgLac from '../assets/images/location-lac-sainte-croix-gorges-verdon.png';
+import imgGetty from '../assets/images/GettyImages-577312024.jpg';
+import imgSnack from '../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import imgPaddleBateaux from '../assets/images/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg';
+import imgBateau from '../assets/images/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg';
+import imgPaddle from '../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+import imgPedalo from '../assets/images/location-pedalo-lac-sainte-croix.jpeg';
+import imgCanoe from '../assets/images/canoe.jpeg';
+import imgVoile from '../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+
+const detailImageMap: Record<string, ImageMetadata> = {
+  'bateau-electrique': imgBateau,
+  'paddle': imgPaddle,
+  'pedalo': imgPedalo,
+  'canoe': imgCanoe,
+  'planche-a-voile': imgVoile,
+};
 
 const title = "L'esprit Surf Center — Notre histoire & nos valeurs | Surf Center Verdon";
 const description = "Découvrez l'esprit Surf Center : une base nautique au bord du lac de Sainte-Croix, au cœur des Gorges du Verdon. Nature, convivialité, qualité et simplicité depuis plus de 10 ans.";
@@ -55,7 +75,7 @@ const jsonLd = [
     eyebrow="Notre histoire"
     title="Un lieu,<br/>une énergie"
     text="Surf Center est né d'une idée simple : proposer un lieu où le lac, le soleil et la convivialité font le reste. Depuis plus de dix ans, nous accueillons familles, couples, groupes d'amis et aventuriers au bord du lac de Sainte-Croix."
-    image={{ src: '/esprit.png', alt: "L'ambiance Surf Center — convivialité au bord du lac" }}
+    image={{ src: imgEsprit, alt: "L'ambiance Surf Center — convivialité au bord du lac" }}
     list={[
       { text: 'Créé par des passionnés du lac', icon: 'heart' },
       { text: 'Équipe locale et engagée', icon: 'users' },
@@ -75,17 +95,17 @@ const jsonLd = [
 
       <div class="espcadre__grid">
         <div class="espcadre__card reveal">
-          <img src="/location-lac-sainte-croix-gorges-verdon.png" alt="Lac de Sainte-Croix vu du ciel" width="600" height="400" loading="lazy" decoding="async" />
+          <Image src={imgLac} alt="Lac de Sainte-Croix vu du ciel" width={600} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
           <h3>Le lac</h3>
           <p>2 200 hectares d'eaux turquoise entre les Gorges du Verdon et le plateau de Valensole.</p>
         </div>
         <div class="espcadre__card reveal reveal-d1">
-          <img src="/GettyImages-577312024 (1).jpg" alt="Gorges du Verdon en kayak" width="600" height="400" loading="lazy" decoding="async" />
+          <Image src={imgGetty} alt="Gorges du Verdon en kayak" width={600} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
           <h3>Les Gorges</h3>
           <p>Le plus grand canyon d'Europe, accessible directement depuis notre base nautique.</p>
         </div>
         <div class="espcadre__card reveal reveal-d2">
-          <img src="/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg" alt="Base nautique Surf Center vue du ciel" width="600" height="400" loading="lazy" decoding="async" />
+          <Image src={imgSnack} alt="Base nautique Surf Center vue du ciel" width={600} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
           <h3>La base</h3>
           <p>Plage, location, snack-pizzeria, scène concerts — tout sur place, les pieds dans l'eau.</p>
         </div>
@@ -106,7 +126,11 @@ const jsonLd = [
         {locationDetails.map((loc, i) => (
           <a href={`/nos-locations/${loc.slug}`} class={`espact__card reveal reveal-d${Math.min(i + 1, 4)}`}>
             <div class="espact__img-wrap">
-              <img src={loc.detailImage} alt={loc.heroAlt} width="400" height="300" loading="lazy" decoding="async" />
+              {detailImageMap[loc.slug] ? (
+                <Image src={detailImageMap[loc.slug]} alt={loc.heroAlt} width={400} height={300} loading="lazy" decoding="async" format="webp" quality={75} />
+              ) : (
+                <img src={loc.detailImage} alt={loc.heroAlt} width="400" height="300" loading="lazy" decoding="async" />
+              )}
             </div>
             <h3 class="espact__name">{loc.title}</h3>
             <span class="espact__price">dès {loc.price}€</span>
@@ -122,7 +146,7 @@ const jsonLd = [
     eyebrow="La destination"
     title="Le Verdon,<br/>côté lac"
     text="Les Salles-sur-Verdon, c'est un village provençal posé au bord du lac de Sainte-Croix. À 1h15 d'Aix-en-Provence, 1h30 de Marseille, 2h de Nice — un accès facile pour un dépaysement total."
-    image={{ src: '/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg', alt: 'Paddle et bateaux sur le lac de Sainte-Croix — Gorges du Verdon' }}
+    image={{ src: imgPaddleBateaux, alt: 'Paddle et bateaux sur le lac de Sainte-Croix — Gorges du Verdon' }}
     list={[
       { text: '1h15 depuis Aix-en-Provence', icon: 'compass' },
       { text: '1h30 depuis Marseille', icon: 'compass' },

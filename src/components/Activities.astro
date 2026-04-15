@@ -58,6 +58,12 @@ const locations = [
     </header>
 
     <div class="slider-wrap reveal">
+      <button class="slider__arrow slider__arrow--prev" type="button" data-slider-prev aria-label="Précédent">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
       <div class="slider" data-slider>
         <div class="slider__track" data-slider-track>
           {locations.map((loc, i) => (
@@ -96,18 +102,11 @@ const locations = [
         </div>
       </div>
 
-      <div class="slider__nav">
-        <button class="slider__btn" type="button" data-slider-prev aria-label="Précédent">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <button class="slider__btn" type="button" data-slider-next aria-label="Suivant">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
+      <button class="slider__arrow slider__arrow--next" type="button" data-slider-next aria-label="Suivant">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
 
     <div class="act-cta reveal reveal-d1">
@@ -123,6 +122,49 @@ const locations = [
   .slider {
     overflow: hidden;
     margin-bottom: var(--s-8);
+  }
+
+  .slider__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    transform: translateY(calc(-50% - var(--s-4)));
+    width: 48px;
+    height: 48px;
+    border-radius: var(--r-full);
+    border: 1.5px solid rgb(255 255 255 / 0.3);
+    background: rgb(0 0 0 / 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--t-fast) var(--ease);
+  }
+
+  .slider__arrow:hover {
+    background: rgb(0 0 0 / 0.55);
+    border-color: rgb(255 255 255 / 0.5);
+  }
+
+  .slider__arrow:disabled {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease);
+  }
+
+  .slider__arrow--prev { left: var(--s-4); }
+  .slider__arrow--next { right: var(--s-4); }
+
+  @media (max-width: 599px) {
+    .slider__arrow {
+      width: 40px;
+      height: 40px;
+    }
+    .slider__arrow--prev { left: var(--s-2); }
+    .slider__arrow--next { right: var(--s-2); }
   }
 
   .slider__track {
@@ -272,33 +314,6 @@ const locations = [
     transform: translateY(0);
   }
 
-  .slider__nav {
-    display: flex;
-    gap: var(--s-3);
-    justify-content: center;
-    margin-bottom: var(--s-6);
-  }
-
-  .slider__btn {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--r-full);
-    border: 1.5px solid var(--c-border);
-    background: var(--c-bg);
-    color: var(--c-text-secondary);
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--t-fast) var(--ease);
-  }
-
-  .slider__btn:hover {
-    border-color: var(--c-orange);
-    color: var(--c-orange);
-    background: var(--c-surface);
-  }
-
   .act-cta {
     display: flex;
     gap: var(--s-4);
@@ -321,9 +336,10 @@ const locations = [
 
 <script>
   document.querySelectorAll('[data-slider]').forEach((slider) => {
-    const track = slider.querySelector('[data-slider-track]');
-    const prevBtn = slider.closest('.slider-wrap')?.querySelector('[data-slider-prev]');
-    const nextBtn = slider.closest('.slider-wrap')?.querySelector('[data-slider-next]');
+    const track = slider.querySelector('[data-slider-track]') as HTMLElement | null;
+    const wrap = slider.closest('.slider-wrap');
+    const prevBtn = wrap?.querySelector('[data-slider-prev]') as HTMLButtonElement | null;
+    const nextBtn = wrap?.querySelector('[data-slider-next]') as HTMLButtonElement | null;
     if (!track) return;
 
     const getScrollAmount = () => {
@@ -331,6 +347,14 @@ const locations = [
       if (!card) return 300;
       return card.offsetWidth + 16;
     };
+
+    const updateArrows = () => {
+      if (prevBtn) prevBtn.disabled = track.scrollLeft <= 2;
+      if (nextBtn) nextBtn.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    };
+
+    updateArrows();
+    track.addEventListener('scroll', updateArrows, { passive: true });
 
     prevBtn?.addEventListener('click', () => {
       track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });

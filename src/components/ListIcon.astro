@@ -1,0 +1,48 @@
+---
+interface Props {
+  name: string;
+  size?: number;
+}
+
+const { name, size = 16 } = Astro.props;
+
+const icons: Record<string, string> = {
+  leaf: '<path d="M12 2C6.5 2 2 6.5 2 12c5.5 0 10-4.5 10-10Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="none"/><path d="M2 12C2 12 5 9 8 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>',
+  check: '<path d="M3.5 7.5 6.5 10.5 12.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
+  heart: '<path d="M7 3C4 1 1 3.5 1 6c0 4 6 7 6 7s6-3 6-7c0-2.5-3-5-6-3Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="none"/>',
+  star: '<path d="M7 1.5 8.8 5.2l4 .6-2.9 2.8.7 4L7 10.8 3.4 12.6l.7-4L1.2 5.8l4-.6Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" fill="none"/>',
+  flame: '<path d="M7 1C7 1 3 5 3 8.5a4 4 0 0 0 8 0C11 5 7 1 7 1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="none"/><path d="M7 13c-1.1 0-2-.9-2-2 0-1.5 2-3.5 2-3.5s2 2 2 3.5c0 1.1-.9 2-2 2Z" stroke="currentColor" stroke-width="1.2" fill="none"/>',
+  sun: '<circle cx="7" cy="7" r="2.5" stroke="currentColor" stroke-width="1.3" fill="none"/><path d="M7 1v1.5M7 11.5V13M1 7h1.5M11.5 7H13M3 3l1 1M10 10l1 1M3 11l1-1M10 4l1-1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>',
+  utensils: '<path d="M3 1v4a2 2 0 0 0 4 0V1M5 5v8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M10 1v3c0 1.5 1 2 1 3v6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none"/>',
+  clock: '<circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3" fill="none"/><path d="M7 4v3l2 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>',
+  yoga: '<circle cx="7" cy="2.5" r="1.5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M7 4.5v4M4 6l3 1.5L10 6M3 12l4-3.5 4 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
+  waves: '<path d="M1 5c1.5-1.5 3-1.5 4.5 0S8.5 5 10 3.5s3-1.5 4.5 0M1 9c1.5-1.5 3-1.5 4.5 0S8.5 9 10 7.5s3-1.5 4.5 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none"/>',
+  zap: '<path d="M8 1 3 8h4l-1 5 5-7H7l1-5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="none"/>',
+  compass: '<circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3" fill="none"/><path d="M9.5 4.5 8 8 4.5 9.5 6 6Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" fill="none"/>',
+  music: '<path d="M4 10V3l7-2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="2.5" cy="10.5" r="1.5" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="9.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.2" fill="none"/>',
+  sunset: '<path d="M1 10h12M3 7.5a4 4 0 0 1 8 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none"/><path d="M7 1v2M2.5 4l1 1M11.5 4l-1 1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>',
+  disc: '<circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="7" cy="7" r="1.5" stroke="currentColor" stroke-width="1.2" fill="none"/>',
+  calendar: '<rect x="1.5" y="2.5" width="11" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3" fill="none"/><path d="M1.5 6h11M4.5 1v3M9.5 1v3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>',
+  users: '<circle cx="5" cy="4" r="2" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M1 12c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" fill="none"/><circle cx="10.5" cy="4.5" r="1.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M10 8c1.7 0 3 1.3 3 3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" fill="none"/>',
+  shield: '<path d="M7 1 1.5 3v4c0 3.5 2.5 5.5 5.5 6.5 3-1 5.5-3 5.5-6.5V3Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="none"/><path d="M5 7l1.5 1.5L9 5.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>',
+};
+
+const svg = icons[name] || icons.check;
+---
+
+<svg
+  class="list-icon"
+  width={size}
+  height={size}
+  viewBox="0 0 14 14"
+  fill="none"
+  aria-hidden="true"
+  set:html={svg}
+/>
+
+<style>
+  .list-icon {
+    flex-shrink: 0;
+    color: var(--c-orange);
+  }
+</style>

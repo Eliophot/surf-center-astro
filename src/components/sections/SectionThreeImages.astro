@@ -1,6 +1,9 @@
 ---
+import ListIcon from '../ListIcon.astro';
+
 interface ListItem {
   text: string;
+  icon?: string;
 }
 
 interface ImageDef {
@@ -47,7 +50,12 @@ const titleId = `${sectionId}-title`;
 
         {list && list.length > 0 && (
           <ul class="s3__list" role="list">
-            {list.map((item) => <li>{item.text}</li>)}
+            {list.map((item) => (
+              <li>
+                {item.icon && <ListIcon name={item.icon} />}
+                <span>{item.text}</span>
+              </li>
+            ))}
           </ul>
         )}
 
@@ -120,21 +128,16 @@ const titleId = `${sectionId}-title`;
   }
 
   .s3__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-3);
     font-size: 0.85rem;
     color: var(--c-text-secondary);
     line-height: 1.5;
-    padding-left: var(--s-5);
-    position: relative;
   }
 
-  .s3__list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.55em;
-    width: 6px;
-    height: 1px;
-    background: var(--c-orange);
+  .s3__list li > span {
+    padding-top: 1px;
   }
 
   .s3__img {

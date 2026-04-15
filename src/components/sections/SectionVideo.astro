@@ -1,6 +1,9 @@
 ---
+import ListIcon from '../ListIcon.astro';
+
 interface ListItem {
   text: string;
+  icon?: string;
 }
 
 interface Props {
@@ -43,7 +46,12 @@ const titleId = `${sectionId}-title`;
 
       {list && list.length > 0 && (
         <ul class="sv__list" role="list">
-          {list.map((item) => <li>{item.text}</li>)}
+          {list.map((item) => (
+            <li>
+              {item.icon && <ListIcon name={item.icon} />}
+              <span>{item.text}</span>
+            </li>
+          ))}
         </ul>
       )}
 
@@ -138,21 +146,16 @@ const titleId = `${sectionId}-title`;
   }
 
   .sv__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-3);
     font-size: 0.85rem;
     color: var(--c-text-secondary);
     line-height: 1.5;
-    padding-left: var(--s-5);
-    position: relative;
   }
 
-  .sv__list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.55em;
-    width: 6px;
-    height: 1px;
-    background: var(--c-orange);
+  .sv__list li > span {
+    padding-top: 1px;
   }
 
   .sv__player {

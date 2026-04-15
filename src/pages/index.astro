@@ -10,6 +10,14 @@ import Testimonials from '../components/Testimonials.astro';
 import Instagram from '../components/Instagram.astro';
 import Maillage from '../components/Maillage.astro';
 
+import imgPaddleBateaux from '../assets/images/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg';
+import imgEsprit from '../assets/images/esprit.png';
+import imgSnack from '../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import imgYoga from '../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import imgPaddleLac from '../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+import imgWindsurf from '../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+import imgConcertPoster from '../assets/images/concert-surfcenter-lac-sainte-croix.png';
+
 const title =
   'Surf Center — Base nautique au lac de Sainte-Croix | Gorges du Verdon';
 const description =
@@ -293,8 +301,8 @@ const jsonLd = [
     title="Un lieu,<br/>une énergie"
     text="Depuis plus de dix ans, Surf Center est bien plus qu'une base nautique. C'est un rendez-vous au bord du lac de Sainte-Croix pour celles et ceux qui aiment l'eau, le soleil et les grands espaces."
     images={[
-      { src: '/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg', alt: 'Paddle et bateaux électriques au bord du lac de Sainte-Croix' },
-      { src: '/esprit.png', alt: 'Ambiance conviviale au Surf Center — lac de Sainte-Croix' },
+      { src: imgPaddleBateaux, alt: 'Paddle et bateaux électriques au bord du lac de Sainte-Croix' },
+      { src: imgEsprit, alt: 'Ambiance conviviale au Surf Center — lac de Sainte-Croix' },
     ]}
     list={[
       { text: 'Nature — Un lac d\'exception, des paysages préservés', icon: 'leaf' },
@@ -311,7 +319,7 @@ const jsonLd = [
     eyebrow="Restauration"
     title="Pizzas, snack<br/>& vue sur le lac"
     text="Pause gourmande à notre snack-pizzeria. Pizzas artisanales au feu de bois, salades fraîches, glaces — vue directe sur le lac."
-    image={{ src: '/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg', alt: 'Vue aérienne du snack Surf Center avec le lac de Sainte-Croix' }}
+    image={{ src: imgSnack, alt: 'Vue aérienne du snack Surf Center avec le lac de Sainte-Croix' }}
     list={[
       { text: 'Pizzas au feu de bois', icon: 'flame' },
       { text: 'Terrasse face au lac', icon: 'sun' },
@@ -328,9 +336,9 @@ const jsonLd = [
     title="Des moments<br/>à partager"
     text="Yoga au lever du soleil, cours de paddle, initiations au windsurf — chaque journée au Surf Center est une invitation à bouger, respirer, s'amuser."
     images={[
-      { src: '/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg', alt: 'Cours de yoga au bord du lac de Sainte-Croix — Surf Center' },
-      { src: '/location-paddle-lac-sainte-croix-surfcenter.jpeg', alt: 'Stand-up paddle sur le lac de Sainte-Croix' },
-      { src: '/location-planche-a-voile-windsurf-lac-sainte-croix.png', alt: 'Planche à voile et windsurf sur le lac de Sainte-Croix' },
+      { src: imgYoga, alt: 'Cours de yoga au bord du lac de Sainte-Croix — Surf Center' },
+      { src: imgPaddleLac, alt: 'Stand-up paddle sur le lac de Sainte-Croix' },
+      { src: imgWindsurf, alt: 'Planche à voile et windsurf sur le lac de Sainte-Croix' },
     ]}
     list={[
       { text: 'Yoga face au lac', icon: 'yoga' },
@@ -346,7 +354,7 @@ const jsonLd = [
     eyebrow="Événements"
     title="Soirées &<br/>concerts au lac"
     text="Le Surf Center prend vie le soir venu. Concerts acoustiques les pieds dans le sable, soirées thématiques, couchers de soleil musicaux — une programmation estivale unique."
-    video={{ src: 'https://video.eliophot.com/download/streaming-playlists/hls/videos/a1a24c18-51ea-4784-b6e5-9f540caa8d2d-2160-fragmented.mp4', poster: '/concert-surfcenter-lac-sainte-croix.png' }}
+    video={{ src: 'https://video.eliophot.com/download/streaming-playlists/hls/videos/a1a24c18-51ea-4784-b6e5-9f540caa8d2d-2160-fragmented.mp4', poster: imgConcertPoster }}
     list={[
       { text: 'Concerts live & acoustiques', icon: 'music' },
       { text: 'Soirées coucher de soleil', icon: 'sunset' },

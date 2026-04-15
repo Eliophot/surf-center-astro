@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import ListIcon from '../ListIcon.astro';
 
 interface ListItem {
@@ -11,7 +13,7 @@ interface Props {
   eyebrow: string;
   title: string;
   text: string;
-  image: { src: string; alt: string; };
+  image: { src: string | ImageMetadata; alt: string; };
   list?: ListItem[];
   cta?: { label: string; href?: string; booking?: boolean; };
   reverse?: boolean;
@@ -63,15 +65,29 @@ const titleId = `${sectionId}-title`;
     </div>
 
     <div class="s1__visual reveal reveal-d2">
-      <img
-        class="s1__img"
-        src={image.src}
-        alt={image.alt}
-        width="640"
-        height="800"
-        loading="lazy"
-        decoding="async"
-      />
+      {typeof image.src === 'string' ? (
+        <img
+          class="s1__img"
+          src={image.src}
+          alt={image.alt}
+          width="640"
+          height="800"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <Image
+          class="s1__img"
+          src={image.src}
+          alt={image.alt}
+          width={640}
+          height={800}
+          loading="lazy"
+          decoding="async"
+          format="webp"
+          quality={75}
+        />
+      )}
     </div>
   </div>
 </section>

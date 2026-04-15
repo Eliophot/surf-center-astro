@@ -1,4 +1,6 @@
 ---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import ListIcon from '../ListIcon.astro';
 
 interface ListItem {
@@ -11,7 +13,7 @@ interface Props {
   eyebrow: string;
   title: string;
   text: string;
-  video: { src: string; poster?: string; };
+  video: { src: string; poster?: string | ImageMetadata; };
   list?: ListItem[];
   cta?: { label: string; href?: string; booking?: boolean; };
   reverse?: boolean;
@@ -32,6 +34,16 @@ const {
 
 const sectionId = id || eyebrow.toLowerCase().replace(/\s+/g, '-');
 const titleId = `${sectionId}-title`;
+
+let posterSrc = '';
+if (video.poster) {
+  if (typeof video.poster === 'string') {
+    posterSrc = video.poster;
+  } else {
+    const optimized = await getImage({ src: video.poster, format: 'webp', quality: 70, width: 800 });
+    posterSrc = optimized.src;
+  }
+}
 ---
 
 <section
@@ -70,10 +82,11 @@ const titleId = `${sectionId}-title`;
           playsinline
           muted
           loop
-          poster={video.poster || ''}
+          poster={posterSrc}
           data-autoplay-video
+          data-src={video.src}
+          data-type={video.src.endsWith('.webm') ? 'video/webm' : 'video/mp4'}
         >
-          <source src={video.src} type={video.src.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
         </video>
         <button class="sv__play" type="button" aria-label="Lire la vidéo" data-video-play>
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
@@ -91,11 +104,26 @@ const titleId = `${sectionId}-title`;
     const el = video as HTMLVideoElement;
     const wrap = el.closest('.sv__player');
     const playBtn = wrap?.querySelector('[data-video-play]') as HTMLButtonElement | null;
+    let sourceLoaded = false;
+
+    function loadSource() {
+      if (sourceLoaded) return;
+      const src = el.dataset.src;
+      const type = el.dataset.type;
+      if (!src) return;
+      const source = document.createElement('source');
+      source.src = src;
+      source.type = type || 'video/mp4';
+      el.appendChild(source);
+      el.load();
+      sourceLoaded = true;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            loadSource();
             el.play().catch(() => {});
             wrap?.classList.add('is-playing');
           } else {
@@ -104,12 +132,13 @@ const titleId = `${sectionId}-title`;
           }
         });
       },
-      { threshold: 0.3 },
+      { threshold: 0.2, rootMargin: '200px' },
     );
 
     observer.observe(el);
 
     playBtn?.addEventListener('click', () => {
+      loadSource();
       if (el.paused) {
         el.play().catch(() => {});
         wrap?.classList.add('is-playing');

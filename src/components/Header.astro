@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logoImg from '../assets/images/logo-surf-center.png';
+
 const navLinks = [
   { label: "Nos locations", href: "/nos-locations" },
   { label: "L'esprit Surf Center", href: "/esprit-surf-center" },
@@ -14,21 +17,25 @@ const navLinks = [
 <header class="header" data-header>
   <div class="header__inner container">
     <a href="/" class="header__logo" aria-label="Surf Center — Accueil">
-      <img
+      <Image
         class="header__logo-img header__logo-img--light"
-        src="/logo-surf-center.png"
+        src={logoImg}
         alt=""
-        width="120"
-        height="36"
+        width={60}
+        height={56}
         loading="eager"
+        format="webp"
+        quality={85}
       />
-      <img
+      <Image
         class="header__logo-img header__logo-img--dark"
-        src="/logo-surf-center.png"
+        src={logoImg}
         alt=""
-        width="120"
-        height="36"
+        width={60}
+        height={56}
         loading="eager"
+        format="webp"
+        quality={85}
       />
     </a>
 

@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import ListIcon from '../ListIcon.astro';
 
 interface ListItem {
@@ -7,7 +9,7 @@ interface ListItem {
 }
 
 interface ImageDef {
-  src: string;
+  src: string | ImageMetadata;
   alt: string;
 }
 
@@ -67,37 +69,25 @@ const titleId = `${sectionId}-title`;
       </div>
 
       <div class="s3__hero-img reveal reveal-d1">
-        <img
-          class="s3__img"
-          src={images[0].src}
-          alt={images[0].alt}
-          width="640"
-          height="480"
-          loading="lazy"
-          decoding="async"
-        />
+        {typeof images[0].src === 'string' ? (
+          <img class="s3__img" src={images[0].src} alt={images[0].alt} width="640" height="480" loading="lazy" decoding="async" />
+        ) : (
+          <Image class="s3__img" src={images[0].src} alt={images[0].alt} width={640} height={480} loading="lazy" decoding="async" format="webp" quality={75} />
+        )}
       </div>
     </div>
 
     <div class="s3__bottom reveal reveal-d2">
-      <img
-        class="s3__img s3__img--half"
-        src={images[1].src}
-        alt={images[1].alt}
-        width="580"
-        height="400"
-        loading="lazy"
-        decoding="async"
-      />
-      <img
-        class="s3__img s3__img--half"
-        src={images[2].src}
-        alt={images[2].alt}
-        width="580"
-        height="400"
-        loading="lazy"
-        decoding="async"
-      />
+      {typeof images[1].src === 'string' ? (
+        <img class="s3__img s3__img--half" src={images[1].src} alt={images[1].alt} width="580" height="400" loading="lazy" decoding="async" />
+      ) : (
+        <Image class="s3__img s3__img--half" src={images[1].src} alt={images[1].alt} width={580} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
+      )}
+      {typeof images[2].src === 'string' ? (
+        <img class="s3__img s3__img--half" src={images[2].src} alt={images[2].alt} width="580" height="400" loading="lazy" decoding="async" />
+      ) : (
+        <Image class="s3__img s3__img--half" src={images[2].src} alt={images[2].alt} width={580} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
+      )}
     </div>
   </div>
 </section>

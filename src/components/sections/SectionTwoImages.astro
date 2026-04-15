@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import ListIcon from '../ListIcon.astro';
 
 interface ListItem {
@@ -7,7 +9,7 @@ interface ListItem {
 }
 
 interface ImageDef {
-  src: string;
+  src: string | ImageMetadata;
   alt: string;
 }
 
@@ -70,26 +72,20 @@ const titleId = `${sectionId}-title`;
         </div>
 
         <div class="twimg__photo-left reveal reveal-d1">
-          <img
-            src={images[0].src}
-            alt={images[0].alt}
-            width="560"
-            height="380"
-            loading="lazy"
-            decoding="async"
-          />
+          {typeof images[0].src === 'string' ? (
+            <img src={images[0].src} alt={images[0].alt} width="560" height="380" loading="lazy" decoding="async" />
+          ) : (
+            <Image src={images[0].src} alt={images[0].alt} width={560} height={380} loading="lazy" decoding="async" format="webp" quality={75} />
+          )}
         </div>
       </div>
 
       <div class="twimg__col-right reveal reveal-d1">
-        <img
-          src={images[1].src}
-          alt={images[1].alt}
-          width="560"
-          height="720"
-          loading="lazy"
-          decoding="async"
-        />
+        {typeof images[1].src === 'string' ? (
+          <img src={images[1].src} alt={images[1].alt} width="560" height="720" loading="lazy" decoding="async" />
+        ) : (
+          <Image src={images[1].src} alt={images[1].alt} width={560} height={720} loading="lazy" decoding="async" format="webp" quality={75} />
+        )}
       </div>
     </div>
   </div>

@@ -1,0 +1,107 @@
+<section class="hiw section section--surface" aria-labelledby="hiw-title">
+  <div class="container hiw__layout">
+    <div class="hiw__content reveal">
+      <span class="section__eyebrow">Notre fonctionnement</span>
+      <h2 id="hiw-title">Simple, rapide<br/>& accompagné</h2>
+      <p class="hiw__text">Réservez en ligne ou sur place, récupérez votre matériel au comptoir, profitez du lac. Notre équipe est là pour vous accompagner du briefing au retour.</p>
+
+      <ol class="hiw__steps" role="list">
+        <li>
+          <span class="hiw__step-num">01</span>
+          <div>
+            <strong>Réservez</strong>
+            <p>En ligne ou au comptoir d'accueil</p>
+          </div>
+        </li>
+        <li>
+          <span class="hiw__step-num">02</span>
+          <div>
+            <strong>Briefing</strong>
+            <p>Sécurité, carte du lac et conseils</p>
+          </div>
+        </li>
+        <li>
+          <span class="hiw__step-num">03</span>
+          <div>
+            <strong>Profitez</strong>
+            <p>Naviguez librement sur le lac</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="hiw__visual reveal reveal-d2">
+      <img src="/surfcenter-location-lac-sainte-croix.JPG" alt="Équipe Surf Center au comptoir de location — lac de Sainte-Croix" width="640" height="800" loading="lazy" decoding="async" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hiw__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: center;
+  }
+
+  .hiw__text {
+    font-size: 0.95rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    max-width: 38ch;
+    margin-top: var(--s-6);
+    margin-bottom: var(--s-10);
+  }
+
+  .hiw__steps {
+    list-style: none;
+    counter-reset: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .hiw__steps li {
+    display: flex;
+    gap: var(--s-4);
+    align-items: flex-start;
+  }
+
+  .hiw__step-num {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--c-orange);
+    min-width: 2rem;
+    padding-top: 2px;
+  }
+
+  .hiw__steps strong {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--c-text);
+    margin-bottom: 2px;
+  }
+
+  .hiw__steps p {
+    font-size: 0.78rem;
+    color: var(--c-text-muted);
+    line-height: 1.5;
+  }
+
+  .hiw__visual img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--r-lg);
+  }
+
+  @media (min-width: 900px) {
+    .hiw__layout { grid-template-columns: 1fr 1.2fr; gap: var(--s-20); }
+  }
+</style>

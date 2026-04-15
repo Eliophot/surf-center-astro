@@ -1,0 +1,81 @@
+---
+interface Props {
+  title: string;
+  tagline?: string;
+  image: string;
+  alt: string;
+}
+
+const { title, tagline, image, alt } = Astro.props;
+---
+
+<section class="lochero" data-hero aria-label={title}>
+  <img class="lochero__bg" src={image} alt={alt} width="1920" height="900" loading="eager" fetchpriority="high" decoding="async" />
+  <div class="lochero__overlay" aria-hidden="true"></div>
+  <div class="container lochero__content">
+    {tagline && <span class="lochero__tagline">{tagline}</span>}
+    <h1 class="lochero__title">{title}</h1>
+  </div>
+</section>
+
+<style>
+  .lochero {
+    position: relative;
+    min-height: 55vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .lochero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  .lochero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.1) 0%, rgb(0 0 0 / 0.55) 100%);
+  }
+
+  .lochero__content {
+    position: relative;
+    z-index: 1;
+    padding-bottom: var(--s-12);
+    animation: lochero-up 800ms var(--ease-smooth) both;
+  }
+
+  @keyframes lochero-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .lochero__tagline {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    background: rgb(0 0 0 / 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 5px 16px;
+    border-radius: var(--r-full);
+    margin-bottom: var(--s-4);
+  }
+
+  .lochero__title {
+    color: #fff !important;
+    font-size: clamp(2.4rem, 7vw, 4.5rem);
+    max-width: 12ch;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lochero__content { animation: none; }
+  }
+</style>

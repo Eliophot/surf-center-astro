@@ -1,0 +1,107 @@
+<section class="dpanel" aria-labelledby="v6-resto-title">
+  <div class="dpanel__grid">
+    <div class="dpanel__img-side">
+      <img src="/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg" alt="Vue aérienne du snack Surf Center avec le lac de Sainte-Croix" width="960" height="1200" loading="lazy" decoding="async" />
+    </div>
+
+    <div class="dpanel__text-side">
+      <div class="dpanel__content reveal">
+        <span class="dpanel__label">Restauration</span>
+        <h2 id="v6-resto-title" class="dpanel__title">Pizzas, snack & vue sur le lac</h2>
+        <div class="dpanel__sep" aria-hidden="true"></div>
+        <p class="dpanel__desc">Pause gourmande à notre snack-pizzeria. Pizzas artisanales au feu de bois, salades fraîches, glaces — vue directe sur le lac de Sainte-Croix.</p>
+        <a href="/restauration" class="dpanel__link">Voir la carte
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 13L13 1M13 1H3M13 1v10" stroke="currentColor" stroke-width="1"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .dpanel {
+    background: var(--c-bg);
+  }
+
+  .dpanel__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 70vh;
+  }
+
+  .dpanel__img-side {
+    overflow: hidden;
+  }
+
+  .dpanel__img-side img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    min-height: 300px;
+    max-height: 50vh;
+  }
+
+  .dpanel__text-side {
+    display: flex;
+    align-items: center;
+    padding: var(--s-16) var(--s-8);
+  }
+
+  .dpanel__content { max-width: 380px; }
+
+  .dpanel__label {
+    display: block;
+    font-size: 0.52rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    margin-bottom: var(--s-6);
+  }
+
+  .dpanel__title {
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    text-transform: none;
+    margin-bottom: var(--s-6);
+  }
+
+  .dpanel__sep {
+    width: 40px;
+    height: 1px;
+    background: var(--c-border);
+    margin-bottom: var(--s-6);
+  }
+
+  .dpanel__desc {
+    font-size: 0.82rem;
+    color: var(--c-text-muted);
+    line-height: 1.75;
+    margin-bottom: var(--s-8);
+  }
+
+  .dpanel__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--c-text);
+    transition: color var(--t-fast);
+  }
+
+  .dpanel__link:hover { color: var(--c-orange); }
+  .dpanel__link svg { transition: transform var(--t-fast) var(--ease); }
+  .dpanel__link:hover svg { transform: translate(2px, -2px); }
+
+  @media (min-width: 900px) {
+    .dpanel__grid { grid-template-columns: 1fr 1fr; }
+    .dpanel__img-side img { max-height: none; min-height: 100%; }
+    .dpanel__text-side { padding: var(--s-20) var(--s-16); }
+  }
+</style>

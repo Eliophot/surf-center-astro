@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EventHero from '../components/events/EventHero.astro';
+import EventIntro from '../components/events/EventIntro.astro';
+import FormulaTable from '../components/events/FormulaTable.astro';
+import ContactForm from '../components/events/ContactForm.astro';
+import BookingCTA from '../components/locations/BookingCTA.astro';
+import { proFormulas, privateFormulas } from '../data/events';
+
+const title = 'Groupes & Événements — Team building, EVJF, concerts | Surf Center Verdon';
+const description = 'Organisez votre événement au lac de Sainte-Croix : team building, séminaire, EVJF, anniversaire, concert privé. Privatisation, activités nautiques, restauration — Surf Center, Gorges du Verdon.';
+
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Groupes & Événements — Surf Center',
+    description,
+    url: `${siteUrl}/groupes-evenements`,
+    isPartOf: { '@type': 'WebSite', name: 'Surf Center', url: siteUrl },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'EventVenue',
+    name: 'Surf Center — Espace événements',
+    description: 'Lieu de réception et événements au bord du lac de Sainte-Croix. Concerts, team building, soirées privées dans les Gorges du Verdon.',
+    url: `${siteUrl}/groupes-evenements`,
+    image: `${siteUrl}/concert-surfcenter-lac-sainte-croix.png`,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Plage des Salles-sur-Verdon',
+      addressLocality: 'Les Salles-sur-Verdon',
+      postalCode: '83630',
+      addressRegion: 'Provence-Alpes-Côte d\'Azur',
+      addressCountry: 'FR',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 43.7766,
+      longitude: 6.21,
+    },
+    maximumAttendeeCapacity: 200,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Groupes & Événements', item: `${siteUrl}/groupes-evenements` },
+    ],
+  },
+];
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <EventHero />
+  <EventIntro />
+  <FormulaTable
+    eyebrow="Professionnels"
+    title="Formules entreprises"
+    formulas={proFormulas}
+    id="pro"
+    surface
+  />
+  <FormulaTable
+    eyebrow="Privés"
+    title="Événements privés"
+    formulas={privateFormulas}
+    id="prives"
+  />
+  <ContactForm />
+  <BookingCTA
+    title="Un projet en tête ?"
+    text="Contactez-nous pour recevoir un devis personnalisé. Nous vous répondons sous 24h."
+  />
+</Layout>

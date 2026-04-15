@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroKinetic from '../components/v7/HeroKinetic.astro';
+import RaceGrid from '../components/v7/RaceGrid.astro';
+import PulseBrand from '../components/v7/PulseBrand.astro';
+import AngleSplit from '../components/v7/AngleSplit.astro';
+import TapeReviews from '../components/v7/TapeReviews.astro';
+import MotionGrid from '../components/v7/MotionGrid.astro';
+import FlareEvent from '../components/v7/FlareEvent.astro';
+import SlantLinks from '../components/v7/SlantLinks.astro';
+import { jsonLd, seoMeta } from '../data/jsonld';
+---
+
+<Layout title={seoMeta.title} description={seoMeta.description} jsonLd={jsonLd}>
+  <HeroKinetic />
+  <RaceGrid />
+  <PulseBrand />
+  <AngleSplit />
+  <TapeReviews />
+  <MotionGrid />
+  <FlareEvent />
+  <SlantLinks />
+</Layout>

@@ -1,0 +1,60 @@
+<section class="haiku" aria-labelledby="v6-brand-title">
+  <div class="container haiku__inner">
+    <h2 id="v6-brand-title" class="sr-only">L'esprit Surf Center</h2>
+
+    <div class="haiku__block reveal">
+      <span class="haiku__num" aria-hidden="true">01</span>
+      <p class="haiku__phrase">Un lac d'exception,<br/>des paysages préservés.</p>
+    </div>
+
+    <div class="haiku__block haiku__block--center reveal reveal-d1">
+      <span class="haiku__num" aria-hidden="true">02</span>
+      <p class="haiku__phrase">Du bon matériel,<br/>un bon accueil.</p>
+    </div>
+
+    <div class="haiku__block haiku__block--right reveal reveal-d2">
+      <span class="haiku__num" aria-hidden="true">03</span>
+      <p class="haiku__phrase">Chacun trouve ici<br/>sa façon de profiter.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .haiku {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+  }
+
+  .haiku__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-20);
+  }
+
+  .haiku__block {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-5);
+    max-width: 360px;
+  }
+
+  .haiku__block--center { align-self: center; }
+  .haiku__block--right { align-self: flex-end; }
+
+  .haiku__num {
+    font-size: 0.5rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: var(--c-border);
+    padding-top: 0.4em;
+    flex-shrink: 0;
+  }
+
+  .haiku__phrase {
+    font-size: clamp(1.3rem, 3vw, 2.2rem);
+    font-weight: 200;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    color: var(--c-text);
+  }
+</style>

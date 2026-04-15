@@ -1,0 +1,212 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LocationHero from '../components/locations/LocationHero.astro';
+import SectionOneImage from '../components/sections/SectionOneImage.astro';
+import SectionTwoImages from '../components/sections/SectionTwoImages.astro';
+import Maillage from '../components/Maillage.astro';
+import BookingCTA from '../components/locations/BookingCTA.astro';
+
+const title = 'Restauration — Snack-pizzeria face au lac | Surf Center Verdon';
+const description = 'Pizzas artisanales au feu de bois, salades fraîches, glaces et boissons avec terrasse face au lac de Sainte-Croix. Snack-pizzeria Surf Center, Les Salles-sur-Verdon, Gorges du Verdon.';
+
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FoodEstablishment',
+    name: 'Snack-Pizzeria Surf Center',
+    description: 'Pizzas au feu de bois, salades, glaces et boissons avec vue directe sur le lac de Sainte-Croix.',
+    url: `${siteUrl}/restauration`,
+    image: `${siteUrl}/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg`,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Plage des Salles-sur-Verdon',
+      addressLocality: 'Les Salles-sur-Verdon',
+      postalCode: '83630',
+      addressCountry: 'FR',
+    },
+    geo: { '@type': 'GeoCoordinates', latitude: 43.7766, longitude: 6.21 },
+    servesCuisine: ['Pizza', 'Snack', 'Salades', 'Glaces'],
+    priceRange: '€',
+    openingHoursSpecification: [{
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+      opens: '11:00', closes: '18:30',
+      validFrom: '2026-04-01', validThrough: '2026-10-31',
+    }],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Restauration', item: `${siteUrl}/restauration` },
+    ],
+  },
+];
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <LocationHero
+    title="Restauration"
+    tagline="Snack-pizzeria · Terrasse face au lac"
+    image="/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg"
+    alt="Vue aérienne du snack-pizzeria Surf Center au lac de Sainte-Croix"
+  />
+
+  <!-- Le Snack -->
+  <SectionOneImage
+    id="snack"
+    eyebrow="Le snack"
+    title="Pause gourmande<br/>face au lac"
+    text="Notre snack-pizzeria vous accueille tout au long de la journée, directement sur la plage du lac de Sainte-Croix. Commandez au comptoir, installez-vous en terrasse les pieds dans le sable et profitez de la vue."
+    image={{ src: '/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg', alt: 'Terrasse du snack Surf Center face au lac de Sainte-Croix' }}
+    list={[
+      { text: 'Service continu de 11h à 18h30' },
+      { text: 'Terrasse vue lac' },
+      { text: 'Commande au comptoir' },
+      { text: 'À emporter disponible' },
+    ]}
+  />
+
+  <!-- Les Pizzas -->
+  <SectionOneImage
+    id="pizzas"
+    eyebrow="Les pizzas"
+    title="Au feu de bois,<br/>comme en Italie"
+    text="Nos pizzas sont préparées chaque jour avec des ingrédients frais et cuites au feu de bois. Pâte faite maison, mozzarella di bufala, légumes de saison — le goût de l'Italie face au lac de Sainte-Croix."
+    image={{ src: '/esprit.png', alt: 'Pizzas artisanales au feu de bois — Surf Center' }}
+    list={[
+      { text: 'Pâte fraîche maison' },
+      { text: 'Cuisson au feu de bois' },
+      { text: 'Ingrédients frais de saison' },
+      { text: 'Formules midi et goûter' },
+    ]}
+    reverse
+    surface
+  />
+
+  <!-- Le bar -->
+  <SectionOneImage
+    id="bar"
+    eyebrow="Le bar"
+    title="Boissons fraîches<br/>& glaces"
+    text="Jus de fruits pressés, smoothies, bières artisanales, rosé de Provence et glaces artisanales — tout ce qu'il faut pour se rafraîchir entre deux sessions nautiques."
+    image={{ src: '/IMG20220610131419.jpg', alt: 'Boissons et glaces au bar Surf Center' }}
+    list={[
+      { text: 'Jus frais & smoothies' },
+      { text: 'Bières artisanales & rosé' },
+      { text: 'Glaces artisanales' },
+      { text: 'Café & thé' },
+    ]}
+  />
+
+  <!-- Horaires & infos -->
+  <section class="section section--surface" aria-labelledby="horaires-title">
+    <div class="container restoinfo__layout">
+      <div class="restoinfo__content reveal">
+        <span class="section__eyebrow">Infos pratiques</span>
+        <h2 id="horaires-title">Horaires & accès</h2>
+        <p class="restoinfo__text">Le snack-pizzeria est ouvert tous les jours en saison, de 11h à 18h30. Pas de réservation nécessaire — venez quand vous voulez.</p>
+
+        <div class="restoinfo__grid">
+          <div class="restoinfo__card">
+            <span class="restoinfo__card-label">Horaires</span>
+            <span class="restoinfo__card-value">11h — 18h30</span>
+            <span class="restoinfo__card-sub">Tous les jours, avril à octobre</span>
+          </div>
+          <div class="restoinfo__card">
+            <span class="restoinfo__card-label">Service continu</span>
+            <span class="restoinfo__card-value">Non-stop</span>
+            <span class="restoinfo__card-sub">Pas de coupure midi</span>
+          </div>
+          <div class="restoinfo__card">
+            <span class="restoinfo__card-label">Paiement</span>
+            <span class="restoinfo__card-value">CB & espèces</span>
+            <span class="restoinfo__card-sub">Sans minimum</span>
+          </div>
+          <div class="restoinfo__card">
+            <span class="restoinfo__card-label">Accès</span>
+            <span class="restoinfo__card-value">Plage directe</span>
+            <span class="restoinfo__card-sub">Parking gratuit à 50m</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="restoinfo__visual reveal reveal-d2">
+        <img src="/IMG20220618204351.jpg" alt="Coucher de soleil au Surf Center — restauration face au lac" width="640" height="800" loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </section>
+
+  <Maillage />
+  <BookingCTA title="Rendez-vous au lac" text="Retrouvez-nous sur la plage des Salles-sur-Verdon pour une journée sport, détente et gourmandise." />
+</Layout>
+
+<style>
+  .restoinfo__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: center;
+  }
+
+  .restoinfo__text {
+    font-size: 0.95rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    max-width: 42ch;
+    margin-top: var(--s-6);
+    margin-bottom: var(--s-10);
+  }
+
+  .restoinfo__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+  }
+
+  .restoinfo__card {
+    padding: var(--s-5);
+    background: var(--c-bg);
+    border-radius: var(--r-md);
+    border: 1px solid var(--c-border-light);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .restoinfo__card-label {
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    margin-bottom: 4px;
+  }
+
+  .restoinfo__card-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--c-text);
+    margin-bottom: 2px;
+  }
+
+  .restoinfo__card-sub {
+    font-size: 0.7rem;
+    color: var(--c-text-muted);
+  }
+
+  .restoinfo__visual img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--r-lg);
+  }
+
+  @media (min-width: 900px) {
+    .restoinfo__layout { grid-template-columns: 1.1fr 1fr; gap: var(--s-20); }
+  }
+</style>

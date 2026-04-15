@@ -1,0 +1,134 @@
+---
+import { locations } from '../../data/home';
+---
+
+<section id="activites" class="rgrid" aria-labelledby="v7-act-title">
+  <div class="container">
+    <div class="rgrid__head reveal">
+      <div class="rgrid__stripe" aria-hidden="true"></div>
+      <h2 id="v7-act-title" class="rgrid__title">Nos locations</h2>
+    </div>
+
+    <div class="rgrid__mosaic">
+      {locations.map((loc, i) => (
+        <button type="button" class:list={['rgrid__tile', `rgrid__tile--${i + 1}`, 'reveal']} data-product-book data-tag={loc.tag} aria-label={`Réserver ${loc.title}`} style={`--d:${i * 100}ms`}>
+          <img src={loc.image} alt={loc.alt} width="600" height="400" loading="lazy" decoding="async" />
+          <div class="rgrid__overlay">
+            <span class="rgrid__num">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="rgrid__name">{loc.title}</h3>
+            <span class="rgrid__price">dès {loc.price}€</span>
+          </div>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .rgrid {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .rgrid__head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    margin-bottom: var(--s-10);
+  }
+
+  .rgrid__stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .rgrid__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .rgrid__mosaic {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 240px;
+    gap: var(--s-3);
+  }
+
+  .rgrid__tile {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--r-sm);
+    background: #000;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .rgrid__tile--1 { grid-column: 1 / -1; grid-row: span 1; }
+  .rgrid__tile--3 { grid-column: 1 / -1; }
+
+  .rgrid__tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s var(--ease), opacity 0.3s;
+  }
+
+  .rgrid__tile:hover img { transform: scale(1.06); opacity: 0.8; }
+
+  .rgrid__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--s-5);
+    background: linear-gradient(180deg, transparent 40%, rgb(0 0 0 / 0.65) 100%);
+    pointer-events: none;
+  }
+
+  .rgrid__num {
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--c-orange);
+    margin-bottom: 2px;
+  }
+
+  .rgrid__name {
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .rgrid__price {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: rgb(255 255 255 / 0.6);
+    margin-top: 2px;
+  }
+
+  @media (min-width: 768px) {
+    .rgrid__mosaic {
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 300px;
+    }
+    .rgrid__tile--1 { grid-column: 1 / 3; }
+    .rgrid__tile--3 { grid-column: auto; }
+    .rgrid__name { font-size: 1.15rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rgrid__tile img { transition: none; }
+  }
+</style>

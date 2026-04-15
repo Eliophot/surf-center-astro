@@ -1,0 +1,137 @@
+---
+import type { EventFormula } from '../../data/events';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  formulas: EventFormula[];
+  id: string;
+  surface?: boolean;
+}
+
+const { eyebrow, title, formulas, id, surface = false } = Astro.props;
+---
+
+<section class:list={['fmtable section', { 'section--surface': surface }]} aria-labelledby={`${id}-title`}>
+  <div class="container">
+    <header class="section__header reveal">
+      <span class="section__eyebrow">{eyebrow}</span>
+      <h2 id={`${id}-title`}>{title}</h2>
+    </header>
+
+    <div class="fmtable__grid">
+      {formulas.map((f, i) => (
+        <div class={`fmtable__card reveal reveal-d${Math.min(i + 1, 3)}`}>
+          <div class="fmtable__img-wrap">
+            <img src={f.image} alt={f.alt} width="600" height="400" loading="lazy" decoding="async" />
+          </div>
+          <div class="fmtable__body">
+            <h3 class="fmtable__name">{f.title}</h3>
+            <span class="fmtable__capacity">{f.capacity}</span>
+            <p class="fmtable__desc">{f.description}</p>
+            <ul class="fmtable__features" role="list">
+              {f.features.map((feat) => <li>{feat}</li>)}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .fmtable__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-8);
+  }
+
+  .fmtable__card {
+    background: var(--c-bg);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    border: 1px solid var(--c-border-light);
+    transition: box-shadow var(--t-fast);
+  }
+
+  :global(.section--surface) .fmtable__card {
+    background: var(--c-bg);
+  }
+
+  .fmtable__card:hover { box-shadow: var(--shadow-lg); }
+
+  .fmtable__img-wrap {
+    overflow: hidden;
+  }
+
+  .fmtable__img-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .fmtable__card:hover .fmtable__img-wrap img { transform: scale(1.04); }
+
+  .fmtable__body {
+    padding: var(--s-6);
+  }
+
+  .fmtable__name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+  }
+
+  .fmtable__capacity {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    margin-bottom: var(--s-4);
+  }
+
+  .fmtable__desc {
+    font-size: 0.85rem;
+    color: var(--c-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--s-5);
+  }
+
+  .fmtable__features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+
+  .fmtable__features li {
+    font-size: 0.78rem;
+    color: var(--c-text-muted);
+    padding-left: var(--s-5);
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .fmtable__features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--c-orange);
+    font-weight: 700;
+    font-size: 0.7rem;
+  }
+
+  @media (min-width: 768px) {
+    .fmtable__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fmtable__img-wrap img { transition: none; }
+  }
+</style>

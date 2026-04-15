@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroZen from '../components/v6/HeroZen.astro';
+import MonoList from '../components/v6/MonoList.astro';
+import HaikuBrand from '../components/v6/HaikuBrand.astro';
+import DuoPanel from '../components/v6/DuoPanel.astro';
+import SingleVoice from '../components/v6/SingleVoice.astro';
+import GridTrio from '../components/v6/GridTrio.astro';
+import QuietEvent from '../components/v6/QuietEvent.astro';
+import DotNav from '../components/v6/DotNav.astro';
+import { jsonLd, seoMeta } from '../data/jsonld';
+---
+
+<Layout title={seoMeta.title} description={seoMeta.description} jsonLd={jsonLd}>
+  <HeroZen />
+  <MonoList />
+  <HaikuBrand />
+  <DuoPanel />
+  <SingleVoice />
+  <GridTrio />
+  <QuietEvent />
+  <DotNav />
+</Layout>

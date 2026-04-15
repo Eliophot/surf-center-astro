@@ -7,7 +7,10 @@ const versions = [
   { label: 'Immersive', href: '/v3' },
   { label: 'Editorial', href: '/v4' },
   { label: 'Expressive', href: '/v5' },
+  { label: 'Minimal', href: '/v6' },
+  { label: 'Kinetic', href: '/v7' },
 ];
+const count = versions.length;
 
 function isActive(href: string): boolean {
   const clean = currentPath === '' ? '/' : currentPath;
@@ -19,7 +22,7 @@ const activeIdx = versions.findIndex((v) => isActive(v.href));
 ---
 
 <nav class="vsw" aria-label="Changer de version">
-  <div class="vsw__bar" style={`--active-idx: ${activeIdx}`}>
+  <div class="vsw__bar" style={`--active-idx: ${activeIdx}; --count: ${count}`}>
     <span class="vsw__indicator" aria-hidden="true"></span>
     {versions.map((v) => (
       <a
@@ -70,8 +73,8 @@ const activeIdx = versions.findIndex((v) => isActive(v.href));
     position: absolute;
     left: 4px;
     right: 4px;
-    height: calc(100% / 5 - 4px * 2 / 5);
-    top: calc(4px + var(--active-idx) * (100% / 5));
+    height: calc(100% / var(--count) - 4px * 2 / var(--count));
+    top: calc(4px + var(--active-idx) * (100% / var(--count)));
     background: rgb(255 255 255 / 0.1);
     border-radius: 10px;
     transition: top 350ms var(--ease);
@@ -83,8 +86,8 @@ const activeIdx = versions.findIndex((v) => isActive(v.href));
     position: relative;
     z-index: 1;
     display: block;
-    padding: 10px 20px;
-    font-size: 0.6rem;
+    padding: 8px 16px;
+    font-size: 0.55rem;
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -140,15 +143,15 @@ const activeIdx = versions.findIndex((v) => isActive(v.href));
       top: 4px;
       bottom: 4px;
       height: auto;
-      width: calc(100% / 5 - 4px * 2 / 5);
-      left: calc(4px + var(--active-idx) * (100% / 5));
+      width: calc(100% / var(--count) - 4px * 2 / var(--count));
+      left: calc(4px + var(--active-idx) * (100% / var(--count)));
       right: auto;
       transition: left 350ms var(--ease);
     }
 
     .vsw__link {
-      padding: 9px 14px;
-      font-size: 0.55rem;
+      padding: 8px 10px;
+      font-size: 0.48rem;
     }
 
     .vsw__badge { display: none; }

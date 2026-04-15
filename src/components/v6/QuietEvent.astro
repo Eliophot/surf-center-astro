@@ -1,0 +1,82 @@
+<section class="qevt" aria-labelledby="v6-events-title">
+  <div class="container">
+    <div class="qevt__line" aria-hidden="true"></div>
+    <div class="qevt__layout reveal">
+      <div class="qevt__left">
+        <span class="qevt__label">Événements</span>
+        <h2 id="v6-events-title" class="qevt__title">Soirées & concerts au lac</h2>
+      </div>
+      <div class="qevt__right">
+        <p class="qevt__desc">Concerts acoustiques, soirées thématiques, couchers de soleil musicaux — une programmation estivale unique au Surf Center.</p>
+        <a href="/groupes-evenements" class="qevt__link">Découvrir
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 13L13 1M13 1H3M13 1v10" stroke="currentColor" stroke-width="1"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="qevt__line" aria-hidden="true"></div>
+  </div>
+</section>
+
+<style>
+  .qevt {
+    padding: var(--s-16) 0;
+    background: var(--c-bg);
+  }
+
+  .qevt__line {
+    height: 1px;
+    background: var(--c-border-light);
+  }
+
+  .qevt__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-8);
+    padding: var(--s-16) 0;
+  }
+
+  .qevt__label {
+    display: block;
+    font-size: 0.52rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    margin-bottom: var(--s-3);
+  }
+
+  .qevt__title {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    text-transform: none;
+  }
+
+  .qevt__desc {
+    font-size: 0.82rem;
+    color: var(--c-text-muted);
+    line-height: 1.75;
+    max-width: 40ch;
+    margin-bottom: var(--s-6);
+  }
+
+  .qevt__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--c-text);
+    transition: color var(--t-fast);
+  }
+
+  .qevt__link:hover { color: var(--c-orange); }
+  .qevt__link svg { transition: transform var(--t-fast) var(--ease); }
+  .qevt__link:hover svg { transform: translate(2px, -2px); }
+
+  @media (min-width: 768px) {
+    .qevt__layout { grid-template-columns: 1fr 1fr; gap: var(--s-16); align-items: center; }
+  }
+</style>

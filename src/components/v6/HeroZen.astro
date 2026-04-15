@@ -1,0 +1,116 @@
+<section class="hzen" data-hero aria-label="Surf Center — base nautique au lac de Sainte-Croix">
+  <div class="hzen__space" aria-hidden="true"></div>
+
+  <div class="hzen__center">
+    <p class="hzen__above">Les Salles-sur-Verdon</p>
+    <h1 class="hzen__title">Surf Center</h1>
+    <p class="hzen__below">Base nautique — Lac de Sainte-Croix</p>
+  </div>
+
+  <div class="hzen__foot">
+    <div class="hzen__line" aria-hidden="true"></div>
+    <div class="hzen__foot-row">
+      <p class="hzen__intro">Location bateaux, activités nautiques et restauration au cœur des Gorges du Verdon.</p>
+      <button type="button" class="hzen__cta" data-booking>
+        <span>Réserver</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 13L13 1M13 1H3M13 1v10" stroke="currentColor" stroke-width="1"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hzen {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: calc(var(--header-h) + var(--s-10)) var(--s-8) var(--s-10);
+    background: var(--c-bg);
+  }
+
+  .hzen__space { flex: 1; }
+
+  .hzen__center {
+    text-align: center;
+    padding: var(--s-20) 0;
+    animation: hzen-in 1.2s var(--ease-smooth) both;
+  }
+
+  @keyframes hzen-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hzen__above,
+  .hzen__below {
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+  }
+
+  .hzen__above { margin-bottom: var(--s-6); }
+  .hzen__below { margin-top: var(--s-6); }
+
+  .hzen__title {
+    font-size: clamp(3.5rem, 12vw, 10rem);
+    font-weight: 100;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    color: var(--c-text);
+    text-transform: none;
+  }
+
+  .hzen__foot {
+    animation: hzen-in 1.2s var(--ease-smooth) 400ms both;
+  }
+
+  .hzen__line {
+    height: 1px;
+    background: var(--c-border-light);
+    margin-bottom: var(--s-6);
+  }
+
+  .hzen__foot-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--s-8);
+  }
+
+  .hzen__intro {
+    font-size: 0.78rem;
+    color: var(--c-text-muted);
+    line-height: 1.6;
+    max-width: 36ch;
+  }
+
+  .hzen__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--c-text);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color var(--t-fast);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .hzen__cta:hover { color: var(--c-orange); }
+
+  .hzen__cta svg { transition: transform var(--t-fast) var(--ease); }
+  .hzen__cta:hover svg { transform: translate(2px, -2px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hzen__center, .hzen__foot { animation: none; }
+  }
+</style>

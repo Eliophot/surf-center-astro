@@ -1,0 +1,75 @@
+<section class="evtintro section" aria-labelledby="evtintro-title">
+  <div class="container evtintro__layout">
+    <div class="evtintro__content reveal">
+      <span class="section__eyebrow">Organisation</span>
+      <h2 id="evtintro-title">Votre événement<br/>au bord du lac</h2>
+      <p class="evtintro__text">Le Surf Center accueille vos événements professionnels et privés dans un cadre exceptionnel. Face au lac de Sainte-Croix, au cœur des Gorges du Verdon, nous organisons avec vous une expérience sur mesure : activités nautiques, restauration, concerts et privatisation.</p>
+      <ul class="evtintro__list" role="list">
+        <li>Cadre unique au bord du lac</li>
+        <li>Activités nautiques encadrées</li>
+        <li>Restauration sur place</li>
+        <li>Scène & soirées musicales</li>
+        <li>Interlocuteur dédié</li>
+      </ul>
+    </div>
+
+    <div class="evtintro__visual reveal reveal-d2">
+      <img src="/framboise-et-ceatera-lac-sainte-croix-concert-surfcenter.jpg" alt="Ambiance concert au Surf Center — lac de Sainte-Croix" width="640" height="800" loading="lazy" decoding="async" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .evtintro__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: center;
+  }
+
+  .evtintro__text {
+    font-size: 0.95rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    max-width: 42ch;
+    margin-top: var(--s-6);
+    margin-bottom: var(--s-8);
+  }
+
+  .evtintro__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .evtintro__list li {
+    font-size: 0.85rem;
+    color: var(--c-text-secondary);
+    line-height: 1.5;
+    padding-left: var(--s-5);
+    position: relative;
+  }
+
+  .evtintro__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 1px;
+    background: var(--c-orange);
+  }
+
+  .evtintro__visual img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--r-lg);
+  }
+
+  @media (min-width: 900px) {
+    .evtintro__layout { grid-template-columns: 1fr 1.2fr; gap: var(--s-20); }
+  }
+</style>

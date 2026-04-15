@@ -1,0 +1,137 @@
+---
+import { brandValues } from '../../data/home';
+---
+
+<section class="pulse" aria-labelledby="v7-brand-title">
+  <div class="container">
+    <div class="pulse__head reveal">
+      <div class="pulse__stripe" aria-hidden="true"></div>
+      <span class="pulse__label">L'esprit Surf Center</span>
+    </div>
+
+    <div class="pulse__stats reveal reveal-d1">
+      <div class="pulse__stat">
+        <span class="pulse__number">10+</span>
+        <span class="pulse__unit">années</span>
+      </div>
+      <div class="pulse__stat">
+        <span class="pulse__number">5</span>
+        <span class="pulse__unit">activités</span>
+      </div>
+      <div class="pulse__stat">
+        <span class="pulse__number">1</span>
+        <span class="pulse__unit">lac d'exception</span>
+      </div>
+    </div>
+
+    <h2 id="v7-brand-title" class="pulse__manifesto reveal reveal-d2">
+      Depuis plus de dix ans, un rendez-vous au bord du lac pour celles et ceux qui aiment l'eau, le soleil et les grands espaces.
+    </h2>
+
+    <div class="pulse__values reveal reveal-d2">
+      {brandValues.map((v) => (
+        <div class="pulse__val">
+          <strong>{v.title}</strong>
+          <p>{v.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pulse {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+  }
+
+  .pulse__head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    margin-bottom: var(--s-16);
+  }
+
+  .pulse__stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .pulse__label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+  }
+
+  .pulse__stats {
+    display: flex;
+    gap: var(--s-16);
+    margin-bottom: var(--s-16);
+    flex-wrap: wrap;
+  }
+
+  .pulse__stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pulse__number {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--c-text);
+  }
+
+  .pulse__unit {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    margin-top: var(--s-1);
+  }
+
+  .pulse__manifesto {
+    font-size: clamp(1.4rem, 3.5vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    color: var(--c-text);
+    max-width: 700px;
+    margin-bottom: var(--s-16);
+  }
+
+  .pulse__values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+    padding-top: var(--s-8);
+    border-top: 1px solid var(--c-border-light);
+  }
+
+  .pulse__val strong {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--c-text);
+    margin-bottom: 2px;
+  }
+
+  .pulse__val p {
+    font-size: 0.78rem;
+    color: var(--c-text-muted);
+    line-height: 1.5;
+  }
+
+  @media (min-width: 768px) {
+    .pulse__values { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>

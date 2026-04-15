@@ -1,0 +1,128 @@
+<section class="gtrio" aria-labelledby="v6-anims-title">
+  <div class="container">
+    <div class="gtrio__head reveal">
+      <span class="gtrio__label">Animations</span>
+      <h2 id="v6-anims-title" class="gtrio__title">Des moments à partager</h2>
+    </div>
+
+    <div class="gtrio__grid">
+      <a href="/animations" class="gtrio__card reveal">
+        <div class="gtrio__img-wrap">
+          <img src="/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg" alt="Cours de yoga au bord du lac de Sainte-Croix" width="600" height="400" loading="lazy" decoding="async" />
+        </div>
+        <span class="gtrio__num" aria-hidden="true">01</span>
+        <h3 class="gtrio__name">Yoga</h3>
+        <p class="gtrio__desc">Face au lac, au lever du soleil</p>
+      </a>
+
+      <a href="/animations" class="gtrio__card reveal reveal-d1">
+        <div class="gtrio__img-wrap">
+          <img src="/location-paddle-lac-sainte-croix-surfcenter.jpeg" alt="Stand-up paddle sur le lac de Sainte-Croix" width="600" height="400" loading="lazy" decoding="async" />
+        </div>
+        <span class="gtrio__num" aria-hidden="true">02</span>
+        <h3 class="gtrio__name">Cours</h3>
+        <p class="gtrio__desc">Paddle, windsurf, initiations</p>
+      </a>
+
+      <a href="/animations" class="gtrio__card reveal reveal-d2">
+        <div class="gtrio__img-wrap">
+          <img src="/location-planche-a-voile-windsurf-lac-sainte-croix.png" alt="Planche à voile sur le lac de Sainte-Croix" width="600" height="400" loading="lazy" decoding="async" />
+        </div>
+        <span class="gtrio__num" aria-hidden="true">03</span>
+        <h3 class="gtrio__name">Sensations</h3>
+        <p class="gtrio__desc">Bouée tractée, balades encadrées</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gtrio {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+  }
+
+  .gtrio__head {
+    margin-bottom: var(--s-12);
+    text-align: center;
+  }
+
+  .gtrio__label {
+    display: block;
+    font-size: 0.52rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    margin-bottom: var(--s-3);
+  }
+
+  .gtrio__title {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    text-transform: none;
+  }
+
+  .gtrio__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-8);
+  }
+
+  .gtrio__card {
+    text-decoration: none;
+    color: var(--c-text);
+  }
+
+  .gtrio__img-wrap {
+    overflow: hidden;
+    border-radius: var(--r-sm);
+    margin-bottom: var(--s-4);
+  }
+
+  .gtrio__img-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease);
+  }
+
+  .gtrio__card:hover .gtrio__img-wrap img { transform: scale(1.03); }
+
+  .gtrio__num {
+    display: block;
+    font-size: 0.48rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: var(--c-border);
+    margin-bottom: 4px;
+  }
+
+  .gtrio__name {
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    margin-bottom: 2px;
+    transition: color var(--t-fast);
+  }
+
+  .gtrio__card:hover .gtrio__name { color: var(--c-orange); }
+
+  .gtrio__desc {
+    font-size: 0.72rem;
+    color: var(--c-text-muted);
+    line-height: 1.5;
+  }
+
+  @media (min-width: 768px) {
+    .gtrio__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gtrio__img-wrap img { transition: none; }
+  }
+</style>

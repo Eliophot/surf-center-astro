@@ -1,0 +1,141 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  alt: string;
+  price: number;
+  priceUnit: string;
+  capacity: string;
+  duration: string;
+  level: string;
+  tag: string;
+  highlights: string[];
+}
+
+const { title, description, image, alt, price, priceUnit, capacity, duration, level, tag, highlights } = Astro.props;
+---
+
+<section class="locdet section" aria-labelledby="locdet-title">
+  <div class="container locdet__layout">
+    <div class="locdet__visual reveal">
+      <img src={image} alt={alt} width="640" height="800" loading="lazy" decoding="async" />
+    </div>
+
+    <div class="locdet__content reveal reveal-d1">
+      <span class="section__eyebrow">Présentation</span>
+      <h2 id="locdet-title">{title}</h2>
+      <p class="locdet__desc">{description}</p>
+
+      <div class="locdet__meta">
+        <div class="locdet__meta-item">
+          <span class="locdet__meta-label">Prix</span>
+          <span class="locdet__meta-value">dès {price}€<small>/{priceUnit}</small></span>
+        </div>
+        <div class="locdet__meta-item">
+          <span class="locdet__meta-label">Capacité</span>
+          <span class="locdet__meta-value">{capacity}</span>
+        </div>
+        <div class="locdet__meta-item">
+          <span class="locdet__meta-label">Durée</span>
+          <span class="locdet__meta-value">{duration}</span>
+        </div>
+        <div class="locdet__meta-item">
+          <span class="locdet__meta-label">Niveau</span>
+          <span class="locdet__meta-value">{level}</span>
+        </div>
+      </div>
+
+      <div class="locdet__tags">
+        {highlights.map((h) => <span>{h}</span>)}
+      </div>
+
+      <button type="button" class="btn btn--primary" data-product-book data-tag={tag}>Réserver maintenant</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .locdet__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: center;
+  }
+
+  .locdet__visual img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--r-lg);
+  }
+
+  .locdet__desc {
+    font-size: 0.95rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    max-width: 42ch;
+    margin-top: var(--s-6);
+    margin-bottom: var(--s-8);
+  }
+
+  .locdet__meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+    margin-bottom: var(--s-8);
+  }
+
+  .locdet__meta-item {
+    padding: var(--s-4);
+    background: var(--c-surface);
+    border-radius: var(--r-sm);
+    border: 1px solid var(--c-border-light);
+  }
+
+  .locdet__meta-label {
+    display: block;
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    margin-bottom: 4px;
+  }
+
+  .locdet__meta-value {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--c-text);
+  }
+
+  .locdet__meta-value small {
+    font-weight: 400;
+    color: var(--c-text-muted);
+  }
+
+  .locdet__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    margin-bottom: var(--s-8);
+  }
+
+  .locdet__tags span {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    background: var(--c-surface);
+    border: 1px solid var(--c-border-light);
+    padding: 5px 14px;
+    border-radius: var(--r-full);
+  }
+
+  @media (min-width: 900px) {
+    .locdet__layout { grid-template-columns: 1fr 1.1fr; gap: var(--s-20); }
+  }
+</style>

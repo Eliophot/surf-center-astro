@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LocationHero from '../components/locations/LocationHero.astro';
+import BookingCTA from '../components/locations/BookingCTA.astro';
+
+const title = 'Galerie photos — Lac de Sainte-Croix | Surf Center Verdon';
+const description = 'Découvrez le Surf Center en images : lac de Sainte-Croix, Gorges du Verdon, activités nautiques, concerts, couchers de soleil. Galerie photos de notre base nautique.';
+
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const photos = [
+  { src: '/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg', alt: 'Bateaux électriques sur le lac de Sainte-Croix — Gorges du Verdon', span: 'wide' },
+  { src: '/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg', alt: 'Paddle et bateaux au lac de Sainte-Croix', span: '' },
+  { src: '/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg', alt: 'Yoga au lever du soleil — Surf Center', span: '' },
+  { src: '/GettyImages-577312024 (1).jpg', alt: 'Kayak dans les Gorges du Verdon', span: 'tall' },
+  { src: '/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg', alt: 'Vue drone snack et pédalos — Surf Center', span: '' },
+  { src: '/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg', alt: 'Bateau électrique au Surf Center', span: '' },
+  { src: '/concert-joulik-lac-sainte-croix-surfcenter.jpg', alt: 'Concert Joulik au Surf Center', span: 'wide' },
+  { src: '/location-pedalo-lac-sainte-croix-plage-surfcenter.jpeg', alt: 'Pédalos sur la plage du lac de Sainte-Croix', span: '' },
+  { src: '/location-paddle-lac-sainte-croix-surfcenter.jpeg', alt: 'Paddle sur le lac de Sainte-Croix', span: '' },
+  { src: '/framboise-et-ceatera-lac-sainte-croix-concert-surfcenter.jpg', alt: 'Concert Framboise & Cætera — Surf Center', span: '' },
+  { src: '/location-canoe-lac-sainte-croix-surfcenter.jpg', alt: 'Canoë sur le lac de Sainte-Croix', span: 'tall' },
+  { src: '/location-planche-a-voile-windsurf-lac-sainte-croix.png', alt: 'Planche à voile au lac de Sainte-Croix', span: '' },
+  { src: '/esprit.png', alt: 'Ambiance conviviale au Surf Center', span: '' },
+  { src: '/location-lac-sainte-croix-gorges-verdon.png', alt: 'Vue aérienne du lac de Sainte-Croix', span: 'wide' },
+  { src: '/IMG20220618204351.jpg', alt: 'Coucher de soleil au Surf Center', span: '' },
+  { src: '/location-bateau-electriques-evjf-lac-sainte-croix.jpg', alt: 'EVJF en bateau électrique', span: '' },
+  { src: '/location-pedalo-lac-sainte-croix.jpeg', alt: 'Pédalos colorés — lac de Sainte-Croix', span: '' },
+  { src: '/trophee-hobie-shop-lac-sainte-croix-surf-center.jpeg', alt: 'Trophée Hobie au Surf Center', span: '' },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ImageGallery',
+    name: 'Galerie photos — Surf Center',
+    description,
+    url: `${siteUrl}/galerie`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Galerie photos', item: `${siteUrl}/galerie` },
+    ],
+  },
+];
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <LocationHero
+    title="Galerie photos"
+    tagline="Lac de Sainte-Croix · Gorges du Verdon"
+    image="/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg"
+    alt="Vue panoramique du lac de Sainte-Croix — Gorges du Verdon"
+  />
+
+  <section class="section" aria-labelledby="mosaic-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Photos</span>
+        <h2 id="mosaic-title">Le Surf Center en images</h2>
+        <p class="section__lead">Activités nautiques, concerts, couchers de soleil — un aperçu de ce qui vous attend au lac de Sainte-Croix.</p>
+      </header>
+
+      <div class="galmosaic">
+        {photos.map((p, i) => (
+          <div class:list={['galmosaic__item', { 'galmosaic__item--wide': p.span === 'wide', 'galmosaic__item--tall': p.span === 'tall' }, `reveal`]} style={`--d:${Math.min(i, 6) * 50}ms`}>
+            <img src={p.src} alt={p.alt} width="800" height="600" loading={i < 4 ? 'eager' : 'lazy'} decoding="async" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <BookingCTA title="Envie d'y être ?" text="Réservez votre activité et venez créer vos propres souvenirs au lac de Sainte-Croix." />
+</Layout>
+
+<style>
+  .galmosaic {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 220px;
+    gap: var(--s-3);
+  }
+
+  .galmosaic__item {
+    overflow: hidden;
+    border-radius: var(--r-md);
+    position: relative;
+  }
+
+  .galmosaic__item--wide { grid-column: span 2; }
+  .galmosaic__item--tall { grid-row: span 2; }
+
+  .galmosaic__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s var(--ease);
+  }
+
+  .galmosaic__item:hover img { transform: scale(1.05); }
+
+  @media (min-width: 768px) {
+    .galmosaic {
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 260px;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .galmosaic { grid-auto-rows: 300px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .galmosaic__item img { transition: none; }
+  }
+</style>

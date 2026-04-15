@@ -1,0 +1,119 @@
+---
+interface Props {
+  price: number;
+  priceUnit: string;
+  tag: string;
+  title: string;
+}
+
+const { price, priceUnit, tag, title } = Astro.props;
+---
+
+<section class="pricing section" aria-labelledby="pricing-title">
+  <div class="container">
+    <header class="section__header reveal">
+      <span class="section__eyebrow">Tarifs & créneaux</span>
+      <h2 id="pricing-title">Réservez votre {title}</h2>
+    </header>
+
+    <div class="pricing__card reveal">
+      <div class="pricing__top">
+        <span class="pricing__from">À partir de</span>
+        <span class="pricing__amount">{price}<small>€</small></span>
+        <span class="pricing__unit">/{priceUnit}</span>
+      </div>
+      <div class="pricing__info">
+        <p>Réservez en ligne pour garantir votre créneau. Paiement sur place possible.</p>
+        <ul>
+          <li>Annulation gratuite jusqu'à 24h avant</li>
+          <li>Briefing sécurité inclus</li>
+          <li>Matériel fourni</li>
+          <li>Équipe sur place toute la journée</li>
+        </ul>
+      </div>
+      <button type="button" class="btn btn--primary btn--lg" data-product-book data-tag={tag}>Réserver maintenant</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing__card {
+    max-width: 560px;
+    margin-inline: auto;
+    text-align: center;
+    padding: var(--s-12) var(--s-8);
+    background: var(--c-surface);
+    border-radius: var(--r-xl);
+    border: 1px solid var(--c-border-light);
+  }
+
+  .pricing__top {
+    margin-bottom: var(--s-8);
+  }
+
+  .pricing__from {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    margin-bottom: var(--s-2);
+  }
+
+  .pricing__amount {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--c-text);
+  }
+
+  .pricing__amount small {
+    font-size: 0.5em;
+    font-weight: 700;
+    color: var(--c-orange);
+  }
+
+  .pricing__unit {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--c-text-muted);
+  }
+
+  .pricing__info {
+    margin-bottom: var(--s-8);
+  }
+
+  .pricing__info p {
+    font-size: 0.88rem;
+    color: var(--c-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--s-6);
+  }
+
+  .pricing__info ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    text-align: left;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  .pricing__info li {
+    font-size: 0.82rem;
+    color: var(--c-text-secondary);
+    padding-left: var(--s-5);
+    position: relative;
+  }
+
+  .pricing__info li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--c-orange);
+    font-weight: 700;
+    font-size: 0.75rem;
+  }
+</style>

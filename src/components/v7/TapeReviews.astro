@@ -1,0 +1,72 @@
+---
+import { reviews } from '../../data/home';
+const tape = [...reviews, ...reviews, ...reviews];
+---
+
+<section class="tape" aria-label="Témoignages clients">
+  <h2 class="sr-only">Témoignages</h2>
+  <div class="tape__band tape__band--top" data-tape-track>
+    <div class="tape__scroll">
+      {tape.map((r, i) => (
+        <span class="tape__item" aria-hidden={i >= reviews.length ? 'true' : undefined}>
+          <span class="tape__star" aria-hidden="true">★</span>
+          &ldquo;{r.quote}&rdquo;
+          <cite class="tape__cite">— {r.author}</cite>
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tape {
+    background: var(--c-dark);
+    padding: var(--s-10) 0;
+    overflow: hidden;
+  }
+
+  .tape__band {
+    overflow: hidden;
+  }
+
+  .tape__scroll {
+    display: flex;
+    gap: var(--s-12);
+    animation: tape-slide 60s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes tape-slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% / 3)); }
+  }
+
+  .tape__item {
+    flex-shrink: 0;
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: rgb(255 255 255 / 0.5);
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+  }
+
+  .tape__star {
+    color: var(--c-orange);
+    font-size: 0.72rem;
+  }
+
+  .tape__cite {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.3);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tape__scroll { animation: none; flex-wrap: wrap; }
+  }
+</style>

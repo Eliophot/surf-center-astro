@@ -1,0 +1,86 @@
+---
+import { meshLinks } from '../../data/home';
+---
+
+<section class="dnav" aria-labelledby="v6-mesh-title">
+  <div class="container">
+    <h2 id="v6-mesh-title" class="dnav__heading reveal">Explorer</h2>
+
+    <div class="dnav__list">
+      {meshLinks.map((link, i) => (
+        <a href={link.href} class="dnav__item reveal" style={`--d:${i * 60}ms`}>
+          <span class="dnav__dot" aria-hidden="true"></span>
+          <div class="dnav__info">
+            <span class="dnav__name">{link.title}</span>
+            <span class="dnav__sub">{link.description}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .dnav {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+  }
+
+  .dnav__heading {
+    font-size: 0.52rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    margin-bottom: var(--s-12);
+  }
+
+  .dnav__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+  }
+
+  .dnav__item {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid var(--c-border-light);
+    color: var(--c-text);
+    transition: padding var(--t-fast);
+  }
+
+  .dnav__item:first-child { border-top: 1px solid var(--c-border-light); }
+  .dnav__item:hover { padding-left: var(--s-2); }
+
+  .dnav__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c-border);
+    flex-shrink: 0;
+    transition: background var(--t-fast);
+  }
+
+  .dnav__item:hover .dnav__dot { background: var(--c-orange); }
+
+  .dnav__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dnav__name {
+    font-size: clamp(0.95rem, 2vw, 1.3rem);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    transition: color var(--t-fast);
+  }
+
+  .dnav__item:hover .dnav__name { color: var(--c-orange); }
+
+  .dnav__sub {
+    font-size: 0.68rem;
+    color: var(--c-text-muted);
+  }
+</style>

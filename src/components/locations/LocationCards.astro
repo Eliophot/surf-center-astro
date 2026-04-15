@@ -1,0 +1,122 @@
+---
+import { locationDetails } from '../../data/locations';
+
+const locs = locationDetails;
+---
+
+<section class="loccards" aria-labelledby="loc-cards-title">
+  <div class="container">
+    <header class="section__header reveal">
+      <span class="section__eyebrow">Nos locations</span>
+      <h2 id="loc-cards-title">Choisissez votre aventure</h2>
+      <p class="section__lead">Bateaux électriques, paddle, pédalo, canoë, planche à voile — tout le lac à votre façon.</p>
+    </header>
+
+    <div class="loccards__grid">
+      {locs.map((loc, i) => (
+        <div class={`loccards__card reveal reveal-d${Math.min(i + 1, 4)}`}>
+          <a href={`/nos-locations/${loc.slug}`} class="loccards__img-link">
+            <img src={loc.detailImage} alt={loc.heroAlt} width="600" height="400" loading="lazy" decoding="async" />
+            <div class="loccards__badge">dès {loc.price}€/{loc.priceUnit}</div>
+          </a>
+          <div class="loccards__body">
+            <h3 class="loccards__name">{loc.title}</h3>
+            <p class="loccards__desc">{loc.tagline}</p>
+            <div class="loccards__actions">
+              <a href={`/nos-locations/${loc.slug}`} class="btn btn--outline btn--sm">Découvrir</a>
+              <button type="button" class="btn btn--primary btn--sm" data-product-book data-tag={loc.tag}>Réserver</button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .loccards {
+    padding-block: var(--s-section);
+    background: var(--c-bg);
+  }
+
+  .loccards__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-8);
+  }
+
+  .loccards__card {
+    background: var(--c-surface);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    transition: box-shadow var(--t-fast);
+  }
+
+  .loccards__card:hover { box-shadow: var(--shadow-lg); }
+
+  .loccards__img-link {
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .loccards__img-link img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .loccards__card:hover .loccards__img-link img { transform: scale(1.04); }
+
+  .loccards__badge {
+    position: absolute;
+    top: var(--s-4);
+    right: var(--s-4);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #fff;
+    background: var(--c-orange);
+    padding: 5px 14px;
+    border-radius: var(--r-full);
+  }
+
+  .loccards__body {
+    padding: var(--s-6);
+  }
+
+  .loccards__name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+  }
+
+  .loccards__desc {
+    font-size: 0.78rem;
+    color: var(--c-text-muted);
+    margin-bottom: var(--s-5);
+  }
+
+  .loccards__actions {
+    display: flex;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: 600px) {
+    .loccards__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 1000px) {
+    .loccards__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .loccards__img-link img { transition: none; }
+  }
+</style>

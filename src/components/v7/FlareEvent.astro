@@ -1,0 +1,88 @@
+<section class="flare" aria-labelledby="v7-events-title">
+  <div class="flare__bg">
+    <img src="/concert-surfcenter-lac-sainte-croix.png" alt="Concert live au Surf Center" width="1920" height="800" loading="lazy" decoding="async" />
+    <div class="flare__dim" aria-hidden="true"></div>
+  </div>
+
+  <div class="container flare__inner">
+    <div class="flare__content reveal">
+      <div class="flare__stripe" aria-hidden="true"></div>
+      <span class="flare__label">Événements</span>
+      <h2 id="v7-events-title" class="flare__title">Soirées &<br/>concerts au lac</h2>
+      <p class="flare__text">Concerts acoustiques les pieds dans le sable, soirées thématiques, couchers de soleil musicaux — une programmation estivale unique.</p>
+      <a href="/groupes-evenements" class="btn btn--primary flare__cta">Découvrir</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .flare {
+    position: relative;
+    padding: var(--s-section) 0;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .flare__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .flare__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .flare__dim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgb(0 0 0 / 0.85) 0%, rgb(0 0 0 / 0.4) 60%, rgb(0 0 0 / 0.2) 100%);
+  }
+
+  .flare__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .flare__content {
+    max-width: 480px;
+  }
+
+  .flare__stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    margin-bottom: var(--s-5);
+  }
+
+  .flare__label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    margin-bottom: var(--s-4);
+  }
+
+  .flare__title {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: #fff;
+    margin-bottom: var(--s-6);
+  }
+
+  .flare__text {
+    font-size: 0.88rem;
+    color: rgb(255 255 255 / 0.5);
+    line-height: 1.75;
+    margin-bottom: var(--s-8);
+  }
+</style>

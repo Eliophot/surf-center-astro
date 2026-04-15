@@ -1,0 +1,228 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LocationHero from '../components/locations/LocationHero.astro';
+import SectionOneImage from '../components/sections/SectionOneImage.astro';
+import Maillage from '../components/Maillage.astro';
+import BookingCTA from '../components/locations/BookingCTA.astro';
+
+const title = 'Animations — Yoga, cours nautiques, concerts | Surf Center Verdon';
+const description = 'Yoga face au lac, cours de paddle et windsurf, concerts live et soirées coucher de soleil. Toutes les animations et événements du Surf Center au lac de Sainte-Croix, Gorges du Verdon.';
+
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const upcomingEvents = [
+  { date: '12 Juil.', title: 'Concert Joulik — acoustique', type: 'Concert' },
+  { date: '19 Juil.', title: 'Sunset DJ Set', type: 'Soirée' },
+  { date: '26 Juil.', title: 'Framboise & Cætera — live', type: 'Concert' },
+  { date: '2 Août', title: 'Nuit du lac — soirée spéciale', type: 'Soirée' },
+  { date: '9 Août', title: 'Yoga & Brunch sunrise', type: 'Atelier' },
+  { date: '16 Août', title: 'Régate des familles', type: 'Sport' },
+];
+
+const galleryImages = [
+  { src: '/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg', alt: 'Yoga au lever du soleil — Surf Center' },
+  { src: '/concert-joulik-lac-sainte-croix-surfcenter.jpg', alt: 'Concert Joulik — Surf Center' },
+  { src: '/location-paddle-lac-sainte-croix-surfcenter.jpeg', alt: 'Cours de paddle — lac de Sainte-Croix' },
+  { src: '/framboise-et-ceatera-lac-sainte-croix-concert-surfcenter.jpg', alt: 'Concert Framboise & Cætera — Surf Center' },
+  { src: '/location-planche-a-voile-windsurf-lac-sainte-croix.png', alt: 'Windsurf au lac de Sainte-Croix' },
+  { src: '/IMG20220618204351.jpg', alt: 'Coucher de soleil au Surf Center' },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Animations — Surf Center',
+    description,
+    url: `${siteUrl}/animations`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Animations', item: `${siteUrl}/animations` },
+    ],
+  },
+];
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <LocationHero
+    title="Animations"
+    tagline="Yoga · Cours · Concerts · Soirées"
+    image="/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg"
+    alt="Cours de yoga au lever du soleil au bord du lac de Sainte-Croix — Surf Center"
+  />
+
+  <!-- Présentation types d'animations -->
+  <SectionOneImage
+    id="types"
+    eyebrow="Activités"
+    title="Bien plus qu'une<br/>base nautique"
+    text="Au Surf Center, chaque journée propose son lot d'expériences : cours encadrés, ateliers bien-être, animations sportives et soirées musicales. Le tout face au lac de Sainte-Croix, dans un cadre exceptionnel."
+    image={{ src: '/location-paddle-lac-sainte-croix-surfcenter.jpeg', alt: 'Activités nautiques encadrées au Surf Center' }}
+    list={[
+      { text: 'Cours de paddle & windsurf' },
+      { text: 'Yoga & bien-être au lever du soleil' },
+      { text: 'Bouée tractée & sensations' },
+      { text: 'Concerts live & soirées thématiques' },
+    ]}
+    cta={{ label: 'Réserver', booking: true }}
+  />
+
+  <!-- Yoga -->
+  <SectionOneImage
+    id="yoga"
+    eyebrow="Bien-être"
+    title="Yoga face au lac"
+    text="Chaque matin d'été, notre professeure Sarah vous accueille pour une session de yoga face au lac de Sainte-Croix. Au lever du soleil, dans le calme absolu, reconnectez-vous à la nature."
+    image={{ src: '/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg', alt: 'Sarah — cours de yoga au Surf Center, lac de Sainte-Croix' }}
+    list={[
+      { text: 'Sessions sunrise 7h30 — 8h30' },
+      { text: 'Tous niveaux bienvenus' },
+      { text: 'Tapis fournis' },
+      { text: 'Sur réservation' },
+    ]}
+    reverse
+    surface
+  />
+
+  <!-- Concerts -->
+  <SectionOneImage
+    id="concerts"
+    eyebrow="Concerts"
+    title="Live au<br/>coucher du soleil"
+    text="Le Surf Center accueille des artistes tout l'été pour des concerts acoustiques, DJ sets et soirées thématiques les pieds dans le sable, face au coucher de soleil sur le lac."
+    image={{ src: '/concert-joulik-lac-sainte-croix-surfcenter.jpg', alt: 'Concert live Joulik au Surf Center — lac de Sainte-Croix' }}
+    list={[
+      { text: 'Concerts acoustiques live' },
+      { text: 'DJ sets coucher de soleil' },
+      { text: 'Soirées à thème' },
+      { text: 'Entrée libre' },
+    ]}
+    cta={{ label: 'Voir les événements', href: '/groupes-evenements' }}
+  />
+
+  <!-- Prochains événements -->
+  <section class="section section--surface" aria-labelledby="upcoming-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Agenda</span>
+        <h2 id="upcoming-title">Prochains événements</h2>
+      </header>
+
+      <div class="anievt__list">
+        {upcomingEvents.map((evt, i) => (
+          <div class={`anievt__row reveal reveal-d${Math.min(i + 1, 4)}`}>
+            <span class="anievt__date">{evt.date}</span>
+            <span class="anievt__name">{evt.title}</span>
+            <span class="anievt__type">{evt.type}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Galerie photos -->
+  <section class="section" aria-labelledby="gallery-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Galerie</span>
+        <h2 id="gallery-title">En images</h2>
+      </header>
+
+      <div class="anigal__grid">
+        {galleryImages.map((img, i) => (
+          <div class={`anigal__item reveal reveal-d${Math.min(i + 1, 4)}`}>
+            <img src={img.src} alt={img.alt} width="600" height="400" loading="lazy" decoding="async" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Maillage />
+  <BookingCTA title="Envie de bouger ?" text="Réservez votre activité en ligne et retrouvez-nous au bord du lac de Sainte-Croix." />
+</Layout>
+
+<style>
+  .anievt__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .anievt__row {
+    display: grid;
+    grid-template-columns: 5rem 1fr auto;
+    gap: var(--s-4);
+    align-items: center;
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid var(--c-border-light);
+    transition: padding var(--t-fast);
+  }
+
+  .anievt__row:first-child { border-top: 1px solid var(--c-border-light); }
+  .anievt__row:hover { padding-left: var(--s-3); }
+
+  .anievt__date {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--c-orange);
+    white-space: nowrap;
+  }
+
+  .anievt__name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--c-text);
+  }
+
+  .anievt__type {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    background: var(--c-bg);
+    padding: 4px 12px;
+    border-radius: var(--r-full);
+    border: 1px solid var(--c-border-light);
+    white-space: nowrap;
+  }
+
+  .anigal__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-3);
+  }
+
+  .anigal__item {
+    overflow: hidden;
+    border-radius: var(--r-md);
+  }
+
+  .anigal__item:first-child { grid-column: 1 / -1; }
+
+  .anigal__item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .anigal__item:first-child img { aspect-ratio: 21 / 9; }
+
+  .anigal__item:hover img { transform: scale(1.04); }
+
+  @media (min-width: 768px) {
+    .anigal__grid { grid-template-columns: repeat(3, 1fr); }
+    .anigal__item:first-child { grid-column: 1 / 3; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anigal__item img { transition: none; }
+  }
+</style>

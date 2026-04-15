@@ -1,0 +1,74 @@
+---
+interface Route {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  routes: Route[];
+}
+
+const { routes } = Astro.props;
+---
+
+<section class="itin section section--surface" aria-labelledby="itin-title">
+  <div class="container">
+    <header class="section__header reveal">
+      <span class="section__eyebrow">Itinéraires</span>
+      <h2 id="itin-title">Parcours & idées de balades</h2>
+      <p class="section__lead">Nos parcours conseillés au départ du Surf Center sur le lac de Sainte-Croix.</p>
+    </header>
+
+    <div class="itin__grid">
+      {routes.map((route, i) => (
+        <div class={`itin__card reveal reveal-d${Math.min(i + 1, 3)}`}>
+          <span class="itin__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="itin__name">{route.title}</h3>
+          <p class="itin__desc">{route.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .itin__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+
+  .itin__card {
+    padding: var(--s-8);
+    background: var(--c-bg);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--c-border-light);
+  }
+
+  .itin__num {
+    display: block;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--c-orange);
+    margin-bottom: var(--s-4);
+  }
+
+  .itin__name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: var(--s-3);
+  }
+
+  .itin__desc {
+    font-size: 0.85rem;
+    color: var(--c-text-secondary);
+    line-height: 1.65;
+  }
+
+  @media (min-width: 768px) {
+    .itin__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>

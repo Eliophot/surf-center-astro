@@ -1,0 +1,125 @@
+<section class="agsplit" aria-labelledby="v7-resto-title">
+  <div class="agsplit__wrap">
+    <div class="agsplit__media">
+      <img src="/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg" alt="Vue aérienne du snack Surf Center au lac de Sainte-Croix" width="960" height="640" loading="lazy" decoding="async" />
+      <div class="agsplit__angle" aria-hidden="true"></div>
+    </div>
+
+    <div class="agsplit__body">
+      <div class="container agsplit__content reveal">
+        <div class="agsplit__stripe" aria-hidden="true"></div>
+        <span class="agsplit__label">Restauration</span>
+        <h2 id="v7-resto-title" class="agsplit__title">Pizzas, snack<br/>& vue sur le lac</h2>
+        <p class="agsplit__desc">Pause gourmande à notre snack-pizzeria. Pizzas artisanales au feu de bois, salades fraîches, glaces — vue directe sur le lac.</p>
+        <div class="agsplit__highlights">
+          <span>Feu de bois</span>
+          <span>Terrasse lac</span>
+          <span>Salades</span>
+          <span>Glaces</span>
+        </div>
+        <a href="/restauration" class="btn btn--primary">Voir la carte</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .agsplit__wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .agsplit__media {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .agsplit__media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .agsplit__angle {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--c-bg);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  }
+
+  .agsplit__body {
+    background: var(--c-bg);
+    padding: var(--s-10) 0 var(--s-section);
+  }
+
+  .agsplit__content {
+    max-width: 480px;
+  }
+
+  .agsplit__stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    margin-bottom: var(--s-5);
+  }
+
+  .agsplit__label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    margin-bottom: var(--s-4);
+  }
+
+  .agsplit__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: var(--s-6);
+  }
+
+  .agsplit__desc {
+    font-size: 0.88rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    margin-bottom: var(--s-6);
+  }
+
+  .agsplit__highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    margin-bottom: var(--s-8);
+  }
+
+  .agsplit__highlights span {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    background: var(--c-surface);
+    padding: 5px 14px;
+    border-radius: var(--r-full);
+  }
+
+  @media (min-width: 900px) {
+    .agsplit__wrap { grid-template-columns: 1.2fr 1fr; }
+    .agsplit__media img { aspect-ratio: auto; height: 100%; }
+    .agsplit__angle { display: none; }
+    .agsplit__body {
+      display: flex;
+      align-items: center;
+      padding: var(--s-16);
+    }
+  }
+</style>

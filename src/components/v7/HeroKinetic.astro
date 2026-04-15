@@ -1,0 +1,147 @@
+<section class="hkin" data-hero aria-label="Surf Center — base nautique au lac de Sainte-Croix">
+  <div class="hkin__split">
+    <div class="hkin__left">
+      <div class="hkin__content">
+        <span class="hkin__tag">Base nautique · Lac de Sainte-Croix</span>
+        <h1 class="hkin__title">
+          <span class="hkin__t1">Surf</span>
+          <span class="hkin__t2">Center</span>
+        </h1>
+        <p class="hkin__sub">Location bateaux & activités nautiques au cœur des Gorges du Verdon, depuis plus de 10 ans.</p>
+        <div class="hkin__ctas">
+          <button type="button" class="btn btn--primary" data-booking>Réserver</button>
+          <a href="#activites" class="hkin__explore">Explorer ↓</a>
+        </div>
+      </div>
+    </div>
+    <div class="hkin__right">
+      <img src="/GettyImages-577312024 (1).jpg" alt="Kayak sur les eaux turquoise des Gorges du Verdon" width="960" height="1200" loading="eager" fetchpriority="high" decoding="async" />
+      <div class="hkin__stripe" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hkin {
+    min-height: 100svh;
+    background: var(--c-dark);
+    overflow: hidden;
+  }
+
+  .hkin__split {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 100svh;
+  }
+
+  .hkin__left {
+    display: flex;
+    align-items: center;
+    padding: calc(var(--header-h) + var(--s-10)) var(--s-8) var(--s-10);
+  }
+
+  .hkin__content {
+    max-width: 480px;
+    animation: hkin-up 900ms var(--ease-smooth) both;
+  }
+
+  @keyframes hkin-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hkin__tag {
+    display: inline-block;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    background: rgb(247 123 70 / 0.1);
+    padding: 5px 16px;
+    border-radius: var(--r-full);
+    margin-bottom: var(--s-8);
+  }
+
+  .hkin__title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--s-6);
+  }
+
+  .hkin__t1 {
+    font-size: clamp(4rem, 14vw, 9rem);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .hkin__t2 {
+    font-size: clamp(4rem, 14vw, 9rem);
+    font-weight: 100;
+    letter-spacing: -0.04em;
+    line-height: 0.85;
+    color: #fff;
+    text-transform: uppercase;
+    padding-left: clamp(2rem, 6vw, 5rem);
+  }
+
+  .hkin__sub {
+    font-size: 0.82rem;
+    color: rgb(255 255 255 / 0.45);
+    line-height: 1.65;
+    max-width: 32ch;
+    margin-bottom: var(--s-8);
+  }
+
+  .hkin__ctas {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+  }
+
+  .hkin__explore {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.35);
+    transition: color var(--t-fast);
+  }
+
+  .hkin__explore:hover { color: #fff; }
+
+  .hkin__right {
+    position: relative;
+    overflow: hidden;
+    display: none;
+  }
+
+  .hkin__right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hkin__stripe {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--c-orange);
+  }
+
+  @media (min-width: 900px) {
+    .hkin__split { grid-template-columns: 1fr 1fr; }
+    .hkin__right { display: block; }
+    .hkin__left { padding: var(--s-20) var(--s-16); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hkin__content { animation: none; }
+  }
+</style>

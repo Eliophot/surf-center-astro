@@ -1,0 +1,110 @@
+---
+import { locations } from '../../data/home';
+---
+
+<section id="activites" class="mlist" aria-labelledby="v6-act-title">
+  <div class="container">
+    <h2 id="v6-act-title" class="mlist__heading reveal">Locations</h2>
+
+    <ol class="mlist__ol">
+      {locations.map((loc, i) => (
+        <li class="mlist__li reveal" style={`--d:${i * 70}ms`}>
+          <button type="button" class="mlist__btn" data-product-book data-tag={loc.tag} aria-label={`Réserver ${loc.title}`}>
+            <span class="mlist__name">{loc.title}</span>
+            <span class="mlist__meta">{loc.description}</span>
+            <span class="mlist__price">dès {loc.price}€</span>
+          </button>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .mlist {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .mlist__heading {
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    margin-bottom: var(--s-12);
+  }
+
+  .mlist__ol {
+    list-style: none;
+    counter-reset: mlist;
+    padding: 0;
+  }
+
+  .mlist__li {
+    counter-increment: mlist;
+    border-top: 1px solid var(--c-border-light);
+  }
+
+  .mlist__li:last-child { border-bottom: 1px solid var(--c-border-light); }
+
+  .mlist__btn {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--s-6);
+    align-items: center;
+    width: 100%;
+    padding: var(--s-6) 0;
+    background: none;
+    border: none;
+    font-family: inherit;
+    color: var(--c-text);
+    cursor: pointer;
+    text-align: left;
+    transition: padding var(--t-fast);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mlist__btn::before {
+    content: counter(mlist, decimal-leading-zero);
+    font-size: 0.58rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--c-text-muted);
+    min-width: 2rem;
+  }
+
+  .mlist__btn:hover { padding-left: var(--s-3); }
+
+  .mlist__name {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    transition: color var(--t-fast);
+  }
+
+  .mlist__btn:hover .mlist__name { color: var(--c-orange); }
+
+  .mlist__meta {
+    display: none;
+  }
+
+  .mlist__price {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--c-text-muted);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 768px) {
+    .mlist__btn {
+      grid-template-columns: 2.5rem 1fr 1fr auto;
+      padding: var(--s-7) 0;
+    }
+    .mlist__meta {
+      display: block;
+      font-size: 0.76rem;
+      color: var(--c-text-muted);
+    }
+  }
+</style>

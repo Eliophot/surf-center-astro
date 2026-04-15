@@ -1,0 +1,78 @@
+---
+import { reviews } from '../../data/home';
+const r = reviews[0];
+---
+
+<section class="svoice" aria-label="Témoignage client">
+  <div class="container svoice__inner reveal">
+    <svg class="svoice__mark" width="36" height="28" viewBox="0 0 36 28" fill="none" aria-hidden="true">
+      <path d="M0 28V16.8C0 5.6 6.3.56 15.75 0l1.05 3.36C10.5 5.04 7.35 9.8 7.35 16.8H14v11.2H0Zm20.25 0V16.8c0-11.2 6.3-16.24 15.75-16.8l1.05 3.36C30.75 5.04 27.6 9.8 27.6 16.8h6.65v11.2H20.25Z" fill="currentColor"/>
+    </svg>
+    <blockquote class="svoice__quote">
+      <p>{r.quote}</p>
+    </blockquote>
+    <footer class="svoice__meta">
+      <cite class="svoice__author">{r.author}</cite>
+      <span class="svoice__sep" aria-hidden="true">·</span>
+      <span class="svoice__ctx">{r.context}</span>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .svoice {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .svoice__inner {
+    max-width: 600px;
+    margin-inline: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .svoice__mark {
+    color: var(--c-border-light);
+    margin-bottom: var(--s-8);
+  }
+
+  .svoice__quote {
+    margin: 0;
+    border: none;
+    padding: 0;
+  }
+
+  .svoice__quote p {
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--c-text);
+    margin-bottom: var(--s-6);
+  }
+
+  .svoice__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+
+  .svoice__author {
+    font-style: normal;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--c-text);
+  }
+
+  .svoice__sep { color: var(--c-border); }
+
+  .svoice__ctx {
+    font-weight: 400;
+    color: var(--c-text-muted);
+  }
+</style>

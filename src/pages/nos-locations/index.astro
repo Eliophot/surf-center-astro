@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LocationHero from '../../components/locations/LocationHero.astro';
+import LocationCards from '../../components/locations/LocationCards.astro';
+import HowItWorks from '../../components/locations/HowItWorks.astro';
+import ServicesGrid from '../../components/locations/ServicesGrid.astro';
+import Maillage from '../../components/Maillage.astro';
+import BookingCTA from '../../components/locations/BookingCTA.astro';
+
+const title = 'Nos locations — Bateaux, paddle, pédalo, canoë | Surf Center Verdon';
+const description = 'Location de bateaux électriques sans permis, paddle, pédalo, canoë et planche à voile au lac de Sainte-Croix. Tarifs, créneaux et réservation en ligne — Surf Center, Gorges du Verdon.';
+
+const sharedServices = [
+  { icon: 'shield', label: 'Gilets de sauvetage fournis' },
+  { icon: 'anchor', label: 'Briefing sécurité pour tous' },
+  { icon: 'map', label: 'Carte du lac remise' },
+  { icon: 'sun', label: 'Équipe présente en continu' },
+  { icon: 'battery', label: 'Matériel récent et entretenu' },
+  { icon: 'users', label: 'Adapté familles & groupes' },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Locations nautiques — Surf Center',
+    description: 'Bateaux électriques, paddle, pédalo, canoë et planche à voile au lac de Sainte-Croix.',
+    url: 'https://surfcenter-verdon.fr/nos-locations',
+    numberOfItems: 5,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Bateaux électriques', url: 'https://surfcenter-verdon.fr/nos-locations/bateau-electrique' },
+      { '@type': 'ListItem', position: 2, name: 'Stand-up Paddle', url: 'https://surfcenter-verdon.fr/nos-locations/paddle' },
+      { '@type': 'ListItem', position: 3, name: 'Pédalos', url: 'https://surfcenter-verdon.fr/nos-locations/pedalo' },
+      { '@type': 'ListItem', position: 4, name: 'Canoë-Kayak', url: 'https://surfcenter-verdon.fr/nos-locations/canoe' },
+      { '@type': 'ListItem', position: 5, name: 'Planche à voile', url: 'https://surfcenter-verdon.fr/nos-locations/planche-a-voile' },
+    ],
+  },
+];
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <LocationHero
+    title="Nos locations"
+    tagline="Lac de Sainte-Croix · Gorges du Verdon"
+    image="/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg"
+    alt="Paddle et bateaux électriques sur le lac de Sainte-Croix — Surf Center"
+  />
+  <LocationCards />
+  <HowItWorks />
+  <ServicesGrid services={sharedServices} title="Inclus avec chaque location" />
+  <Maillage />
+  <BookingCTA />
+</Layout>

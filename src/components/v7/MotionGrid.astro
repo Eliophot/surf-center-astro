@@ -1,0 +1,144 @@
+<section class="mgrid" aria-labelledby="v7-anims-title">
+  <div class="container">
+    <div class="mgrid__head reveal">
+      <div class="mgrid__stripe" aria-hidden="true"></div>
+      <h2 id="v7-anims-title" class="mgrid__title">Animations</h2>
+    </div>
+
+    <div class="mgrid__layout">
+      <div class="mgrid__col mgrid__col--text reveal">
+        <h3 class="mgrid__subtitle">Des moments à partager</h3>
+        <p class="mgrid__desc">Yoga au lever du soleil, cours de paddle, initiations au windsurf — chaque journée au Surf Center est une invitation à bouger, respirer, s'amuser.</p>
+        <ul class="mgrid__list" role="list">
+          <li>Yoga face au lac</li>
+          <li>Cours de paddle & windsurf</li>
+          <li>Bouée tractée</li>
+          <li>Balades encadrées</li>
+        </ul>
+        <a href="/animations" class="btn btn--primary">Découvrir</a>
+      </div>
+
+      <div class="mgrid__col mgrid__col--imgs">
+        <div class="mgrid__img mgrid__img--tall reveal">
+          <img src="/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg" alt="Yoga au bord du lac de Sainte-Croix" width="400" height="600" loading="lazy" decoding="async" />
+        </div>
+        <div class="mgrid__img mgrid__img--wide reveal reveal-d1">
+          <img src="/location-paddle-lac-sainte-croix-surfcenter.jpeg" alt="Paddle sur le lac de Sainte-Croix" width="600" height="300" loading="lazy" decoding="async" />
+        </div>
+        <div class="mgrid__img mgrid__img--sq reveal reveal-d2">
+          <img src="/location-planche-a-voile-windsurf-lac-sainte-croix.png" alt="Windsurf au lac de Sainte-Croix" width="400" height="400" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mgrid {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .mgrid__head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    margin-bottom: var(--s-10);
+  }
+
+  .mgrid__stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .mgrid__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .mgrid__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+  }
+
+  .mgrid__subtitle {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: none;
+    margin-bottom: var(--s-5);
+  }
+
+  .mgrid__desc {
+    font-size: 0.88rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    margin-bottom: var(--s-6);
+  }
+
+  .mgrid__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-bottom: var(--s-8);
+  }
+
+  .mgrid__list li {
+    font-size: 0.82rem;
+    color: var(--c-text-secondary);
+    padding-left: var(--s-5);
+    position: relative;
+  }
+
+  .mgrid__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 6px;
+    height: 2px;
+    background: var(--c-orange);
+  }
+
+  .mgrid__col--imgs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-3);
+  }
+
+  .mgrid__img { overflow: hidden; border-radius: var(--r-sm); }
+
+  .mgrid__img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .mgrid__img:hover img { transform: scale(1.04); }
+
+  .mgrid__img--tall { grid-row: span 2; }
+  .mgrid__img--tall img { aspect-ratio: 2 / 3; }
+  .mgrid__img--wide img { aspect-ratio: 16 / 9; }
+  .mgrid__img--sq img { aspect-ratio: 1; }
+
+  @media (min-width: 900px) {
+    .mgrid__layout { grid-template-columns: 0.4fr 1fr; gap: var(--s-16); }
+    .mgrid__col--text {
+      position: sticky;
+      top: calc(var(--header-h) + var(--s-8));
+      align-self: start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mgrid__img img { transition: none; }
+  }
+</style>

@@ -1,0 +1,133 @@
+---
+import { meshLinks } from '../../data/home';
+---
+
+<section class="slant" aria-labelledby="v7-mesh-title">
+  <div class="container">
+    <div class="slant__head reveal">
+      <div class="slant__stripe" aria-hidden="true"></div>
+      <h2 id="v7-mesh-title" class="slant__title">Explorer</h2>
+    </div>
+
+    <div class="slant__list">
+      {meshLinks.map((link, i) => (
+        <a href={link.href} class="slant__row reveal" style={`--d:${i * 60}ms`}>
+          <div class="slant__left">
+            <span class="slant__num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="slant__name">{link.title}</span>
+          </div>
+          <div class="slant__right">
+            <span class="slant__desc">{link.description}</span>
+            <span class="slant__icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M5 15L15 5M15 5H8M15 5v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .slant {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+  }
+
+  .slant__head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    margin-bottom: var(--s-10);
+  }
+
+  .slant__stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .slant__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .slant__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .slant__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    padding: var(--s-6) 0;
+    border-bottom: 2px solid var(--c-border-light);
+    color: var(--c-text);
+    transition: all var(--t-fast);
+  }
+
+  .slant__row:first-child { border-top: 2px solid var(--c-border-light); }
+
+  .slant__row:hover {
+    padding-left: var(--s-4);
+    border-bottom-color: var(--c-orange);
+  }
+
+  .slant__left {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-4);
+  }
+
+  .slant__num {
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--c-orange);
+  }
+
+  .slant__name {
+    font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    transition: color var(--t-fast);
+  }
+
+  .slant__row:hover .slant__name { color: var(--c-orange); }
+
+  .slant__right {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+  }
+
+  .slant__desc {
+    font-size: 0.72rem;
+    color: var(--c-text-muted);
+    display: none;
+  }
+
+  .slant__icon {
+    color: var(--c-text-muted);
+    transition: transform var(--t-fast) var(--ease), color var(--t-fast);
+  }
+
+  .slant__row:hover .slant__icon {
+    transform: translate(3px, -3px);
+    color: var(--c-orange);
+  }
+
+  @media (min-width: 768px) {
+    .slant__row { padding: var(--s-8) 0; }
+    .slant__desc { display: block; }
+  }
+</style>

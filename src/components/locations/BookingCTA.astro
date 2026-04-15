@@ -1,0 +1,44 @@
+---
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = 'Prêt à naviguer\u00a0?',
+  text = 'Réservez votre créneau en ligne en quelques clics. Retrouvez-nous au bord du lac de Sainte-Croix.',
+} = Astro.props;
+---
+
+<section class="bookcta" aria-labelledby="bookcta-title">
+  <div class="container bookcta__inner reveal">
+    <h2 id="bookcta-title" class="bookcta__title">{title}</h2>
+    <p class="bookcta__text">{text}</p>
+    <button type="button" class="btn btn--primary btn--lg" data-booking>Réserver une location</button>
+  </div>
+</section>
+
+<style>
+  .bookcta {
+    padding: var(--s-section) 0;
+    background: var(--c-dark);
+  }
+
+  .bookcta__inner {
+    text-align: center;
+    max-width: 540px;
+    margin-inline: auto;
+  }
+
+  .bookcta__title {
+    color: #fff !important;
+    margin-bottom: var(--s-5);
+  }
+
+  .bookcta__text {
+    font-size: 0.92rem;
+    color: rgb(255 255 255 / 0.5);
+    line-height: 1.7;
+    margin-bottom: var(--s-10);
+  }
+</style>

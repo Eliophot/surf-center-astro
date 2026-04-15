@@ -1,0 +1,294 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionOneImage from '../components/sections/SectionOneImage.astro';
+import Maillage from '../components/Maillage.astro';
+import BookingCTA from '../components/locations/BookingCTA.astro';
+import { locationDetails } from '../data/locations';
+
+const title = "L'esprit Surf Center — Notre histoire & nos valeurs | Surf Center Verdon";
+const description = "Découvrez l'esprit Surf Center : une base nautique au bord du lac de Sainte-Croix, au cœur des Gorges du Verdon. Nature, convivialité, qualité et simplicité depuis plus de 10 ans.";
+
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: "L'esprit Surf Center",
+    description,
+    url: `${siteUrl}/esprit-surf-center`,
+    isPartOf: { '@type': 'WebSite', name: 'Surf Center', url: siteUrl },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: "L'esprit Surf Center", item: `${siteUrl}/esprit-surf-center` },
+    ],
+  },
+];
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Hero vidéo pleine page -->
+  <section class="espvideo" data-hero aria-label="L'esprit Surf Center">
+    <video class="espvideo__bg" autoplay muted loop playsinline poster="/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg">
+      <source src="/concert-surfcenter-lac-sainte-croix.mp4" type="video/mp4" />
+    </video>
+    <img class="espvideo__fallback" src="/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg" alt="Lac de Sainte-Croix — Gorges du Verdon" width="1920" height="1080" loading="eager" fetchpriority="high" decoding="async" />
+    <div class="espvideo__overlay" aria-hidden="true"></div>
+    <div class="container espvideo__content">
+      <span class="espvideo__tag">Depuis plus de 10 ans</span>
+      <h1 class="espvideo__title">L'esprit<br/>Surf Center</h1>
+    </div>
+  </section>
+
+  <!-- Ambiance / Esprit -->
+  <SectionOneImage
+    id="ambiance"
+    eyebrow="Notre histoire"
+    title="Un lieu,<br/>une énergie"
+    text="Surf Center est né d'une idée simple : proposer un lieu où le lac, le soleil et la convivialité font le reste. Depuis plus de dix ans, nous accueillons familles, couples, groupes d'amis et aventuriers au bord du lac de Sainte-Croix."
+    image={{ src: '/esprit.png', alt: "L'ambiance Surf Center — convivialité au bord du lac" }}
+    list={[
+      { text: 'Créé par des passionnés du lac' },
+      { text: 'Équipe locale et engagée' },
+      { text: 'Esprit familial et décontracté' },
+      { text: 'Ouvert d\'avril à octobre' },
+    ]}
+  />
+
+  <!-- Le cadre / les espaces -->
+  <section class="section section--surface" aria-labelledby="cadre-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Le cadre</span>
+        <h2 id="cadre-title">Un cadre exceptionnel</h2>
+        <p class="section__lead">Au pied des Gorges du Verdon, sur les rives du lac de Sainte-Croix — un des plus beaux lacs d'Europe.</p>
+      </header>
+
+      <div class="espcadre__grid">
+        <div class="espcadre__card reveal">
+          <img src="/location-lac-sainte-croix-gorges-verdon.png" alt="Lac de Sainte-Croix vu du ciel" width="600" height="400" loading="lazy" decoding="async" />
+          <h3>Le lac</h3>
+          <p>2 200 hectares d'eaux turquoise entre les Gorges du Verdon et le plateau de Valensole.</p>
+        </div>
+        <div class="espcadre__card reveal reveal-d1">
+          <img src="/GettyImages-577312024 (1).jpg" alt="Gorges du Verdon en kayak" width="600" height="400" loading="lazy" decoding="async" />
+          <h3>Les Gorges</h3>
+          <p>Le plus grand canyon d'Europe, accessible directement depuis notre base nautique.</p>
+        </div>
+        <div class="espcadre__card reveal reveal-d2">
+          <img src="/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg" alt="Base nautique Surf Center vue du ciel" width="600" height="400" loading="lazy" decoding="async" />
+          <h3>La base</h3>
+          <p>Plage, location, snack-pizzeria, scène concerts — tout sur place, les pieds dans l'eau.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nos activités slider -->
+  <section class="section" aria-labelledby="espact-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Activités</span>
+        <h2 id="espact-title">Tout le lac, à votre façon</h2>
+        <p class="section__lead">5 activités nautiques, un snack face au lac, des animations tout l'été.</p>
+      </header>
+
+      <div class="espact__grid">
+        {locationDetails.map((loc, i) => (
+          <a href={`/nos-locations/${loc.slug}`} class={`espact__card reveal reveal-d${Math.min(i + 1, 4)}`}>
+            <div class="espact__img-wrap">
+              <img src={loc.detailImage} alt={loc.heroAlt} width="400" height="300" loading="lazy" decoding="async" />
+            </div>
+            <h3 class="espact__name">{loc.title}</h3>
+            <span class="espact__price">dès {loc.price}€</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- La destination -->
+  <SectionOneImage
+    id="destination"
+    eyebrow="La destination"
+    title="Le Verdon,<br/>côté lac"
+    text="Les Salles-sur-Verdon, c'est un village provençal posé au bord du lac de Sainte-Croix. À 1h15 d'Aix-en-Provence, 1h30 de Marseille, 2h de Nice — un accès facile pour un dépaysement total."
+    image={{ src: '/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg', alt: 'Paddle et bateaux sur le lac de Sainte-Croix — Gorges du Verdon' }}
+    list={[
+      { text: '1h15 depuis Aix-en-Provence' },
+      { text: '1h30 depuis Marseille' },
+      { text: '2h depuis Nice' },
+      { text: 'Parking gratuit sur place' },
+    ]}
+    cta={{ label: 'Voir les locations', href: '/nos-locations' }}
+    surface
+  />
+
+  <Maillage />
+  <BookingCTA title="Venez vivre l'expérience" text="Réservez en ligne et retrouvez-nous sur la plage du lac de Sainte-Croix." />
+</Layout>
+
+<style>
+  /* ── Hero vidéo ── */
+  .espvideo {
+    position: relative;
+    min-height: 65vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .espvideo__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 50%;
+  }
+
+  .espvideo__fallback {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .espvideo__bg + .espvideo__fallback { display: none; }
+
+  .espvideo__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.15) 0%, rgb(0 0 0 / 0.6) 100%);
+    z-index: 1;
+  }
+
+  .espvideo__content {
+    position: relative;
+    z-index: 2;
+    padding-bottom: var(--s-12);
+    animation: espvideo-up 800ms var(--ease-smooth) both;
+  }
+
+  @keyframes espvideo-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .espvideo__tag {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    background: rgb(0 0 0 / 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 5px 16px;
+    border-radius: var(--r-full);
+    margin-bottom: var(--s-4);
+  }
+
+  .espvideo__title {
+    color: #fff !important;
+    font-size: clamp(2.4rem, 7vw, 4.5rem);
+  }
+
+  /* ── Cadre grid ── */
+  .espcadre__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-8);
+  }
+
+  .espcadre__card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--r-lg);
+    margin-bottom: var(--s-4);
+  }
+
+  .espcadre__card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: var(--s-2);
+  }
+
+  .espcadre__card p {
+    font-size: 0.85rem;
+    color: var(--c-text-secondary);
+    line-height: 1.65;
+  }
+
+  @media (min-width: 768px) {
+    .espcadre__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ── Activités slider ── */
+  .espact__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-4);
+  }
+
+  .espact__card {
+    text-decoration: none;
+    color: var(--c-text);
+  }
+
+  .espact__img-wrap {
+    overflow: hidden;
+    border-radius: var(--r-md);
+    margin-bottom: var(--s-3);
+  }
+
+  .espact__img-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .espact__card:hover .espact__img-wrap img { transform: scale(1.04); }
+
+  .espact__name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 2px;
+    transition: color var(--t-fast);
+  }
+
+  .espact__card:hover .espact__name { color: var(--c-orange); }
+
+  .espact__price {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--c-orange);
+  }
+
+  @media (min-width: 768px) {
+    .espact__grid { grid-template-columns: repeat(5, 1fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .espvideo__content { animation: none; }
+    .espact__img-wrap img { transition: none; }
+  }
+</style>

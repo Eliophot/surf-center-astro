@@ -5,7 +5,21 @@ import { locations } from '../../data/home';
 <section id="activites" class="scards" aria-labelledby="v5-activities-title">
   <div class="scards__header container reveal">
     <h2 id="v5-activities-title" class="scards__title">Locations</h2>
-    <p class="scards__count">{String(locations.length).padStart(2, '0')} activités</p>
+    <div class="scards__header-right">
+      <p class="scards__count">{String(locations.length).padStart(2, '0')} activités</p>
+      <div class="scards__nav">
+        <button class="scards__arrow" type="button" data-scards-prev aria-label="Précédent">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="scards__arrow" type="button" data-scards-next aria-label="Suivant">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="scards__track" data-scards-track>
@@ -46,6 +60,12 @@ import { locations } from '../../data/home';
     line-height: 1;
   }
 
+  .scards__header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+  }
+
   .scards__count {
     font-size: 0.65rem;
     font-weight: 600;
@@ -54,10 +74,41 @@ import { locations } from '../../data/home';
     color: var(--c-text-muted);
   }
 
+  .scards__nav {
+    display: flex;
+    gap: var(--s-2);
+  }
+
+  .scards__arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-full);
+    border: 1.5px solid var(--c-border);
+    background: var(--c-bg);
+    color: var(--c-text-secondary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--t-fast) var(--ease);
+  }
+
+  .scards__arrow:hover {
+    border-color: var(--c-orange);
+    color: var(--c-orange);
+    background: var(--c-surface);
+  }
+
+  .scards__arrow:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
   .scards__track {
     display: flex;
     gap: var(--s-4);
     overflow-x: auto;
+    scroll-behavior: smooth;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     padding: 0 var(--s-6);
@@ -140,3 +191,36 @@ import { locations } from '../../data/home';
     .scards__visual img { transition: none; }
   }
 </style>
+
+<script>
+  document.querySelectorAll('[data-scards-track]').forEach((track) => {
+    const section = track.closest('.scards');
+    const prevBtn = section?.querySelector('[data-scards-prev]') as HTMLButtonElement | null;
+    const nextBtn = section?.querySelector('[data-scards-next]') as HTMLButtonElement | null;
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const el = track as HTMLElement;
+
+    const getScrollAmount = () => {
+      const card = el.querySelector('.scards__card') as HTMLElement | null;
+      if (!card) return 300;
+      return card.offsetWidth + 16;
+    };
+
+    const updateArrows = () => {
+      prevBtn.disabled = el.scrollLeft <= 2;
+      nextBtn.disabled = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+    };
+
+    updateArrows();
+    el.addEventListener('scroll', updateArrows, { passive: true });
+
+    prevBtn.addEventListener('click', () => {
+      el.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      el.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+  });
+</script>

@@ -1,0 +1,128 @@
+<section class="section section--surface" aria-labelledby="v2-resto-title">
+  <div class="container">
+    <div class="bento reveal">
+      <div class="bento__img">
+        <img
+          src="/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg"
+          alt="Vue aérienne du snack Surf Center avec le lac de Sainte-Croix"
+          width="720" height="800" loading="lazy" decoding="async"
+        />
+      </div>
+      <div class="bento__cell bento__text">
+        <span class="section__eyebrow">Restauration</span>
+        <h2 id="v2-resto-title">Pizzas, snack<br/>& vue sur le lac</h2>
+        <p>Pause gourmande à notre snack-pizzeria. Pizzas artisanales au feu de bois, salades fraîches, glaces — vue directe sur le lac.</p>
+      </div>
+      <div class="bento__cell bento__list">
+        <ul role="list">
+          <li>Pizzas au feu de bois</li>
+          <li>Terrasse face au lac</li>
+          <li>Salades, snacking, glaces</li>
+          <li>Service continu en saison</li>
+        </ul>
+      </div>
+      <a href="/restauration" class="bento__cell bento__cta">
+        <span class="bento__cta-label">Voir la carte</span>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bento {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+
+  .bento__img {
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    grid-row: span 1;
+  }
+
+  .bento__img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 16 / 10;
+  }
+
+  .bento__cell {
+    background: var(--c-bg);
+    border-radius: var(--r-xl);
+    padding: var(--s-8);
+  }
+
+  .bento__text p {
+    font-size: 0.9rem;
+    color: var(--c-text-secondary);
+    line-height: 1.7;
+    margin-top: var(--s-4);
+    max-width: 34ch;
+  }
+
+  .bento__list ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+
+  .bento__list li {
+    font-size: 0.85rem;
+    color: var(--c-text-secondary);
+    padding-left: var(--s-5);
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .bento__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 2px;
+    background: var(--c-orange);
+    border-radius: 1px;
+  }
+
+  .bento__cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--c-orange);
+    color: #fff;
+    text-decoration: none;
+    transition: background var(--t-fast);
+  }
+
+  .bento__cta:hover { background: var(--c-orange-dark); }
+
+  .bento__cta-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  @media (min-width: 768px) {
+    .bento {
+      grid-template-columns: 1.4fr 1fr;
+      grid-template-rows: auto auto auto;
+    }
+
+    .bento__img {
+      grid-row: 1 / 4;
+    }
+
+    .bento__img img {
+      aspect-ratio: auto;
+      height: 100%;
+    }
+  }
+</style>

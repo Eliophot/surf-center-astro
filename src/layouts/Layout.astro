@@ -2,9 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import BookingModal from '../components/BookingModal.astro';
-import CartModal from '../components/CartModal.astro';
-import ShopModal from '../components/ShopModal.astro';
+import UniversalModal from '../components/UniversalModal.astro';
 
 interface Props {
   title: string;
@@ -83,9 +81,7 @@ const siteUrl = 'https://surfcenter-verdon.fr';
       <slot />
     </main>
     <Footer />
-    <BookingModal />
-    <CartModal />
-    <ShopModal />
+    <UniversalModal />
 
     <button class="spct" id="scrollPct" type="button" aria-label="Retour en haut">
       <span class="spct__left">

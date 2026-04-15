@@ -1,0 +1,170 @@
+---
+interface ListItem {
+  text: string;
+}
+
+interface ImageDef {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  id?: string;
+  eyebrow: string;
+  title: string;
+  text: string;
+  images: [ImageDef, ImageDef, ImageDef];
+  list?: ListItem[];
+  cta?: { label: string; href?: string; booking?: boolean; };
+  surface?: boolean;
+}
+
+const {
+  id,
+  eyebrow,
+  title,
+  text,
+  images,
+  list,
+  cta,
+  surface = false,
+} = Astro.props;
+
+const sectionId = id || eyebrow.toLowerCase().replace(/\s+/g, '-');
+const titleId = `${sectionId}-title`;
+---
+
+<section
+  class:list={['section', { 'section--surface': surface }]}
+  aria-labelledby={titleId}
+>
+  <div class="container">
+    <div class="s3__top">
+      <div class="s3__intro reveal">
+        <span class="section__eyebrow">{eyebrow}</span>
+        <h2 id={titleId} set:html={title} />
+        <p class="s3__text">{text}</p>
+
+        {list && list.length > 0 && (
+          <ul class="s3__list" role="list">
+            {list.map((item) => <li>{item.text}</li>)}
+          </ul>
+        )}
+
+        {cta && (
+          cta.booking
+            ? <button type="button" class="btn btn--primary" data-booking>{cta.label}</button>
+            : <a href={cta.href} class="btn btn--primary">{cta.label}</a>
+        )}
+      </div>
+
+      <div class="s3__hero-img reveal reveal-d1">
+        <img
+          class="s3__img"
+          src={images[0].src}
+          alt={images[0].alt}
+          width="640"
+          height="480"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+
+    <div class="s3__bottom reveal reveal-d2">
+      <img
+        class="s3__img s3__img--half"
+        src={images[1].src}
+        alt={images[1].alt}
+        width="580"
+        height="400"
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        class="s3__img s3__img--half"
+        src={images[2].src}
+        alt={images[2].alt}
+        width="580"
+        height="400"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .s3__top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: center;
+    margin-bottom: var(--s-8);
+  }
+
+  .s3__text {
+    font-size: 1rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    max-width: 38ch;
+    margin-top: var(--s-6);
+  }
+
+  .s3__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-top: var(--s-8);
+    margin-bottom: var(--s-10);
+  }
+
+  .s3__list li {
+    font-size: 0.85rem;
+    color: var(--c-text-secondary);
+    line-height: 1.5;
+    padding-left: var(--s-5);
+    position: relative;
+  }
+
+  .s3__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 1px;
+    background: var(--c-orange);
+  }
+
+  .s3__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: var(--r-lg);
+  }
+
+  .s3__hero-img .s3__img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .s3__bottom {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+
+  .s3__img--half {
+    aspect-ratio: 3 / 2;
+  }
+
+  @media (min-width: 600px) {
+    .s3__bottom { grid-template-columns: 1fr 1fr; gap: var(--s-6); }
+  }
+
+  @media (min-width: 900px) {
+    .s3__top { grid-template-columns: 1fr 1.3fr; gap: var(--s-20); }
+    .s3__bottom { gap: var(--s-8); }
+  }
+</style>

@@ -2,11 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Activities from '../components/Activities.astro';
-import BrandUniverse from '../components/BrandUniverse.astro';
+import SectionOneImage from '../components/sections/SectionOneImage.astro';
+import SectionTwoImages from '../components/sections/SectionTwoImages.astro';
+import SectionThreeImages from '../components/sections/SectionThreeImages.astro';
+import SectionVideo from '../components/sections/SectionVideo.astro';
 import Testimonials from '../components/Testimonials.astro';
-import Restaurant from '../components/Restaurant.astro';
-import Animations from '../components/Animations.astro';
-import Events from '../components/Events.astro';
 import Instagram from '../components/Instagram.astro';
 import Maillage from '../components/Maillage.astro';
 
@@ -286,11 +286,77 @@ const jsonLd = [
 <Layout title={title} description={description} jsonLd={jsonLd}>
   <Hero />
   <Activities />
-  <BrandUniverse />
+
+  <SectionTwoImages
+    id="brand"
+    eyebrow="L'esprit Surf Center"
+    title="Un lieu,<br/>une énergie"
+    text="Depuis plus de dix ans, Surf Center est bien plus qu'une base nautique. C'est un rendez-vous au bord du lac de Sainte-Croix pour celles et ceux qui aiment l'eau, le soleil et les grands espaces."
+    images={[
+      { src: '/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg', alt: 'Paddle et bateaux électriques au bord du lac de Sainte-Croix' },
+      { src: '/esprit.png', alt: 'Ambiance conviviale au Surf Center — lac de Sainte-Croix' },
+    ]}
+    list={[
+      { text: 'Nature — Un lac d\'exception, des paysages préservés' },
+      { text: 'Simplicité — Du bon matériel, un bon accueil' },
+      { text: 'Convivialité — Chacun trouve ici sa façon de profiter' },
+      { text: 'Qualité — Bateaux récents, équipe passionnée' },
+    ]}
+  />
+
   <Testimonials />
-  <Restaurant />
-  <Animations />
-  <Events />
+
+  <SectionOneImage
+    id="restauration"
+    eyebrow="Restauration"
+    title="Pizzas, snack<br/>& vue sur le lac"
+    text="Pause gourmande à notre snack-pizzeria. Pizzas artisanales au feu de bois, salades fraîches, glaces — vue directe sur le lac."
+    image={{ src: '/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg', alt: 'Vue aérienne du snack Surf Center avec le lac de Sainte-Croix' }}
+    list={[
+      { text: 'Pizzas au feu de bois' },
+      { text: 'Terrasse face au lac' },
+      { text: 'Salades, snacking, glaces' },
+      { text: 'Service continu en saison' },
+    ]}
+    cta={{ label: 'Voir la carte', href: '/restauration' }}
+    surface
+  />
+
+  <SectionThreeImages
+    id="animations"
+    eyebrow="Animations"
+    title="Des moments<br/>à partager"
+    text="Yoga au lever du soleil, cours de paddle, initiations au windsurf — chaque journée au Surf Center est une invitation à bouger, respirer, s'amuser."
+    images={[
+      { src: '/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg', alt: 'Cours de yoga au bord du lac de Sainte-Croix — Surf Center' },
+      { src: '/location-paddle-lac-sainte-croix-surfcenter.jpeg', alt: 'Stand-up paddle sur le lac de Sainte-Croix' },
+      { src: '/location-planche-a-voile-windsurf-lac-sainte-croix.png', alt: 'Planche à voile et windsurf sur le lac de Sainte-Croix' },
+    ]}
+    list={[
+      { text: 'Yoga face au lac' },
+      { text: 'Cours de paddle & windsurf' },
+      { text: 'Bouée tractée & sensations' },
+      { text: 'Balades encadrées' },
+    ]}
+    cta={{ label: 'Découvrir', href: '/animations' }}
+  />
+
+  <SectionVideo
+    id="evenements"
+    eyebrow="Événements"
+    title="Soirées &<br/>concerts au lac"
+    text="Le Surf Center prend vie le soir venu. Concerts acoustiques les pieds dans le sable, soirées thématiques, couchers de soleil musicaux — une programmation estivale unique."
+    video={{ src: '/concert-surfcenter-lac-sainte-croix.mp4', poster: '/concert-surfcenter-lac-sainte-croix.png' }}
+    list={[
+      { text: 'Concerts live & acoustiques' },
+      { text: 'Soirées coucher de soleil' },
+      { text: 'DJ sets & ambiance estivale' },
+      { text: 'Événements privatisables' },
+    ]}
+    cta={{ label: 'Découvrir', href: '/evenements' }}
+    surface
+  />
+
   <Instagram />
   <Maillage />
 </Layout>

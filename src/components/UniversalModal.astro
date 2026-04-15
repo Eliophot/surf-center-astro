@@ -1,0 +1,272 @@
+<dialog class="umodal" id="umodal" aria-label="Surf Center">
+  <div class="umodal__header">
+    <p class="umodal__title" id="umodal-title"></p>
+    <button
+      class="umodal__close"
+      type="button"
+      id="umodal-close"
+      aria-label="Fermer"
+    >
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="umodal__body">
+    <div class="umodal__loader" id="umodal-loader" aria-hidden="true">
+      <span class="umodal__spinner"></span>
+    </div>
+    <iframe
+      id="umodal-iframe"
+      title="Surf Center"
+      width="100%"
+      height="100%"
+      frameborder="0"
+    ></iframe>
+  </div>
+</dialog>
+
+<script>
+  const BASE = 'https://booking.yoplanning.pro/af0e7a3e-a541-40bf-b074-470572d4e762';
+
+  const URLS: Record<string, { url: string; title: string; variant: string }> = {
+    booking: { url: `${BASE}/?bedisplay=embed`, title: 'Réservation', variant: 'center' },
+    cart:    { url: `${BASE}/cart/?bedisplay=embed`, title: 'Panier', variant: 'side' },
+    shop:    { url: `${BASE}/shop/?bedisplay=embed`, title: 'Boutique', variant: 'wide' },
+  };
+
+  const modal = document.getElementById('umodal') as HTMLDialogElement;
+  const iframe = document.getElementById('umodal-iframe') as HTMLIFrameElement;
+  const titleEl = document.getElementById('umodal-title') as HTMLElement;
+  const closeBtn = document.getElementById('umodal-close') as HTMLButtonElement;
+  const loader = document.getElementById('umodal-loader') as HTMLElement;
+
+  let currentUrl = '';
+
+  function open(url: string, title: string, variant: string) {
+    modal.dataset.variant = variant;
+    titleEl.textContent = title;
+
+    if (currentUrl !== url) {
+      loader.hidden = false;
+      iframe.src = url;
+      currentUrl = url;
+      iframe.onload = () => { loader.hidden = true; };
+    }
+
+    modal.showModal();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    modal.close();
+    document.body.style.overflow = '';
+  }
+
+  function reset() {
+    iframe.removeAttribute('src');
+    currentUrl = '';
+    loader.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-booking]').forEach((el) =>
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      open(URLS.booking.url, URLS.booking.title, URLS.booking.variant);
+    }),
+  );
+
+  document.querySelectorAll('[data-cart]').forEach((el) =>
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      open(URLS.cart.url, URLS.cart.title, URLS.cart.variant);
+    }),
+  );
+
+  document.querySelectorAll('[data-shop]').forEach((el) =>
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      open(URLS.shop.url, URLS.shop.title, URLS.shop.variant);
+    }),
+  );
+
+  document.querySelectorAll('[data-product-book]').forEach((el) =>
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const tag = (el as HTMLElement).dataset.tag;
+      const url = tag
+        ? `${BASE}/?tag=${tag}&bedisplay=embed`
+        : URLS.booking.url;
+      open(url, 'Réservation', URLS.booking.variant);
+    }),
+  );
+
+  closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+  modal.addEventListener('close', reset);
+</script>
+
+<style>
+  .umodal {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: var(--c-modal-bg);
+    color: var(--c-modal-text);
+  }
+
+  .umodal:not([open]) { display: none; }
+
+  .umodal[open] {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+    transition:
+      opacity var(--t-normal) var(--ease),
+      transform var(--t-normal) var(--ease);
+  }
+
+  @starting-style {
+    .umodal[open] { opacity: 0; transform: translateY(1rem); }
+    .umodal[open][data-variant='side'] { opacity: 0; transform: translateX(2rem); }
+  }
+
+  .umodal::backdrop {
+    background: rgb(0 0 0 / 0);
+    transition:
+      background var(--t-normal) var(--ease),
+      display var(--t-normal) var(--ease) allow-discrete,
+      overlay var(--t-normal) var(--ease) allow-discrete;
+  }
+
+  .umodal[open]::backdrop { background: rgb(0 0 0 / 0.5); }
+
+  @starting-style {
+    .umodal[open]::backdrop { background: rgb(0 0 0 / 0); }
+  }
+
+  .umodal__header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--s-4) var(--s-6);
+    border-bottom: 1px solid var(--c-modal-border);
+  }
+
+  .umodal__title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--c-text-muted);
+  }
+
+  .umodal__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--c-modal-close-border);
+    color: var(--c-text-muted);
+    cursor: pointer;
+    transition: all var(--t-fast);
+  }
+
+  .umodal__close:hover {
+    background: var(--c-modal-close-hover);
+    color: var(--c-modal-text);
+  }
+
+  .umodal__body {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .umodal__body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  .umodal__loader {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--c-modal-bg);
+    z-index: 1;
+  }
+
+  .umodal__loader[hidden] { display: none; }
+
+  .umodal__spinner {
+    width: 28px;
+    height: 28px;
+    border: 2px solid var(--c-border);
+    border-top-color: var(--c-orange);
+    border-radius: 50%;
+    animation: umodal-spin 0.7s linear infinite;
+  }
+
+  @keyframes umodal-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Desktop: center variant (booking, default) */
+  @media (min-width: 768px) {
+    .umodal[data-variant='center'] {
+      inset: var(--s-8);
+      width: auto;
+      height: auto;
+      max-width: 900px;
+      max-height: calc(100vh - var(--s-16));
+      margin: auto;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .umodal[data-variant='side'] {
+      inset: 0 0 0 auto;
+      width: 480px;
+      max-width: 100%;
+      height: 100%;
+      max-height: 100%;
+      margin: 0;
+      border-radius: var(--r-xl) 0 0 var(--r-xl);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .umodal[data-variant='wide'] {
+      inset: var(--s-8);
+      width: auto;
+      height: auto;
+      max-width: 1000px;
+      max-height: calc(100vh - var(--s-16));
+      margin: auto;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .umodal__spinner { animation: none; }
+  }
+</style>

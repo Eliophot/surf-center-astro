@@ -1,0 +1,144 @@
+---
+import { meshLinks } from '../../data/home';
+---
+
+<section class="section deck-section" aria-labelledby="v3-mesh-title">
+  <div class="container">
+    <header class="section__header reveal">
+      <span class="section__eyebrow" style="color: var(--c-orange);">Explorer</span>
+      <h2 id="v3-mesh-title" class="deck-section__title">Tout Surf Center</h2>
+    </header>
+
+    <div class="deck" data-deck>
+      {meshLinks.map((link, i) => (
+        <a
+          href={link.href}
+          class="deck__card"
+          style={`--i: ${i}; --total: ${meshLinks.length};`}
+        >
+          <img class="deck__img" src={link.image} alt={link.alt} width="400" height="300" loading="lazy" decoding="async" />
+          <div class="deck__overlay"></div>
+          <div class="deck__content">
+            <h3 class="deck__title">{link.title}</h3>
+            <p class="deck__desc">{link.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-deck]').forEach((deck) => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) deck.classList.add('is-spread'); },
+      { threshold: 0.2 },
+    );
+    observer.observe(deck);
+  });
+</script>
+
+<style>
+  .deck-section {
+    background: var(--c-dark);
+  }
+
+  .deck-section__title {
+    color: #fff !important;
+  }
+
+  .deck-section .section__header {
+    color: #fff;
+  }
+
+  .deck {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+    position: relative;
+  }
+
+  .deck__card {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--r-lg);
+    text-decoration: none;
+    color: #fff;
+    transform: translateY(calc(var(--i) * -12px)) rotate(calc(var(--i) * -1.2deg));
+    transition: transform 0.8s var(--ease), box-shadow 0.6s var(--ease);
+  }
+
+  .deck.is-spread .deck__card {
+    transform: translateY(0) rotate(0);
+  }
+
+  .deck__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .deck__card:hover .deck__img { transform: scale(1.06); }
+
+  .deck__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgb(0 0 0 / 0.65) 0%, rgb(0 0 0 / 0.05) 60%);
+  }
+
+  .deck__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--s-5);
+    z-index: 1;
+  }
+
+  .deck__title {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+
+  .deck__desc {
+    font-size: 0.72rem;
+    color: rgb(255 255 255 / 0.55);
+  }
+
+  @media (min-width: 768px) {
+    .deck {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .deck__card {
+      transform: translateY(calc(var(--i) * -20px)) rotate(calc(var(--i) * -2deg));
+    }
+  }
+
+  @media (max-width: 767px) {
+    .deck__card {
+      transform: translateY(calc(var(--i) * -8px));
+    }
+
+    .deck.is-spread .deck__card {
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .deck__card {
+      transform: none !important;
+      transition: none;
+    }
+    .deck__img { transition: none; }
+  }
+</style>

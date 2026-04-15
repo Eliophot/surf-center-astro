@@ -1,0 +1,120 @@
+<section class="poster" aria-labelledby="v3-events-title">
+  <div class="container poster__inner">
+    <div class="poster__meta reveal">
+      <span class="poster__badge">Été 2026</span>
+      <h2 id="v3-events-title" class="poster__title">Soirées &<br/>concerts au lac</h2>
+      <p class="poster__text">
+        Concerts acoustiques les pieds dans le sable, soirées thématiques, couchers de soleil musicaux — une programmation estivale unique au Surf Center.
+      </p>
+      <ul class="poster__list" role="list">
+        <li>Concerts live & acoustiques</li>
+        <li>Soirées coucher de soleil</li>
+        <li>DJ sets & ambiance estivale</li>
+        <li>Événements privatisables</li>
+      </ul>
+      <a href="/groupes-evenements" class="btn btn--primary poster__cta-btn">Découvrir</a>
+    </div>
+
+    <div class="poster__frame reveal reveal-d1">
+      <img
+        class="poster__img"
+        src="/concert-surfcenter-lac-sainte-croix.png"
+        alt="Concert live au Surf Center — soirée au bord du lac de Sainte-Croix"
+        width="500" height="750" loading="lazy" decoding="async"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .poster {
+    background: #050505;
+    padding: var(--s-section) 0;
+    overflow: hidden;
+  }
+
+  .poster__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: center;
+  }
+
+  .poster__badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #050505;
+    background: var(--c-orange);
+    padding: var(--s-2) var(--s-4);
+    border-radius: var(--r-full);
+    margin-bottom: var(--s-6);
+  }
+
+  .poster__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #fff !important;
+    margin-bottom: var(--s-5);
+  }
+
+  .poster__text {
+    font-size: 0.9rem;
+    color: rgb(255 255 255 / 0.55);
+    line-height: 1.7;
+    max-width: 36ch;
+    margin-bottom: var(--s-6);
+  }
+
+  .poster__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-bottom: var(--s-8);
+  }
+
+  .poster__list li {
+    font-size: 0.82rem;
+    color: rgb(255 255 255 / 0.45);
+    padding-left: var(--s-5);
+    position: relative;
+  }
+
+  .poster__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 2px;
+    background: var(--c-orange);
+    border-radius: 1px;
+  }
+
+  .poster__cta-btn {
+    box-shadow: 0 0 30px rgb(247 123 70 / 0.4);
+  }
+
+  .poster__frame {
+    display: flex;
+    justify-content: center;
+  }
+
+  .poster__img {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: var(--r-xl);
+    box-shadow: 0 20px 60px rgb(0 0 0 / 0.5);
+  }
+
+  @media (min-width: 900px) {
+    .poster__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-20);
+    }
+  }
+</style>

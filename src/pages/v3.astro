@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroCinematic from '../components/v3/HeroCinematic.astro';
+import FullbleedStack from '../components/v3/FullbleedStack.astro';
+import CounterBand from '../components/v3/CounterBand.astro';
+import DarkTestimonial from '../components/v3/DarkTestimonial.astro';
+import MagazineSpread from '../components/v3/MagazineSpread.astro';
+import PhotoMosaic from '../components/v3/PhotoMosaic.astro';
+import PosterEvent from '../components/v3/PosterEvent.astro';
+import DeckCards from '../components/v3/DeckCards.astro';
+import { jsonLd, seoMeta } from '../data/jsonld';
+---
+
+<Layout title={seoMeta.title} description={seoMeta.description} jsonLd={jsonLd}>
+  <HeroCinematic />
+  <FullbleedStack />
+  <CounterBand />
+  <DarkTestimonial />
+  <MagazineSpread />
+  <PhotoMosaic />
+  <PosterEvent />
+  <DeckCards />
+</Layout>

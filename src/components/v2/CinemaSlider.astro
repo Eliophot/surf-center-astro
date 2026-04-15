@@ -1,0 +1,191 @@
+---
+import { locations } from '../../data/home';
+---
+
+<section id="activites" class="section" aria-labelledby="v2-activities-title">
+  <div class="container">
+    <header class="section__header reveal">
+      <span class="section__eyebrow">Nos locations</span>
+      <h2 id="v2-activities-title">Tout le lac,<br/>à votre façon</h2>
+    </header>
+  </div>
+
+  <div class="cinema" data-cinema>
+    <div class="cinema__track" data-cinema-track>
+      {locations.map((loc) => (
+        <button type="button" class="cinema__item" data-product-book data-tag={loc.tag} aria-label={`Réserver ${loc.title}`}>
+          <div class="cinema__frame">
+            <img class="cinema__img" src={loc.image} alt={loc.alt} width="800" height="450" loading="lazy" decoding="async" />
+          </div>
+          <div class="cinema__info">
+            <span class="cinema__name">{loc.title}</span>
+            <span class="cinema__desc">{loc.description}</span>
+            <span class="cinema__price">dès {loc.price}€</span>
+          </div>
+        </button>
+      ))}
+    </div>
+
+    <div class="cinema__controls container">
+      <div class="cinema__bar"><span class="cinema__progress" data-cinema-progress></span></div>
+      <div class="cinema__nav">
+        <button class="cinema__btn" type="button" data-cinema-prev aria-label="Précédent">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="cinema__btn" type="button" data-cinema-next aria-label="Suivant">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cinema__track {
+    display: flex;
+    gap: var(--s-6);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 var(--s-6);
+    scroll-behavior: smooth;
+  }
+
+  .cinema__track::-webkit-scrollbar { display: none; }
+
+  .cinema__item {
+    flex: 0 0 85%;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .cinema__frame {
+    overflow: hidden;
+    border-radius: var(--r-lg);
+    margin-bottom: var(--s-4);
+  }
+
+  .cinema__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .cinema__item:hover .cinema__img { transform: scale(1.03); }
+
+  .cinema__info {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-4);
+    padding: 0 var(--s-1);
+  }
+
+  .cinema__name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--c-text);
+  }
+
+  .cinema__desc {
+    font-size: 0.72rem;
+    color: var(--c-text-muted);
+    flex: 1;
+  }
+
+  .cinema__price {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--c-orange);
+    white-space: nowrap;
+  }
+
+  .cinema__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    margin-top: var(--s-8);
+  }
+
+  .cinema__bar {
+    flex: 1;
+    height: 2px;
+    background: var(--c-border-light);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+
+  .cinema__progress {
+    display: block;
+    height: 100%;
+    width: 20%;
+    background: var(--c-orange);
+    border-radius: 1px;
+    transition: width 0.3s var(--ease);
+  }
+
+  .cinema__nav {
+    display: flex;
+    gap: var(--s-2);
+  }
+
+  .cinema__btn {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--r-full);
+    border: 1px solid var(--c-border);
+    background: var(--c-bg);
+    color: var(--c-text-secondary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--t-fast);
+  }
+
+  .cinema__btn:hover {
+    border-color: var(--c-orange);
+    color: var(--c-orange);
+  }
+
+  @media (min-width: 600px) { .cinema__item { flex: 0 0 55%; } }
+  @media (min-width: 900px) { .cinema__item { flex: 0 0 42%; } }
+  @media (min-width: 1200px) { .cinema__item { flex: 0 0 35%; } }
+</style>
+
+<script>
+  document.querySelectorAll('[data-cinema]').forEach((cinema) => {
+    const track = cinema.querySelector('[data-cinema-track]') as HTMLElement;
+    const progress = cinema.querySelector('[data-cinema-progress]') as HTMLElement;
+    const prev = cinema.querySelector('[data-cinema-prev]');
+    const next = cinema.querySelector('[data-cinema-next]');
+    if (!track || !progress) return;
+
+    function updateProgress() {
+      const max = track.scrollWidth - track.clientWidth;
+      if (max <= 0) { progress.style.width = '100%'; return; }
+      const pct = (track.scrollLeft / max) * 100;
+      progress.style.width = Math.max(20, pct) + '%';
+    }
+
+    track.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    const getStep = () => {
+      const item = track.querySelector('.cinema__item') as HTMLElement | null;
+      return item ? item.offsetWidth + 24 : 400;
+    };
+
+    prev?.addEventListener('click', () => track.scrollBy({ left: -getStep(), behavior: 'smooth' }));
+    next?.addEventListener('click', () => track.scrollBy({ left: getStep(), behavior: 'smooth' }));
+  });
+</script>

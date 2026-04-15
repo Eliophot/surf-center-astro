@@ -1,0 +1,145 @@
+<section class="evband" aria-labelledby="v2-events-title">
+  <div class="evband__bg" aria-hidden="true">
+    <img
+      src="/concert-surfcenter-lac-sainte-croix.png"
+      alt=""
+      width="1920" height="800"
+      loading="lazy" decoding="async"
+    />
+  </div>
+
+  <div class="container evband__inner reveal">
+    <div class="evband__badge">Été 2026</div>
+
+    <div class="evband__head">
+      <span class="evband__eyebrow">Événements</span>
+      <h2 id="v2-events-title" class="evband__title">Soirées &<br/>concerts au lac</h2>
+    </div>
+
+    <p class="evband__text">
+      Concerts acoustiques les pieds dans le sable, soirées thématiques, couchers de soleil musicaux — une programmation estivale unique au Surf Center.
+    </p>
+
+    <div class="evband__footer">
+      <ul class="evband__tags" role="list">
+        <li>Live</li>
+        <li>Coucher de soleil</li>
+        <li>DJ sets</li>
+        <li>Privatisation</li>
+      </ul>
+      <a href="/groupes-evenements" class="btn btn--primary">Découvrir</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .evband {
+    position: relative;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+
+  .evband__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .evband__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.25;
+    filter: grayscale(0.3);
+  }
+
+  .evband__inner {
+    position: relative;
+    z-index: 1;
+    padding-block: var(--s-20);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+    max-width: 620px;
+  }
+
+  .evband__badge {
+    display: inline-flex;
+    align-self: flex-start;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    background: var(--c-orange);
+    padding: 5px 14px;
+    border-radius: var(--r-full);
+  }
+
+  .evband__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .evband__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+  }
+
+  .evband__title {
+    font-size: clamp(2.2rem, 5vw, 3.8rem) !important;
+    font-weight: 800 !important;
+    line-height: 0.95 !important;
+    letter-spacing: -0.03em !important;
+    color: #fff !important;
+    text-transform: uppercase;
+  }
+
+  .evband__text {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: rgb(255 255 255 / 0.55);
+    max-width: 42ch;
+  }
+
+  .evband__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-6);
+    margin-top: var(--s-4);
+  }
+
+  .evband__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+  }
+
+  .evband__tags li {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.5);
+    border: 1px solid rgb(255 255 255 / 0.12);
+    padding: 5px 12px;
+    border-radius: var(--r-full);
+    transition: all var(--t-fast);
+  }
+
+  .evband__tags li:hover {
+    color: #fff;
+    border-color: rgb(255 255 255 / 0.3);
+  }
+
+  @media (min-width: 900px) {
+    .evband__inner {
+      padding-block: var(--s-24);
+    }
+  }
+</style>

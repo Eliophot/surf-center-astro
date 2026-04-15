@@ -1,0 +1,133 @@
+---
+import { meshLinks } from '../../data/home';
+---
+
+<section class="section" aria-labelledby="v2-mesh-title">
+  <div class="container">
+    <header class="section__header reveal">
+      <span class="section__eyebrow">Explorer</span>
+      <h2 id="v2-mesh-title">Tout Surf Center</h2>
+    </header>
+  </div>
+
+  <div class="lreveal container reveal">
+    <div class="lreveal__bgs" aria-hidden="true">
+      {meshLinks.map((link, i) => (
+        <img class="lreveal__bg" data-reveal-bg={i} src={link.image} alt="" width="1200" height="800" loading="lazy" decoding="async" />
+      ))}
+    </div>
+
+    <ul class="lreveal__list" role="list">
+      {meshLinks.map((link, i) => (
+        <li>
+          <a href={link.href} class="lreveal__row" data-reveal-row={i}>
+            <span class="lreveal__title">{link.title}</span>
+            <span class="lreveal__desc">{link.description}</span>
+            <svg class="lreveal__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.lreveal').forEach((wrap) => {
+    const rows = wrap.querySelectorAll('[data-reveal-row]');
+    const bgs = wrap.querySelectorAll('[data-reveal-bg]');
+
+    rows.forEach((row) => {
+      row.addEventListener('mouseenter', () => {
+        const idx = (row as HTMLElement).dataset.revealRow;
+        bgs.forEach((bg, i) => bg.classList.toggle('is-visible', String(i) === idx));
+      });
+
+      row.addEventListener('mouseleave', () => {
+        bgs.forEach((bg) => bg.classList.remove('is-visible'));
+      });
+    });
+  });
+</script>
+
+<style>
+  .lreveal {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .lreveal__bgs {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .lreveal__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s var(--ease);
+    border-radius: var(--r-xl);
+  }
+
+  .lreveal__bg.is-visible { opacity: 0.12; }
+
+  [data-theme='dark'] .lreveal__bg.is-visible { opacity: 0.08; }
+
+  .lreveal__list {
+    position: relative;
+    z-index: 1;
+  }
+
+  .lreveal__row {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    padding: var(--s-6) 0;
+    border-bottom: 1px solid var(--c-border-light);
+    text-decoration: none;
+    color: var(--c-text);
+    transition: color var(--t-fast);
+  }
+
+  .lreveal__list li:first-child .lreveal__row {
+    border-top: 1px solid var(--c-border-light);
+  }
+
+  .lreveal__row:hover { color: var(--c-orange); }
+
+  .lreveal__title {
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    flex: 1;
+  }
+
+  .lreveal__desc {
+    font-size: 0.78rem;
+    color: var(--c-text-muted);
+    display: none;
+  }
+
+  .lreveal__arrow {
+    flex-shrink: 0;
+    color: var(--c-text-muted);
+    transition: transform var(--t-fast) var(--ease), color var(--t-fast);
+  }
+
+  .lreveal__row:hover .lreveal__arrow {
+    transform: translateX(4px);
+    color: var(--c-orange);
+  }
+
+  @media (min-width: 768px) {
+    .lreveal__desc { display: block; }
+    .lreveal__row { padding: var(--s-8) 0; }
+  }
+</style>

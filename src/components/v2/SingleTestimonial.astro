@@ -1,0 +1,160 @@
+---
+import { reviews } from '../../data/home';
+---
+
+<section class="section section--surface" aria-labelledby="v2-reviews-title">
+  <div class="container stesti">
+    <h2 id="v2-reviews-title" class="sr-only">Témoignages</h2>
+
+    <div class="stesti__wrap" data-testi-rotator>
+      <span class="stesti__glyph" aria-hidden="true">&ldquo;</span>
+
+      {reviews.map((r, i) => (
+        <blockquote class:list={['stesti__slide', { 'is-active': i === 0 }]} data-testi-slide={i}>
+          <p class="stesti__quote">{r.quote}</p>
+          <footer class="stesti__meta">
+            <cite class="stesti__author">{r.author}</cite>
+            <span class="stesti__context">{r.context}</span>
+          </footer>
+        </blockquote>
+      ))}
+
+      <div class="stesti__dots" role="tablist" aria-label="Témoignages">
+        {reviews.map((_, i) => (
+          <button
+            class:list={['stesti__dot', { 'is-active': i === 0 }]}
+            type="button"
+            role="tab"
+            data-testi-dot={i}
+            aria-label={`Témoignage ${i + 1}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-testi-rotator]').forEach((wrap) => {
+    const slides = wrap.querySelectorAll('[data-testi-slide]');
+    const dots = wrap.querySelectorAll('[data-testi-dot]');
+    let current = 0;
+    const total = slides.length;
+
+    function show(idx: number) {
+      slides.forEach((s, i) => s.classList.toggle('is-active', i === idx));
+      dots.forEach((d, i) => {
+        d.classList.toggle('is-active', i === idx);
+        d.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+      });
+      current = idx;
+    }
+
+    dots.forEach((d) => d.addEventListener('click', () => {
+      const idx = Number((d as HTMLElement).dataset.testiDot);
+      show(idx);
+    }));
+
+    setInterval(() => show((current + 1) % total), 6000);
+  });
+</script>
+
+<style>
+  .stesti {
+    text-align: center;
+    max-width: 700px;
+    margin-inline: auto;
+  }
+
+  .stesti__wrap {
+    position: relative;
+    min-height: 200px;
+  }
+
+  .stesti__glyph {
+    display: block;
+    font-size: 12rem;
+    line-height: 0.6;
+    font-weight: 700;
+    color: var(--c-text);
+    opacity: 0.04;
+    pointer-events: none;
+    user-select: none;
+    margin-bottom: var(--s-4);
+  }
+
+  .stesti__slide {
+    margin: 0;
+    border: none;
+    padding: 0;
+    opacity: 0;
+    position: absolute;
+    inset: 0;
+    top: 7rem;
+    transition: opacity 0.6s var(--ease);
+    pointer-events: none;
+  }
+
+  .stesti__slide.is-active {
+    opacity: 1;
+    position: relative;
+    pointer-events: auto;
+  }
+
+  .stesti__quote {
+    font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--c-text);
+    margin-bottom: var(--s-8);
+  }
+
+  .stesti__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stesti__author {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-text);
+  }
+
+  .stesti__context {
+    font-size: 0.7rem;
+    color: var(--c-text-muted);
+  }
+
+  .stesti__dots {
+    display: flex;
+    justify-content: center;
+    gap: var(--s-3);
+    margin-top: var(--s-10);
+  }
+
+  .stesti__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid var(--c-border);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: all var(--t-fast);
+  }
+
+  .stesti__dot.is-active {
+    background: var(--c-orange);
+    border-color: var(--c-orange);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stesti__slide { transition: none; }
+  }
+</style>

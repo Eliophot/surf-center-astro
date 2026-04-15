@@ -1,0 +1,142 @@
+---
+import { locations } from '../../data/home';
+---
+
+<section id="activites" aria-labelledby="v3-activities-title">
+  <h2 id="v3-activities-title" class="sr-only">Nos locations</h2>
+  {locations.map((loc, i) => (
+    <button
+      type="button"
+      class:list={['fbs', { 'fbs--right': i % 2 !== 0 }]}
+      data-product-book
+      data-tag={loc.tag}
+      aria-label={`Réserver ${loc.title}`}
+    >
+      <img class="fbs__img" src={loc.image} alt={loc.alt} width="1920" height="800" loading="lazy" decoding="async" />
+      <div class="fbs__overlay"></div>
+      <div class="fbs__content">
+        <span class="fbs__idx">{String(i + 1).padStart(2, '0')}</span>
+        <h3 class="fbs__title">{loc.title}</h3>
+        <p class="fbs__desc">{loc.description}</p>
+        <span class="fbs__price">dès {loc.price}€</span>
+      </div>
+      <span class="fbs__cta">Réserver <span aria-hidden="true">→</span></span>
+    </button>
+  ))}
+</section>
+
+<style>
+  .fbs {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    height: 60vh;
+    min-height: 400px;
+    overflow: hidden;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+    color: #fff;
+    -webkit-tap-highlight-color: transparent;
+    background: #0a0a0a;
+  }
+
+  .fbs__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .fbs:hover .fbs__img { transform: scale(1.04); }
+
+  .fbs__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgb(0 0 0 / 0.7) 0%, rgb(0 0 0 / 0.1) 50%, rgb(0 0 0 / 0.2) 100%);
+  }
+
+  .fbs__content {
+    position: relative;
+    z-index: 1;
+    padding: var(--s-8) var(--s-6) var(--s-8);
+    max-width: 600px;
+  }
+
+  .fbs--right .fbs__content {
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .fbs__idx {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--c-orange);
+    margin-bottom: var(--s-3);
+  }
+
+  .fbs__title {
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: var(--s-2);
+  }
+
+  .fbs__desc {
+    font-size: 0.82rem;
+    color: rgb(255 255 255 / 0.5);
+    letter-spacing: 0.04em;
+    margin-bottom: var(--s-2);
+  }
+
+  .fbs__price {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--c-orange);
+  }
+
+  .fbs__cta {
+    position: absolute;
+    z-index: 1;
+    bottom: var(--s-8);
+    right: var(--s-6);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgb(255 255 255 / 0.4);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all var(--t-normal) var(--ease);
+  }
+
+  .fbs--right .fbs__cta {
+    right: auto;
+    left: var(--s-6);
+  }
+
+  .fbs:hover .fbs__cta {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (min-width: 900px) {
+    .fbs__content { padding: var(--s-12) var(--s-16); }
+    .fbs__cta { right: var(--s-16); }
+    .fbs--right .fbs__cta { left: var(--s-16); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fbs__img, .fbs__cta { transition: none; }
+  }
+</style>

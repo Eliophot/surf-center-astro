@@ -1,10 +1,10 @@
 ---
 const navLinks = [
-  { label: "Activités", href: "/activites" },
-  { label: "Bateaux", href: "/location-bateaux-electriques" },
-  { label: "Restaurant", href: "/restauration" },
-  { label: "Tarifs", href: "/tarifs", modal: "shop" },
-  { label: "Contact", href: "/contact" },
+  { label: "Nos locations", href: "/nos-locations" },
+  { label: "L'esprit Surf Center", href: "/esprit-surf-center" },
+  { label: "Restauration", href: "/restauration" },
+  { label: "Animations", href: "/animations" },
+  { label: "Groupes & Événements", href: "/groupes-evenements" },
 ];
 ---
 
@@ -15,7 +15,7 @@ const navLinks = [
     <a href="/" class="header__logo" aria-label="Surf Center — Accueil">
       <img
         class="header__logo-img header__logo-img--light"
-        src="/logo-surf-center2.png"
+        src="/logo-surf-center.png"
         alt=""
         width="120"
         height="36"
@@ -241,15 +241,15 @@ const navLinks = [
     object-fit: contain;
   }
 
-  .header__logo-img--light {
-    filter: brightness(0) invert(1);
-    display: block;
-  }
+  /* Over hero: show colored logo (visible on dark overlay) */
+  .header__logo-img--light { display: block; }
   .header__logo-img--dark { display: none; }
 
+  /* Scrolled light mode: show dark logo */
   .header.is-scrolled .header__logo-img--light { display: none; }
   .header.is-scrolled .header__logo-img--dark { display: block; }
 
+  /* Scrolled dark mode: keep the light logo */
   :global([data-theme='dark']) .header.is-scrolled .header__logo-img--light {
     display: block;
   }

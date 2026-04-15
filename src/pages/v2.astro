@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSplit from '../components/v2/HeroSplit.astro';
+import CinemaSlider from '../components/v2/CinemaSlider.astro';
+import Manifesto from '../components/v2/Manifesto.astro';
+import SingleTestimonial from '../components/v2/SingleTestimonial.astro';
+import BentoResto from '../components/v2/BentoResto.astro';
+import StickyScroll from '../components/v2/StickyScroll.astro';
+import GlassVideo from '../components/v2/GlassVideo.astro';
+import ListReveal from '../components/v2/ListReveal.astro';
+import { jsonLd, seoMeta } from '../data/jsonld';
+---
+
+<Layout title={seoMeta.title} description={seoMeta.description} jsonLd={jsonLd}>
+  <HeroSplit />
+  <CinemaSlider />
+  <Manifesto />
+  <SingleTestimonial />
+  <BentoResto />
+  <StickyScroll />
+  <GlassVideo />
+  <ListReveal />
+</Layout>

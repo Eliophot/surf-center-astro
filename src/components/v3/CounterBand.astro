@@ -1,0 +1,102 @@
+---
+const counters = [
+  { value: 10, suffix: '+', label: 'ans' },
+  { value: 320, suffix: '+', label: 'avis' },
+  { value: 5, suffix: '', label: 'activités' },
+  { value: 1, suffix: '', label: "lac d'exception" },
+];
+---
+
+<section class="cband" aria-label="Chiffres clés">
+  <div class="container cband__inner" data-counter-band>
+    {counters.map((c) => (
+      <div class="cband__item">
+        <span class="cband__number" data-counter-target={c.value}>{c.value}</span>
+        {c.suffix && <span class="cband__suffix">{c.suffix}</span>}
+        <span class="cband__label">{c.label}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  const band = document.querySelector('[data-counter-band]');
+  if (band) {
+    const numbers = band.querySelectorAll('[data-counter-target]');
+    let animated = false;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !animated) {
+        animated = true;
+        numbers.forEach((el) => {
+          const target = Number((el as HTMLElement).dataset.counterTarget);
+          const duration = 1800;
+          const start = performance.now();
+          function step(now: number) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = String(Math.round(target * eased));
+            if (progress < 1) requestAnimationFrame(step);
+          }
+          el.textContent = '0';
+          requestAnimationFrame(step);
+        });
+      }
+    }, { threshold: 0.3 });
+
+    observer.observe(band);
+  }
+</script>
+
+<style>
+  .cband {
+    background: var(--c-dark);
+    padding: var(--s-16) 0;
+  }
+
+  .cband__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--s-10) var(--s-16);
+  }
+
+  .cband__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-1);
+    text-align: center;
+    min-width: 120px;
+  }
+
+  .cband__number {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    display: inline;
+  }
+
+  .cband__suffix {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--c-orange);
+    line-height: 1;
+    margin-top: -0.5em;
+  }
+
+  .cband__label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.4);
+  }
+
+  @media (min-width: 768px) {
+    .cband__inner { gap: var(--s-8) var(--s-24); }
+  }
+</style>

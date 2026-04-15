@@ -1,0 +1,156 @@
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const sharedAddress = {
+  '@type': 'PostalAddress',
+  streetAddress: 'Plage des Salles-sur-Verdon',
+  addressLocality: 'Les Salles-sur-Verdon',
+  postalCode: '83630',
+  addressRegion: 'Provence-Alpes-Côte d\'Azur',
+  addressCountry: 'FR',
+};
+
+const sharedGeo = {
+  '@type': 'GeoCoordinates',
+  latitude: 43.7766,
+  longitude: 6.21,
+};
+
+export const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${siteUrl}/#business`,
+    name: 'Surf Center',
+    alternateName: 'Surf Center Verdon',
+    description:
+      'Base nautique au lac de Sainte-Croix proposant location de bateaux électriques sans permis, paddle, pédalo, kayak, bouée tractée et restauration. Située aux Salles-sur-Verdon, Gorges du Verdon, Provence.',
+    url: siteUrl,
+    telephone: '+33492771450',
+    email: 'contact@surfcenter-verdon.fr',
+    image: `${siteUrl}/og-default.jpg`,
+    priceRange: '€€',
+    currenciesAccepted: 'EUR',
+    paymentAccepted: 'Cash, Credit Card',
+    address: sharedAddress,
+    geo: sharedGeo,
+    areaServed: {
+      '@type': 'GeoCircle',
+      geoMidpoint: sharedGeo,
+      geoRadius: '50000',
+    },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        opens: '09:00',
+        closes: '19:00',
+        validFrom: '2026-04-01',
+        validThrough: '2026-10-31',
+      },
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Activités nautiques et restauration',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: 'Location de bateaux électriques', description: 'Naviguez sans permis sur le lac de Sainte-Croix à bord de bateaux électriques silencieux, jusqu\'à 7 personnes.' },
+          priceSpecification: { '@type': 'PriceSpecification', price: '55', priceCurrency: 'EUR', unitText: 'heure' },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: 'Location de stand-up paddle', description: 'Paddle sur les eaux turquoise du lac de Sainte-Croix, accessible à tous les niveaux.' },
+          priceSpecification: { '@type': 'PriceSpecification', price: '15', priceCurrency: 'EUR', unitText: 'heure' },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: 'Location de pédalo et kayak', description: 'Pédalo et kayak en famille ou entre amis sur le lac de Sainte-Croix.' },
+          priceSpecification: { '@type': 'PriceSpecification', price: '15', priceCurrency: 'EUR', unitText: 'heure' },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: 'Bouée tractée', description: 'Sensations fortes sur le lac de Sainte-Croix, encadrement professionnel.' },
+          priceSpecification: { '@type': 'PriceSpecification', price: '15', priceCurrency: 'EUR', unitText: 'session' },
+        },
+      ],
+    },
+    aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.8', reviewCount: '320', bestRating: '5' },
+    sameAs: [
+      'https://www.instagram.com/surfcenter_verdon/',
+      'https://www.facebook.com/surfcenterverdon/',
+      'https://www.tripadvisor.fr/Attraction_Review-g1597091-d12345678-Reviews-Surf_Center-Les_Salles_sur_Verdon.html',
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${siteUrl}/#organization`,
+    name: 'Surf Center',
+    url: siteUrl,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/logo-surf-center.png`, width: 200, height: 60 },
+    contactPoint: { '@type': 'ContactPoint', telephone: '+33492771450', contactType: 'customer service', availableLanguage: ['French', 'English'] },
+    sameAs: ['https://www.instagram.com/surfcenter_verdon/', 'https://www.facebook.com/surfcenterverdon/'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'TouristAttraction',
+    name: 'Surf Center — Base nautique du lac de Sainte-Croix',
+    description: 'Base nautique proposant location de bateaux électriques sans permis, paddle, pédalo, kayak et bouée tractée sur le lac de Sainte-Croix, au cœur des Gorges du Verdon, Provence.',
+    url: siteUrl,
+    image: `${siteUrl}/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg`,
+    address: sharedAddress,
+    geo: sharedGeo,
+    touristType: ['Familles', 'Couples', 'Groupes', 'Sportifs'],
+    isAccessibleForFree: false,
+    publicAccess: true,
+    availableLanguage: ['fr', 'en'],
+    containedInPlace: { '@type': 'Place', name: 'Lac de Sainte-Croix', containedInPlace: { '@type': 'Place', name: 'Gorges du Verdon, Provence-Alpes-Côte d\'Azur' } },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FoodEstablishment',
+    name: 'Snack-Pizzeria Surf Center',
+    description: 'Pizzas artisanales au feu de bois, salades fraîches, glaces et boissons avec vue directe sur le lac de Sainte-Croix. Terrasse les pieds dans le sable.',
+    url: `${siteUrl}/restauration`,
+    image: `${siteUrl}/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg`,
+    address: sharedAddress,
+    geo: sharedGeo,
+    telephone: '+33492771450',
+    servesCuisine: ['Pizza', 'Snack', 'Salades', 'Glaces'],
+    priceRange: '€',
+    menu: `${siteUrl}/restauration`,
+    acceptsReservations: false,
+    openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '11:00', closes: '18:30', validFrom: '2026-04-01', validThrough: '2026-10-31' }],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'EventSeries',
+    name: 'Soirées & Concerts au Surf Center',
+    description: 'Concerts live, DJ sets et soirées coucher de soleil au bord du lac de Sainte-Croix, chaque été au Surf Center.',
+    url: `${siteUrl}/evenements`,
+    image: `${siteUrl}/concert-surfcenter-lac-sainte-croix.png`,
+    location: { '@type': 'Place', name: 'Surf Center', address: sharedAddress, geo: sharedGeo },
+    organizer: { '@type': 'Organization', name: 'Surf Center', url: siteUrl },
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    isAccessibleForFree: true,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'Où se trouve Surf Center ?', acceptedAnswer: { '@type': 'Answer', text: 'Surf Center est situé aux Salles-sur-Verdon, directement sur la plage du lac de Sainte-Croix, au cœur des Gorges du Verdon en Provence. Accès facile depuis Aix-en-Provence (1h15), Nice (2h) et Marseille (1h30).' } },
+      { '@type': 'Question', name: 'Faut-il un permis pour louer un bateau électrique ?', acceptedAnswer: { '@type': 'Answer', text: 'Non, aucun permis n\'est nécessaire pour nos bateaux électriques. Ils sont conçus pour être accessibles à tous. Un briefing de sécurité est donné avant chaque départ.' } },
+      { '@type': 'Question', name: 'Quelles activités nautiques proposez-vous ?', acceptedAnswer: { '@type': 'Answer', text: 'Surf Center propose la location de bateaux électriques (sans permis), de paddles, de pédalos, de kayaks et de bouées tractées. Toutes les activités sont accessibles aux débutants comme aux confirmés.' } },
+      { '@type': 'Question', name: 'Surf Center est-il ouvert toute l\'année ?', acceptedAnswer: { '@type': 'Answer', text: 'Surf Center est ouvert d\'avril à octobre, tous les jours de 9h à 19h en pleine saison (juillet-août). Les horaires sont adaptés en début et fin de saison.' } },
+      { '@type': 'Question', name: 'Y a-t-il un restaurant sur place ?', acceptedAnswer: { '@type': 'Answer', text: 'Oui, notre snack-pizzeria propose des pizzas artisanales au feu de bois, des salades, des glaces et des boissons fraîches avec vue directe sur le lac de Sainte-Croix.' } },
+      { '@type': 'Question', name: 'Comment réserver une activité ?', acceptedAnswer: { '@type': 'Answer', text: 'Vous pouvez réserver en ligne sur notre site ou directement sur place au comptoir d\'accueil. La réservation en ligne est recommandée en juillet-août pour garantir votre créneau.' } },
+      { '@type': 'Question', name: 'Quels sont les tarifs des locations ?', acceptedAnswer: { '@type': 'Answer', text: 'Les tarifs commencent à 10€/h pour un kayak, 15€/h pour un paddle ou pédalo, 35€/h pour un catamaran et 55€/h pour un bateau électrique (jusqu\'à 7 personnes). Réductions pour les demi-journées et journées complètes.' } },
+      { '@type': 'Question', name: 'Quels sont les accès depuis les grandes villes ?', acceptedAnswer: { '@type': 'Answer', text: 'Surf Center est accessible depuis Aix-en-Provence (1h15), Marseille (1h30), Nice (2h), Toulon (1h30) et Avignon (1h45). Parking gratuit sur place.' } },
+    ],
+  },
+];
+
+export const seoMeta = {
+  title: 'Surf Center — Base nautique au lac de Sainte-Croix | Gorges du Verdon',
+  description: 'Location de bateaux électriques, paddle, pédalo et kayak au lac de Sainte-Croix. Base nautique aux Salles-sur-Verdon, Gorges du Verdon. Snack-pizzeria, événements. Réservez en ligne.',
+};

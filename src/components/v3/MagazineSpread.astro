@@ -1,0 +1,112 @@
+<section class="magspread" aria-labelledby="v3-resto-title">
+  <img
+    class="magspread__img"
+    src="/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg"
+    alt="Vue aérienne du snack Surf Center avec le lac de Sainte-Croix"
+    width="1920" height="1080" loading="lazy" decoding="async"
+  />
+  <div class="magspread__gradient" aria-hidden="true"></div>
+
+  <div class="magspread__card reveal">
+    <span class="section__eyebrow" style="color: var(--c-orange);">Restauration</span>
+    <h2 id="v3-resto-title" class="magspread__title">Pizzas, snack<br/>& vue sur le lac</h2>
+    <p class="magspread__text">
+      Pause gourmande à notre snack-pizzeria. Pizzas artisanales au feu de bois, salades fraîches, glaces — vue directe sur le lac.
+    </p>
+    <ul class="magspread__list" role="list">
+      <li>Pizzas au feu de bois</li>
+      <li>Terrasse face au lac</li>
+      <li>Salades, snacking, glaces</li>
+      <li>Service continu en saison</li>
+    </ul>
+    <a href="/restauration" class="btn btn--primary">Voir la carte</a>
+  </div>
+</section>
+
+<style>
+  .magspread {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+
+  .magspread__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .magspread__gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg,
+      rgb(0 0 0 / 0.65) 0%,
+      rgb(0 0 0 / 0.1) 50%,
+      rgb(0 0 0 / 0.25) 100%);
+  }
+
+  .magspread__card {
+    position: relative;
+    z-index: 1;
+    max-width: 440px;
+    margin: var(--s-12) var(--s-6);
+    padding: var(--s-8);
+    background: var(--c-bg);
+    border-radius: var(--r-xl);
+    color: var(--c-text);
+  }
+
+  [data-theme='dark'] .magspread__card {
+    background: var(--c-surface);
+  }
+
+  .magspread__title {
+    margin-bottom: var(--s-4);
+  }
+
+  .magspread__text {
+    font-size: 0.9rem;
+    color: var(--c-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--s-6);
+  }
+
+  .magspread__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-bottom: var(--s-8);
+  }
+
+  .magspread__list li {
+    font-size: 0.82rem;
+    color: var(--c-text-secondary);
+    padding-left: var(--s-5);
+    position: relative;
+  }
+
+  .magspread__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 2px;
+    background: var(--c-orange);
+    border-radius: 1px;
+  }
+
+  @media (min-width: 768px) {
+    .magspread { min-height: 80vh; }
+    .magspread__card {
+      margin: var(--s-16);
+      padding: var(--s-10);
+    }
+  }
+</style>

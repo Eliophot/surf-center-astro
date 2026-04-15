@@ -1,0 +1,203 @@
+---
+interface ListItem {
+  text: string;
+}
+
+interface Props {
+  id?: string;
+  eyebrow: string;
+  title: string;
+  text: string;
+  video: { src: string; poster?: string; };
+  list?: ListItem[];
+  cta?: { label: string; href?: string; booking?: boolean; };
+  reverse?: boolean;
+  surface?: boolean;
+}
+
+const {
+  id,
+  eyebrow,
+  title,
+  text,
+  video,
+  list,
+  cta,
+  reverse = false,
+  surface = false,
+} = Astro.props;
+
+const sectionId = id || eyebrow.toLowerCase().replace(/\s+/g, '-');
+const titleId = `${sectionId}-title`;
+---
+
+<section
+  class:list={['section', { 'section--surface': surface }]}
+  aria-labelledby={titleId}
+>
+  <div class:list={['container sv', { 'sv--reverse': reverse }]}>
+    <div class="sv__content reveal">
+      <span class="section__eyebrow">{eyebrow}</span>
+      <h2 id={titleId} set:html={title} />
+      <p class="sv__text">{text}</p>
+
+      {list && list.length > 0 && (
+        <ul class="sv__list" role="list">
+          {list.map((item) => <li>{item.text}</li>)}
+        </ul>
+      )}
+
+      {cta && (
+        cta.booking
+          ? <button type="button" class="btn btn--primary" data-booking>{cta.label}</button>
+          : <a href={cta.href} class="btn btn--primary">{cta.label}</a>
+      )}
+    </div>
+
+    <div class="sv__visual reveal reveal-d2">
+      <div class="sv__player">
+        <video
+          class="sv__video"
+          preload="none"
+          playsinline
+          muted
+          loop
+          poster={video.poster || ''}
+          data-autoplay-video
+        >
+          <source src={video.src} type={video.src.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
+        </video>
+        <button class="sv__play" type="button" aria-label="Lire la vidéo" data-video-play>
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+            <path d="M20 16l12 8-12 8V16z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-autoplay-video]').forEach((video) => {
+    const el = video as HTMLVideoElement;
+    const wrap = el.closest('.sv__player');
+    const playBtn = wrap?.querySelector('[data-video-play]') as HTMLButtonElement | null;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            el.play().catch(() => {});
+            wrap?.classList.add('is-playing');
+          } else {
+            el.pause();
+            wrap?.classList.remove('is-playing');
+          }
+        });
+      },
+      { threshold: 0.3 },
+    );
+
+    observer.observe(el);
+
+    playBtn?.addEventListener('click', () => {
+      if (el.paused) {
+        el.play().catch(() => {});
+        wrap?.classList.add('is-playing');
+      } else {
+        el.pause();
+        wrap?.classList.remove('is-playing');
+      }
+    });
+  });
+</script>
+
+<style>
+  .sv {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: center;
+  }
+
+  .sv__text {
+    font-size: 1rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    max-width: 38ch;
+    margin-top: var(--s-6);
+  }
+
+  .sv__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-top: var(--s-8);
+    margin-bottom: var(--s-10);
+  }
+
+  .sv__list li {
+    font-size: 0.85rem;
+    color: var(--c-text-secondary);
+    line-height: 1.5;
+    padding-left: var(--s-5);
+    position: relative;
+  }
+
+  .sv__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 1px;
+    background: var(--c-orange);
+  }
+
+  .sv__player {
+    position: relative;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background: var(--c-dark);
+  }
+
+  .sv__video {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  .sv__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0 0 0 / 0.25);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: opacity var(--t-fast) var(--ease);
+  }
+
+  .sv__play:hover { background: rgb(0 0 0 / 0.35); }
+
+  .is-playing .sv__play {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sv__player:hover .sv__play {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (min-width: 900px) {
+    .sv { grid-template-columns: 1fr 1.4fr; gap: var(--s-20); }
+    .sv--reverse { grid-template-columns: 1.4fr 1fr; }
+    .sv--reverse .sv__visual { order: -1; }
+  }
+</style>

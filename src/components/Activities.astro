@@ -1,52 +1,44 @@
 ---
 const locations = [
   {
-    title: "Bateaux électriques",
-    description: "Sans permis · Jusqu'à 7 pers.",
-    price: 55,
-    href: "/location-bateaux-electriques",
-    image: "/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg",
-    alt: "Bateau électrique sur le lac de Sainte-Croix",
+    title: "Planche à voile",
+    description: "Adrénaline · Vent du Verdon",
+    price: 20,
+    image: "/location-planche-a-voile-windsurf-lac-sainte-croix.png",
+    alt: "Planche à voile sur le lac de Sainte-Croix",
+    tag: "7a524907-97b7-42bd-bfdc-deb401767b21",
   },
   {
-    title: "Stand-up paddle",
-    description: "Accessible à tous · Vue garantie",
-    price: 15,
-    href: "/activites/paddle",
-    image: "/location-paddle-lac-sainte-croix-surfcenter.jpeg",
-    alt: "Paddle sur le lac de Sainte-Croix",
+    title: "Bateau électrique",
+    description: "Sans permis · Jusqu'à 7 pers.",
+    price: 55,
+    image: "/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg",
+    alt: "Bateau électrique sur le lac de Sainte-Croix",
+    tag: "62329049-d954-482c-82a1-faa16321e3bf",
   },
   {
     title: "Pédalo",
     description: "En famille · Criques secrètes",
     price: 15,
-    href: "/activites/pedalo-kayak",
     image: "/pedalos_lac_sainte_croix.jpg",
     alt: "Pédalos sur le lac de Sainte-Croix",
+    tag: "03a55e88-44ac-4161-ad03-aa857b1d0dc0",
   },
   {
-    title: "Canoë & Kayak",
+    title: "Paddle board",
+    description: "Accessible à tous · Vue garantie",
+    price: 15,
+    image: "/location-paddle-lac-sainte-croix-surfcenter.jpeg",
+    alt: "Paddle board sur le lac de Sainte-Croix",
+    tag: "52bf76b6-6f0a-43ff-b0a2-4c1332d5ede5",
+  },
+  {
+    title: "Canoë",
     description: "Exploration · Face aux falaises",
     price: 10,
-    href: "/activites/canoe-kayak",
     image: "/canoe.jpeg",
     alt: "Canoë sur le lac de Sainte-Croix",
-  },
-  {
-    title: "Catamaran",
-    description: "Sensations · Grand large",
-    price: 35,
-    href: "/activites/catamaran",
-    image: "/location-catamaran-lac-sainte-croix.jpg",
-    alt: "Catamaran sur le lac de Sainte-Croix",
-  },
-  {
-    title: "Planche à voile",
-    description: "Adrénaline · Vent du Verdon",
-    price: 20,
-    href: "/activites/windsurf",
-    image: "/location-planche-a-voile-windsurf-lac-sainte-croix.png",
-    alt: "Planche à voile sur le lac de Sainte-Croix",
+    tag: "e57bf5a3-2296-4226-94a8-06295b1415d8",
   },
 ];
 ---
@@ -62,7 +54,13 @@ const locations = [
       <div class="slider" data-slider>
         <div class="slider__track" data-slider-track>
           {locations.map((loc, i) => (
-            <a href={loc.href} class="slider__card">
+            <button
+              type="button"
+              class="slider__card"
+              data-product-book
+              data-tag={loc.tag}
+              aria-label={`Réserver ${loc.title}`}
+            >
               <img
                 class="slider__img"
                 src={loc.image}
@@ -81,10 +79,10 @@ const locations = [
                 <h3 class="slider__title">{loc.title}</h3>
                 <p class="slider__desc">{loc.description}</p>
                 <span class="slider__link">
-                  Découvrir <span aria-hidden="true">→</span>
+                  Réserver <span aria-hidden="true">→</span>
                 </span>
               </div>
-            </a>
+            </button>
           ))}
         </div>
       </div>
@@ -138,8 +136,15 @@ const locations = [
     overflow: hidden;
     border-radius: var(--r-lg);
     text-decoration: none;
+    text-align: left;
     color: #fff;
     scroll-snap-align: start;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .slider__img {

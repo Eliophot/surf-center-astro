@@ -1,0 +1,149 @@
+<section class="hsplit" data-hero aria-label="Surf Center — base nautique au lac de Sainte-Croix">
+  <div class="hsplit__left">
+    <div class="hsplit__content">
+      <p class="hsplit__eyebrow">Lac de Sainte-Croix · Gorges du Verdon</p>
+      <h1 class="hsplit__title">Surf<br/>Center</h1>
+      <p class="hsplit__baseline">Location bateaux<br/>& activités nautiques</p>
+      <div class="hsplit__actions">
+        <button type="button" class="btn btn--primary btn--lg" data-booking>Réserver</button>
+        <a href="#activites" class="hsplit__discover">
+          Découvrir
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <p class="hsplit__location">Les Salles-sur-Verdon, Provence</p>
+  </div>
+  <div class="hsplit__right">
+    <img
+      class="hsplit__img"
+      src="/GettyImages-577312024 (1).jpg"
+      alt="Kayak sur les eaux turquoise des Gorges du Verdon"
+      width="960"
+      height="1080"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </div>
+</section>
+
+<style>
+  .hsplit {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 100svh;
+  }
+
+  .hsplit__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: calc(var(--header-h) + var(--s-8)) var(--s-6) var(--s-8);
+    background: var(--c-dark);
+    color: #fff;
+    position: relative;
+  }
+
+  .hsplit__content {
+    max-width: 540px;
+  }
+
+  .hsplit__eyebrow {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    margin-bottom: var(--s-8);
+  }
+
+  .hsplit__title {
+    font-size: clamp(4.5rem, 12vw, 10rem);
+    font-weight: 800;
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    color: #fff !important;
+    margin-bottom: var(--s-6);
+  }
+
+  .hsplit__baseline {
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgb(255 255 255 / 0.5);
+    margin-bottom: var(--s-12);
+    line-height: 1.6;
+  }
+
+  .hsplit__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--s-8);
+  }
+
+  .hsplit__discover {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgb(255 255 255 / 0.5);
+    transition: color var(--t-fast);
+  }
+
+  .hsplit__discover:hover { color: #fff; }
+
+  .hsplit__location {
+    position: absolute;
+    bottom: var(--s-6);
+    left: var(--s-6);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.25);
+  }
+
+  .hsplit__right {
+    position: relative;
+    min-height: 50vh;
+  }
+
+  .hsplit__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (min-width: 900px) {
+    .hsplit {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hsplit__left {
+      padding: var(--s-20) var(--s-16) var(--s-12);
+    }
+
+    .hsplit__title {
+      font-size: clamp(6rem, 8vw, 14rem);
+    }
+
+    .hsplit__location {
+      left: var(--s-16);
+    }
+
+    .hsplit__right {
+      min-height: 100svh;
+    }
+  }
+</style>

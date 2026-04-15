@@ -1,0 +1,87 @@
+---
+import { brandValues } from '../../data/home';
+---
+
+<section class="section" aria-labelledby="v2-brand-title">
+  <div class="container mfst">
+    <div class="mfst__line" aria-hidden="true"></div>
+
+    <div class="mfst__statement reveal">
+      <span class="section__eyebrow">L'esprit Surf Center</span>
+      <h2 id="v2-brand-title" class="mfst__quote">
+        Depuis plus de dix ans, un rendez-vous au bord du lac pour celles et ceux qui aiment l'eau, le soleil et les grands espaces.
+      </h2>
+    </div>
+
+    <div class="mfst__line" aria-hidden="true"></div>
+
+    <ul class="mfst__values reveal reveal-d1" role="list">
+      {brandValues.map((v) => (
+        <li class="mfst__value">
+          <strong>{v.title}</strong>
+          <span>{v.text}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .mfst {
+    text-align: center;
+  }
+
+  .mfst__line {
+    width: 100%;
+    height: 1px;
+    background: var(--c-orange);
+    opacity: 0.3;
+  }
+
+  .mfst__statement {
+    padding: var(--s-16) 0;
+  }
+
+  .mfst__quote {
+    font-size: clamp(1.4rem, 4vw, 3.2rem) !important;
+    font-weight: 300 !important;
+    line-height: 1.35 !important;
+    letter-spacing: -0.01em !important;
+    text-transform: none !important;
+    max-width: 48ch;
+    margin-inline: auto;
+    color: var(--c-text);
+  }
+
+  .mfst__values {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--s-10) var(--s-16);
+    padding-top: var(--s-12);
+  }
+
+  .mfst__value {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+    text-align: center;
+  }
+
+  .mfst__value strong {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--c-orange);
+  }
+
+  .mfst__value span {
+    font-size: 0.78rem;
+    color: var(--c-text-muted);
+  }
+
+  @media (min-width: 900px) {
+    .mfst__statement { padding: var(--s-24) 0; }
+  }
+</style>

@@ -1,0 +1,114 @@
+<section class="section section--surface" aria-labelledby="boat-title">
+  <div class="container boat">
+    <div class="boat__visual reveal">
+      <img
+        class="boat__img"
+        src="/location-bateau-electriques-evjf-lac-sainte-croix.jpg"
+        alt="Groupe d'amis sur un bateau électrique au lac de Sainte-Croix"
+        width="720"
+        height="540"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="boat__content reveal reveal-d2">
+      <span class="section__eyebrow">Expérience phare</span>
+      <h2 id="boat-title">
+        Naviguez sur<br />le lac de<br />Sainte-Croix
+      </h2>
+      <p class="boat__text">
+        Pas besoin de permis. Montez à bord, glissez en silence sur des eaux
+        turquoise, longez les falaises du Verdon, découvrez des criques
+        accessibles uniquement par l'eau.
+      </p>
+
+      <div class="boat__details">
+        <div class="boat__detail">
+          <strong>Sans permis</strong>
+          <span>Briefing avant départ</span>
+        </div>
+        <div class="boat__detail">
+          <strong>7 places</strong>
+          <span>Famille ou amis</span>
+        </div>
+        <div class="boat__detail">
+          <strong>Électrique</strong>
+          <span>Silence total</span>
+        </div>
+      </div>
+
+      <div class="boat__actions">
+        <button type="button" class="btn btn--primary" data-booking>Réserver un bateau</button>
+        <a href="/location-bateaux-electriques" class="btn btn--outline">En savoir plus</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .boat {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: center;
+  }
+
+  .boat__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--r-lg);
+  }
+
+  .boat__text {
+    font-size: 1rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    max-width: 40ch;
+    margin-top: var(--s-6);
+    margin-bottom: var(--s-10);
+  }
+
+  .boat__details {
+    display: flex;
+    gap: var(--s-8);
+    margin-bottom: var(--s-10);
+    padding-bottom: var(--s-8);
+    border-bottom: 1px solid var(--c-border-light);
+  }
+
+  .boat__detail {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .boat__detail strong {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--c-orange);
+  }
+
+  .boat__detail span {
+    font-size: 0.72rem;
+    color: var(--c-text-muted);
+  }
+
+  .boat__actions {
+    display: flex;
+    gap: var(--s-4);
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: 900px) {
+    .boat {
+      grid-template-columns: 1.3fr 1fr;
+      gap: var(--s-20);
+    }
+  }
+</style>

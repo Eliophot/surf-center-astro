@@ -1,0 +1,89 @@
+<section class="section section--surface" aria-labelledby="resto-title">
+  <div class="container resto">
+    <div class="resto__content reveal">
+      <span class="section__eyebrow">Restauration</span>
+      <h2 id="resto-title">Pizzas, snack<br/>& vue sur le lac</h2>
+      <p class="resto__text">
+        Pause gourmande à notre snack-pizzeria. Pizzas artisanales au feu
+        de bois, salades fraîches, glaces — vue directe sur le lac.
+      </p>
+
+      <ul class="resto__list" role="list">
+        <li>Pizzas au feu de bois</li>
+        <li>Terrasse face au lac</li>
+        <li>Salades, snacking, glaces</li>
+        <li>Service continu en saison</li>
+      </ul>
+
+      <a href="/restauration" class="btn btn--primary">Voir la carte</a>
+    </div>
+
+    <div class="resto__visual reveal reveal-d2">
+      <img
+        class="resto__img"
+        src="/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg"
+        alt="Vue du snack Surf Center avec le lac de Sainte-Croix en arrière-plan"
+        width="720"
+        height="800"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .resto {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: center;
+  }
+
+  .resto__text {
+    font-size: 1rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    max-width: 36ch;
+    margin-top: var(--s-6);
+    margin-bottom: var(--s-8);
+  }
+
+  .resto__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-bottom: var(--s-10);
+  }
+
+  .resto__list li {
+    font-size: 0.85rem;
+    color: var(--c-text-secondary);
+    line-height: 1.5;
+    padding-left: var(--s-5);
+    position: relative;
+  }
+
+  .resto__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 1px;
+    background: var(--c-orange);
+  }
+
+  .resto__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--r-lg);
+  }
+
+  @media (min-width: 900px) {
+    .resto { grid-template-columns: 1fr 1.2fr; gap: var(--s-20); }
+  }
+</style>

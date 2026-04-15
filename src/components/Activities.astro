@@ -1,0 +1,275 @@
+---
+const locations = [
+  {
+    title: "Bateaux électriques",
+    description: "Sans permis · Jusqu'à 7 pers.",
+    href: "/location-bateaux-electriques",
+    image: "/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg",
+    alt: "Bateau électrique sur le lac de Sainte-Croix",
+  },
+  {
+    title: "Stand-up paddle",
+    description: "Accessible à tous · Vue garantie",
+    href: "/activites/paddle",
+    image: "/location-paddle-lac-sainte-croix-surfcenter.jpeg",
+    alt: "Paddle sur le lac de Sainte-Croix",
+  },
+  {
+    title: "Pédalo",
+    description: "En famille · Criques secrètes",
+    href: "/activites/pedalo-kayak",
+    image: "/pedalos_lac_sainte_croix.jpg",
+    alt: "Pédalos sur le lac de Sainte-Croix",
+  },
+  {
+    title: "Canoë & Kayak",
+    description: "Exploration · Face aux falaises",
+    href: "/activites/canoe-kayak",
+    image: "/canoe.jpeg",
+    alt: "Canoë sur le lac de Sainte-Croix",
+  },
+  {
+    title: "Catamaran",
+    description: "Sensations · Grand large",
+    href: "/activites/catamaran",
+    image: "/location-catamaran-lac-sainte-croix.jpg",
+    alt: "Catamaran sur le lac de Sainte-Croix",
+  },
+  {
+    title: "Planche à voile",
+    description: "Adrénaline · Vent du Verdon",
+    href: "/activites/windsurf",
+    image: "/location-planche-a-voile-windsurf-lac-sainte-croix.png",
+    alt: "Planche à voile sur le lac de Sainte-Croix",
+  },
+];
+---
+
+<section id="activites" class="section" aria-labelledby="activities-title">
+  <div class="container">
+    <header class="section__header reveal">
+      <span class="section__eyebrow">Nos locations</span>
+      <h2 id="activities-title">Tout le lac,<br/>à votre façon</h2>
+    </header>
+
+    <div class="slider-wrap reveal">
+      <div class="slider" data-slider>
+        <div class="slider__track" data-slider-track>
+          {locations.map((loc, i) => (
+            <a href={loc.href} class="slider__card">
+              <img
+                class="slider__img"
+                src={loc.image}
+                alt={loc.alt}
+                width="600"
+                height="800"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="slider__overlay"></div>
+              <div class="slider__content">
+                <h3 class="slider__title">{loc.title}</h3>
+                <p class="slider__desc">{loc.description}</p>
+                <span class="slider__link">
+                  Découvrir <span aria-hidden="true">→</span>
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="slider__nav">
+        <button class="slider__btn" type="button" data-slider-prev aria-label="Précédent">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="slider__btn" type="button" data-slider-next aria-label="Suivant">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="act-cta reveal reveal-d1">
+      <a href="#activites" class="btn btn--secondary">Découvrir</a>
+      <button type="button" class="btn btn--primary" data-booking>Réserver</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .slider-wrap { position: relative; }
+
+  .slider {
+    overflow: hidden;
+    margin-bottom: var(--s-8);
+  }
+
+  .slider__track {
+    display: flex;
+    gap: var(--s-4);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--s-2);
+  }
+
+  .slider__track::-webkit-scrollbar { display: none; }
+
+  .slider__card {
+    position: relative;
+    flex: 0 0 75%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: var(--r-lg);
+    text-decoration: none;
+    color: #fff;
+    scroll-snap-align: start;
+  }
+
+  .slider__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .slider__card:hover .slider__img { transform: scale(1.06); }
+
+  .slider__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg,
+      rgb(0 0 0 / 0.7) 0%,
+      rgb(0 0 0 / 0.05) 50%,
+      rgb(0 0 0 / 0.15) 100%);
+    transition: background var(--t-normal);
+  }
+
+  .slider__card:hover .slider__overlay {
+    background: linear-gradient(0deg,
+      rgb(0 0 0 / 0.8) 0%,
+      rgb(0 0 0 / 0.15) 50%,
+      rgb(0 0 0 / 0.25) 100%);
+  }
+
+  .slider__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--s-6);
+    z-index: 1;
+  }
+
+  .slider__title {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+    margin-bottom: var(--s-1);
+  }
+
+  .slider__desc {
+    font-size: 0.75rem;
+    color: rgb(255 255 255 / 0.6);
+    letter-spacing: 0.04em;
+    margin-bottom: var(--s-3);
+  }
+
+  .slider__link {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--c-orange);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all var(--t-normal) var(--ease);
+  }
+
+  .slider__card:hover .slider__link {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .slider__nav {
+    display: flex;
+    gap: var(--s-3);
+    justify-content: center;
+    margin-bottom: var(--s-6);
+  }
+
+  .slider__btn {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-full);
+    border: 1.5px solid var(--c-border);
+    background: var(--c-bg);
+    color: var(--c-text-secondary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--t-fast) var(--ease);
+  }
+
+  .slider__btn:hover {
+    border-color: var(--c-orange);
+    color: var(--c-orange);
+    background: var(--c-surface);
+  }
+
+  .act-cta {
+    display: flex;
+    gap: var(--s-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: 600px) {
+    .slider__card { flex: 0 0 45%; }
+  }
+
+  @media (min-width: 900px) {
+    .slider__card { flex: 0 0 30%; }
+  }
+
+  @media (min-width: 1200px) {
+    .slider__card { flex: 0 0 23%; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-slider]').forEach((slider) => {
+    const track = slider.querySelector('[data-slider-track]');
+    const prevBtn = slider.closest('.slider-wrap')?.querySelector('[data-slider-prev]');
+    const nextBtn = slider.closest('.slider-wrap')?.querySelector('[data-slider-next]');
+    if (!track) return;
+
+    const getScrollAmount = () => {
+      const card = track.querySelector('.slider__card') as HTMLElement | null;
+      if (!card) return 300;
+      return card.offsetWidth + 16;
+    };
+
+    prevBtn?.addEventListener('click', () => {
+      track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+  });
+</script>

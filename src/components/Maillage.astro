@@ -1,0 +1,154 @@
+---
+const links = [
+  {
+    title: "Bateaux électriques",
+    description: "Location sans permis sur le lac",
+    href: "/location-bateaux-electriques",
+    image: "/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg",
+    alt: "Bateau électrique — Surf Center",
+  },
+  {
+    title: "Paddle & Kayak",
+    description: "Glisse et exploration",
+    href: "/activites/paddle",
+    image: "/location-paddle-lac-sainte-croix-surfcenter.jpeg",
+    alt: "Paddle sur le lac",
+  },
+  {
+    title: "Restauration",
+    description: "Snack-pizzeria face au lac",
+    href: "/restauration",
+    image: "/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg",
+    alt: "Restaurant Surf Center",
+  },
+  {
+    title: "Événements",
+    description: "Concerts & soirées estivales",
+    href: "/evenements",
+    image: "/concert-surfcenter-lac-sainte-croix.png",
+    alt: "Concert au Surf Center",
+  },
+  {
+    title: "Animations",
+    description: "Yoga, cours & activités",
+    href: "/animations",
+    image: "/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg",
+    alt: "Yoga au Surf Center",
+  },
+  {
+    title: "Le Verdon",
+    description: "Découvrir la région",
+    href: "/gorges-du-verdon",
+    image: "/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg",
+    alt: "Gorges du Verdon et lac de Sainte-Croix",
+  },
+];
+---
+
+<section class="section" aria-labelledby="maillage-title">
+  <div class="container">
+    <header class="section__header reveal">
+      <span class="section__eyebrow">Explorer</span>
+      <h2 id="maillage-title">Tout Surf Center</h2>
+    </header>
+
+    <div class="mesh-grid">
+      {links.map((link, i) => (
+        <a href={link.href} class={`mesh-card reveal reveal-d${Math.min(i + 1, 4)}`}>
+          <img
+            class="mesh-card__img"
+            src={link.image}
+            alt={link.alt}
+            width="400"
+            height="300"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="mesh-card__overlay"></div>
+          <div class="mesh-card__content">
+            <h3 class="mesh-card__title">{link.title}</h3>
+            <p class="mesh-card__desc">{link.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .mesh-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+  }
+
+  .mesh-card {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--r-lg);
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .mesh-card__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .mesh-card:hover .mesh-card__img { transform: scale(1.06); }
+
+  .mesh-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg,
+      rgb(0 0 0 / 0.65) 0%,
+      rgb(0 0 0 / 0.05) 60%,
+      rgb(0 0 0 / 0.1) 100%);
+    transition: background var(--t-normal);
+  }
+
+  .mesh-card:hover .mesh-card__overlay {
+    background: linear-gradient(0deg,
+      rgb(0 0 0 / 0.75) 0%,
+      rgb(0 0 0 / 0.1) 60%,
+      rgb(0 0 0 / 0.2) 100%);
+  }
+
+  .mesh-card__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--s-5);
+    z-index: 1;
+  }
+
+  .mesh-card__title {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+
+  .mesh-card__desc {
+    font-size: 0.72rem;
+    color: rgb(255 255 255 / 0.6);
+    letter-spacing: 0.02em;
+  }
+
+  @media (min-width: 768px) {
+    .mesh-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 480px) {
+    .mesh-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,177 @@
+---
+const currentYear = new Date().getFullYear();
+
+const navColumns = [
+  {
+    title: "Activités",
+    links: [
+      { label: "Bateaux électriques", href: "/location-bateaux-electriques" },
+      { label: "Paddle", href: "/activites/paddle" },
+      { label: "Pédalo & Kayak", href: "/activites/pedalo-kayak" },
+      { label: "Bouée tractée", href: "/activites/bouee-tractee" },
+      { label: "Tarifs", href: "/tarifs" },
+    ],
+  },
+  {
+    title: "Surf Center",
+    links: [
+      { label: "Restaurant", href: "/restauration" },
+      { label: "Événements", href: "/evenements" },
+      { label: "Contact & accès", href: "/contact" },
+      { label: "Réservation", href: "/reservation" },
+    ],
+  },
+  {
+    title: "Légal",
+    links: [
+      { label: "Mentions légales", href: "/mentions-legales" },
+      { label: "Confidentialité", href: "/confidentialite" },
+      { label: "CGV", href: "/cgv" },
+    ],
+  },
+];
+---
+
+<footer class="footer" role="contentinfo">
+  <div class="footer__top">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="/" class="footer__logo" aria-label="Surf Center — Accueil">
+          <img
+            class="footer__logo-img"
+            src="/logo-surf-center2.png"
+            alt=""
+            width="120"
+            height="36"
+            loading="lazy"
+          />
+        </a>
+        <p class="footer__tagline">
+          Base nautique au lac de Sainte-Croix,<br />
+          Les Salles-sur-Verdon · Gorges du Verdon.
+        </p>
+        <address class="footer__address">
+          <p><a href="tel:+33492771450">04 92 77 14 50</a></p>
+          <p><a href="mailto:contact@surfcenter-verdon.fr">contact@surfcenter-verdon.fr</a></p>
+        </address>
+      </div>
+
+      {navColumns.map((col) => (
+        <nav class="footer__col" aria-label={col.title}>
+          <p class="footer__col-title">{col.title}</p>
+          <ul role="list">
+            {col.links.map((link) => (
+              <li>
+                {link.href === '/reservation'
+                  ? <button type="button" class="footer__modal-btn" data-booking>{link.label}</button>
+                  : link.href === '/tarifs'
+                    ? <button type="button" class="footer__modal-btn" data-shop>{link.label}</button>
+                    : <a href={link.href}>{link.label}</a>}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container">
+      <p>© {currentYear} Surf Center · Les Salles-sur-Verdon</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--c-dark);
+    color: rgb(255 255 255 / 0.6);
+  }
+
+  .footer__top {
+    padding-block: var(--s-20);
+  }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+  }
+
+  .footer__brand { max-width: 280px; }
+
+  .footer__logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--s-5);
+  }
+
+  .footer__logo-img {
+    height: 24px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.6;
+  }
+
+  .footer__tagline {
+    font-size: 0.8rem;
+    line-height: 1.55;
+    color: rgb(255 255 255 / 0.35);
+    margin-bottom: var(--s-5);
+  }
+
+  .footer__address {
+    font-style: normal;
+    font-size: 0.78rem;
+    line-height: 1.8;
+    color: rgb(255 255 255 / 0.4);
+  }
+  .footer__address a:hover { color: var(--c-orange); }
+
+  .footer__col-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.3);
+    margin-bottom: var(--s-5);
+  }
+
+  .footer__col ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .footer__col a {
+    font-size: 0.8rem;
+    color: rgb(255 255 255 / 0.5);
+    transition: color var(--t-fast);
+  }
+  .footer__col a:hover { color: #fff; }
+
+  .footer__modal-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    font-size: 0.8rem;
+    color: rgb(255 255 255 / 0.5);
+    cursor: pointer;
+    transition: color var(--t-fast);
+  }
+  .footer__modal-btn:hover { color: #fff; }
+
+  .footer__bottom {
+    padding-block: var(--s-6);
+    border-top: 1px solid rgb(255 255 255 / 0.08);
+    font-size: 0.68rem;
+    color: rgb(255 255 255 / 0.25);
+    letter-spacing: 0.04em;
+  }
+
+  @media (min-width: 768px) {
+    .footer__inner { grid-template-columns: 1.5fr repeat(3, 1fr); }
+  }
+</style>

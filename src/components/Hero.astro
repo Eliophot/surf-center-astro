@@ -1,0 +1,121 @@
+<section class="hero" data-hero aria-label="Surf Center — base nautique au lac de Sainte-Croix">
+  <img
+    class="hero__img"
+    src="/GettyImages-577312024 (1).jpg"
+    alt="Kayak sur les eaux turquoise des Gorges du Verdon, falaises et végétation méditerranéenne"
+    width="1920"
+    height="1080"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+  />
+  <div class="hero__overlay" aria-hidden="true"></div>
+
+  <div class="hero__content">
+    <p class="hero__eyebrow">Lac de Sainte-Croix · Gorges du Verdon</p>
+    <h1 class="hero__title">Surf<br/>Center</h1>
+    <p class="hero__baseline">Location bateaux & activités nautiques</p>
+
+    <div class="hero__actions">
+      <button type="button" class="btn btn--primary" data-booking>Réserver</button>
+      <a href="#activites" class="btn btn--ghost">Découvrir</a>
+    </div>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    animation: slow-zoom 25s var(--ease-smooth) forwards;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg,
+      rgb(0 0 0 / 0.5) 0%,
+      rgb(0 0 0 / 0.2) 40%,
+      rgb(0 0 0 / 0.6) 100%);
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+  }
+
+  .hero__eyebrow {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.45);
+    margin-bottom: var(--s-8);
+    animation: fade-up 800ms var(--ease-smooth) 200ms both;
+  }
+
+  .hero__title {
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin-bottom: var(--s-6);
+    animation: fade-up 800ms var(--ease-smooth) 400ms both;
+  }
+
+  .hero__baseline {
+    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--c-orange);
+    margin-bottom: var(--s-12);
+    animation: fade-up 800ms var(--ease-smooth) 600ms both;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: var(--s-4);
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fade-up 800ms var(--ease-smooth) 800ms both;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: var(--s-8);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    color: rgb(255 255 255 / 0.25);
+    animation: bounce-subtle 2.5s var(--ease) infinite 3s;
+  }
+
+  @media (max-width: 480px) {
+    .hero__actions {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>

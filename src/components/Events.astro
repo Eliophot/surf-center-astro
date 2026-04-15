@@ -1,0 +1,90 @@
+<section class="section section--surface" aria-labelledby="events-title">
+  <div class="container events">
+    <div class="events__content reveal">
+      <span class="section__eyebrow">Événements</span>
+      <h2 id="events-title">Soirées &<br/>concerts au lac</h2>
+      <p class="events__text">
+        Le Surf Center prend vie le soir venu. Concerts acoustiques les pieds 
+        dans le sable, soirées thématiques, couchers de soleil musicaux — 
+        une programmation estivale unique, face aux Gorges du Verdon.
+      </p>
+
+      <ul class="events__list" role="list">
+        <li>Concerts live & acoustiques</li>
+        <li>Soirées coucher de soleil</li>
+        <li>DJ sets & ambiance estivale</li>
+        <li>Événements privatisables</li>
+      </ul>
+
+      <a href="/evenements" class="btn btn--primary">Découvrir</a>
+    </div>
+
+    <div class="events__visual reveal reveal-d2">
+      <img
+        class="events__img"
+        src="/concert-surfcenter-lac-sainte-croix.png"
+        alt="Concert live au Surf Center — soirée au bord du lac de Sainte-Croix"
+        width="720"
+        height="800"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .events {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: center;
+  }
+
+  .events__text {
+    font-size: 1rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    max-width: 36ch;
+    margin-top: var(--s-6);
+    margin-bottom: var(--s-8);
+  }
+
+  .events__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-bottom: var(--s-10);
+  }
+
+  .events__list li {
+    font-size: 0.85rem;
+    color: var(--c-text-secondary);
+    line-height: 1.5;
+    padding-left: var(--s-5);
+    position: relative;
+  }
+
+  .events__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 1px;
+    background: var(--c-orange);
+  }
+
+  .events__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--r-lg);
+  }
+
+  @media (min-width: 900px) {
+    .events { grid-template-columns: 1fr 1.2fr; gap: var(--s-20); }
+  }
+</style>

@@ -1,0 +1,97 @@
+---
+const reviews = [
+  {
+    quote:
+      "Un cadre magnifique, un accueil au top et des bateaux en très bon état. On a passé une journée incroyable sur le lac avec les enfants.",
+    author: "Sophie L.",
+    context: "Famille — Août 2025",
+  },
+  {
+    quote:
+      "La meilleure base nautique du Verdon. Le paddle au lever du soleil sur le lac de Sainte-Croix, c'est juste magique.",
+    author: "Maxime R.",
+    context: "Paddle — Juillet 2025",
+  },
+  {
+    quote:
+      "Super spot, super équipe. Les pizzas du snack sont excellentes. L'endroit idéal pour une journée complète au lac.",
+    author: "Camille & Julien",
+    context: "Couple — Septembre 2025",
+  },
+];
+---
+
+<section class="section" aria-labelledby="reviews-title">
+  <div class="container">
+    <header class="section__header reveal">
+      <span class="section__eyebrow">Témoignages</span>
+      <h2 id="reviews-title">Ce qu'ils<br/>en disent</h2>
+    </header>
+
+    <div class="reviews-grid">
+      {reviews.map((r, i) => (
+        <blockquote class={`review reveal reveal-d${i + 1}`}>
+          <p class="review__text">&ldquo;{r.quote}&rdquo;</p>
+          <footer class="review__footer">
+            <cite class="review__author">{r.author}</cite>
+            <span class="review__context">{r.context}</span>
+          </footer>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+
+  .review {
+    padding: var(--s-8);
+    background: var(--c-surface);
+    border-radius: var(--r-lg);
+    border: none;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .review__text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--c-text);
+    margin-bottom: auto;
+    padding-bottom: var(--s-6);
+    max-width: none;
+    font-style: italic;
+  }
+
+  .review__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--c-border-light);
+  }
+
+  .review__author {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--c-text);
+  }
+
+  .review__context {
+    font-size: 0.72rem;
+    color: var(--c-text-muted);
+  }
+
+  @media (min-width: 768px) {
+    .reviews-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>

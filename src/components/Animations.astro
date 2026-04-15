@@ -1,0 +1,90 @@
+<section class="section" aria-labelledby="animations-title">
+  <div class="container anims">
+    <div class="anims__visual reveal">
+      <img
+        class="anims__img"
+        src="/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg"
+        alt="Cours de yoga au bord du lac de Sainte-Croix — Surf Center"
+        width="720"
+        height="800"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="anims__content reveal reveal-d2">
+      <span class="section__eyebrow">Animations</span>
+      <h2 id="animations-title">Des moments<br/>à partager</h2>
+      <p class="anims__text">
+        Yoga au lever du soleil, cours de paddle, initiations au windsurf — 
+        chaque journée au Surf Center est une invitation à bouger, respirer, 
+        s'amuser. Des activités encadrées pour tous les niveaux et tous les âges.
+      </p>
+
+      <ul class="anims__list" role="list">
+        <li>Yoga face au lac</li>
+        <li>Cours de paddle & windsurf</li>
+        <li>Bouée tractée & sensations</li>
+        <li>Balades encadrées</li>
+      </ul>
+
+      <a href="/animations" class="btn btn--primary">Découvrir</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .anims {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: center;
+  }
+
+  .anims__text {
+    font-size: 1rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    max-width: 36ch;
+    margin-top: var(--s-6);
+    margin-bottom: var(--s-8);
+  }
+
+  .anims__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-bottom: var(--s-10);
+  }
+
+  .anims__list li {
+    font-size: 0.85rem;
+    color: var(--c-text-secondary);
+    line-height: 1.5;
+    padding-left: var(--s-5);
+    position: relative;
+  }
+
+  .anims__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 1px;
+    background: var(--c-orange);
+  }
+
+  .anims__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--r-lg);
+  }
+
+  @media (min-width: 900px) {
+    .anims { grid-template-columns: 1.2fr 1fr; gap: var(--s-20); }
+  }
+</style>

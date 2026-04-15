@@ -1,0 +1,400 @@
+---
+const navLinks = [
+  { label: "Activités", href: "/activites" },
+  { label: "Bateaux", href: "/location-bateaux-electriques" },
+  { label: "Restaurant", href: "/restauration" },
+  { label: "Tarifs", href: "/tarifs", modal: "shop" },
+  { label: "Contact", href: "/contact" },
+];
+---
+
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+<header class="header" data-header>
+  <div class="header__inner container">
+    <a href="/" class="header__logo" aria-label="Surf Center — Accueil">
+      <img
+        class="header__logo-img header__logo-img--light"
+        src="/logo-surf-center2.png"
+        alt=""
+        width="120"
+        height="36"
+        loading="eager"
+      />
+      <img
+        class="header__logo-img header__logo-img--dark"
+        src="/logo-surf-center.png"
+        alt=""
+        width="120"
+        height="36"
+        loading="eager"
+      />
+    </a>
+
+    <nav class="header__nav" aria-label="Navigation principale">
+      <ul role="list">
+        {navLinks.map((link) => (
+          <li>
+            {link.modal
+              ? <button type="button" class="header__nav-btn link-anim" data-shop>{link.label}</button>
+              : <a href={link.href} class="link-anim">{link.label}</a>}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header__end">
+      <button
+        class="header__theme"
+        type="button"
+        data-theme-toggle
+        aria-label="Changer de thème"
+      >
+        <svg class="header__theme-icon header__theme-icon--sun" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="3.5" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M9 2v1.5M9 14.5V16M2 9h1.5M14.5 9H16M4.05 4.05l1.06 1.06M12.89 12.89l1.06 1.06M4.05 13.95l1.06-1.06M12.89 5.11l1.06-1.06" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <svg class="header__theme-icon header__theme-icon--moon" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M15.1 10.63A6.5 6.5 0 0 1 7.37 2.9 6.5 6.5 0 1 0 15.1 10.63Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <!-- Mobile: icon only -->
+      <button
+        class="header__cart-icon"
+        type="button"
+        data-cart
+        aria-label="Voir le panier"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M6 6h12l-1.5 7H7.5L6 6Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M6 6L5 3H2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="8.5" cy="16.5" r="1" fill="currentColor"/>
+          <circle cx="14.5" cy="16.5" r="1" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <!-- Desktop: text button -->
+      <button type="button" class="btn btn--outline btn--sm header__cart-btn" data-cart>Mon panier</button>
+
+      <button type="button" class="btn btn--primary btn--sm header__cta" data-booking>Réserver</button>
+
+      <button
+        class="header__burger"
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-label="Menu de navigation"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="header__mobile" id="mobile-menu" hidden>
+    <nav aria-label="Navigation mobile">
+      <ul role="list">
+        {navLinks.map((link) => (
+          <li>
+            {link.modal
+              ? <button type="button" class="header__mobile-btn" data-shop>{link.label}</button>
+              : <a href={link.href}>{link.label}</a>}
+          </li>
+        ))}
+        <li class="header__mobile-cta">
+          <button type="button" class="btn btn--primary" data-booking>Réserver</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector('[data-header]') as HTMLElement;
+  const hero = document.querySelector('[data-hero]') as HTMLElement;
+
+  if (header && hero) {
+    const obs = new IntersectionObserver(
+      ([entry]) => header.classList.toggle('is-scrolled', !entry.isIntersecting),
+      { threshold: 0 },
+    );
+    obs.observe(hero);
+  }
+
+  const toggle = document.querySelector('[data-menu-toggle]') as HTMLButtonElement;
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (toggle && mobileMenu) {
+    const set = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      mobileMenu.hidden = !open;
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+
+    toggle.addEventListener('click', () => {
+      set(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        set(false);
+        toggle.focus();
+      }
+    });
+
+    mobileMenu.querySelectorAll('a, button').forEach((el) =>
+      el.addEventListener('click', () => set(false)),
+    );
+  }
+
+  /* Theme toggle */
+  const themeToggle = document.querySelector('[data-theme-toggle]') as HTMLButtonElement;
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+
+      const meta = document.getElementById('meta-theme-color');
+      if (meta) meta.setAttribute('content', next === 'dark' ? '#0a0a0a' : '#ffffff');
+    });
+  }
+</script>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: var(--s-4);
+    z-index: 200;
+    padding: var(--s-2) var(--s-6);
+    background: var(--c-orange);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .skip-link:focus { top: var(--s-2); }
+
+  .header {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: 100;
+    height: var(--header-h);
+    transition: all var(--t-normal) var(--ease-smooth);
+  }
+
+  .header.is-scrolled {
+    background: var(--c-header-bg);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-bottom: 1px solid var(--c-header-border);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .header__logo {
+    z-index: 101;
+    display: flex;
+    align-items: center;
+  }
+
+  .header__logo-img {
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  /* Over hero: always white logo */
+  .header__logo-img--light {
+    filter: brightness(0) invert(1);
+    display: block;
+  }
+  .header__logo-img--dark { display: none; }
+
+  /* Scrolled light: dark logo */
+  .header.is-scrolled .header__logo-img--light { display: none; }
+  .header.is-scrolled .header__logo-img--dark { display: block; }
+
+  /* Scrolled dark: keep white logo */
+  :global([data-theme='dark']) .header.is-scrolled .header__logo-img--light {
+    display: block;
+  }
+  :global([data-theme='dark']) .header.is-scrolled .header__logo-img--dark {
+    display: none;
+  }
+
+  .header__nav { display: none; }
+  .header__nav ul {
+    display: flex;
+    gap: var(--s-8);
+  }
+  .header__nav a,
+  .header__nav-btn {
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgb(255 255 255 / 0.7);
+    transition: color var(--t-fast);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .header__nav a:hover,
+  .header__nav-btn:hover { color: #fff; }
+
+  .header.is-scrolled .header__nav a,
+  .header.is-scrolled .header__nav-btn { color: var(--c-header-text); }
+  .header.is-scrolled .header__nav a:hover,
+  .header.is-scrolled .header__nav-btn:hover { color: var(--c-header-text-hover); }
+
+  .header__end {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    z-index: 101;
+  }
+  .header__cta { display: none; }
+
+  /* Theme toggle */
+  .header__theme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: rgb(255 255 255 / 0.7);
+    transition: color var(--t-fast);
+  }
+  .header__theme:hover { color: #fff; }
+  .header.is-scrolled .header__theme { color: var(--c-header-text); }
+  .header.is-scrolled .header__theme:hover { color: var(--c-header-text-hover); }
+
+  /* Show sun in dark mode, moon in light mode */
+  .header__theme-icon--sun { display: none; }
+  .header__theme-icon--moon { display: block; }
+  :global([data-theme='dark']) .header__theme-icon--sun { display: block; }
+  :global([data-theme='dark']) .header__theme-icon--moon { display: none; }
+
+  .header__cart-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: rgb(255 255 255 / 0.7);
+    transition: color var(--t-fast);
+  }
+  .header__cart-icon:hover { color: #fff; }
+  .header.is-scrolled .header__cart-icon { color: var(--c-header-text); }
+  .header.is-scrolled .header__cart-icon:hover { color: var(--c-header-text-hover); }
+
+  .header__cart-btn {
+    display: none;
+    color: rgb(255 255 255 / 0.7);
+    border-color: rgb(255 255 255 / 0.25);
+  }
+  .header__cart-btn:hover {
+    color: #fff;
+    border-color: rgb(255 255 255 / 0.5);
+    background: rgb(255 255 255 / 0.08);
+  }
+  .header.is-scrolled .header__cart-btn {
+    color: var(--c-header-text);
+    border-color: var(--c-btn-outline-border);
+  }
+  .header.is-scrolled .header__cart-btn:hover {
+    color: var(--c-orange);
+    border-color: var(--c-orange);
+    background: transparent;
+  }
+
+  .header__burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 2rem;
+    height: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  .header__burger span {
+    display: block;
+    width: 1.4rem;
+    height: 1px;
+    background: #fff;
+    transition: all var(--t-normal) var(--ease);
+    transform-origin: center;
+  }
+  .header.is-scrolled .header__burger span { background: var(--c-header-burger); }
+  .header__burger[aria-expanded='true'] span { background: var(--c-text) !important; }
+  .header__burger[aria-expanded='true'] span:first-child {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+  .header__burger[aria-expanded='true'] span:last-child {
+    transform: translateY(-3.5px) rotate(-45deg);
+  }
+
+  .header__mobile {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: var(--c-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .header__mobile[hidden] { display: none; }
+  .header__mobile ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-10);
+  }
+  .header__mobile a,
+  .header__mobile-btn {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-text);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .header__mobile-cta { margin-top: var(--s-6); }
+
+  @media (min-width: 1024px) {
+    .header__nav { display: block; }
+    .header__cta { display: inline-flex; }
+    .header__cart-btn { display: inline-flex; }
+    .header__cart-icon { display: none; }
+    .header__burger { display: none; }
+  }
+</style>

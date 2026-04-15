@@ -1,0 +1,206 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BookingModal from '../components/BookingModal.astro';
+import CartModal from '../components/CartModal.astro';
+import ShopModal from '../components/ShopModal.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  canonical = Astro.url.href,
+  ogImage = '/og-default.jpg',
+  jsonLd,
+} = Astro.props;
+
+const siteUrl = 'https://surfcenter-verdon.fr';
+---
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#ffffff" id="meta-theme-color" />
+
+    <!-- Theme: detect system preference + localStorage override, applied before paint -->
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        var meta = document.getElementById('meta-theme-color');
+        if (meta) meta.setAttribute('content', theme === 'dark' ? '#0a0a0a' : '#ffffff');
+      })();
+    </script>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:site_name" content="Surf Center" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+
+    <!-- Geo hints -->
+    <meta name="geo.region" content="FR-83" />
+    <meta name="geo.placename" content="Les Salles-sur-Verdon" />
+    <meta name="geo.position" content="43.7766;6.2100" />
+    <meta name="ICBM" content="43.7766, 6.2100" />
+
+    {jsonLd && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(Array.isArray(jsonLd) ? jsonLd : [jsonLd])}
+      />
+    )}
+  </head>
+  <body>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <BookingModal />
+    <CartModal />
+    <ShopModal />
+
+    <div class="scroll-pct" id="scrollPct" aria-hidden="true">
+      <svg class="scroll-pct__ring" viewBox="0 0 44 44">
+        <circle class="scroll-pct__track" cx="22" cy="22" r="19" />
+        <circle class="scroll-pct__fill" cx="22" cy="22" r="19" id="scrollRing" />
+      </svg>
+      <span class="scroll-pct__value" id="scrollValue">0</span>
+    </div>
+
+    <style>
+      .scroll-pct {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 90;
+        width: 52px;
+        height: 52px;
+        opacity: 0;
+        transform: scale(0.6) translateY(10px);
+        transition: opacity 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1);
+        pointer-events: none;
+        will-change: opacity, transform;
+      }
+      .scroll-pct.is-active {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        pointer-events: auto;
+      }
+      .scroll-pct__ring {
+        width: 100%;
+        height: 100%;
+        transform: rotate(-90deg);
+      }
+      .scroll-pct__track {
+        fill: none;
+        stroke: var(--c-border);
+        stroke-width: 2;
+      }
+      .scroll-pct__fill {
+        fill: none;
+        stroke: var(--c-orange);
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-dasharray: 119.38;
+        stroke-dashoffset: 119.38;
+        transition: stroke-dashoffset 0.15s linear;
+      }
+      .scroll-pct__value {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-sans);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        color: var(--c-text);
+        user-select: none;
+      }
+      @media (max-width: 480px) {
+        .scroll-pct { bottom: 1.25rem; right: 1.25rem; width: 44px; height: 44px; }
+        .scroll-pct__value { font-size: 0.56rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .scroll-pct { transition: none; }
+        .scroll-pct__fill { transition: none; }
+      }
+    </style>
+
+    <script is:inline>
+      document.documentElement.classList.remove('no-js');
+      if ('IntersectionObserver' in window) {
+        var ro = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              ro.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(function (el) { ro.observe(el); });
+      } else {
+        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-visible'); });
+      }
+    </script>
+
+    <script is:inline>
+      (function () {
+        var el = document.getElementById('scrollPct');
+        var ring = document.getElementById('scrollRing');
+        var val = document.getElementById('scrollValue');
+        if (!el || !ring || !val) return;
+
+        var C = 2 * Math.PI * 19;
+        var ticking = false;
+        var shown = false;
+        var last = -1;
+
+        function update() {
+          ticking = false;
+          var h = document.documentElement.scrollHeight - window.innerHeight;
+          if (h <= 0) return;
+          var pct = Math.round((window.scrollY / h) * 100);
+          if (pct === last) return;
+          last = pct;
+          if (!shown && pct > 0) { shown = true; el.classList.add('is-active'); }
+          if (shown && pct === 0) { shown = false; el.classList.remove('is-active'); }
+          ring.style.strokeDashoffset = C - (C * pct / 100);
+          val.textContent = pct;
+        }
+
+        window.addEventListener('scroll', function () {
+          if (!ticking) { ticking = true; requestAnimationFrame(update); }
+        }, { passive: true });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,183 @@
+<dialog class="shop" id="shop-modal" aria-label="Boutique — Tarifs et réservations">
+  <div class="shop__header">
+    <p class="shop__title">Boutique</p>
+    <button
+      class="shop__close"
+      type="button"
+      data-shop-close
+      aria-label="Fermer la boutique"
+    >
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="shop__body">
+    <iframe
+      id="shop-iframe"
+      title="Boutique Surf Center"
+      width="100%"
+      height="100%"
+      frameborder="0"
+      loading="lazy"
+    ></iframe>
+  </div>
+</dialog>
+
+<script>
+  const SHOP_URL =
+    'https://booking.yoplanning.pro/af0e7a3e-a541-40bf-b074-470572d4e762/shop/?bedisplay=embed';
+
+  const modal = document.getElementById('shop-modal') as HTMLDialogElement;
+  const iframe = document.getElementById('shop-iframe') as HTMLIFrameElement;
+  const closeBtn = document.querySelector('[data-shop-close]') as HTMLButtonElement;
+
+  let iframeLoaded = false;
+
+  function openShop(e: Event) {
+    e.preventDefault();
+    if (!iframeLoaded) {
+      iframe.src = SHOP_URL;
+      iframeLoaded = true;
+    }
+    modal.showModal();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeShop() {
+    modal.close();
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-shop]').forEach((trigger) =>
+    trigger.addEventListener('click', openShop),
+  );
+
+  closeBtn.addEventListener('click', closeShop);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeShop();
+  });
+
+  modal.addEventListener('close', () => {
+    document.body.style.overflow = '';
+  });
+</script>
+
+<style>
+  .shop {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: var(--c-bg);
+    color: var(--c-text);
+  }
+
+  .shop:not([open]) { display: none; }
+
+  .shop[open] {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity var(--t-normal) var(--ease),
+      transform var(--t-normal) var(--ease);
+  }
+
+  @starting-style {
+    .shop[open] {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+  }
+
+  .shop::backdrop {
+    background: rgb(0 0 0 / 0);
+    transition:
+      background var(--t-normal) var(--ease),
+      display var(--t-normal) var(--ease) allow-discrete,
+      overlay var(--t-normal) var(--ease) allow-discrete;
+  }
+
+  .shop[open]::backdrop {
+    background: rgb(0 0 0 / 0.5);
+  }
+
+  @starting-style {
+    .shop[open]::backdrop {
+      background: rgb(0 0 0 / 0);
+    }
+  }
+
+  .shop__header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--s-4) var(--s-6);
+    border-bottom: 1px solid var(--c-border-light);
+  }
+
+  .shop__title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--c-text-muted);
+  }
+
+  .shop__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--c-border);
+    color: var(--c-text-muted);
+    cursor: pointer;
+    transition: all var(--t-fast);
+  }
+
+  .shop__close:hover {
+    background: var(--c-surface);
+    color: var(--c-text);
+    border-color: var(--c-border);
+  }
+
+  .shop__body {
+    flex: 1;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .shop__body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .shop {
+      inset: var(--s-8);
+      width: auto;
+      height: auto;
+      max-width: 1000px;
+      max-height: calc(100vh - var(--s-16));
+      margin: auto;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+  }
+</style>

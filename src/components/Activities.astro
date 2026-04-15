@@ -3,6 +3,7 @@ const locations = [
   {
     title: "Bateaux électriques",
     description: "Sans permis · Jusqu'à 7 pers.",
+    price: 55,
     href: "/location-bateaux-electriques",
     image: "/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg",
     alt: "Bateau électrique sur le lac de Sainte-Croix",
@@ -10,6 +11,7 @@ const locations = [
   {
     title: "Stand-up paddle",
     description: "Accessible à tous · Vue garantie",
+    price: 15,
     href: "/activites/paddle",
     image: "/location-paddle-lac-sainte-croix-surfcenter.jpeg",
     alt: "Paddle sur le lac de Sainte-Croix",
@@ -17,6 +19,7 @@ const locations = [
   {
     title: "Pédalo",
     description: "En famille · Criques secrètes",
+    price: 15,
     href: "/activites/pedalo-kayak",
     image: "/pedalos_lac_sainte_croix.jpg",
     alt: "Pédalos sur le lac de Sainte-Croix",
@@ -24,6 +27,7 @@ const locations = [
   {
     title: "Canoë & Kayak",
     description: "Exploration · Face aux falaises",
+    price: 10,
     href: "/activites/canoe-kayak",
     image: "/canoe.jpeg",
     alt: "Canoë sur le lac de Sainte-Croix",
@@ -31,6 +35,7 @@ const locations = [
   {
     title: "Catamaran",
     description: "Sensations · Grand large",
+    price: 35,
     href: "/activites/catamaran",
     image: "/location-catamaran-lac-sainte-croix.jpg",
     alt: "Catamaran sur le lac de Sainte-Croix",
@@ -38,6 +43,7 @@ const locations = [
   {
     title: "Planche à voile",
     description: "Adrénaline · Vent du Verdon",
+    price: 20,
     href: "/activites/windsurf",
     image: "/location-planche-a-voile-windsurf-lac-sainte-croix.png",
     alt: "Planche à voile sur le lac de Sainte-Croix",
@@ -67,6 +73,10 @@ const locations = [
                 decoding="async"
               />
               <div class="slider__overlay"></div>
+              <div class="slider__price">
+                <span class="slider__price-label">dès</span>
+                <span class="slider__price-amount">{loc.price}<span class="slider__price-cur">€</span></span>
+              </div>
               <div class="slider__content">
                 <h3 class="slider__title">{loc.title}</h3>
                 <p class="slider__desc">{loc.description}</p>
@@ -158,6 +168,50 @@ const locations = [
       rgb(0 0 0 / 0.8) 0%,
       rgb(0 0 0 / 0.15) 50%,
       rgb(0 0 0 / 0.25) 100%);
+  }
+
+  .slider__price {
+    position: absolute;
+    top: var(--s-4);
+    right: var(--s-4);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--r-full);
+    background: rgb(0 0 0 / 0.45);
+    backdrop-filter: blur(16px) saturate(1.5);
+    -webkit-backdrop-filter: blur(16px) saturate(1.5);
+    line-height: 1;
+    transition: background var(--t-fast);
+  }
+
+  .slider__card:hover .slider__price {
+    background: rgb(0 0 0 / 0.6);
+  }
+
+  .slider__price-label {
+    font-size: 0.52rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.5);
+  }
+
+  .slider__price-amount {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .slider__price-cur {
+    font-size: 0.7em;
+    font-weight: 700;
+    opacity: 0.6;
+    margin-left: 1px;
   }
 
   .slider__content {

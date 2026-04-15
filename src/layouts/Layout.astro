@@ -86,72 +86,198 @@ const siteUrl = 'https://surfcenter-verdon.fr';
     <CartModal />
     <ShopModal />
 
-    <div class="scroll-pct" id="scrollPct" aria-hidden="true">
-      <svg class="scroll-pct__ring" viewBox="0 0 44 44">
-        <circle class="scroll-pct__track" cx="22" cy="22" r="19" />
-        <circle class="scroll-pct__fill" cx="22" cy="22" r="19" id="scrollRing" />
-      </svg>
-      <span class="scroll-pct__value" id="scrollValue">0</span>
-    </div>
+    <button class="spct" id="scrollPct" type="button" aria-label="Retour en haut">
+      <span class="spct__left">
+        <span class="spct__pct">
+          <span class="spct__num" id="scrollValue">0</span><span class="spct__sign">%</span>
+        </span>
+        <span class="spct__arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 13V3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M4 6.5L8 3l4 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </span>
+      <span class="spct__sep"></span>
+      <span class="spct__right">
+        <span class="spct__label-scroll">SCROLL</span>
+        <span class="spct__label-top">TOP</span>
+      </span>
+    </button>
 
     <style>
-      .scroll-pct {
+      .spct {
         position: fixed;
         bottom: 2rem;
         right: 2rem;
         z-index: 90;
-        width: 52px;
-        height: 52px;
+        display: flex;
+        align-items: center;
+        gap: 0;
+        height: 46px;
+        padding: 0;
+        border: 1px solid var(--c-border);
+        border-radius: var(--r-full);
+        background: var(--c-bg);
+        box-shadow: 0 4px 24px rgb(0 0 0 / 0.08), 0 1px 3px rgb(0 0 0 / 0.04);
+        cursor: pointer;
         opacity: 0;
-        transform: scale(0.6) translateY(10px);
-        transition: opacity 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1);
+        transform: translateY(16px);
+        transition:
+          opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow var(--t-fast),
+          border-color var(--t-fast);
         pointer-events: none;
-        will-change: opacity, transform;
+        user-select: none;
+        font-family: var(--font-sans);
+        outline: none;
       }
-      .scroll-pct.is-active {
+
+      [data-theme='dark'] .spct {
+        background: var(--c-surface);
+        border-color: var(--c-border);
+        box-shadow: 0 4px 24px rgb(0 0 0 / 0.3), 0 1px 3px rgb(0 0 0 / 0.2);
+      }
+
+      .spct.is-active {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: translateY(0);
         pointer-events: auto;
       }
-      .scroll-pct__ring {
-        width: 100%;
+
+      .spct:hover {
+        border-color: var(--c-text-muted);
+        box-shadow: 0 6px 28px rgb(0 0 0 / 0.12), 0 2px 6px rgb(0 0 0 / 0.06);
+      }
+
+      [data-theme='dark'] .spct:hover {
+        border-color: rgb(255 255 255 / 0.2);
+        box-shadow: 0 6px 28px rgb(0 0 0 / 0.4);
+      }
+
+      .spct:active { transform: scale(0.96); }
+
+      .spct__left {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 54px;
         height: 100%;
-        transform: rotate(-90deg);
       }
-      .scroll-pct__track {
-        fill: none;
-        stroke: var(--c-border);
-        stroke-width: 2;
+
+      .spct__pct {
+        display: flex;
+        align-items: baseline;
+        gap: 1px;
+        transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
       }
-      .scroll-pct__fill {
-        fill: none;
-        stroke: var(--c-orange);
-        stroke-width: 2.5;
-        stroke-linecap: round;
-        stroke-dasharray: 119.38;
-        stroke-dashoffset: 119.38;
-        transition: stroke-dashoffset 0.15s linear;
-      }
-      .scroll-pct__value {
+
+      .spct__arrow {
         position: absolute;
         inset: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: var(--font-sans);
+        color: var(--c-text);
+        opacity: 0;
+        transform: translateY(4px);
+        transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+      }
+
+      .spct:hover .spct__pct {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+
+      .spct:hover .spct__arrow {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .spct__num {
+        font-size: 0.92rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1;
+        color: var(--c-text);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .spct__sign {
+        font-size: 0.52rem;
+        font-weight: 600;
+        color: var(--c-text-muted);
+        line-height: 1;
+        margin-left: 1px;
+      }
+
+      .spct__sep {
+        width: 1px;
+        height: 18px;
+        background: var(--c-border);
+        flex-shrink: 0;
+      }
+
+      .spct__right {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1rem;
+        height: 100%;
+      }
+
+      .spct__label-scroll,
+      .spct__label-top {
         font-size: 0.62rem;
         font-weight: 700;
-        letter-spacing: 0.02em;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        line-height: 1;
+        transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+      }
+
+      .spct__label-scroll {
+        color: var(--c-text-muted);
+      }
+
+      .spct__label-top {
+        position: absolute;
         color: var(--c-text);
-        user-select: none;
+        opacity: 0;
+        transform: translateY(4px);
       }
+
+      .spct:hover .spct__label-scroll {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+
+      .spct:hover .spct__label-top {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
       @media (max-width: 480px) {
-        .scroll-pct { bottom: 1.25rem; right: 1.25rem; width: 44px; height: 44px; }
-        .scroll-pct__value { font-size: 0.56rem; }
+        .spct {
+          bottom: 1.25rem;
+          right: 1.25rem;
+          height: 40px;
+        }
+        .spct__left { width: 46px; }
+        .spct__num { font-size: 0.82rem; }
+        .spct__right { padding: 0 0.8rem; }
+        .spct__label-scroll, .spct__label-top { font-size: 0.56rem; }
       }
+
       @media (prefers-reduced-motion: reduce) {
-        .scroll-pct { transition: none; }
-        .scroll-pct__fill { transition: none; }
+        .spct,
+        .spct__pct,
+        .spct__arrow,
+        .spct__label-scroll,
+        .spct__label-top { transition: none; }
       }
     </style>
 
@@ -175,11 +301,9 @@ const siteUrl = 'https://surfcenter-verdon.fr';
     <script is:inline>
       (function () {
         var el = document.getElementById('scrollPct');
-        var ring = document.getElementById('scrollRing');
         var val = document.getElementById('scrollValue');
-        if (!el || !ring || !val) return;
+        if (!el || !val) return;
 
-        var C = 2 * Math.PI * 19;
         var ticking = false;
         var shown = false;
         var last = -1;
@@ -193,13 +317,16 @@ const siteUrl = 'https://surfcenter-verdon.fr';
           last = pct;
           if (!shown && pct > 0) { shown = true; el.classList.add('is-active'); }
           if (shown && pct === 0) { shown = false; el.classList.remove('is-active'); }
-          ring.style.strokeDashoffset = C - (C * pct / 100);
           val.textContent = pct;
         }
 
         window.addEventListener('scroll', function () {
           if (!ticking) { ticking = true; requestAnimationFrame(update); }
         }, { passive: true });
+
+        el.addEventListener('click', function () {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
       })();
     </script>
   </body>

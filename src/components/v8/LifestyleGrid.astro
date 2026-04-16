@@ -1,0 +1,175 @@
+---
+import { Image } from 'astro:assets';
+import imgSnack from '../../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import imgYoga from '../../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import imgPaddle from '../../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+import imgWindsurf from '../../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+
+const cards = [
+  {
+    eyebrow: "Restauration",
+    title: "Pizzas au feu de bois & vue sur le lac",
+    text: "Pause gourmande à notre snack-pizzeria. Terrasse les pieds dans le sable, service continu de 11h à 18h30.",
+    image: imgSnack,
+    alt: "Vue aérienne du snack Surf Center avec le lac de Sainte-Croix",
+    href: "/restauration",
+    cta: "Voir la carte",
+  },
+  {
+    eyebrow: "Yoga & bien-être",
+    title: "Yoga face au lac au lever du soleil",
+    text: "Respirez, étirez-vous, reconnectez-vous. Séances accessibles à tous, dans un cadre unique.",
+    image: imgYoga,
+    alt: "Cours de yoga au bord du lac de Sainte-Croix — Surf Center",
+    href: "/animations",
+    cta: "Découvrir",
+  },
+  {
+    eyebrow: "Cours & initiations",
+    title: "Paddle, windsurf — progressez avec nous",
+    text: "Cours encadrés par notre équipe. Tous niveaux, du débutant au confirmé. Matériel fourni.",
+    image: imgPaddle,
+    alt: "Stand-up paddle sur le lac de Sainte-Croix",
+    href: "/animations",
+    cta: "En savoir plus",
+  },
+  {
+    eyebrow: "Sensations",
+    title: "Planche à voile & vent du Verdon",
+    text: "Le lac offre des conditions idéales pour la planche à voile. Adrénaline garantie.",
+    image: imgWindsurf,
+    alt: "Planche à voile et windsurf sur le lac de Sainte-Croix",
+    href: "/nos-locations/planche-a-voile",
+    cta: "Réserver",
+  },
+];
+---
+
+<section class="section" aria-labelledby="v8-lifestyle-title">
+  <div class="container">
+    <header class="section__header reveal">
+      <span class="section__eyebrow">Bien plus encore</span>
+      <h2 id="v8-lifestyle-title">Une journée<br/>complète au lac</h2>
+      <p class="section__lead">Restauration, animations, sensations — tout est réuni au même endroit.</p>
+    </header>
+
+    <div class="lg__grid">
+      {cards.map((c, i) => (
+        <a href={c.href} class={`lg__card reveal reveal-d${Math.min(i + 1, 4)}`}>
+          <Image
+            class="lg__img"
+            src={c.image}
+            alt={c.alt}
+            width={600}
+            height={400}
+            loading="lazy"
+            decoding="async"
+            format="webp"
+            quality={75}
+          />
+          <div class="lg__overlay"></div>
+          <div class="lg__content">
+            <span class="lg__eyebrow">{c.eyebrow}</span>
+            <h3 class="lg__title">{c.title}</h3>
+            <p class="lg__text">{c.text}</p>
+            <span class="lg__link">{c.cta} <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .lg__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-5);
+  }
+
+  .lg__card {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--r-lg);
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .lg__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+  .lg__card:hover .lg__img { transform: scale(1.05); }
+
+  .lg__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgb(0 0 0 / 0.75) 0%, rgb(0 0 0 / 0.1) 50%, rgb(0 0 0 / 0.15) 100%);
+    transition: background var(--t-normal);
+  }
+  .lg__card:hover .lg__overlay {
+    background: linear-gradient(0deg, rgb(0 0 0 / 0.85) 0%, rgb(0 0 0 / 0.2) 50%, rgb(0 0 0 / 0.25) 100%);
+  }
+
+  .lg__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--s-6) var(--s-7);
+    z-index: 1;
+  }
+
+  .lg__eyebrow {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    margin-bottom: var(--s-2);
+  }
+
+  .lg__title {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: var(--s-2);
+  }
+
+  .lg__text {
+    font-size: 0.78rem;
+    color: rgb(255 255 255 / 0.6);
+    line-height: 1.6;
+    max-width: 40ch;
+    margin-bottom: var(--s-3);
+  }
+
+  .lg__link {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--c-orange);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: all var(--t-normal) var(--ease);
+  }
+  .lg__card:hover .lg__link { opacity: 1; transform: translateY(0); }
+
+  @media (min-width: 768px) {
+    .lg__grid { grid-template-columns: repeat(2, 1fr); }
+    .lg__card:first-child { grid-column: span 2; aspect-ratio: 21 / 9; }
+  }
+</style>

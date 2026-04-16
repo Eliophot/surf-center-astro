@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ChapterHero from '../components/v9/ChapterHero.astro';
+import ChapterMorning from '../components/v9/ChapterMorning.astro';
+import ChapterAdventure from '../components/v9/ChapterAdventure.astro';
+import ChapterLunch from '../components/v9/ChapterLunch.astro';
+import ChapterVoices from '../components/v9/ChapterVoices.astro';
+import ChapterSunset from '../components/v9/ChapterSunset.astro';
+import ChapterEpilogue from '../components/v9/ChapterEpilogue.astro';
+import ChapterLinks from '../components/v9/ChapterLinks.astro';
+import { jsonLd, seoMeta } from '../data/jsonld';
+---
+
+<Layout title={seoMeta.title} description={seoMeta.description} jsonLd={jsonLd}>
+  <ChapterHero />
+  <ChapterMorning />
+  <ChapterAdventure />
+  <ChapterLunch />
+  <ChapterVoices />
+  <ChapterSunset />
+  <ChapterEpilogue />
+  <ChapterLinks />
+</Layout>

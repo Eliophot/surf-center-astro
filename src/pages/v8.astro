@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSales from '../components/v8/HeroSales.astro';
+import TrustBar from '../components/v8/TrustBar.astro';
+import ProductSlider from '../components/v8/ProductSlider.astro';
+import PricingCards from '../components/v8/PricingCards.astro';
+import ValueProps from '../components/v8/ValueProps.astro';
+import ProofWall from '../components/v8/ProofWall.astro';
+import StepsBooking from '../components/v8/StepsBooking.astro';
+import LifestyleGrid from '../components/v8/LifestyleGrid.astro';
+import TrustBadges from '../components/v8/TrustBadges.astro';
+import FaqAccordion from '../components/v8/FaqAccordion.astro';
+import ClosingCta from '../components/v8/ClosingCta.astro';
+import SiteLinks from '../components/v8/SiteLinks.astro';
+import { jsonLd, seoMeta } from '../data/jsonld';
+---
+
+<Layout title={seoMeta.title} description={seoMeta.description} jsonLd={jsonLd}>
+  <HeroSales />
+  <TrustBar />
+  <ProductSlider />
+  <PricingCards />
+  <ValueProps />
+  <ProofWall />
+  <StepsBooking />
+  <LifestyleGrid />
+  <TrustBadges />
+  <FaqAccordion />
+  <ClosingCta />
+  <SiteLinks />
+</Layout>

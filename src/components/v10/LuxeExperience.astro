@@ -1,0 +1,82 @@
+---
+import { Image } from 'astro:assets';
+import imgPaddleBateaux from '../../assets/images/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg';
+import imgEsprit from '../../assets/images/esprit.png';
+---
+
+<section class="section le" aria-labelledby="v10-experience-title">
+  <div class="container">
+    <div class="le__grid">
+      <div class="le__visual reveal">
+        <div class="le__img-main">
+          <Image class="le__img" src={imgPaddleBateaux} alt="Paddle et bateaux au lac de Sainte-Croix" width={700} height={500} loading="lazy" decoding="async" format="webp" quality={75} />
+        </div>
+        <div class="le__img-accent">
+          <Image class="le__img" src={imgEsprit} alt="Ambiance Surf Center" width={300} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
+        </div>
+      </div>
+
+      <div class="le__content reveal reveal-d1">
+        <div class="le__rule" aria-hidden="true"></div>
+        <h2 id="v10-experience-title" class="le__title">L'esprit<br/>du lieu</h2>
+        <p class="le__text">
+          Depuis plus de dix ans, Surf Center est bien plus qu'une base nautique. C'est un rendez-vous au bord du lac pour celles et ceux qui cherchent la beauté simple des grands espaces.
+        </p>
+        <ul class="le__values" role="list">
+          <li><strong>Nature</strong> — Un lac d'exception, des paysages préservés</li>
+          <li><strong>Excellence</strong> — Matériel premium, flotte récente</li>
+          <li><strong>Authenticité</strong> — Équipe passionnée, accueil sincère</li>
+        </ul>
+        <a href="/esprit-surf-center" class="le__link link-anim">Découvrir notre histoire</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .le__grid { display: grid; grid-template-columns: 1fr; gap: var(--s-10); }
+
+  .le__visual { display: grid; grid-template-columns: 1.6fr 0.8fr; gap: var(--s-4); }
+  .le__img-main { overflow: hidden; border-radius: var(--r-lg); aspect-ratio: 3 / 2; }
+  .le__img-accent { overflow: hidden; border-radius: var(--r-lg); aspect-ratio: 3 / 4; align-self: end; }
+  .le__img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }
+  .le__img-main:hover .le__img, .le__img-accent:hover .le__img { transform: scale(1.04); }
+
+  .le__rule { width: 32px; height: 1px; background: var(--c-orange); margin-bottom: var(--s-6); }
+
+  .le__title {
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 200;
+    text-transform: none;
+    line-height: 1.2;
+    margin-bottom: var(--s-6);
+  }
+
+  .le__text {
+    font-size: 0.92rem;
+    color: var(--c-text-secondary);
+    line-height: 1.85;
+    max-width: 38ch;
+    margin-bottom: var(--s-8);
+  }
+
+  .le__values {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-bottom: var(--s-8);
+  }
+
+  .le__values li {
+    font-size: 0.82rem;
+    color: var(--c-text-secondary);
+    line-height: 1.5;
+  }
+  .le__values strong { color: var(--c-text); font-weight: 600; }
+
+  .le__link { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-orange); }
+
+  @media (min-width: 900px) {
+    .le__grid { grid-template-columns: 1.3fr 1fr; align-items: center; gap: var(--s-16); }
+  }
+</style>

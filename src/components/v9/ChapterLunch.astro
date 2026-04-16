@@ -1,0 +1,89 @@
+---
+import { Image } from 'astro:assets';
+import imgSnack from '../../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+---
+
+<section class="section chl" aria-labelledby="v9-lunch-title">
+  <div class="container">
+    <div class="chl__header reveal">
+      <span class="chl__chapter">Chapitre 04</span>
+      <span class="chl__clock">12h30</span>
+    </div>
+
+    <div class="chl__split">
+      <div class="chl__visual reveal">
+        <Image class="chl__img" src={imgSnack} alt="Vue aérienne du snack-pizzeria Surf Center avec le lac" width={800} height={500} loading="lazy" decoding="async" format="webp" quality={75} />
+      </div>
+      <div class="chl__copy reveal reveal-d1">
+        <h2 id="v9-lunch-title" class="chl__title">Pause. On mange<br/>face au lac.</h2>
+        <p class="chl__text">
+          Les pieds dans le sable, une pizza au feu de bois devant vous, le lac de Sainte-Croix en toile de fond. Ici, même le déjeuner est un moment qu'on ne veut pas oublier.
+        </p>
+        <ul class="chl__menu" role="list">
+          <li>Pizzas artisanales au feu de bois</li>
+          <li>Salades fraîches & bowls</li>
+          <li>Glaces & boissons fraîches</li>
+          <li>Terrasse face au lac</li>
+        </ul>
+        <a href="/restauration" class="btn btn--primary">Voir la carte</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .chl__header {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    margin-bottom: var(--s-10);
+  }
+  .chl__chapter { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--c-orange); }
+  .chl__clock { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.1em; color: var(--c-text-muted); padding: 0.2rem 0.6rem; border: 1px solid var(--c-border-light); border-radius: var(--r-full); }
+
+  .chl__split { display: grid; grid-template-columns: 1fr; gap: var(--s-10); }
+
+  .chl__visual { overflow: hidden; border-radius: var(--r-lg); }
+  .chl__img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; display: block; transition: transform 0.8s var(--ease); }
+  .chl__visual:hover .chl__img { transform: scale(1.03); }
+
+  .chl__title {
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    font-weight: 300;
+    text-transform: none;
+    line-height: 1.15;
+    margin-bottom: var(--s-6);
+  }
+
+  .chl__text {
+    font-size: 0.95rem;
+    color: var(--c-text-secondary);
+    line-height: 1.8;
+    max-width: 40ch;
+    margin-bottom: var(--s-6);
+  }
+
+  .chl__menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-bottom: var(--s-8);
+  }
+
+  .chl__menu li {
+    font-size: 0.82rem;
+    color: var(--c-text-secondary);
+    padding-left: var(--s-5);
+    position: relative;
+  }
+  .chl__menu li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--c-orange);
+  }
+
+  @media (min-width: 900px) {
+    .chl__split { grid-template-columns: 1.3fr 1fr; align-items: center; gap: var(--s-16); }
+  }
+</style>

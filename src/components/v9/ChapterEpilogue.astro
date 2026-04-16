@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+import heroImg from '../../assets/images/hero-home.jpg';
+---
+
+<section class="section chep" aria-labelledby="v9-epilogue-title">
+  <Image
+    class="chep__bg"
+    src={heroImg}
+    alt=""
+    widths={[640, 1024, 1440, 1920]}
+    sizes="100vw"
+    loading="lazy"
+    decoding="async"
+    format="webp"
+    quality={70}
+  />
+  <div class="chep__overlay" aria-hidden="true"></div>
+
+  <div class="container chep__inner reveal">
+    <span class="chep__chapter">Épilogue</span>
+    <h2 id="v9-epilogue-title" class="chep__title">Et demain,<br/>on recommence ?</h2>
+    <p class="chep__text">
+      La meilleure journée au lac, c'est celle que vous n'avez pas encore vécue.<br/>
+      Réservez la vôtre — d'avril à octobre, le Surf Center vous attend.
+    </p>
+    <div class="chep__actions">
+      <button type="button" class="btn btn--primary btn--lg" data-booking>
+        <span class="btn-flip__inner"><span class="btn-flip__front">Écrire mon chapitre</span><span class="btn-flip__back">Écrire mon chapitre</span></span>
+      </button>
+      <a href="tel:+33492771450" class="btn btn--ghost btn--lg">04 92 77 14 50</a>
+    </div>
+    <p class="chep__micro">Dès 10€/h · Annulation gratuite · Paiement sécurisé</p>
+  </div>
+</section>
+
+<style>
+  .chep {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .chep__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .chep__overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgb(10 10 10 / 0.6) 0%, rgb(10 10 10 / 0.8) 100%); }
+
+  .chep__inner { position: relative; z-index: 2; text-align: center; max-width: 42rem; margin-inline: auto; }
+
+  .chep__chapter { display: inline-block; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--c-orange); margin-bottom: var(--s-6); }
+  .chep__title { font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 300; text-transform: none; color: #fff; line-height: 1.15; margin-bottom: var(--s-6); }
+  .chep__text { font-size: 0.95rem; color: rgb(255 255 255 / 0.6); line-height: 1.8; margin-bottom: var(--s-10); }
+  .chep__actions { display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap; }
+  .chep__micro { margin-top: var(--s-5); font-size: 0.68rem; color: rgb(255 255 255 / 0.35); }
+</style>

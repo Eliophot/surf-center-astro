@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+import imgSnack from '../../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+---
+
+<section class="section ld" aria-labelledby="v10-dining-title">
+  <div class="container ld__grid">
+    <div class="ld__content reveal">
+      <div class="ld__rule" aria-hidden="true"></div>
+      <h2 id="v10-dining-title" class="ld__title">La table</h2>
+      <p class="ld__text">
+        Notre snack-pizzeria est un prolongement naturel de l'expérience. Pizzas au feu de bois, salades composées avec des produits locaux, glaces artisanales — le tout servi face au lac.
+      </p>
+      <div class="ld__details">
+        <span>Pizzas au feu de bois</span>
+        <span>Salades & bowls</span>
+        <span>Glaces artisanales</span>
+        <span>11h — 18h30</span>
+      </div>
+      <a href="/restauration" class="le__link link-anim">Découvrir la carte</a>
+    </div>
+    <div class="ld__visual reveal reveal-d1">
+      <Image class="ld__img" src={imgSnack} alt="Snack-pizzeria face au lac de Sainte-Croix" width={700} height={500} loading="lazy" decoding="async" format="webp" quality={75} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .ld__grid { display: grid; grid-template-columns: 1fr; gap: var(--s-10); align-items: center; }
+
+  .ld__rule { width: 32px; height: 1px; background: var(--c-orange); margin-bottom: var(--s-6); }
+  .ld__title {
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 200;
+    text-transform: none;
+    margin-bottom: var(--s-6);
+  }
+  .ld__text { font-size: 0.92rem; color: var(--c-text-secondary); line-height: 1.85; max-width: 38ch; margin-bottom: var(--s-6); }
+
+  .ld__details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    margin-bottom: var(--s-8);
+  }
+  .ld__details span {
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-full);
+  }
+
+  .le__link { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-orange); }
+
+  .ld__visual { overflow: hidden; border-radius: var(--r-lg); }
+  .ld__img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; display: block; transition: transform 0.8s var(--ease); }
+  .ld__visual:hover .ld__img { transform: scale(1.03); }
+
+  @media (min-width: 900px) { .ld__grid { grid-template-columns: 1fr 1.3fr; gap: var(--s-16); } }
+</style>

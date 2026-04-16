@@ -1,0 +1,81 @@
+---
+const voices = [
+  { quote: "Un cadre magnifique, un accueil au top. On a passé une journée incroyable sur le lac avec les enfants.", author: "Sophie L.", moment: "Août 2025" },
+  { quote: "Le paddle au lever du soleil, c'est juste magique. La meilleure base nautique du Verdon.", author: "Maxime R.", moment: "Juillet 2025" },
+  { quote: "Les pizzas du snack sont excellentes. L'endroit idéal pour une journée complète au lac.", author: "Camille & Julien", moment: "Septembre 2025" },
+];
+---
+
+<section class="section chv section--surface" aria-labelledby="v9-voices-title">
+  <div class="container">
+    <div class="chv__header reveal">
+      <span class="chv__chapter">Interlude</span>
+    </div>
+
+    <h2 id="v9-voices-title" class="chv__title reveal">Ce qu'ils racontent<br/>en rentrant</h2>
+
+    <div class="chv__list">
+      {voices.map((v, i) => (
+        <blockquote class={`chv__quote reveal reveal-d${i + 1}`}>
+          <p class="chv__text">&ldquo;{v.quote}&rdquo;</p>
+          <footer class="chv__footer">
+            <cite class="chv__author">{v.author}</cite>
+            <span class="chv__moment">{v.moment}</span>
+          </footer>
+        </blockquote>
+      ))}
+    </div>
+
+    <div class="chv__rating reveal">
+      <span class="chv__stars">★★★★★</span>
+      <span class="chv__rating-text">4.8/5 sur Google — 320+ avis</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .chv__header { margin-bottom: var(--s-5); }
+  .chv__chapter { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--c-orange); }
+
+  .chv__title {
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    font-weight: 300;
+    text-transform: none;
+    line-height: 1.15;
+    margin-bottom: var(--s-12);
+  }
+
+  .chv__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+
+  .chv__quote {
+    padding: var(--s-8);
+    background: var(--c-bg);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--c-border-light);
+    margin: 0;
+  }
+
+  .chv__text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--c-text);
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: var(--s-6);
+  }
+
+  .chv__footer { display: flex; align-items: center; gap: var(--s-3); }
+  .chv__author { font-style: normal; font-weight: 600; font-size: 0.78rem; color: var(--c-text); }
+  .chv__moment { font-size: 0.68rem; color: var(--c-text-muted); }
+  .chv__moment::before { content: '· '; }
+
+  .chv__rating { display: flex; align-items: center; gap: var(--s-3); margin-top: var(--s-10); }
+  .chv__stars { color: #fbbf24; font-size: 0.9rem; letter-spacing: 2px; }
+  .chv__rating-text { font-size: 0.75rem; font-weight: 500; color: var(--c-text-muted); }
+
+  @media (min-width: 768px) { .chv__list { grid-template-columns: repeat(3, 1fr); } }
+</style>

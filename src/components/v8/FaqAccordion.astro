@@ -1,0 +1,96 @@
+---
+const faqs = [
+  { question: "Où se trouve Surf Center ?", answer: "Surf Center est situé aux Salles-sur-Verdon, directement sur la plage du lac de Sainte-Croix, au cœur des Gorges du Verdon en Provence." },
+  { question: "Faut-il un permis pour louer un bateau ?", answer: "Non, aucun permis n'est nécessaire pour nos bateaux électriques. Un briefing de sécurité est donné avant chaque départ." },
+  { question: "Quelles activités proposez-vous ?", answer: "Bateaux électriques sans permis, paddles, pédalos, kayaks et bouées tractées. Accessibles à tous les niveaux." },
+  { question: "Quels sont les tarifs ?", answer: "À partir de 10€/h pour un canoë, 15€/h pour un paddle ou pédalo, et 55€/h pour un bateau électrique (jusqu'à 7 personnes). Réductions pour les demi-journées et journées complètes." },
+  { question: "Surf Center est-il ouvert toute l'année ?", answer: "Ouvert d'avril à octobre, tous les jours de 9h à 19h en pleine saison. Horaires adaptés en début et fin de saison." },
+  { question: "Y a-t-il un restaurant sur place ?", answer: "Oui, notre snack-pizzeria propose pizzas au feu de bois, salades, glaces et boissons fraîches avec vue sur le lac." },
+  { question: "Comment réserver une activité ?", answer: "En ligne sur notre site ou directement sur place. La réservation en ligne est recommandée en juillet-août." },
+  { question: "Peut-on annuler une réservation ?", answer: "Oui, l'annulation est gratuite jusqu'à 24h avant votre créneau. Le remboursement est intégral." },
+];
+---
+
+<section class="section section--surface" aria-labelledby="v8-faq-title">
+  <div class="container faq-wrap">
+    <header class="section__header reveal">
+      <span class="section__eyebrow">Questions fréquentes</span>
+      <h2 id="v8-faq-title">Vos questions,<br/>nos réponses</h2>
+    </header>
+
+    <div class="faq-list reveal">
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-item__q">
+            <span>{faq.question}</span>
+            <svg class="faq-item__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="faq-item__a"><p>{faq.answer}</p></div>
+        </details>
+      ))}
+    </div>
+
+    <div class="faq-cta reveal">
+      <p class="faq-cta__text">Une autre question ?</p>
+      <a href="/acces-contact" class="btn btn--secondary btn--sm">Nous contacter</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-wrap { max-width: var(--max-w-narrow); }
+  .faq-list { display: flex; flex-direction: column; }
+
+  .faq-item { border-bottom: 1px solid var(--c-border-light); }
+
+  .faq-item__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-6);
+    padding: var(--s-6) 0;
+    font-weight: 500;
+    font-size: 0.92rem;
+    cursor: pointer;
+    list-style: none;
+    color: var(--c-text);
+    transition: color var(--t-fast);
+  }
+  .faq-item__q::-webkit-details-marker { display: none; }
+  .faq-item__q::marker { content: ''; }
+  .faq-item__q:hover { color: var(--c-orange); }
+
+  .faq-item__chevron {
+    flex-shrink: 0;
+    color: var(--c-text-muted);
+    transition: transform var(--t-normal) var(--ease);
+  }
+  .faq-item[open] .faq-item__chevron { transform: rotate(180deg); color: var(--c-orange); }
+
+  .faq-item__a {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--t-normal) var(--ease);
+  }
+  .faq-item[open] .faq-item__a { grid-template-rows: 1fr; }
+
+  .faq-item__a > p {
+    overflow: hidden;
+    font-size: 0.88rem;
+    color: var(--c-text-secondary);
+    line-height: 1.7;
+  }
+  .faq-item[open] .faq-item__a > p { padding-bottom: var(--s-6); }
+
+  .faq-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-4);
+    margin-top: var(--s-10);
+    flex-wrap: wrap;
+  }
+  .faq-cta__text { font-size: 0.85rem; color: var(--c-text-muted); }
+</style>

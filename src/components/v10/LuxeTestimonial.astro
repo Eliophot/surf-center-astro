@@ -1,0 +1,78 @@
+---
+const reviews = [
+  { quote: "Un cadre magnifique, un accueil au top et des bateaux en très bon état. Journée incroyable.", author: "Sophie L.", context: "Famille · Août" },
+  { quote: "Le paddle au lever du soleil sur le lac de Sainte-Croix, c'est juste magique.", author: "Maxime R.", context: "Paddle · Juillet" },
+  { quote: "Le must du Verdon. Les pizzas sont excellentes et l'ambiance parfaite.", author: "Camille & Julien", context: "Couple · Septembre" },
+];
+---
+
+<section class="section lt section--surface" aria-labelledby="v10-testimonial-title">
+  <div class="container lt__inner">
+    <div class="lt__header reveal">
+      <div class="lt__rule" aria-hidden="true"></div>
+      <h2 id="v10-testimonial-title" class="lt__title">Paroles de visiteurs</h2>
+    </div>
+
+    <div class="lt__grid">
+      {reviews.map((r, i) => (
+        <blockquote class={`lt__card reveal reveal-d${i + 1}`}>
+          <p class="lt__quote">&ldquo;{r.quote}&rdquo;</p>
+          <footer class="lt__footer">
+            <cite class="lt__author">{r.author}</cite>
+            <span class="lt__ctx">{r.context}</span>
+          </footer>
+        </blockquote>
+      ))}
+    </div>
+
+    <p class="lt__rating reveal">★★★★★ 4.8/5 — 320 avis Google</p>
+  </div>
+</section>
+
+<style>
+  .lt__inner { max-width: 960px; }
+  .lt__header { margin-bottom: var(--s-10); }
+  .lt__rule { width: 32px; height: 1px; background: var(--c-orange); margin-bottom: var(--s-5); }
+  .lt__title {
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 200;
+    text-transform: none;
+  }
+
+  .lt__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+
+  .lt__card {
+    padding: var(--s-8);
+    background: var(--c-bg);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--c-border-light);
+    margin: 0;
+  }
+
+  .lt__quote {
+    font-size: 1.05rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.8;
+    color: var(--c-text);
+    margin-bottom: var(--s-6);
+  }
+
+  .lt__footer { display: flex; align-items: center; gap: var(--s-3); }
+  .lt__author { font-style: normal; font-weight: 600; font-size: 0.78rem; color: var(--c-text); }
+  .lt__ctx { font-size: 0.68rem; color: var(--c-text-muted); }
+  .lt__ctx::before { content: '· '; }
+
+  .lt__rating {
+    margin-top: var(--s-8);
+    font-size: 0.75rem;
+    color: var(--c-text-muted);
+    font-weight: 500;
+  }
+
+  @media (min-width: 768px) { .lt__grid { grid-template-columns: repeat(3, 1fr); } }
+</style>

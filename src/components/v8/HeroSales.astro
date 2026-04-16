@@ -1,0 +1,303 @@
+---
+import { Image } from 'astro:assets';
+import heroImg from '../../assets/images/hero-home.jpg';
+---
+
+<section class="hero" data-hero aria-label="Surf Center — base nautique au lac de Sainte-Croix">
+  <Image
+    class="hero__img"
+    src={heroImg}
+    alt="Kayak sur les eaux turquoise des Gorges du Verdon, falaises et végétation méditerranéenne"
+    widths={[640, 1024, 1440, 1920]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+    format="webp"
+    quality={80}
+  />
+  <div class="hero__overlay" aria-hidden="true"></div>
+
+  <div class="hero__badge" aria-label="Saison 2026 ouverte">
+    <span class="hero__badge-dot" aria-hidden="true"></span>
+    Saison 2026 — Réservations ouvertes
+  </div>
+
+  <div class="hero__content">
+    <p class="hero__eyebrow">
+      <span class="hero__dot" aria-hidden="true"></span>
+      Lac de Sainte-Croix · Gorges du Verdon
+    </p>
+    <h1 class="hero__title">Surf<br/>Center</h1>
+    <p class="hero__baseline">Votre journée parfaite au lac commence ici</p>
+
+    <div class="hero__proof">
+      <div class="hero__proof-item">
+        <span class="hero__stars" aria-label="4.8 étoiles sur 5">★★★★★</span>
+        <span class="hero__proof-text">4.8/5 — 320+ avis</span>
+      </div>
+      <span class="hero__proof-sep" aria-hidden="true"></span>
+      <div class="hero__proof-item">
+        <span class="hero__proof-text">N°1 base nautique Sainte-Croix</span>
+      </div>
+    </div>
+
+    <div class="hero__actions">
+      <button type="button" class="btn btn--primary btn--lg hero__cta-main" data-booking>
+        <span class="btn-flip__inner">
+          <span class="btn-flip__front">Réserver maintenant</span>
+          <span class="btn-flip__back">Réserver maintenant</span>
+        </span>
+      </button>
+      <a href="#tarifs" class="btn btn--ghost btn--lg">Voir les tarifs</a>
+    </div>
+
+    <p class="hero__sub-cta">Dès 10€/h · Aucun permis requis · Annulation gratuite</p>
+  </div>
+
+  <div class="hero__bottom">
+    <div class="hero__scroll" aria-hidden="true">
+      <span class="hero__scroll-line"></span>
+    </div>
+    <p class="hero__location">Les Salles-sur-Verdon, Provence</p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: 100svh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+
+  .hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    z-index: 0;
+    animation: slow-zoom 25s var(--ease-smooth) forwards;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(180deg,
+        rgb(0 0 0 / 0.55) 0%,
+        rgb(0 0 0 / 0.3) 30%,
+        rgb(0 0 0 / 0.25) 55%,
+        rgb(0 0 0 / 0.7) 100%);
+  }
+
+  .hero__badge {
+    position: absolute;
+    top: calc(var(--header-h) + var(--s-4));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 0.45rem 1rem;
+    border-radius: var(--r-full);
+    background: rgb(247 123 70 / 0.15);
+    border: 1px solid rgb(247 123 70 / 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-orange-light);
+    white-space: nowrap;
+    animation: fade-up 700ms var(--ease-smooth) 100ms both;
+  }
+
+  .hero__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: v8-pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes v8-pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding-inline: var(--s-6);
+    max-width: 56rem;
+    margin-top: calc(var(--header-h) * 0.5);
+  }
+
+  .hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.85) !important;
+    margin-bottom: var(--s-8);
+    text-shadow: 0 1px 8px rgb(0 0 0 / 0.5);
+    animation: fade-up 900ms var(--ease-smooth) 200ms both;
+  }
+
+  .hero__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .hero__title {
+    font-size: clamp(4rem, 14vw, 9rem);
+    font-weight: 800;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    margin-bottom: var(--s-6);
+    text-shadow: 0 4px 40px rgb(0 0 0 / 0.5), 0 1px 3px rgb(0 0 0 / 0.3);
+    animation: fade-up 900ms var(--ease-smooth) 400ms both;
+  }
+
+  .hero__baseline {
+    font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: rgb(255 255 255 / 0.8) !important;
+    margin-bottom: var(--s-8);
+    text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
+    animation: fade-up 900ms var(--ease-smooth) 550ms both;
+  }
+
+  .hero__proof {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-4);
+    margin-bottom: var(--s-10);
+    animation: fade-up 900ms var(--ease-smooth) 650ms both;
+    flex-wrap: wrap;
+  }
+
+  .hero__proof-item {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+  }
+
+  .hero__stars {
+    font-size: 0.8rem;
+    color: #fbbf24;
+    letter-spacing: 2px;
+  }
+
+  .hero__proof-text {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: rgb(255 255 255 / 0.6);
+    letter-spacing: 0.04em;
+  }
+
+  .hero__proof-sep {
+    width: 1px;
+    height: 14px;
+    background: rgb(255 255 255 / 0.2);
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: var(--s-4);
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fade-up 900ms var(--ease-smooth) 750ms both;
+  }
+
+  .hero__cta-main {
+    box-shadow: 0 4px 30px rgb(247 123 70 / 0.4);
+  }
+
+  .hero__sub-cta {
+    margin-top: var(--s-5);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: rgb(255 255 255 / 0.45);
+    letter-spacing: 0.06em;
+    animation: fade-up 900ms var(--ease-smooth) 900ms both;
+  }
+
+  .hero__bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: var(--s-8) var(--s-8) var(--s-6);
+    animation: fade-up 900ms var(--ease-smooth) 1200ms both;
+  }
+
+  .hero__scroll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__scroll-line {
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(180deg, transparent, rgb(255 255 255 / 0.5));
+    animation: v8-scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes v8-scroll-pulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; }
+    50%      { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  }
+
+  .hero__location {
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.45);
+    text-shadow: 0 1px 6px rgb(0 0 0 / 0.4);
+  }
+
+  @media (max-width: 600px) {
+    .hero__proof-sep { display: none; }
+    .hero__proof { flex-direction: column; gap: var(--s-2); }
+    .hero__badge { font-size: 0.58rem; padding: 0.4rem 0.8rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero__actions { flex-direction: column; align-items: center; }
+    .hero__location { display: none; }
+    .hero__bottom { justify-content: center; }
+  }
+
+  @media (min-width: 1400px) {
+    .hero__title { font-size: 10rem; }
+  }
+</style>

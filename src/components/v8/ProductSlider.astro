@@ -1,0 +1,327 @@
+---
+import { Image } from 'astro:assets';
+import imgPlanche from '../../assets/images/location-planche-a-voile.png';
+import imgBateau from '../../assets/images/location-bateau-electrique.jpeg';
+import imgPedalo from '../../assets/images/location-pedalo.jpg';
+import imgPaddle from '../../assets/images/location-paddle.jpeg';
+import imgCanoe from '../../assets/images/location-canoe.jpeg';
+
+const locations = [
+  {
+    title: "Bateau électrique",
+    description: "Sans permis · Jusqu'à 7 pers.",
+    price: 55,
+    image: imgBateau,
+    alt: "Bateau électrique sur le lac de Sainte-Croix",
+    tag: "62329049-d954-482c-82a1-faa16321e3bf",
+    badge: "Populaire",
+  },
+  {
+    title: "Paddle board",
+    description: "Accessible à tous · Vue garantie",
+    price: 15,
+    image: imgPaddle,
+    alt: "Paddle board sur le lac de Sainte-Croix",
+    tag: "52bf76b6-6f0a-43ff-b0a2-4c1332d5ede5",
+    badge: "",
+  },
+  {
+    title: "Pédalo",
+    description: "En famille · Criques secrètes",
+    price: 15,
+    image: imgPedalo,
+    alt: "Pédalos sur le lac de Sainte-Croix",
+    tag: "03a55e88-44ac-4161-ad03-aa857b1d0dc0",
+    badge: "Familles",
+  },
+  {
+    title: "Planche à voile",
+    description: "Adrénaline · Vent du Verdon",
+    price: 20,
+    image: imgPlanche,
+    alt: "Planche à voile sur le lac de Sainte-Croix",
+    tag: "7a524907-97b7-42bd-bfdc-deb401767b21",
+    badge: "",
+  },
+  {
+    title: "Canoë",
+    description: "Exploration · Face aux falaises",
+    price: 10,
+    image: imgCanoe,
+    alt: "Canoë sur le lac de Sainte-Croix",
+    tag: "e57bf5a3-2296-4226-94a8-06295b1415d8",
+    badge: "Dès 10€",
+  },
+];
+---
+
+<section id="activites" class="section" aria-labelledby="v8-activities-title">
+  <div class="container">
+    <header class="section__header reveal">
+      <span class="section__eyebrow">Nos locations</span>
+      <h2 id="v8-activities-title">Choisissez votre<br/>aventure</h2>
+      <p class="section__lead">Bateaux, paddle, pédalo — trouvez l'activité qui vous ressemble.</p>
+    </header>
+
+    <div class="sl-wrap reveal">
+      <button class="sl__arrow sl__arrow--prev" type="button" data-v8-slider-prev aria-label="Précédent">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="sl" data-v8-slider>
+        <div class="sl__track" data-v8-slider-track>
+          {locations.map((loc) => (
+            <button
+              type="button"
+              class="sl__card"
+              data-product-book
+              data-tag={loc.tag}
+              aria-label={`Réserver ${loc.title} — dès ${loc.price}€/h`}
+            >
+              <Image
+                class="sl__img"
+                src={loc.image}
+                alt={loc.alt}
+                width={600}
+                height={800}
+                loading="lazy"
+                decoding="async"
+                format="webp"
+                quality={75}
+              />
+              <div class="sl__overlay"></div>
+              {loc.badge && <span class="sl__badge">{loc.badge}</span>}
+              <div class="sl__price">
+                <span class="sl__price-label">dès</span>
+                <span class="sl__price-amount">{loc.price}<span class="sl__price-cur">€</span></span>
+                <span class="sl__price-unit">/h</span>
+              </div>
+              <div class="sl__content">
+                <h3 class="sl__title">{loc.title}</h3>
+                <p class="sl__desc">{loc.description}</p>
+                <span class="sl__link">
+                  Réserver <span aria-hidden="true">→</span>
+                </span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <button class="sl__arrow sl__arrow--next" type="button" data-v8-slider-next aria-label="Suivant">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="sl-cta reveal reveal-d1">
+      <a href="/nos-locations" class="btn btn--secondary">Toutes nos locations</a>
+      <button type="button" class="btn btn--primary" data-booking><span class="btn-flip__inner"><span class="btn-flip__front">Réserver</span><span class="btn-flip__back">Réserver</span></span></button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sl-wrap { position: relative; }
+  .sl { overflow: hidden; margin-bottom: var(--s-8); }
+
+  .sl__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    transform: translateY(calc(-50% - var(--s-4)));
+    width: 48px;
+    height: 48px;
+    border-radius: var(--r-full);
+    border: 1.5px solid rgb(255 255 255 / 0.3);
+    background: rgb(0 0 0 / 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--t-fast) var(--ease);
+  }
+  .sl__arrow:hover { background: rgb(0 0 0 / 0.55); border-color: rgb(255 255 255 / 0.5); }
+  .sl__arrow:disabled { opacity: 0; pointer-events: none; }
+  .sl__arrow--prev { left: var(--s-4); }
+  .sl__arrow--next { right: var(--s-4); }
+
+  .sl__track {
+    display: flex;
+    gap: var(--s-4);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--s-2);
+  }
+  .sl__track::-webkit-scrollbar { display: none; }
+
+  .sl__card {
+    position: relative;
+    flex: 0 0 75%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: var(--r-lg);
+    text-align: left;
+    color: #fff;
+    scroll-snap-align: start;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .sl__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+  .sl__card:hover .sl__img { transform: scale(1.06); }
+
+  .sl__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgb(0 0 0 / 0.7) 0%, rgb(0 0 0 / 0.05) 50%, rgb(0 0 0 / 0.15) 100%);
+    transition: background var(--t-normal);
+  }
+  .sl__card:hover .sl__overlay {
+    background: linear-gradient(0deg, rgb(0 0 0 / 0.8) 0%, rgb(0 0 0 / 0.15) 50%, rgb(0 0 0 / 0.25) 100%);
+  }
+
+  .sl__badge {
+    position: absolute;
+    top: var(--s-4);
+    left: var(--s-4);
+    z-index: 2;
+    padding: 0.3rem 0.7rem;
+    border-radius: var(--r-full);
+    background: var(--c-orange);
+    color: #fff;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .sl__price {
+    position: absolute;
+    top: var(--s-4);
+    right: var(--s-4);
+    z-index: 2;
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--r-full);
+    background: rgb(0 0 0 / 0.45);
+    backdrop-filter: blur(16px) saturate(1.5);
+    -webkit-backdrop-filter: blur(16px) saturate(1.5);
+    line-height: 1;
+  }
+  .sl__price-label {
+    font-size: 0.52rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.5);
+  }
+  .sl__price-amount {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+  .sl__price-cur { font-size: 0.7em; font-weight: 700; opacity: 0.6; margin-left: 1px; }
+  .sl__price-unit { font-size: 0.55rem; color: rgb(255 255 255 / 0.4); font-weight: 500; }
+
+  .sl__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--s-6);
+    z-index: 1;
+  }
+  .sl__title {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+    margin-bottom: var(--s-1);
+  }
+  .sl__desc {
+    font-size: 0.75rem;
+    color: rgb(255 255 255 / 0.6);
+    letter-spacing: 0.04em;
+    margin-bottom: var(--s-3);
+  }
+  .sl__link {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--c-orange);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all var(--t-normal) var(--ease);
+  }
+  .sl__card:hover .sl__link { opacity: 1; transform: translateY(0); }
+
+  .sl-cta {
+    display: flex;
+    gap: var(--s-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 599px) {
+    .sl__arrow { width: 40px; height: 40px; }
+    .sl__arrow--prev { left: var(--s-2); }
+    .sl__arrow--next { right: var(--s-2); }
+  }
+  @media (min-width: 600px) { .sl__card { flex: 0 0 45%; } }
+  @media (min-width: 900px) { .sl__card { flex: 0 0 30%; } }
+  @media (min-width: 1200px) { .sl__card { flex: 0 0 23%; } }
+</style>
+
+<script>
+  document.querySelectorAll('[data-v8-slider]').forEach((slider) => {
+    const track = slider.querySelector('[data-v8-slider-track]') as HTMLElement | null;
+    const wrap = slider.closest('.sl-wrap');
+    const prevBtn = wrap?.querySelector('[data-v8-slider-prev]') as HTMLButtonElement | null;
+    const nextBtn = wrap?.querySelector('[data-v8-slider-next]') as HTMLButtonElement | null;
+    if (!track) return;
+
+    const getScrollAmount = () => {
+      const card = track.querySelector('.sl__card') as HTMLElement | null;
+      return card ? card.offsetWidth + 16 : 300;
+    };
+
+    const updateArrows = () => {
+      if (prevBtn) prevBtn.disabled = track.scrollLeft <= 2;
+      if (nextBtn) nextBtn.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    };
+
+    updateArrows();
+    track.addEventListener('scroll', updateArrows, { passive: true });
+    prevBtn?.addEventListener('click', () => track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' }));
+    nextBtn?.addEventListener('click', () => track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' }));
+  });
+</script>

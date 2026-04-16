@@ -1,0 +1,161 @@
+---
+import { Image } from 'astro:assets';
+import heroImg from '../../assets/images/hero-home.jpg';
+---
+
+<section class="ch" data-hero aria-label="Votre journée au lac de Sainte-Croix">
+  <Image
+    class="ch__img"
+    src={heroImg}
+    alt="Eaux turquoise du lac de Sainte-Croix au lever du soleil"
+    widths={[640, 1024, 1440, 1920]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+    format="webp"
+    quality={80}
+  />
+  <div class="ch__overlay" aria-hidden="true"></div>
+
+  <div class="ch__content">
+    <span class="ch__chapter" aria-hidden="true">Chapitre 01</span>
+    <h1 class="ch__title">Il était une fois<br/>un lac</h1>
+    <p class="ch__intro">
+      Imaginez des eaux turquoise encadrées de falaises vertigineuses.<br/>
+      Un endroit où le temps s'arrête. Bienvenue au Surf Center.
+    </p>
+    <div class="ch__actions">
+      <a href="#prologue" class="ch__scroll-btn">
+        Commencer l'histoire
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="ch__time" aria-hidden="true">
+    <span class="ch__time-line"></span>
+    <span class="ch__time-label">9h00</span>
+  </div>
+</section>
+
+<style>
+  .ch {
+    position: relative;
+    height: 100svh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+
+  .ch__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    z-index: 0;
+    animation: slow-zoom 30s var(--ease-smooth) forwards;
+  }
+
+  .ch__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.5) 0%, rgb(0 0 0 / 0.2) 40%, rgb(0 0 0 / 0.7) 100%);
+  }
+
+  .ch__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding-inline: var(--s-6);
+    max-width: 48rem;
+  }
+
+  .ch__chapter {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    margin-bottom: var(--s-8);
+    animation: fade-up 800ms var(--ease-smooth) 200ms both;
+  }
+
+  .ch__title {
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-transform: none;
+    color: #fff !important;
+    margin-bottom: var(--s-8);
+    animation: fade-up 800ms var(--ease-smooth) 400ms both;
+  }
+
+  .ch__intro {
+    font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+    font-weight: 400;
+    color: rgb(255 255 255 / 0.65);
+    line-height: 1.8;
+    max-width: 36ch;
+    margin-inline: auto;
+    margin-bottom: var(--s-12);
+    animation: fade-up 800ms var(--ease-smooth) 600ms both;
+  }
+
+  .ch__actions { animation: fade-up 800ms var(--ease-smooth) 800ms both; }
+
+  .ch__scroll-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.5);
+    text-decoration: none;
+    transition: color var(--t-fast);
+  }
+  .ch__scroll-btn:hover { color: #fff; }
+  .ch__scroll-btn svg { animation: bounce-subtle 2s ease-in-out infinite; }
+
+  .ch__time {
+    position: absolute;
+    bottom: var(--s-10);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-3);
+    animation: fade-up 800ms var(--ease-smooth) 1200ms both;
+  }
+
+  .ch__time-line {
+    display: block;
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(180deg, transparent, rgb(255 255 255 / 0.3));
+  }
+
+  .ch__time-label {
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.3);
+  }
+
+  @media (max-width: 480px) {
+    .ch__title { font-weight: 400; }
+  }
+</style>

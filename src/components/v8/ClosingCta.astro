@@ -1,0 +1,139 @@
+---
+import { Image } from 'astro:assets';
+import ctaBg from '../../assets/images/hero-home.jpg';
+---
+
+<section class="section ccta" aria-labelledby="v8-cta-title">
+  <Image
+    class="ccta__bg"
+    src={ctaBg}
+    alt=""
+    widths={[640, 1024, 1440, 1920]}
+    sizes="100vw"
+    loading="lazy"
+    decoding="async"
+    format="webp"
+    quality={70}
+  />
+  <div class="ccta__overlay" aria-hidden="true"></div>
+
+  <div class="container ccta__inner reveal">
+    <span class="section__eyebrow ccta__eyebrow">La saison est courte</span>
+    <h2 id="v8-cta-title" class="ccta__title">N'attendez plus,<br/>réservez votre place</h2>
+    <p class="ccta__text">
+      D'avril à octobre, chaque journée au bord du lac est précieuse.<br/>
+      Les créneaux en juillet-août partent vite — réservez dès maintenant.
+    </p>
+
+    <div class="ccta__proof">
+      <span class="ccta__proof-dot" aria-hidden="true"></span>
+      <span class="ccta__proof-text">320+ avis 5 étoiles · 20 000+ visiteurs par été</span>
+    </div>
+
+    <div class="ccta__actions">
+      <button type="button" class="btn btn--primary btn--lg ccta__btn" data-booking>
+        <span class="btn-flip__inner"><span class="btn-flip__front">Réserver maintenant</span><span class="btn-flip__back">Réserver maintenant</span></span>
+      </button>
+      <a href="tel:+33492771450" class="btn btn--ghost btn--lg">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="margin-right:6px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.35a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.75.32 1.54.55 2.35.68A2 2 0 0 1 22 16.92Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        04 92 77 14 50
+      </a>
+    </div>
+
+    <p class="ccta__micro">Dès 10€/h · Annulation gratuite 24h avant · Paiement sécurisé</p>
+  </div>
+</section>
+
+<style>
+  .ccta {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .ccta__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .ccta__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, rgb(10 10 10 / 0.65) 0%, rgb(10 10 10 / 0.8) 100%);
+  }
+
+  .ccta__inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+
+  .ccta__eyebrow { color: var(--c-orange); }
+
+  .ccta__title {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    color: #fff;
+    margin-bottom: var(--s-5);
+  }
+
+  .ccta__text {
+    font-size: 0.95rem;
+    color: rgb(255 255 255 / 0.6);
+    line-height: 1.7;
+    margin-bottom: var(--s-6);
+  }
+
+  .ccta__proof {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    margin-bottom: var(--s-10);
+    padding: 0.4rem 1rem;
+    border-radius: var(--r-full);
+    background: rgb(255 255 255 / 0.08);
+    border: 1px solid rgb(255 255 255 / 0.1);
+  }
+
+  .ccta__proof-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: v8-cta-dot 2s ease-in-out infinite;
+  }
+  @keyframes v8-cta-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  .ccta__proof-text {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: rgb(255 255 255 / 0.5);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .ccta__actions {
+    display: flex;
+    gap: var(--s-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .ccta__btn { box-shadow: 0 4px 30px rgb(247 123 70 / 0.4); }
+
+  .ccta__micro {
+    margin-top: var(--s-5);
+    font-size: 0.68rem;
+    color: rgb(255 255 255 / 0.35);
+    letter-spacing: 0.04em;
+  }
+</style>

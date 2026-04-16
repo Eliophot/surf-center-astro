@@ -1,0 +1,55 @@
+---
+---
+
+<section class="section lct" aria-labelledby="v10-cta-title">
+  <div class="container lct__inner reveal">
+    <div class="lct__rule" aria-hidden="true"></div>
+    <h2 id="v10-cta-title" class="lct__title">Votre expérience<br/>vous attend</h2>
+    <p class="lct__text">
+      D'avril à octobre, au bord du lac de Sainte-Croix.<br/>
+      Un lieu, une énergie, des souvenirs.
+    </p>
+    <div class="lct__actions">
+      <button type="button" class="btn btn--primary btn--lg" data-booking>
+        <span class="btn-flip__inner"><span class="btn-flip__front">Réserver</span><span class="btn-flip__back">Réserver</span></span>
+      </button>
+      <a href="tel:+33492771450" class="btn btn--outline btn--lg">04 92 77 14 50</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .lct {
+    background: var(--c-dark);
+    color: #fff;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .lct__inner {
+    text-align: center;
+    max-width: 38rem;
+    margin-inline: auto;
+  }
+
+  .lct__rule { width: 32px; height: 1px; background: var(--c-orange); margin: 0 auto var(--s-8); }
+
+  .lct__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 200;
+    text-transform: none;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: var(--s-6);
+  }
+
+  .lct__text {
+    font-size: 0.95rem;
+    color: rgb(255 255 255 / 0.5);
+    line-height: 1.8;
+    margin-bottom: var(--s-10);
+  }
+
+  .lct__actions { display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap; }
+</style>

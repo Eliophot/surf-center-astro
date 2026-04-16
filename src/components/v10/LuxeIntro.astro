@@ -1,0 +1,87 @@
+---
+const stats = [
+  { value: "10+", label: "Années" },
+  { value: "4.8", label: "Google" },
+  { value: "20k", label: "Visiteurs / été" },
+];
+---
+
+<section class="section li" aria-labelledby="v10-intro-title">
+  <div class="container li__inner">
+    <div class="li__left reveal">
+      <h2 id="v10-intro-title" class="li__title">Une base nautique<br/>d'exception</h2>
+      <div class="li__rule" aria-hidden="true"></div>
+      <p class="li__text">
+        Depuis plus de dix ans, le Surf Center accueille les amoureux du lac de Sainte-Croix. Un lieu où la beauté des paysages se conjugue avec la qualité du service, du matériel et de l'accueil.
+      </p>
+      <p class="li__text">
+        Ici, chaque détail compte.
+      </p>
+    </div>
+    <div class="li__right reveal reveal-d2">
+      {stats.map((s) => (
+        <div class="li__stat">
+          <strong class="li__stat-value">{s.value}</strong>
+          <span class="li__stat-label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .li__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: center;
+  }
+
+  .li__title {
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 200;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    line-height: 1.2;
+    margin-bottom: var(--s-6);
+  }
+
+  .li__rule { width: 32px; height: 1px; background: var(--c-orange); margin-bottom: var(--s-6); }
+
+  .li__text {
+    font-size: 0.92rem;
+    color: var(--c-text-secondary);
+    line-height: 1.85;
+    max-width: 40ch;
+    margin-bottom: var(--s-3);
+  }
+
+  .li__right {
+    display: flex;
+    gap: var(--s-10);
+    justify-content: flex-start;
+  }
+
+  .li__stat { text-align: center; }
+  .li__stat-value {
+    display: block;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--c-orange);
+    margin-bottom: var(--s-2);
+  }
+  .li__stat-label {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+  }
+
+  @media (min-width: 900px) {
+    .li__inner { grid-template-columns: 1.5fr 1fr; gap: var(--s-20); }
+    .li__right { justify-content: center; }
+  }
+</style>

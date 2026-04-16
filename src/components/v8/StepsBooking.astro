@@ -1,0 +1,78 @@
+---
+const steps = [
+  { num: "01", title: "Choisissez", text: "Sélectionnez votre activité et votre créneau en ligne. Bateau, paddle, pédalo — tout est disponible en quelques clics." },
+  { num: "02", title: "Réservez", text: "Confirmez votre réservation instantanément. Paiement sécurisé, annulation gratuite jusqu'à 24h avant." },
+  { num: "03", title: "Profitez", text: "Présentez-vous au Surf Center, récupérez votre matériel après un bref briefing et profitez du lac." },
+];
+---
+
+<section class="section section--surface" aria-labelledby="v8-steps-title">
+  <div class="container">
+    <header class="section__header reveal">
+      <span class="section__eyebrow">Comment ça marche</span>
+      <h2 id="v8-steps-title">Réservez en<br/>3 étapes</h2>
+    </header>
+
+    <div class="stb__grid">
+      {steps.map((s, i) => (
+        <div class={`stb__item reveal reveal-d${i + 1}`}>
+          <span class="stb__num" aria-hidden="true">{s.num}</span>
+          <h3 class="stb__title">{s.title}</h3>
+          <p class="stb__text">{s.text}</p>
+          {i < steps.length - 1 && <div class="stb__connector" aria-hidden="true"></div>}
+        </div>
+      ))}
+    </div>
+
+    <div class="stb__cta reveal">
+      <button type="button" class="btn btn--primary btn--lg" data-booking>
+        <span class="btn-flip__inner"><span class="btn-flip__front">Réserver maintenant</span><span class="btn-flip__back">Réserver maintenant</span></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .stb__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+    max-width: var(--max-w-narrow);
+    margin-inline: auto;
+  }
+
+  .stb__item { position: relative; text-align: center; }
+
+  .stb__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--r-full);
+    background: var(--c-orange);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--s-5);
+  }
+
+  .stb__title { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: var(--s-3); }
+  .stb__text { font-size: 0.88rem; color: var(--c-text-secondary); line-height: 1.7; max-width: 32ch; margin-inline: auto; }
+  .stb__connector { display: none; }
+  .stb__cta { display: flex; justify-content: center; margin-top: var(--s-12); }
+
+  @media (min-width: 900px) {
+    .stb__grid { grid-template-columns: repeat(3, 1fr); gap: var(--s-8); max-width: none; }
+    .stb__connector {
+      display: block;
+      position: absolute;
+      top: 28px;
+      left: calc(50% + 40px);
+      width: calc(100% - 80px + var(--s-8));
+      height: 1px;
+      background: var(--c-border);
+    }
+  }
+</style>

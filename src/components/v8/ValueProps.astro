@@ -1,0 +1,99 @@
+---
+const benefits = [
+  {
+    title: "Sans permis",
+    text: "Nos bateaux électriques sont accessibles à tous, sans aucun permis. Un briefing rapide et c'est parti.",
+    icon: "anchor",
+  },
+  {
+    title: "Cadre exceptionnel",
+    text: "Eaux turquoise, falaises vertigineuses et nature préservée : le lac de Sainte-Croix est un joyau de Provence.",
+    icon: "mountain",
+  },
+  {
+    title: "Matériel premium",
+    text: "Flotte récente et entretenue. Bateaux électriques silencieux, paddles rigides, équipements de qualité.",
+    icon: "sparkle",
+  },
+  {
+    title: "Équipe passionnée",
+    text: "Conseils personnalisés, itinéraires recommandés, encadrement pour les débutants. On est là pour vous.",
+    icon: "heart",
+  },
+  {
+    title: "Parking gratuit",
+    text: "Stationnement gratuit à deux pas de la plage. Arrivez, profitez — c'est aussi simple que ça.",
+    icon: "car",
+  },
+  {
+    title: "Tout sur place",
+    text: "Location, restauration, animations et événements. Une journée complète sans bouger.",
+    icon: "sun",
+  },
+];
+---
+
+<section class="section" aria-labelledby="v8-benefits-title">
+  <div class="container">
+    <header class="section__header reveal">
+      <span class="section__eyebrow">Pourquoi nous choisir</span>
+      <h2 id="v8-benefits-title">L'expérience<br/>Surf Center</h2>
+      <p class="section__lead">Tout est pensé pour que vous profitiez pleinement de votre journée au lac.</p>
+    </header>
+
+    <div class="vp__grid">
+      {benefits.map((b, i) => (
+        <div class={`vp__card reveal reveal-d${Math.min(i + 1, 4)}`}>
+          <div class="vp__icon" aria-hidden="true">
+            {b.icon === 'anchor' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12 8v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 12H2a10 10 0 0 0 20 0h-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+            {b.icon === 'mountain' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="m8 3 4 8 5-5 5 15H2L8 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>}
+            {b.icon === 'sparkle' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2v4m0 12v4M2 12h4m12 0h4M5.6 5.6l2.9 2.9m7 7 2.9 2.9M18.4 5.6l-2.9 2.9m-7 7-2.9 2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>}
+            {b.icon === 'heart' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>}
+            {b.icon === 'car' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 17h14v-5l-2-6H7L5 12v5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7.5" cy="17" r="1.5" stroke="currentColor" stroke-width="1.5"/><circle cx="16.5" cy="17" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 12h18" stroke="currentColor" stroke-width="1.5"/></svg>}
+            {b.icon === 'sun' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>}
+          </div>
+          <h3 class="vp__title">{b.title}</h3>
+          <p class="vp__text">{b.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .vp__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+
+  .vp__card {
+    padding: var(--s-8);
+    background: var(--c-surface);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--c-border-light);
+    transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  }
+  .vp__card:hover {
+    border-color: var(--c-orange);
+    box-shadow: 0 0 0 1px rgb(247 123 70 / 0.1), var(--shadow-md);
+  }
+
+  .vp__icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-md);
+    background: rgb(247 123 70 / 0.1);
+    color: var(--c-orange);
+    margin-bottom: var(--s-5);
+  }
+
+  .vp__title { font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: var(--s-2); }
+  .vp__text { font-size: 0.85rem; color: var(--c-text-secondary); line-height: 1.65; }
+
+  @media (min-width: 600px) { .vp__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1000px) { .vp__grid { grid-template-columns: repeat(3, 1fr); } }
+</style>

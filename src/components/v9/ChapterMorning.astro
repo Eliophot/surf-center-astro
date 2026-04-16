@@ -1,0 +1,130 @@
+---
+import { Image } from 'astro:assets';
+import imgYoga from '../../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import imgPaddle from '../../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+---
+
+<section id="prologue" class="section chm" aria-labelledby="v9-morning-title">
+  <div class="container">
+    <div class="chm__header reveal">
+      <span class="chm__chapter">Chapitre 02</span>
+      <span class="chm__clock">9h — 11h</span>
+    </div>
+
+    <div class="chm__grid">
+      <div class="chm__copy reveal">
+        <h2 id="v9-morning-title" class="chm__title">Le matin,<br/>tout commence doucement</h2>
+        <p class="chm__text">
+          Le lac est encore calme. La brume se lève sur les falaises. C'est l'heure idéale pour un yoga face à l'eau, un paddle au lever du soleil, ou simplement un café les pieds dans le sable.
+        </p>
+        <p class="chm__text">
+          Ici, pas besoin de se presser. Le Verdon offre son meilleur visage à ceux qui savent prendre leur temps.
+        </p>
+        <div class="chm__tags">
+          <span class="chm__tag">Yoga</span>
+          <span class="chm__tag">Paddle</span>
+          <span class="chm__tag">Café face au lac</span>
+        </div>
+      </div>
+
+      <div class="chm__visuals">
+        <div class="chm__img-wrap chm__img-wrap--main reveal reveal-d1">
+          <Image class="chm__img" src={imgYoga} alt="Yoga au lever du soleil face au lac de Sainte-Croix" width={640} height={800} loading="lazy" decoding="async" format="webp" quality={75} />
+        </div>
+        <div class="chm__img-wrap chm__img-wrap--secondary reveal reveal-d2">
+          <Image class="chm__img" src={imgPaddle} alt="Paddle sur le lac de Sainte-Croix au petit matin" width={400} height={300} loading="lazy" decoding="async" format="webp" quality={75} />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .chm__header {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    margin-bottom: var(--s-12);
+  }
+
+  .chm__chapter {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+  }
+
+  .chm__clock {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--c-text-muted);
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--c-border-light);
+    border-radius: var(--r-full);
+  }
+
+  .chm__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+  }
+
+  .chm__title {
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    line-height: 1.15;
+    margin-bottom: var(--s-6);
+  }
+
+  .chm__text {
+    font-size: 0.95rem;
+    color: var(--c-text-secondary);
+    line-height: 1.8;
+    max-width: 42ch;
+    margin-bottom: var(--s-4);
+  }
+
+  .chm__tags {
+    display: flex;
+    gap: var(--s-2);
+    flex-wrap: wrap;
+    margin-top: var(--s-6);
+  }
+
+  .chm__tag {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-full);
+  }
+
+  .chm__visuals {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--s-4);
+  }
+
+  .chm__img-wrap { overflow: hidden; border-radius: var(--r-lg); }
+  .chm__img-wrap--main { aspect-ratio: 4 / 5; }
+  .chm__img-wrap--secondary { aspect-ratio: 4 / 3; align-self: end; }
+
+  .chm__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+  .chm__img-wrap:hover .chm__img { transform: scale(1.04); }
+
+  @media (min-width: 900px) {
+    .chm__grid { grid-template-columns: 1fr 1.2fr; gap: var(--s-16); align-items: center; }
+  }
+</style>

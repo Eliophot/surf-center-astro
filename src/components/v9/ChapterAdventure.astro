@@ -1,0 +1,134 @@
+---
+import { Image } from 'astro:assets';
+import imgBateau from '../../assets/images/location-bateau-electrique.jpeg';
+import imgPedalo from '../../assets/images/location-pedalo.jpg';
+import imgCanoe from '../../assets/images/location-canoe.jpeg';
+import imgPlanche from '../../assets/images/location-planche-a-voile.png';
+import imgPaddle from '../../assets/images/location-paddle.jpeg';
+
+const activities = [
+  { title: "Bateau électrique", desc: "Sans permis · Jusqu'à 7 pers.", price: "55€/h", image: imgBateau, alt: "Bateau électrique sur le lac", tag: "62329049-d954-482c-82a1-faa16321e3bf" },
+  { title: "Paddle board", desc: "Vue imprenable garantie", price: "15€/h", image: imgPaddle, alt: "Paddle board sur le lac", tag: "52bf76b6-6f0a-43ff-b0a2-4c1332d5ede5" },
+  { title: "Pédalo", desc: "En famille · Criques secrètes", price: "15€/h", image: imgPedalo, alt: "Pédalo sur le lac", tag: "03a55e88-44ac-4161-ad03-aa857b1d0dc0" },
+  { title: "Canoë", desc: "Face aux falaises", price: "10€/h", image: imgCanoe, alt: "Canoë sur le lac", tag: "e57bf5a3-2296-4226-94a8-06295b1415d8" },
+  { title: "Planche à voile", desc: "Vent du Verdon", price: "20€/h", image: imgPlanche, alt: "Planche à voile sur le lac", tag: "7a524907-97b7-42bd-bfdc-deb401767b21" },
+];
+---
+
+<section class="section cha section--surface" aria-labelledby="v9-adventure-title">
+  <div class="container">
+    <div class="cha__header reveal">
+      <span class="cha__chapter">Chapitre 03</span>
+      <span class="cha__clock">11h — 16h</span>
+    </div>
+
+    <div class="cha__intro reveal">
+      <h2 id="v9-adventure-title" class="cha__title">Puis vient l'heure<br/>de l'aventure</h2>
+      <p class="cha__lead">Le soleil est haut. Le lac brille. C'est le moment de choisir : explorer en bateau, glisser en paddle, pagayer en canoë ou défier le vent sur une planche à voile.</p>
+    </div>
+
+    <div class="cha__grid">
+      {activities.map((a, i) => (
+        <button type="button" class={`cha__card reveal reveal-d${Math.min(i + 1, 4)}`} data-product-book data-tag={a.tag} aria-label={`Réserver ${a.title}`}>
+          <Image class="cha__img" src={a.image} alt={a.alt} width={500} height={600} loading="lazy" decoding="async" format="webp" quality={75} />
+          <div class="cha__card-overlay"></div>
+          <div class="cha__card-price">{a.price}</div>
+          <div class="cha__card-content">
+            <h3 class="cha__card-title">{a.title}</h3>
+            <p class="cha__card-desc">{a.desc}</p>
+          </div>
+        </button>
+      ))}
+    </div>
+
+    <div class="cha__cta reveal">
+      <button type="button" class="btn btn--primary btn--lg" data-booking>
+        <span class="btn-flip__inner"><span class="btn-flip__front">Réserver mon activité</span><span class="btn-flip__back">Réserver mon activité</span></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cha__header {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    margin-bottom: var(--s-6);
+  }
+  .cha__chapter { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--c-orange); }
+  .cha__clock { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.1em; color: var(--c-text-muted); padding: 0.2rem 0.6rem; border: 1px solid var(--c-border-light); border-radius: var(--r-full); }
+
+  .cha__intro { max-width: 38rem; margin-bottom: var(--s-12); }
+  .cha__title {
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    line-height: 1.15;
+    margin-bottom: var(--s-5);
+  }
+  .cha__lead { font-size: 0.95rem; color: var(--c-text-secondary); line-height: 1.8; }
+
+  .cha__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-4);
+  }
+
+  .cha__card {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: var(--r-lg);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+    color: #fff;
+    background: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .cha__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+  .cha__card:hover .cha__img { transform: scale(1.06); }
+
+  .cha__card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgb(0 0 0 / 0.7) 0%, transparent 50%, rgb(0 0 0 / 0.1) 100%);
+  }
+
+  .cha__card-price {
+    position: absolute;
+    top: var(--s-4);
+    right: var(--s-4);
+    z-index: 2;
+    padding: 0.35rem 0.7rem;
+    border-radius: var(--r-full);
+    background: rgb(0 0 0 / 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .cha__card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: var(--s-5); z-index: 1; }
+  .cha__card-title { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; margin-bottom: 2px; }
+  .cha__card-desc { font-size: 0.68rem; color: rgb(255 255 255 / 0.55); }
+
+  .cha__cta { display: flex; justify-content: center; margin-top: var(--s-10); }
+
+  @media (min-width: 768px) { .cha__grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1100px) { .cha__grid { grid-template-columns: repeat(5, 1fr); } }
+  @media (max-width: 480px) { .cha__grid { grid-template-columns: 1fr; } .cha__card { aspect-ratio: 4 / 3; } }
+</style>

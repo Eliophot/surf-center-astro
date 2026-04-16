@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LuxeHero from '../components/v10/LuxeHero.astro';
+import LuxeIntro from '../components/v10/LuxeIntro.astro';
+import LuxeCollection from '../components/v10/LuxeCollection.astro';
+import LuxeExperience from '../components/v10/LuxeExperience.astro';
+import LuxeTestimonial from '../components/v10/LuxeTestimonial.astro';
+import LuxeDining from '../components/v10/LuxeDining.astro';
+import LuxeCta from '../components/v10/LuxeCta.astro';
+import LuxeNav from '../components/v10/LuxeNav.astro';
+import { jsonLd, seoMeta } from '../data/jsonld';
+---
+
+<Layout title={seoMeta.title} description={seoMeta.description} jsonLd={jsonLd}>
+  <LuxeHero />
+  <LuxeIntro />
+  <LuxeCollection />
+  <LuxeExperience />
+  <LuxeTestimonial />
+  <LuxeDining />
+  <LuxeCta />
+  <LuxeNav />
+</Layout>

@@ -1,0 +1,73 @@
+---
+const badges = [
+  { icon: "shield", text: "Paiement sécurisé" },
+  { icon: "undo", text: "Annulation gratuite 24h" },
+  { icon: "key", text: "Aucun permis requis" },
+  { icon: "parking", text: "Parking gratuit" },
+  { icon: "family", text: "Adapté aux familles" },
+  { icon: "clock", text: "Ouvert 7j/7 en saison" },
+];
+---
+
+<section class="tb" aria-label="Engagements Surf Center">
+  <div class="container">
+    <div class="tb__grid">
+      {badges.map((b, i) => (
+        <div class={`tb__item reveal ${i > 0 ? `reveal-d${Math.min(i, 4)}` : ''}`}>
+          <div class="tb__icon" aria-hidden="true">
+            {b.icon === 'shield' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>}
+            {b.icon === 'undo' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M1 4v6h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+            {b.icon === 'key' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78Zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+            {b.icon === 'parking' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M9 17V7h4a3 3 0 1 1 0 6H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+            {b.icon === 'family' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M22 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>}
+            {b.icon === 'clock' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+          </div>
+          <span class="tb__text">{b.text}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tb {
+    padding-block: var(--s-12);
+    border-top: 1px solid var(--c-border-light);
+    border-bottom: 1px solid var(--c-border-light);
+  }
+
+  .tb__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-6);
+  }
+
+  .tb__item { display: flex; align-items: center; gap: var(--s-3); }
+
+  .tb__icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-md);
+    background: var(--c-surface);
+    color: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .tb__text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--c-text-secondary);
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+  }
+
+  @media (min-width: 600px) { .tb__grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1000px) {
+    .tb__grid { grid-template-columns: repeat(6, 1fr); }
+    .tb__item { flex-direction: column; text-align: center; }
+    .tb { padding-block: var(--s-16); }
+  }
+</style>

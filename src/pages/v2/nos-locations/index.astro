@@ -1,0 +1,497 @@
+---
+import LayoutDesign from '../../../layouts/LayoutDesign.astro';
+import { locationDetails } from '../../../data/locations';
+
+const title = 'Nos locations — Bateaux, paddle, pédalo, canoë | Surf Center Verdon';
+const description = 'Location de bateaux électriques sans permis, paddle, pédalo, canoë et planche à voile au lac de Sainte-Croix. Tarifs, créneaux et réservation — Surf Center.';
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const sharedServices = [
+  { icon: '⚓', label: 'Briefing sécurité pour tous' },
+  { icon: '🛡', label: 'Gilets de sauvetage fournis' },
+  { icon: '🗺', label: 'Carte du lac remise' },
+  { icon: '☀', label: 'Équipe présente en continu' },
+  { icon: '🔋', label: 'Matériel récent et entretenu' },
+  { icon: '👥', label: 'Adapté familles & groupes' },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Locations nautiques — Surf Center',
+    description: 'Bateaux électriques, paddle, pédalo, canoë et planche à voile au lac de Sainte-Croix.',
+    url: `${siteUrl}/v2/nos-locations`,
+    numberOfItems: locationDetails.length,
+    itemListElement: locationDetails.map((loc, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: loc.title,
+      url: `${siteUrl}/v2/nos-locations/${loc.slug}`,
+    })),
+  },
+];
+---
+
+<LayoutDesign title={title} description={description} jsonLd={jsonLd}>
+
+  <!-- ═══ SPLIT HERO ═══ -->
+  <section class="lochub-hero" aria-label="Nos locations">
+    <div class="lochub-hero__left">
+      <div class="lochub-hero__content">
+        <span class="lochub-hero__eyebrow">Lac de Sainte-Croix · Gorges du Verdon</span>
+        <h1 class="lochub-hero__title">Nos<br/>locations</h1>
+        <p class="lochub-hero__baseline">Bateaux électriques · Paddle · Pédalo<br/>Canoë · Planche à voile</p>
+        <a href="#locations-grid" class="lochub-hero__scroll" aria-label="Voir les locations">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M10 4v12M6 12l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <p class="lochub-hero__location">Les Salles-sur-Verdon, Provence</p>
+    </div>
+    <div class="lochub-hero__right">
+      <img
+        class="lochub-hero__img"
+        src="/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg"
+        alt="Paddle et bateaux électriques sur le lac de Sainte-Croix"
+        width="960" height="1080"
+        loading="eager" fetchpriority="high" decoding="async"
+      />
+    </div>
+  </section>
+
+  <!-- ═══ CINEMA LOCATION CARDS ═══ -->
+  <section id="locations-grid" class="section" aria-labelledby="lochub-grid-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Choisissez votre embarcation</span>
+        <h2 id="lochub-grid-title">Tout le lac,<br/>à votre façon</h2>
+      </header>
+    </div>
+
+    <div class="lochub-cinema" data-lochub-cinema>
+      <div class="lochub-cinema__track" data-lochub-track>
+        {locationDetails.map((loc) => (
+          <a href={`/v2/nos-locations/${loc.slug}`} class="lochub-card">
+            <div class="lochub-card__frame">
+              <img class="lochub-card__img" src={loc.heroImage} alt={loc.heroAlt} width="800" height="450" loading="lazy" decoding="async" />
+              <div class="lochub-card__glass">
+                <span class="lochub-card__price">dès {loc.price}€<small>/{loc.priceUnit}</small></span>
+              </div>
+            </div>
+            <div class="lochub-card__info">
+              <span class="lochub-card__name">{loc.title}</span>
+              <span class="lochub-card__tag">{loc.tagline}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="lochub-cinema__controls container">
+        <div class="lochub-cinema__bar"><span class="lochub-cinema__progress" data-lochub-progress></span></div>
+        <div class="lochub-cinema__nav">
+          <button class="lochub-cinema__btn" type="button" data-lochub-prev aria-label="Précédent">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="lochub-cinema__btn" type="button" data-lochub-next aria-label="Suivant">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GLASS HOW IT WORKS ═══ -->
+  <section class="section lochub-how" aria-labelledby="lochub-how-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Comment ça marche</span>
+        <h2 id="lochub-how-title">3 étapes simples</h2>
+      </header>
+      <div class="lochub-how__grid">
+        <div class="lochub-how__card reveal reveal-d1">
+          <span class="lochub-how__num">01</span>
+          <h3>Choisir</h3>
+          <p>Sélectionnez votre embarcation parmi nos bateaux électriques, paddles, pédalos, canoës ou planches à voile.</p>
+        </div>
+        <div class="lochub-how__card reveal reveal-d2">
+          <span class="lochub-how__num">02</span>
+          <h3>Réserver</h3>
+          <p>Réservez en ligne votre créneau ou présentez-vous directement au comptoir. Paiement sécurisé.</p>
+        </div>
+        <div class="lochub-how__card reveal reveal-d3">
+          <span class="lochub-how__num">03</span>
+          <h3>Profiter</h3>
+          <p>Briefing sécurité, gilet fourni — vous êtes sur le lac en quelques minutes. Le Verdon est à vous.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BENTO SERVICES ═══ -->
+  <section class="section section--surface lochub-services" aria-labelledby="lochub-svc-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Inclus</span>
+        <h2 id="lochub-svc-title">Avec chaque location</h2>
+      </header>
+      <div class="lochub-bento reveal">
+        {sharedServices.map((svc) => (
+          <div class="lochub-bento__cell">
+            <span class="lochub-bento__icon" aria-hidden="true">{svc.icon}</span>
+            <span class="lochub-bento__label">{svc.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</LayoutDesign>
+
+<style>
+  /* ═══ SPLIT HERO ═══ */
+  .lochub-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 100svh;
+  }
+
+  .lochub-hero__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: calc(var(--header-h) + var(--s-8)) var(--s-6) var(--s-8);
+    background: var(--c-dark);
+    color: #fff;
+    position: relative;
+  }
+
+  .lochub-hero__content { max-width: 540px; }
+
+  .lochub-hero__eyebrow {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    margin-bottom: var(--s-8);
+    display: block;
+  }
+
+  .lochub-hero__title {
+    font-size: clamp(4.5rem, 12vw, 10rem);
+    font-weight: 800;
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    color: #fff !important;
+    margin-bottom: var(--s-6);
+  }
+
+  .lochub-hero__baseline {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgb(255 255 255 / 0.45);
+    line-height: 1.7;
+    margin-bottom: var(--s-10);
+  }
+
+  .lochub-hero__scroll {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-full);
+    border: 1px solid rgb(255 255 255 / 0.2);
+    color: rgb(255 255 255 / 0.5);
+    transition: all var(--t-fast);
+    animation: bounce-subtle 2.5s ease-in-out infinite;
+  }
+
+  .lochub-hero__scroll:hover {
+    border-color: var(--c-orange);
+    color: var(--c-orange);
+  }
+
+  .lochub-hero__location {
+    position: absolute;
+    bottom: var(--s-6);
+    left: var(--s-6);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.25);
+  }
+
+  .lochub-hero__right {
+    position: relative;
+    min-height: 50vh;
+  }
+
+  .lochub-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (min-width: 900px) {
+    .lochub-hero { grid-template-columns: 1fr 1fr; }
+    .lochub-hero__left { padding: var(--s-20) var(--s-16) var(--s-12); }
+    .lochub-hero__title { font-size: clamp(6rem, 8vw, 12rem); }
+    .lochub-hero__location { left: var(--s-16); }
+    .lochub-hero__right { min-height: 100svh; }
+  }
+
+  /* ═══ CINEMA CARDS ═══ */
+  .lochub-cinema__track {
+    display: flex;
+    gap: var(--s-6);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 var(--s-6);
+    scroll-behavior: smooth;
+  }
+
+  .lochub-cinema__track::-webkit-scrollbar { display: none; }
+
+  .lochub-card {
+    flex: 0 0 85%;
+    text-decoration: none;
+    color: var(--c-text);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .lochub-card__frame {
+    overflow: hidden;
+    border-radius: var(--r-xl);
+    position: relative;
+    margin-bottom: var(--s-4);
+  }
+
+  .lochub-card__img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .lochub-card:hover .lochub-card__img {
+    transform: scale(1.04);
+  }
+
+  .lochub-card__glass {
+    position: absolute;
+    bottom: var(--s-4);
+    right: var(--s-4);
+    background: rgb(0 0 0 / 0.5);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgb(255 255 255 / 0.12);
+    border-radius: var(--r-md);
+    padding: var(--s-2) var(--s-4);
+  }
+
+  .lochub-card__price {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .lochub-card__price small {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: rgb(255 255 255 / 0.5);
+  }
+
+  .lochub-card__info {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-4);
+    padding: 0 var(--s-1);
+  }
+
+  .lochub-card__name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .lochub-card__tag {
+    font-size: 0.72rem;
+    color: var(--c-text-muted);
+  }
+
+  .lochub-cinema__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    margin-top: var(--s-8);
+  }
+
+  .lochub-cinema__bar {
+    flex: 1;
+    height: 2px;
+    background: var(--c-border-light);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+
+  .lochub-cinema__progress {
+    display: block;
+    height: 100%;
+    width: 20%;
+    background: var(--c-orange);
+    border-radius: 1px;
+    transition: width 0.3s var(--ease);
+  }
+
+  .lochub-cinema__nav { display: flex; gap: var(--s-2); }
+
+  .lochub-cinema__btn {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--r-full);
+    border: 1px solid var(--c-border);
+    background: var(--c-bg);
+    color: var(--c-text-secondary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--t-fast);
+  }
+
+  .lochub-cinema__btn:hover {
+    border-color: var(--c-orange);
+    color: var(--c-orange);
+  }
+
+  @media (min-width: 600px) { .lochub-card { flex: 0 0 55%; } }
+  @media (min-width: 900px) { .lochub-card { flex: 0 0 42%; } }
+  @media (min-width: 1200px) { .lochub-card { flex: 0 0 35%; } }
+
+  /* ═══ GLASS HOW IT WORKS ═══ */
+  .lochub-how__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+
+  .lochub-how__card {
+    background: rgb(255 255 255 / 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--c-border-light);
+    border-radius: var(--r-xl);
+    padding: var(--s-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    transition: transform var(--t-normal) var(--ease), box-shadow var(--t-normal) var(--ease);
+  }
+
+  .lochub-how__card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .lochub-how__num {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--c-orange);
+    line-height: 1;
+    opacity: 0.6;
+  }
+
+  .lochub-how__card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .lochub-how__card p {
+    font-size: 0.88rem;
+    color: var(--c-text-secondary);
+    line-height: 1.7;
+  }
+
+  @media (min-width: 768px) {
+    .lochub-how__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ═══ BENTO SERVICES ═══ */
+  .lochub-bento {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-4);
+  }
+
+  .lochub-bento__cell {
+    background: var(--c-bg);
+    border-radius: var(--r-lg);
+    padding: var(--s-6);
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    border: 1px solid var(--c-border-light);
+    transition: transform var(--t-fast), box-shadow var(--t-fast);
+  }
+
+  .lochub-bento__cell:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .lochub-bento__icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .lochub-bento__label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--c-text-secondary);
+  }
+
+  @media (min-width: 768px) {
+    .lochub-bento { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-lochub-cinema]').forEach((cinema) => {
+    const track = cinema.querySelector('[data-lochub-track]') as HTMLElement;
+    const progress = cinema.querySelector('[data-lochub-progress]') as HTMLElement;
+    const prev = cinema.querySelector('[data-lochub-prev]');
+    const next = cinema.querySelector('[data-lochub-next]');
+    if (!track || !progress) return;
+
+    function updateProgress() {
+      const max = track.scrollWidth - track.clientWidth;
+      if (max <= 0) { progress.style.width = '100%'; return; }
+      const pct = (track.scrollLeft / max) * 100;
+      progress.style.width = Math.max(20, pct) + '%';
+    }
+
+    track.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    const getStep = () => {
+      const item = track.querySelector('.lochub-card') as HTMLElement | null;
+      return item ? item.offsetWidth + 24 : 400;
+    };
+
+    prev?.addEventListener('click', () => track.scrollBy({ left: -getStep(), behavior: 'smooth' }));
+    next?.addEventListener('click', () => track.scrollBy({ left: getStep(), behavior: 'smooth' }));
+  });
+</script>

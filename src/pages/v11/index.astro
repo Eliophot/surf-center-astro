@@ -1,0 +1,933 @@
+---
+import LayoutHyper from '../../layouts/LayoutHyper.astro';
+import MeshGradient from '../../components/v11/MeshGradient.astro';
+import GlowText from '../../components/v11/GlowText.astro';
+import HolographicCard from '../../components/v11/HolographicCard.astro';
+import WaveDivider from '../../components/v11/WaveDivider.astro';
+import ParticleField from '../../components/v11/ParticleField.astro';
+import { locationDetails } from '../../data/locations';
+import { jsonLd, seoMeta } from '../../data/jsonld';
+
+const testimonials = [
+  { quote: "Le cadre est magique, on se croirait aux Caraïbes. Les bateaux électriques sont top !", author: "Marie L.", rating: 5 },
+  { quote: "Super accueil, activités au top. Le paddle au coucher du soleil est inoubliable.", author: "Thomas D.", rating: 5 },
+  { quote: "On y retourne chaque été. Les enfants adorent les pédalos et la pizzeria est excellente.", author: "Sophie & Marc", rating: 5 },
+  { quote: "Meilleur spot du Verdon. Le canoë dans les gorges est une expérience unique.", author: "Lucas R.", rating: 4 },
+];
+
+const galleryImages = [
+  { src: '/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg', alt: 'Bateaux électriques sur le lac de Sainte-Croix', caption: 'Bateaux électriques' },
+  { src: '/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg', alt: 'Paddle et bateaux sur le lac', caption: 'Paddle & Bateaux' },
+  { src: '/location-canoe-lac-sainte-croix-surfcenter.jpg', alt: 'Canoë sur le lac de Sainte-Croix', caption: 'Canoë-Kayak' },
+  { src: '/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg', alt: 'Vue drone du snack et pédalos', caption: 'Vue aérienne' },
+  { src: '/location-pedalo-lac-sainte-croix-plage-surfcenter.jpeg', alt: 'Pédalos sur la plage', caption: 'Plage & Pédalos' },
+  { src: '/concert-surfcenter-lac-sainte-croix.png', alt: 'Concert au Surf Center', caption: 'Soirées & Concerts' },
+];
+
+const quickLinks = [
+  { label: 'Nos locations', href: '/v11/nos-locations' },
+  { label: 'Restauration', href: '/v11/restauration' },
+  { label: 'Animations', href: '/v11/animations' },
+  { label: 'Esprit Surf Center', href: '/v11/esprit-surf-center' },
+  { label: 'Groupes & Événements', href: '/v11/groupes-evenements' },
+  { label: 'Blog', href: '/v11/blog' },
+  { label: 'Accès & Contact', href: '/v11/acces-contact' },
+];
+---
+
+<LayoutHyper title={seoMeta.title} description={seoMeta.description} jsonLd={jsonLd}>
+
+  <!-- ═══════════════ 1. HYPER HERO ═══════════════ -->
+  <section class="hyh__hero" id="hero">
+    <MeshGradient class="hyh__hero-bg" />
+    <div class="hyh__hero-inner">
+      <div class="hyh__hero-badge reveal">
+        <span class="hyh__hero-badge-text">Saison 2026</span>
+      </div>
+      <GlowText tag="h1" color="#26cfff" intensity="high" class="hyh__hero-title reveal">
+        Surf Center
+      </GlowText>
+      <p class="hyh__hero-sub reveal">
+        <GlowText color="#93c5fd" intensity="low" tag="span">
+          Base nautique · Lac de Sainte-Croix
+        </GlowText>
+      </p>
+      <div class="hyh__hero-ctas reveal">
+        <button class="hyh__btn hyh__btn--primary" data-booking type="button">Réserver</button>
+        <a class="hyh__btn hyh__btn--outline" href="#activites">Explorer</a>
+      </div>
+    </div>
+    <div class="hyh__scroll-indicator" aria-hidden="true">
+      <span class="hyh__scroll-line"></span>
+      <span class="hyh__scroll-label">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 2. HYPER ACTIVITIES ═══════════════ -->
+  <section class="hyh__activities" id="activites">
+    <div class="hyh__container">
+      <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyh__section-title reveal">
+        Nos activités
+      </GlowText>
+      <div class="hyh__activities-grid">
+        {locationDetails.map((loc, i) => (
+          <a href={`/v11/nos-locations/${loc.slug}`} class="hyh__activity-link reveal" style={`--reveal-d: ${i * 80}ms`}>
+            <HolographicCard>
+              <div class="hyh__activity-card">
+                <div class="hyh__activity-img-wrap">
+                  <img src={loc.heroImage} alt={loc.heroAlt} class="hyh__activity-img" loading="lazy" decoding="async" />
+                  <span class="hyh__activity-price">Dès {loc.price}€/{loc.priceUnit}</span>
+                </div>
+                <div class="hyh__activity-body">
+                  <h3 class="hyh__activity-name">{loc.title}</h3>
+                  <p class="hyh__activity-tagline">{loc.tagline}</p>
+                </div>
+              </div>
+            </HolographicCard>
+          </a>
+        ))}
+      </div>
+    </div>
+    <WaveDivider color="#6b21a8" />
+  </section>
+
+  <!-- ═══════════════ 3. HYPER MANIFESTO ═══════════════ -->
+  <section class="hyh__manifesto" id="manifesto">
+    <MeshGradient class="hyh__manifesto-bg" />
+    <div class="hyh__manifesto-particles">
+      <ParticleField count={120} speed={0.3} />
+    </div>
+    <div class="hyh__container hyh__manifesto-inner">
+      <blockquote class="hyh__manifesto-quote reveal">
+        <GlowText tag="p" color="#f0f0eb" intensity="medium" class="hyh__manifesto-text">
+          &laquo;&nbsp;Un lieu où le lac, le soleil et la convivialité font le reste&nbsp;&raquo;
+        </GlowText>
+      </blockquote>
+      <div class="hyh__stats reveal">
+        <div class="hyh__stat">
+          <GlowText tag="span" color="#26cfff" intensity="high" class="hyh__stat-num">10+</GlowText>
+          <span class="hyh__stat-label">ans d'expérience</span>
+        </div>
+        <div class="hyh__stat">
+          <GlowText tag="span" color="#3b82f6" intensity="high" class="hyh__stat-num">50k+</GlowText>
+          <span class="hyh__stat-label">clients satisfaits</span>
+        </div>
+        <div class="hyh__stat">
+          <GlowText tag="span" color="#f77b46" intensity="high" class="hyh__stat-num">4.8★</GlowText>
+          <span class="hyh__stat-label">avis Google</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 4. HYPER TESTIMONIALS ═══════════════ -->
+  <section class="hyh__testimonials" id="avis">
+    <div class="hyh__container">
+      <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyh__section-title reveal">
+        Ce qu'ils en disent
+      </GlowText>
+      <div class="hyh__testimonials-grid">
+        {testimonials.map((t, i) => (
+          <div class="hyh__testimonial-item reveal" style={`--reveal-d: ${i * 100}ms; --tilt: ${i % 2 === 0 ? -1.5 : 1.5}deg; --offset-y: ${i % 3 === 0 ? '0' : i % 3 === 1 ? '2rem' : '1rem'}`}>
+            <HolographicCard>
+              <div class="hyh__testimonial-content">
+                <div class="hyh__testimonial-stars" aria-label={`${t.rating} étoiles sur 5`}>
+                  {Array.from({ length: 5 }).map((_, s) => (
+                    <svg class={`hyh__star ${s < t.rating ? 'hyh__star--filled' : ''}`} width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  ))}
+                </div>
+                <p class="hyh__testimonial-quote">{t.quote}</p>
+                <span class="hyh__testimonial-author">{t.author}</span>
+              </div>
+            </HolographicCard>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 5. HYPER GALLERY ═══════════════ -->
+  <section class="hyh__gallery" id="galerie">
+    <div class="hyh__container">
+      <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyh__section-title reveal">
+        Vivez l'expérience
+      </GlowText>
+      <div class="hyh__gallery-masonry">
+        {galleryImages.map((img, i) => (
+          <div class="hyh__gallery-item reveal" style={`--reveal-d: ${i * 70}ms`} data-depth={((i % 3) + 1) * 0.02}>
+            <img src={img.src} alt={img.alt} class="hyh__gallery-img" loading="lazy" decoding="async" />
+            <div class="hyh__gallery-overlay">
+              <span class="hyh__gallery-caption">{img.caption}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 6. HYPER CTA ═══════════════ -->
+  <section class="hyh__cta" id="cta">
+    <MeshGradient class="hyh__cta-bg" />
+    <div class="hyh__container hyh__cta-inner">
+      <GlowText tag="h2" color="#f77b46" intensity="high" class="hyh__cta-title reveal">
+        Prêt pour l'aventure ?
+      </GlowText>
+      <p class="hyh__cta-sub reveal">
+        Réservez votre activité nautique sur le lac de Sainte-Croix
+      </p>
+      <button class="hyh__btn hyh__btn--primary hyh__btn--lg reveal" data-booking type="button">
+        Réserver maintenant
+      </button>
+      <p class="hyh__cta-location reveal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" />
+        </svg>
+        Les Salles-sur-Verdon · Gorges du Verdon · Provence
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 7. HYPER LINKS ═══════════════ -->
+  <section class="hyh__links" id="liens">
+    <div class="hyh__container">
+      <div class="hyh__links-grid">
+        {quickLinks.map((link, i) => (
+          <a href={link.href} class="hyh__link-item reveal" style={`--reveal-d: ${i * 60}ms`}>
+            <span class="hyh__link-label">{link.label}</span>
+            <svg class="hyh__link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+    <WaveDivider color="#26cfff" flip />
+  </section>
+
+</LayoutHyper>
+
+<style>
+  /* ──────────────────── TOKENS ──────────────────── */
+  :root {
+    --hyh-dark: #050510;
+    --hyh-cyan: #26cfff;
+    --hyh-violet: #6b21a8;
+    --hyh-blue: #3b82f6;
+    --hyh-orange: #f77b46;
+    --hyh-text: #f0f0eb;
+    --hyh-text-muted: rgba(240, 240, 235, 0.55);
+    --hyh-glass: rgba(255, 255, 255, 0.03);
+    --hyh-glass-border: rgba(38, 207, 255, 0.12);
+    --hyh-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --hyh-max: 1280px;
+  }
+
+  /* ──────────────────── REVEAL SYSTEM ──────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition:
+      opacity 0.8s var(--hyh-ease),
+      transform 0.8s var(--hyh-ease);
+    transition-delay: var(--reveal-d, 0ms);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ──────────────────── CONTAINER ──────────────────── */
+  .hyh__container {
+    width: 100%;
+    max-width: var(--hyh-max);
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 3rem);
+  }
+
+  .hyh__section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     1. HERO
+     ═══════════════════════════════════════════════════ */
+  .hyh__hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  .hyh__hero-bg {
+    z-index: 0;
+  }
+
+  .hyh__hero-inner {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+
+  .hyh__hero-badge {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(38, 207, 255, 0.25);
+    box-shadow:
+      0 0 20px rgba(38, 207, 255, 0.08),
+      inset 0 0 20px rgba(38, 207, 255, 0.04);
+    animation: hyh-badge-shimmer 4s ease-in-out infinite;
+  }
+
+  .hyh__hero-badge-text {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--hyh-cyan), var(--hyh-blue), var(--hyh-violet), var(--hyh-orange));
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: hyh-holo-text 6s ease-in-out infinite;
+  }
+
+  @keyframes hyh-badge-shimmer {
+    0%, 100% { box-shadow: 0 0 20px rgba(38, 207, 255, 0.08), inset 0 0 20px rgba(38, 207, 255, 0.04); }
+    50% { box-shadow: 0 0 30px rgba(38, 207, 255, 0.15), inset 0 0 30px rgba(38, 207, 255, 0.06); }
+  }
+
+  @keyframes hyh-holo-text {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .hyh__hero-title {
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin: 0;
+  }
+
+  .hyh__hero-sub {
+    margin-top: 1.5rem;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+
+  .hyh__hero-ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+  }
+
+  /* Buttons */
+  .hyh__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 2.2rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: inherit;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      transform 0.3s var(--hyh-ease),
+      box-shadow 0.3s ease,
+      background 0.3s ease;
+  }
+
+  .hyh__btn--primary {
+    background: var(--hyh-orange);
+    color: #fff;
+    border: none;
+    box-shadow:
+      0 0 20px rgba(247, 123, 70, 0.3),
+      0 0 60px rgba(247, 123, 70, 0.1);
+  }
+
+  .hyh__btn--primary:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow:
+      0 0 30px rgba(247, 123, 70, 0.5),
+      0 0 80px rgba(247, 123, 70, 0.2);
+  }
+
+  .hyh__btn--outline {
+    background: transparent;
+    color: var(--hyh-cyan);
+    border: 1.5px solid var(--hyh-cyan);
+    box-shadow: 0 0 12px rgba(38, 207, 255, 0.1);
+  }
+
+  .hyh__btn--outline:hover {
+    background: rgba(38, 207, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 0 24px rgba(38, 207, 255, 0.2);
+  }
+
+  .hyh__btn--lg {
+    padding: 1.1rem 3rem;
+    font-size: 1.05rem;
+  }
+
+  /* Scroll indicator */
+  .hyh__scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    z-index: 3;
+  }
+
+  .hyh__scroll-line {
+    display: block;
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, transparent, var(--hyh-cyan));
+    animation: hyh-scroll-pulse 2s ease-in-out infinite;
+  }
+
+  .hyh__scroll-label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--hyh-text-muted);
+  }
+
+  @keyframes hyh-scroll-pulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* ═══════════════════════════════════════════════════
+     2. ACTIVITIES
+     ═══════════════════════════════════════════════════ */
+  .hyh__activities {
+    position: relative;
+    padding: 7rem 0 0;
+    z-index: 2;
+  }
+
+  .hyh__activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .hyh__activity-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.4s var(--hyh-ease);
+  }
+
+  .hyh__activity-link:hover {
+    transform: translateY(-6px);
+  }
+
+  .hyh__activity-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hyh__activity-img-wrap {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--r-lg, 1.25rem) var(--r-lg, 1.25rem) 0 0;
+  }
+
+  .hyh__activity-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--hyh-ease);
+  }
+
+  .hyh__activity-link:hover .hyh__activity-img {
+    transform: scale(1.08);
+  }
+
+  .hyh__activity-price {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 9999px;
+    background: rgba(5, 5, 16, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(247, 123, 70, 0.4);
+    color: var(--hyh-orange);
+    text-shadow: 0 0 8px rgba(247, 123, 70, 0.3);
+  }
+
+  .hyh__activity-body {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .hyh__activity-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+    color: var(--hyh-text);
+  }
+
+  .hyh__activity-tagline {
+    font-size: 0.85rem;
+    color: var(--hyh-text-muted);
+    margin: 0;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     3. MANIFESTO
+     ═══════════════════════════════════════════════════ */
+  .hyh__manifesto {
+    position: relative;
+    padding: 8rem 0;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  .hyh__manifesto-bg {
+    z-index: 0;
+  }
+
+  .hyh__manifesto-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hyh__manifesto-particles :global(.pf11) {
+    position: absolute;
+  }
+
+  .hyh__manifesto-inner {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+  }
+
+  .hyh__manifesto-quote {
+    margin: 0 auto 4rem;
+    max-width: 50ch;
+    border: none;
+    padding: 0;
+  }
+
+  .hyh__manifesto-text {
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.35;
+    font-style: italic;
+  }
+
+  .hyh__stats {
+    display: flex;
+    justify-content: center;
+    gap: clamp(2rem, 6vw, 5rem);
+    flex-wrap: wrap;
+  }
+
+  .hyh__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hyh__stat-num {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .hyh__stat-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--hyh-text-muted);
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     4. TESTIMONIALS
+     ═══════════════════════════════════════════════════ */
+  .hyh__testimonials {
+    position: relative;
+    padding: 7rem 0;
+    z-index: 2;
+  }
+
+  .hyh__testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .hyh__testimonial-item {
+    transform: rotate(var(--tilt, 0deg)) translateY(var(--offset-y, 0));
+    transition:
+      opacity 0.8s var(--hyh-ease),
+      transform 0.8s var(--hyh-ease);
+    transition-delay: var(--reveal-d, 0ms);
+  }
+
+  .hyh__testimonial-item.is-visible {
+    opacity: 1;
+    transform: rotate(var(--tilt, 0deg)) translateY(var(--offset-y, 0));
+  }
+
+  .hyh__testimonial-content {
+    padding: 1.75rem;
+  }
+
+  .hyh__testimonial-stars {
+    display: flex;
+    gap: 0.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .hyh__star {
+    color: rgba(255, 255, 255, 0.15);
+  }
+
+  .hyh__star path {
+    stroke: none;
+    fill: currentColor;
+  }
+
+  .hyh__star--filled {
+    color: var(--hyh-orange);
+    filter: drop-shadow(0 0 4px rgba(247, 123, 70, 0.4));
+  }
+
+  .hyh__testimonial-quote {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--hyh-text);
+    margin: 0 0 1.25rem;
+    font-style: italic;
+  }
+
+  .hyh__testimonial-author {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--hyh-cyan);
+    text-shadow: 0 0 6px rgba(38, 207, 255, 0.3);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     5. GALLERY
+     ═══════════════════════════════════════════════════ */
+  .hyh__gallery {
+    position: relative;
+    padding: 7rem 0;
+    z-index: 2;
+  }
+
+  .hyh__gallery-masonry {
+    columns: 3;
+    column-gap: 1.25rem;
+  }
+
+  .hyh__gallery-item {
+    position: relative;
+    break-inside: avoid;
+    margin-bottom: 1.25rem;
+    border-radius: var(--r-lg, 1.25rem);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.5s var(--hyh-ease);
+  }
+
+  .hyh__gallery-item:hover {
+    transform: scale(1.02);
+  }
+
+  .hyh__gallery-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.6s var(--hyh-ease);
+  }
+
+  .hyh__gallery-item:hover .hyh__gallery-img {
+    transform: scale(1.06);
+  }
+
+  .hyh__gallery-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+    background: linear-gradient(
+      to top,
+      rgba(5, 5, 16, 0.8) 0%,
+      rgba(5, 5, 16, 0.2) 40%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .hyh__gallery-item:hover .hyh__gallery-overlay {
+    opacity: 1;
+  }
+
+  .hyh__gallery-caption {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+    padding: 0.4rem 1rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(38, 207, 255, 0.2);
+  }
+
+  @media (max-width: 900px) {
+    .hyh__gallery-masonry { columns: 2; }
+  }
+
+  @media (max-width: 550px) {
+    .hyh__gallery-masonry { columns: 1; }
+  }
+
+  /* ═══════════════════════════════════════════════════
+     6. CTA
+     ═══════════════════════════════════════════════════ */
+  .hyh__cta {
+    position: relative;
+    padding: 8rem 0;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  .hyh__cta-bg {
+    z-index: 0;
+  }
+
+  .hyh__cta-inner {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .hyh__cta-title {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+
+  .hyh__cta-sub {
+    font-size: 1.1rem;
+    color: var(--hyh-text-muted);
+    margin: 0;
+    max-width: 40ch;
+  }
+
+  .hyh__cta-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--hyh-text-muted);
+    margin-top: 1rem;
+  }
+
+  .hyh__cta-location svg {
+    flex-shrink: 0;
+    color: var(--hyh-cyan);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     7. QUICK LINKS
+     ═══════════════════════════════════════════════════ */
+  .hyh__links {
+    position: relative;
+    padding: 5rem 0 0;
+    z-index: 2;
+  }
+
+  .hyh__links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .hyh__link-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.5rem;
+    text-decoration: none;
+    color: var(--hyh-text);
+    border-radius: var(--r-md, 0.75rem);
+    background: var(--hyh-glass);
+    border: 1px solid var(--hyh-glass-border);
+    transition:
+      background 0.3s ease,
+      border-color 0.3s ease,
+      transform 0.3s var(--hyh-ease);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hyh__link-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1.5rem;
+    right: 1.5rem;
+    height: 2px;
+    background: linear-gradient(90deg, var(--hyh-cyan), var(--hyh-violet));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--hyh-ease);
+  }
+
+  .hyh__link-item:hover {
+    background: rgba(38, 207, 255, 0.05);
+    border-color: rgba(38, 207, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .hyh__link-item:hover::after {
+    transform: scaleX(1);
+  }
+
+  .hyh__link-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .hyh__link-arrow {
+    color: var(--hyh-cyan);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s var(--hyh-ease);
+  }
+
+  .hyh__link-item:hover .hyh__link-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════════════════════════ */
+  @media (max-width: 640px) {
+    .hyh__hero-title {
+      font-size: clamp(2.8rem, 14vw, 4.5rem);
+    }
+
+    .hyh__activities-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hyh__testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hyh__testimonial-item {
+      --tilt: 0deg !important;
+      --offset-y: 0 !important;
+    }
+
+    .hyh__stats {
+      gap: 2rem;
+    }
+
+    .hyh__links-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ──────────────────── REDUCED MOTION ──────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .hyh__hero-badge,
+    .hyh__hero-badge-text,
+    .hyh__scroll-line {
+      animation: none;
+    }
+
+    .hyh__activity-link:hover,
+    .hyh__gallery-item:hover,
+    .hyh__link-item:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<script is:inline>
+(function () {
+  var items = document.querySelectorAll('[data-depth]');
+  if (!items.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  window.addEventListener('mousemove', function (e) {
+    var mx = (e.clientX / window.innerWidth - 0.5) * 2;
+    var my = (e.clientY / window.innerHeight - 0.5) * 2;
+
+    items.forEach(function (el) {
+      var depth = parseFloat(el.dataset.depth) || 0.02;
+      var tx = mx * depth * 40;
+      var ty = my * depth * 40;
+      el.style.transform = 'translate(' + tx + 'px, ' + ty + 'px)';
+    });
+  }, { passive: true });
+})();
+</script>

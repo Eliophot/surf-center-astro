@@ -1,0 +1,568 @@
+---
+import LayoutHyper from '../../../layouts/LayoutHyper.astro';
+import MeshGradient from '../../../components/v11/MeshGradient.astro';
+import GlowText from '../../../components/v11/GlowText.astro';
+import HolographicCard from '../../../components/v11/HolographicCard.astro';
+import WaveDivider from '../../../components/v11/WaveDivider.astro';
+import { locationDetails, getLocationBySlug, getOtherLocations } from '../../../data/locations';
+import type { GetStaticPaths } from 'astro';
+
+export function getStaticPaths() {
+  return locationDetails.map((loc) => ({
+    params: { slug: loc.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const loc = getLocationBySlug(slug as string)!;
+const others = getOtherLocations(slug as string);
+
+const iconMap: Record<string, string> = {
+  anchor: '⚓',
+  users: '👥',
+  battery: '🔋',
+  shield: '🛡',
+  sun: '☀️',
+  map: '🗺',
+  zap: '⚡',
+};
+
+const accentColors = ['#26cfff', '#6b21a8', '#3b82f6', '#f77b46'];
+---
+
+<LayoutHyper
+  title={`${loc.title} — Location Surf Center`}
+  description={loc.description}
+>
+  <!-- HERO -->
+  <section class="hyld__hero">
+    <img src={loc.heroImage} alt={loc.heroAlt} class="hyld__hero-img" />
+    <div class="hyld__hero-overlay">
+      <MeshGradient />
+    </div>
+    <div class="hyld__hero-inner">
+      <a href="/v11/nos-locations" class="hyld__back reveal">← Toutes les locations</a>
+      <div class="hyld__hero-badges reveal">
+        {loc.highlights.map((h) => (
+          <span class="hyld__hero-badge">{h}</span>
+        ))}
+      </div>
+      <GlowText tag="h1" color="#26cfff" intensity="high" class="hyld__hero-title reveal">
+        {loc.title}
+      </GlowText>
+      <p class="hyld__hero-tagline reveal">{loc.tagline}</p>
+    </div>
+  </section>
+
+  <!-- PRICING BAND -->
+  <section class="hyld__pricing reveal">
+    <div class="hyld__pricing-inner">
+      <div class="hyld__pricing-main">
+        <span class="hyld__pricing-label">À partir de</span>
+        <div class="hyld__pricing-value">
+          <GlowText tag="span" color="#26cfff" intensity="high" class="hyld__pricing-num">
+            {loc.price}€
+          </GlowText>
+          <span class="hyld__pricing-unit">/ {loc.priceUnit}</span>
+        </div>
+      </div>
+      <div class="hyld__pricing-meta">
+        <div class="hyld__pricing-meta-item">
+          <span class="hyld__pricing-meta-label">Capacité</span>
+          <span class="hyld__pricing-meta-val">{loc.capacity}</span>
+        </div>
+        <div class="hyld__pricing-meta-item">
+          <span class="hyld__pricing-meta-label">Durée</span>
+          <span class="hyld__pricing-meta-val">{loc.duration}</span>
+        </div>
+        <div class="hyld__pricing-meta-item">
+          <span class="hyld__pricing-meta-label">Niveau</span>
+          <span class="hyld__pricing-meta-val">{loc.level}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <WaveDivider color="#26cfff" />
+
+  <!-- DESCRIPTION -->
+  <section class="hyld__desc reveal">
+    <div class="hyld__desc-inner">
+      <div class="hyld__desc-text">
+        <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyld__desc-title">
+          Découvrez l'expérience
+        </GlowText>
+        <p class="hyld__desc-body">{loc.longDescription}</p>
+      </div>
+      <div class="hyld__desc-img-wrap">
+        <img src={loc.detailImage} alt={loc.detailAlt} class="hyld__desc-img" loading="lazy" />
+        <div class="hyld__desc-img-glow" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <WaveDivider color="#6b21a8" flip />
+
+  <!-- SERVICES -->
+  <section class="hyld__services reveal">
+    <GlowText tag="h2" color="#3b82f6" intensity="medium" class="hyld__services-title">
+      Inclus dans votre location
+    </GlowText>
+    <div class="hyld__services-grid">
+      {loc.services.map((svc, i) => (
+        <HolographicCard class="hyld__svc-card">
+          <div class="hyld__svc-inner">
+            <span class="hyld__svc-icon" style={`--hyld-accent: ${accentColors[i % 4]};`}>
+              {iconMap[svc.icon] || '✦'}
+            </span>
+            <span class="hyld__svc-label">{svc.label}</span>
+          </div>
+        </HolographicCard>
+      ))}
+    </div>
+  </section>
+
+  <WaveDivider color="#3b82f6" />
+
+  <!-- ITINERARY -->
+  <section class="hyld__itin reveal">
+    <GlowText tag="h2" color="#f77b46" intensity="medium" class="hyld__itin-title">
+      Parcours suggérés
+    </GlowText>
+    <div class="hyld__itin-list">
+      {loc.itinerary.map((it, i) => (
+        <div class="hyld__itin-item">
+          <div class="hyld__itin-num-wrap">
+            <GlowText tag="span" color={accentColors[i % 4]} intensity="high" class="hyld__itin-num">
+              {String(i + 1).padStart(2, '0')}
+            </GlowText>
+            {i < loc.itinerary.length - 1 && (
+              <div class="hyld__itin-line" style={`background: linear-gradient(to bottom, ${accentColors[i % 4]}, ${accentColors[(i + 1) % 4]});`} />
+            )}
+          </div>
+          <HolographicCard class="hyld__itin-card">
+            <div class="hyld__itin-card-inner">
+              <GlowText tag="h3" color={accentColors[i % 4]} intensity="low" class="hyld__itin-card-title">
+                {it.title}
+              </GlowText>
+              <p class="hyld__itin-card-text">{it.text}</p>
+            </div>
+          </HolographicCard>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <WaveDivider color="#26cfff" flip />
+
+  <!-- OTHER LOCATIONS -->
+  <section class="hyld__others reveal">
+    <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyld__others-title">
+      Autres activités
+    </GlowText>
+    <div class="hyld__others-grid">
+      {others.map((o, i) => {
+        const accent = accentColors[i % 4];
+        return (
+          <a href={`/v11/nos-locations/${o.slug}`} class="hyld__other-link">
+            <HolographicCard class="hyld__other-card">
+              <div class="hyld__other-img-wrap">
+                <img src={o.heroImage} alt={o.heroAlt} class="hyld__other-img" loading="lazy" />
+              </div>
+              <div class="hyld__other-body">
+                <GlowText tag="h3" color={accent} intensity="low" class="hyld__other-name">
+                  {o.shortTitle}
+                </GlowText>
+                <span class="hyld__other-price" style={`color: ${accent};`}>
+                  {o.price}€/{o.priceUnit}
+                </span>
+              </div>
+            </HolographicCard>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</LayoutHyper>
+
+<style>
+  /* HERO */
+  .hyld__hero {
+    position: relative;
+    min-height: 75vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 2rem 1.5rem 4rem;
+    overflow: hidden;
+  }
+  .hyld__hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hyld__hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(5, 5, 16, 0.95) 0%, rgba(5, 5, 16, 0.3) 50%, rgba(5, 5, 16, 0.6) 100%);
+  }
+  .hyld__hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    text-align: center;
+    width: 100%;
+  }
+  .hyld__back {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: rgba(240, 240, 235, 0.5);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: color 0.3s ease;
+  }
+  .hyld__back:hover {
+    color: #26cfff;
+  }
+  .hyld__hero-badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .hyld__hero-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #26cfff;
+    background: rgba(38, 207, 255, 0.1);
+    border: 1px solid rgba(38, 207, 255, 0.25);
+    padding: 0.3rem 0.9rem;
+    border-radius: 9999px;
+  }
+  .hyld__hero-title {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+  }
+  .hyld__hero-tagline {
+    font-size: 1.1rem;
+    color: rgba(240, 240, 235, 0.6);
+    margin: 0;
+  }
+
+  /* PRICING */
+  .hyld__pricing {
+    padding: 3rem 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .hyld__pricing-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem 3rem;
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(38, 207, 255, 0.12);
+    backdrop-filter: blur(16px);
+  }
+  .hyld__pricing-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .hyld__pricing-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(240, 240, 235, 0.4);
+  }
+  .hyld__pricing-value {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .hyld__pricing-num {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .hyld__pricing-unit {
+    font-size: 1.1rem;
+    color: rgba(240, 240, 235, 0.45);
+  }
+  .hyld__pricing-meta {
+    display: flex;
+    gap: 2.5rem;
+  }
+  .hyld__pricing-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .hyld__pricing-meta-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(240, 240, 235, 0.35);
+  }
+  .hyld__pricing-meta-val {
+    font-size: 0.88rem;
+    color: rgba(240, 240, 235, 0.75);
+  }
+
+  /* DESC */
+  .hyld__desc {
+    padding: 5rem 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hyld__desc-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hyld__desc-title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    margin: 0 0 1.25rem;
+  }
+  .hyld__desc-body {
+    font-size: 1rem;
+    color: rgba(240, 240, 235, 0.65);
+    line-height: 1.8;
+    margin: 0;
+  }
+  .hyld__desc-img-wrap {
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+  }
+  .hyld__desc-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 1.25rem;
+  }
+  .hyld__desc-img-glow {
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle, rgba(38, 207, 255, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* SERVICES */
+  .hyld__services {
+    padding: 5rem 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hyld__services-title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    text-align: center;
+    margin: 0 0 2.5rem;
+  }
+  .hyld__services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .hyld__svc-card {
+    padding: 0;
+  }
+  .hyld__svc-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+  }
+  .hyld__svc-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 6px var(--hyld-accent));
+  }
+  .hyld__svc-label {
+    font-size: 0.9rem;
+    color: rgba(240, 240, 235, 0.75);
+  }
+
+  /* ITINERARY */
+  .hyld__itin {
+    padding: 5rem 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .hyld__itin-title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    text-align: center;
+    margin: 0 0 3rem;
+  }
+  .hyld__itin-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .hyld__itin-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  .hyld__itin-num-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 50px;
+  }
+  .hyld__itin-num {
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .hyld__itin-line {
+    width: 2px;
+    height: 40px;
+    margin: 0.5rem 0;
+    opacity: 0.35;
+    border-radius: 2px;
+  }
+  .hyld__itin-card {
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+  .hyld__itin-card-inner {
+    padding: 1.5rem;
+  }
+  .hyld__itin-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+  }
+  .hyld__itin-card-text {
+    font-size: 0.9rem;
+    color: rgba(240, 240, 235, 0.6);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* OTHERS */
+  .hyld__others {
+    padding: 5rem 1.5rem 6rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hyld__others-title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    text-align: center;
+    margin: 0 0 2.5rem;
+  }
+  .hyld__others-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .hyld__other-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .hyld__other-link:hover {
+    transform: translateY(-4px);
+  }
+  .hyld__other-card {
+    height: 100%;
+  }
+  .hyld__other-img-wrap {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 1.25rem 1.25rem 0 0;
+  }
+  .hyld__other-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .hyld__other-link:hover .hyld__other-img {
+    transform: scale(1.06);
+  }
+  .hyld__other-body {
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .hyld__other-name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .hyld__other-price {
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hyld__pricing-inner {
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem;
+    }
+    .hyld__pricing-meta {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .hyld__desc-inner {
+      grid-template-columns: 1fr;
+    }
+    .hyld__services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .hyld__hero {
+      min-height: 60vh;
+      padding: 2rem 1rem 3rem;
+    }
+    .hyld__pricing-num {
+      font-size: 2.5rem;
+    }
+    .hyld__services-grid {
+      grid-template-columns: 1fr;
+    }
+    .hyld__others-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .hyld__itin-item {
+      gap: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,329 @@
+---
+const currentYear = new Date().getFullYear();
+
+const navColumns = [
+  {
+    title: 'Nos locations',
+    links: [
+      { label: 'Bateau électrique', href: '/v7/nos-locations' },
+      { label: 'Paddle board', href: '/v7/nos-locations' },
+      { label: 'Pédalo', href: '/v7/nos-locations' },
+      { label: 'Canoë', href: '/v7/nos-locations' },
+      { label: 'Planche à voile', href: '/v7/nos-locations' },
+    ],
+  },
+  {
+    title: 'Surf Center',
+    links: [
+      { label: "L'esprit Surf Center", href: '/v7/esprit-surf-center' },
+      { label: 'Restauration', href: '/v7/restauration' },
+      { label: 'Animations', href: '/v7/animations' },
+      { label: 'Groupes & Événements', href: '/v7/groupes-evenements' },
+      { label: 'Blog', href: '/v7/blog' },
+    ],
+  },
+  {
+    title: 'Légal',
+    links: [
+      { label: 'Mentions légales', href: '/v7/mentions-legales' },
+      { label: 'Confidentialité', href: '/v7/confidentialite' },
+      { label: 'CGV', href: '/v7/cgv' },
+    ],
+  },
+];
+---
+
+<footer class="fk7" role="contentinfo">
+  <div class="fk7__stripe" aria-hidden="true"></div>
+
+  <div class="fk7__top">
+    <div class="container fk7__grid">
+      <div class="fk7__brand">
+        <a href="/v7" class="fk7__logo" aria-label="Surf Center — Accueil">
+          <img
+            class="fk7__logo-img"
+            src="/logo-surf-center2.png"
+            alt=""
+            width="120"
+            height="36"
+            loading="lazy"
+          />
+        </a>
+        <p class="fk7__tagline">
+          Base nautique au lac de Sainte-Croix,<br />
+          Les Salles-sur-Verdon · Gorges du Verdon.
+        </p>
+        <address class="fk7__address">
+          <p><a href="tel:+33492771450">04 92 77 14 50</a></p>
+          <p><a href="mailto:contact@surfcenter-verdon.fr">contact@surfcenter-verdon.fr</a></p>
+        </address>
+        <div class="fk7__energy" aria-hidden="true">
+          <span class="fk7__energy-bar"></span>
+          <span class="fk7__energy-bar"></span>
+          <span class="fk7__energy-bar"></span>
+          <span class="fk7__energy-bar"></span>
+          <span class="fk7__energy-bar"></span>
+        </div>
+      </div>
+
+      {navColumns.map((col) => (
+        <nav class="fk7__col" aria-label={col.title}>
+          <p class="fk7__col-title">{col.title}</p>
+          <ul role="list">
+            {col.links.map((link) => (
+              <li>
+                <a href={link.href} class="fk7__col-link">{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+    </div>
+  </div>
+
+  <div class="fk7__bottom">
+    <div class="container fk7__bottom-inner">
+      <p class="fk7__copy">© {currentYear} Surf Center · Les Salles-sur-Verdon</p>
+      <div class="fk7__bottom-accent" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* =============================================
+     Footer Kinetic v7 — Race Grid / Angular
+     ============================================= */
+
+  .fk7 {
+    position: relative;
+    background: var(--c-dark);
+    color: rgb(255 255 255 / 0.6);
+    overflow: hidden;
+  }
+
+  /* Diagonal stripe accent at top */
+  .fk7__stripe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--c-orange) 0%, var(--c-blue) 40%, var(--c-rose) 80%, var(--c-orange) 100%);
+    background-size: 200% 100%;
+    animation: fk7-stripe-shift 6s linear infinite;
+  }
+
+  @keyframes fk7-stripe-shift {
+    0% { background-position: 0% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .fk7::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -10%;
+    width: 50%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 30px,
+      rgb(255 255 255 / 0.015) 30px,
+      rgb(255 255 255 / 0.015) 32px
+    );
+    pointer-events: none;
+  }
+
+  .fk7__top {
+    position: relative;
+    padding-block: var(--s-20);
+  }
+
+  .fk7__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+  }
+
+  /* ── Brand ── */
+
+  .fk7__brand {
+    max-width: 300px;
+    position: relative;
+  }
+
+  .fk7__logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--s-5);
+  }
+
+  .fk7__logo-img {
+    height: 24px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.6;
+  }
+
+  .fk7__tagline {
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: rgb(255 255 255 / 0.3);
+    margin-bottom: var(--s-5);
+  }
+
+  .fk7__address {
+    font-style: normal;
+    font-size: 0.75rem;
+    line-height: 1.9;
+    color: rgb(255 255 255 / 0.35);
+  }
+
+  .fk7__address a {
+    transition: color 0.2s;
+  }
+
+  .fk7__address a:hover { color: var(--c-orange); }
+
+  /* Energy bars — race grid decoration */
+  .fk7__energy {
+    display: flex;
+    gap: 3px;
+    margin-top: var(--s-6);
+  }
+
+  .fk7__energy-bar {
+    width: 4px;
+    height: 20px;
+    background: var(--c-orange);
+    opacity: 0.3;
+    transform: skewX(-15deg);
+  }
+
+  .fk7__energy-bar:nth-child(2) { height: 30px; opacity: 0.45; }
+  .fk7__energy-bar:nth-child(3) { height: 40px; opacity: 0.6; background: var(--c-blue); }
+  .fk7__energy-bar:nth-child(4) { height: 28px; opacity: 0.4; background: var(--c-rose); }
+  .fk7__energy-bar:nth-child(5) { height: 16px; opacity: 0.25; }
+
+  /* ── Nav columns ── */
+
+  .fk7__col-title {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    margin-bottom: var(--s-5);
+    position: relative;
+    padding-left: var(--s-4);
+  }
+
+  .fk7__col-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) skewX(-15deg);
+    width: 3px;
+    height: 14px;
+    background: var(--c-orange);
+  }
+
+  .fk7__col ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .fk7__col-link {
+    position: relative;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: rgb(255 255 255 / 0.45);
+    transition: color 0.2s, padding-left 0.25s var(--ease);
+    display: inline-block;
+  }
+
+  .fk7__col-link:hover {
+    color: #fff;
+    padding-left: var(--s-3);
+  }
+
+  .fk7__col-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) skewX(-15deg);
+    width: 0;
+    height: 2px;
+    background: var(--c-orange);
+    transition: width 0.25s var(--ease);
+  }
+
+  .fk7__col-link:hover::before { width: 8px; }
+
+  /* ── Bottom ── */
+
+  .fk7__bottom {
+    position: relative;
+    padding-block: var(--s-6);
+    border-top: 2px solid rgb(255 255 255 / 0.06);
+  }
+
+  .fk7__bottom::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 80px;
+    height: 2px;
+    background: var(--c-orange);
+  }
+
+  .fk7__bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .fk7__copy {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.2);
+  }
+
+  .fk7__bottom-accent {
+    display: flex;
+    gap: 4px;
+  }
+
+  .fk7__bottom-accent span {
+    display: block;
+    width: 20px;
+    height: 3px;
+    transform: skewX(-20deg);
+  }
+
+  .fk7__bottom-accent span:nth-child(1) { background: var(--c-orange); opacity: 0.6; }
+  .fk7__bottom-accent span:nth-child(2) { background: var(--c-blue); opacity: 0.4; }
+  .fk7__bottom-accent span:nth-child(3) { background: var(--c-rose); opacity: 0.3; }
+
+  /* ── Responsive ── */
+
+  @media (min-width: 768px) {
+    .fk7__grid { grid-template-columns: 1.5fr repeat(3, 1fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fk7__stripe { animation: none; }
+    .fk7__col-link,
+    .fk7__col-link::before { transition: none; }
+  }
+</style>

@@ -1,0 +1,444 @@
+---
+import LayoutHyper from '../../../layouts/LayoutHyper.astro';
+import MeshGradient from '../../../components/v11/MeshGradient.astro';
+import GlowText from '../../../components/v11/GlowText.astro';
+import HolographicCard from '../../../components/v11/HolographicCard.astro';
+import WaveDivider from '../../../components/v11/WaveDivider.astro';
+import { blogPostsV11 } from '../../../data/blog-posts';
+
+export function getStaticPaths() {
+  return blogPostsV11.map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const post = blogPostsV11.find((p) => p.slug === slug)!;
+const related = blogPostsV11.filter((p) => p.slug !== slug).slice(0, 3);
+---
+
+<LayoutHyper
+  title={`${post.title} — Blog Surf Center`}
+  description={post.excerpt}
+>
+  <!-- HERO -->
+  <section class="hyba__hero">
+    <img src={post.image} alt={post.imageAlt} class="hyba__hero-img" />
+    <div class="hyba__hero-overlay">
+      <MeshGradient />
+    </div>
+    <div class="hyba__hero-inner">
+      <a href="/v11/blog" class="hyba__back reveal">← Retour au blog</a>
+      <span class="hyba__hero-badge reveal" style={`--hyba-cat: ${post.categoryColor};`}>
+        {post.category}
+      </span>
+      <GlowText tag="h1" color={post.categoryColor} intensity="high" class="hyba__hero-title reveal">
+        {post.title}
+      </GlowText>
+      <div class="hyba__hero-meta reveal">
+        <span>{post.author}</span>
+        <span class="hyba__hero-dot" aria-hidden="true">·</span>
+        <time>{post.date}</time>
+        <span class="hyba__hero-dot" aria-hidden="true">·</span>
+        <span>{post.readTime} de lecture</span>
+      </div>
+    </div>
+  </section>
+
+  <WaveDivider color={post.categoryColor} />
+
+  <!-- ARTICLE + SIDEBAR -->
+  <div class="hyba__layout">
+    <!-- ARTICLE -->
+    <article class="hyba__article reveal">
+      <div class="hyba__article-body">
+        {post.content.map((block) => {
+          if (block.startsWith('## ')) {
+            const parts = block.split('\n\n');
+            const heading = parts[0].replace('## ', '');
+            const body = parts.slice(1).join('\n\n');
+            return (
+              <div class="hyba__block">
+                <GlowText tag="h2" color={post.categoryColor} intensity="low" class="hyba__h2">
+                  {heading}
+                </GlowText>
+                {body && <p class="hyba__p" set:html={body.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')} />}
+              </div>
+            );
+          }
+          return <p class="hyba__p">{block}</p>;
+        })}
+      </div>
+
+      <!-- SHARE -->
+      <div class="hyba__share">
+        <span class="hyba__share-label">Partager</span>
+        <div class="hyba__share-btns">
+          <a
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://surfcenter-verdon.fr/v11/blog/${post.slug}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hyba__share-btn"
+            aria-label="Partager sur Twitter"
+          >𝕏</a>
+          <a
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://surfcenter-verdon.fr/v11/blog/${post.slug}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hyba__share-btn"
+            aria-label="Partager sur Facebook"
+          >f</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="hyba__sidebar reveal">
+      <HolographicCard class="hyba__sidebar-card">
+        <div class="hyba__sidebar-inner">
+          <GlowText tag="h3" color="#26cfff" intensity="low" class="hyba__sidebar-title">
+            Articles liés
+          </GlowText>
+          <div class="hyba__sidebar-list">
+            {related.map((r) => (
+              <a href={`/v11/blog/${r.slug}`} class="hyba__sidebar-item">
+                <div class="hyba__sidebar-item-img-wrap">
+                  <img src={r.image} alt={r.imageAlt} class="hyba__sidebar-item-img" loading="lazy" />
+                </div>
+                <div class="hyba__sidebar-item-info">
+                  <span class="hyba__sidebar-item-cat" style={`color: ${r.categoryColor};`}>{r.category}</span>
+                  <span class="hyba__sidebar-item-title">{r.title}</span>
+                  <span class="hyba__sidebar-item-date">{r.date}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </HolographicCard>
+
+      <HolographicCard class="hyba__sidebar-card">
+        <div class="hyba__sidebar-inner">
+          <GlowText tag="h3" color="#f77b46" intensity="low" class="hyba__sidebar-title">
+            Envie d'essayer ?
+          </GlowText>
+          <p class="hyba__sidebar-cta-text">
+            Réservez votre activité nautique au Surf Center et vivez l'expérience du lac de Sainte-Croix.
+          </p>
+          <a href="/v11/nos-locations" class="hyba__sidebar-cta-btn">
+            Voir nos locations →
+          </a>
+        </div>
+      </HolographicCard>
+    </aside>
+  </div>
+
+  <WaveDivider color="#6b21a8" flip />
+</LayoutHyper>
+
+<style>
+  /* HERO */
+  .hyba__hero {
+    position: relative;
+    min-height: 65vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 2rem 1.5rem 4rem;
+    overflow: hidden;
+  }
+  .hyba__hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hyba__hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(5, 5, 16, 0.95) 0%, rgba(5, 5, 16, 0.3) 50%, rgba(5, 5, 16, 0.5) 100%);
+  }
+  .hyba__hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    text-align: center;
+    width: 100%;
+  }
+  .hyba__back {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: rgba(240, 240, 235, 0.5);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: color 0.3s ease;
+  }
+  .hyba__back:hover {
+    color: #26cfff;
+  }
+  .hyba__hero-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--hyba-cat);
+    background: rgba(5, 5, 16, 0.5);
+    border: 1px solid color-mix(in srgb, var(--hyba-cat) 35%, transparent);
+    padding: 0.35rem 1rem;
+    border-radius: 9999px;
+    margin-bottom: 1.25rem;
+    backdrop-filter: blur(8px);
+  }
+  .hyba__hero-title {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0 0 1.25rem;
+  }
+  .hyba__hero-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: rgba(240, 240, 235, 0.5);
+    flex-wrap: wrap;
+  }
+  .hyba__hero-dot {
+    color: rgba(240, 240, 235, 0.25);
+  }
+
+  /* LAYOUT */
+  .hyba__layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 5rem;
+    align-items: start;
+  }
+
+  /* ARTICLE */
+  .hyba__article {
+    min-width: 0;
+  }
+  .hyba__article-body {
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(38, 207, 255, 0.06);
+    backdrop-filter: blur(8px);
+  }
+  .hyba__block {
+    margin-bottom: 2rem;
+  }
+  .hyba__block:last-child {
+    margin-bottom: 0;
+  }
+  .hyba__h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 2.5rem 0 1rem;
+    line-height: 1.3;
+  }
+  .hyba__block:first-child .hyba__h2 {
+    margin-top: 0;
+  }
+  .hyba__p {
+    font-size: 1rem;
+    color: rgba(240, 240, 235, 0.7);
+    line-height: 1.85;
+    margin: 0 0 1.5rem;
+  }
+  .hyba__p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* SHARE */
+  .hyba__share {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(38, 207, 255, 0.08);
+  }
+  .hyba__share-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(240, 240, 235, 0.4);
+  }
+  .hyba__share-btns {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .hyba__share-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(38, 207, 255, 0.12);
+    color: rgba(240, 240, 235, 0.6);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+  }
+  .hyba__share-btn:hover {
+    border-color: rgba(38, 207, 255, 0.4);
+    color: #26cfff;
+    box-shadow: 0 0 12px rgba(38, 207, 255, 0.15);
+  }
+
+  /* SIDEBAR */
+  .hyba__sidebar {
+    position: sticky;
+    top: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .hyba__sidebar-card {
+    padding: 0;
+  }
+  .hyba__sidebar-inner {
+    padding: 1.5rem;
+  }
+  .hyba__sidebar-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0 0 1.25rem;
+  }
+  .hyba__sidebar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .hyba__sidebar-item {
+    display: flex;
+    gap: 0.8rem;
+    text-decoration: none;
+    color: inherit;
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+    transition: background 0.3s ease;
+  }
+  .hyba__sidebar-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .hyba__sidebar-item-img-wrap {
+    width: 64px;
+    height: 64px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .hyba__sidebar-item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hyba__sidebar-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+  .hyba__sidebar-item-cat {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .hyba__sidebar-item-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(240, 240, 235, 0.8);
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .hyba__sidebar-item-date {
+    font-size: 0.7rem;
+    color: rgba(240, 240, 235, 0.35);
+  }
+  .hyba__sidebar-cta-text {
+    font-size: 0.88rem;
+    color: rgba(240, 240, 235, 0.55);
+    line-height: 1.6;
+    margin: 0 0 1.25rem;
+  }
+  .hyba__sidebar-cta-btn {
+    display: inline-block;
+    padding: 0.7rem 1.4rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #050510;
+    background: linear-gradient(135deg, #f77b46, #ff9a62);
+    border-radius: 0.65rem;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .hyba__sidebar-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(247, 123, 70, 0.3);
+  }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .hyba__layout {
+      grid-template-columns: 1fr;
+    }
+    .hyba__sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .hyba__sidebar-card {
+      flex: 1;
+      min-width: 280px;
+    }
+  }
+  @media (max-width: 600px) {
+    .hyba__hero {
+      min-height: 55vh;
+      padding: 2rem 1rem 3rem;
+    }
+    .hyba__article-body {
+      padding: 1.5rem;
+    }
+    .hyba__hero-title {
+      font-size: 1.6rem;
+    }
+    .hyba__layout {
+      padding: 2.5rem 1rem 4rem;
+    }
+    .hyba__sidebar {
+      flex-direction: column;
+    }
+    .hyba__sidebar-card {
+      min-width: 0;
+    }
+  }
+</style>

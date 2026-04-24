@@ -1,0 +1,91 @@
+---
+interface Props {
+  class?: string;
+}
+
+const extraClass = Astro.props.class || '';
+---
+
+<div class={`hc11 ${extraClass}`.trim()} data-holo-card>
+  <div class="hc11__shimmer" aria-hidden="true"></div>
+  <div class="hc11__content">
+    <slot />
+  </div>
+</div>
+
+<script is:inline>
+(function () {
+  document.querySelectorAll('[data-holo-card]').forEach(function (card) {
+    var shimmer = card.querySelector('.hc11__shimmer');
+    card.addEventListener('mousemove', function (e) {
+      var rect = card.getBoundingClientRect();
+      var x = ((e.clientX - rect.left) / rect.width) * 100;
+      var y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--holo-x', x + '%');
+      card.style.setProperty('--holo-y', y + '%');
+      card.style.setProperty('--holo-angle', Math.round(x * 3.6) + 'deg');
+    });
+    card.addEventListener('mouseleave', function () {
+      card.style.setProperty('--holo-x', '50%');
+      card.style.setProperty('--holo-y', '50%');
+    });
+  });
+})();
+</script>
+
+<style>
+  .hc11 {
+    --holo-x: 50%;
+    --holo-y: 50%;
+    --holo-angle: 180deg;
+    position: relative;
+    border-radius: var(--r-lg, 1.25rem);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid rgba(38, 207, 255, 0.15);
+    overflow: hidden;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .hc11:hover {
+    border-color: rgba(38, 207, 255, 0.4);
+    box-shadow:
+      0 0 20px rgba(38, 207, 255, 0.1),
+      0 0 60px rgba(38, 207, 255, 0.05),
+      inset 0 0 20px rgba(38, 207, 255, 0.03);
+  }
+
+  .hc11__shimmer {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      radial-gradient(
+        circle at var(--holo-x) var(--holo-y),
+        rgba(38, 207, 255, 0.2) 0%,
+        transparent 50%
+      ),
+      conic-gradient(
+        from var(--holo-angle) at var(--holo-x) var(--holo-y),
+        rgba(38, 207, 255, 0.12),
+        rgba(107, 33, 168, 0.12),
+        rgba(59, 130, 246, 0.12),
+        rgba(247, 123, 70, 0.1),
+        rgba(38, 207, 255, 0.12)
+      );
+    mix-blend-mode: screen;
+  }
+
+  .hc11:hover .hc11__shimmer {
+    opacity: 1;
+  }
+
+  .hc11__content {
+    position: relative;
+    z-index: 2;
+  }
+</style>

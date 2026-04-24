@@ -1,27 +1,42 @@
 ---
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 
+const versionPrefixes = ['/', '/v2', '/v7', '/v8', '/v11'];
+
 const versions = [
-  { label: 'Standard', href: '/' },
-  { label: 'Design', href: '/v2' },
-  { label: 'Immersive', href: '/v3' },
-  { label: 'Editorial', href: '/v4' },
-  { label: 'Expressive', href: '/v5' },
-  { label: 'Minimal', href: '/v6' },
-  { label: 'Kinetic', href: '/v7' },
-  { label: 'Marketing', href: '/v8' },
-  { label: 'Storytelling', href: '/v9' },
-  { label: 'Luxe', href: '/v10' },
+  { label: 'Standard', prefix: '/' },
+  { label: 'Design', prefix: '/v2' },
+  { label: 'Kinetic', prefix: '/v7' },
+  { label: 'Marketing', prefix: '/v8' },
+  { label: 'Hyper Design', prefix: '/v11' },
 ];
 const count = versions.length;
 
-function isActive(href: string): boolean {
+function getActivePrefix(): string {
   const clean = currentPath === '' ? '/' : currentPath;
-  if (href === '/') return clean === '/';
-  return clean.startsWith(href);
+  for (const p of versionPrefixes) {
+    if (p !== '/' && clean.startsWith(p)) return p;
+  }
+  return '/';
 }
 
-const activeIdx = versions.findIndex((v) => isActive(v.href));
+function getPageSuffix(): string {
+  const prefix = getActivePrefix();
+  if (prefix === '/') return currentPath === '/' ? '' : currentPath;
+  return currentPath.slice(prefix.length);
+}
+
+function buildHref(targetPrefix: string): string {
+  const suffix = getPageSuffix();
+  if (targetPrefix === '/') return suffix || '/';
+  return suffix ? targetPrefix + suffix : targetPrefix;
+}
+
+function isActive(prefix: string): boolean {
+  return getActivePrefix() === prefix;
+}
+
+const activeIdx = versions.findIndex((v) => isActive(v.prefix));
 ---
 
 <nav class="vsw" aria-label="Changer de version">
@@ -40,9 +55,9 @@ const activeIdx = versions.findIndex((v) => isActive(v.href));
       <span class="vsw__indicator" aria-hidden="true"></span>
       {versions.map((v) => (
         <a
-          href={v.href}
-          class:list={['vsw__link', { 'is-active': isActive(v.href) }]}
-          aria-current={isActive(v.href) ? 'page' : undefined}
+          href={buildHref(v.prefix)}
+          class:list={['vsw__link', { 'is-active': isActive(v.prefix) }]}
+          aria-current={isActive(v.prefix) ? 'page' : undefined}
         >
           {v.label}
         </a>

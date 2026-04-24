@@ -1,0 +1,370 @@
+---
+import LayoutDesign from '../../layouts/LayoutDesign.astro';
+import { Image } from 'astro:assets';
+import lacImg from '../../assets/images/location-lac-sainte-croix-gorges-verdon.png';
+
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const photos = [
+  { src: '/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg', alt: 'Bateaux électriques sur le lac de Sainte-Croix avec vue sur les Gorges du Verdon', w: 2, h: 3 },
+  { src: '/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg', alt: 'Paddle et bateaux sur le lac de Sainte-Croix', w: 3, h: 2 },
+  { src: '/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg', alt: 'Bateau électrique — location Surf Center', w: 2, h: 2 },
+  { src: '/concert-surfcenter-lac-sainte-croix.png', alt: 'Concert au coucher du soleil — Surf Center', w: 3, h: 2 },
+  { src: '/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg', alt: 'Cours de yoga au bord du lac de Sainte-Croix', w: 2, h: 3 },
+  { src: '/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg', alt: 'Vue aérienne du snack et pédalos — Surf Center', w: 3, h: 2 },
+  { src: '/location-pedalo-lac-sainte-croix-plage-surfcenter.jpeg', alt: 'Pédalos sur la plage du lac de Sainte-Croix', w: 2, h: 2 },
+  { src: '/location-planche-a-voile-windsurf-lac-sainte-croix.png', alt: 'Planche à voile sur le lac de Sainte-Croix', w: 2, h: 3 },
+  { src: '/location-canoe-lac-sainte-croix-surfcenter.jpg', alt: 'Canoë sur le lac de Sainte-Croix', w: 3, h: 2 },
+  { src: '/framboise-et-ceatera-lac-sainte-croix-concert-surfcenter.jpg', alt: 'Concert Framboise et Cætera — Surf Center', w: 2, h: 2 },
+  { src: '/location-paddle-lac-sainte-croix-surfcenter.jpeg', alt: 'Paddle sur le lac de Sainte-Croix', w: 3, h: 2 },
+  { src: '/concert-joulik-lac-sainte-croix-surfcenter.jpg', alt: 'Concert Joulik au Surf Center', w: 2, h: 3 },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageGallery',
+  name: 'Galerie photos — Surf Center',
+  description: 'Photos du lac de Sainte-Croix, des activités nautiques, du restaurant et des événements au Surf Center.',
+  url: `${siteUrl}/v2/galerie`,
+  image: photos.map(p => ({
+    '@type': 'ImageObject',
+    contentUrl: `${siteUrl}${p.src}`,
+    description: p.alt,
+  })),
+};
+---
+
+<LayoutDesign
+  title="Galerie — Surf Center | Photos du lac de Sainte-Croix"
+  description="Galerie photos du Surf Center. Lac de Sainte-Croix, Gorges du Verdon, activités nautiques, restaurant et événements en images."
+  jsonLd={jsonLd}
+>
+  <!-- SPLIT HERO -->
+  <section class="dgal-hero">
+    <div class="dgal-hero__left">
+      <div class="dgal-hero__content reveal">
+        <span class="dgal-hero__eyebrow">Surf Center · En images</span>
+        <h1 class="dgal-hero__title">Galerie</h1>
+        <p class="dgal-hero__sub">{photos.length} photos du lac, des activités et de la vie au Surf Center.</p>
+      </div>
+    </div>
+    <div class="dgal-hero__right">
+      <Image
+        src={lacImg}
+        alt="Lac de Sainte-Croix — Gorges du Verdon"
+        width={960}
+        height={1080}
+        class="dgal-hero__img"
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <!-- MASONRY GALLERY -->
+  <section class="section dgal-grid-section" aria-labelledby="dgal-grid-title">
+    <div class="container">
+      <header class="dgal-grid__header reveal">
+        <span class="dgal-grid__eyebrow">Photos</span>
+        <h2 id="dgal-grid-title" class="dgal-grid__heading">Le lac, les activités,<br/>les moments</h2>
+      </header>
+      <div class="dgal-mosaic">
+        {photos.map((p, i) => (
+          <div
+            class={`dgal-mosaic__item dgal-mosaic__item--${p.w}x${p.h} reveal`}
+            data-dgal-lightbox
+            data-src={p.src}
+            data-alt={p.alt}
+            tabindex="0"
+            role="button"
+            aria-label={`Voir en grand : ${p.alt}`}
+          >
+            <img
+              src={p.src}
+              alt={p.alt}
+              width={p.w * 400}
+              height={p.h * 400}
+              loading={i < 4 ? 'eager' : 'lazy'}
+              decoding="async"
+              class="dgal-mosaic__img"
+            />
+            <div class="dgal-mosaic__glass">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="dgal-lb" id="dgalLightbox" aria-hidden="true" role="dialog" aria-label="Visionneuse photo">
+    <button class="dgal-lb__close" type="button" aria-label="Fermer">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <img class="dgal-lb__img" id="dgalLbImg" src="" alt="" />
+    <p class="dgal-lb__caption" id="dgalLbCaption"></p>
+  </div>
+</LayoutDesign>
+
+<style>
+  /* ========================
+     DGAL — Galerie (Design v2)
+     ======================== */
+
+  /* --- Split hero --- */
+  .dgal-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 70svh;
+  }
+
+  .dgal-hero__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: calc(var(--header-h) + var(--s-8)) var(--s-6) var(--s-8);
+    background: #0a0a0a;
+    color: #fff;
+  }
+
+  .dgal-hero__content {
+    max-width: 480px;
+  }
+
+  .dgal-hero__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    display: block;
+    margin-bottom: var(--s-6);
+  }
+
+  .dgal-hero__title {
+    font-size: clamp(4rem, 10vw, 9rem) !important;
+    font-weight: 800 !important;
+    line-height: 0.85 !important;
+    letter-spacing: -0.05em !important;
+    text-transform: uppercase;
+    color: #fff !important;
+    margin-bottom: var(--s-6);
+  }
+
+  .dgal-hero__sub {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: rgb(255 255 255 / 0.45);
+  }
+
+  .dgal-hero__right {
+    position: relative;
+    min-height: 40vh;
+  }
+
+  .dgal-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* --- Mosaic grid --- */
+  .dgal-grid-section {
+    background: #0a0a0a;
+    color: #fff;
+  }
+
+  .dgal-grid__header {
+    margin-bottom: var(--s-12);
+  }
+
+  .dgal-grid__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    display: block;
+    margin-bottom: var(--s-3);
+  }
+
+  .dgal-grid__heading {
+    font-size: clamp(1.8rem, 4vw, 2.8rem) !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.03em !important;
+    color: #fff !important;
+    text-transform: uppercase;
+  }
+
+  .dgal-mosaic {
+    columns: 1;
+    column-gap: var(--s-4);
+  }
+
+  .dgal-mosaic__item {
+    break-inside: avoid;
+    margin-bottom: var(--s-4);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .dgal-mosaic__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .dgal-mosaic__item:hover .dgal-mosaic__img,
+  .dgal-mosaic__item:focus-visible .dgal-mosaic__img {
+    transform: scale(1.04);
+  }
+
+  .dgal-mosaic__glass {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0 0 0 / 0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.35s var(--ease);
+    color: #fff;
+  }
+
+  .dgal-mosaic__item:hover .dgal-mosaic__glass,
+  .dgal-mosaic__item:focus-visible .dgal-mosaic__glass {
+    opacity: 1;
+  }
+
+  /* --- Lightbox --- */
+  .dgal-lb {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgb(0 0 0 / 0.92);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--s-8);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease);
+  }
+
+  .dgal-lb.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .dgal-lb__close {
+    position: absolute;
+    top: var(--s-6);
+    right: var(--s-6);
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgb(255 255 255 / 0.15);
+    border-radius: var(--r-full);
+    background: rgb(255 255 255 / 0.06);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color var(--t-fast), background var(--t-fast);
+  }
+
+  .dgal-lb__close:hover {
+    border-color: var(--c-orange);
+    background: rgb(255 255 255 / 0.1);
+  }
+
+  .dgal-lb__img {
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: var(--r-md);
+  }
+
+  .dgal-lb__caption {
+    font-size: 0.78rem;
+    color: rgb(255 255 255 / 0.5);
+    text-align: center;
+    margin-top: var(--s-4);
+    max-width: 60ch;
+  }
+
+  /* --- Responsive --- */
+  @media (min-width: 600px) {
+    .dgal-mosaic { columns: 2; }
+  }
+
+  @media (min-width: 900px) {
+    .dgal-hero {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .dgal-hero__left {
+      padding: var(--s-20) var(--s-16) var(--s-12);
+    }
+
+    .dgal-hero__right {
+      min-height: 100svh;
+    }
+
+    .dgal-mosaic { columns: 3; }
+  }
+</style>
+
+<script>
+  const lb = document.getElementById('dgalLightbox');
+  const lbImg = document.getElementById('dgalLbImg') as HTMLImageElement;
+  const lbCaption = document.getElementById('dgalLbCaption');
+  const lbClose = lb?.querySelector('.dgal-lb__close');
+
+  function openLb(src: string, alt: string) {
+    if (!lb || !lbImg || !lbCaption) return;
+    lbImg.src = src;
+    lbImg.alt = alt;
+    lbCaption.textContent = alt;
+    lb.classList.add('is-active');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLb() {
+    if (!lb) return;
+    lb.classList.remove('is-active');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-dgal-lightbox]').forEach((el) => {
+    const src = (el as HTMLElement).dataset.src || '';
+    const alt = (el as HTMLElement).dataset.alt || '';
+    el.addEventListener('click', () => openLb(src, alt));
+    el.addEventListener('keydown', (e) => {
+      if ((e as KeyboardEvent).key === 'Enter') openLb(src, alt);
+    });
+  });
+
+  lbClose?.addEventListener('click', closeLb);
+  lb?.addEventListener('click', (e) => {
+    if (e.target === lb) closeLb();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLb();
+  });
+</script>

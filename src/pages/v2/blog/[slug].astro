@@ -1,0 +1,371 @@
+---
+import LayoutDesign from '../../../layouts/LayoutDesign.astro';
+import { blogPostsV2 } from '../../../data/blog-posts';
+
+export function getStaticPaths() {
+  return blogPostsV2.map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const post = blogPostsV2.find((p) => p.slug === slug)!;
+const relatedPosts = blogPostsV2.filter((p) => p.slug !== slug).slice(0, 3);
+
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    datePublished: post.date,
+    image: `${siteUrl}${post.image}`,
+    author: { '@type': 'Organization', name: 'Surf Center', url: siteUrl },
+    publisher: { '@type': 'Organization', name: 'Surf Center', logo: { '@type': 'ImageObject', url: `${siteUrl}/logo-surf-center.png` } },
+    url: `${siteUrl}/v2/blog/${post.slug}`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${siteUrl}/v2` },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/v2/blog` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `${siteUrl}/v2/blog/${post.slug}` },
+    ],
+  },
+];
+---
+
+<LayoutDesign title={`${post.title} | Blog Surf Center`} description={post.title} jsonLd={jsonLd}>
+
+  <!-- ═══ CINEMA ARTICLE HERO ═══ -->
+  <section class="blogart-hero" aria-label={post.title}>
+    <div class="blogart-hero__bg" aria-hidden="true">
+      <img src={post.image} alt="" width="1920" height="1080" loading="eager" fetchpriority="high" decoding="async" />
+    </div>
+    <div class="blogart-hero__overlay" aria-hidden="true"></div>
+    <div class="container blogart-hero__inner">
+      <a href="/v2/blog" class="blogart-hero__back">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Blog
+      </a>
+      <div class="blogart-hero__meta">
+        <span class="blogart-hero__cat">{post.category}</span>
+        <time datetime={post.date}>{post.dateFormatted}</time>
+        <span>{post.readTime} de lecture</span>
+      </div>
+      <h1 class="blogart-hero__title">{post.title}</h1>
+    </div>
+    <div class="blogart-hero__vignette" aria-hidden="true"></div>
+  </section>
+
+  <!-- ═══ ARTICLE + SIDEBAR LAYOUT ═══ -->
+  <section class="section blogart-content">
+    <div class="container blogart-layout">
+
+      <!-- MAIN ARTICLE -->
+      <article class="blogart-article reveal">
+        <div class="blogart-prose" set:html={post.content} />
+        <div class="blogart-article__footer">
+          <a href="/v2/blog" class="btn btn--outline">
+            Retour au blog
+          </a>
+        </div>
+      </article>
+
+      <!-- GLASS SIDEBAR -->
+      <aside class="blogart-sidebar reveal reveal-d2">
+        <div class="blogart-sidebar__glass">
+          <h3 class="blogart-sidebar__title">Articles liés</h3>
+          <div class="blogart-sidebar__list">
+            {relatedPosts.map((rp) => (
+              <a href={`/v2/blog/${rp.slug}`} class="blogart-sidebar__item">
+                <div class="blogart-sidebar__thumb">
+                  <img src={rp.image} alt={rp.alt} width="120" height="80" loading="lazy" decoding="async" />
+                </div>
+                <div class="blogart-sidebar__info">
+                  <span class="blogart-sidebar__cat">{rp.category}</span>
+                  <span class="blogart-sidebar__name">{rp.title}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div class="blogart-sidebar__glass blogart-sidebar__cta">
+          <span class="blogart-sidebar__cta-eyebrow">Envie de tester ?</span>
+          <p>Réservez votre activité nautique au lac de Sainte-Croix.</p>
+          <button type="button" class="btn btn--primary btn--sm" data-booking>Réserver</button>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+</LayoutDesign>
+
+<style>
+  /* ═══ CINEMA HERO ═══ */
+  .blogart-hero {
+    position: relative;
+    min-height: 70svh;
+    display: flex;
+    align-items: flex-end;
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+
+  .blogart-hero__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .blogart-hero__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    filter: grayscale(0.15);
+    animation: slow-zoom 25s ease-in-out infinite alternate;
+  }
+
+  .blogart-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, #0a0a0a 0%, transparent 60%, rgba(10,10,10,0.4) 100%);
+  }
+
+  .blogart-hero__vignette {
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 150px rgba(0,0,0,0.4);
+    pointer-events: none;
+  }
+
+  .blogart-hero__inner {
+    position: relative;
+    z-index: 2;
+    padding-bottom: var(--s-16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    max-width: 800px;
+    animation: fade-up 1s var(--ease) both;
+  }
+
+  .blogart-hero__back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgb(255 255 255 / 0.4);
+    transition: color var(--t-fast);
+    margin-bottom: var(--s-4);
+  }
+
+  .blogart-hero__back:hover { color: var(--c-orange); }
+
+  .blogart-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-4);
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgb(255 255 255 / 0.45);
+  }
+
+  .blogart-hero__cat {
+    background: var(--c-orange);
+    color: #0a0a0a;
+    padding: 3px 10px;
+    border-radius: var(--r-full);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+  }
+
+  .blogart-hero__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #fff !important;
+    text-transform: none;
+  }
+
+  @media (min-width: 900px) {
+    .blogart-hero__inner { padding-bottom: var(--s-20); }
+  }
+
+  /* ═══ ARTICLE LAYOUT ═══ */
+  .blogart-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .blogart-layout {
+      grid-template-columns: 1fr 320px;
+      gap: var(--s-12);
+    }
+  }
+
+  /* ═══ ARTICLE PROSE ═══ */
+  .blogart-prose {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--c-text-secondary);
+  }
+
+  .blogart-prose :global(h2) {
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-weight: 700;
+    color: var(--c-text);
+    margin-top: var(--s-10);
+    margin-bottom: var(--s-4);
+    text-transform: none !important;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  .blogart-prose :global(p) {
+    margin-bottom: var(--s-5);
+  }
+
+  .blogart-prose :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .blogart-article__footer {
+    margin-top: var(--s-12);
+    padding-top: var(--s-8);
+    border-top: 1px solid var(--c-border-light);
+  }
+
+  /* ═══ GLASS SIDEBAR ═══ */
+  .blogart-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .blogart-sidebar__glass {
+    background: rgb(255 255 255 / 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--c-border-light);
+    border-radius: var(--r-xl);
+    padding: var(--s-6);
+  }
+
+  [data-theme='light'] .blogart-sidebar__glass {
+    background: var(--c-surface);
+  }
+
+  .blogart-sidebar__title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--c-text-muted);
+    margin-bottom: var(--s-5);
+  }
+
+  .blogart-sidebar__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+
+  .blogart-sidebar__item {
+    display: flex;
+    gap: var(--s-4);
+    text-decoration: none;
+    color: var(--c-text);
+    padding: var(--s-3);
+    border-radius: var(--r-md);
+    transition: background var(--t-fast);
+  }
+
+  .blogart-sidebar__item:hover {
+    background: rgb(247 123 70 / 0.06);
+  }
+
+  .blogart-sidebar__thumb {
+    flex-shrink: 0;
+    width: 72px;
+    height: 52px;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+  }
+
+  .blogart-sidebar__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .blogart-sidebar__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .blogart-sidebar__cat {
+    font-size: 0.58rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--c-orange);
+  }
+
+  .blogart-sidebar__name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* ═══ CTA BOX ═══ */
+  .blogart-sidebar__cta {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-3);
+  }
+
+  .blogart-sidebar__cta-eyebrow {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--c-orange);
+  }
+
+  .blogart-sidebar__cta p {
+    font-size: 0.85rem;
+    color: var(--c-text-secondary);
+    line-height: 1.6;
+  }
+
+  @media (min-width: 900px) {
+    .blogart-sidebar {
+      position: sticky;
+      top: calc(var(--header-h) + var(--s-6));
+    }
+  }
+</style>

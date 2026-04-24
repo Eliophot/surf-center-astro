@@ -1,0 +1,432 @@
+---
+import LayoutHyper from '../../../layouts/LayoutHyper.astro';
+import MeshGradient from '../../../components/v11/MeshGradient.astro';
+import GlowText from '../../../components/v11/GlowText.astro';
+import HolographicCard from '../../../components/v11/HolographicCard.astro';
+import WaveDivider from '../../../components/v11/WaveDivider.astro';
+import { locationDetails } from '../../../data/locations';
+
+const steps = [
+  { num: '01', title: 'Choisissez', desc: 'Sélectionnez votre activité nautique parmi notre flotte.', color: '#26cfff' },
+  { num: '02', title: 'Réservez', desc: 'Réservez en ligne ou sur place — c\'est rapide et flexible.', color: '#6b21a8' },
+  { num: '03', title: 'Profitez', desc: 'Briefing sécurité inclus, puis embarquez sur le lac.', color: '#3b82f6' },
+];
+
+const iconMap: Record<string, string> = {
+  anchor: '⚓',
+  users: '👥',
+  battery: '🔋',
+  shield: '🛡',
+  sun: '☀️',
+  map: '🗺',
+  zap: '⚡',
+};
+---
+
+<LayoutHyper
+  title="Nos Locations — Surf Center Hyper Design"
+  description="Louez bateaux électriques, paddles, pédalos, canoës et planches à voile au Surf Center, lac de Sainte-Croix."
+>
+  <!-- HERO -->
+  <section class="hylc__hero">
+    <MeshGradient />
+    <div class="hylc__hero-inner">
+      <p class="hylc__hero-tag reveal">Location nautique</p>
+      <GlowText tag="h1" color="#26cfff" intensity="high" class="hylc__hero-title reveal">
+        Nos Locations
+      </GlowText>
+      <p class="hylc__hero-sub reveal">
+        Bateaux électriques, paddle, pédalo, canoë, planche à voile — trouvez l'activité parfaite pour votre journée sur le lac.
+      </p>
+    </div>
+  </section>
+
+  <WaveDivider color="#26cfff" />
+
+  <!-- LOCATIONS GRID -->
+  <section class="hylc__grid-section">
+    <div class="hylc__grid">
+      {locationDetails.map((loc, i) => {
+        const accent = ['#26cfff', '#6b21a8', '#3b82f6', '#f77b46', '#26cfff'][i % 5];
+        return (
+          <a href={`/v11/nos-locations/${loc.slug}`} class="hylc__card-link reveal">
+            <HolographicCard class="hylc__card">
+              <div class="hylc__card-img-wrap">
+                <img src={loc.heroImage} alt={loc.heroAlt} class="hylc__card-img" loading="lazy" />
+                <div class="hylc__card-overlay">
+                  <span class="hylc__card-price" style={`--hylc-accent: ${accent};`}>
+                    {loc.price}€<span class="hylc__card-price-unit">/{loc.priceUnit}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="hylc__card-body">
+                <GlowText tag="h3" color={accent} intensity="low" class="hylc__card-title">
+                  {loc.title}
+                </GlowText>
+                <p class="hylc__card-tagline">{loc.tagline}</p>
+                <p class="hylc__card-desc">{loc.description}</p>
+                <div class="hylc__card-highlights">
+                  {loc.highlights.map((h) => (
+                    <span class="hylc__card-hl" style={`--hylc-accent: ${accent};`}>{h}</span>
+                  ))}
+                </div>
+                <span class="hylc__card-cta" style={`--hylc-accent: ${accent};`}>
+                  Découvrir →
+                </span>
+              </div>
+            </HolographicCard>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <WaveDivider color="#6b21a8" flip />
+
+  <!-- HOW IT WORKS -->
+  <section class="hylc__how reveal">
+    <GlowText tag="h2" color="#26cfff" intensity="medium" class="hylc__how-title">
+      Comment ça marche
+    </GlowText>
+    <p class="hylc__how-sub">En 3 étapes, vous êtes sur l'eau</p>
+    <div class="hylc__steps">
+      {steps.map((s, i) => (
+        <div class="hylc__step">
+          <div class="hylc__step-num-wrap">
+            <GlowText tag="span" color={s.color} intensity="high" class="hylc__step-num">
+              {s.num}
+            </GlowText>
+            {i < steps.length - 1 && <div class="hylc__step-line" style={`background: linear-gradient(to bottom, ${s.color}, ${steps[i + 1].color});`} />}
+          </div>
+          <div class="hylc__step-content">
+            <GlowText tag="h3" color={s.color} intensity="low" class="hylc__step-title">
+              {s.title}
+            </GlowText>
+            <p class="hylc__step-desc">{s.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <WaveDivider color="#3b82f6" />
+
+  <!-- INFO BAND -->
+  <section class="hylc__info reveal">
+    <div class="hylc__info-inner">
+      <div class="hylc__info-item">
+        <GlowText tag="span" color="#26cfff" intensity="low" class="hylc__info-icon">⚓</GlowText>
+        <div>
+          <strong class="hylc__info-label">Ouvert tous les jours</strong>
+          <span class="hylc__info-val">De mai à septembre, 9h–19h</span>
+        </div>
+      </div>
+      <div class="hylc__info-item">
+        <GlowText tag="span" color="#6b21a8" intensity="low" class="hylc__info-icon">🛡</GlowText>
+        <div>
+          <strong class="hylc__info-label">Sécurité incluse</strong>
+          <span class="hylc__info-val">Gilets, briefing, assistance</span>
+        </div>
+      </div>
+      <div class="hylc__info-item">
+        <GlowText tag="span" color="#f77b46" intensity="low" class="hylc__info-icon">⚡</GlowText>
+        <div>
+          <strong class="hylc__info-label">Sans réservation</strong>
+          <span class="hylc__info-val">Venez directement — premier arrivé, premier servi</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</LayoutHyper>
+
+<style>
+  /* HERO */
+  .hylc__hero {
+    position: relative;
+    min-height: 65vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 1.5rem 4rem;
+    overflow: hidden;
+  }
+  .hylc__hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+  .hylc__hero-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    background: rgba(59, 130, 246, 0.08);
+    padding: 0.4rem 1.2rem;
+    border-radius: 9999px;
+    margin-bottom: 1.5rem;
+  }
+  .hylc__hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 1.5rem;
+  }
+  .hylc__hero-sub {
+    font-size: 1.15rem;
+    color: rgba(240, 240, 235, 0.6);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* GRID */
+  .hylc__grid-section {
+    padding: 4rem 1.5rem 5rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .hylc__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 2rem;
+  }
+  .hylc__card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .hylc__card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hylc__card-link:hover .hylc__card {
+    transform: translateY(-4px);
+  }
+  .hylc__card-img-wrap {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 1.25rem 1.25rem 0 0;
+  }
+  .hylc__card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hylc__card-link:hover .hylc__card-img {
+    transform: scale(1.06);
+  }
+  .hylc__card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(5, 5, 16, 0.7) 0%, transparent 60%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 1rem;
+  }
+  .hylc__card-price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--hylc-accent);
+    text-shadow: 0 0 12px var(--hylc-accent);
+  }
+  .hylc__card-price-unit {
+    font-size: 0.8rem;
+    font-weight: 500;
+    opacity: 0.7;
+  }
+  .hylc__card-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .hylc__card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 0.3rem;
+  }
+  .hylc__card-tagline {
+    font-size: 0.8rem;
+    color: rgba(240, 240, 235, 0.45);
+    margin: 0 0 0.75rem;
+    letter-spacing: 0.02em;
+  }
+  .hylc__card-desc {
+    font-size: 0.88rem;
+    color: rgba(240, 240, 235, 0.6);
+    line-height: 1.65;
+    margin: 0 0 1.25rem;
+  }
+  .hylc__card-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .hylc__card-hl {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--hylc-accent);
+    border: 1px solid color-mix(in srgb, var(--hylc-accent) 25%, transparent);
+    background: color-mix(in srgb, var(--hylc-accent) 6%, transparent);
+    padding: 0.25rem 0.7rem;
+    border-radius: 9999px;
+  }
+  .hylc__card-cta {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--hylc-accent);
+    margin-top: auto;
+    transition: letter-spacing 0.3s ease;
+  }
+  .hylc__card-link:hover .hylc__card-cta {
+    letter-spacing: 0.06em;
+  }
+
+  /* HOW IT WORKS */
+  .hylc__how {
+    padding: 5rem 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .hylc__how-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    text-align: center;
+    margin: 0 0 0.5rem;
+  }
+  .hylc__how-sub {
+    text-align: center;
+    color: rgba(240, 240, 235, 0.5);
+    font-size: 1rem;
+    margin: 0 0 3.5rem;
+  }
+  .hylc__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .hylc__step {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+  .hylc__step-num-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 60px;
+  }
+  .hylc__step-num {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .hylc__step-line {
+    width: 2px;
+    height: 60px;
+    margin: 0.75rem 0;
+    border-radius: 2px;
+    opacity: 0.4;
+  }
+  .hylc__step-content {
+    padding-bottom: 2.5rem;
+  }
+  .hylc__step-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+  }
+  .hylc__step-desc {
+    font-size: 0.92rem;
+    color: rgba(240, 240, 235, 0.6);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* INFO */
+  .hylc__info {
+    padding: 4rem 1.5rem 5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hylc__info-inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .hylc__info-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(38, 207, 255, 0.08);
+    backdrop-filter: blur(12px);
+  }
+  .hylc__info-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  .hylc__info-label {
+    display: block;
+    font-size: 0.95rem;
+    color: #f0f0eb;
+    margin-bottom: 0.25rem;
+  }
+  .hylc__info-val {
+    font-size: 0.82rem;
+    color: rgba(240, 240, 235, 0.5);
+  }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hylc__grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .hylc__info-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 600px) {
+    .hylc__hero {
+      min-height: 55vh;
+      padding: 6rem 1rem 3rem;
+    }
+    .hylc__step {
+      gap: 1.25rem;
+    }
+    .hylc__step-num-wrap {
+      width: 44px;
+    }
+    .hylc__step-num {
+      font-size: 1.5rem;
+    }
+  }
+</style>

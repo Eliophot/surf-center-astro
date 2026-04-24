@@ -1,0 +1,425 @@
+---
+import LayoutDesign from '../../layouts/LayoutDesign.astro';
+import { Image } from 'astro:assets';
+import snackImg from '../../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import espritImg from '../../assets/images/esprit.png';
+import pizzaImg from '../../assets/images/IMG20220610131419.jpg';
+import barImg from '../../assets/images/IMG20220618204351.jpg';
+
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FoodEstablishment',
+  name: 'Snack-Pizzeria Surf Center',
+  description: 'Pizzas artisanales au feu de bois, salades fraîches, glaces et boissons avec vue directe sur le lac de Sainte-Croix. Terrasse les pieds dans le sable.',
+  url: `${siteUrl}/v2/restauration`,
+  image: `${siteUrl}/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg`,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Plage des Salles-sur-Verdon',
+    addressLocality: 'Les Salles-sur-Verdon',
+    postalCode: '83630',
+    addressRegion: 'Provence-Alpes-Côte d\'Azur',
+    addressCountry: 'FR',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: 43.7766, longitude: 6.21 },
+  telephone: '+33492771450',
+  servesCuisine: ['Pizza', 'Snack', 'Salades', 'Glaces'],
+  priceRange: '€',
+  menu: `${siteUrl}/v2/restauration`,
+  acceptsReservations: false,
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+      opens: '11:00',
+      closes: '18:30',
+      validFrom: '2026-04-01',
+      validThrough: '2026-10-31',
+    },
+  ],
+};
+---
+
+<LayoutDesign
+  title="Restauration — Surf Center | Snack-Pizzeria au lac de Sainte-Croix"
+  description="Pizzas au feu de bois, salades, glaces et bar avec vue sur le lac de Sainte-Croix. Snack-pizzeria du Surf Center, Les Salles-sur-Verdon."
+  jsonLd={jsonLd}
+>
+  <!-- CINEMA HERO -->
+  <section class="drst-hero">
+    <div class="drst-hero__bg" aria-hidden="true">
+      <Image
+        src={snackImg}
+        alt=""
+        width={1920}
+        height={820}
+        class="drst-hero__bgimg"
+        loading="eager"
+      />
+    </div>
+    <div class="drst-hero__overlay" aria-hidden="true"></div>
+    <div class="container drst-hero__inner">
+      <span class="drst-hero__eyebrow">Surf Center · Lac de Sainte-Croix</span>
+      <h1 class="drst-hero__title reveal">Restauration</h1>
+      <p class="drst-hero__sub reveal">Pizzas artisanales au feu de bois, salades fraîches, glaces & boissons — les pieds dans le sable, face au lac.</p>
+    </div>
+  </section>
+
+  <!-- DIPTYCH: SNACK -->
+  <section class="section drst-dip" aria-labelledby="drst-snack-title">
+    <div class="container drst-dip__wrap reveal">
+      <div class="drst-dip__img">
+        <Image
+          src={espritImg}
+          alt="Vue du snack Surf Center au bord du lac de Sainte-Croix"
+          width={800}
+          height={540}
+          class="drst-dip__photo"
+          loading="lazy"
+        />
+      </div>
+      <div class="drst-dip__text">
+        <span class="drst-dip__eyebrow">Le snack</span>
+        <h2 id="drst-snack-title" class="drst-dip__heading">Salades, paninis<br/>& snacking</h2>
+        <p class="drst-dip__desc">Des recettes simples et fraîches, préparées sur place chaque jour. Salades composées, paninis, wraps et croque-monsieurs, à déguster sur la terrasse face au lac ou à emporter pour une pause gourmande entre deux activités.</p>
+        <ul class="drst-dip__list" role="list">
+          <li>Salades composées du jour</li>
+          <li>Paninis & wraps maison</li>
+          <li>Croque-monsieurs</li>
+          <li>Frites fraîches</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIPTYCH: PIZZAS -->
+  <section class="section drst-dip drst-dip--reverse" aria-labelledby="drst-pizza-title">
+    <div class="container drst-dip__wrap reveal">
+      <div class="drst-dip__img">
+        <Image
+          src={pizzaImg}
+          alt="Pizzas au feu de bois — Surf Center"
+          width={800}
+          height={540}
+          class="drst-dip__photo"
+          loading="lazy"
+        />
+      </div>
+      <div class="drst-dip__text">
+        <span class="drst-dip__eyebrow">Les pizzas</span>
+        <h2 id="drst-pizza-title" class="drst-dip__heading">Pizzas artisanales<br/>au feu de bois</h2>
+        <p class="drst-dip__desc">Notre spécialité : des pizzas cuites au four à bois, pâte fine et croustillante, garnitures généreuses. À savourer sur notre terrasse ombragée avec vue panoramique sur le lac de Sainte-Croix.</p>
+        <ul class="drst-dip__list" role="list">
+          <li>Pâte maison pétrie chaque matin</li>
+          <li>Four à bois traditionnel</li>
+          <li>Ingrédients frais et locaux</li>
+          <li>Grande variété de recettes</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIPTYCH: BAR -->
+  <section class="section drst-dip" aria-labelledby="drst-bar-title">
+    <div class="container drst-dip__wrap reveal">
+      <div class="drst-dip__img">
+        <Image
+          src={barImg}
+          alt="Bar du Surf Center — boissons et glaces"
+          width={800}
+          height={540}
+          class="drst-dip__photo"
+          loading="lazy"
+        />
+      </div>
+      <div class="drst-dip__text">
+        <span class="drst-dip__eyebrow">Le bar</span>
+        <h2 id="drst-bar-title" class="drst-dip__heading">Boissons, glaces<br/>& cocktails</h2>
+        <p class="drst-dip__desc">Rafraîchissez-vous au bar du Surf Center. Boissons fraîches, jus de fruits, bières artisanales, glaces italiennes et cocktails maison pour accompagner votre journée au lac.</p>
+        <ul class="drst-dip__list" role="list">
+          <li>Boissons fraîches & jus</li>
+          <li>Bières artisanales</li>
+          <li>Glaces italiennes</li>
+          <li>Cocktails & spritz</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO CARDS -->
+  <section class="section drst-info" aria-labelledby="drst-info-title">
+    <div class="container">
+      <header class="drst-info__header reveal">
+        <span class="drst-info__eyebrow">Pratique</span>
+        <h2 id="drst-info-title" class="drst-info__heading">Horaires & accès</h2>
+      </header>
+      <div class="drst-info__grid">
+        <div class="drst-info__card reveal">
+          <h3 class="drst-info__label">Horaires snack</h3>
+          <p class="drst-info__value">11h00 — 18h30<br/>Tous les jours, avril à octobre</p>
+        </div>
+        <div class="drst-info__card reveal">
+          <h3 class="drst-info__label">Horaires pizzas</h3>
+          <p class="drst-info__value">12h00 — 14h30 · 18h00 — 21h00<br/>Juillet & août uniquement</p>
+        </div>
+        <div class="drst-info__card reveal">
+          <h3 class="drst-info__label">Sur place</h3>
+          <p class="drst-info__value">Terrasse face au lac<br/>Service à emporter disponible</p>
+        </div>
+        <div class="drst-info__card reveal">
+          <h3 class="drst-info__label">Paiement</h3>
+          <p class="drst-info__value">CB, espèces<br/>Sans réservation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</LayoutDesign>
+
+<style>
+  /* ========================
+     DRST — Restauration (Design v2)
+     ======================== */
+
+  /* --- Cinema hero --- */
+  .drst-hero {
+    position: relative;
+    min-height: 65vh;
+    display: flex;
+    align-items: flex-end;
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+
+  .drst-hero__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .drst-hero__bgimg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.35;
+    filter: grayscale(0.2);
+  }
+
+  .drst-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #0a0a0a 0%, transparent 60%);
+  }
+
+  .drst-hero__inner {
+    position: relative;
+    z-index: 1;
+    padding-block: calc(var(--header-h) + var(--s-16)) var(--s-16);
+    max-width: 680px;
+  }
+
+  .drst-hero__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    display: block;
+    margin-bottom: var(--s-4);
+  }
+
+  .drst-hero__title {
+    font-size: clamp(3rem, 7vw, 6rem) !important;
+    font-weight: 800 !important;
+    line-height: 0.9 !important;
+    letter-spacing: -0.04em !important;
+    text-transform: uppercase;
+    color: #fff !important;
+    margin-bottom: var(--s-6);
+  }
+
+  .drst-hero__sub {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgb(255 255 255 / 0.5);
+    max-width: 48ch;
+  }
+
+  /* --- Diptych sections --- */
+  .drst-dip {
+    background: #0a0a0a;
+    color: #fff;
+  }
+
+  .drst-dip__wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-8);
+    align-items: center;
+  }
+
+  .drst-dip__img {
+    overflow: hidden;
+    border-radius: var(--r-xl);
+  }
+
+  .drst-dip__photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .drst-dip__img:hover .drst-dip__photo {
+    transform: scale(1.03);
+  }
+
+  .drst-dip__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    display: block;
+    margin-bottom: var(--s-3);
+  }
+
+  .drst-dip__heading {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.03em !important;
+    color: #fff !important;
+    text-transform: uppercase;
+    margin-bottom: var(--s-4);
+  }
+
+  .drst-dip__desc {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: rgb(255 255 255 / 0.55);
+    max-width: 42ch;
+    margin-bottom: var(--s-6);
+  }
+
+  .drst-dip__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .drst-dip__list li {
+    font-size: 0.82rem;
+    color: rgb(255 255 255 / 0.6);
+    padding-left: var(--s-5);
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .drst-dip__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 2px;
+    background: var(--c-orange);
+    border-radius: 1px;
+  }
+
+  /* --- Info cards --- */
+  .drst-info {
+    background: #0e0e0e;
+    color: #fff;
+  }
+
+  .drst-info__header {
+    margin-bottom: var(--s-12);
+  }
+
+  .drst-info__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    display: block;
+    margin-bottom: var(--s-3);
+  }
+
+  .drst-info__heading {
+    font-size: clamp(1.8rem, 4vw, 2.8rem) !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.03em !important;
+    color: #fff !important;
+    text-transform: uppercase;
+  }
+
+  .drst-info__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+
+  .drst-info__card {
+    background: rgb(255 255 255 / 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: var(--r-lg);
+    padding: var(--s-8);
+    transition: border-color var(--t-fast);
+  }
+
+  .drst-info__card:hover {
+    border-color: rgb(255 255 255 / 0.15);
+  }
+
+  .drst-info__label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--c-orange);
+    margin-bottom: var(--s-3);
+  }
+
+  .drst-info__value {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: rgb(255 255 255 / 0.7);
+  }
+
+  /* --- Responsive --- */
+  @media (min-width: 900px) {
+    .drst-hero {
+      min-height: 70vh;
+      aspect-ratio: 21 / 9;
+    }
+
+    .drst-hero__inner {
+      padding-block: calc(var(--header-h) + var(--s-20)) var(--s-20);
+    }
+
+    .drst-dip__wrap {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-16);
+    }
+
+    .drst-dip--reverse .drst-dip__img {
+      order: 2;
+    }
+
+    .drst-dip--reverse .drst-dip__text {
+      order: 1;
+    }
+
+    .drst-info__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

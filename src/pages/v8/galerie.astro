@@ -1,0 +1,367 @@
+---
+import LayoutMarketing from '../../layouts/LayoutMarketing.astro';
+import { Image } from 'astro:assets';
+import imgHeroGalerie from '../../assets/images/hero-galerie.jpg';
+import imgBateaux from '../../assets/images/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg';
+import imgPaddle from '../../assets/images/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg';
+import imgDroneSnack from '../../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import imgEsprit from '../../assets/images/esprit.png';
+import imgCanoe from '../../assets/images/location-canoe-lac-sainte-croix-surfcenter.jpg';
+import imgPedalo from '../../assets/images/location-pedalo-lac-sainte-croix-plage-surfcenter.jpeg';
+import imgPlanche from '../../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+import imgConcert from '../../assets/images/concert-surfcenter-lac-sainte-croix.png';
+import imgYoga from '../../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import imgEvjf from '../../assets/images/location-bateau-electriques-evjf-lac-sainte-croix.jpg';
+import imgConcert2 from '../../assets/images/concert-joulik-lac-sainte-croix-surfcenter.jpg';
+import imgGetty from '../../assets/images/GettyImages-577312024.jpg';
+import imgLac from '../../assets/images/location-lac-sainte-croix-gorges-verdon.png';
+import imgPlat1 from '../../assets/images/IMG20220610131419.jpg';
+import imgTrophee from '../../assets/images/trophee-hobie-shop-lac-sainte-croix-surf-center.jpeg';
+import TrustBadges from '../../components/v8/TrustBadges.astro';
+
+const galleryRows = [
+  {
+    title: "Le lac & les paysages",
+    items: [
+      { image: imgBateaux, alt: "Bateaux électriques sur les eaux turquoise du lac de Sainte-Croix", badge: "Photo du jour", wide: true },
+      { image: imgLac, alt: "Vue aérienne du lac de Sainte-Croix et Gorges du Verdon", badge: "", wide: false },
+      { image: imgGetty, alt: "Panorama du lac de Sainte-Croix au coucher du soleil", badge: "Coup de cœur", wide: false },
+    ],
+  },
+  {
+    title: "Activités nautiques",
+    items: [
+      { image: imgPaddle, alt: "Paddle et bateaux au lac de Sainte-Croix", badge: "", wide: false },
+      { image: imgCanoe, alt: "Canoë sur les eaux cristallines du lac", badge: "Coup de cœur", wide: false },
+      { image: imgPedalo, alt: "Pédalos sur la plage du Surf Center", badge: "", wide: true },
+    ],
+  },
+  {
+    title: "Ambiance & restauration",
+    items: [
+      { image: imgDroneSnack, alt: "Vue aérienne du snack Surf Center", badge: "Photo du jour", wide: true },
+      { image: imgEsprit, alt: "Terrasse du Surf Center face au lac", badge: "", wide: false },
+      { image: imgPlat1, alt: "Pizza au feu de bois du Surf Center", badge: "", wide: false },
+    ],
+  },
+  {
+    title: "Événements & soirées",
+    items: [
+      { image: imgConcert, alt: "Concert au Surf Center au coucher du soleil", badge: "", wide: false },
+      { image: imgConcert2, alt: "Concert live Joulik au Surf Center", badge: "Coup de cœur", wide: false },
+      { image: imgEvjf, alt: "EVJF en bateau électrique au lac", badge: "", wide: true },
+    ],
+  },
+  {
+    title: "Sport & sensations",
+    items: [
+      { image: imgPlanche, alt: "Planche à voile sur le lac de Sainte-Croix", badge: "Photo du jour", wide: false },
+      { image: imgTrophee, alt: "Trophée Hobie Shop au Surf Center", badge: "", wide: true },
+      { image: imgYoga, alt: "Cours de yoga au bord du lac", badge: "", wide: false },
+    ],
+  },
+];
+---
+
+<LayoutMarketing
+  title="Galerie — Vivez l'expérience en images | Surf Center"
+  description="Découvrez le Surf Center en photos : lac de Sainte-Croix, activités nautiques, événements et ambiance unique au cœur des Gorges du Verdon."
+>
+  <!-- HERO -->
+  <section class="m8__ghero" aria-label="Galerie Surf Center">
+    <Image
+      class="m8__ghero-img"
+      src={imgHeroGalerie}
+      alt="Vue panoramique du lac de Sainte-Croix avec les Gorges du Verdon"
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      format="webp"
+      quality={80}
+    />
+    <div class="m8__ghero-overlay" aria-hidden="true"></div>
+
+    <div class="m8__ghero-badge">
+      <span class="m8__ghero-badge-dot" aria-hidden="true"></span>
+      Plus de 50 000 visiteurs par an
+    </div>
+
+    <div class="m8__ghero-content">
+      <div class="m8__ghero-proof">
+        <span class="m8__ghero-stars" aria-label="4.8 étoiles sur 5">★★★★★</span>
+        <span class="m8__ghero-proof-text">4.8/5 — « Le plus beau lac de France »</span>
+      </div>
+      <h1 class="m8__ghero-title">Vivez l'expérience<br/>en images</h1>
+      <p class="m8__ghero-baseline">Des eaux turquoise, des sourires et des souvenirs inoubliables</p>
+      <div class="m8__ghero-actions">
+        <button type="button" class="btn btn--primary btn--lg" data-booking>
+          <span class="btn-flip__inner">
+            <span class="btn-flip__front">Réserver votre journée</span>
+            <span class="btn-flip__back">Réserver votre journée</span>
+          </span>
+        </button>
+        <a href="#galerie" class="btn btn--ghost btn--lg">Explorer la galerie</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY SECTIONS -->
+  <div id="galerie">
+    {galleryRows.map((row, rowIdx) => (
+      <>
+        <section class="section" aria-labelledby={`m8__gal-title-${rowIdx}`}>
+          <div class="container">
+            <header class="section__header reveal">
+              <span class="section__eyebrow">Galerie</span>
+              <h2 id={`m8__gal-title-${rowIdx}`}>{row.title}</h2>
+            </header>
+
+            <div class={`m8__gal-grid ${row.items[0].wide ? 'm8__gal-grid--wide-first' : 'm8__gal-grid--wide-last'}`}>
+              {row.items.map((item, i) => (
+                <div class={`m8__gal-item ${item.wide ? 'm8__gal-item--wide' : ''} reveal reveal-d${i + 1}`}>
+                  <Image
+                    class="m8__gal-img"
+                    src={item.image}
+                    alt={item.alt}
+                    width={item.wide ? 900 : 500}
+                    height={item.wide ? 500 : 500}
+                    loading="lazy"
+                    decoding="async"
+                    format="webp"
+                    quality={75}
+                  />
+                  {item.badge && (
+                    <span class={`m8__gal-badge ${item.badge === 'Coup de cœur' ? 'm8__gal-badge--heart' : ''}`}>
+                      {item.badge === 'Coup de cœur' && <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z" fill="currentColor"/></svg>}
+                      {item.badge}
+                    </span>
+                  )}
+                  <p class="m8__gal-caption">{item.alt}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {rowIdx === 1 && (
+          <section class="m8__gal-cta-band" aria-label="Réserver une activité">
+            <div class="container m8__gal-cta-inner reveal">
+              <div class="m8__gal-cta-left">
+                <strong class="m8__gal-cta-heading">Envie de vivre ces moments ?</strong>
+                <p class="m8__gal-cta-sub">Réservez votre activité en ligne — dès 10€/h, annulation gratuite.</p>
+              </div>
+              <button type="button" class="btn btn--primary" data-booking>
+                <span class="btn-flip__inner"><span class="btn-flip__front">Réserver maintenant</span><span class="btn-flip__back">Réserver maintenant</span></span>
+              </button>
+            </div>
+          </section>
+        )}
+
+        {rowIdx === 3 && (
+          <section class="m8__gal-cta-band m8__gal-cta-band--alt" aria-label="Organiser un événement">
+            <div class="container m8__gal-cta-inner reveal">
+              <div class="m8__gal-cta-left">
+                <strong class="m8__gal-cta-heading">Un événement au bord du lac ?</strong>
+                <p class="m8__gal-cta-sub">EVJF, anniversaire, concert privé — contactez-nous pour organiser votre soirée.</p>
+              </div>
+              <a href="/v8/acces-contact" class="btn btn--secondary">Nous contacter</a>
+            </div>
+          </section>
+        )}
+      </>
+    ))}
+  </div>
+
+  <TrustBadges />
+
+  <!-- CLOSING CTA -->
+  <section class="section m8__gal-closing" aria-labelledby="m8__gal-closing-title">
+    <Image
+      class="m8__gal-closing-bg"
+      src={imgHeroGalerie}
+      alt=""
+      widths={[640, 1024, 1440]}
+      sizes="100vw"
+      loading="lazy"
+      decoding="async"
+      format="webp"
+      quality={70}
+    />
+    <div class="m8__gal-closing-overlay" aria-hidden="true"></div>
+    <div class="container m8__gal-closing-inner reveal">
+      <span class="section__eyebrow" style="color: var(--c-orange)">Créez vos souvenirs</span>
+      <h2 id="m8__gal-closing-title" class="m8__gal-closing-title">Ces moments<br/>vous attendent</h2>
+      <p class="m8__gal-closing-text">Réservez votre journée au lac de Sainte-Croix et repartez avec des souvenirs inoubliables.</p>
+      <div class="m8__gal-closing-proof">
+        <span class="m8__gal-closing-dot" aria-hidden="true"></span>
+        <span>320+ avis 5 étoiles · 50 000+ visiteurs · Annulation gratuite</span>
+      </div>
+      <div class="m8__gal-closing-actions">
+        <button type="button" class="btn btn--primary btn--lg" data-booking>
+          <span class="btn-flip__inner"><span class="btn-flip__front">Réserver maintenant</span><span class="btn-flip__back">Réserver maintenant</span></span>
+        </button>
+        <a href="/v8/acces-contact" class="btn btn--ghost btn--lg">Nous contacter</a>
+      </div>
+    </div>
+  </section>
+</LayoutMarketing>
+
+<style>
+  /* ── HERO ── */
+  .m8__ghero {
+    position: relative; height: 80svh; min-height: 500px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; background: #0a0a0a;
+  }
+  .m8__ghero-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 40%; z-index: 0;
+    animation: m8g-zoom 25s ease forwards;
+  }
+  @keyframes m8g-zoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+  .m8__ghero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.5) 0%, rgb(0 0 0 / 0.2) 40%, rgb(0 0 0 / 0.7) 100%);
+  }
+  .m8__ghero-badge {
+    position: absolute; top: calc(var(--header-h, 80px) + 1rem); left: 50%; transform: translateX(-50%); z-index: 3;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.45rem 1rem; border-radius: var(--r-full);
+    background: rgb(247 123 70 / 0.15); border: 1px solid rgb(247 123 70 / 0.3);
+    backdrop-filter: blur(12px); font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-orange-light, #fbbf80);
+    white-space: nowrap; animation: m8g-badge 700ms ease 100ms both;
+  }
+  .m8__ghero-badge-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+    animation: m8g-pulse 2s ease-in-out infinite;
+  }
+  @keyframes m8g-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  @keyframes m8g-badge {
+    from { opacity: 0; transform: translateX(-50%) translateY(16px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+  .m8__ghero-content {
+    position: relative; z-index: 2; text-align: center;
+    padding-inline: var(--s-6); max-width: 52rem;
+    margin-top: calc(var(--header-h, 80px) * 0.4);
+  }
+  .m8__ghero-proof {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.5rem; margin-bottom: var(--s-6);
+    animation: m8g-up 900ms ease 200ms both;
+  }
+  @keyframes m8g-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .m8__ghero-stars { font-size: 0.8rem; color: #fbbf24; letter-spacing: 2px; }
+  .m8__ghero-proof-text { font-size: 0.7rem; font-weight: 500; color: rgb(255 255 255 / 0.6); }
+  .m8__ghero-title {
+    font-size: clamp(2.6rem, 8vw, 6rem); font-weight: 800; line-height: 0.92;
+    letter-spacing: -0.04em; text-transform: uppercase; color: #fff !important;
+    margin-bottom: var(--s-5); text-shadow: 0 4px 40px rgb(0 0 0 / 0.5);
+    animation: m8g-up 900ms ease 400ms both;
+  }
+  .m8__ghero-baseline {
+    font-size: clamp(0.85rem, 1.6vw, 1.1rem); font-weight: 500;
+    color: rgb(255 255 255 / 0.75) !important; margin-bottom: var(--s-8);
+    animation: m8g-up 900ms ease 550ms both;
+  }
+  .m8__ghero-actions {
+    display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap;
+    animation: m8g-up 900ms ease 700ms both;
+  }
+
+  /* ── GALLERY GRID ── */
+  .m8__gal-grid {
+    display: grid; grid-template-columns: 1fr; gap: var(--s-4);
+  }
+  @media (min-width: 768px) {
+    .m8__gal-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto auto; }
+    .m8__gal-item--wide { grid-column: span 2; }
+    .m8__gal-grid--wide-first .m8__gal-item--wide { grid-row: 1; grid-column: 1 / -1; }
+    .m8__gal-grid--wide-last .m8__gal-item--wide { grid-row: 2; grid-column: 1 / -1; }
+  }
+  .m8__gal-item {
+    position: relative; border-radius: var(--r-lg); overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+  .m8__gal-item--wide { aspect-ratio: 21 / 9; }
+  .m8__gal-img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+  .m8__gal-item:hover .m8__gal-img { transform: scale(1.05); }
+  .m8__gal-badge {
+    position: absolute; top: var(--s-3); left: var(--s-3); z-index: 2;
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    padding: 0.3rem 0.65rem; border-radius: var(--r-full);
+    background: var(--c-orange); color: #fff;
+    font-size: 0.56rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .m8__gal-badge--heart { background: #e11d48; }
+  .m8__gal-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: var(--s-4) var(--s-5);
+    background: linear-gradient(0deg, rgb(0 0 0 / 0.6) 0%, transparent 100%);
+    font-size: 0.72rem; color: rgb(255 255 255 / 0.7); font-weight: 500;
+    opacity: 0; transition: opacity var(--t-normal);
+  }
+  .m8__gal-item:hover .m8__gal-caption { opacity: 1; }
+
+  /* ── CTA BANDS ── */
+  .m8__gal-cta-band {
+    padding-block: var(--s-10); background: var(--c-surface);
+    border-top: 1px solid var(--c-border-light); border-bottom: 1px solid var(--c-border-light);
+  }
+  .m8__gal-cta-band--alt { background: var(--c-bg); }
+  .m8__gal-cta-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--s-6); flex-wrap: wrap;
+  }
+  .m8__gal-cta-left { flex: 1; min-width: 240px; }
+  .m8__gal-cta-heading {
+    display: block; font-size: 1.1rem; font-weight: 700; margin-bottom: var(--s-1);
+  }
+  .m8__gal-cta-sub { font-size: 0.82rem; color: var(--c-text-muted); }
+
+  /* ── CLOSING ── */
+  .m8__gal-closing {
+    position: relative; overflow: hidden; color: #fff;
+    min-height: 60vh; display: flex; align-items: center;
+  }
+  .m8__gal-closing-bg {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+  }
+  .m8__gal-closing-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgb(10 10 10 / 0.6) 0%, rgb(10 10 10 / 0.85) 100%);
+  }
+  .m8__gal-closing-inner {
+    position: relative; z-index: 2; text-align: center;
+    max-width: 42rem; margin-inline: auto;
+  }
+  .m8__gal-closing-title {
+    font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800;
+    letter-spacing: -0.03em; color: #fff; margin-bottom: var(--s-4);
+  }
+  .m8__gal-closing-text {
+    font-size: 0.95rem; color: rgb(255 255 255 / 0.6); line-height: 1.7; margin-bottom: var(--s-6);
+  }
+  .m8__gal-closing-proof {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 1rem; border-radius: var(--r-full);
+    background: rgb(255 255 255 / 0.08); border: 1px solid rgb(255 255 255 / 0.1);
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgb(255 255 255 / 0.5); margin-bottom: var(--s-8);
+  }
+  .m8__gal-closing-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+    animation: m8g-pulse 2s ease-in-out infinite;
+  }
+  .m8__gal-closing-actions { display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap; }
+
+  @media (max-width: 600px) {
+    .m8__ghero-actions, .m8__gal-closing-actions, .m8__gal-cta-inner { flex-direction: column; align-items: center; text-align: center; }
+  }
+</style>

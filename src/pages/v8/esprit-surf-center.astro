@@ -1,0 +1,557 @@
+---
+import LayoutMarketing from '../../layouts/LayoutMarketing.astro';
+import { Image } from 'astro:assets';
+import imgEsprit from '../../assets/images/esprit.png';
+import imgHero from '../../assets/images/hero-home.jpg';
+import imgLac from '../../assets/images/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg';
+import { locationDetails } from '../../data/locations';
+import TrustBadges from '../../components/v8/TrustBadges.astro';
+
+const keyNumbers = [
+  { value: "10+", label: "ans d'expérience", icon: "calendar" },
+  { value: "50 000+", label: "clients satisfaits", icon: "users" },
+  { value: "4.8★", label: "note Google (320 avis)", icon: "star" },
+  { value: "N°1", label: "base nautique Sainte-Croix", icon: "trophy" },
+  { value: "5", label: "activités nautiques", icon: "anchor" },
+  { value: "7j/7", label: "ouvert en saison", icon: "clock" },
+];
+
+const values = [
+  {
+    title: "Un cadre exceptionnel",
+    text: "Le lac de Sainte-Croix, joyau de Provence aux eaux turquoise, niché au pied des Gorges du Verdon. Un décor naturel spectaculaire préservé depuis des générations.",
+    icon: "mountain",
+  },
+  {
+    title: "Matériel premium",
+    text: "Flotte renouvelée régulièrement : bateaux électriques silencieux, paddles rigides, kayaks stables. Chaque équipement est entretenu avec soin pour votre sécurité et confort.",
+    icon: "sparkle",
+  },
+  {
+    title: "Équipe passionnée",
+    text: "Des moniteurs diplômés, des conseillers qui connaissent le lac par cœur. Briefing personnalisé, itinéraires recommandés et bienveillance à chaque étape.",
+    icon: "heart",
+  },
+  {
+    title: "Tout sur place",
+    text: "Location, restauration, animations, événements : une journée complète sans bouger. Du petit-déjeuner face au lac au coucher de soleil en musique.",
+    icon: "sun",
+  },
+  {
+    title: "Accessibilité totale",
+    text: "Pas de permis requis, parking gratuit, accès direct à la plage. Activités accessibles dès 3 ans. On simplifie votre journée au maximum.",
+    icon: "key",
+  },
+  {
+    title: "Engagement éco-responsable",
+    text: "Moteurs 100% électriques, tri sélectif, produits locaux au snack. Nous protégeons ce qui fait la beauté de ce lieu unique.",
+    icon: "leaf",
+  },
+];
+
+const testimonials = [
+  { quote: "Un cadre magnifique, un accueil au top et des bateaux en très bon état. On a passé une journée incroyable avec les enfants.", author: "Sophie L.", context: "Famille — Août 2025", activity: "Bateau électrique" },
+  { quote: "Troisième été de suite qu'on vient. Les enfants adorent le pédalo, nous on préfère le bateau électrique. Parfait !", author: "Laurent D.", context: "Famille — Juillet 2025", activity: "Bateau + Pédalo" },
+  { quote: "La meilleure base nautique du Verdon. Le paddle au lever du soleil, c'est juste magique. Équipe pro et super sympa.", author: "Maxime R.", context: "Paddle — Juillet 2025", activity: "Paddle board" },
+  { quote: "Quel lac ! Et quel accueil. Paddle au coucher du soleil puis pizza au snack. La journée parfaite au Surf Center.", author: "Émilie P.", context: "Entre amis — Août 2025", activity: "Paddle + Snack" },
+  { quote: "Super spot, super équipe. Les pizzas sont excellentes. L'endroit idéal pour une journée complète au lac.", author: "Camille & Julien", context: "Couple — Sept. 2025", activity: "Pédalo + Snack" },
+  { quote: "Première fois en planche à voile et l'équipe a été top pour nous guider. Le cadre est incroyable. Merci !", author: "Thomas B.", context: "Windsurf — Juin 2025", activity: "Planche à voile" },
+];
+---
+
+<LayoutMarketing
+  title="L'esprit Surf Center — Pourquoi nous choisir | Lac de Sainte-Croix"
+  description="Découvrez l'ADN de Surf Center : 10+ ans d'expérience, 50 000+ clients, matériel premium et un cadre exceptionnel au lac de Sainte-Croix, Gorges du Verdon."
+>
+  <!-- HERO -->
+  <section class="m8__ehero" aria-label="L'esprit Surf Center">
+    <Image
+      class="m8__ehero-img"
+      src={imgEsprit}
+      alt="L'équipe Surf Center au bord du lac de Sainte-Croix"
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      format="webp"
+      quality={80}
+    />
+    <div class="m8__ehero-overlay" aria-hidden="true"></div>
+
+    <div class="m8__ehero-badge">
+      <span class="m8__ehero-badge-dot" aria-hidden="true"></span>
+      Depuis plus de 10 ans
+    </div>
+
+    <div class="m8__ehero-content">
+      <div class="m8__ehero-proof">
+        <span class="m8__ehero-stars" aria-label="4.8 étoiles sur 5">★★★★★</span>
+        <span class="m8__ehero-proof-text">4.8/5 — 320+ avis vérifiés · 50 000+ clients</span>
+      </div>
+      <h1 class="m8__ehero-title">Pourquoi choisir<br/>Surf Center ?</h1>
+      <p class="m8__ehero-baseline">La base nautique de référence au lac de Sainte-Croix</p>
+      <div class="m8__ehero-actions">
+        <button type="button" class="btn btn--primary btn--lg" data-booking>
+          <span class="btn-flip__inner">
+            <span class="btn-flip__front">Réserver maintenant</span>
+            <span class="btn-flip__back">Réserver maintenant</span>
+          </span>
+        </button>
+        <a href="#nos-valeurs" class="btn btn--ghost btn--lg">Découvrir nos valeurs</a>
+      </div>
+      <p class="m8__ehero-sub">Dès 10€/h · Aucun permis requis · Annulation gratuite</p>
+    </div>
+  </section>
+
+  <!-- PROOF WALL — KEY NUMBERS -->
+  <section class="m8__e-proof" aria-label="Chiffres clés Surf Center">
+    <div class="container">
+      <div class="m8__e-proof-grid">
+        {keyNumbers.map((stat, i) => (
+          <div class={`m8__e-proof-item reveal ${i > 0 ? `reveal-d${Math.min(i, 4)}` : ''}`}>
+            <div class="m8__e-proof-icon" aria-hidden="true">
+              {stat.icon === 'calendar' && <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>}
+              {stat.icon === 'users' && <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>}
+              {stat.icon === 'star' && <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>}
+              {stat.icon === 'trophy' && <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 9H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3M18 9h3a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-3" stroke="currentColor" stroke-width="1.5"/><path d="M6 4h12v6a6 6 0 0 1-12 0V4Z" stroke="currentColor" stroke-width="1.5"/><path d="M12 16v4M8 22h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>}
+              {stat.icon === 'anchor' && <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12 8v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 12H2a10 10 0 0 0 20 0h-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+              {stat.icon === 'clock' && <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+            </div>
+            <strong class="m8__e-proof-value">{stat.value}</strong>
+            <span class="m8__e-proof-label">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE PROPOSITIONS -->
+  <section id="nos-valeurs" class="section" aria-labelledby="m8__e-values-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Nos engagements</span>
+        <h2 id="m8__e-values-title">Ce qui fait<br/>la différence</h2>
+        <p class="section__lead">Depuis plus de 10 ans, nous mettons tout en œuvre pour que chaque visite soit mémorable.</p>
+      </header>
+
+      <div class="m8__e-values-grid">
+        {values.map((v, i) => (
+          <div class={`m8__e-value-card reveal reveal-d${Math.min(i + 1, 4)}`}>
+            <div class="m8__e-value-icon" aria-hidden="true">
+              {v.icon === 'mountain' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="m8 3 4 8 5-5 5 15H2L8 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>}
+              {v.icon === 'sparkle' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2v4m0 12v4M2 12h4m12 0h4M5.6 5.6l2.9 2.9m7 7 2.9 2.9M18.4 5.6l-2.9 2.9m-7 7-2.9 2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>}
+              {v.icon === 'heart' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>}
+              {v.icon === 'sun' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>}
+              {v.icon === 'key' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78Zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+              {v.icon === 'leaf' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+            </div>
+            <h3 class="m8__e-value-title">{v.title}</h3>
+            <p class="m8__e-value-text">{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- LIFESTYLE IMAGE BREAK -->
+  <section class="m8__e-imgbreak reveal" aria-label="Le lac de Sainte-Croix">
+    <Image
+      class="m8__e-imgbreak-img"
+      src={imgLac}
+      alt="Bateaux électriques sur les eaux turquoise du lac de Sainte-Croix"
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      loading="lazy"
+      decoding="async"
+      format="webp"
+      quality={75}
+    />
+    <div class="m8__e-imgbreak-overlay" aria-hidden="true"></div>
+    <div class="m8__e-imgbreak-content">
+      <p class="m8__e-imgbreak-quote">&ldquo;Le plus beau lac de France,<br/>aux portes des Gorges du Verdon.&rdquo;</p>
+    </div>
+  </section>
+
+  <!-- ACTIVITIES LINKS -->
+  <section class="section section--surface" aria-labelledby="m8__e-activities-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Nos activités</span>
+        <h2 id="m8__e-activities-title">5 façons de<br/>profiter du lac</h2>
+        <p class="section__lead">Chaque activité est une porte vers une expérience différente.</p>
+      </header>
+
+      <div class="m8__e-act-grid">
+        {locationDetails.map((loc, i) => (
+          <a href={`/v8/nos-locations/${loc.slug}`} class={`m8__e-act-card reveal reveal-d${Math.min(i + 1, 4)}`}>
+            <div class="m8__e-act-price">
+              <span class="m8__e-act-price-from">dès</span>
+              <span class="m8__e-act-price-val">{loc.price}€</span>
+              <span class="m8__e-act-price-unit">/{loc.priceUnit}</span>
+            </div>
+            <h3 class="m8__e-act-title">{loc.shortTitle}</h3>
+            <p class="m8__e-act-tagline">{loc.tagline}</p>
+            <span class="m8__e-act-link">Découvrir →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section" aria-labelledby="m8__e-testi-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Avis clients</span>
+        <h2 id="m8__e-testi-title">Ils nous font<br/>confiance</h2>
+        <p class="section__lead">4.8/5 sur Google — Plus de 320 avis vérifiés.</p>
+      </header>
+
+      <div class="m8__e-testi-slider" data-m8-testi-slider>
+        <div class="m8__e-testi-track" data-m8-testi-track>
+          {testimonials.map((t) => (
+            <blockquote class="m8__e-testi-card">
+              <div class="m8__e-testi-stars" aria-label="5 étoiles sur 5">★★★★★</div>
+              <p class="m8__e-testi-text">&ldquo;{t.quote}&rdquo;</p>
+              <footer class="m8__e-testi-footer">
+                <div class="m8__e-testi-info">
+                  <cite class="m8__e-testi-author">{t.author}</cite>
+                  <span class="m8__e-testi-context">{t.context}</span>
+                </div>
+                <span class="m8__e-testi-activity">{t.activity}</span>
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+      </div>
+
+      <div class="m8__e-testi-cta reveal">
+        <div class="m8__e-testi-google">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1Z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23Z" fill="#34A853"/><path d="M5.84 14.09A6.68 6.68 0 0 1 5.5 12c0-.72.12-1.42.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84Z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53Z" fill="#EA4335"/></svg>
+          <span class="m8__e-testi-google-text">4.8/5 sur Google</span>
+        </div>
+        <button type="button" class="btn btn--primary" data-booking>
+          <span class="btn-flip__inner"><span class="btn-flip__front">Réserver ma place</span><span class="btn-flip__back">Réserver ma place</span></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <TrustBadges />
+
+  <!-- CLOSING CTA -->
+  <section class="section m8__e-closing" aria-labelledby="m8__e-closing-title">
+    <Image
+      class="m8__e-closing-bg"
+      src={imgHero}
+      alt=""
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      loading="lazy"
+      decoding="async"
+      format="webp"
+      quality={70}
+    />
+    <div class="m8__e-closing-overlay" aria-hidden="true"></div>
+    <div class="container m8__e-closing-inner reveal">
+      <span class="section__eyebrow" style="color: var(--c-orange)">Rejoignez-nous</span>
+      <h2 id="m8__e-closing-title" class="m8__e-closing-title">Votre prochaine journée<br/>parfaite commence ici</h2>
+      <p class="m8__e-closing-text">D'avril à octobre, chaque jour au lac est une occasion unique. Les créneaux d'été partent vite.</p>
+      <div class="m8__e-closing-proof">
+        <span class="m8__e-closing-dot" aria-hidden="true"></span>
+        <span>50 000+ clients · 10+ ans d'expérience · N°1 du Verdon</span>
+      </div>
+      <div class="m8__e-closing-actions">
+        <button type="button" class="btn btn--primary btn--lg" data-booking>
+          <span class="btn-flip__inner"><span class="btn-flip__front">Réserver maintenant</span><span class="btn-flip__back">Réserver maintenant</span></span>
+        </button>
+        <a href="/v8/acces-contact" class="btn btn--ghost btn--lg">Nous contacter</a>
+      </div>
+    </div>
+  </section>
+</LayoutMarketing>
+
+<style>
+  /* ── HERO ── */
+  .m8__ehero {
+    position: relative; height: 85svh; min-height: 550px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; background: #0a0a0a;
+  }
+  .m8__ehero-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 40%; z-index: 0;
+    animation: m8e-zoom 25s ease forwards;
+  }
+  @keyframes m8e-zoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+  .m8__ehero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.5) 0%, rgb(0 0 0 / 0.25) 40%, rgb(0 0 0 / 0.7) 100%);
+  }
+  .m8__ehero-badge {
+    position: absolute; top: calc(var(--header-h, 80px) + 1rem); left: 50%; transform: translateX(-50%); z-index: 3;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.45rem 1rem; border-radius: var(--r-full);
+    background: rgb(247 123 70 / 0.15); border: 1px solid rgb(247 123 70 / 0.3);
+    backdrop-filter: blur(12px); font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-orange-light, #fbbf80);
+    white-space: nowrap; animation: m8e-badge 700ms ease 100ms both;
+  }
+  .m8__ehero-badge-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+    animation: m8e-pulse 2s ease-in-out infinite;
+  }
+  @keyframes m8e-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  @keyframes m8e-badge {
+    from { opacity: 0; transform: translateX(-50%) translateY(16px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+  .m8__ehero-content {
+    position: relative; z-index: 2; text-align: center;
+    padding-inline: var(--s-6); max-width: 52rem;
+    margin-top: calc(var(--header-h, 80px) * 0.4);
+  }
+  .m8__ehero-proof {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.5rem; margin-bottom: var(--s-6);
+    animation: m8e-up 900ms ease 200ms both;
+  }
+  @keyframes m8e-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .m8__ehero-stars { font-size: 0.8rem; color: #fbbf24; letter-spacing: 2px; }
+  .m8__ehero-proof-text { font-size: 0.7rem; font-weight: 500; color: rgb(255 255 255 / 0.6); }
+  .m8__ehero-title {
+    font-size: clamp(2.6rem, 8vw, 6rem); font-weight: 800; line-height: 0.92;
+    letter-spacing: -0.04em; text-transform: uppercase; color: #fff !important;
+    margin-bottom: var(--s-5); text-shadow: 0 4px 40px rgb(0 0 0 / 0.5);
+    animation: m8e-up 900ms ease 400ms both;
+  }
+  .m8__ehero-baseline {
+    font-size: clamp(0.85rem, 1.6vw, 1.1rem); font-weight: 500;
+    color: rgb(255 255 255 / 0.75) !important; margin-bottom: var(--s-8);
+    animation: m8e-up 900ms ease 550ms both;
+  }
+  .m8__ehero-actions {
+    display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap;
+    animation: m8e-up 900ms ease 700ms both;
+  }
+  .m8__ehero-sub {
+    margin-top: var(--s-4); font-size: 0.7rem; font-weight: 500;
+    color: rgb(255 255 255 / 0.4); letter-spacing: 0.04em;
+    animation: m8e-up 900ms ease 850ms both;
+  }
+
+  /* ── PROOF WALL ── */
+  .m8__e-proof {
+    padding-block: var(--s-12); background: var(--c-surface);
+    border-bottom: 1px solid var(--c-border-light);
+  }
+  .m8__e-proof-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-6) var(--s-4);
+  }
+  @media (min-width: 600px) { .m8__e-proof-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1000px) {
+    .m8__e-proof { padding-block: var(--s-16); }
+    .m8__e-proof-grid { grid-template-columns: repeat(6, 1fr); }
+  }
+  .m8__e-proof-item { text-align: center; padding: var(--s-4); }
+  .m8__e-proof-icon {
+    width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;
+    border-radius: var(--r-full); background: rgb(247 123 70 / 0.1); color: var(--c-orange);
+    margin-bottom: var(--s-3);
+  }
+  .m8__e-proof-value {
+    display: block; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800;
+    letter-spacing: -0.02em; line-height: 1; color: var(--c-orange); margin-bottom: var(--s-1);
+  }
+  .m8__e-proof-label {
+    display: block; font-size: 0.65rem; font-weight: 500; color: var(--c-text-muted);
+    text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.4;
+  }
+
+  /* ── VALUES ── */
+  .m8__e-values-grid {
+    display: grid; grid-template-columns: 1fr; gap: var(--s-6);
+  }
+  @media (min-width: 600px) { .m8__e-values-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1000px) { .m8__e-values-grid { grid-template-columns: repeat(3, 1fr); } }
+  .m8__e-value-card {
+    padding: var(--s-8); background: var(--c-surface); border-radius: var(--r-lg);
+    border: 1px solid var(--c-border-light);
+    transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  }
+  .m8__e-value-card:hover {
+    border-color: var(--c-orange);
+    box-shadow: 0 0 0 1px rgb(247 123 70 / 0.1), var(--shadow-md, 0 4px 24px rgb(0 0 0 / 0.06));
+  }
+  .m8__e-value-icon {
+    width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+    border-radius: var(--r-md); background: rgb(247 123 70 / 0.1); color: var(--c-orange);
+    margin-bottom: var(--s-5);
+  }
+  .m8__e-value-title {
+    font-size: 0.95rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.04em; margin-bottom: var(--s-2);
+  }
+  .m8__e-value-text { font-size: 0.85rem; color: var(--c-text-secondary); line-height: 1.65; }
+
+  /* ── IMAGE BREAK ── */
+  .m8__e-imgbreak {
+    position: relative; height: 50vh; min-height: 300px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .m8__e-imgbreak-img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  }
+  .m8__e-imgbreak-overlay {
+    position: absolute; inset: 0;
+    background: rgb(0 0 0 / 0.45);
+  }
+  .m8__e-imgbreak-content { position: relative; z-index: 1; text-align: center; padding: var(--s-6); }
+  .m8__e-imgbreak-quote {
+    font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 700; color: #fff;
+    font-style: italic; letter-spacing: -0.01em; line-height: 1.4;
+  }
+
+  /* ── ACTIVITIES GRID ── */
+  .m8__e-act-grid {
+    display: grid; grid-template-columns: 1fr; gap: var(--s-4);
+  }
+  @media (min-width: 600px) { .m8__e-act-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 900px) { .m8__e-act-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1200px) { .m8__e-act-grid { grid-template-columns: repeat(5, 1fr); } }
+  .m8__e-act-card {
+    display: flex; flex-direction: column; padding: var(--s-6);
+    background: var(--c-bg); border-radius: var(--r-lg); border: 1px solid var(--c-border-light);
+    text-decoration: none; color: var(--c-text);
+    transition: border-color var(--t-fast), transform var(--t-fast);
+  }
+  .m8__e-act-card:hover { border-color: var(--c-orange); transform: translateY(-2px); }
+  .m8__e-act-price {
+    display: flex; align-items: baseline; gap: 0.2rem; margin-bottom: var(--s-3);
+  }
+  .m8__e-act-price-from {
+    font-size: 0.56rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--c-text-muted);
+  }
+  .m8__e-act-price-val { font-size: 1.4rem; font-weight: 800; color: var(--c-orange); }
+  .m8__e-act-price-unit { font-size: 0.65rem; color: var(--c-text-muted); }
+  .m8__e-act-title {
+    font-size: 0.92rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.04em; margin-bottom: var(--s-1);
+  }
+  .m8__e-act-tagline { font-size: 0.72rem; color: var(--c-text-muted); margin-bottom: var(--s-3); flex-grow: 1; }
+  .m8__e-act-link {
+    font-size: 0.68rem; font-weight: 700; color: var(--c-orange);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .m8__e-testi-slider { overflow: hidden; margin-bottom: var(--s-8); }
+  .m8__e-testi-track {
+    display: flex; gap: var(--s-5); overflow-x: auto;
+    scroll-snap-type: x mandatory; scrollbar-width: none;
+    -webkit-overflow-scrolling: touch; padding-bottom: var(--s-2);
+  }
+  .m8__e-testi-track::-webkit-scrollbar { display: none; }
+  .m8__e-testi-card {
+    flex: 0 0 85%; scroll-snap-align: start;
+    padding: var(--s-6) var(--s-7); background: var(--c-surface);
+    border-radius: var(--r-lg); border: 1px solid var(--c-border-light);
+    margin: 0; display: flex; flex-direction: column;
+  }
+  @media (min-width: 600px) { .m8__e-testi-card { flex: 0 0 48%; } }
+  @media (min-width: 1000px) { .m8__e-testi-card { flex: 0 0 32%; } }
+  .m8__e-testi-stars { font-size: 0.85rem; color: #fbbf24; letter-spacing: 2px; margin-bottom: var(--s-3); }
+  .m8__e-testi-text {
+    font-size: 0.9rem; line-height: 1.7; color: var(--c-text);
+    font-style: italic; margin-bottom: auto; padding-bottom: var(--s-5);
+  }
+  .m8__e-testi-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--s-4); padding-top: var(--s-4); border-top: 1px solid var(--c-border-light);
+  }
+  .m8__e-testi-info { display: flex; flex-direction: column; gap: 2px; }
+  .m8__e-testi-author {
+    font-style: normal; font-weight: 700; font-size: 0.78rem;
+    letter-spacing: 0.04em; text-transform: uppercase; color: var(--c-text);
+  }
+  .m8__e-testi-context { font-size: 0.68rem; color: var(--c-text-muted); }
+  .m8__e-testi-activity {
+    font-size: 0.62rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--c-orange);
+    padding: 0.25rem 0.6rem; background: rgb(247 123 70 / 0.1);
+    border-radius: var(--r-full); white-space: nowrap;
+  }
+  .m8__e-testi-cta {
+    display: flex; align-items: center; justify-content: center;
+    gap: var(--s-6); flex-wrap: wrap;
+  }
+  .m8__e-testi-google { display: flex; align-items: center; gap: var(--s-2); }
+  .m8__e-testi-google-text { font-size: 0.78rem; font-weight: 600; color: var(--c-text-muted); }
+
+  /* ── CLOSING ── */
+  .m8__e-closing {
+    position: relative; overflow: hidden; color: #fff;
+    min-height: 65vh; display: flex; align-items: center;
+  }
+  .m8__e-closing-bg {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+  }
+  .m8__e-closing-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgb(10 10 10 / 0.6) 0%, rgb(10 10 10 / 0.85) 100%);
+  }
+  .m8__e-closing-inner {
+    position: relative; z-index: 2; text-align: center;
+    max-width: 44rem; margin-inline: auto;
+  }
+  .m8__e-closing-title {
+    font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800;
+    letter-spacing: -0.03em; color: #fff; margin-bottom: var(--s-4);
+  }
+  .m8__e-closing-text {
+    font-size: 0.95rem; color: rgb(255 255 255 / 0.6); line-height: 1.7; margin-bottom: var(--s-6);
+  }
+  .m8__e-closing-proof {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 1rem; border-radius: var(--r-full);
+    background: rgb(255 255 255 / 0.08); border: 1px solid rgb(255 255 255 / 0.1);
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgb(255 255 255 / 0.5); margin-bottom: var(--s-8);
+  }
+  .m8__e-closing-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+    animation: m8e-pulse 2s ease-in-out infinite;
+  }
+  .m8__e-closing-actions { display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap; }
+
+  @media (max-width: 600px) {
+    .m8__ehero-actions, .m8__e-closing-actions { flex-direction: column; align-items: center; }
+  }
+</style>
+
+<script>
+  const slider = document.querySelector('[data-m8-testi-slider]');
+  const track = slider?.querySelector('[data-m8-testi-track]') as HTMLElement | null;
+  if (track) {
+    let isDown = false;
+    let startX = 0;
+    let scrollStart = 0;
+
+    track.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - track.offsetLeft;
+      scrollStart = track.scrollLeft;
+      track.style.cursor = 'grabbing';
+    });
+    track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = ''; });
+    track.addEventListener('mouseup', () => { isDown = false; track.style.cursor = ''; });
+    track.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      track.scrollLeft = scrollStart - (x - startX) * 1.5;
+    });
+  }
+</script>

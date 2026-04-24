@@ -1,0 +1,381 @@
+---
+import LayoutMarketing from '../../../layouts/LayoutMarketing.astro';
+import { locationDetails, getLocationBySlug, getOtherLocations, type LocationDetail } from '../../../data/locations';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return locationDetails.map((loc) => ({
+    params: { slug: loc.slug },
+    props: { location: loc },
+  }));
+};
+
+interface Props { location: LocationDetail; }
+const { location } = Astro.props as Props;
+const others = getOtherLocations(location.slug);
+
+const reviews = [
+  { quote: "Expérience incroyable ! Le cadre est magnifique et l'équipe au top. On a adoré et on reviendra.", author: "Julie M.", context: "Août 2025", rating: 5 },
+  { quote: "Parfait pour une journée en famille. Matériel en excellent état, briefing clair. Le lac est un rêve.", author: "Pierre L.", context: "Juillet 2025", rating: 5 },
+  { quote: "Troisième année de suite qu'on vient. Toujours aussi bien. Le meilleur spot du Verdon !", author: "Sarah & Marc", context: "Juin 2025", rating: 5 },
+];
+
+const iconMap: Record<string, string> = {
+  anchor: 'M12 22V8m0 0a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 2a7 7 0 0 0 14 0',
+  users: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm13 18v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+  battery: 'M6 7h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Zm16 4v2',
+  shield: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z',
+  sun: 'M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0-12v2m0 16v-2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41',
+  map: 'M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4Zm7-4v16m8-12v16',
+  zap: 'M13 2 3 14h9l-1 10 10-12h-9l1-10Z',
+};
+---
+
+<LayoutMarketing
+  title={`${location.title} — Location au Surf Center · Lac de Sainte-Croix`}
+  description={location.description}
+>
+  <!-- HERO -->
+  <section class="m8__dethero" aria-labelledby="m8-det-title">
+    <div class="m8__dethero-bg" style={`background-image: url('${location.heroImage}')`}></div>
+    <div class="m8__dethero-overlay" aria-hidden="true"></div>
+    <div class="container m8__dethero-inner">
+      <nav class="m8__dethero-bread" aria-label="Fil d'Ariane">
+        <a href="/v8">Accueil</a>
+        <span aria-hidden="true">›</span>
+        <a href="/v8/nos-locations">Nos locations</a>
+        <span aria-hidden="true">›</span>
+        <span>{location.shortTitle}</span>
+      </nav>
+      <span class="section__eyebrow m8__dethero-ey">Location {location.shortTitle}</span>
+      <h1 id="m8-det-title" class="m8__dethero-title">{location.title}</h1>
+      <p class="m8__dethero-tagline">{location.tagline}</p>
+
+      <div class="m8__dethero-price-box">
+        <div class="m8__dethero-price-main">
+          <span class="m8__dethero-price-from">dès</span>
+          <span class="m8__dethero-price-num">{location.price}<span class="m8__dethero-price-cur">€</span></span>
+          <span class="m8__dethero-price-unit">/ {location.priceUnit}</span>
+        </div>
+        <p class="m8__dethero-price-note">Annulation gratuite 24h · Paiement sécurisé</p>
+      </div>
+
+      <div class="m8__dethero-actions">
+        <button type="button" class="btn btn--primary btn--lg m8__dethero-cta" data-booking>
+          <span class="btn-flip__inner"><span class="btn-flip__front">Réserver maintenant</span><span class="btn-flip__back">Réserver maintenant</span></span>
+        </button>
+        <a href="#details" class="btn btn--ghost btn--lg">En savoir plus</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section id="details" class="section" aria-labelledby="m8-info-title">
+    <div class="container">
+      <div class="m8__det-layout">
+        <div class="m8__det-main">
+          <header class="reveal">
+            <h2 id="m8-info-title" class="m8__det-section-title">À propos</h2>
+            <p class="m8__det-long">{location.longDescription}</p>
+          </header>
+
+          <div class="m8__det-services reveal">
+            <h3 class="m8__det-subtitle">Ce qui est inclus</h3>
+            <div class="m8__det-services-grid">
+              {location.services.map((s: { icon: string; label: string }) => (
+                <div class="m8__det-service">
+                  <div class="m8__det-service-icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                      <path d={iconMap[s.icon] || iconMap.anchor} stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <span>{s.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="m8__det-itinerary reveal">
+            <h3 class="m8__det-subtitle">Parcours suggérés</h3>
+            {location.itinerary.map((it: { title: string; text: string }, i: number) => (
+              <div class="m8__det-iti-item">
+                <span class="m8__det-iti-num">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <h4 class="m8__det-iti-title">{it.title}</h4>
+                  <p class="m8__det-iti-text">{it.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="m8__det-sidebar">
+          <div class="m8__det-booking-widget reveal">
+            <h3 class="m8__det-widget-title">Réservez maintenant</h3>
+            <div class="m8__det-widget-price">
+              <span class="m8__det-widget-from">dès</span>
+              <span class="m8__det-widget-num">{location.price}<span class="m8__det-widget-cur">€</span></span>
+              <span class="m8__det-widget-unit">/ {location.priceUnit}</span>
+            </div>
+            <ul class="m8__det-widget-info" role="list">
+              <li><strong>Capacité :</strong> {location.capacity}</li>
+              <li><strong>Durées :</strong> {location.duration}</li>
+              <li><strong>Niveau :</strong> {location.level}</li>
+            </ul>
+            <button type="button" class="btn btn--primary btn--lg m8__det-widget-btn" data-booking>
+              <span class="btn-flip__inner"><span class="btn-flip__front">Réserver — dès {location.price}€</span><span class="btn-flip__back">Réserver — dès {location.price}€</span></span>
+            </button>
+            <p class="m8__det-widget-note">Annulation gratuite 24h · Paiement sécurisé</p>
+
+            <div class="m8__det-widget-trust">
+              <div class="m8__det-widget-trust-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                Sécurisé
+              </div>
+              <div class="m8__det-widget-trust-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M1 4v6h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Annulation libre
+              </div>
+              <div class="m8__det-widget-trust-item">
+                <span class="m8__det-widget-stars">★★★★★</span>
+                4.8/5
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="section section--surface" aria-labelledby="m8-detrev-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Avis clients</span>
+        <h2 id="m8-detrev-title">Ce qu'ils en pensent</h2>
+      </header>
+      <div class="m8__det-reviews">
+        {reviews.map((r, i) => (
+          <blockquote class={`m8__det-review reveal reveal-d${i + 1}`}>
+            <div class="m8__det-review-stars" aria-label={`${r.rating} étoiles sur 5`}>★★★★★</div>
+            <p>&ldquo;{r.quote}&rdquo;</p>
+            <footer>
+              <cite>{r.author}</cite>
+              <span>{r.context}</span>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- UPSELL -->
+  <section class="section" aria-labelledby="m8-upsell-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Vous aimerez aussi</span>
+        <h2 id="m8-upsell-title">Nos autres<br/>activités</h2>
+      </header>
+      <div class="m8__upsell-grid">
+        {others.map((o, i) => (
+          <a href={`/v8/nos-locations/${o.slug}`} class={`m8__upsell-card reveal reveal-d${Math.min(i + 1, 4)}`}>
+            <div class="m8__upsell-card-img">
+              <img src={o.heroImage} alt={o.heroAlt} loading="lazy" decoding="async" width="400" height="300" />
+            </div>
+            <div class="m8__upsell-card-body">
+              <h3 class="m8__upsell-card-title">{o.title}</h3>
+              <p class="m8__upsell-card-tagline">{o.tagline}</p>
+              <div class="m8__upsell-card-price">
+                <span>dès </span>
+                <strong>{o.price}€</strong>
+                <span>/{o.priceUnit}</span>
+              </div>
+              <span class="m8__upsell-card-link">Découvrir →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section class="m8__det-cta" aria-labelledby="m8-detcta-title">
+    <div class="m8__det-cta-overlay" aria-hidden="true"></div>
+    <div class="container m8__det-cta-inner reveal">
+      <span class="section__eyebrow" style="color: var(--c-orange);">Prêt à naviguer ?</span>
+      <h2 id="m8-detcta-title" class="m8__det-cta-title">Réservez votre<br/>{location.shortTitle}</h2>
+      <p class="m8__det-cta-text">
+        Dès {location.price}€/{location.priceUnit} · Annulation gratuite 24h · Paiement sécurisé
+      </p>
+      <div class="m8__det-cta-actions">
+        <button type="button" class="btn btn--primary btn--lg" data-booking>
+          <span class="btn-flip__inner"><span class="btn-flip__front">Réserver maintenant</span><span class="btn-flip__back">Réserver maintenant</span></span>
+        </button>
+        <a href="tel:+33492771450" class="btn btn--ghost btn--lg">04 92 77 14 50</a>
+      </div>
+    </div>
+  </section>
+</LayoutMarketing>
+
+<style>
+  /* HERO */
+  .m8__dethero {
+    position: relative; min-height: 75vh; display: flex;
+    align-items: center; justify-content: center; color: #fff;
+  }
+  .m8__dethero-bg {
+    position: absolute; inset: 0; background-size: cover;
+    background-position: center 40%; z-index: 0;
+  }
+  .m8__dethero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.5) 0%, rgb(0 0 0 / 0.3) 35%, rgb(0 0 0 / 0.75) 100%);
+  }
+  .m8__dethero-inner {
+    position: relative; z-index: 2; text-align: center;
+    max-width: 48rem; margin-inline: auto;
+    padding-block: calc(var(--header-h) + var(--s-10)) var(--s-14);
+  }
+  .m8__dethero-bread {
+    display: flex; align-items: center; justify-content: center; gap: var(--s-2);
+    font-size: 0.65rem; color: rgb(255 255 255 / 0.5); margin-bottom: var(--s-6);
+  }
+  .m8__dethero-bread a { color: rgb(255 255 255 / 0.6); text-decoration: none; }
+  .m8__dethero-bread a:hover { color: #fff; }
+  .m8__dethero-ey { color: var(--c-orange) !important; }
+  .m8__dethero-title {
+    font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 800; line-height: 0.92;
+    letter-spacing: -0.04em; text-transform: uppercase; color: #fff !important;
+    margin-bottom: var(--s-3); text-shadow: 0 4px 40px rgb(0 0 0 / 0.5);
+  }
+  .m8__dethero-tagline { font-size: 0.85rem; color: rgb(255 255 255 / 0.6); margin-bottom: var(--s-8); }
+  .m8__dethero-price-box {
+    display: inline-flex; flex-direction: column; align-items: center;
+    padding: var(--s-5) var(--s-8); border-radius: var(--r-lg);
+    background: rgb(255 255 255 / 0.08); border: 1px solid rgb(255 255 255 / 0.12);
+    backdrop-filter: blur(16px); margin-bottom: var(--s-8);
+  }
+  .m8__dethero-price-main { display: flex; align-items: baseline; gap: 0.3rem; }
+  .m8__dethero-price-from { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgb(255 255 255 / 0.5); }
+  .m8__dethero-price-num { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.03em; color: #fff; line-height: 1; }
+  .m8__dethero-price-cur { font-size: 0.5em; font-weight: 700; opacity: 0.6; }
+  .m8__dethero-price-unit { font-size: 0.78rem; color: rgb(255 255 255 / 0.5); }
+  .m8__dethero-price-note { font-size: 0.62rem; color: rgb(255 255 255 / 0.4); margin-top: var(--s-2); }
+  .m8__dethero-actions { display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap; }
+  .m8__dethero-cta { box-shadow: 0 4px 30px rgb(247 123 70 / 0.4); }
+
+  /* DETAIL LAYOUT */
+  .m8__det-layout { display: grid; grid-template-columns: 1fr; gap: var(--s-10); }
+  @media (min-width: 900px) { .m8__det-layout { grid-template-columns: 1fr 340px; } }
+  @media (min-width: 1100px) { .m8__det-layout { grid-template-columns: 1fr 380px; } }
+
+  .m8__det-main { min-width: 0; }
+  .m8__det-section-title { font-size: 1.6rem; font-weight: 800; margin-bottom: var(--s-4); }
+  .m8__det-long { font-size: 0.92rem; color: var(--c-text-secondary); line-height: 1.8; margin-bottom: var(--s-10); }
+  .m8__det-subtitle { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: var(--s-5); }
+
+  .m8__det-services { margin-bottom: var(--s-10); }
+  .m8__det-services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-4); }
+  .m8__det-service { display: flex; align-items: center; gap: var(--s-3); font-size: 0.82rem; color: var(--c-text-secondary); }
+  .m8__det-service-icon {
+    width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+    border-radius: var(--r-md); background: var(--c-surface); color: var(--c-orange); flex-shrink: 0;
+  }
+  @media (min-width: 600px) { .m8__det-services-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .m8__det-itinerary { margin-bottom: var(--s-10); }
+  .m8__det-iti-item {
+    display: flex; gap: var(--s-4); padding: var(--s-4) 0;
+    border-bottom: 1px solid var(--c-border-light);
+  }
+  .m8__det-iti-item:last-child { border-bottom: none; }
+  .m8__det-iti-num {
+    font-size: 0.72rem; font-weight: 800; color: var(--c-orange);
+    min-width: 28px; padding-top: 2px;
+  }
+  .m8__det-iti-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 2px; }
+  .m8__det-iti-text { font-size: 0.82rem; color: var(--c-text-secondary); line-height: 1.6; }
+
+  /* SIDEBAR WIDGET */
+  .m8__det-sidebar { position: relative; }
+  @media (min-width: 900px) { .m8__det-sidebar { position: sticky; top: calc(var(--header-h) + var(--s-6)); align-self: start; } }
+  .m8__det-booking-widget {
+    padding: var(--s-6); background: var(--c-surface);
+    border-radius: var(--r-lg); border: 1.5px solid var(--c-border-light);
+  }
+  .m8__det-widget-title { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: var(--s-4); }
+  .m8__det-widget-price { display: flex; align-items: baseline; gap: 0.3rem; margin-bottom: var(--s-5); }
+  .m8__det-widget-from { font-size: 0.55rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-text-muted); }
+  .m8__det-widget-num { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; color: var(--c-text); line-height: 1; }
+  .m8__det-widget-cur { font-size: 0.5em; font-weight: 700; opacity: 0.5; }
+  .m8__det-widget-unit { font-size: 0.72rem; color: var(--c-text-muted); }
+  .m8__det-widget-info { display: flex; flex-direction: column; gap: var(--s-2); margin-bottom: var(--s-5); }
+  .m8__det-widget-info li { font-size: 0.78rem; color: var(--c-text-secondary); }
+  .m8__det-widget-info strong { color: var(--c-text); font-weight: 600; }
+  .m8__det-widget-btn { width: 100%; justify-content: center; box-shadow: 0 4px 20px rgb(247 123 70 / 0.3); }
+  .m8__det-widget-note { text-align: center; font-size: 0.62rem; color: var(--c-text-muted); margin-top: var(--s-3); }
+  .m8__det-widget-trust {
+    display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-5);
+    padding-top: var(--s-4); border-top: 1px solid var(--c-border-light);
+    justify-content: center;
+  }
+  .m8__det-widget-trust-item {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 0.62rem; font-weight: 600; color: var(--c-text-muted);
+  }
+  .m8__det-widget-trust-item svg { color: var(--c-orange); }
+  .m8__det-widget-stars { font-size: 0.65rem; color: #fbbf24; letter-spacing: 1px; }
+
+  /* REVIEWS */
+  .m8__det-reviews { display: grid; grid-template-columns: 1fr; gap: var(--s-5); }
+  .m8__det-review {
+    padding: var(--s-6); background: var(--c-bg); border-radius: var(--r-lg);
+    border: 1px solid var(--c-border-light); margin: 0;
+  }
+  .m8__det-review-stars { font-size: 0.85rem; color: #fbbf24; letter-spacing: 2px; margin-bottom: var(--s-3); }
+  .m8__det-review p { font-size: 0.88rem; line-height: 1.7; color: var(--c-text); font-style: italic; margin-bottom: var(--s-4); }
+  .m8__det-review footer { display: flex; gap: var(--s-3); align-items: center; }
+  .m8__det-review cite { font-style: normal; font-weight: 700; font-size: 0.75rem; color: var(--c-text); }
+  .m8__det-review footer span { font-size: 0.65rem; color: var(--c-text-muted); }
+  @media (min-width: 768px) { .m8__det-reviews { grid-template-columns: repeat(3, 1fr); } }
+
+  /* UPSELL */
+  .m8__upsell-grid { display: grid; grid-template-columns: 1fr; gap: var(--s-5); }
+  .m8__upsell-card {
+    display: flex; flex-direction: column; background: var(--c-bg);
+    border-radius: var(--r-lg); border: 1.5px solid var(--c-border-light);
+    overflow: hidden; text-decoration: none; color: inherit;
+    transition: border-color var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
+  }
+  .m8__upsell-card:hover { border-color: var(--c-orange); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .m8__upsell-card-img { aspect-ratio: 16 / 10; overflow: hidden; }
+  .m8__upsell-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+  .m8__upsell-card:hover .m8__upsell-card-img img { transform: scale(1.04); }
+  .m8__upsell-card-body { padding: var(--s-4) var(--s-5) var(--s-5); }
+  .m8__upsell-card-title { font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
+  .m8__upsell-card-tagline { font-size: 0.7rem; color: var(--c-text-muted); margin-bottom: var(--s-3); }
+  .m8__upsell-card-price { font-size: 0.78rem; color: var(--c-text-secondary); margin-bottom: var(--s-3); }
+  .m8__upsell-card-price strong { font-size: 1.1rem; font-weight: 800; color: var(--c-orange); }
+  .m8__upsell-card-link { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--c-orange); }
+  @media (min-width: 600px) { .m8__upsell-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1000px) { .m8__upsell-grid { grid-template-columns: repeat(4, 1fr); } }
+
+  /* CLOSING CTA */
+  .m8__det-cta {
+    position: relative; overflow: hidden; color: #fff;
+    min-height: 55vh; display: flex; align-items: center;
+    background: #0a0a0a;
+  }
+  .m8__det-cta-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(135deg, rgb(247 123 70 / 0.15) 0%, transparent 60%);
+  }
+  .m8__det-cta-inner {
+    position: relative; z-index: 2; text-align: center;
+    max-width: 42rem; margin-inline: auto; padding-block: var(--s-20);
+  }
+  .m8__det-cta-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; color: #fff; margin-bottom: var(--s-5); }
+  .m8__det-cta-text { font-size: 0.85rem; color: rgb(255 255 255 / 0.5); margin-bottom: var(--s-10); }
+  .m8__det-cta-actions { display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap; }
+</style>

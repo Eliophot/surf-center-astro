@@ -1,0 +1,606 @@
+---
+import { Image } from 'astro:assets';
+import logoImg from '../../assets/images/logo-surf-center.png';
+
+const navLinks = [
+  { label: "Nos locations", href: "/v2/nos-locations" },
+  { label: "L'esprit Surf Center", href: "/v2/esprit-surf-center" },
+  { label: "Restauration", href: "/v2/restauration" },
+  { label: "Animations", href: "/v2/animations" },
+  { label: "Groupes & Événements", href: "/v2/groupes-evenements" },
+  { label: "Blog", href: "/v2/blog" },
+];
+---
+
+<a href="#main-content" class="hd2__skip">Aller au contenu principal</a>
+
+<header class="hd2" data-header>
+  <div class="hd2__inner container">
+    <a href="/v2" class="hd2__logo" aria-label="Surf Center — Accueil">
+      <Image
+        class="hd2__logo-img"
+        src={logoImg}
+        alt=""
+        width={60}
+        height={56}
+        loading="eager"
+        format="webp"
+        quality={85}
+      />
+    </a>
+
+    <nav class="hd2__nav" aria-label="Navigation principale">
+      <ul role="list">
+        {navLinks.map((link) => (
+          <li>
+            <a href={link.href} class="hd2__nav-link">{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="hd2__end">
+      <button
+        class="hd2__theme"
+        type="button"
+        data-theme-toggle
+        aria-label="Changer de thème"
+      >
+        <svg class="hd2__theme-icon hd2__theme-icon--sun" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="3.5" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M9 2v1.5M9 14.5V16M2 9h1.5M14.5 9H16M4.05 4.05l1.06 1.06M12.89 12.89l1.06 1.06M4.05 13.95l1.06-1.06M12.89 5.11l1.06-1.06" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <svg class="hd2__theme-icon hd2__theme-icon--moon" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M15.1 10.63A6.5 6.5 0 0 1 7.37 2.9 6.5 6.5 0 1 0 15.1 10.63Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <button type="button" class="btn btn--primary btn--sm hd2__cta" data-booking>
+        <span class="btn-flip__inner">
+          <span class="btn-flip__front">Réserver</span>
+          <span class="btn-flip__back">Réserver</span>
+        </span>
+      </button>
+
+      <button
+        class="hd2__burger"
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-label="Menu de navigation"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="hd2__mobile" id="mobile-menu" hidden>
+  <div class="hd2__mobile-inner">
+    <nav class="hd2__mobile-nav" aria-label="Navigation mobile">
+      <ul role="list">
+        {navLinks.map((link, i) => (
+          <li class="hd2__mobile-item" style={`--delay: ${i * 60}ms`}>
+            <a href={link.href} class="hd2__mobile-link">
+              <span class="hd2__mobile-label">{link.label}</span>
+              <svg class="hd2__mobile-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="hd2__mobile-actions" style="--delay: 300ms">
+      <button type="button" class="btn btn--primary hd2__mobile-book" data-booking>Réserver une activité</button>
+    </div>
+
+    <div class="hd2__mobile-footer" style="--delay: 400ms">
+      <a href="tel:+33492771450" class="hd2__mobile-contact">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M6.5 2.5H4a1.5 1.5 0 0 0-1.5 1.5A9.5 9.5 0 0 0 12 13.5a1.5 1.5 0 0 0 1.5-1.5v-2.5l-3-1.5-1.5 1.5a7.5 7.5 0 0 1-3.5-3.5L7 4.5l-.5-2Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+        04 92 77 14 50
+      </a>
+      <p class="hd2__mobile-address">Les Salles-sur-Verdon · Gorges du Verdon</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const header = document.querySelector('[data-header]') as HTMLElement;
+  const hero = document.querySelector('[data-hero]') as HTMLElement;
+
+  if (header && hero) {
+    const obs = new IntersectionObserver(
+      ([entry]) => header.classList.toggle('is-scrolled', !entry.isIntersecting),
+      { threshold: 0 },
+    );
+    obs.observe(hero);
+  }
+
+  if (header && !hero) {
+    header.classList.add('is-scrolled');
+  }
+
+  const toggle = document.querySelector('[data-menu-toggle]') as HTMLButtonElement;
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (toggle && mobileMenu) {
+    const set = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      mobileMenu.hidden = !open;
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (open) {
+        mobileMenu.classList.add('is-open');
+      } else {
+        mobileMenu.classList.remove('is-open');
+      }
+    };
+
+    toggle.addEventListener('click', () => {
+      set(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        set(false);
+        toggle.focus();
+      }
+    });
+
+    mobileMenu.querySelectorAll('a, button').forEach((el) =>
+      el.addEventListener('click', () => set(false)),
+    );
+  }
+
+  const themeToggle = document.querySelector('[data-theme-toggle]') as HTMLButtonElement;
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+
+      const meta = document.getElementById('meta-theme-color');
+      if (meta) meta.setAttribute('content', next === 'dark' ? '#0a0a0a' : '#ffffff');
+    });
+  }
+</script>
+
+<style>
+  .hd2__skip {
+    position: absolute;
+    top: -100%;
+    left: var(--s-4);
+    z-index: 200;
+    padding: var(--s-2) var(--s-6);
+    background: var(--c-orange);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 0 0 var(--r-sm) var(--r-sm);
+  }
+  .hd2__skip:focus { top: 0; }
+
+  /* ── Header shell ── */
+
+  .hd2 {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: 100;
+    height: var(--header-h);
+    transition:
+      background var(--t-normal) var(--ease-smooth),
+      border-color var(--t-normal) var(--ease-smooth),
+      box-shadow var(--t-normal) var(--ease-smooth);
+  }
+
+  .hd2.is-scrolled {
+    background: rgb(10 10 10 / 0.72);
+    backdrop-filter: blur(24px) saturate(1.6);
+    -webkit-backdrop-filter: blur(24px) saturate(1.6);
+    border-bottom: 1px solid rgb(255 255 255 / 0.06);
+    box-shadow: 0 4px 30px rgb(0 0 0 / 0.25);
+  }
+
+  :global([data-theme='light']) .hd2.is-scrolled {
+    background: rgb(255 255 255 / 0.72);
+    border-bottom-color: rgb(0 0 0 / 0.06);
+    box-shadow: 0 4px 30px rgb(0 0 0 / 0.06);
+  }
+
+  .hd2__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: var(--s-10);
+  }
+
+  /* ── Logo ── */
+
+  .hd2__logo {
+    z-index: 101;
+    display: flex;
+    align-items: center;
+    transition: opacity var(--t-fast);
+  }
+  .hd2__logo:hover { opacity: 0.8; }
+
+  .hd2__logo-img {
+    height: 30px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: filter var(--t-normal) var(--ease);
+  }
+
+  :global([data-theme='light']) .hd2.is-scrolled .hd2__logo-img {
+    filter: none;
+  }
+
+  /* ── Desktop nav ── */
+
+  .hd2__nav { display: none; }
+
+  .hd2__nav ul {
+    display: flex;
+    align-items: center;
+    gap: var(--s-8);
+    flex-wrap: nowrap;
+  }
+
+  .hd2__nav-link {
+    position: relative;
+    font-size: 0.68rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgb(255 255 255 / 0.65);
+    transition: color var(--t-fast);
+    padding: var(--s-2) 0;
+    white-space: nowrap;
+  }
+
+  .hd2__nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1.5px;
+    background: var(--c-orange);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--t-normal) var(--ease);
+  }
+
+  .hd2__nav-link:hover { color: #fff; }
+  .hd2__nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .hd2.is-scrolled .hd2__nav-link {
+    color: rgb(255 255 255 / 0.55);
+  }
+  .hd2.is-scrolled .hd2__nav-link:hover {
+    color: #fff;
+  }
+
+  :global([data-theme='light']) .hd2.is-scrolled .hd2__nav-link {
+    color: var(--c-text-muted);
+  }
+  :global([data-theme='light']) .hd2.is-scrolled .hd2__nav-link:hover {
+    color: var(--c-text);
+  }
+
+  /* ── End group: theme toggle, CTA, burger ── */
+
+  .hd2__end {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    z-index: 101;
+  }
+
+  .hd2__theme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    background: rgb(255 255 255 / 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    color: rgb(255 255 255 / 0.7);
+    transition: color var(--t-fast), background var(--t-fast), border-color var(--t-fast);
+  }
+  .hd2__theme:hover {
+    color: #fff;
+    background: rgb(255 255 255 / 0.12);
+    border-color: rgb(255 255 255 / 0.15);
+  }
+
+  :global([data-theme='light']) .hd2.is-scrolled .hd2__theme {
+    background: var(--c-surface);
+    border-color: var(--c-border-light);
+    color: var(--c-text-muted);
+  }
+  :global([data-theme='light']) .hd2.is-scrolled .hd2__theme:hover {
+    color: var(--c-text);
+    border-color: var(--c-border);
+  }
+
+  .hd2__theme-icon--sun { display: none; }
+  .hd2__theme-icon--moon { display: block; }
+  :global([data-theme='dark']) .hd2__theme-icon--sun { display: block; }
+  :global([data-theme='dark']) .hd2__theme-icon--moon { display: none; }
+
+  .hd2__cta { display: none; }
+
+  .hd2__burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgb(255 255 255 / 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    padding: 0;
+    transition: background var(--t-fast), border-color var(--t-fast);
+  }
+
+  .hd2__burger:hover {
+    background: rgb(255 255 255 / 0.12);
+    border-color: rgb(255 255 255 / 0.18);
+  }
+
+  :global([data-theme='light']) .hd2.is-scrolled .hd2__burger {
+    background: var(--c-surface);
+    border-color: var(--c-border-light);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .hd2__burger span {
+    display: block;
+    width: 1.1rem;
+    height: 1.5px;
+    background: #fff;
+    border-radius: 1px;
+    transition: all var(--t-normal) var(--ease);
+    transform-origin: center;
+  }
+
+  :global([data-theme='light']) .hd2.is-scrolled .hd2__burger span {
+    background: var(--c-text);
+  }
+
+  .hd2__burger[aria-expanded='true'] {
+    background: transparent;
+    border-color: transparent;
+  }
+  .hd2__burger[aria-expanded='true'] span { background: var(--c-text) !important; }
+  .hd2__burger[aria-expanded='true'] span:first-child {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+  .hd2__burger[aria-expanded='true'] span:last-child {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
+
+  /* ── Mobile overlay ── */
+
+  .hd2__mobile {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: var(--c-dark);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  :global([data-theme='light']) .hd2__mobile {
+    background: var(--c-bg);
+  }
+
+  .hd2__mobile[hidden] { display: none; }
+
+  .hd2__mobile-inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: calc(var(--header-h) + var(--s-8)) var(--s-6) var(--s-8);
+  }
+
+  .hd2__mobile-nav { flex: 1; }
+
+  .hd2__mobile-nav ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hd2__mobile-item {
+    border-bottom: 1px solid rgb(255 255 255 / 0.06);
+    opacity: 0;
+    transform: translateX(20px);
+    transition:
+      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay);
+  }
+
+  :global([data-theme='light']) .hd2__mobile-item {
+    border-bottom-color: var(--c-border-light);
+  }
+
+  .hd2__mobile.is-open .hd2__mobile-item {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .hd2__mobile-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--s-5) 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: rgb(255 255 255 / 0.85);
+    text-decoration: none;
+    transition: color var(--t-fast);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :global([data-theme='light']) .hd2__mobile-link {
+    color: var(--c-text);
+  }
+
+  .hd2__mobile-link:hover,
+  .hd2__mobile-link:active {
+    color: var(--c-orange);
+  }
+
+  .hd2__mobile-label {
+    flex: 1;
+    text-align: left;
+  }
+
+  .hd2__mobile-arrow {
+    flex-shrink: 0;
+    color: rgb(255 255 255 / 0.25);
+    transition: transform var(--t-fast) var(--ease), color var(--t-fast);
+  }
+
+  :global([data-theme='light']) .hd2__mobile-arrow {
+    color: var(--c-text-muted);
+  }
+
+  .hd2__mobile-link:hover .hd2__mobile-arrow,
+  .hd2__mobile-link:active .hd2__mobile-arrow {
+    color: var(--c-orange);
+    transform: translateX(4px);
+  }
+
+  .hd2__mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-top: var(--s-8);
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay);
+  }
+
+  .hd2__mobile.is-open .hd2__mobile-actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hd2__mobile-book {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .hd2__mobile-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-2);
+    margin-top: var(--s-10);
+    padding-top: var(--s-6);
+    border-top: 1px solid rgb(255 255 255 / 0.06);
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay);
+  }
+
+  :global([data-theme='light']) .hd2__mobile-footer {
+    border-top-color: var(--c-border-light);
+  }
+
+  .hd2__mobile.is-open .hd2__mobile-footer {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hd2__mobile-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgb(255 255 255 / 0.85);
+    text-decoration: none;
+    transition: color var(--t-fast);
+  }
+
+  :global([data-theme='light']) .hd2__mobile-contact {
+    color: var(--c-text);
+  }
+
+  .hd2__mobile-contact:hover { color: var(--c-orange); }
+
+  .hd2__mobile-address {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.3);
+  }
+
+  :global([data-theme='light']) .hd2__mobile-address {
+    color: var(--c-text-muted);
+  }
+
+  /* ── Responsive ── */
+
+  @media (min-width: 960px) {
+    .hd2__nav { display: block; }
+    .hd2__cta { display: inline-flex; }
+    .hd2__burger { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hd2,
+    .hd2__nav-link::after,
+    .hd2__mobile-item,
+    .hd2__mobile-actions,
+    .hd2__mobile-footer {
+      transition: none;
+    }
+    .hd2__mobile-item,
+    .hd2__mobile-actions,
+    .hd2__mobile-footer {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

@@ -12,6 +12,8 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.3.0",
     "@fontsource-variable/montserrat": "^5.2.8",
-    "astro": "^5.7.0"
+    "@types/three": "^0.184.0",
+    "astro": "^5.7.0",
+    "three": "^0.184.0"
   }
 }

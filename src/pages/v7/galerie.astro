@@ -1,0 +1,287 @@
+---
+import LayoutKinetic from '../../layouts/LayoutKinetic.astro';
+import imgHeroGalerie from '../../assets/images/hero-galerie.jpg';
+import imgLac from '../../assets/images/location-lac-sainte-croix-gorges-verdon.png';
+import imgPaddle from '../../assets/images/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg';
+import imgPaddleSurf from '../../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+import imgBateau from '../../assets/images/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg';
+import imgBateauEvjf from '../../assets/images/location-bateau-electriques-evjf-lac-sainte-croix.jpg';
+import imgPedalo from '../../assets/images/location-pedalo-lac-sainte-croix-plage-surfcenter.jpeg';
+import imgPedaloLac from '../../assets/images/pedalos_lac_sainte_croix.jpg';
+import imgCanoe from '../../assets/images/location-canoe-lac-sainte-croix-surfcenter.jpg';
+import imgWindsurf from '../../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+import imgConcert from '../../assets/images/concert-surfcenter-lac-sainte-croix.png';
+import imgConcertJoulik from '../../assets/images/concert-joulik-lac-sainte-croix-surfcenter.jpg';
+import imgFramboise from '../../assets/images/framboise-et-ceatera-lac-sainte-croix-concert-surfcenter.jpg';
+import imgYoga from '../../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import imgDroneSnack from '../../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import imgEsprit from '../../assets/images/esprit.png';
+import imgTerrasse from '../../assets/images/IMG20220610131419.jpg';
+import imgSoiree from '../../assets/images/IMG20220618204351.jpg';
+import imgTrophee from '../../assets/images/trophee-hobie-shop-lac-sainte-croix-surf-center.jpeg';
+
+const photos = [
+  { src: imgLac.src, alt: 'Vue aérienne du lac de Sainte-Croix et des Gorges du Verdon', span: 'wide' },
+  { src: imgPaddle.src, alt: 'Paddle et bateaux sur le lac de Sainte-Croix', span: 'tall' },
+  { src: imgBateau.src, alt: 'Bateau électrique sur les eaux turquoise', span: 'normal' },
+  { src: imgPedalo.src, alt: 'Pédalos sur la plage du Surf Center', span: 'normal' },
+  { src: imgConcert.src, alt: 'Concert live au Surf Center face au lac', span: 'wide' },
+  { src: imgYoga.src, alt: 'Yoga au lever du soleil au bord du lac', span: 'tall' },
+  { src: imgWindsurf.src, alt: 'Planche à voile sur le lac de Sainte-Croix', span: 'normal' },
+  { src: imgCanoe.src, alt: 'Canoë-kayak face aux falaises du Verdon', span: 'normal' },
+  { src: imgDroneSnack.src, alt: 'Vue aérienne du snack et de la plage', span: 'wide' },
+  { src: imgBateauEvjf.src, alt: 'Groupe en bateau électrique — EVJF', span: 'normal' },
+  { src: imgConcertJoulik.src, alt: 'Concert Joulik au Surf Center', span: 'tall' },
+  { src: imgPaddleSurf.src, alt: 'Session paddle au Surf Center', span: 'normal' },
+  { src: imgFramboise.src, alt: 'Concert Framboise et Cætera face au lac', span: 'normal' },
+  { src: imgTerrasse.src, alt: 'Terrasse du snack avec vue sur le lac', span: 'normal' },
+  { src: imgSoiree.src, alt: 'Soirée en terrasse au Surf Center', span: 'normal' },
+  { src: imgEsprit.src, alt: 'L\'esprit Surf Center', span: 'wide' },
+  { src: imgTrophee.src, alt: 'Trophée Hobie au lac de Sainte-Croix', span: 'normal' },
+  { src: imgPedaloLac.src, alt: 'Pédalos sur le lac de Sainte-Croix', span: 'normal' },
+];
+---
+
+<LayoutKinetic
+  title="Galerie — Surf Center · Lac de Sainte-Croix"
+  description="Galerie photo du Surf Center : lac de Sainte-Croix, activités nautiques, concerts, couchers de soleil et moments au cœur des Gorges du Verdon."
+>
+
+  <!-- HERO -->
+  <section class="k7ga__hero">
+    <div class="k7ga__hero-bg">
+      <img src={imgHeroGalerie.src} alt="Panorama du lac de Sainte-Croix — Gorges du Verdon" width="1920" height="800" loading="eager" fetchpriority="high" decoding="async" />
+      <div class="k7ga__hero-dim" aria-hidden="true"></div>
+    </div>
+    <div class="container k7ga__hero-inner">
+      <div class="k7ga__hero-content">
+        <h1 class="k7ga__hero-title">
+          <span class="k7ga__t-bold">Gale&shy;rie</span>
+        </h1>
+        <p class="k7ga__hero-sub">{photos.length} photos · Lac de Sainte-Croix · Gorges du Verdon</p>
+      </div>
+    </div>
+    <div class="k7ga__hero-skew" aria-hidden="true"></div>
+  </section>
+
+  <!-- MOSAIC -->
+  <section class="k7ga__mosaic-section" aria-label="Galerie photos">
+    <div class="container">
+      <div class="k7ga__mosaic">
+        {photos.map((photo, i) => (
+          <div class:list={['k7ga__tile', `k7ga__tile--${photo.span}`, 'reveal']} style={`--d:${(i % 6) * 60}ms`}>
+            <img src={photo.src} alt={photo.alt} width="800" height="600" loading={i < 4 ? 'eager' : 'lazy'} decoding="async" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="k7ga__cta">
+    <div class="container k7ga__cta-inner reveal">
+      <h2 class="k7ga__cta-title">Vivez l'expérience</h2>
+      <p class="k7ga__cta-sub">Réservez votre activité et créez vos propres souvenirs au bord du lac.</p>
+      <div class="k7ga__cta-btns">
+        <button type="button" class="btn btn--primary" data-booking>Réserver</button>
+        <a href="/v7/acces-contact" class="btn btn--secondary">Nous contacter</a>
+      </div>
+    </div>
+  </section>
+
+</LayoutKinetic>
+
+<style>
+  /* ====== HERO ====== */
+  .k7ga__hero {
+    position: relative;
+    min-height: 60svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--c-dark);
+  }
+
+  .k7ga__hero-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .k7ga__hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: k7ga-zoom 20s ease-in-out alternate infinite;
+  }
+
+  @keyframes k7ga-zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+  }
+
+  .k7ga__hero-dim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.2) 0%, rgb(0 0 0 / 0.7) 100%);
+  }
+
+  .k7ga__hero-inner {
+    position: relative;
+    z-index: 1;
+    padding: calc(var(--header-h) + var(--s-16)) 0 var(--s-16);
+  }
+
+  .k7ga__hero-content {
+    animation: k7ga-up 900ms var(--ease-smooth) both;
+  }
+
+  @keyframes k7ga-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .k7ga__hero-title { margin-bottom: var(--s-4); }
+
+  .k7ga__t-bold {
+    font-size: clamp(4rem, 14vw, 10rem);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .k7ga__hero-sub {
+    font-size: 0.78rem;
+    color: rgb(255 255 255 / 0.4);
+    letter-spacing: 0.06em;
+  }
+
+  .k7ga__hero-skew {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--c-bg);
+    clip-path: polygon(0 60%, 100% 100%, 0 100%);
+    z-index: 2;
+  }
+
+  /* ====== MOSAIC ====== */
+  .k7ga__mosaic-section {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .k7ga__mosaic {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 200px;
+    gap: var(--s-3);
+  }
+
+  .k7ga__tile {
+    overflow: hidden;
+    border-radius: var(--r-sm);
+    background: var(--c-surface);
+  }
+
+  .k7ga__tile--wide { grid-column: span 2; }
+  .k7ga__tile--tall { grid-row: span 2; }
+
+  .k7ga__tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s var(--ease), filter 0.5s var(--ease);
+  }
+
+  .k7ga__tile:hover img {
+    transform: scale(1.05) rotate(0.5deg);
+    filter: brightness(1.05) contrast(1.05);
+  }
+
+  @media (min-width: 768px) {
+    .k7ga__mosaic {
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 260px;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .k7ga__mosaic {
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 280px;
+    }
+  }
+
+  /* ====== CTA ====== */
+  .k7ga__cta {
+    padding: var(--s-section) 0;
+    background: var(--c-dark);
+    text-align: center;
+  }
+
+  .k7ga__cta-title {
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: #fff;
+    margin-bottom: var(--s-4);
+  }
+
+  .k7ga__cta-sub {
+    font-size: 0.88rem;
+    color: rgb(255 255 255 / 0.45);
+    margin-bottom: var(--s-8);
+    max-width: 40ch;
+    margin-inline: auto;
+  }
+
+  .k7ga__cta-btns {
+    display: flex;
+    gap: var(--s-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .k7ga__cta .btn--secondary {
+    color: #fff;
+    border-color: rgb(255 255 255 / 0.3);
+  }
+
+  .k7ga__cta .btn--secondary:hover {
+    background: #fff;
+    color: var(--c-dark);
+  }
+
+  /* ====== REDUCED MOTION ====== */
+  @media (prefers-reduced-motion: reduce) {
+    .k7ga__hero-bg img { animation: none; }
+    .k7ga__hero-content { animation: none; }
+    .k7ga__tile img { transition: none; }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tiles = document.querySelectorAll('.k7ga__tile');
+    if (!('IntersectionObserver' in window)) {
+      tiles.forEach(t => t.classList.add('is-visible'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+    tiles.forEach(t => io.observe(t));
+  });
+</script>

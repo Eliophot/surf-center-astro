@@ -1,0 +1,604 @@
+---
+import LayoutMarketing from '../../layouts/LayoutMarketing.astro';
+import { Image } from 'astro:assets';
+import imgYoga from '../../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import imgPaddle from '../../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+import imgPlanche from '../../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+import imgConcert from '../../assets/images/concert-surfcenter-lac-sainte-croix.png';
+import imgEvjf from '../../assets/images/location-bateau-electriques-evjf-lac-sainte-croix.jpg';
+import imgHero from '../../assets/images/hero-home.jpg';
+import TrustBadges from '../../components/v8/TrustBadges.astro';
+
+const animations = [
+  {
+    title: "Yoga face au lac",
+    tagline: "Sérénité & bien-être",
+    description: "Sessions de yoga au lever du soleil sur la plage, face aux eaux turquoise du lac de Sainte-Croix. Accessibles à tous les niveaux, encadrées par Sarah, professeure certifiée.",
+    schedule: "Lundi, mercredi, vendredi — 7h30",
+    price: "15€",
+    badge: "Populaire",
+    image: imgYoga,
+    alt: "Cours de yoga au bord du lac de Sainte-Croix — Surf Center",
+    tag: "",
+  },
+  {
+    title: "Cours de paddle",
+    tagline: "Initiation & perfectionnement",
+    description: "Apprenez les bases du stand-up paddle ou perfectionnez votre technique avec nos moniteurs. Cours collectifs ou privés, matériel inclus.",
+    schedule: "Tous les jours — 10h & 14h",
+    price: "25€",
+    badge: "",
+    image: imgPaddle,
+    alt: "Cours de paddle sur le lac de Sainte-Croix",
+    tag: "52bf76b6-6f0a-43ff-b0a2-4c1332d5ede5",
+  },
+  {
+    title: "Initiation planche à voile",
+    tagline: "Adrénaline pour tous",
+    description: "Découvrez la planche à voile sur le spot idéal : vent thermique régulier, eau plate, cadre spectaculaire. Moniteurs diplômés, matériel fourni.",
+    schedule: "Mardi, jeudi, samedi — 14h",
+    price: "35€",
+    badge: "Nouveau",
+    image: imgPlanche,
+    alt: "Initiation planche à voile au lac de Sainte-Croix",
+    tag: "7a524907-97b7-42bd-bfdc-deb401767b21",
+  },
+  {
+    title: "Soirées musicales",
+    tagline: "Concerts au coucher du soleil",
+    description: "Chaque vendredi soir en été, profitez d'un concert live sur notre scène face au lac. Artistes locaux, ambiance décontractée, coucher de soleil garanti.",
+    schedule: "Vendredis — 19h à 22h",
+    price: "Gratuit",
+    badge: "Gratuit",
+    image: imgConcert,
+    alt: "Concert au coucher du soleil — Surf Center",
+    tag: "",
+  },
+  {
+    title: "Activités EVJF / EVG",
+    tagline: "Formules groupe sur mesure",
+    description: "Enterrement de vie de jeune fille ou garçon au bord du lac. Paddle géant, bateau privatisé, défis nautiques — des souvenirs mémorables garantis.",
+    schedule: "Sur réservation",
+    price: "Sur devis",
+    badge: "",
+    image: imgEvjf,
+    alt: "EVJF en bateau au lac de Sainte-Croix",
+    tag: "",
+  },
+];
+
+const faqAnimations = [
+  { question: "Faut-il réserver les cours à l'avance ?", answer: "La réservation en ligne est recommandée en juillet-août car les places sont limitées. En avant-saison, vous pouvez aussi vous inscrire sur place le jour même." },
+  { question: "Les cours sont-ils adaptés aux débutants ?", answer: "Absolument ! Tous nos cours sont accessibles aux débutants complets. Nos moniteurs adaptent le contenu selon votre niveau. Aucune expérience préalable n'est requise." },
+  { question: "Quel âge minimum pour les animations ?", answer: "Le yoga est accessible dès 12 ans. Les cours de paddle et planche à voile sont ouverts à partir de 8 ans (accompagnés d'un adulte pour les moins de 12 ans)." },
+  { question: "Le matériel est-il inclus ?", answer: "Oui, tout le matériel est inclus dans le tarif : planche, pagaie, gilet, combinaison si nécessaire. Vous n'avez rien à amener à part une serviette et de la crème solaire." },
+  { question: "Les soirées concerts sont-elles gratuites ?", answer: "Oui, l'accès aux concerts du vendredi soir est entièrement gratuit. La restauration et les boissons sont disponibles au snack-pizzeria pendant toute la soirée." },
+  { question: "Peut-on privatiser une animation pour un groupe ?", answer: "Bien sûr ! Nous proposons des formules groupe sur mesure pour les EVJF, EVG, anniversaires, team building… Contactez-nous pour un devis personnalisé." },
+];
+
+const trustStats = [
+  { value: "500+", label: "cours donnés chaque été" },
+  { value: "98%", label: "de satisfaction" },
+  { value: "4.8★", label: "note moyenne (320 avis)" },
+  { value: "3", label: "moniteurs diplômés" },
+];
+---
+
+<LayoutMarketing
+  title="Animations — Yoga, Cours & Événements | Surf Center"
+  description="Yoga au lever du soleil, cours de paddle, planche à voile, concerts gratuits et formules groupe. Animations au Surf Center, lac de Sainte-Croix."
+>
+  <!-- HERO -->
+  <section class="m8__ahero" aria-label="Animations Surf Center">
+    <Image
+      class="m8__ahero-img"
+      src={imgYoga}
+      alt="Cours de yoga face au lac de Sainte-Croix au lever du soleil"
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      format="webp"
+      quality={80}
+    />
+    <div class="m8__ahero-overlay" aria-hidden="true"></div>
+
+    <div class="m8__ahero-badge">
+      <span class="m8__ahero-badge-dot" aria-hidden="true"></span>
+      Programme été 2026
+    </div>
+
+    <div class="m8__ahero-content">
+      <div class="m8__ahero-proof">
+        <span class="m8__ahero-stars" aria-label="4.8 étoiles sur 5">★★★★★</span>
+        <span class="m8__ahero-proof-text">4.8/5 — 500+ cours donnés chaque été</span>
+      </div>
+      <h1 class="m8__ahero-title">Animations<br/>inoubliables</h1>
+      <p class="m8__ahero-baseline">Yoga, cours nautiques, concerts & événements au bord du lac</p>
+      <div class="m8__ahero-actions">
+        <button type="button" class="btn btn--primary btn--lg" data-booking>
+          <span class="btn-flip__inner">
+            <span class="btn-flip__front">Réserver une animation</span>
+            <span class="btn-flip__back">Réserver une animation</span>
+          </span>
+        </button>
+        <a href="#programme" class="btn btn--ghost btn--lg">Voir le programme</a>
+      </div>
+      <p class="m8__ahero-sub">Dès 15€ · Matériel inclus · Tous niveaux · Annulation gratuite</p>
+    </div>
+  </section>
+
+  <!-- TRUST STATS -->
+  <section class="m8__a-trust" aria-label="Chiffres animations">
+    <div class="container">
+      <div class="m8__a-trust-grid">
+        {trustStats.map((stat, i) => (
+          <div class={`m8__a-trust-item reveal ${i > 0 ? `reveal-d${i}` : ''}`}>
+            <strong class="m8__a-trust-value">{stat.value}</strong>
+            <span class="m8__a-trust-label">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ANIMATION SLIDER / CARDS -->
+  <section id="programme" class="section" aria-labelledby="m8__a-prog-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Programme</span>
+        <h2 id="m8__a-prog-title">Nos animations<br/>& activités</h2>
+        <p class="section__lead">Du yoga matinal aux concerts du vendredi soir — il y en a pour tous les goûts.</p>
+      </header>
+
+      <div class="m8__a-slider-wrap reveal">
+        <button class="m8__a-arrow m8__a-arrow--prev" type="button" data-m8a-prev aria-label="Précédent">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="m8__a-slider" data-m8a-slider>
+          <div class="m8__a-track" data-m8a-track>
+            {animations.map((anim) => (
+              <div class="m8__a-card">
+                <div class="m8__a-card-img-wrap">
+                  <Image
+                    class="m8__a-card-img"
+                    src={anim.image}
+                    alt={anim.alt}
+                    width={500}
+                    height={650}
+                    loading="lazy"
+                    decoding="async"
+                    format="webp"
+                    quality={75}
+                  />
+                  <div class="m8__a-card-overlay"></div>
+                  {anim.badge && <span class="m8__a-card-badge">{anim.badge}</span>}
+                  <div class="m8__a-card-price-tag">
+                    <span class="m8__a-card-price">{anim.price}</span>
+                  </div>
+                </div>
+                <div class="m8__a-card-body">
+                  <span class="m8__a-card-tagline">{anim.tagline}</span>
+                  <h3 class="m8__a-card-title">{anim.title}</h3>
+                  <p class="m8__a-card-desc">{anim.description}</p>
+                  <div class="m8__a-card-schedule">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>{anim.schedule}</span>
+                  </div>
+                  {anim.tag ? (
+                    <button type="button" class="btn btn--primary btn--sm m8__a-card-cta" data-product-book data-tag={anim.tag}>
+                      <span class="btn-flip__inner"><span class="btn-flip__front">Réserver</span><span class="btn-flip__back">Réserver</span></span>
+                    </button>
+                  ) : (
+                    <button type="button" class="btn btn--primary btn--sm m8__a-card-cta" data-booking>
+                      <span class="btn-flip__inner"><span class="btn-flip__front">Réserver</span><span class="btn-flip__back">Réserver</span></span>
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <button class="m8__a-arrow m8__a-arrow--next" type="button" data-m8a-next aria-label="Suivant">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING CTA -->
+  <section class="m8__a-booking" aria-label="Réserver une animation">
+    <div class="container m8__a-booking-inner reveal">
+      <div class="m8__a-booking-left">
+        <span class="section__eyebrow">Calendrier</span>
+        <h2 class="m8__a-booking-title">Réservez votre<br/>prochaine animation</h2>
+        <p class="m8__a-booking-text">Choisissez votre date et votre activité en ligne. Confirmation instantanée, annulation gratuite 24h avant.</p>
+        <ul class="m8__a-booking-perks">
+          <li class="m8__a-booking-perk">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Matériel inclus dans le tarif
+          </li>
+          <li class="m8__a-booking-perk">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Moniteurs diplômés d'État
+          </li>
+          <li class="m8__a-booking-perk">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Annulation gratuite 24h avant
+          </li>
+          <li class="m8__a-booking-perk">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Paiement sécurisé
+          </li>
+        </ul>
+      </div>
+      <div class="m8__a-booking-right">
+        <div class="m8__a-booking-card">
+          <strong class="m8__a-booking-card-title">Prêt à réserver ?</strong>
+          <p class="m8__a-booking-card-text">Sélectionnez votre animation et réservez en 2 clics.</p>
+          <button type="button" class="btn btn--primary btn--lg m8__a-booking-btn" data-booking>
+            <span class="btn-flip__inner"><span class="btn-flip__front">Réserver maintenant</span><span class="btn-flip__back">Réserver maintenant</span></span>
+          </button>
+          <p class="m8__a-booking-card-note">ou appelez-nous : <a href="tel:+33492771450">04 92 77 14 50</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--surface" aria-labelledby="m8__a-faq-title">
+    <div class="container m8__a-faq-wrap">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Questions fréquentes</span>
+        <h2 id="m8__a-faq-title">Tout savoir sur<br/>nos animations</h2>
+      </header>
+
+      <div class="m8__a-faq-list reveal">
+        {faqAnimations.map((faq) => (
+          <details class="m8__a-faq-item">
+            <summary class="m8__a-faq-q">
+              <span>{faq.question}</span>
+              <svg class="m8__a-faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="m8__a-faq-a"><p>{faq.answer}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <TrustBadges />
+
+  <!-- CLOSING CTA -->
+  <section class="section m8__a-closing" aria-labelledby="m8__a-closing-title">
+    <Image
+      class="m8__a-closing-bg"
+      src={imgHero}
+      alt=""
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      loading="lazy"
+      decoding="async"
+      format="webp"
+      quality={70}
+    />
+    <div class="m8__a-closing-overlay" aria-hidden="true"></div>
+    <div class="container m8__a-closing-inner reveal">
+      <span class="section__eyebrow" style="color: var(--c-orange)">Cet été au Surf Center</span>
+      <h2 id="m8__a-closing-title" class="m8__a-closing-title">Des moments<br/>qui comptent</h2>
+      <p class="m8__a-closing-text">Yoga au lever du soleil, glisse sur les eaux turquoise, concert au coucher du soleil.<br/>Chaque journée est une expérience unique.</p>
+      <div class="m8__a-closing-proof">
+        <span class="m8__a-closing-dot" aria-hidden="true"></span>
+        <span>500+ cours · 98% satisfaction · Moniteurs diplômés</span>
+      </div>
+      <div class="m8__a-closing-actions">
+        <button type="button" class="btn btn--primary btn--lg" data-booking>
+          <span class="btn-flip__inner"><span class="btn-flip__front">Réserver une animation</span><span class="btn-flip__back">Réserver une animation</span></span>
+        </button>
+        <a href="/v8/acces-contact" class="btn btn--ghost btn--lg">Nous contacter</a>
+      </div>
+    </div>
+  </section>
+</LayoutMarketing>
+
+<style>
+  /* ── HERO ── */
+  .m8__ahero {
+    position: relative; height: 85svh; min-height: 550px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; background: #0a0a0a;
+  }
+  .m8__ahero-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 30%; z-index: 0;
+    animation: m8a-zoom 25s ease forwards;
+  }
+  @keyframes m8a-zoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+  .m8__ahero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.5) 0%, rgb(0 0 0 / 0.2) 40%, rgb(0 0 0 / 0.7) 100%);
+  }
+  .m8__ahero-badge {
+    position: absolute; top: calc(var(--header-h, 80px) + 1rem); left: 50%; transform: translateX(-50%); z-index: 3;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.45rem 1rem; border-radius: var(--r-full);
+    background: rgb(247 123 70 / 0.15); border: 1px solid rgb(247 123 70 / 0.3);
+    backdrop-filter: blur(12px); font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-orange-light, #fbbf80);
+    white-space: nowrap; animation: m8a-badge 700ms ease 100ms both;
+  }
+  .m8__ahero-badge-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+    animation: m8a-pulse 2s ease-in-out infinite;
+  }
+  @keyframes m8a-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  @keyframes m8a-badge {
+    from { opacity: 0; transform: translateX(-50%) translateY(16px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+  .m8__ahero-content {
+    position: relative; z-index: 2; text-align: center;
+    padding-inline: var(--s-6); max-width: 52rem;
+    margin-top: calc(var(--header-h, 80px) * 0.4);
+  }
+  .m8__ahero-proof {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.5rem; margin-bottom: var(--s-6);
+    animation: m8a-up 900ms ease 200ms both;
+  }
+  @keyframes m8a-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .m8__ahero-stars { font-size: 0.8rem; color: #fbbf24; letter-spacing: 2px; }
+  .m8__ahero-proof-text { font-size: 0.7rem; font-weight: 500; color: rgb(255 255 255 / 0.6); }
+  .m8__ahero-title {
+    font-size: clamp(2.8rem, 9vw, 6.5rem); font-weight: 800; line-height: 0.92;
+    letter-spacing: -0.04em; text-transform: uppercase; color: #fff !important;
+    margin-bottom: var(--s-5); text-shadow: 0 4px 40px rgb(0 0 0 / 0.5);
+    animation: m8a-up 900ms ease 400ms both;
+  }
+  .m8__ahero-baseline {
+    font-size: clamp(0.85rem, 1.6vw, 1.1rem); font-weight: 500;
+    color: rgb(255 255 255 / 0.75) !important; margin-bottom: var(--s-8);
+    animation: m8a-up 900ms ease 550ms both;
+  }
+  .m8__ahero-actions {
+    display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap;
+    animation: m8a-up 900ms ease 700ms both;
+  }
+  .m8__ahero-sub {
+    margin-top: var(--s-4); font-size: 0.7rem; font-weight: 500;
+    color: rgb(255 255 255 / 0.4); letter-spacing: 0.04em;
+    animation: m8a-up 900ms ease 850ms both;
+  }
+
+  /* ── TRUST STATS ── */
+  .m8__a-trust {
+    padding-block: var(--s-12); background: var(--c-surface);
+    border-bottom: 1px solid var(--c-border-light);
+  }
+  .m8__a-trust-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-6) var(--s-4);
+  }
+  @media (min-width: 768px) {
+    .m8__a-trust { padding-block: var(--s-16); }
+    .m8__a-trust-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .m8__a-trust-item { text-align: center; padding: var(--s-4); }
+  .m8__a-trust-value {
+    display: block; font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 800;
+    letter-spacing: -0.02em; line-height: 1; color: var(--c-orange); margin-bottom: var(--s-2);
+  }
+  .m8__a-trust-label {
+    display: block; font-size: 0.68rem; font-weight: 500; color: var(--c-text-muted);
+    text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.4;
+  }
+
+  /* ── SLIDER ── */
+  .m8__a-slider-wrap { position: relative; }
+  .m8__a-slider { overflow: hidden; margin-bottom: var(--s-8); }
+  .m8__a-track {
+    display: flex; gap: var(--s-5); overflow-x: auto;
+    scroll-snap-type: x mandatory; scrollbar-width: none;
+    -webkit-overflow-scrolling: touch; padding-bottom: var(--s-2);
+  }
+  .m8__a-track::-webkit-scrollbar { display: none; }
+  .m8__a-arrow {
+    position: absolute; top: 35%; z-index: 10; transform: translateY(-50%);
+    width: 48px; height: 48px; border-radius: var(--r-full);
+    border: 1.5px solid var(--c-border); background: var(--c-bg);
+    color: var(--c-text); cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: all var(--t-fast);
+    box-shadow: 0 2px 12px rgb(0 0 0 / 0.08);
+  }
+  .m8__a-arrow:hover { border-color: var(--c-orange); color: var(--c-orange); }
+  .m8__a-arrow:disabled { opacity: 0; pointer-events: none; }
+  .m8__a-arrow--prev { left: calc(-1 * var(--s-3)); }
+  .m8__a-arrow--next { right: calc(-1 * var(--s-3)); }
+
+  .m8__a-card {
+    flex: 0 0 85%; scroll-snap-align: start;
+    border-radius: var(--r-lg); overflow: hidden;
+    background: var(--c-surface); border: 1px solid var(--c-border-light);
+    display: flex; flex-direction: column;
+    transition: border-color var(--t-fast);
+  }
+  .m8__a-card:hover { border-color: var(--c-orange); }
+  @media (min-width: 600px) { .m8__a-card { flex: 0 0 48%; } }
+  @media (min-width: 1000px) { .m8__a-card { flex: 0 0 32%; } }
+
+  .m8__a-card-img-wrap { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+  .m8__a-card-img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+  .m8__a-card:hover .m8__a-card-img { transform: scale(1.06); }
+  .m8__a-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgb(0 0 0 / 0.3) 0%, transparent 50%);
+  }
+  .m8__a-card-badge {
+    position: absolute; top: var(--s-3); left: var(--s-3); z-index: 2;
+    padding: 0.3rem 0.65rem; border-radius: var(--r-full);
+    background: var(--c-orange); color: #fff;
+    font-size: 0.56rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .m8__a-card-price-tag {
+    position: absolute; bottom: var(--s-3); right: var(--s-3); z-index: 2;
+    padding: 0.4rem 0.75rem; border-radius: var(--r-full);
+    background: rgb(0 0 0 / 0.5); backdrop-filter: blur(12px);
+  }
+  .m8__a-card-price { font-size: 1rem; font-weight: 800; color: #fff; }
+
+  .m8__a-card-body {
+    padding: var(--s-5) var(--s-6); display: flex; flex-direction: column; flex-grow: 1;
+  }
+  .m8__a-card-tagline {
+    font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--c-orange); margin-bottom: var(--s-1);
+  }
+  .m8__a-card-title {
+    font-size: 1.05rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.02em; margin-bottom: var(--s-2);
+  }
+  .m8__a-card-desc {
+    font-size: 0.82rem; color: var(--c-text-secondary); line-height: 1.65; margin-bottom: var(--s-4);
+    flex-grow: 1;
+  }
+  .m8__a-card-schedule {
+    display: flex; align-items: center; gap: var(--s-2);
+    font-size: 0.72rem; color: var(--c-text-muted); font-weight: 500;
+    margin-bottom: var(--s-4);
+  }
+  .m8__a-card-schedule svg { color: var(--c-orange); flex-shrink: 0; }
+  .m8__a-card-cta { align-self: flex-start; }
+
+  /* ── BOOKING ── */
+  .m8__a-booking {
+    padding-block: var(--s-16); background: var(--c-surface);
+    border-top: 1px solid var(--c-border-light);
+  }
+  .m8__a-booking-inner {
+    display: grid; grid-template-columns: 1fr; gap: var(--s-10);
+  }
+  @media (min-width: 900px) {
+    .m8__a-booking-inner { grid-template-columns: 1.2fr 1fr; align-items: center; }
+  }
+  .m8__a-booking-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800;
+    letter-spacing: -0.03em; margin-bottom: var(--s-4);
+  }
+  .m8__a-booking-text { font-size: 0.92rem; color: var(--c-text-secondary); line-height: 1.7; margin-bottom: var(--s-6); }
+  .m8__a-booking-perks { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--s-3); }
+  .m8__a-booking-perk {
+    display: flex; align-items: center; gap: var(--s-3);
+    font-size: 0.82rem; font-weight: 500; color: var(--c-text);
+  }
+  .m8__a-booking-perk svg { color: #4ade80; flex-shrink: 0; }
+  .m8__a-booking-card {
+    padding: var(--s-8); background: var(--c-bg); border-radius: var(--r-lg);
+    border: 1px solid var(--c-border-light); text-align: center;
+  }
+  .m8__a-booking-card-title {
+    display: block; font-size: 1.1rem; font-weight: 700; margin-bottom: var(--s-3);
+  }
+  .m8__a-booking-card-text { font-size: 0.85rem; color: var(--c-text-muted); margin-bottom: var(--s-6); }
+  .m8__a-booking-btn { width: 100%; box-shadow: 0 4px 30px rgb(247 123 70 / 0.4); }
+  .m8__a-booking-card-note {
+    margin-top: var(--s-4); font-size: 0.72rem; color: var(--c-text-muted);
+  }
+  .m8__a-booking-card-note a { color: var(--c-orange); font-weight: 600; text-decoration: none; }
+  .m8__a-booking-card-note a:hover { text-decoration: underline; }
+
+  /* ── FAQ ── */
+  .m8__a-faq-wrap { max-width: var(--max-w-narrow, 48rem); }
+  .m8__a-faq-list { display: flex; flex-direction: column; }
+  .m8__a-faq-item { border-bottom: 1px solid var(--c-border-light); }
+  .m8__a-faq-q {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s-6);
+    padding: var(--s-6) 0; font-weight: 500; font-size: 0.92rem;
+    cursor: pointer; list-style: none; color: var(--c-text); transition: color var(--t-fast);
+  }
+  .m8__a-faq-q::-webkit-details-marker { display: none; }
+  .m8__a-faq-q::marker { content: ''; }
+  .m8__a-faq-q:hover { color: var(--c-orange); }
+  .m8__a-faq-chevron {
+    flex-shrink: 0; color: var(--c-text-muted);
+    transition: transform var(--t-normal) var(--ease);
+  }
+  .m8__a-faq-item[open] .m8__a-faq-chevron { transform: rotate(180deg); color: var(--c-orange); }
+  .m8__a-faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--t-normal) var(--ease); }
+  .m8__a-faq-item[open] .m8__a-faq-a { grid-template-rows: 1fr; }
+  .m8__a-faq-a > p { overflow: hidden; font-size: 0.88rem; color: var(--c-text-secondary); line-height: 1.7; }
+  .m8__a-faq-item[open] .m8__a-faq-a > p { padding-bottom: var(--s-6); }
+
+  /* ── CLOSING ── */
+  .m8__a-closing {
+    position: relative; overflow: hidden; color: #fff;
+    min-height: 65vh; display: flex; align-items: center;
+  }
+  .m8__a-closing-bg {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+  }
+  .m8__a-closing-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgb(10 10 10 / 0.6) 0%, rgb(10 10 10 / 0.85) 100%);
+  }
+  .m8__a-closing-inner {
+    position: relative; z-index: 2; text-align: center;
+    max-width: 42rem; margin-inline: auto;
+  }
+  .m8__a-closing-title {
+    font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800;
+    letter-spacing: -0.03em; color: #fff; margin-bottom: var(--s-4);
+  }
+  .m8__a-closing-text {
+    font-size: 0.92rem; color: rgb(255 255 255 / 0.6); line-height: 1.7; margin-bottom: var(--s-6);
+  }
+  .m8__a-closing-proof {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 1rem; border-radius: var(--r-full);
+    background: rgb(255 255 255 / 0.08); border: 1px solid rgb(255 255 255 / 0.1);
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgb(255 255 255 / 0.5); margin-bottom: var(--s-8);
+  }
+  .m8__a-closing-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+    animation: m8a-pulse 2s ease-in-out infinite;
+  }
+  .m8__a-closing-actions { display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap; }
+
+  @media (max-width: 600px) {
+    .m8__ahero-actions, .m8__a-closing-actions { flex-direction: column; align-items: center; }
+    .m8__a-arrow { display: none; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-m8a-slider]').forEach((slider) => {
+    const track = slider.querySelector('[data-m8a-track]') as HTMLElement | null;
+    const wrap = slider.closest('.m8__a-slider-wrap');
+    const prevBtn = wrap?.querySelector('[data-m8a-prev]') as HTMLButtonElement | null;
+    const nextBtn = wrap?.querySelector('[data-m8a-next]') as HTMLButtonElement | null;
+    if (!track) return;
+
+    const getScrollAmount = () => {
+      const card = track.querySelector('.m8__a-card') as HTMLElement | null;
+      return card ? card.offsetWidth + 20 : 300;
+    };
+
+    const updateArrows = () => {
+      if (prevBtn) prevBtn.disabled = track.scrollLeft <= 2;
+      if (nextBtn) nextBtn.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    };
+
+    updateArrows();
+    track.addEventListener('scroll', updateArrows, { passive: true });
+    prevBtn?.addEventListener('click', () => track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' }));
+    nextBtn?.addEventListener('click', () => track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' }));
+  });
+</script>

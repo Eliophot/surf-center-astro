@@ -1,0 +1,668 @@
+---
+import LayoutDesign from '../../layouts/LayoutDesign.astro';
+import { Image } from 'astro:assets';
+import espritImg from '../../assets/images/esprit.png';
+import lacImg from '../../assets/images/location-lac-sainte-croix-gorges-verdon.png';
+import gettyImg from '../../assets/images/GettyImages-577312024.jpg';
+import droneImg from '../../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import bateauImg from '../../assets/images/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg';
+import paddleImg from '../../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+import pedaloImg from '../../assets/images/location-pedalo-lac-sainte-croix-plage-surfcenter.jpeg';
+import canoeImg from '../../assets/images/location-canoe-lac-sainte-croix-surfcenter.jpg';
+import voileImg from '../../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+import { locationDetails } from '../../data/locations';
+
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'L\'esprit Surf Center',
+  description: 'Découvrez l\'histoire, les valeurs et le cadre unique du Surf Center, base nautique au lac de Sainte-Croix dans les Gorges du Verdon.',
+  url: `${siteUrl}/v2/esprit-surf-center`,
+  mainEntity: {
+    '@type': 'LocalBusiness',
+    name: 'Surf Center',
+    url: siteUrl,
+  },
+};
+
+const activityImages: Record<string, ImageMetadata> = {
+  'bateau-electrique': bateauImg,
+  'paddle': paddleImg,
+  'pedalo': pedaloImg,
+  'canoe': canoeImg,
+  'planche-a-voile': voileImg,
+};
+
+const historySteps = [
+  { year: '1990', title: 'Les débuts', text: 'Création de la base nautique sur la plage des Salles-sur-Verdon. Quelques pédalos, un rêve : faire découvrir le lac.' },
+  { year: '2000', title: 'L\'essor', text: 'Arrivée des premiers bateaux électriques et du snack-pizzeria. Le Surf Center devient une adresse incontournable du Verdon.' },
+  { year: '2010', title: 'L\'expansion', text: 'Paddle, kayak, planche à voile, bouée tractée — l\'offre s\'étoffe. Les concerts d\'été s\'installent.' },
+  { year: '2024', title: 'Aujourd\'hui', text: 'Une base nautique complète, un restaurant, des événements. Le cadre n\'a pas changé, l\'esprit non plus.' },
+];
+
+const cadreCards = [
+  { title: 'Le lac', desc: 'Les eaux turquoise du lac de Sainte-Croix, un des plus beaux lacs d\'Europe, au cœur de la Provence.', img: lacImg, alt: 'Lac de Sainte-Croix — eaux turquoise' },
+  { title: 'Les gorges', desc: 'Les majestueuses Gorges du Verdon, le plus grand canyon d\'Europe, offrent un décor à couper le souffle.', img: gettyImg, alt: 'Gorges du Verdon — falaises et eaux turquoise' },
+  { title: 'La base', desc: 'Directement sur la plage, entre pins et sable fin. Le Surf Center est un camp de base idéal pour explorer.', img: droneImg, alt: 'Vue aérienne du Surf Center — plage et lac' },
+];
+---
+
+<LayoutDesign
+  title="L'esprit Surf Center — Notre histoire | Lac de Sainte-Croix"
+  description="L'histoire, les valeurs et le cadre du Surf Center. Base nautique au lac de Sainte-Croix, Gorges du Verdon. Découvrez l'esprit du lieu."
+  jsonLd={jsonLd}
+>
+  <!-- CINEMA HERO WITH VIDEO -->
+  <section class="desp-hero">
+    <video
+      class="desp-hero__video"
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg"
+      aria-hidden="true"
+    >
+      <source src="/concert-surfcenter-lac-sainte-croix.mp4" type="video/mp4" />
+    </video>
+    <div class="desp-hero__overlay" aria-hidden="true"></div>
+    <div class="container desp-hero__inner">
+      <span class="desp-hero__eyebrow">Depuis 1990 · Gorges du Verdon</span>
+      <h1 class="desp-hero__title reveal">L'esprit<br/>Surf Center</h1>
+      <p class="desp-hero__sub reveal">Plus qu'une base nautique. Un lieu de vie au bord du lac de Sainte-Croix, où nature, convivialité et aventure se retrouvent.</p>
+    </div>
+  </section>
+
+  <!-- STICKY SCROLL HISTORY -->
+  <section class="section desp-hist" aria-labelledby="desp-hist-title">
+    <div class="container desp-hist__wrap">
+      <div class="desp-hist__sticky reveal">
+        <span class="desp-hist__eyebrow">Notre histoire</span>
+        <h2 id="desp-hist-title" class="desp-hist__heading">Plus de 30 ans<br/>au bord du lac</h2>
+        <p class="desp-hist__intro">Depuis 1990, le Surf Center accueille familles, sportifs et amoureux de nature sur la plage des Salles-sur-Verdon.</p>
+      </div>
+      <div class="desp-hist__timeline">
+        {historySteps.map((s) => (
+          <div class="desp-hist__step reveal">
+            <span class="desp-hist__year">{s.year}</span>
+            <h3 class="desp-hist__stitle">{s.title}</h3>
+            <p class="desp-hist__stext">{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BENTO GRID: LE CADRE -->
+  <section class="section desp-cadre" aria-labelledby="desp-cadre-title">
+    <div class="container">
+      <header class="desp-cadre__header reveal">
+        <span class="desp-cadre__eyebrow">Le cadre</span>
+        <h2 id="desp-cadre-title" class="desp-cadre__heading">Un décor<br/>d'exception</h2>
+      </header>
+      <div class="desp-cadre__grid">
+        {cadreCards.map((c, i) => (
+          <div class={`desp-cadre__card ${i === 0 ? 'desp-cadre__card--wide' : ''} reveal`}>
+            <div class="desp-cadre__imgwrap">
+              <Image
+                src={c.img}
+                alt={c.alt}
+                width={i === 0 ? 1200 : 600}
+                height={i === 0 ? 600 : 500}
+                class="desp-cadre__img"
+                loading="lazy"
+              />
+            </div>
+            <div class="desp-cadre__overlay">
+              <h3 class="desp-cadre__ctitle">{c.title}</h3>
+              <p class="desp-cadre__cdesc">{c.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CINEMA SLIDER: ACTIVITIES -->
+  <section class="section desp-act" aria-labelledby="desp-act-title">
+    <div class="container">
+      <header class="desp-act__header reveal">
+        <span class="desp-cadre__eyebrow">Nos activités</span>
+        <h2 id="desp-act-title" class="desp-cadre__heading">Le lac,<br/>à votre façon</h2>
+      </header>
+    </div>
+    <div class="desp-act__slider" data-desp-slider>
+      <div class="desp-act__track" data-desp-track>
+        {locationDetails.map((loc) => (
+          <a href={`/v2/nos-locations/${loc.slug}`} class="desp-act__item">
+            <div class="desp-act__frame">
+              {activityImages[loc.slug] ? (
+                <Image
+                  src={activityImages[loc.slug]}
+                  alt={loc.heroAlt}
+                  width={800}
+                  height={450}
+                  class="desp-act__img"
+                  loading="lazy"
+                />
+              ) : (
+                <img
+                  src={loc.heroImage}
+                  alt={loc.heroAlt}
+                  width="800"
+                  height="450"
+                  class="desp-act__img"
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+            </div>
+            <div class="desp-act__info">
+              <span class="desp-act__name">{loc.title}</span>
+              <span class="desp-act__tagline">{loc.tagline}</span>
+              <span class="desp-act__price">dès {loc.price}€/{loc.priceUnit}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="container desp-act__controls">
+        <div class="desp-act__bar"><span class="desp-act__progress" data-desp-progress></span></div>
+        <div class="desp-act__nav">
+          <button class="desp-act__btn" type="button" data-desp-prev aria-label="Précédent">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="desp-act__btn" type="button" data-desp-next aria-label="Suivant">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO BAND -->
+  <section class="desp-mani">
+    <div class="container desp-mani__inner reveal">
+      <Image
+        src={espritImg}
+        alt="Vue du Surf Center"
+        width={600}
+        height={400}
+        class="desp-mani__img"
+        loading="lazy"
+      />
+      <div class="desp-mani__text">
+        <span class="desp-cadre__eyebrow">Nos valeurs</span>
+        <h2 class="desp-cadre__heading">Nature,<br/>simplicité</h2>
+        <p class="desp-mani__desc">Le Surf Center, c'est avant tout un esprit. Celui de gens passionnés qui partagent un lieu d'exception. Pas de superflu, pas d'artifice — juste le lac, le soleil, et la joie de faire découvrir ce paradis provençal depuis plus de 30 ans.</p>
+        <a href="/v2/acces-contact" class="btn btn--primary">Nous contacter</a>
+      </div>
+    </div>
+  </section>
+</LayoutDesign>
+
+<style>
+  /* ========================
+     DESP — Esprit (Design v2)
+     ======================== */
+
+  /* --- Cinema hero with video --- */
+  .desp-hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+
+  .desp-hero__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+  }
+
+  .desp-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #0a0a0a 0%, transparent 50%);
+  }
+
+  .desp-hero__inner {
+    position: relative;
+    z-index: 1;
+    padding-block: calc(var(--header-h) + var(--s-20)) var(--s-16);
+    max-width: 680px;
+  }
+
+  .desp-hero__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    display: block;
+    margin-bottom: var(--s-6);
+  }
+
+  .desp-hero__title {
+    font-size: clamp(3.5rem, 8vw, 7rem) !important;
+    font-weight: 800 !important;
+    line-height: 0.88 !important;
+    letter-spacing: -0.04em !important;
+    text-transform: uppercase;
+    color: #fff !important;
+    margin-bottom: var(--s-6);
+  }
+
+  .desp-hero__sub {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgb(255 255 255 / 0.5);
+    max-width: 46ch;
+  }
+
+  /* --- Sticky scroll history --- */
+  .desp-hist {
+    background: #0a0a0a;
+    color: #fff;
+  }
+
+  .desp-hist__wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+  }
+
+  .desp-hist__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    display: block;
+    margin-bottom: var(--s-3);
+  }
+
+  .desp-hist__heading {
+    font-size: clamp(1.8rem, 4vw, 2.8rem) !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.03em !important;
+    color: #fff !important;
+    text-transform: uppercase;
+    margin-bottom: var(--s-4);
+  }
+
+  .desp-hist__intro {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: rgb(255 255 255 / 0.5);
+    max-width: 36ch;
+  }
+
+  .desp-hist__timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+
+  .desp-hist__step {
+    background: rgb(255 255 255 / 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: var(--r-lg);
+    padding: var(--s-8);
+    transition: border-color var(--t-fast);
+  }
+
+  .desp-hist__step:hover {
+    border-color: var(--c-orange);
+  }
+
+  .desp-hist__year {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #0a0a0a;
+    background: var(--c-orange);
+    padding: 3px 10px;
+    border-radius: var(--r-full);
+    margin-bottom: var(--s-3);
+  }
+
+  .desp-hist__stitle {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    margin-bottom: var(--s-2);
+  }
+
+  .desp-hist__stext {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgb(255 255 255 / 0.5);
+    max-width: 48ch;
+  }
+
+  /* --- Bento grid: le cadre --- */
+  .desp-cadre {
+    background: #0e0e0e;
+    color: #fff;
+  }
+
+  .desp-cadre__header {
+    margin-bottom: var(--s-12);
+  }
+
+  .desp-cadre__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    display: block;
+    margin-bottom: var(--s-3);
+  }
+
+  .desp-cadre__heading {
+    font-size: clamp(1.8rem, 4vw, 2.8rem) !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.03em !important;
+    color: #fff !important;
+    text-transform: uppercase;
+  }
+
+  .desp-cadre__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+
+  .desp-cadre__card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--r-xl);
+    min-height: 300px;
+  }
+
+  .desp-cadre__imgwrap {
+    position: absolute;
+    inset: 0;
+  }
+
+  .desp-cadre__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .desp-cadre__card:hover .desp-cadre__img {
+    transform: scale(1.04);
+  }
+
+  .desp-cadre__overlay {
+    position: relative;
+    z-index: 1;
+    padding: var(--s-8);
+    background: linear-gradient(to top, rgb(0 0 0 / 0.75) 0%, transparent 100%);
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .desp-cadre__ctitle {
+    font-size: 1.2rem !important;
+    font-weight: 800 !important;
+    color: #fff !important;
+    text-transform: uppercase;
+    margin-bottom: var(--s-2);
+  }
+
+  .desp-cadre__cdesc {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: rgb(255 255 255 / 0.6);
+    max-width: 40ch;
+  }
+
+  /* --- Cinema slider --- */
+  .desp-act {
+    background: #0a0a0a;
+    color: #fff;
+  }
+
+  .desp-act__header {
+    margin-bottom: var(--s-10);
+  }
+
+  .desp-act__track {
+    display: flex;
+    gap: var(--s-6);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 var(--s-6);
+    scroll-behavior: smooth;
+  }
+
+  .desp-act__track::-webkit-scrollbar { display: none; }
+
+  .desp-act__item {
+    flex: 0 0 82%;
+    text-decoration: none;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .desp-act__frame {
+    overflow: hidden;
+    border-radius: var(--r-lg);
+    margin-bottom: var(--s-4);
+  }
+
+  .desp-act__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .desp-act__item:hover .desp-act__img {
+    transform: scale(1.03);
+  }
+
+  .desp-act__info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--s-3);
+    padding: 0 var(--s-1);
+  }
+
+  .desp-act__name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #fff;
+  }
+
+  .desp-act__tagline {
+    font-size: 0.72rem;
+    color: rgb(255 255 255 / 0.4);
+    flex: 1;
+  }
+
+  .desp-act__price {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--c-orange);
+    white-space: nowrap;
+  }
+
+  .desp-act__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    margin-top: var(--s-8);
+  }
+
+  .desp-act__bar {
+    flex: 1;
+    height: 2px;
+    background: rgb(255 255 255 / 0.1);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+
+  .desp-act__progress {
+    display: block;
+    height: 100%;
+    width: 20%;
+    background: var(--c-orange);
+    border-radius: 1px;
+    transition: width 0.3s var(--ease);
+  }
+
+  .desp-act__nav {
+    display: flex;
+    gap: var(--s-2);
+  }
+
+  .desp-act__btn {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--r-full);
+    border: 1px solid rgb(255 255 255 / 0.15);
+    background: transparent;
+    color: rgb(255 255 255 / 0.6);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--t-fast);
+  }
+
+  .desp-act__btn:hover {
+    border-color: var(--c-orange);
+    color: var(--c-orange);
+  }
+
+  /* --- Manifesto band --- */
+  .desp-mani {
+    background: #0e0e0e;
+    color: #fff;
+    padding-block: var(--s-section);
+  }
+
+  .desp-mani__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+    align-items: center;
+  }
+
+  .desp-mani__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--r-xl);
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+
+  .desp-mani__desc {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: rgb(255 255 255 / 0.55);
+    margin-top: var(--s-4);
+    margin-bottom: var(--s-8);
+    max-width: 42ch;
+  }
+
+  /* --- Responsive --- */
+  @media (min-width: 600px) {
+    .desp-act__item { flex: 0 0 52%; }
+  }
+
+  @media (min-width: 900px) {
+    .desp-hero__inner {
+      padding-block: calc(var(--header-h) + var(--s-24)) var(--s-20);
+    }
+
+    .desp-hist__wrap {
+      grid-template-columns: 0.4fr 1fr;
+      gap: var(--s-20);
+    }
+
+    .desp-hist__sticky {
+      position: sticky;
+      top: calc(var(--header-h) + var(--s-8));
+    }
+
+    .desp-cadre__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .desp-cadre__card--wide {
+      grid-column: 1 / -1;
+      min-height: 400px;
+    }
+
+    .desp-cadre__card--wide .desp-cadre__overlay {
+      min-height: 400px;
+    }
+
+    .desp-act__item { flex: 0 0 38%; }
+
+    .desp-mani__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-16);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .desp-act__item { flex: 0 0 32%; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-desp-slider]').forEach((slider) => {
+    const track = slider.querySelector('[data-desp-track]') as HTMLElement;
+    const progress = slider.querySelector('[data-desp-progress]') as HTMLElement;
+    const prev = slider.querySelector('[data-desp-prev]');
+    const next = slider.querySelector('[data-desp-next]');
+    if (!track || !progress) return;
+
+    function updateProgress() {
+      const max = track.scrollWidth - track.clientWidth;
+      if (max <= 0) { progress.style.width = '100%'; return; }
+      const pct = (track.scrollLeft / max) * 100;
+      progress.style.width = Math.max(20, pct) + '%';
+    }
+
+    track.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    const getStep = () => {
+      const item = track.querySelector('.desp-act__item') as HTMLElement | null;
+      return item ? item.offsetWidth + 24 : 400;
+    };
+
+    prev?.addEventListener('click', () => track.scrollBy({ left: -getStep(), behavior: 'smooth' }));
+    next?.addEventListener('click', () => track.scrollBy({ left: getStep(), behavior: 'smooth' }));
+  });
+</script>

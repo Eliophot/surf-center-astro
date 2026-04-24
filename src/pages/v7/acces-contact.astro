@@ -1,0 +1,579 @@
+---
+import LayoutKinetic from '../../layouts/LayoutKinetic.astro';
+import imgLac from '../../assets/images/location-lac-sainte-croix-gorges-verdon.png';
+---
+
+<LayoutKinetic
+  title="Accès & Contact — Surf Center · Lac de Sainte-Croix"
+  description="Comment venir au Surf Center, base nautique au lac de Sainte-Croix. Itinéraires, temps de trajet, coordonnées et formulaire de contact."
+>
+
+  <!-- HERO -->
+  <section class="k7cx__hero">
+    <div class="k7cx__hero-bg">
+      <img src={imgLac.src} alt="Lac de Sainte-Croix dans les Gorges du Verdon — vue aérienne" width="1920" height="800" loading="eager" fetchpriority="high" decoding="async" />
+      <div class="k7cx__hero-dim" aria-hidden="true"></div>
+    </div>
+    <div class="container k7cx__hero-inner">
+      <div class="k7cx__hero-content">
+        <span class="k7cx__hero-tag">Venir nous voir</span>
+        <h1 class="k7cx__hero-title">
+          <span class="k7cx__t-bold">Accès</span>
+          <span class="k7cx__t-light">&amp; Contact</span>
+        </h1>
+        <p class="k7cx__hero-sub">Les Salles-sur-Verdon · Var (83) · Gorges du Verdon</p>
+      </div>
+    </div>
+    <div class="k7cx__hero-skew" aria-hidden="true"></div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="k7cx__form-section" aria-labelledby="k7cx-form-title">
+    <div class="container k7cx__form-wrap">
+      <div class="k7cx__form-header reveal">
+        <div class="k7cx__stripe" aria-hidden="true"></div>
+        <h2 id="k7cx-form-title" class="k7cx__section-title">Nous contacter</h2>
+      </div>
+
+      <div class="k7cx__form-grid">
+        <form class="k7cx__form reveal" action="#" method="post" novalidate>
+          <div class="k7cx__field">
+            <label for="k7cx-name" class="k7cx__label">Nom</label>
+            <input type="text" id="k7cx-name" name="name" class="k7cx__input" required autocomplete="name" />
+          </div>
+          <div class="k7cx__field">
+            <label for="k7cx-email" class="k7cx__label">Email</label>
+            <input type="email" id="k7cx-email" name="email" class="k7cx__input" required autocomplete="email" />
+          </div>
+          <div class="k7cx__field">
+            <label for="k7cx-phone" class="k7cx__label">Téléphone</label>
+            <input type="tel" id="k7cx-phone" name="phone" class="k7cx__input" autocomplete="tel" />
+          </div>
+          <div class="k7cx__field k7cx__field--full">
+            <label for="k7cx-subject" class="k7cx__label">Sujet</label>
+            <select id="k7cx-subject" name="subject" class="k7cx__input">
+              <option value="">Sélectionner</option>
+              <option value="reservation">Réservation</option>
+              <option value="groupe">Groupe / Événement</option>
+              <option value="info">Renseignement</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+          <div class="k7cx__field k7cx__field--full">
+            <label for="k7cx-msg" class="k7cx__label">Message</label>
+            <textarea id="k7cx-msg" name="message" rows="5" class="k7cx__input k7cx__textarea" required></textarea>
+          </div>
+          <div class="k7cx__field k7cx__field--full">
+            <button type="submit" class="btn btn--primary k7cx__submit">
+              <span class="btn-flip__inner">
+                <span class="btn-flip__front">Envoyer</span>
+                <span class="btn-flip__back">Envoyer →</span>
+              </span>
+            </button>
+          </div>
+        </form>
+
+        <div class="k7cx__info reveal reveal-d1">
+          <div class="k7cx__info-card">
+            <strong>Adresse</strong>
+            <p>Surf Center<br/>Plage des Salles-sur-Verdon<br/>83630 Les Salles-sur-Verdon</p>
+          </div>
+          <div class="k7cx__info-card">
+            <strong>Téléphone</strong>
+            <p><a href="tel:+33494701255">04 94 70 12 55</a></p>
+          </div>
+          <div class="k7cx__info-card">
+            <strong>Email</strong>
+            <p><a href="mailto:contact@surfcenter-verdon.fr">contact@surfcenter-verdon.fr</a></p>
+          </div>
+          <div class="k7cx__info-card">
+            <strong>Horaires</strong>
+            <p>Avril — Octobre<br/>9h00 — 19h00 (haute saison)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RACE GRID — ROUTES -->
+  <section class="k7cx__routes" aria-labelledby="k7cx-routes-title">
+    <div class="container">
+      <div class="k7cx__form-header reveal">
+        <div class="k7cx__stripe" aria-hidden="true"></div>
+        <h2 id="k7cx-routes-title" class="k7cx__section-title">Comment venir</h2>
+      </div>
+
+      <div class="k7cx__race-grid">
+        {[
+          { city: 'Aix-en-Provence', time: '1h15', km: '95 km', via: 'A51 → D952' },
+          { city: 'Marseille', time: '1h30', km: '120 km', via: 'A51 → D952' },
+          { city: 'Nice', time: '2h00', km: '160 km', via: 'A8 → N202' },
+          { city: 'Toulon', time: '1h30', km: '110 km', via: 'A57 → A8 → D557' },
+          { city: 'Avignon', time: '1h45', km: '150 km', via: 'A7 → A51 → D952' },
+          { city: 'Gap', time: '1h30', km: '115 km', via: 'N85 → D952' },
+        ].map((route, i) => (
+          <div class="k7cx__race-card reveal" style={`--d:${i * 80}ms`}>
+            <span class="k7cx__race-num">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="k7cx__race-city">{route.city}</h3>
+            <div class="k7cx__race-time">{route.time}</div>
+            <div class="k7cx__race-meta">
+              <span>{route.km}</span>
+              <span>{route.via}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PULSE CLIMATE CARDS -->
+  <section class="k7cx__climate" aria-labelledby="k7cx-climate-title">
+    <div class="container">
+      <div class="k7cx__form-header reveal">
+        <div class="k7cx__stripe" aria-hidden="true"></div>
+        <h2 id="k7cx-climate-title" class="k7cx__section-title">Climat & Saison</h2>
+      </div>
+
+      <div class="k7cx__climate-grid">
+        {[
+          { label: 'Eau', value: '22–25°C', icon: '💧', detail: 'Juin à Septembre' },
+          { label: 'Air', value: '28–35°C', icon: '☀️', detail: 'Été provençal' },
+          { label: 'Vent', value: 'Thermique', icon: '🌬️', detail: '12–18 nœuds l\'après-midi' },
+          { label: 'Saison', value: 'Avr — Oct', icon: '📅', detail: 'Ouverture annuelle' },
+        ].map((c, i) => (
+          <div class="k7cx__clim-card reveal" style={`--d:${i * 100}ms`}>
+            <span class="k7cx__clim-icon" aria-hidden="true">{c.icon}</span>
+            <span class="k7cx__clim-label">{c.label}</span>
+            <strong class="k7cx__clim-value">{c.value}</strong>
+            <span class="k7cx__clim-detail">{c.detail}</span>
+            <div class="k7cx__clim-pulse" aria-hidden="true"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP CTA -->
+  <section class="k7cx__map-cta">
+    <div class="container k7cx__map-inner reveal">
+      <h2 class="k7cx__map-title">GPS : 43.7766° N, 6.2100° E</h2>
+      <p class="k7cx__map-sub">Plage des Salles-sur-Verdon · Parking gratuit à proximité</p>
+      <a href="https://maps.google.com/?q=43.7766,6.2100" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+        <span class="btn-flip__inner">
+          <span class="btn-flip__front">Ouvrir dans Maps</span>
+          <span class="btn-flip__back">Ouvrir dans Maps →</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+</LayoutKinetic>
+
+<style>
+  /* ====== HERO ====== */
+  .k7cx__hero {
+    position: relative;
+    min-height: 70svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--c-dark);
+  }
+
+  .k7cx__hero-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .k7cx__hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: k7cx-zoom 20s ease-in-out alternate infinite;
+  }
+
+  @keyframes k7cx-zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
+  }
+
+  .k7cx__hero-dim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(170deg, rgb(0 0 0 / 0.3) 0%, rgb(0 0 0 / 0.75) 100%);
+  }
+
+  .k7cx__hero-inner {
+    position: relative;
+    z-index: 1;
+    padding: calc(var(--header-h) + var(--s-16)) 0 var(--s-16);
+  }
+
+  .k7cx__hero-content {
+    animation: k7cx-up 900ms var(--ease-smooth) both;
+  }
+
+  @keyframes k7cx-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .k7cx__hero-tag {
+    display: inline-block;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    background: rgb(247 123 70 / 0.12);
+    padding: 5px 16px;
+    border-radius: var(--r-full);
+    margin-bottom: var(--s-6);
+  }
+
+  .k7cx__hero-title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--s-5);
+  }
+
+  .k7cx__t-bold {
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .k7cx__t-light {
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 100;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+    color: #fff;
+    text-transform: uppercase;
+    padding-left: clamp(1rem, 4vw, 3rem);
+  }
+
+  .k7cx__hero-sub {
+    font-size: 0.78rem;
+    color: rgb(255 255 255 / 0.45);
+    letter-spacing: 0.04em;
+  }
+
+  .k7cx__hero-skew {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--c-bg);
+    clip-path: polygon(0 100%, 100% 30%, 100% 100%);
+    z-index: 2;
+  }
+
+  /* ====== SHARED ====== */
+  .k7cx__stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .k7cx__section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .k7cx__form-header {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    margin-bottom: var(--s-10);
+  }
+
+  /* ====== FORM SECTION ====== */
+  .k7cx__form-section {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .k7cx__form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+  }
+
+  .k7cx__form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-5);
+  }
+
+  .k7cx__field--full { grid-column: 1 / -1; }
+
+  .k7cx__label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    margin-bottom: var(--s-2);
+  }
+
+  .k7cx__input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 2px solid var(--c-border);
+    border-radius: 0;
+    background: var(--c-bg);
+    color: var(--c-text);
+    font-size: 0.88rem;
+    transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  }
+
+  .k7cx__input:focus {
+    outline: none;
+    border-color: var(--c-orange);
+    box-shadow: inset 4px 0 0 var(--c-orange);
+  }
+
+  .k7cx__textarea { resize: vertical; min-height: 120px; }
+
+  .k7cx__submit { width: 100%; }
+
+  .k7cx__info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-5);
+  }
+
+  .k7cx__info-card {
+    padding: var(--s-5);
+    border-left: 3px solid var(--c-orange);
+    background: var(--c-surface);
+  }
+
+  .k7cx__info-card strong {
+    display: block;
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--c-text);
+    margin-bottom: var(--s-2);
+  }
+
+  .k7cx__info-card p {
+    font-size: 0.82rem;
+    color: var(--c-text-secondary);
+    line-height: 1.6;
+  }
+
+  .k7cx__info-card a {
+    color: var(--c-orange);
+    transition: opacity var(--t-fast);
+  }
+
+  .k7cx__info-card a:hover { opacity: 0.7; }
+
+  @media (min-width: 768px) {
+    .k7cx__form { grid-template-columns: 1fr 1fr; }
+    .k7cx__submit { width: auto; }
+  }
+
+  @media (min-width: 900px) {
+    .k7cx__form-grid { grid-template-columns: 1.4fr 0.6fr; }
+  }
+
+  /* ====== RACE GRID — ROUTES ====== */
+  .k7cx__routes {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+  }
+
+  .k7cx__race-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+  }
+
+  .k7cx__race-card {
+    position: relative;
+    background: var(--c-bg);
+    padding: var(--s-6);
+    border: 2px solid var(--c-border);
+    overflow: hidden;
+    transition: border-color var(--t-fast), transform var(--t-fast);
+  }
+
+  .k7cx__race-card:hover {
+    border-color: var(--c-orange);
+    transform: translateY(-3px);
+  }
+
+  .k7cx__race-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--c-orange);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform var(--t-normal) var(--ease);
+  }
+
+  .k7cx__race-card:hover::before { transform: scaleY(1); }
+
+  .k7cx__race-num {
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--c-orange);
+  }
+
+  .k7cx__race-city {
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: var(--s-1) 0 var(--s-3);
+  }
+
+  .k7cx__race-time {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--c-orange);
+    line-height: 1;
+    margin-bottom: var(--s-3);
+  }
+
+  .k7cx__race-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .k7cx__race-meta span {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--c-text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  @media (min-width: 768px) {
+    .k7cx__race-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ====== CLIMATE CARDS ====== */
+  .k7cx__climate {
+    padding: var(--s-section) 0;
+    background: var(--c-dark);
+    color: #fff;
+  }
+
+  .k7cx__climate .k7cx__section-title { color: #fff; }
+
+  .k7cx__climate-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+  }
+
+  .k7cx__clim-card {
+    position: relative;
+    background: rgb(255 255 255 / 0.04);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    padding: var(--s-6);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .k7cx__clim-icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: var(--s-3);
+  }
+
+  .k7cx__clim-label {
+    display: block;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.4);
+    margin-bottom: var(--s-2);
+  }
+
+  .k7cx__clim-value {
+    display: block;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: var(--s-2);
+  }
+
+  .k7cx__clim-detail {
+    font-size: 0.7rem;
+    color: rgb(255 255 255 / 0.35);
+  }
+
+  .k7cx__clim-pulse {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 60%;
+    height: 3px;
+    transform: translateX(-50%);
+    background: var(--c-orange);
+    animation: k7cx-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes k7cx-pulse {
+    0%, 100% { opacity: 0.3; transform: translateX(-50%) scaleX(0.6); }
+    50% { opacity: 1; transform: translateX(-50%) scaleX(1); }
+  }
+
+  @media (min-width: 768px) {
+    .k7cx__climate-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  /* ====== MAP CTA ====== */
+  .k7cx__map-cta {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+    text-align: center;
+  }
+
+  .k7cx__map-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-bottom: var(--s-3);
+  }
+
+  .k7cx__map-sub {
+    font-size: 0.85rem;
+    color: var(--c-text-muted);
+    margin-bottom: var(--s-8);
+  }
+
+  /* ====== REDUCED MOTION ====== */
+  @media (prefers-reduced-motion: reduce) {
+    .k7cx__hero-bg img { animation: none; }
+    .k7cx__hero-content { animation: none; }
+    .k7cx__clim-pulse { animation: none; opacity: 0.6; }
+    .k7cx__race-card { transition: none; }
+  }
+</style>

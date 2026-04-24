@@ -1,0 +1,478 @@
+---
+import LayoutKinetic from '../../layouts/LayoutKinetic.astro';
+import imgDroneSnack from '../../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import imgEsprit from '../../assets/images/esprit.png';
+import imgTerrasse from '../../assets/images/IMG20220610131419.jpg';
+import imgSoiree from '../../assets/images/IMG20220618204351.jpg';
+---
+
+<LayoutKinetic
+  title="Restauration — Surf Center · Snack-Pizzeria lac de Sainte-Croix"
+  description="Snack-pizzeria face au lac de Sainte-Croix. Pizzas au feu de bois, salades, glaces et bar en terrasse au cœur des Gorges du Verdon."
+>
+
+  <!-- HERO -->
+  <section class="k7rs__hero">
+    <div class="k7rs__hero-bg">
+      <img src={imgDroneSnack.src} alt="Vue aérienne du snack-pizzeria Surf Center face au lac" width="1920" height="800" loading="eager" fetchpriority="high" decoding="async" />
+      <div class="k7rs__hero-dim" aria-hidden="true"></div>
+    </div>
+    <div class="k7rs__hero-diag" aria-hidden="true"></div>
+    <div class="container k7rs__hero-inner">
+      <div class="k7rs__hero-content">
+        <span class="k7rs__hero-tag">Snack · Pizzeria · Bar</span>
+        <h1 class="k7rs__hero-title">
+          <span class="k7rs__t-bold">Restau&shy;ration</span>
+        </h1>
+        <p class="k7rs__hero-sub">Pizzas artisanales, salades fraîches, bar en terrasse face au lac de Sainte-Croix.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SNACK — ANGLE SPLIT -->
+  <section class="k7rs__split" aria-labelledby="k7rs-snack-title">
+    <div class="k7rs__split-wrap">
+      <div class="k7rs__split-media">
+        <img src={imgTerrasse.src} alt="Terrasse du snack Surf Center avec vue sur le lac" width="960" height="640" loading="lazy" decoding="async" />
+        <div class="k7rs__split-angle" aria-hidden="true"></div>
+      </div>
+      <div class="k7rs__split-body">
+        <div class="container k7rs__split-content reveal">
+          <div class="k7rs__stripe" aria-hidden="true"></div>
+          <span class="k7rs__split-label">Le Snack</span>
+          <h2 id="k7rs-snack-title" class="k7rs__split-title">Terrasse<br/>face au lac</h2>
+          <p class="k7rs__split-desc">Installez-vous en terrasse, les pieds presque dans l'eau. Salades composées, burgers maison, paninis — cuisine simple et généreuse pour recharger entre deux sessions.</p>
+          <div class="k7rs__split-tags">
+            <span>Salades</span>
+            <span>Burgers</span>
+            <span>Paninis</span>
+            <span>Frites</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIZZAS — ANGLE SPLIT REVERSED -->
+  <section class="k7rs__split k7rs__split--rev" aria-labelledby="k7rs-pizza-title">
+    <div class="k7rs__split-wrap">
+      <div class="k7rs__split-media">
+        <img src={imgEsprit.src} alt="Pizza artisanale au feu de bois — Surf Center" width="960" height="640" loading="lazy" decoding="async" />
+        <div class="k7rs__split-angle k7rs__split-angle--rev" aria-hidden="true"></div>
+      </div>
+      <div class="k7rs__split-body">
+        <div class="container k7rs__split-content reveal">
+          <div class="k7rs__stripe" aria-hidden="true"></div>
+          <span class="k7rs__split-label">Pizzeria</span>
+          <h2 id="k7rs-pizza-title" class="k7rs__split-title">Pizzas<br/>au feu de bois</h2>
+          <p class="k7rs__split-desc">Nos pizzas sont cuites au feu de bois dans un four traditionnel. Pâte maison, produits frais, mozzarella filante — la vraie pizza provençale au bord de l'eau.</p>
+          <div class="k7rs__split-tags">
+            <span>Feu de bois</span>
+            <span>Pâte fraîche</span>
+            <span>Mozzarella</span>
+            <span>Produits locaux</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAR — ANGLE SPLIT -->
+  <section class="k7rs__split" aria-labelledby="k7rs-bar-title">
+    <div class="k7rs__split-wrap">
+      <div class="k7rs__split-media">
+        <img src={imgSoiree.src} alt="Bar en soirée au Surf Center — cocktails face au lac" width="960" height="640" loading="lazy" decoding="async" />
+        <div class="k7rs__split-angle" aria-hidden="true"></div>
+      </div>
+      <div class="k7rs__split-body">
+        <div class="container k7rs__split-content reveal">
+          <div class="k7rs__stripe" aria-hidden="true"></div>
+          <span class="k7rs__split-label">Le Bar</span>
+          <h2 id="k7rs-bar-title" class="k7rs__split-title">Cocktails &<br/>coucher de soleil</h2>
+          <p class="k7rs__split-desc">Bières artisanales, cocktails maison, smoothies — le bar du Surf Center est le spot parfait pour le golden hour. Musique live certains soirs d'été.</p>
+          <div class="k7rs__split-tags">
+            <span>Cocktails</span>
+            <span>Bières craft</span>
+            <span>Smoothies</span>
+            <span>Glaces</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAPE INFO CARDS -->
+  <section class="k7rs__tape" aria-labelledby="k7rs-info-title">
+    <div class="container">
+      <div class="k7rs__tape-header reveal">
+        <div class="k7rs__stripe" aria-hidden="true"></div>
+        <h2 id="k7rs-info-title" class="k7rs__section-title">Infos pratiques</h2>
+      </div>
+
+      <div class="k7rs__tape-grid">
+        {[
+          { title: 'Horaires Snack', text: '11h30 — 15h00 · Tous les jours en saison', icon: '🕐' },
+          { title: 'Horaires Pizzeria', text: '18h00 — 22h00 · Juillet & Août', icon: '🍕' },
+          { title: 'Horaires Bar', text: '10h00 — 23h00 · Ouvert en continu', icon: '🍹' },
+          { title: 'Sur place / À emporter', text: 'Service en terrasse ou vente à emporter', icon: '📦' },
+          { title: 'Groupes', text: 'Réservation pour groupes à partir de 10 pers.', icon: '👥' },
+          { title: 'Accès', text: 'Parking gratuit · Plage des Salles-sur-Verdon', icon: '🅿️' },
+        ].map((info, i) => (
+          <div class="k7rs__tape-card reveal" style={`--d:${i * 80}ms`}>
+            <span class="k7rs__tape-icon" aria-hidden="true">{info.icon}</span>
+            <strong class="k7rs__tape-title">{info.title}</strong>
+            <p class="k7rs__tape-text">{info.text}</p>
+            <div class="k7rs__tape-stripe" aria-hidden="true"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="k7rs__cta-section">
+    <div class="container k7rs__cta-inner reveal">
+      <h2 class="k7rs__cta-title">Envie d'une pizza<br/>les pieds dans le sable ?</h2>
+      <a href="/v7/acces-contact" class="btn btn--primary">
+        <span class="btn-flip__inner">
+          <span class="btn-flip__front">Nous trouver</span>
+          <span class="btn-flip__back">Nous trouver →</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+</LayoutKinetic>
+
+<style>
+  /* ====== HERO ====== */
+  .k7rs__hero {
+    position: relative;
+    min-height: 70svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--c-dark);
+  }
+
+  .k7rs__hero-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .k7rs__hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: k7rs-zoom 18s ease-in-out alternate infinite;
+  }
+
+  @keyframes k7rs-zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+  }
+
+  .k7rs__hero-dim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgb(0 0 0 / 0.2) 0%, rgb(0 0 0 / 0.75) 100%);
+  }
+
+  .k7rs__hero-diag {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 18px,
+      rgb(247 123 70 / 0.08) 18px,
+      rgb(247 123 70 / 0.08) 20px
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .k7rs__hero-inner {
+    position: relative;
+    z-index: 2;
+    padding: calc(var(--header-h) + var(--s-16)) 0 var(--s-16);
+  }
+
+  .k7rs__hero-content {
+    max-width: 600px;
+    animation: k7rs-up 900ms var(--ease-smooth) both;
+  }
+
+  @keyframes k7rs-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .k7rs__hero-tag {
+    display: inline-block;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    background: rgb(247 123 70 / 0.12);
+    padding: 5px 16px;
+    border-radius: var(--r-full);
+    margin-bottom: var(--s-6);
+  }
+
+  .k7rs__hero-title { margin-bottom: var(--s-5); }
+
+  .k7rs__t-bold {
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .k7rs__hero-sub {
+    font-size: 0.88rem;
+    color: rgb(255 255 255 / 0.5);
+    line-height: 1.7;
+    max-width: 36ch;
+  }
+
+  /* ====== SHARED ====== */
+  .k7rs__stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    flex-shrink: 0;
+    margin-bottom: var(--s-5);
+  }
+
+  .k7rs__section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* ====== ANGLE SPLIT ====== */
+  .k7rs__split {
+    overflow: hidden;
+  }
+
+  .k7rs__split-wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .k7rs__split-media {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .k7rs__split-media img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .k7rs__split-media:hover img { transform: scale(1.04); }
+
+  .k7rs__split-angle {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: var(--c-bg);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  }
+
+  .k7rs__split-angle--rev {
+    clip-path: polygon(0 0, 0 100%, 100% 100%);
+  }
+
+  .k7rs__split-body {
+    background: var(--c-bg);
+    padding: var(--s-8) 0 var(--s-section);
+  }
+
+  .k7rs__split-content { max-width: 480px; }
+
+  .k7rs__split-label {
+    display: block;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    margin-bottom: var(--s-3);
+  }
+
+  .k7rs__split-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: var(--s-6);
+  }
+
+  .k7rs__split-desc {
+    font-size: 0.88rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    margin-bottom: var(--s-6);
+  }
+
+  .k7rs__split-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+  }
+
+  .k7rs__split-tags span {
+    font-size: 0.56rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    background: var(--c-surface);
+    padding: 5px 14px;
+    border-radius: var(--r-full);
+  }
+
+  .k7rs__split--rev .k7rs__split-body {
+    background: var(--c-surface);
+  }
+
+  .k7rs__split--rev .k7rs__split-angle,
+  .k7rs__split--rev .k7rs__split-angle--rev {
+    background: var(--c-surface);
+  }
+
+  .k7rs__split--rev .k7rs__split-tags span {
+    background: var(--c-bg);
+  }
+
+  @media (min-width: 900px) {
+    .k7rs__split-wrap { grid-template-columns: 1.2fr 1fr; }
+    .k7rs__split-media img { aspect-ratio: auto; height: 100%; }
+    .k7rs__split-angle { display: none; }
+    .k7rs__split-body {
+      display: flex;
+      align-items: center;
+      padding: var(--s-16);
+    }
+    .k7rs__split--rev .k7rs__split-wrap { direction: rtl; }
+    .k7rs__split--rev .k7rs__split-wrap > * { direction: ltr; }
+  }
+
+  /* ====== TAPE INFO CARDS ====== */
+  .k7rs__tape {
+    padding: var(--s-section) 0;
+    background: var(--c-dark);
+    color: #fff;
+  }
+
+  .k7rs__tape .k7rs__section-title { color: #fff; }
+
+  .k7rs__tape-header {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    margin-bottom: var(--s-10);
+  }
+
+  .k7rs__tape-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+
+  .k7rs__tape-card {
+    position: relative;
+    background: rgb(255 255 255 / 0.04);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    padding: var(--s-6);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-4);
+    flex-wrap: wrap;
+    overflow: hidden;
+    transition: border-color var(--t-fast);
+  }
+
+  .k7rs__tape-card:hover { border-color: var(--c-orange); }
+
+  .k7rs__tape-icon { font-size: 1.3rem; flex-shrink: 0; }
+
+  .k7rs__tape-title {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    width: 100%;
+    margin-top: -2px;
+  }
+
+  .k7rs__tape-text {
+    font-size: 0.82rem;
+    color: rgb(255 255 255 / 0.45);
+    line-height: 1.6;
+    width: 100%;
+  }
+
+  .k7rs__tape-stripe {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--c-orange), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--t-normal) var(--ease);
+  }
+
+  .k7rs__tape-card:hover .k7rs__tape-stripe { transform: scaleX(1); }
+
+  @media (min-width: 600px) {
+    .k7rs__tape-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (min-width: 900px) {
+    .k7rs__tape-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ====== CTA ====== */
+  .k7rs__cta-section {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+    text-align: center;
+  }
+
+  .k7rs__cta-title {
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: var(--s-8);
+  }
+
+  /* ====== REDUCED MOTION ====== */
+  @media (prefers-reduced-motion: reduce) {
+    .k7rs__hero-bg img { animation: none; }
+    .k7rs__hero-content { animation: none; }
+    .k7rs__split-media img { transition: none; }
+    .k7rs__tape-stripe { transition: none; }
+  }
+</style>

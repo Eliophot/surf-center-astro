@@ -1,0 +1,576 @@
+---
+import LayoutHyper from '../../layouts/LayoutHyper.astro';
+import { Image } from 'astro:assets';
+import MeshGradient from '../../components/v11/MeshGradient.astro';
+import GlowText from '../../components/v11/GlowText.astro';
+import HolographicCard from '../../components/v11/HolographicCard.astro';
+import WaveDivider from '../../components/v11/WaveDivider.astro';
+import imgDroneSnack from '../../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import imgEsprit from '../../assets/images/esprit.png';
+import imgPlat1 from '../../assets/images/IMG20220610131419.jpg';
+import imgPlat2 from '../../assets/images/IMG20220618204351.jpg';
+
+const menuPizzas = [
+  { name: "Margherita", desc: "Tomate, mozzarella, basilic frais", price: "11€" },
+  { name: "Reine", desc: "Tomate, mozzarella, jambon, champignons", price: "13€" },
+  { name: "Végétarienne", desc: "Légumes grillés, mozzarella, olives", price: "13€" },
+  { name: "Provençale", desc: "Tomate, chèvre, miel, noix", price: "14€" },
+  { name: "Surf Special", desc: "Tomate, mozzarella, parme, roquette, parmesan", price: "15€" },
+  { name: "Calzone", desc: "Pliée, tomate, mozzarella, jambon, œuf", price: "14€" },
+];
+
+const menuSalades = [
+  { name: "Salade du Lac", desc: "Mesclun, tomates, concombre, olive", price: "10€" },
+  { name: "Salade Chèvre Chaud", desc: "Mesclun, toasts chèvre, miel, noix", price: "13€" },
+  { name: "Salade Italienne", desc: "Roquette, parme, parmesan, tomates confites", price: "14€" },
+];
+
+const menuSnack = [
+  { name: "Frites maison", desc: "Frites fraîches coupées à la main", price: "5€" },
+  { name: "Panini Provençal", desc: "Jambon cru, mozzarella, tomates, basilic", price: "8€" },
+  { name: "Croque-Monsieur", desc: "Jambon, fromage gratiné, salade verte", price: "7€" },
+  { name: "Assiette enfant", desc: "Nuggets, frites, compote", price: "9€" },
+];
+
+const menuBoissons = [
+  { name: "Soft (33cl)", desc: "Coca, Orangina, Ice Tea, eau", price: "3€" },
+  { name: "Bière pression", desc: "Blonde locale 25cl / 50cl", price: "4€/6€" },
+  { name: "Rosé de Provence", desc: "Verre / Bouteille", price: "4€/18€" },
+  { name: "Cocktail du jour", desc: "Création maison selon arrivage", price: "8€" },
+  { name: "Glaces artisanales", desc: "2 boules au choix", price: "4€" },
+];
+
+const infoGrid = [
+  { icon: "clock", label: "Horaires", value: "12h–21h en saison", sub: "Service continu" },
+  { icon: "users", label: "Capacité", value: "120 couverts", sub: "Terrasse face au lac" },
+  { icon: "credit-card", label: "Paiement", value: "CB & espèces", sub: "À partir de 1€" },
+  { icon: "utensils", label: "À emporter", value: "Disponible", sub: "Commandez au comptoir" },
+];
+---
+
+<LayoutHyper
+  title="Restauration — Snack-Pizzeria face au lac | Surf Center"
+  description="Pizzas au feu de bois, salades fraîches et boissons glacées face au lac de Sainte-Croix. Snack-pizzeria du Surf Center."
+>
+  <!-- HERO -->
+  <section class="hyrs__hero" aria-label="Restauration Surf Center">
+    <MeshGradient class="hyrs__hero-mesh" />
+    <Image
+      class="hyrs__hero-img"
+      src={imgDroneSnack}
+      alt="Vue aérienne du snack-pizzeria Surf Center au bord du lac de Sainte-Croix"
+      widths={[640, 1024, 1440]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      format="webp"
+      quality={75}
+    />
+    <div class="hyrs__hero-overlay" aria-hidden="true"></div>
+    <div class="hyrs__hero-content reveal">
+      <GlowText tag="h1" color="#26cfff" intensity="high" class="hyrs__hero-title">
+        Restauration
+      </GlowText>
+      <p class="hyrs__hero-sub">Snack · Pizzeria · Bar — face au lac de Sainte-Croix</p>
+    </div>
+  </section>
+
+  <WaveDivider color="#26cfff" />
+
+  <!-- INTRO -->
+  <section class="hyrs__intro" aria-label="Présentation restaurant">
+    <div class="hyrs__intro-grid">
+      <div class="hyrs__intro-text reveal">
+        <GlowText tag="h2" color="#f77b46" intensity="medium" class="hyrs__intro-title">
+          Les pieds dans l'eau, le goût en plus
+        </GlowText>
+        <p class="hyrs__intro-desc">
+          Notre snack-pizzeria vous accueille dans un cadre unique : terrasse face au lac, 
+          produits frais et locaux, pizzas au feu de bois et cocktails maison. 
+          Le spot idéal pour déjeuner après une session paddle ou profiter du coucher de soleil.
+        </p>
+      </div>
+      <div class="hyrs__intro-img-wrap reveal">
+        <Image
+          class="hyrs__intro-img"
+          src={imgEsprit}
+          alt="Ambiance du restaurant Surf Center"
+          widths={[400, 600]}
+          sizes="(max-width: 768px) 100vw, 45vw"
+          format="webp"
+          quality={75}
+        />
+        <div class="hyrs__intro-img-glow" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <WaveDivider color="#6b21a8" flip />
+
+  <!-- MENU SECTIONS -->
+  <section class="hyrs__menu" aria-label="Notre carte">
+    <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyrs__section-title">Notre Carte</GlowText>
+    <p class="hyrs__section-sub">Produits frais, cuisine maison, saveurs provençales</p>
+
+    <!-- Pizzas -->
+    <div class="hyrs__menu-block reveal">
+      <GlowText tag="h3" color="#f77b46" intensity="low" class="hyrs__menu-cat">
+        <span class="hyrs__menu-cat-icon" aria-hidden="true">🍕</span> Pizzas au feu de bois
+      </GlowText>
+      <div class="hyrs__menu-grid">
+        {menuPizzas.map((item) => (
+          <HolographicCard class="hyrs__menu-card">
+            <div class="hyrs__menu-item">
+              <div class="hyrs__menu-top">
+                <span class="hyrs__menu-name">{item.name}</span>
+                <GlowText tag="span" color="#f77b46" intensity="low" class="hyrs__menu-price">{item.price}</GlowText>
+              </div>
+              <p class="hyrs__menu-desc">{item.desc}</p>
+            </div>
+          </HolographicCard>
+        ))}
+      </div>
+    </div>
+
+    <!-- Salades -->
+    <div class="hyrs__menu-block reveal">
+      <GlowText tag="h3" color="#26cfff" intensity="low" class="hyrs__menu-cat">
+        <span class="hyrs__menu-cat-icon" aria-hidden="true">🥗</span> Salades fraîches
+      </GlowText>
+      <div class="hyrs__menu-grid">
+        {menuSalades.map((item) => (
+          <HolographicCard class="hyrs__menu-card">
+            <div class="hyrs__menu-item">
+              <div class="hyrs__menu-top">
+                <span class="hyrs__menu-name">{item.name}</span>
+                <GlowText tag="span" color="#26cfff" intensity="low" class="hyrs__menu-price">{item.price}</GlowText>
+              </div>
+              <p class="hyrs__menu-desc">{item.desc}</p>
+            </div>
+          </HolographicCard>
+        ))}
+      </div>
+    </div>
+
+    <!-- Snack -->
+    <div class="hyrs__menu-block reveal">
+      <GlowText tag="h3" color="#3b82f6" intensity="low" class="hyrs__menu-cat">
+        <span class="hyrs__menu-cat-icon" aria-hidden="true">🍟</span> Snack
+      </GlowText>
+      <div class="hyrs__menu-grid">
+        {menuSnack.map((item) => (
+          <HolographicCard class="hyrs__menu-card">
+            <div class="hyrs__menu-item">
+              <div class="hyrs__menu-top">
+                <span class="hyrs__menu-name">{item.name}</span>
+                <GlowText tag="span" color="#3b82f6" intensity="low" class="hyrs__menu-price">{item.price}</GlowText>
+              </div>
+              <p class="hyrs__menu-desc">{item.desc}</p>
+            </div>
+          </HolographicCard>
+        ))}
+      </div>
+    </div>
+
+    <!-- Boissons -->
+    <div class="hyrs__menu-block reveal">
+      <GlowText tag="h3" color="#6b21a8" intensity="low" class="hyrs__menu-cat">
+        <span class="hyrs__menu-cat-icon" aria-hidden="true">🍹</span> Bar & Boissons
+      </GlowText>
+      <div class="hyrs__menu-grid">
+        {menuBoissons.map((item) => (
+          <HolographicCard class="hyrs__menu-card">
+            <div class="hyrs__menu-item">
+              <div class="hyrs__menu-top">
+                <span class="hyrs__menu-name">{item.name}</span>
+                <GlowText tag="span" color="#6b21a8" intensity="low" class="hyrs__menu-price">{item.price}</GlowText>
+              </div>
+              <p class="hyrs__menu-desc">{item.desc}</p>
+            </div>
+          </HolographicCard>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <WaveDivider color="#3b82f6" />
+
+  <!-- PHOTO GRID -->
+  <section class="hyrs__photos" aria-label="Photos du restaurant">
+    <div class="hyrs__photos-grid">
+      <div class="hyrs__photos-item reveal">
+        <Image
+          class="hyrs__photos-img"
+          src={imgPlat1}
+          alt="Plat servi au restaurant Surf Center"
+          widths={[400, 600]}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          format="webp"
+          quality={75}
+        />
+        <div class="hyrs__photos-overlay" aria-hidden="true"></div>
+      </div>
+      <div class="hyrs__photos-item reveal">
+        <Image
+          class="hyrs__photos-img"
+          src={imgPlat2}
+          alt="Ambiance restauration au bord du lac"
+          widths={[400, 600]}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          format="webp"
+          quality={75}
+        />
+        <div class="hyrs__photos-overlay" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <WaveDivider color="#f77b46" flip />
+
+  <!-- INFO GRID -->
+  <section class="hyrs__infos" aria-label="Informations pratiques">
+    <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyrs__section-title">Infos pratiques</GlowText>
+
+    <div class="hyrs__infos-grid">
+      {infoGrid.map((info) => (
+        <HolographicCard class="hyrs__infos-card">
+          <div class="hyrs__infos-inner">
+            <span class="hyrs__infos-icon" aria-hidden="true">
+              {info.icon === 'clock' && (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#26cfff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              )}
+              {info.icon === 'users' && (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6b21a8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              )}
+              {info.icon === 'credit-card' && (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              )}
+              {info.icon === 'utensils' && (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f77b46" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
+              )}
+            </span>
+            <span class="hyrs__infos-label">{info.label}</span>
+            <GlowText tag="span" color="#26cfff" intensity="low" class="hyrs__infos-value">{info.value}</GlowText>
+            <span class="hyrs__infos-sub">{info.sub}</span>
+          </div>
+        </HolographicCard>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="hyrs__cta reveal" aria-label="Réserver une table">
+    <div class="hyrs__cta-wrap">
+      <MeshGradient class="hyrs__cta-mesh" />
+      <div class="hyrs__cta-content">
+        <GlowText tag="h2" color="#26cfff" intensity="high" class="hyrs__cta-title">Réservez votre table</GlowText>
+        <p class="hyrs__cta-desc">Pour les groupes de 8+ personnes, la réservation est recommandée.</p>
+        <a href="/v11/acces-contact" class="hyrs__cta-btn">
+          <span>Nous contacter</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</LayoutHyper>
+
+<style>
+  /* HERO */
+  .hyrs__hero {
+    position: relative;
+    min-height: 55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hyrs__hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+    z-index: 0;
+  }
+  .hyrs__hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5,5,16,0.5) 0%, rgba(5,5,16,0.95) 100%);
+    z-index: 1;
+  }
+  .hyrs__hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 6rem 1.5rem 4rem;
+  }
+  .hyrs__hero-title {
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+  }
+  .hyrs__hero-sub {
+    font-size: 1.1rem;
+    color: rgba(240,240,235,0.6);
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  /* SECTION COMMON */
+  .hyrs__section-title {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin: 0 0 0.5rem;
+  }
+  .hyrs__section-sub {
+    text-align: center;
+    color: rgba(240,240,235,0.5);
+    font-size: 1rem;
+    margin: 0 0 3rem;
+  }
+
+  /* INTRO */
+  .hyrs__intro {
+    padding: 5rem 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hyrs__intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hyrs__intro-title {
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    font-weight: 700;
+    margin: 0 0 1.25rem;
+    line-height: 1.2;
+  }
+  .hyrs__intro-desc {
+    color: rgba(240,240,235,0.7);
+    line-height: 1.75;
+    font-size: 1rem;
+    margin: 0;
+  }
+  .hyrs__intro-img-wrap {
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+  }
+  .hyrs__intro-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 1.25rem;
+  }
+  .hyrs__intro-img-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 1.25rem;
+    box-shadow: inset 0 0 60px rgba(38,207,255,0.08);
+    pointer-events: none;
+  }
+
+  /* MENU */
+  .hyrs__menu {
+    padding: 5rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hyrs__menu-block {
+    margin-bottom: 3.5rem;
+  }
+  .hyrs__menu-block:last-child {
+    margin-bottom: 0;
+  }
+  .hyrs__menu-cat {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .hyrs__menu-cat-icon {
+    font-size: 1.4rem;
+  }
+  .hyrs__menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .hyrs__menu-item {
+    padding: 1.25rem 1.5rem;
+  }
+  .hyrs__menu-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .hyrs__menu-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #f0f0eb;
+  }
+  .hyrs__menu-price {
+    font-size: 1.05rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .hyrs__menu-desc {
+    color: rgba(240,240,235,0.5);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* PHOTOS */
+  .hyrs__photos {
+    padding: 3rem 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hyrs__photos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .hyrs__photos-item {
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+  }
+  .hyrs__photos-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hyrs__photos-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(5,5,16,0.6) 100%);
+    pointer-events: none;
+  }
+
+  /* INFO GRID */
+  .hyrs__infos {
+    padding: 5rem 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .hyrs__infos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  .hyrs__infos-inner {
+    padding: 2rem 1.25rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .hyrs__infos-icon {
+    margin-bottom: 0.5rem;
+  }
+  .hyrs__infos-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgba(240,240,235,0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .hyrs__infos-value {
+    font-size: 1.15rem;
+    font-weight: 800;
+  }
+  .hyrs__infos-sub {
+    font-size: 0.8rem;
+    color: rgba(240,240,235,0.4);
+  }
+
+  /* CTA */
+  .hyrs__cta {
+    padding: 4rem 1.5rem 6rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .hyrs__cta-wrap {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 1px solid rgba(38,207,255,0.12);
+    background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .hyrs__cta-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 3.5rem 2rem;
+  }
+  .hyrs__cta-title {
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+  }
+  .hyrs__cta-desc {
+    color: rgba(240,240,235,0.6);
+    font-size: 1rem;
+    margin: 0 0 2rem;
+  }
+  .hyrs__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.9rem 2.2rem;
+    border: 1px solid rgba(38,207,255,0.3);
+    border-radius: 9999px;
+    background: linear-gradient(135deg, rgba(38,207,255,0.12) 0%, rgba(107,33,168,0.1) 100%);
+    color: #26cfff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.02em;
+  }
+  .hyrs__cta-btn:hover {
+    border-color: rgba(38,207,255,0.6);
+    box-shadow: 0 0 24px rgba(38,207,255,0.2), 0 0 48px rgba(38,207,255,0.08);
+    background: linear-gradient(135deg, rgba(38,207,255,0.2) 0%, rgba(107,33,168,0.15) 100%);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hyrs__intro-grid {
+      grid-template-columns: 1fr;
+    }
+    .hyrs__photos-grid {
+      grid-template-columns: 1fr;
+    }
+    .hyrs__infos-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .hyrs__infos-grid {
+      grid-template-columns: 1fr;
+    }
+    .hyrs__hero-content {
+      padding: 5rem 1rem 3rem;
+    }
+  }
+</style>

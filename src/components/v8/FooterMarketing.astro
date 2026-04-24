@@ -1,0 +1,407 @@
+---
+const currentYear = new Date().getFullYear();
+
+const navColumns = [
+  {
+    title: "Nos locations",
+    links: [
+      { label: "Bateau électrique", href: "/v8/nos-locations" },
+      { label: "Paddle board", href: "/v8/nos-locations" },
+      { label: "Pédalo", href: "/v8/nos-locations" },
+      { label: "Canoë", href: "/v8/nos-locations" },
+      { label: "Planche à voile", href: "/v8/nos-locations" },
+    ],
+  },
+  {
+    title: "Surf Center",
+    links: [
+      { label: "L'esprit Surf Center", href: "/v8/esprit-surf-center" },
+      { label: "Restauration", href: "/v8/restauration" },
+      { label: "Animations", href: "/v8/animations" },
+      { label: "Groupes & Événements", href: "/v8/groupes-evenements" },
+      { label: "Blog", href: "/v8/blog" },
+    ],
+  },
+  {
+    title: "Informations",
+    links: [
+      { label: "Accès & Contact", href: "/v8/acces-contact" },
+      { label: "Tarifs & Réservation", href: "/v8/nos-locations" },
+      { label: "FAQ", href: "/v8#faq" },
+    ],
+  },
+  {
+    title: "Légal",
+    links: [
+      { label: "Mentions légales", href: "/v8/mentions-legales" },
+      { label: "Confidentialité", href: "/v8/confidentialite" },
+      { label: "CGV", href: "/v8/cgv" },
+    ],
+  },
+];
+
+const badges = [
+  { icon: "shield", label: "Paiement 100% sécurisé" },
+  { icon: "check", label: "Satisfaction garantie" },
+  { icon: "undo", label: "Annulation gratuite 24h" },
+  { icon: "lock", label: "Données protégées" },
+];
+---
+
+<footer class="fm8" role="contentinfo">
+  <!-- Last-chance CTA -->
+  <section class="fm8__cta-band" aria-label="Réservation">
+    <div class="container fm8__cta-inner">
+      <div class="fm8__cta-text">
+        <p class="fm8__cta-eyebrow">Prêt pour l'aventure ?</p>
+        <h2 class="fm8__cta-title">Réservez votre activité<br/>sur le lac de Sainte-Croix</h2>
+        <p class="fm8__cta-sub">Places limitées en haute saison — réservez dès maintenant pour garantir votre créneau.</p>
+      </div>
+      <div class="fm8__cta-actions">
+        <a href="/v8/nos-locations" class="btn btn--primary btn--lg fm8__cta-btn">
+          <span class="btn-flip__inner">
+            <span class="btn-flip__front">Réserver maintenant</span>
+            <span class="btn-flip__back">Réserver maintenant</span>
+          </span>
+        </a>
+        <a href="tel:+33492771450" class="fm8__cta-phone">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M6.5 2.5H4a1.5 1.5 0 0 0-1.5 1.5A9.5 9.5 0 0 0 12 13.5a1.5 1.5 0 0 0 1.5-1.5v-2.5l-3-1.5-1.5 1.5a7.5 7.5 0 0 1-3.5-3.5L7 4.5l-.5-2Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          </svg>
+          04 92 77 14 50
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust badges -->
+  <section class="fm8__badges" aria-label="Engagements de confiance">
+    <div class="container">
+      <div class="fm8__badges-grid">
+        {badges.map((b) => (
+          <div class="fm8__badge">
+            <div class="fm8__badge-icon" aria-hidden="true">
+              {b.icon === 'shield' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>}
+              {b.icon === 'check' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 4 12 14.01l-3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+              {b.icon === 'undo' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M1 4v6h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+              {b.icon === 'lock' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+            </div>
+            <span class="fm8__badge-label">{b.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer columns -->
+  <div class="fm8__top">
+    <div class="container fm8__inner">
+      <div class="fm8__brand">
+        <a href="/v8" class="fm8__logo" aria-label="Surf Center — Accueil">
+          <img
+            class="fm8__logo-img"
+            src="/logo-surf-center2.png"
+            alt=""
+            width="120"
+            height="36"
+            loading="lazy"
+          />
+        </a>
+        <p class="fm8__tagline">
+          Base nautique au lac de Sainte-Croix,<br />
+          Les Salles-sur-Verdon · Gorges du Verdon.
+        </p>
+        <address class="fm8__address">
+          <p><a href="tel:+33492771450">04 92 77 14 50</a></p>
+          <p><a href="mailto:contact@surfcenter-verdon.fr">contact@surfcenter-verdon.fr</a></p>
+        </address>
+        <div class="fm8__socials">
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="1.5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z" stroke="currentColor" stroke-width="1.5"/><path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </a>
+          <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      {navColumns.map((col) => (
+        <nav class="fm8__col" aria-label={col.title}>
+          <p class="fm8__col-title">{col.title}</p>
+          <ul role="list">
+            {col.links.map((link) => (
+              <li><a href={link.href}>{link.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="fm8__bottom">
+    <div class="container fm8__bottom-inner">
+      <p>© {currentYear} Surf Center · Les Salles-sur-Verdon · Tous droits réservés</p>
+      <div class="fm8__bottom-links">
+        <a href="/v8/mentions-legales">Mentions légales</a>
+        <a href="/v8/confidentialite">Confidentialité</a>
+        <a href="/v8/cgv">CGV</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* ========== Last-chance CTA ========== */
+  .fm8__cta-band {
+    background: var(--c-orange);
+    padding-block: var(--s-16);
+    text-align: center;
+    color: #fff;
+  }
+
+  .fm8__cta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-8);
+  }
+
+  .fm8__cta-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: var(--s-3);
+  }
+
+  .fm8__cta-title {
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #fff;
+  }
+
+  .fm8__cta-sub {
+    font-size: 0.88rem;
+    opacity: 0.9;
+    margin-top: var(--s-3);
+    max-width: 38ch;
+    line-height: 1.6;
+  }
+
+  .fm8__cta-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-4);
+  }
+
+  .fm8__cta-btn {
+    background: #fff;
+    color: var(--c-orange);
+    border-color: #fff;
+    font-size: 0.82rem;
+  }
+  .fm8__cta-btn:hover {
+    background: var(--c-dark);
+    color: #fff;
+    border-color: var(--c-dark);
+  }
+
+  .fm8__cta-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgb(255 255 255 / 0.85);
+    transition: color var(--t-fast);
+  }
+  .fm8__cta-phone:hover { color: #fff; }
+
+  @media (min-width: 768px) {
+    .fm8__cta-band { padding-block: var(--s-20); }
+    .fm8__cta-actions { flex-direction: row; gap: var(--s-6); }
+  }
+
+  /* ========== Trust badges ========== */
+  .fm8__badges {
+    background: var(--c-dark-soft);
+    padding-block: var(--s-10);
+    border-bottom: 1px solid rgb(255 255 255 / 0.06);
+  }
+
+  .fm8__badges-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-6);
+  }
+
+  .fm8__badge {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+  }
+
+  .fm8__badge-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-md);
+    background: rgb(255 255 255 / 0.06);
+    color: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .fm8__badge-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgb(255 255 255 / 0.7);
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+  }
+
+  @media (min-width: 768px) {
+    .fm8__badges-grid { grid-template-columns: repeat(4, 1fr); }
+    .fm8__badge { flex-direction: column; text-align: center; }
+    .fm8__badges { padding-block: var(--s-12); }
+  }
+
+  /* ========== Footer main ========== */
+  .fm8 {
+    background: var(--c-dark);
+    color: rgb(255 255 255 / 0.6);
+  }
+
+  .fm8__top {
+    padding-block: var(--s-20);
+  }
+
+  .fm8__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+  }
+
+  .fm8__brand { max-width: 280px; }
+
+  .fm8__logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--s-5);
+  }
+
+  .fm8__logo-img {
+    height: 24px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.6;
+  }
+
+  .fm8__tagline {
+    font-size: 0.8rem;
+    line-height: 1.55;
+    color: rgb(255 255 255 / 0.35);
+    margin-bottom: var(--s-5);
+  }
+
+  .fm8__address {
+    font-style: normal;
+    font-size: 0.78rem;
+    line-height: 1.8;
+    color: rgb(255 255 255 / 0.4);
+    margin-bottom: var(--s-5);
+  }
+  .fm8__address a { transition: color var(--t-fast); }
+  .fm8__address a:hover { color: var(--c-orange); }
+
+  .fm8__socials {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+  }
+  .fm8__socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--r-sm);
+    background: rgb(255 255 255 / 0.06);
+    color: rgb(255 255 255 / 0.5);
+    transition: background var(--t-fast), color var(--t-fast);
+  }
+  .fm8__socials a:hover {
+    background: var(--c-orange);
+    color: #fff;
+  }
+
+  /* Nav columns */
+  .fm8__col-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.3);
+    margin-bottom: var(--s-5);
+  }
+
+  .fm8__col ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .fm8__col a {
+    font-size: 0.8rem;
+    color: rgb(255 255 255 / 0.5);
+    transition: color var(--t-fast);
+  }
+  .fm8__col a:hover { color: #fff; }
+
+  /* ========== Bottom bar ========== */
+  .fm8__bottom {
+    padding-block: var(--s-6);
+    border-top: 1px solid rgb(255 255 255 / 0.08);
+    font-size: 0.68rem;
+    color: rgb(255 255 255 / 0.25);
+    letter-spacing: 0.04em;
+  }
+
+  .fm8__bottom-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-3);
+    text-align: center;
+  }
+
+  .fm8__bottom-links {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+  }
+
+  .fm8__bottom-links a {
+    color: rgb(255 255 255 / 0.3);
+    transition: color var(--t-fast);
+  }
+  .fm8__bottom-links a:hover { color: rgb(255 255 255 / 0.6); }
+
+  @media (min-width: 768px) {
+    .fm8__inner { grid-template-columns: 1.5fr repeat(4, 1fr); }
+    .fm8__bottom-inner {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+</style>

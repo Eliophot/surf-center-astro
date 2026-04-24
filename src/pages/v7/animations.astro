@@ -1,0 +1,566 @@
+---
+import LayoutKinetic from '../../layouts/LayoutKinetic.astro';
+import imgYoga from '../../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import imgPaddle from '../../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+import imgWindsurf from '../../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+import imgConcert from '../../assets/images/concert-surfcenter-lac-sainte-croix.png';
+import imgConcertJoulik from '../../assets/images/concert-joulik-lac-sainte-croix-surfcenter.jpg';
+import imgFramboise from '../../assets/images/framboise-et-ceatera-lac-sainte-croix-concert-surfcenter.jpg';
+import imgTrophee from '../../assets/images/trophee-hobie-shop-lac-sainte-croix-surf-center.jpeg';
+import imgBateauEvjf from '../../assets/images/location-bateau-electriques-evjf-lac-sainte-croix.jpg';
+
+const animationTypes = [
+  {
+    title: 'Yoga & Bien-être',
+    desc: 'Séances de yoga face au lac au lever du soleil. Pilates, stretching et méditation sur la plage — pour commencer chaque journée en douceur.',
+    tags: ['Yoga', 'Pilates', 'Méditation', 'Sunrise'],
+    img: imgYoga.src,
+    alt: 'Yoga au lever du soleil au bord du lac de Sainte-Croix',
+  },
+  {
+    title: 'Cours nautiques',
+    desc: 'Initiations et perfectionnement en paddle, planche à voile et canoë avec nos moniteurs diplômés. Tous niveaux, dès 8 ans.',
+    tags: ['Paddle', 'Windsurf', 'Canoë', 'Moniteurs'],
+    img: imgPaddle.src,
+    alt: 'Cours de paddle sur le lac de Sainte-Croix',
+  },
+  {
+    title: 'Concerts & Soirées',
+    desc: 'Programmation live chaque été : acoustique, DJ sets, soirées à thème — les pieds dans le sable, face au coucher de soleil.',
+    tags: ['Live', 'DJ', 'Coucher de soleil', 'Été'],
+    img: imgConcert.src,
+    alt: 'Concert live au Surf Center au coucher de soleil',
+  },
+  {
+    title: 'Compétitions & Événements',
+    desc: 'Régates, trophées Hobie Cat, journées découverte, challenges inter-bases — des rendez-vous sportifs tout au long de la saison.',
+    tags: ['Régate', 'Trophée', 'Challenge', 'Sport'],
+    img: imgTrophee.src,
+    alt: 'Trophée Hobie au lac de Sainte-Croix',
+  },
+];
+
+const timeline = [
+  { month: 'Avril', event: 'Ouverture de saison', detail: 'Reprise des locations & premiers cours' },
+  { month: 'Mai', event: 'Journées découverte', detail: 'Initiations gratuites paddle & canoë' },
+  { month: 'Juin', event: 'Sunrise Yoga Series', detail: 'Yoga au lever du soleil chaque samedi' },
+  { month: 'Juillet', event: 'Concerts acoustiques', detail: 'Live tous les vendredis soir' },
+  { month: 'Août', event: 'Trophée Hobie Cat', detail: 'Régate inter-clubs sur le lac' },
+  { month: 'Août', event: 'Nuit des étoiles', detail: 'Observation astronomique sur la plage' },
+  { month: 'Septembre', event: 'Fête de la glisse', detail: 'Journée multi-activités & barbecue' },
+  { month: 'Octobre', event: 'Clôture de saison', detail: 'Dernière soirée & pot de fin' },
+];
+
+const galleryImgs = [
+  { src: imgYoga.src, alt: 'Yoga face au lac' },
+  { src: imgConcertJoulik.src, alt: 'Concert Joulik au Surf Center' },
+  { src: imgFramboise.src, alt: 'Concert Framboise et Cætera' },
+  { src: imgWindsurf.src, alt: 'Planche à voile sur le lac' },
+  { src: imgBateauEvjf.src, alt: 'Groupe en bateau — EVJF' },
+  { src: imgTrophee.src, alt: 'Trophée Hobie Cat' },
+];
+---
+
+<LayoutKinetic
+  title="Animations — Surf Center · Lac de Sainte-Croix"
+  description="Yoga, cours nautiques, concerts live, compétitions — toutes les animations du Surf Center au lac de Sainte-Croix dans les Gorges du Verdon."
+>
+
+  <!-- FLARE HERO -->
+  <section class="k7an__hero">
+    <div class="k7an__hero-bg">
+      <img src={imgConcert.src} alt="Animations et concerts au Surf Center — lac de Sainte-Croix" width="1920" height="800" loading="eager" fetchpriority="high" decoding="async" />
+      <div class="k7an__hero-dim" aria-hidden="true"></div>
+    </div>
+    <div class="k7an__hero-bars" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="container k7an__hero-inner">
+      <div class="k7an__hero-content">
+        <span class="k7an__hero-tag">Yoga · Cours · Concerts · Événements</span>
+        <h1 class="k7an__hero-title">
+          <span class="k7an__t-bold">Anima&shy;tions</span>
+        </h1>
+        <p class="k7an__hero-sub">Chaque journée au Surf Center est une invitation à bouger, respirer, s'amuser.</p>
+      </div>
+    </div>
+    <div class="k7an__hero-skew" aria-hidden="true"></div>
+  </section>
+
+  <!-- MOTION SECTIONS — ANIMATION TYPES -->
+  {animationTypes.map((anim, i) => (
+    <section class:list={['k7an__type', i % 2 !== 0 && 'k7an__type--alt']} aria-labelledby={`k7an-type-${i}`}>
+      <div class="k7an__type-wrap">
+        <div class="k7an__type-media">
+          <img src={anim.img} alt={anim.alt} width="960" height="640" loading="lazy" decoding="async" />
+          <div class="k7an__type-angle" aria-hidden="true"></div>
+        </div>
+        <div class="k7an__type-body">
+          <div class="container k7an__type-content reveal">
+            <div class="k7an__stripe" aria-hidden="true"></div>
+            <span class="k7an__type-num">{String(i + 1).padStart(2, '0')}</span>
+            <h2 id={`k7an-type-${i}`} class="k7an__type-title">{anim.title}</h2>
+            <p class="k7an__type-desc">{anim.desc}</p>
+            <div class="k7an__type-tags">
+              {anim.tags.map(t => <span>{t}</span>)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- RACE TIMELINE -->
+  <section class="k7an__timeline" aria-labelledby="k7an-timeline-title">
+    <div class="container">
+      <div class="k7an__head reveal">
+        <div class="k7an__stripe" aria-hidden="true"></div>
+        <h2 id="k7an-timeline-title" class="k7an__section-title">Programme</h2>
+      </div>
+
+      <div class="k7an__tl-grid">
+        {timeline.map((ev, i) => (
+          <div class="k7an__tl-card reveal" style={`--d:${i * 70}ms`}>
+            <span class="k7an__tl-month">{ev.month}</span>
+            <div class="k7an__tl-line" aria-hidden="true"></div>
+            <h3 class="k7an__tl-event">{ev.event}</h3>
+            <p class="k7an__tl-detail">{ev.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION GRID GALLERY -->
+  <section class="k7an__gallery" aria-label="Photos animations">
+    <div class="container">
+      <div class="k7an__head reveal">
+        <div class="k7an__stripe" aria-hidden="true"></div>
+        <h2 class="k7an__section-title">En images</h2>
+      </div>
+
+      <div class="k7an__gal-grid">
+        {galleryImgs.map((img, i) => (
+          <div class:list={['k7an__gal-tile', i === 0 && 'k7an__gal-tile--wide', i === 1 && 'k7an__gal-tile--tall', 'reveal']} style={`--d:${i * 80}ms`}>
+            <img src={img.src} alt={img.alt} width="600" height="400" loading="lazy" decoding="async" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="k7an__cta">
+    <div class="container k7an__cta-inner reveal">
+      <h2 class="k7an__cta-title">Prêt à vivre<br/>l'été au lac ?</h2>
+      <div class="k7an__cta-btns">
+        <button type="button" class="btn btn--primary" data-booking>Réserver</button>
+        <a href="/v7/acces-contact" class="btn btn--ghost">Nous contacter</a>
+      </div>
+    </div>
+  </section>
+
+</LayoutKinetic>
+
+<style>
+  /* ====== HERO ====== */
+  .k7an__hero {
+    position: relative;
+    min-height: 75svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--c-dark);
+  }
+
+  .k7an__hero-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .k7an__hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: k7an-zoom 20s ease-in-out alternate infinite;
+  }
+
+  @keyframes k7an-zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
+  }
+
+  .k7an__hero-dim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgb(0 0 0 / 0.3) 0%, rgb(0 0 0 / 0.8) 100%);
+  }
+
+  .k7an__hero-bars {
+    position: absolute;
+    bottom: 15%;
+    right: 6%;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    z-index: 1;
+  }
+
+  .k7an__hero-bars span {
+    width: 6px;
+    background: var(--c-orange);
+    border-radius: 3px;
+    animation: k7an-bar 1.5s ease-in-out infinite;
+  }
+
+  .k7an__hero-bars span:nth-child(1) { height: 30px; animation-delay: 0s; }
+  .k7an__hero-bars span:nth-child(2) { height: 55px; animation-delay: 0.15s; }
+  .k7an__hero-bars span:nth-child(3) { height: 80px; animation-delay: 0.3s; }
+  .k7an__hero-bars span:nth-child(4) { height: 50px; animation-delay: 0.45s; }
+  .k7an__hero-bars span:nth-child(5) { height: 35px; animation-delay: 0.6s; }
+
+  @keyframes k7an-bar {
+    0%, 100% { transform: scaleY(1); opacity: 0.5; }
+    50% { transform: scaleY(1.4); opacity: 1; }
+  }
+
+  .k7an__hero-inner {
+    position: relative;
+    z-index: 2;
+    padding: calc(var(--header-h) + var(--s-16)) 0 var(--s-16);
+  }
+
+  .k7an__hero-content {
+    max-width: 600px;
+    animation: k7an-up 900ms var(--ease-smooth) both;
+  }
+
+  @keyframes k7an-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .k7an__hero-tag {
+    display: inline-block;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    background: rgb(247 123 70 / 0.12);
+    padding: 5px 16px;
+    border-radius: var(--r-full);
+    margin-bottom: var(--s-6);
+  }
+
+  .k7an__hero-title { margin-bottom: var(--s-5); }
+
+  .k7an__t-bold {
+    font-size: clamp(4rem, 14vw, 9rem);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .k7an__hero-sub {
+    font-size: 0.88rem;
+    color: rgb(255 255 255 / 0.45);
+    line-height: 1.7;
+    max-width: 38ch;
+  }
+
+  .k7an__hero-skew {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--c-bg);
+    clip-path: polygon(0 100%, 100% 30%, 100% 100%);
+    z-index: 3;
+  }
+
+  /* ====== SHARED ====== */
+  .k7an__stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    flex-shrink: 0;
+    margin-bottom: var(--s-4);
+  }
+
+  .k7an__section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .k7an__head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    margin-bottom: var(--s-10);
+  }
+
+  .k7an__head .k7an__stripe { margin-bottom: 0; }
+
+  /* ====== ANIMATION TYPE SECTIONS ====== */
+  .k7an__type { overflow: hidden; }
+
+  .k7an__type-wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .k7an__type-media {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .k7an__type-media img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .k7an__type-media:hover img { transform: scale(1.04); }
+
+  .k7an__type-angle {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: var(--c-bg);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  }
+
+  .k7an__type--alt .k7an__type-angle {
+    background: var(--c-surface);
+    clip-path: polygon(0 0, 0 100%, 100% 100%);
+  }
+
+  .k7an__type-body {
+    background: var(--c-bg);
+    padding: var(--s-8) 0 var(--s-section);
+  }
+
+  .k7an__type--alt .k7an__type-body { background: var(--c-surface); }
+
+  .k7an__type-content { max-width: 500px; }
+
+  .k7an__type-num {
+    display: block;
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--c-orange);
+    margin-bottom: var(--s-2);
+  }
+
+  .k7an__type-title {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: var(--s-5);
+  }
+
+  .k7an__type-desc {
+    font-size: 0.88rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    margin-bottom: var(--s-6);
+  }
+
+  .k7an__type-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+  }
+
+  .k7an__type-tags span {
+    font-size: 0.56rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    background: var(--c-surface);
+    padding: 5px 14px;
+    border-radius: var(--r-full);
+  }
+
+  .k7an__type--alt .k7an__type-tags span { background: var(--c-bg); }
+
+  @media (min-width: 900px) {
+    .k7an__type-wrap { grid-template-columns: 1.2fr 1fr; }
+    .k7an__type-media img { aspect-ratio: auto; height: 100%; }
+    .k7an__type-angle { display: none; }
+    .k7an__type-body {
+      display: flex;
+      align-items: center;
+      padding: var(--s-16);
+    }
+    .k7an__type--alt .k7an__type-wrap { direction: rtl; }
+    .k7an__type--alt .k7an__type-wrap > * { direction: ltr; }
+  }
+
+  /* ====== TIMELINE ====== */
+  .k7an__timeline {
+    padding: var(--s-section) 0;
+    background: var(--c-dark);
+    color: #fff;
+  }
+
+  .k7an__timeline .k7an__section-title { color: #fff; }
+
+  .k7an__tl-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .k7an__tl-card {
+    display: grid;
+    grid-template-columns: 80px 1px 1fr;
+    gap: var(--s-5);
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid rgb(255 255 255 / 0.06);
+    align-items: start;
+  }
+
+  .k7an__tl-card:first-child { border-top: 1px solid rgb(255 255 255 / 0.06); }
+
+  .k7an__tl-month {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    padding-top: 2px;
+  }
+
+  .k7an__tl-line {
+    width: 1px;
+    height: 100%;
+    min-height: 40px;
+    background: rgb(255 255 255 / 0.1);
+    position: relative;
+  }
+
+  .k7an__tl-line::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: -3px;
+    width: 7px;
+    height: 7px;
+    background: var(--c-orange);
+    border-radius: 50%;
+  }
+
+  .k7an__tl-event {
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .k7an__tl-detail {
+    grid-column: 3;
+    font-size: 0.78rem;
+    color: rgb(255 255 255 / 0.4);
+    line-height: 1.5;
+    margin-top: 2px;
+  }
+
+  @media (min-width: 768px) {
+    .k7an__tl-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0 var(--s-8);
+    }
+    .k7an__tl-card { grid-template-columns: 80px 1px 1fr; }
+  }
+
+  /* ====== GALLERY ====== */
+  .k7an__gallery {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .k7an__gal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 200px;
+    gap: var(--s-3);
+  }
+
+  .k7an__gal-tile {
+    overflow: hidden;
+    border-radius: var(--r-sm);
+    background: var(--c-surface);
+  }
+
+  .k7an__gal-tile--wide { grid-column: span 2; }
+  .k7an__gal-tile--tall { grid-row: span 2; }
+
+  .k7an__gal-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s var(--ease);
+  }
+
+  .k7an__gal-tile:hover img { transform: scale(1.05) rotate(0.5deg); }
+
+  @media (min-width: 768px) {
+    .k7an__gal-grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 260px;
+    }
+  }
+
+  /* ====== CTA ====== */
+  .k7an__cta {
+    padding: var(--s-section) 0;
+    background: var(--c-dark);
+    text-align: center;
+  }
+
+  .k7an__cta-title {
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: #fff;
+    margin-bottom: var(--s-8);
+  }
+
+  .k7an__cta-btns {
+    display: flex;
+    gap: var(--s-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ====== REDUCED MOTION ====== */
+  @media (prefers-reduced-motion: reduce) {
+    .k7an__hero-bg img { animation: none; }
+    .k7an__hero-content { animation: none; }
+    .k7an__hero-bars span { animation: none; }
+    .k7an__type-media img { transition: none; }
+    .k7an__gal-tile img { transition: none; }
+  }
+</style>

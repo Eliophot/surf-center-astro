@@ -1,0 +1,512 @@
+---
+import LayoutHyper from '../../../layouts/LayoutHyper.astro';
+import MeshGradient from '../../../components/v11/MeshGradient.astro';
+import GlowText from '../../../components/v11/GlowText.astro';
+import HolographicCard from '../../../components/v11/HolographicCard.astro';
+import WaveDivider from '../../../components/v11/WaveDivider.astro';
+
+interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  category: string;
+  categoryColor: string;
+  image: string;
+  imageAlt: string;
+}
+
+const posts: BlogPost[] = [
+  {
+    slug: '5-criques-secretes-lac-sainte-croix',
+    title: '5 criques secrètes du lac de Sainte-Croix',
+    excerpt: 'Découvrez les plus belles criques cachées du lac, accessibles uniquement par l\'eau. Paddle, canoë ou bateau électrique — on vous dit tout.',
+    date: '15 juin 2026',
+    readTime: '6 min',
+    category: 'Découverte',
+    categoryColor: '#26cfff',
+    image: '/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg',
+    imageAlt: 'Criques secrètes du lac de Sainte-Croix vues depuis un paddle',
+  },
+  {
+    slug: 'guide-debutant-paddle-lac-verdon',
+    title: 'Guide débutant : votre premier paddle sur le lac',
+    excerpt: 'Tout ce qu\'il faut savoir pour débuter le stand-up paddle sur le lac de Sainte-Croix. Techniques, sécurité et meilleurs créneaux.',
+    date: '8 juin 2026',
+    readTime: '8 min',
+    category: 'Guide pratique',
+    categoryColor: '#3b82f6',
+    image: '/location-paddle-lac-sainte-croix-surfcenter.jpeg',
+    imageAlt: 'Débutant en paddle sur le lac de Sainte-Croix',
+  },
+  {
+    slug: 'concerts-ete-2026-programme-surfcenter',
+    title: 'Concerts été 2026 : la programmation du Surf Center',
+    excerpt: 'Jazz, reggae, musique du monde — retrouvez tous les concerts de l\'été au Surf Center, les pieds dans l\'eau face au coucher de soleil.',
+    date: '1er juin 2026',
+    readTime: '4 min',
+    category: 'Événements',
+    categoryColor: '#f77b46',
+    image: '/concert-joulik-lac-sainte-croix-surfcenter.jpg',
+    imageAlt: 'Concert au coucher de soleil au Surf Center lac de Sainte-Croix',
+  },
+  {
+    slug: 'bateau-electrique-gorges-verdon-itineraire',
+    title: 'Bateau électrique : l\'itinéraire parfait dans les Gorges',
+    excerpt: 'Notre guide complet pour naviguer en bateau électrique jusqu\'aux Gorges du Verdon. Durée, points d\'intérêt et conseils pratiques.',
+    date: '25 mai 2026',
+    readTime: '7 min',
+    category: 'Itinéraire',
+    categoryColor: '#6b21a8',
+    image: '/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg',
+    imageAlt: 'Bateau électrique dans les Gorges du Verdon',
+  },
+];
+
+const categories = [...new Set(posts.map((p) => p.category))];
+---
+
+<LayoutHyper
+  title="Blog — Surf Center Hyper Design"
+  description="Articles, guides et actualités du Surf Center au lac de Sainte-Croix. Conseils paddle, criques secrètes, événements et plus."
+>
+  <!-- HERO -->
+  <section class="hybl__hero">
+    <MeshGradient />
+    <div class="hybl__hero-inner">
+      <p class="hybl__hero-tag reveal">Articles & actualités</p>
+      <GlowText tag="h1" color="#26cfff" intensity="high" class="hybl__hero-title reveal">
+        Blog
+      </GlowText>
+      <p class="hybl__hero-sub reveal">
+        Guides pratiques, criques secrètes, événements — tout l'univers du lac de Sainte-Croix.
+      </p>
+    </div>
+  </section>
+
+  <WaveDivider color="#26cfff" />
+
+  <!-- CATEGORY FILTERS -->
+  <section class="hybl__filters reveal">
+    <div class="hybl__filters-inner">
+      <button class="hybl__filter-btn hybl__filter-btn--active" data-hybl-filter="all">Tous</button>
+      {categories.map((cat) => {
+        const color = posts.find((p) => p.category === cat)?.categoryColor || '#26cfff';
+        return (
+          <button class="hybl__filter-btn" data-hybl-filter={cat} style={`--hybl-cat: ${color};`}>
+            {cat}
+          </button>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- POSTS GRID -->
+  <section class="hybl__posts">
+    <div class="hybl__grid">
+      {posts.map((post, i) => {
+        const isFeatured = i === 0;
+        return (
+          <a
+            href={`/v11/blog/${post.slug}`}
+            class={`hybl__card-link reveal ${isFeatured ? 'hybl__card-link--featured' : ''}`}
+            data-hybl-cat={post.category}
+          >
+            <HolographicCard class={`hybl__card ${isFeatured ? 'hybl__card--featured' : ''}`}>
+              <div class="hybl__card-img-wrap">
+                <img src={post.image} alt={post.imageAlt} class="hybl__card-img" loading="lazy" />
+                <div class="hybl__card-img-overlay"></div>
+                <span class="hybl__card-badge" style={`--hybl-cat: ${post.categoryColor};`}>
+                  {post.category}
+                </span>
+              </div>
+              <div class="hybl__card-body">
+                <div class="hybl__card-meta">
+                  <time class="hybl__card-date">{post.date}</time>
+                  <span class="hybl__card-dot" aria-hidden="true">·</span>
+                  <span class="hybl__card-read">{post.readTime}</span>
+                </div>
+                <GlowText
+                  tag="h2"
+                  color={post.categoryColor}
+                  intensity="low"
+                  class={`hybl__card-title ${isFeatured ? 'hybl__card-title--featured' : ''}`}
+                >
+                  {post.title}
+                </GlowText>
+                <p class="hybl__card-excerpt">{post.excerpt}</p>
+                <span class="hybl__card-cta" style={`color: ${post.categoryColor};`}>
+                  Lire l'article →
+                </span>
+              </div>
+            </HolographicCard>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <WaveDivider color="#6b21a8" flip />
+
+  <!-- NEWSLETTER -->
+  <section class="hybl__newsletter reveal">
+    <HolographicCard class="hybl__nl-card">
+      <div class="hybl__nl-inner">
+        <GlowText tag="h2" color="#26cfff" intensity="medium" class="hybl__nl-title">
+          Restez informé
+        </GlowText>
+        <p class="hybl__nl-desc">
+          Recevez nos derniers articles, événements et offres spéciales directement dans votre boîte mail.
+        </p>
+        <form class="hybl__nl-form" data-hybl-nl>
+          <input
+            class="hybl__nl-input"
+            type="email"
+            placeholder="votre@email.com"
+            required
+            aria-label="Adresse email"
+          />
+          <button class="hybl__nl-btn" type="submit">S'abonner</button>
+        </form>
+      </div>
+    </HolographicCard>
+  </section>
+</LayoutHyper>
+
+<script is:inline>
+(function () {
+  var btns = document.querySelectorAll('[data-hybl-filter]');
+  var cards = document.querySelectorAll('[data-hybl-cat]');
+  btns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      btns.forEach(function (b) { b.classList.remove('hybl__filter-btn--active'); });
+      btn.classList.add('hybl__filter-btn--active');
+      var f = btn.getAttribute('data-hybl-filter');
+      cards.forEach(function (c) {
+        if (f === 'all' || c.getAttribute('data-hybl-cat') === f) {
+          c.style.display = '';
+        } else {
+          c.style.display = 'none';
+        }
+      });
+    });
+  });
+})();
+</script>
+
+<style>
+  /* HERO */
+  .hybl__hero {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 1.5rem 4rem;
+    overflow: hidden;
+  }
+  .hybl__hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+  }
+  .hybl__hero-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #6b21a8;
+    border: 1px solid rgba(107, 33, 168, 0.3);
+    background: rgba(107, 33, 168, 0.08);
+    padding: 0.4rem 1.2rem;
+    border-radius: 9999px;
+    margin-bottom: 1.5rem;
+  }
+  .hybl__hero-title {
+    font-size: clamp(3rem, 7vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin: 0 0 1.25rem;
+  }
+  .hybl__hero-sub {
+    font-size: 1.1rem;
+    color: rgba(240, 240, 235, 0.6);
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* FILTERS */
+  .hybl__filters {
+    padding: 1.5rem 1.5rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hybl__filters-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  .hybl__filter-btn {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: rgba(240, 240, 235, 0.5);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.45rem 1.1rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+  }
+  .hybl__filter-btn:hover {
+    color: var(--hybl-cat, #26cfff);
+    border-color: color-mix(in srgb, var(--hybl-cat, #26cfff) 40%, transparent);
+  }
+  .hybl__filter-btn--active {
+    color: #050510;
+    background: #26cfff;
+    border-color: #26cfff;
+  }
+  .hybl__filter-btn--active:hover {
+    color: #050510;
+  }
+
+  /* POSTS GRID */
+  .hybl__posts {
+    padding: 2.5rem 1.5rem 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hybl__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .hybl__card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .hybl__card-link--featured {
+    grid-column: 1 / -1;
+  }
+  .hybl__card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hybl__card--featured {
+    flex-direction: row;
+  }
+  .hybl__card-link:hover .hybl__card {
+    transform: translateY(-4px);
+  }
+  .hybl__card-img-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .hybl__card:not(.hybl__card--featured) .hybl__card-img-wrap {
+    aspect-ratio: 16 / 10;
+    border-radius: 1.25rem 1.25rem 0 0;
+  }
+  .hybl__card--featured .hybl__card-img-wrap {
+    width: 50%;
+    min-height: 320px;
+    border-radius: 1.25rem 0 0 1.25rem;
+    flex-shrink: 0;
+  }
+  .hybl__card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hybl__card-link:hover .hybl__card-img {
+    transform: scale(1.05);
+  }
+  .hybl__card-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(5, 5, 16, 0.4) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hybl__card-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--hybl-cat);
+    background: rgba(5, 5, 16, 0.7);
+    border: 1px solid color-mix(in srgb, var(--hybl-cat) 35%, transparent);
+    padding: 0.3rem 0.8rem;
+    border-radius: 9999px;
+    backdrop-filter: blur(8px);
+  }
+  .hybl__card-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .hybl__card--featured .hybl__card-body {
+    padding: 2rem;
+    justify-content: center;
+  }
+  .hybl__card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: rgba(240, 240, 235, 0.4);
+    margin-bottom: 0.75rem;
+  }
+  .hybl__card-dot {
+    color: rgba(240, 240, 235, 0.25);
+  }
+  .hybl__card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    line-height: 1.35;
+  }
+  .hybl__card-title--featured {
+    font-size: 1.6rem;
+  }
+  .hybl__card-excerpt {
+    font-size: 0.88rem;
+    color: rgba(240, 240, 235, 0.55);
+    line-height: 1.65;
+    margin: 0 0 1.25rem;
+  }
+  .hybl__card-cta {
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-top: auto;
+    transition: letter-spacing 0.3s ease;
+  }
+  .hybl__card-link:hover .hybl__card-cta {
+    letter-spacing: 0.06em;
+  }
+
+  /* NEWSLETTER */
+  .hybl__newsletter {
+    padding: 3rem 1.5rem 6rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .hybl__nl-card {
+    padding: 0;
+  }
+  .hybl__nl-inner {
+    padding: 3rem;
+    text-align: center;
+  }
+  .hybl__nl-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0 0 0.75rem;
+  }
+  .hybl__nl-desc {
+    font-size: 0.95rem;
+    color: rgba(240, 240, 235, 0.55);
+    line-height: 1.65;
+    margin: 0 0 2rem;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hybl__nl-form {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+  .hybl__nl-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(38, 207, 255, 0.15);
+    border-radius: 0.75rem;
+    padding: 0.8rem 1rem;
+    font-size: 0.92rem;
+    color: #f0f0eb;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hybl__nl-input::placeholder {
+    color: rgba(240, 240, 235, 0.25);
+  }
+  .hybl__nl-input:focus {
+    border-color: rgba(38, 207, 255, 0.5);
+    box-shadow: 0 0 16px rgba(38, 207, 255, 0.1);
+  }
+  .hybl__nl-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #050510;
+    background: linear-gradient(135deg, #26cfff, #3b82f6);
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .hybl__nl-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(38, 207, 255, 0.3);
+  }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hybl__card--featured {
+      flex-direction: column;
+    }
+    .hybl__card--featured .hybl__card-img-wrap {
+      width: 100%;
+      min-height: 220px;
+      border-radius: 1.25rem 1.25rem 0 0;
+    }
+    .hybl__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 600px) {
+    .hybl__hero {
+      min-height: 50vh;
+      padding: 6rem 1rem 3rem;
+    }
+    .hybl__nl-form {
+      flex-direction: column;
+    }
+    .hybl__nl-inner {
+      padding: 2rem 1.5rem;
+    }
+    .hybl__card-title--featured {
+      font-size: 1.3rem;
+    }
+  }
+</style>

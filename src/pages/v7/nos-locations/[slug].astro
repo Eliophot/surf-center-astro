@@ -1,0 +1,570 @@
+---
+import LayoutKinetic from '../../../layouts/LayoutKinetic.astro';
+import { locationDetails, getOtherLocations } from '../../../data/locations';
+import type { LocationDetail } from '../../../data/locations';
+
+export function getStaticPaths() {
+  return locationDetails.map((loc) => ({
+    params: { slug: loc.slug },
+    props: { location: loc },
+  }));
+}
+
+interface Props { location: LocationDetail; }
+const { location } = Astro.props;
+const others = getOtherLocations(location.slug);
+---
+
+<LayoutKinetic
+  title={`${location.title} | Surf Center — Lac de Sainte-Croix`}
+  description={location.description}
+>
+  <!-- KINETIC DETAIL HERO -->
+  <section class="k7ld__hero" aria-label={location.title}>
+    <div class="k7ld__hero-bg" aria-hidden="true">
+      <img src={location.heroImage} alt={location.heroAlt} width="1600" height="900" loading="eager" fetchpriority="high" decoding="async" />
+      <div class="k7ld__hero-dim"></div>
+      <div class="k7ld__hero-stripes"></div>
+    </div>
+    <div class="container k7ld__hero-inner">
+      <a href="/v7/nos-locations" class="k7ld__hero-back">← Toutes les locations</a>
+      <span class="k7ld__hero-tag">{location.tagline}</span>
+      <h1 class="k7ld__hero-title">
+        <span class="k7ld__hero-t1">{location.shortTitle}</span>
+      </h1>
+      <p class="k7ld__hero-sub">{location.description}</p>
+      <div class="k7ld__hero-highlights">
+        {location.highlights.map((h) => (
+          <span class="k7ld__highlight">{h}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ANGULAR PRICING CARD -->
+  <section class="k7ld__pricing" aria-labelledby="k7ld-price-title">
+    <div class="k7ld__pricing-angle" aria-hidden="true"></div>
+    <div class="container">
+      <div class="k7ld__pricing-card reveal">
+        <div class="k7ld__pricing-left">
+          <h2 id="k7ld-price-title" class="k7ld__pricing-name">{location.title}</h2>
+          <p class="k7ld__pricing-desc">{location.longDescription}</p>
+        </div>
+        <div class="k7ld__pricing-right">
+          <div class="k7ld__pricing-price">
+            <span class="k7ld__pricing-amount">{location.price}€</span>
+            <span class="k7ld__pricing-unit">/{location.priceUnit}</span>
+          </div>
+          <ul class="k7ld__pricing-meta" role="list">
+            <li><strong>Capacité</strong><span>{location.capacity}</span></li>
+            <li><strong>Durée</strong><span>{location.duration}</span></li>
+            <li><strong>Niveau</strong><span>{location.level}</span></li>
+          </ul>
+          <button type="button" class="btn btn--primary k7ld__pricing-btn" data-product-book data-tag={location.tag}>Réserver</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RACE GRID SERVICES -->
+  <section class="k7ld__services" aria-labelledby="k7ld-svc-title">
+    <div class="container">
+      <div class="k7ld__svc-head reveal">
+        <div class="k7ld__svc-stripe" aria-hidden="true"></div>
+        <h2 id="k7ld-svc-title" class="k7ld__svc-title">Services inclus</h2>
+      </div>
+      <div class="k7ld__svc-grid">
+        {location.services.map((s, i) => (
+          <div class="k7ld__svc-item reveal" style={`--d:${i * 80}ms`}>
+            <span class="k7ld__svc-icon" aria-hidden="true">
+              {s.icon === 'anchor' && '⚓'}
+              {s.icon === 'users' && '👥'}
+              {s.icon === 'battery' && '🔋'}
+              {s.icon === 'shield' && '🛡️'}
+              {s.icon === 'sun' && '☀️'}
+              {s.icon === 'map' && '🗺️'}
+              {s.icon === 'zap' && '⚡'}
+            </span>
+            <span class="k7ld__svc-label">{s.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION ITINERARY -->
+  <section class="k7ld__itinerary" aria-labelledby="k7ld-itin-title">
+    <div class="container">
+      <div class="k7ld__itin-head reveal">
+        <div class="k7ld__itin-stripe" aria-hidden="true"></div>
+        <h2 id="k7ld-itin-title" class="k7ld__itin-title">Parcours suggérés</h2>
+      </div>
+      <div class="k7ld__itin-grid">
+        {location.itinerary.map((it, i) => (
+          <article class="k7ld__itin-card reveal" style={`--d:${i * 120}ms`}>
+            <span class="k7ld__itin-num">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="k7ld__itin-name">{it.title}</h3>
+            <p class="k7ld__itin-text">{it.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- OTHER LOCATIONS -->
+  <section class="k7ld__others" aria-labelledby="k7ld-others-title">
+    <div class="container">
+      <div class="k7ld__others-head reveal">
+        <div class="k7ld__others-stripe" aria-hidden="true"></div>
+        <h2 id="k7ld-others-title" class="k7ld__others-title">Autres locations</h2>
+      </div>
+      <div class="k7ld__others-grid">
+        {others.map((o, i) => (
+          <a href={`/v7/nos-locations/${o.slug}`} class="k7ld__others-card reveal" style={`--d:${i * 100}ms`}>
+            <img src={o.heroImage} alt={o.heroAlt} width="600" height="400" loading="lazy" decoding="async" />
+            <div class="k7ld__others-overlay">
+              <h3 class="k7ld__others-name">{o.shortTitle}</h3>
+              <span class="k7ld__others-price">dès {o.price}€</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</LayoutKinetic>
+
+<style>
+  /* ═══════════════ DETAIL HERO ═══════════════ */
+  .k7ld__hero {
+    position: relative;
+    min-height: 75svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .k7ld__hero-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .k7ld__hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .k7ld__hero-dim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.3) 0%, rgb(0 0 0 / 0.7) 100%);
+  }
+
+  .k7ld__hero-stripes {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgb(255 255 255 / 0.03) 40px,
+      rgb(255 255 255 / 0.03) 42px
+    );
+  }
+
+  .k7ld__hero-inner {
+    position: relative;
+    z-index: 1;
+    padding: calc(var(--header-h) + var(--s-10)) 0 var(--s-16);
+    animation: k7ld-up 800ms var(--ease-smooth) both;
+  }
+
+  @keyframes k7ld-up {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .k7ld__hero-back {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.5);
+    margin-bottom: var(--s-8);
+    transition: color var(--t-fast);
+  }
+
+  .k7ld__hero-back:hover { color: #fff; }
+
+  .k7ld__hero-tag {
+    display: inline-block;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    background: rgb(247 123 70 / 0.15);
+    padding: 5px 16px;
+    border-radius: var(--r-full);
+    margin-bottom: var(--s-6);
+  }
+
+  .k7ld__hero-title { margin-bottom: var(--s-5); }
+
+  .k7ld__hero-t1 {
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .k7ld__hero-sub {
+    font-size: 0.88rem;
+    color: rgb(255 255 255 / 0.55);
+    line-height: 1.7;
+    max-width: 45ch;
+    margin-bottom: var(--s-6);
+  }
+
+  .k7ld__hero-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+  }
+
+  .k7ld__highlight {
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgb(255 255 255 / 0.12);
+    padding: 4px 14px;
+    border-radius: var(--r-full);
+    backdrop-filter: blur(4px);
+  }
+
+  /* ═══════════════ ANGULAR PRICING ═══════════════ */
+  .k7ld__pricing {
+    position: relative;
+    padding: var(--s-section) 0;
+    background: var(--c-dark);
+  }
+
+  .k7ld__pricing-angle {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: transparent;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    background: var(--c-dark);
+    display: none;
+  }
+
+  .k7ld__pricing-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+    background: rgb(255 255 255 / 0.04);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: var(--r-sm);
+    padding: var(--s-10);
+  }
+
+  .k7ld__pricing-name {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: var(--s-5);
+  }
+
+  .k7ld__pricing-desc {
+    font-size: 0.85rem;
+    color: rgb(255 255 255 / 0.5);
+    line-height: 1.75;
+  }
+
+  .k7ld__pricing-right {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .k7ld__pricing-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .k7ld__pricing-amount {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--c-orange);
+  }
+
+  .k7ld__pricing-unit {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgb(255 255 255 / 0.4);
+  }
+
+  .k7ld__pricing-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .k7ld__pricing-meta li {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid rgb(255 255 255 / 0.06);
+    font-size: 0.8rem;
+  }
+
+  .k7ld__pricing-meta strong {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.62rem;
+    color: rgb(255 255 255 / 0.5);
+  }
+
+  .k7ld__pricing-meta span { color: #fff; font-weight: 500; }
+
+  .k7ld__pricing-btn { align-self: flex-start; }
+
+  @media (min-width: 768px) {
+    .k7ld__pricing-card { grid-template-columns: 1.3fr 1fr; }
+  }
+
+  /* ═══════════════ RACE SERVICES ═══════════════ */
+  .k7ld__services {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .k7ld__svc-head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    margin-bottom: var(--s-10);
+  }
+
+  .k7ld__svc-stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .k7ld__svc-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .k7ld__svc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-5);
+  }
+
+  .k7ld__svc-item {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    padding: var(--s-5);
+    background: var(--c-surface);
+    border-radius: var(--r-sm);
+    border-left: 3px solid var(--c-orange);
+  }
+
+  .k7ld__svc-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+  .k7ld__svc-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--c-text);
+  }
+
+  @media (min-width: 768px) {
+    .k7ld__svc-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ═══════════════ MOTION ITINERARY ═══════════════ */
+  .k7ld__itinerary {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+  }
+
+  .k7ld__itin-head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    margin-bottom: var(--s-10);
+  }
+
+  .k7ld__itin-stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .k7ld__itin-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .k7ld__itin-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+
+  .k7ld__itin-card {
+    padding: var(--s-6);
+    background: var(--c-bg);
+    border-radius: var(--r-sm);
+    border: 1px solid var(--c-border-light);
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+
+  .k7ld__itin-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgb(0 0 0 / 0.08);
+  }
+
+  .k7ld__itin-num {
+    display: inline-block;
+    font-size: 0.55rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--c-orange);
+    margin-bottom: var(--s-3);
+  }
+
+  .k7ld__itin-name {
+    font-size: 1.05rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--s-3);
+  }
+
+  .k7ld__itin-text {
+    font-size: 0.82rem;
+    color: var(--c-text-secondary);
+    line-height: 1.7;
+  }
+
+  @media (min-width: 768px) {
+    .k7ld__itin-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ═══════════════ OTHERS ═══════════════ */
+  .k7ld__others {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .k7ld__others-head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    margin-bottom: var(--s-10);
+  }
+
+  .k7ld__others-stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .k7ld__others-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .k7ld__others-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+  }
+
+  .k7ld__others-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--r-sm);
+    aspect-ratio: 4 / 3;
+    display: block;
+  }
+
+  .k7ld__others-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .k7ld__others-card:hover img { transform: scale(1.06); }
+
+  .k7ld__others-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--s-5);
+    background: linear-gradient(180deg, transparent 40%, rgb(0 0 0 / 0.65) 100%);
+    pointer-events: none;
+  }
+
+  .k7ld__others-name {
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .k7ld__others-price {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--c-orange);
+    margin-top: 2px;
+  }
+
+  @media (min-width: 768px) {
+    .k7ld__others-grid { grid-template-columns: repeat(4, 1fr); }
+    .k7ld__others-name { font-size: 1.1rem; }
+  }
+
+  /* ═══════════════ MOTION ═══════════════ */
+  @media (prefers-reduced-motion: reduce) {
+    .k7ld__hero-inner { animation: none; }
+    .k7ld__itin-card { transition: none; }
+    .k7ld__others-card img { transition: none; }
+  }
+</style>

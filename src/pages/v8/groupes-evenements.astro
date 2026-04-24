@@ -1,0 +1,419 @@
+---
+import LayoutMarketing from '../../layouts/LayoutMarketing.astro';
+import { proFormulas, privateFormulas } from '../../data/events';
+
+const allFormulas = [...proFormulas, ...privateFormulas];
+
+const companies = [
+  { name: 'Airbus', count: '120 collaborateurs' },
+  { name: 'Orange', count: '85 collaborateurs' },
+  { name: 'Decathlon', count: '60 collaborateurs' },
+  { name: 'Thales', count: '45 collaborateurs' },
+  { name: 'SNCF', count: '90 collaborateurs' },
+  { name: 'EDF', count: '70 collaborateurs' },
+];
+
+const stats = [
+  { value: '200+', label: 'événements organisés' },
+  { value: '98%', label: 'taux de satisfaction' },
+  { value: '15 000+', label: 'participants accueillis' },
+  { value: '10+', label: 'ans d\'expérience' },
+];
+---
+
+<LayoutMarketing
+  title="Événements pro & privés — Surf Center · Lac de Sainte-Croix"
+  description="Organisez votre team building, séminaire, EVJF ou fête privée au bord du lac de Sainte-Croix. Devis gratuit, formules clé en main."
+>
+  <!-- HERO -->
+  <section class="m8__evhero" aria-labelledby="m8-ev-title">
+    <div class="m8__evhero-overlay" aria-hidden="true"></div>
+    <div class="container m8__evhero-inner">
+      <div class="m8__evhero-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        Organisateur certifié · Assurance incluse
+      </div>
+      <span class="section__eyebrow m8__evhero-ey">Groupes & Événements</span>
+      <h1 id="m8-ev-title" class="m8__evhero-title">Événements<br/>pro & privés</h1>
+      <p class="m8__evhero-lead">
+        Séminaires, team building, EVJF, anniversaires — organisez votre événement<br/>
+        dans un cadre exceptionnel au bord du lac de Sainte-Croix.
+      </p>
+      <div class="m8__evhero-proof">
+        <span class="m8__evhero-proof-dot" aria-hidden="true"></span>
+        200+ événements réussis · 98% de satisfaction
+      </div>
+      <div class="m8__evhero-actions">
+        <a href="#devis" class="btn btn--primary btn--lg m8__evhero-cta">
+          <span class="btn-flip__inner"><span class="btn-flip__front">Demander un devis gratuit</span><span class="btn-flip__back">Demander un devis gratuit</span></span>
+        </a>
+        <a href="#formules" class="btn btn--ghost btn--lg">Voir les formules</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRO FORMULAS -->
+  <section id="formules" class="section" aria-labelledby="m8-pro-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Entreprises</span>
+        <h2 id="m8-pro-title">Formules<br/>professionnelles</h2>
+        <p class="section__lead">Du team building au séminaire, nous organisons tout pour vous.</p>
+      </header>
+
+      <div class="m8__ev-grid">
+        {proFormulas.map((f, i) => (
+          <div class={`m8__ev-card reveal reveal-d${Math.min(i + 1, 4)}`}>
+            <div class="m8__ev-card-img">
+              <img src={f.image} alt={f.alt} loading="lazy" decoding="async" width="600" height="400" />
+            </div>
+            <div class="m8__ev-card-body">
+              <h3 class="m8__ev-card-title">{f.title}</h3>
+              <p class="m8__ev-card-desc">{f.description}</p>
+              <span class="m8__ev-card-cap">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M22 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                {f.capacity}
+              </span>
+              <ul class="m8__ev-card-features" role="list">
+                {f.features.map((feat) => (
+                  <li>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3.5 7l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    {feat}
+                  </li>
+                ))}
+              </ul>
+              <div class="m8__ev-card-price">
+                <span class="m8__ev-card-price-label">Sur devis</span>
+                <span class="m8__ev-card-price-sub">Réponse sous 24h</span>
+              </div>
+              <a href="#devis" class="btn btn--primary m8__ev-card-btn">
+                <span class="btn-flip__inner"><span class="btn-flip__front">Demander un devis</span><span class="btn-flip__back">Demander un devis</span></span>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVATE FORMULAS -->
+  <section class="section section--surface" aria-labelledby="m8-priv-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Événements privés</span>
+        <h2 id="m8-priv-title">Célébrez vos<br/>moments forts</h2>
+        <p class="section__lead">EVJF, anniversaires, concerts privés — le lac comme décor de rêve.</p>
+      </header>
+
+      <div class="m8__ev-grid">
+        {privateFormulas.map((f, i) => (
+          <div class={`m8__ev-card reveal reveal-d${Math.min(i + 1, 4)}`}>
+            <div class="m8__ev-card-img">
+              <img src={f.image} alt={f.alt} loading="lazy" decoding="async" width="600" height="400" />
+            </div>
+            <div class="m8__ev-card-body">
+              <h3 class="m8__ev-card-title">{f.title}</h3>
+              <p class="m8__ev-card-desc">{f.description}</p>
+              <span class="m8__ev-card-cap">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M22 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                {f.capacity}
+              </span>
+              <ul class="m8__ev-card-features" role="list">
+                {f.features.map((feat) => (
+                  <li>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3.5 7l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    {feat}
+                  </li>
+                ))}
+              </ul>
+              <div class="m8__ev-card-price">
+                <span class="m8__ev-card-price-label">Sur devis</span>
+                <span class="m8__ev-card-price-sub">Devis gratuit en 24h</span>
+              </div>
+              <a href="#devis" class="btn btn--primary m8__ev-card-btn">
+                <span class="btn-flip__inner"><span class="btn-flip__front">Demander un devis</span><span class="btn-flip__back">Demander un devis</span></span>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF WALL -->
+  <section class="section" aria-labelledby="m8-proof-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Ils nous font confiance</span>
+        <h2 id="m8-proof-title">+200 événements<br/>réussis</h2>
+      </header>
+
+      <div class="m8__proof-stats reveal">
+        {stats.map((s) => (
+          <div class="m8__proof-stat">
+            <strong class="m8__proof-stat-val">{s.value}</strong>
+            <span class="m8__proof-stat-label">{s.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="m8__proof-logos reveal reveal-d1">
+        {companies.map((c) => (
+          <div class="m8__proof-logo">
+            <span class="m8__proof-logo-name">{c.name}</span>
+            <span class="m8__proof-logo-count">{c.count}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="m8__proof-quotes">
+        <blockquote class="m8__proof-quote reveal reveal-d1">
+          <div class="m8__proof-quote-stars" aria-label="5 étoiles sur 5">★★★★★</div>
+          <p>"Organisation parfaite pour notre team building de 60 personnes. Le cadre est incroyable, l'équipe très pro. Nos collaborateurs en parlent encore !"</p>
+          <footer>
+            <cite>Marie D. — DRH, Airbus Provence</cite>
+          </footer>
+        </blockquote>
+        <blockquote class="m8__proof-quote reveal reveal-d2">
+          <div class="m8__proof-quote-stars" aria-label="5 étoiles sur 5">★★★★★</div>
+          <p>"Un EVJF de rêve ! Paddle au coucher du soleil, pizzas face au lac... Les filles ont adoré. Merci pour cette journée magique."</p>
+          <footer>
+            <cite>Léa R. — EVJF, Août 2025</cite>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section id="devis" class="m8__ev-cta" aria-labelledby="m8-evcta-title">
+    <div class="m8__ev-cta-overlay" aria-hidden="true"></div>
+    <div class="container m8__ev-cta-inner reveal">
+      <span class="section__eyebrow" style="color: var(--c-orange);">Devis gratuit</span>
+      <h2 id="m8-evcta-title" class="m8__ev-cta-title">Demandez votre<br/>devis gratuit</h2>
+      <p class="m8__ev-cta-text">
+        Décrivez votre projet et recevez une proposition personnalisée sous 24h.<br/>
+        Notre équipe s'occupe de tout — vous n'avez plus qu'à profiter.
+      </p>
+      <div class="m8__ev-cta-proof">
+        <span class="m8__ev-cta-proof-dot" aria-hidden="true"></span>
+        Réponse garantie sous 24h · Sans engagement
+      </div>
+      <div class="m8__ev-cta-actions">
+        <a href="tel:+33492771450" class="btn btn--primary btn--lg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="margin-right:6px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.35a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.75.32 1.54.55 2.35.68A2 2 0 0 1 22 16.92Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          04 92 77 14 50
+        </a>
+        <button type="button" class="btn btn--ghost btn--lg" data-booking>
+          <span class="btn-flip__inner"><span class="btn-flip__front">Réserver en ligne</span><span class="btn-flip__back">Réserver en ligne</span></span>
+        </button>
+      </div>
+      <p class="m8__ev-cta-micro">Ou écrivez-nous : contact@surfcenter-verdon.fr</p>
+    </div>
+  </section>
+</LayoutMarketing>
+
+<style>
+  /* HERO */
+  .m8__evhero {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('/concert-surfcenter-lac-sainte-croix.png') center / cover no-repeat;
+    color: #fff;
+  }
+  .m8__evhero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.6) 0%, rgb(0 0 0 / 0.4) 40%, rgb(0 0 0 / 0.75) 100%);
+    z-index: 1;
+  }
+  .m8__evhero-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 48rem;
+    margin-inline: auto;
+    padding-block: calc(var(--header-h) + var(--s-12)) var(--s-16);
+  }
+  .m8__evhero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 0.4rem 1rem;
+    border-radius: var(--r-full);
+    background: rgb(255 255 255 / 0.08);
+    border: 1px solid rgb(255 255 255 / 0.15);
+    backdrop-filter: blur(12px);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.7);
+    margin-bottom: var(--s-8);
+    animation: fade-up 700ms var(--ease-smooth) 100ms both;
+  }
+  .m8__evhero-badge svg { color: #4ade80; }
+  .m8__evhero-ey { color: var(--c-orange) !important; animation: fade-up 700ms var(--ease-smooth) 200ms both; }
+  .m8__evhero-title {
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: #fff !important;
+    margin-bottom: var(--s-6);
+    text-shadow: 0 4px 40px rgb(0 0 0 / 0.5);
+    animation: fade-up 700ms var(--ease-smooth) 350ms both;
+  }
+  .m8__evhero-lead {
+    font-size: clamp(0.88rem, 1.6vw, 1.05rem);
+    color: rgb(255 255 255 / 0.7) !important;
+    line-height: 1.7;
+    margin-bottom: var(--s-6);
+    animation: fade-up 700ms var(--ease-smooth) 500ms both;
+  }
+  .m8__evhero-proof {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 0.4rem 1rem;
+    border-radius: var(--r-full);
+    background: rgb(255 255 255 / 0.06);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.5);
+    margin-bottom: var(--s-10);
+    animation: fade-up 700ms var(--ease-smooth) 600ms both;
+  }
+  .m8__evhero-proof-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+    animation: m8-evpulse 2s ease-in-out infinite;
+  }
+  @keyframes m8-evpulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .m8__evhero-actions {
+    display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap;
+    animation: fade-up 700ms var(--ease-smooth) 700ms both;
+  }
+  .m8__evhero-cta { box-shadow: 0 4px 30px rgb(247 123 70 / 0.4); }
+
+  /* FORMULA CARDS */
+  .m8__ev-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+  .m8__ev-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--c-bg);
+    border-radius: var(--r-lg);
+    border: 1.5px solid var(--c-border-light);
+    overflow: hidden;
+    transition: border-color var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
+  }
+  .m8__ev-card:hover { border-color: var(--c-border); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .m8__ev-card-img { aspect-ratio: 16 / 9; overflow: hidden; }
+  .m8__ev-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+  .m8__ev-card:hover .m8__ev-card-img img { transform: scale(1.04); }
+  .m8__ev-card-body { padding: var(--s-6); display: flex; flex-direction: column; flex: 1; }
+  .m8__ev-card-title {
+    font-size: 1.1rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.04em; margin-bottom: var(--s-2);
+  }
+  .m8__ev-card-desc { font-size: 0.85rem; color: var(--c-text-secondary); line-height: 1.6; margin-bottom: var(--s-4); }
+  .m8__ev-card-cap {
+    display: inline-flex; align-items: center; gap: var(--s-2);
+    font-size: 0.72rem; font-weight: 600; color: var(--c-orange);
+    margin-bottom: var(--s-4);
+  }
+  .m8__ev-card-features { display: flex; flex-direction: column; gap: var(--s-2); margin-bottom: var(--s-5); flex: 1; }
+  .m8__ev-card-features li { display: flex; align-items: center; gap: var(--s-2); font-size: 0.78rem; color: var(--c-text-secondary); }
+  .m8__ev-card-features svg { color: var(--c-orange); flex-shrink: 0; }
+  .m8__ev-card-price { margin-bottom: var(--s-4); }
+  .m8__ev-card-price-label {
+    font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; color: var(--c-text);
+    display: block;
+  }
+  .m8__ev-card-price-sub { font-size: 0.68rem; color: var(--c-text-muted); }
+  .m8__ev-card-btn { width: 100%; justify-content: center; }
+
+  @media (min-width: 768px) { .m8__ev-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .m8__ev-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  /* PROOF WALL */
+  .m8__proof-stats {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-4);
+    margin-bottom: var(--s-12);
+  }
+  .m8__proof-stat { text-align: center; padding: var(--s-5); background: var(--c-surface); border-radius: var(--r-lg); border: 1px solid var(--c-border-light); }
+  .m8__proof-stat-val { display: block; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--c-orange); letter-spacing: -0.02em; margin-bottom: var(--s-1); }
+  .m8__proof-stat-label { font-size: 0.68rem; font-weight: 500; color: var(--c-text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  @media (min-width: 768px) { .m8__proof-stats { grid-template-columns: repeat(4, 1fr); } }
+
+  .m8__proof-logos {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-4);
+    margin-bottom: var(--s-12);
+  }
+  .m8__proof-logo {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: var(--s-5) var(--s-4); background: var(--c-surface);
+    border-radius: var(--r-lg); border: 1px solid var(--c-border-light);
+    transition: border-color var(--t-fast);
+  }
+  .m8__proof-logo:hover { border-color: var(--c-border); }
+  .m8__proof-logo-name { font-size: 1rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-text); }
+  .m8__proof-logo-count { font-size: 0.65rem; color: var(--c-text-muted); margin-top: 2px; }
+
+  @media (min-width: 600px) { .m8__proof-logos { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1000px) { .m8__proof-logos { grid-template-columns: repeat(6, 1fr); } }
+
+  .m8__proof-quotes { display: grid; grid-template-columns: 1fr; gap: var(--s-5); }
+  .m8__proof-quote {
+    padding: var(--s-6) var(--s-7); background: var(--c-surface);
+    border-radius: var(--r-lg); border: 1px solid var(--c-border-light);
+    margin: 0;
+  }
+  .m8__proof-quote-stars { font-size: 0.85rem; color: #fbbf24; letter-spacing: 2px; margin-bottom: var(--s-3); }
+  .m8__proof-quote p { font-size: 0.92rem; line-height: 1.7; color: var(--c-text); font-style: italic; margin-bottom: var(--s-4); }
+  .m8__proof-quote cite { font-style: normal; font-size: 0.75rem; font-weight: 600; color: var(--c-text-muted); }
+
+  @media (min-width: 768px) { .m8__proof-quotes { grid-template-columns: repeat(2, 1fr); } }
+
+  /* CLOSING CTA */
+  .m8__ev-cta {
+    position: relative; overflow: hidden; color: #fff;
+    min-height: 60vh; display: flex; align-items: center;
+    background: url('/trophee-hobie-shop-lac-sainte-croix-surf-center.jpeg') center / cover no-repeat;
+  }
+  .m8__ev-cta-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgb(10 10 10 / 0.7) 0%, rgb(10 10 10 / 0.85) 100%);
+  }
+  .m8__ev-cta-inner {
+    position: relative; z-index: 2; text-align: center;
+    max-width: 42rem; margin-inline: auto; padding-block: var(--s-20);
+  }
+  .m8__ev-cta-title {
+    font-size: clamp(2rem, 5.5vw, 3.5rem); font-weight: 800;
+    letter-spacing: -0.03em; color: #fff; margin-bottom: var(--s-5);
+  }
+  .m8__ev-cta-text { font-size: 0.95rem; color: rgb(255 255 255 / 0.6); line-height: 1.7; margin-bottom: var(--s-6); }
+  .m8__ev-cta-proof {
+    display: inline-flex; align-items: center; gap: var(--s-2);
+    margin-bottom: var(--s-10); padding: 0.4rem 1rem;
+    border-radius: var(--r-full); background: rgb(255 255 255 / 0.08);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    font-size: 0.62rem; font-weight: 600; color: rgb(255 255 255 / 0.5);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .m8__ev-cta-proof-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: m8-evpulse 2s ease-in-out infinite; }
+  .m8__ev-cta-actions { display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap; }
+  .m8__ev-cta-micro { margin-top: var(--s-5); font-size: 0.68rem; color: rgb(255 255 255 / 0.35); letter-spacing: 0.04em; }
+</style>

@@ -1,0 +1,634 @@
+---
+import { Image } from 'astro:assets';
+import logoImg from '../../assets/images/logo-surf-center.png';
+
+const navLinks = [
+  { label: "Nos locations", href: "/v8/nos-locations" },
+  { label: "L'esprit Surf Center", href: "/v8/esprit-surf-center" },
+  { label: "Restauration", href: "/v8/restauration" },
+  { label: "Animations", href: "/v8/animations" },
+  { label: "Groupes & Événements", href: "/v8/groupes-evenements" },
+  { label: "Blog", href: "/v8/blog" },
+];
+---
+
+<a href="#main-content" class="hm8__skip">Aller au contenu principal</a>
+
+<div class="hm8__trust-bar">
+  <div class="container hm8__trust-inner">
+    <span class="hm8__trust-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      N°1 du lac de Sainte-Croix
+    </span>
+    <span class="hm8__trust-sep" aria-hidden="true">·</span>
+    <span class="hm8__trust-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2Z" fill="currentColor"/></svg>
+      4.8★
+    </span>
+    <span class="hm8__trust-sep" aria-hidden="true">·</span>
+    <span class="hm8__trust-item">320+ avis vérifiés</span>
+  </div>
+</div>
+
+<header class="hm8" data-hm8>
+  <div class="container hm8__inner">
+    <a href="/v8" class="hm8__logo" aria-label="Surf Center — Accueil">
+      <Image
+        class="hm8__logo-img hm8__logo-img--light"
+        src={logoImg}
+        alt=""
+        width={60}
+        height={56}
+        loading="eager"
+        format="webp"
+        quality={85}
+      />
+      <Image
+        class="hm8__logo-img hm8__logo-img--dark"
+        src={logoImg}
+        alt=""
+        width={60}
+        height={56}
+        loading="eager"
+        format="webp"
+        quality={85}
+      />
+    </a>
+
+    <nav class="hm8__nav" aria-label="Navigation principale">
+      <ul role="list">
+        {navLinks.map((link) => (
+          <li><a href={link.href} class="link-anim">{link.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="hm8__end">
+      <button
+        class="hm8__theme"
+        type="button"
+        data-theme-toggle-m8
+        aria-label="Changer de thème"
+      >
+        <svg class="hm8__theme-icon hm8__theme-icon--sun" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="3.5" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M9 2v1.5M9 14.5V16M2 9h1.5M14.5 9H16M4.05 4.05l1.06 1.06M12.89 12.89l1.06 1.06M4.05 13.95l1.06-1.06M12.89 5.11l1.06-1.06" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <svg class="hm8__theme-icon hm8__theme-icon--moon" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M15.1 10.63A6.5 6.5 0 0 1 7.37 2.9 6.5 6.5 0 1 0 15.1 10.63Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <a href="/v8/nos-locations" class="hm8__cta">
+        <span class="hm8__cta-pulse" aria-hidden="true"></span>
+        Réserver maintenant
+      </a>
+
+      <button
+        class="hm8__burger"
+        type="button"
+        data-menu-toggle-m8
+        aria-expanded="false"
+        aria-label="Menu de navigation"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="hm8__mmenu" id="mobile-menu-m8" hidden>
+  <div class="hm8__mmenu-inner">
+    <nav class="hm8__mmenu-nav" aria-label="Navigation mobile">
+      <ul role="list">
+        {navLinks.map((link, i) => (
+          <li class="hm8__mmenu-item" style={`--delay: ${i * 60}ms`}>
+            <a href={link.href} class="hm8__mmenu-link">
+              <span class="hm8__mmenu-label">{link.label}</span>
+              <svg class="hm8__mmenu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="hm8__mmenu-actions" style="--delay: 360ms">
+      <a href="/v8/nos-locations" class="btn btn--primary hm8__mmenu-book">Réserver maintenant</a>
+      <a href="/v8/acces-contact" class="btn btn--outline hm8__mmenu-contact-btn">Accès & Contact</a>
+    </div>
+
+    <div class="hm8__mmenu-trust" style="--delay: 450ms">
+      <span>N°1 du lac de Sainte-Croix</span>
+      <span>·</span>
+      <span>4.8★ · 320+ avis</span>
+    </div>
+
+    <div class="hm8__mmenu-footer" style="--delay: 500ms">
+      <a href="tel:+33492771450" class="hm8__mmenu-phone">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M6.5 2.5H4a1.5 1.5 0 0 0-1.5 1.5A9.5 9.5 0 0 0 12 13.5a1.5 1.5 0 0 0 1.5-1.5v-2.5l-3-1.5-1.5 1.5a7.5 7.5 0 0 1-3.5-3.5L7 4.5l-.5-2Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+        04 92 77 14 50
+      </a>
+      <p class="hm8__mmenu-address">Les Salles-sur-Verdon · Gorges du Verdon</p>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+(function () {
+  var header = document.querySelector('[data-hm8]');
+  if (!header) return;
+
+  var lastY = 0;
+  var ticking = false;
+
+  function onScroll() {
+    ticking = false;
+    var y = window.scrollY;
+    header.classList.toggle('is-scrolled', y > 60);
+    lastY = y;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+
+  onScroll();
+
+  var toggle = document.querySelector('[data-menu-toggle-m8]');
+  var menu = document.getElementById('mobile-menu-m8');
+
+  if (toggle && menu) {
+    var setOpen = function (open) {
+      toggle.setAttribute('aria-expanded', String(open));
+      menu.hidden = !open;
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (open) menu.classList.add('is-open');
+      else menu.classList.remove('is-open');
+    };
+
+    toggle.addEventListener('click', function () {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    menu.querySelectorAll('a, button').forEach(function (el) {
+      el.addEventListener('click', function () { setOpen(false); });
+    });
+  }
+
+  var themeBtn = document.querySelector('[data-theme-toggle-m8]');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function () {
+      var cur = document.documentElement.getAttribute('data-theme');
+      var next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      var meta = document.getElementById('meta-theme-color');
+      if (meta) meta.setAttribute('content', next === 'dark' ? '#0a0a0a' : '#ffffff');
+    });
+  }
+})();
+</script>
+
+<style>
+  /* ========== Skip link ========== */
+  .hm8__skip {
+    position: absolute;
+    top: -100%;
+    left: var(--s-4);
+    z-index: 200;
+    padding: var(--s-2) var(--s-6);
+    background: var(--c-orange);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .hm8__skip:focus { top: var(--s-2); }
+
+  /* ========== Trust bar ========== */
+  .hm8__trust-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 101;
+    background: var(--c-dark);
+    color: rgb(255 255 255 / 0.8);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: transform 0.35s var(--ease);
+  }
+
+  .hm8__trust-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-2);
+    padding-block: 0.45rem;
+    flex-wrap: wrap;
+  }
+
+  .hm8__trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  .hm8__trust-item svg { color: var(--c-orange); }
+
+  .hm8__trust-sep {
+    color: rgb(255 255 255 / 0.25);
+    margin-inline: var(--s-1);
+  }
+
+  :global([data-theme='dark']) .hm8__trust-bar {
+    background: #000;
+  }
+
+  /* ========== Header ========== */
+  .hm8 {
+    position: fixed;
+    inset-inline: 0;
+    top: 1.7rem;
+    z-index: 100;
+    height: var(--header-h);
+    transition: all var(--t-normal) var(--ease-smooth);
+  }
+
+  .hm8.is-scrolled {
+    background: var(--c-header-bg);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-bottom: 1px solid var(--c-header-border);
+  }
+
+  .hm8__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: var(--s-10);
+  }
+
+  /* ========== Logo ========== */
+  .hm8__logo {
+    z-index: 101;
+    display: flex;
+    align-items: center;
+  }
+
+  .hm8__logo-img {
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .hm8__logo-img--light { display: block; }
+  .hm8__logo-img--dark { display: none; }
+
+  .hm8.is-scrolled .hm8__logo-img--light { display: none; }
+  .hm8.is-scrolled .hm8__logo-img--dark { display: block; }
+
+  :global([data-theme='dark']) .hm8.is-scrolled .hm8__logo-img--light { display: block; }
+  :global([data-theme='dark']) .hm8.is-scrolled .hm8__logo-img--dark { display: none; }
+
+  /* ========== Nav ========== */
+  .hm8__nav { display: none; }
+  .hm8__nav ul {
+    display: flex;
+    align-items: center;
+    gap: var(--s-8);
+    flex-wrap: nowrap;
+  }
+  .hm8__nav a {
+    font-size: 0.68rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgb(255 255 255 / 0.7);
+    transition: color var(--t-fast);
+    padding: var(--s-2) 0;
+    white-space: nowrap;
+  }
+  .hm8__nav a:hover { color: #fff; }
+
+  .hm8.is-scrolled .hm8__nav a { color: var(--c-header-text); }
+  .hm8.is-scrolled .hm8__nav a:hover { color: var(--c-header-text-hover); }
+
+  /* ========== End actions ========== */
+  .hm8__end {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    z-index: 101;
+  }
+
+  /* Theme toggle */
+  .hm8__theme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: rgb(255 255 255 / 0.7);
+    transition: color var(--t-fast);
+  }
+  .hm8__theme:hover { color: #fff; }
+  .hm8.is-scrolled .hm8__theme { color: var(--c-header-text); }
+  .hm8.is-scrolled .hm8__theme:hover { color: var(--c-header-text-hover); }
+
+  .hm8__theme-icon--sun { display: none; }
+  .hm8__theme-icon--moon { display: block; }
+  :global([data-theme='dark']) .hm8__theme-icon--sun { display: block; }
+  :global([data-theme='dark']) .hm8__theme-icon--moon { display: none; }
+
+  /* ========== CTA button ========== */
+  .hm8__cta {
+    position: relative;
+    display: none;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 0.6rem 1.6rem;
+    background: var(--c-orange);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: var(--r-full);
+    white-space: nowrap;
+    transition: background var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
+  }
+
+  .hm8__cta:hover {
+    background: var(--c-orange-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-glow);
+    color: #fff;
+  }
+
+  .hm8__cta:active { transform: scale(0.97); }
+
+  .hm8__cta-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    transform: translate(-50%, -50%);
+    border: 2px solid var(--c-orange);
+    animation: hm8-pulse 2.5s ease-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes hm8-pulse {
+    0% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.35); }
+  }
+
+  /* ========== Burger ========== */
+  .hm8__burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgb(0 0 0 / 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0;
+    transition: background var(--t-fast), border-color var(--t-fast);
+  }
+  .hm8.is-scrolled .hm8__burger {
+    background: var(--c-surface);
+    border-color: var(--c-border-light);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .hm8__burger span {
+    display: block;
+    width: 1.1rem;
+    height: 1.5px;
+    background: #fff;
+    border-radius: 1px;
+    transition: all var(--t-normal) var(--ease);
+    transform-origin: center;
+  }
+  .hm8.is-scrolled .hm8__burger span { background: var(--c-header-burger); }
+  .hm8__burger[aria-expanded='true'] {
+    background: transparent;
+    border-color: transparent;
+  }
+  .hm8__burger[aria-expanded='true'] span { background: var(--c-text) !important; }
+  .hm8__burger[aria-expanded='true'] span:first-child {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+  .hm8__burger[aria-expanded='true'] span:last-child {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
+
+  /* ========== Mobile menu ========== */
+  .hm8__mmenu {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: var(--c-bg);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .hm8__mmenu[hidden] { display: none; }
+
+  .hm8__mmenu-inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: calc(var(--header-h) + 2.5rem) var(--s-6) var(--s-8);
+  }
+
+  .hm8__mmenu-nav { flex: 1; }
+  .hm8__mmenu-nav ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hm8__mmenu-item {
+    border-bottom: 1px solid var(--c-border-light);
+    opacity: 0;
+    transform: translateX(20px);
+    transition:
+      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay);
+  }
+  .hm8__mmenu.is-open .hm8__mmenu-item {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .hm8__mmenu-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--s-5) 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--c-text);
+    text-decoration: none;
+    transition: color var(--t-fast);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hm8__mmenu-link:hover,
+  .hm8__mmenu-link:active { color: var(--c-orange); }
+
+  .hm8__mmenu-label { flex: 1; text-align: left; }
+
+  .hm8__mmenu-arrow {
+    flex-shrink: 0;
+    color: var(--c-text-muted);
+    transition: transform var(--t-fast) var(--ease), color var(--t-fast);
+  }
+  .hm8__mmenu-link:hover .hm8__mmenu-arrow {
+    color: var(--c-orange);
+    transform: translateX(4px);
+  }
+
+  .hm8__mmenu-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-top: var(--s-8);
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay);
+  }
+  .hm8__mmenu.is-open .hm8__mmenu-actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hm8__mmenu-book,
+  .hm8__mmenu-contact-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .hm8__mmenu-trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-2);
+    margin-top: var(--s-6);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--c-orange);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay);
+  }
+  .hm8__mmenu.is-open .hm8__mmenu-trust {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hm8__mmenu-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-2);
+    margin-top: var(--s-10);
+    padding-top: var(--s-6);
+    border-top: 1px solid var(--c-border-light);
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay);
+  }
+  .hm8__mmenu.is-open .hm8__mmenu-footer {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hm8__mmenu-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--c-text);
+    text-decoration: none;
+    transition: color var(--t-fast);
+  }
+  .hm8__mmenu-phone:hover { color: var(--c-orange); }
+
+  .hm8__mmenu-address {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+  }
+
+  /* ========== Responsive ========== */
+  @media (min-width: 960px) {
+    .hm8__nav { display: block; }
+    .hm8__cta { display: inline-flex; }
+    .hm8__burger { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .hm8__trust-inner { font-size: 0.58rem; gap: var(--s-1); }
+    .hm8__trust-sep { margin-inline: 2px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hm8__mmenu-item,
+    .hm8__mmenu-actions,
+    .hm8__mmenu-trust,
+    .hm8__mmenu-footer {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+    .hm8__cta-pulse { animation: none; }
+  }
+</style>

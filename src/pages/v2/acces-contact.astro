@@ -1,0 +1,585 @@
+---
+import LayoutDesign from '../../layouts/LayoutDesign.astro';
+import { Image } from 'astro:assets';
+import espritImg from '../../assets/images/esprit.png';
+
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Accès & Contact — Surf Center',
+  description: 'Coordonnées et plan d\'accès au Surf Center, base nautique au lac de Sainte-Croix, Les Salles-sur-Verdon.',
+  url: `${siteUrl}/v2/acces-contact`,
+  mainEntity: {
+    '@type': 'LocalBusiness',
+    name: 'Surf Center',
+    telephone: '+33492771450',
+    email: 'contact@surfcenter-verdon.fr',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Plage des Salles-sur-Verdon',
+      addressLocality: 'Les Salles-sur-Verdon',
+      postalCode: '83630',
+      addressRegion: 'Provence-Alpes-Côte d\'Azur',
+      addressCountry: 'FR',
+    },
+    geo: { '@type': 'GeoCoordinates', latitude: 43.7766, longitude: 6.21 },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+        opens: '09:00',
+        closes: '19:00',
+        validFrom: '2026-04-01',
+        validThrough: '2026-10-31',
+      },
+    ],
+  },
+};
+
+const routes = [
+  { city: 'Aix-en-Provence', time: '1h15', direction: 'A51 puis D952' },
+  { city: 'Marseille', time: '1h30', direction: 'A51 puis D952' },
+  { city: 'Nice', time: '2h00', direction: 'A8 puis D6085' },
+  { city: 'Toulon', time: '1h30', direction: 'A57 puis A8' },
+  { city: 'Avignon', time: '1h45', direction: 'A7 puis D952' },
+  { city: 'Gap', time: '1h30', direction: 'N85 puis D952' },
+];
+
+const climate = [
+  { label: 'Ensoleillement', value: '300j/an', icon: 'sun' },
+  { label: 'Eau en été', value: '22–24°C', icon: 'water' },
+  { label: 'Air en été', value: '28–35°C', icon: 'thermo' },
+  { label: 'Saison', value: 'Avr — Oct', icon: 'calendar' },
+];
+---
+
+<LayoutDesign
+  title="Accès & Contact — Surf Center | Lac de Sainte-Croix"
+  description="Retrouvez les coordonnées, horaires et plan d'accès du Surf Center. Base nautique au lac de Sainte-Croix, Les Salles-sur-Verdon, Gorges du Verdon."
+  jsonLd={jsonLd}
+>
+  <!-- HERO -->
+  <section class="dcon-hero">
+    <div class="dcon-hero__bg" aria-hidden="true">
+      <Image
+        src={espritImg}
+        alt=""
+        width={1920}
+        height={900}
+        class="dcon-hero__bgimg"
+        loading="eager"
+      />
+    </div>
+    <div class="container dcon-hero__inner">
+      <div class="dcon-hero__card reveal">
+        <span class="dcon-hero__eyebrow">Surf Center · Gorges du Verdon</span>
+        <h1 class="dcon-hero__title">Accès &<br/>Contact</h1>
+        <p class="dcon-hero__tagline">Base nautique au lac de Sainte-Croix, Les Salles-sur-Verdon. Ouverte d'avril à octobre, tous les jours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT INFO CARDS -->
+  <section class="section dcon-info" aria-labelledby="dcon-info-title">
+    <div class="container">
+      <header class="dcon-info__header reveal">
+        <span class="dcon-info__eyebrow">Informations</span>
+        <h2 id="dcon-info-title" class="dcon-info__heading">Nous trouver</h2>
+      </header>
+      <div class="dcon-info__grid">
+        <div class="dcon-info__card reveal">
+          <div class="dcon-info__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 class="dcon-info__label">Adresse</h3>
+          <p class="dcon-info__value">Plage des Salles-sur-Verdon<br/>83630 Les Salles-sur-Verdon</p>
+        </div>
+        <div class="dcon-info__card reveal">
+          <div class="dcon-info__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <h3 class="dcon-info__label">Téléphone</h3>
+          <p class="dcon-info__value"><a href="tel:+33492771450">04 92 77 14 50</a></p>
+        </div>
+        <div class="dcon-info__card reveal">
+          <div class="dcon-info__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h3 class="dcon-info__label">Email</h3>
+          <p class="dcon-info__value"><a href="mailto:contact@surfcenter-verdon.fr">contact@surfcenter-verdon.fr</a></p>
+        </div>
+        <div class="dcon-info__card reveal">
+          <div class="dcon-info__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 class="dcon-info__label">Horaires</h3>
+          <p class="dcon-info__value">Avril — Octobre<br/>9h00 — 19h00 tous les jours</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="section dcon-form-section" aria-labelledby="dcon-form-title">
+    <div class="container">
+      <div class="dcon-form-wrap reveal">
+        <div class="dcon-form__head">
+          <span class="dcon-info__eyebrow">Message</span>
+          <h2 id="dcon-form-title" class="dcon-info__heading">Nous écrire</h2>
+          <p class="dcon-form__intro">Une question sur les activités, les tarifs, l'accès ? Envoyez-nous un message, nous répondons sous 24h.</p>
+        </div>
+        <form class="dcon-form" action="#" method="post">
+          <div class="dcon-form__row">
+            <div class="dcon-form__field">
+              <label for="dcon-name" class="dcon-form__label">Nom</label>
+              <input id="dcon-name" type="text" class="dcon-form__input" required placeholder="Votre nom" />
+            </div>
+            <div class="dcon-form__field">
+              <label for="dcon-email" class="dcon-form__label">Email</label>
+              <input id="dcon-email" type="email" class="dcon-form__input" required placeholder="votre@email.com" />
+            </div>
+          </div>
+          <div class="dcon-form__field">
+            <label for="dcon-subject" class="dcon-form__label">Sujet</label>
+            <input id="dcon-subject" type="text" class="dcon-form__input" placeholder="Objet de votre message" />
+          </div>
+          <div class="dcon-form__field">
+            <label for="dcon-message" class="dcon-form__label">Message</label>
+            <textarea id="dcon-message" class="dcon-form__input dcon-form__textarea" rows="5" required placeholder="Votre message…"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--lg">Envoyer</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROUTES BENTO -->
+  <section class="section dcon-routes" aria-labelledby="dcon-routes-title">
+    <div class="container">
+      <header class="dcon-routes__header reveal">
+        <span class="dcon-info__eyebrow">Itinéraires</span>
+        <h2 id="dcon-routes-title" class="dcon-info__heading">Venir au Surf Center</h2>
+        <p class="dcon-routes__sub">Parking gratuit sur place. Coordonnées GPS : 43.7766, 6.2100</p>
+      </header>
+      <div class="dcon-routes__grid">
+        {routes.map((r) => (
+          <div class="dcon-routes__card reveal">
+            <span class="dcon-routes__time">{r.time}</span>
+            <h3 class="dcon-routes__city">{r.city}</h3>
+            <p class="dcon-routes__dir">{r.direction}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIMATE -->
+  <section class="section dcon-climate" aria-labelledby="dcon-climate-title">
+    <div class="container">
+      <header class="dcon-climate__header reveal">
+        <span class="dcon-info__eyebrow">Météo & climat</span>
+        <h2 id="dcon-climate-title" class="dcon-info__heading">Un climat idéal</h2>
+        <p class="dcon-routes__sub">Le lac de Sainte-Croix bénéficie d'un climat provençal exceptionnel avec plus de 300 jours de soleil par an.</p>
+      </header>
+      <div class="dcon-climate__grid">
+        {climate.map((c) => (
+          <div class="dcon-climate__card reveal">
+            <span class="dcon-climate__val">{c.value}</span>
+            <span class="dcon-climate__lbl">{c.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</LayoutDesign>
+
+<style>
+  /* ========================
+     DCON — Contact (Design v2)
+     ======================== */
+
+  /* --- Hero --- */
+  .dcon-hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: flex-end;
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+
+  .dcon-hero__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .dcon-hero__bgimg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.3;
+    filter: grayscale(0.2);
+  }
+
+  .dcon-hero__inner {
+    position: relative;
+    z-index: 1;
+    padding-block: calc(var(--header-h) + var(--s-16)) var(--s-16);
+    width: 100%;
+  }
+
+  .dcon-hero__card {
+    background: rgb(255 255 255 / 0.06);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: var(--r-xl);
+    padding: var(--s-10) var(--s-8);
+    max-width: 600px;
+  }
+
+  .dcon-hero__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    display: block;
+    margin-bottom: var(--s-4);
+  }
+
+  .dcon-hero__title {
+    font-size: clamp(2.8rem, 6vw, 5rem) !important;
+    font-weight: 800 !important;
+    line-height: 0.92 !important;
+    letter-spacing: -0.04em !important;
+    text-transform: uppercase;
+    color: #fff !important;
+    margin-bottom: var(--s-6);
+  }
+
+  .dcon-hero__tagline {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: rgb(255 255 255 / 0.55);
+    max-width: 42ch;
+  }
+
+  /* --- Info cards --- */
+  .dcon-info {
+    background: #0a0a0a;
+    color: #fff;
+  }
+
+  .dcon-info__header {
+    margin-bottom: var(--s-12);
+  }
+
+  .dcon-info__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    display: block;
+    margin-bottom: var(--s-3);
+  }
+
+  .dcon-info__heading {
+    font-size: clamp(1.8rem, 4vw, 2.8rem) !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.03em !important;
+    color: #fff !important;
+    text-transform: uppercase;
+  }
+
+  .dcon-info__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+
+  .dcon-info__card {
+    background: rgb(255 255 255 / 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: var(--r-lg);
+    padding: var(--s-8);
+    transition: border-color var(--t-fast), background var(--t-fast);
+  }
+
+  .dcon-info__card:hover {
+    border-color: rgb(255 255 255 / 0.15);
+    background: rgb(255 255 255 / 0.07);
+  }
+
+  .dcon-info__icon {
+    color: var(--c-orange);
+    margin-bottom: var(--s-4);
+  }
+
+  .dcon-info__label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgb(255 255 255 / 0.5);
+    margin-bottom: var(--s-2);
+  }
+
+  .dcon-info__value {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: rgb(255 255 255 / 0.85);
+  }
+
+  .dcon-info__value a {
+    color: rgb(255 255 255 / 0.85);
+    text-decoration: none;
+    border-bottom: 1px solid rgb(255 255 255 / 0.15);
+    transition: border-color var(--t-fast), color var(--t-fast);
+  }
+
+  .dcon-info__value a:hover {
+    color: var(--c-orange);
+    border-color: var(--c-orange);
+  }
+
+  /* --- Form --- */
+  .dcon-form-section {
+    background: #0a0a0a;
+    color: #fff;
+  }
+
+  .dcon-form-wrap {
+    background: rgb(255 255 255 / 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: var(--r-xl);
+    padding: var(--s-10) var(--s-8);
+  }
+
+  .dcon-form__head {
+    margin-bottom: var(--s-10);
+  }
+
+  .dcon-form__intro {
+    font-size: 0.92rem;
+    color: rgb(255 255 255 / 0.5);
+    line-height: 1.7;
+    margin-top: var(--s-4);
+    max-width: 48ch;
+  }
+
+  .dcon-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .dcon-form__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+
+  .dcon-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+
+  .dcon-form__label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgb(255 255 255 / 0.45);
+  }
+
+  .dcon-form__input {
+    background: rgb(255 255 255 / 0.04);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: var(--r-md);
+    padding: var(--s-3) var(--s-4);
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    color: #fff;
+    outline: none;
+    transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  }
+
+  .dcon-form__input::placeholder {
+    color: rgb(255 255 255 / 0.2);
+  }
+
+  .dcon-form__input:focus {
+    border-color: var(--c-orange);
+    box-shadow: 0 0 0 3px rgb(247 123 70 / 0.15), 0 0 20px rgb(247 123 70 / 0.08);
+  }
+
+  .dcon-form__textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  /* --- Routes bento --- */
+  .dcon-routes {
+    background: #0e0e0e;
+    color: #fff;
+  }
+
+  .dcon-routes__header {
+    margin-bottom: var(--s-12);
+  }
+
+  .dcon-routes__sub {
+    font-size: 0.88rem;
+    color: rgb(255 255 255 / 0.45);
+    line-height: 1.6;
+    margin-top: var(--s-4);
+  }
+
+  .dcon-routes__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+
+  .dcon-routes__card {
+    background: rgb(255 255 255 / 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: var(--r-lg);
+    padding: var(--s-6) var(--s-8);
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    transition: border-color var(--t-fast), transform var(--t-fast);
+  }
+
+  .dcon-routes__card:hover {
+    border-color: var(--c-orange);
+    transform: translateY(-2px);
+  }
+
+  .dcon-routes__time {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--c-orange);
+    white-space: nowrap;
+    min-width: 4.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .dcon-routes__city {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    margin-bottom: 2px;
+  }
+
+  .dcon-routes__dir {
+    font-size: 0.75rem;
+    color: rgb(255 255 255 / 0.4);
+  }
+
+  /* --- Climate --- */
+  .dcon-climate {
+    background: #0a0a0a;
+    color: #fff;
+  }
+
+  .dcon-climate__header {
+    margin-bottom: var(--s-12);
+  }
+
+  .dcon-climate__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-4);
+  }
+
+  .dcon-climate__card {
+    background: rgb(255 255 255 / 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: var(--r-lg);
+    padding: var(--s-8);
+    text-align: center;
+    transition: border-color var(--t-fast);
+  }
+
+  .dcon-climate__card:hover {
+    border-color: rgb(255 255 255 / 0.15);
+  }
+
+  .dcon-climate__val {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--c-orange);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--s-2);
+  }
+
+  .dcon-climate__lbl {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgb(255 255 255 / 0.45);
+  }
+
+  /* --- Responsive --- */
+  @media (min-width: 600px) {
+    .dcon-info__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dcon-form__row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .dcon-routes__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .dcon-hero {
+      min-height: 80vh;
+    }
+
+    .dcon-hero__card {
+      padding: var(--s-12) var(--s-10);
+    }
+
+    .dcon-info__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .dcon-form-wrap {
+      padding: var(--s-12) var(--s-10);
+      display: grid;
+      grid-template-columns: 0.4fr 1fr;
+      gap: var(--s-12);
+    }
+
+    .dcon-routes__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .dcon-climate__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

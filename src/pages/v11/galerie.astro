@@ -1,0 +1,354 @@
+---
+import LayoutHyper from '../../layouts/LayoutHyper.astro';
+import { Image } from 'astro:assets';
+import MeshGradient from '../../components/v11/MeshGradient.astro';
+import GlowText from '../../components/v11/GlowText.astro';
+import WaveDivider from '../../components/v11/WaveDivider.astro';
+import imgHeroGalerie from '../../assets/images/hero-galerie.jpg';
+import imgBateaux from '../../assets/images/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg';
+import imgPaddle from '../../assets/images/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg';
+import imgPaddleSurf from '../../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+import imgBateau from '../../assets/images/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg';
+import imgBateauEvjf from '../../assets/images/location-bateau-electriques-evjf-lac-sainte-croix.jpg';
+import imgPedalo from '../../assets/images/location-pedalo-lac-sainte-croix-plage-surfcenter.jpeg';
+import imgCanoe from '../../assets/images/location-canoe-lac-sainte-croix-surfcenter.jpg';
+import imgPlanche from '../../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+import imgConcert from '../../assets/images/concert-surfcenter-lac-sainte-croix.png';
+import imgYoga from '../../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import imgConcert2 from '../../assets/images/concert-joulik-lac-sainte-croix-surfcenter.jpg';
+import imgSnack from '../../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import imgTrophee from '../../assets/images/trophee-hobie-shop-lac-sainte-croix-surf-center.jpeg';
+import imgLac from '../../assets/images/location-lac-sainte-croix-gorges-verdon.png';
+import imgEsprit from '../../assets/images/esprit.png';
+
+const galleryImages = [
+  { src: imgBateaux, alt: "Bateaux électriques sur le lac de Sainte-Croix", caption: "Bateaux électriques", tag: "nautique", span: "tall" },
+  { src: imgPaddle, alt: "Stand-up paddle face aux Gorges du Verdon", caption: "Paddle & Gorges", tag: "nautique", span: "normal" },
+  { src: imgConcert, alt: "Concert au coucher du soleil — Surf Center", caption: "Concerts live", tag: "animations", span: "wide" },
+  { src: imgPaddleSurf, alt: "Location paddle au Surf Center", caption: "Session paddle", tag: "nautique", span: "normal" },
+  { src: imgBateau, alt: "Bateau électrique au Surf Center", caption: "Balade en bateau", tag: "nautique", span: "normal" },
+  { src: imgYoga, alt: "Cours de yoga face au lac de Sainte-Croix", caption: "Yoga lakeside", tag: "animations", span: "tall" },
+  { src: imgPedalo, alt: "Pédalos sur la plage du Surf Center", caption: "Pédalos familiaux", tag: "nautique", span: "normal" },
+  { src: imgConcert2, alt: "Concert Joulik au Surf Center", caption: "Joulik en concert", tag: "animations", span: "wide" },
+  { src: imgSnack, alt: "Vue aérienne du snack Surf Center", caption: "Le snack vu du ciel", tag: "restaurant", span: "normal" },
+  { src: imgCanoe, alt: "Canoë sur le lac de Sainte-Croix", caption: "Aventure canoë", tag: "nautique", span: "normal" },
+  { src: imgBateauEvjf, alt: "EVJF en bateau sur le lac de Sainte-Croix", caption: "EVJF sur le lac", tag: "événements", span: "tall" },
+  { src: imgPlanche, alt: "Planche à voile au lac de Sainte-Croix", caption: "Windsurf", tag: "nautique", span: "normal" },
+  { src: imgTrophee, alt: "Trophée Hobie au Surf Center", caption: "Trophée Hobie", tag: "événements", span: "normal" },
+  { src: imgLac, alt: "Vue panoramique du lac de Sainte-Croix", caption: "Panorama", tag: "paysage", span: "wide" },
+  { src: imgEsprit, alt: "L'esprit Surf Center", caption: "L'esprit SC", tag: "ambiance", span: "normal" },
+];
+
+const tags = ["tout", ...new Set(galleryImages.map(i => i.tag))];
+---
+
+<LayoutHyper
+  title="Galerie — Surf Center | Lac de Sainte-Croix"
+  description="Découvrez le Surf Center en images : lac de Sainte-Croix, activités nautiques, concerts, restauration et paysages des Gorges du Verdon."
+>
+  <!-- HERO -->
+  <section class="hyga__hero" aria-label="Galerie photos">
+    <MeshGradient class="hyga__hero-mesh" />
+    <Image
+      class="hyga__hero-img"
+      src={imgHeroGalerie}
+      alt="Vue panoramique du lac de Sainte-Croix — Surf Center"
+      widths={[640, 1024, 1440]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      format="webp"
+      quality={75}
+    />
+    <div class="hyga__hero-overlay" aria-hidden="true"></div>
+    <div class="hyga__hero-content reveal">
+      <GlowText tag="h1" color="#26cfff" intensity="high" class="hyga__hero-title">
+        Galerie
+      </GlowText>
+      <p class="hyga__hero-sub">Le Surf Center en images</p>
+    </div>
+  </section>
+
+  <WaveDivider color="#26cfff" />
+
+  <!-- FILTER TABS -->
+  <section class="hyga__filters" aria-label="Filtrer la galerie">
+    <div class="hyga__filters-wrap">
+      {tags.map((t, i) => (
+        <button
+          class={`hyga__filter-btn ${i === 0 ? 'hyga__filter-btn--active' : ''}`}
+          data-filter={t}
+          type="button"
+        >
+          {t.charAt(0).toUpperCase() + t.slice(1)}
+        </button>
+      ))}
+    </div>
+  </section>
+
+  <!-- MASONRY GALLERY -->
+  <section class="hyga__gallery" aria-label="Photos">
+    <div class="hyga__masonry" id="hyga-masonry">
+      {galleryImages.map((img, idx) => (
+        <div
+          class={`hyga__item hyga__item--${img.span} reveal`}
+          data-tag={img.tag}
+          style={`--hyga-delay: ${idx * 60}ms;`}
+        >
+          <Image
+            class="hyga__img"
+            src={img.src}
+            alt={img.alt}
+            widths={[400, 600, 800]}
+            sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw"
+            format="webp"
+            quality={75}
+            loading={idx < 6 ? 'eager' : 'lazy'}
+          />
+          <div class="hyga__overlay" aria-hidden="true">
+            <div class="hyga__overlay-shimmer"></div>
+          </div>
+          <div class="hyga__caption">
+            <GlowText tag="span" color="#26cfff" intensity="low" class="hyga__caption-text">{img.caption}</GlowText>
+            <span class="hyga__caption-tag">{img.tag}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</LayoutHyper>
+
+<script is:inline>
+(function () {
+  var btns = document.querySelectorAll('.hyga__filter-btn');
+  var items = document.querySelectorAll('.hyga__item');
+
+  btns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      btns.forEach(function (b) { b.classList.remove('hyga__filter-btn--active'); });
+      btn.classList.add('hyga__filter-btn--active');
+      var filter = btn.getAttribute('data-filter');
+
+      items.forEach(function (item) {
+        if (filter === 'tout' || item.getAttribute('data-tag') === filter) {
+          item.style.display = '';
+          item.style.animation = 'hyga-fadeIn 0.5s ease forwards';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+})();
+</script>
+
+<style>
+  /* HERO */
+  .hyga__hero {
+    position: relative;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hyga__hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+    z-index: 0;
+  }
+  .hyga__hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5,5,16,0.5) 0%, rgba(5,5,16,0.95) 100%);
+    z-index: 1;
+  }
+  .hyga__hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 6rem 1.5rem 4rem;
+  }
+  .hyga__hero-title {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+  }
+  .hyga__hero-sub {
+    font-size: 1.1rem;
+    color: rgba(240,240,235,0.6);
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  /* FILTERS */
+  .hyga__filters {
+    padding: 2rem 1.5rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hyga__filters-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    justify-content: center;
+  }
+  .hyga__filter-btn {
+    padding: 0.5rem 1.25rem;
+    border: 1px solid rgba(38,207,255,0.15);
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.03);
+    color: rgba(240,240,235,0.5);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: capitalize;
+    font-family: inherit;
+    letter-spacing: 0.02em;
+  }
+  .hyga__filter-btn:hover {
+    border-color: rgba(38,207,255,0.3);
+    color: rgba(240,240,235,0.8);
+  }
+  .hyga__filter-btn--active {
+    border-color: rgba(38,207,255,0.5);
+    background: rgba(38,207,255,0.1);
+    color: #26cfff;
+    box-shadow: 0 0 16px rgba(38,207,255,0.1);
+  }
+
+  /* MASONRY GALLERY */
+  .hyga__gallery {
+    padding: 3rem 1.5rem 6rem;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .hyga__masonry {
+    columns: 3;
+    column-gap: 1.25rem;
+  }
+  .hyga__item {
+    position: relative;
+    break-inside: avoid;
+    margin-bottom: 1.25rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: pointer;
+    animation-delay: var(--hyga-delay, 0ms);
+  }
+  .hyga__item--tall {
+    aspect-ratio: auto;
+  }
+  .hyga__item--wide {
+    aspect-ratio: auto;
+  }
+  .hyga__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), filter 0.4s ease;
+  }
+  .hyga__item:hover .hyga__img {
+    transform: scale(1.05);
+    filter: brightness(1.1) saturate(1.2);
+  }
+
+  /* Holographic overlay on hover */
+  .hyga__overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+    background: linear-gradient(135deg, rgba(38,207,255,0.1) 0%, rgba(107,33,168,0.08) 50%, rgba(247,123,70,0.06) 100%);
+  }
+  .hyga__overlay-shimmer {
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(
+      from 0deg at 50% 50%,
+      rgba(38,207,255,0.15),
+      rgba(107,33,168,0.1),
+      rgba(59,130,246,0.1),
+      rgba(247,123,70,0.08),
+      rgba(38,207,255,0.15)
+    );
+    mix-blend-mode: screen;
+    animation: hyga-shimmer-rotate 4s linear infinite;
+    opacity: 0.5;
+  }
+  .hyga__item:hover .hyga__overlay {
+    opacity: 1;
+  }
+
+  /* Captions */
+  .hyga__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2.5rem 1.25rem 1.25rem;
+    background: linear-gradient(transparent, rgba(5,5,16,0.85));
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0.5rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .hyga__item:hover .hyga__caption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .hyga__caption-text {
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+  .hyga__caption-tag {
+    font-size: 0.68rem;
+    color: rgba(240,240,235,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* Parallax depth effect */
+  .hyga__item:nth-child(odd) {
+    transform: translateZ(0);
+  }
+  .hyga__item:nth-child(3n) {
+    margin-top: -0.5rem;
+  }
+
+  @keyframes hyga-shimmer-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes hyga-fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .hyga__masonry {
+      columns: 2;
+    }
+  }
+  @media (max-width: 580px) {
+    .hyga__masonry {
+      columns: 1;
+    }
+  }
+</style>

@@ -1,0 +1,622 @@
+---
+import LayoutDesign from '../../layouts/LayoutDesign.astro';
+import { proFormulas, privateFormulas } from '../../data/events';
+
+const title = 'Groupes & Événements — Team building, EVJF, concerts | Surf Center Verdon';
+const description = 'Organisez votre événement au lac de Sainte-Croix : team building, séminaire, EVJF, anniversaire, concert privé. Privatisation et activités nautiques — Surf Center.';
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Groupes & Événements — Surf Center',
+    description,
+    url: `${siteUrl}/v2/groupes-evenements`,
+    isPartOf: { '@type': 'WebSite', name: 'Surf Center', url: siteUrl },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'EventVenue',
+    name: 'Surf Center — Espace événements',
+    description: 'Lieu de réception et événements au bord du lac de Sainte-Croix. Concerts, team building, soirées privées dans les Gorges du Verdon.',
+    url: `${siteUrl}/v2/groupes-evenements`,
+    image: `${siteUrl}/concert-surfcenter-lac-sainte-croix.png`,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Plage des Salles-sur-Verdon',
+      addressLocality: 'Les Salles-sur-Verdon',
+      postalCode: '83630',
+      addressRegion: 'Provence-Alpes-Côte d\'Azur',
+      addressCountry: 'FR',
+    },
+    geo: { '@type': 'GeoCoordinates', latitude: 43.7766, longitude: 6.21 },
+    maximumAttendeeCapacity: 200,
+  },
+];
+---
+
+<LayoutDesign title={title} description={description} jsonLd={jsonLd}>
+
+  <!-- ═══ CINEMA HERO ═══ -->
+  <section class="evhero" aria-label="Groupes & Événements">
+    <div class="evhero__bg" aria-hidden="true">
+      <img src="/concert-surfcenter-lac-sainte-croix.png" alt="" width="1920" height="1080" loading="eager" fetchpriority="high" decoding="async" />
+    </div>
+    <div class="evhero__overlay" aria-hidden="true"></div>
+    <div class="container evhero__inner">
+      <span class="evhero__eyebrow">Lac de Sainte-Croix · Gorges du Verdon</span>
+      <h1 class="evhero__title">Groupes &<br/>Événements</h1>
+      <p class="evhero__sub">Privatisation · Activités nautiques · Restauration</p>
+      <a href="#formules-pro" class="evhero__scroll" aria-label="Voir les formules">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M10 4v12M6 12l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="evhero__vignette" aria-hidden="true"></div>
+  </section>
+
+  <!-- ═══ MANIFESTO INTRO ═══ -->
+  <section class="section evintro" aria-labelledby="evintro-title">
+    <div class="container evintro__wrap reveal">
+      <div class="evintro__line" aria-hidden="true"></div>
+      <div class="evintro__block">
+        <span class="section__eyebrow">Votre événement, notre décor</span>
+        <h2 id="evintro-title" class="evintro__quote">
+          Un lac turquoise, des falaises monumentales, un coucher de soleil en fond de scène — le Surf Center transforme chaque événement en moment d'exception.
+        </h2>
+      </div>
+      <div class="evintro__line" aria-hidden="true"></div>
+      <ul class="evintro__stats" role="list">
+        <li><strong>200</strong><span>Capacité max.</span></li>
+        <li><strong>10+</strong><span>Ans d'expérience</span></li>
+        <li><strong>100%</strong><span>Sur mesure</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ PRO FORMULAS ═══ -->
+  <section id="formules-pro" class="section evformulas evformulas--dark" aria-labelledby="evpro-title">
+    <div class="container">
+      <header class="evformulas__header reveal">
+        <span class="section__eyebrow">Professionnels</span>
+        <h2 id="evpro-title">Formules entreprises</h2>
+      </header>
+      <div class="evformulas__grid">
+        {proFormulas.map((f, i) => (
+          <article class={`evcard reveal reveal-d${(i % 3) + 1}`}>
+            <div class="evcard__img-wrap">
+              <img class="evcard__img" src={f.image} alt={f.alt} width="600" height="400" loading="lazy" decoding="async" />
+            </div>
+            <div class="evcard__body">
+              <h3 class="evcard__title">{f.title}</h3>
+              <p class="evcard__desc">{f.description}</p>
+              <ul class="evcard__features" role="list">
+                {f.features.map((feat) => <li>{feat}</li>)}
+              </ul>
+              <div class="evcard__footer">
+                <span class="evcard__cap">{f.capacity}</span>
+                <a href="#contact-event" class="btn btn--primary btn--sm">Demander un devis</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PRIVATE FORMULAS ═══ -->
+  <section class="section evformulas" aria-labelledby="evpriv-title">
+    <div class="container">
+      <header class="evformulas__header reveal">
+        <span class="section__eyebrow">Privés</span>
+        <h2 id="evpriv-title">Événements privés</h2>
+      </header>
+      <div class="evformulas__grid">
+        {privateFormulas.map((f, i) => (
+          <article class={`evcard evcard--light reveal reveal-d${(i % 3) + 1}`}>
+            <div class="evcard__img-wrap">
+              <img class="evcard__img" src={f.image} alt={f.alt} width="600" height="400" loading="lazy" decoding="async" />
+            </div>
+            <div class="evcard__body">
+              <h3 class="evcard__title">{f.title}</h3>
+              <p class="evcard__desc">{f.description}</p>
+              <ul class="evcard__features" role="list">
+                {f.features.map((feat) => <li>{feat}</li>)}
+              </ul>
+              <div class="evcard__footer">
+                <span class="evcard__cap">{f.capacity}</span>
+                <a href="#contact-event" class="btn btn--primary btn--sm">Nous contacter</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GLASS CONTACT FORM ═══ -->
+  <section id="contact-event" class="section evcontact" aria-labelledby="evcontact-title">
+    <div class="evcontact__bg" aria-hidden="true">
+      <img src="/trophee-hobie-shop-lac-sainte-croix-surf-center.jpeg" alt="" width="1920" height="1080" loading="lazy" decoding="async" />
+    </div>
+    <div class="container evcontact__inner">
+      <div class="evcontact__glass reveal">
+        <span class="section__eyebrow">Contact</span>
+        <h2 id="evcontact-title">Parlez-nous de votre projet</h2>
+        <p class="evcontact__lead">Décrivez votre événement et recevez un devis personnalisé sous 24h.</p>
+        <form class="evcontact__form" action="#" method="post">
+          <div class="evcontact__row">
+            <div class="evcontact__field">
+              <label for="ev-name">Nom</label>
+              <input type="text" id="ev-name" name="name" required autocomplete="name" />
+            </div>
+            <div class="evcontact__field">
+              <label for="ev-email">Email</label>
+              <input type="email" id="ev-email" name="email" required autocomplete="email" />
+            </div>
+          </div>
+          <div class="evcontact__row">
+            <div class="evcontact__field">
+              <label for="ev-phone">Téléphone</label>
+              <input type="tel" id="ev-phone" name="phone" autocomplete="tel" />
+            </div>
+            <div class="evcontact__field">
+              <label for="ev-type">Type d'événement</label>
+              <select id="ev-type" name="type" required>
+                <option value="">Choisir…</option>
+                <option value="team-building">Team Building</option>
+                <option value="seminaire">Séminaire</option>
+                <option value="soiree-entreprise">Soirée d'entreprise</option>
+                <option value="evjf">EVJF / EVG</option>
+                <option value="anniversaire">Anniversaire</option>
+                <option value="concert">Concert privé</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+          </div>
+          <div class="evcontact__field evcontact__field--full">
+            <label for="ev-msg">Votre message</label>
+            <textarea id="ev-msg" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--lg">Envoyer la demande</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</LayoutDesign>
+
+<style>
+  /* ═══ CINEMA HERO ═══ */
+  .evhero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+
+  .evhero__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .evhero__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+    filter: grayscale(0.2);
+    animation: slow-zoom 20s ease-in-out infinite alternate;
+  }
+
+  .evhero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, #0a0a0a 0%, transparent 50%, rgba(10,10,10,0.3) 100%);
+  }
+
+  .evhero__vignette {
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 200px rgba(0,0,0,0.5);
+    pointer-events: none;
+  }
+
+  .evhero__inner {
+    position: relative;
+    z-index: 2;
+    padding-bottom: var(--s-16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    animation: fade-up 1s var(--ease) both;
+  }
+
+  .evhero__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+  }
+
+  .evhero__title {
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: #fff !important;
+    text-transform: uppercase;
+  }
+
+  .evhero__sub {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.45);
+    margin-top: var(--s-2);
+  }
+
+  .evhero__scroll {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-full);
+    border: 1px solid rgb(255 255 255 / 0.2);
+    color: rgb(255 255 255 / 0.5);
+    margin-top: var(--s-8);
+    transition: all var(--t-fast);
+    animation: bounce-subtle 2.5s ease-in-out infinite;
+  }
+
+  .evhero__scroll:hover {
+    border-color: var(--c-orange);
+    color: var(--c-orange);
+  }
+
+  /* ═══ MANIFESTO INTRO ═══ */
+  .evintro__wrap { text-align: center; }
+
+  .evintro__line {
+    width: 100%;
+    height: 1px;
+    background: var(--c-orange);
+    opacity: 0.3;
+  }
+
+  .evintro__block {
+    padding: var(--s-16) 0;
+  }
+
+  .evintro__quote {
+    font-size: clamp(1.3rem, 3.5vw, 2.8rem) !important;
+    font-weight: 300 !important;
+    line-height: 1.35 !important;
+    letter-spacing: -0.01em !important;
+    text-transform: none !important;
+    max-width: 46ch;
+    margin-inline: auto;
+    color: var(--c-text);
+    margin-top: var(--s-6);
+  }
+
+  .evintro__stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--s-12);
+    padding-top: var(--s-10);
+  }
+
+  .evintro__stats li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-1);
+  }
+
+  .evintro__stats strong {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--c-orange);
+    line-height: 1;
+  }
+
+  .evintro__stats span {
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--c-text-muted);
+  }
+
+  /* ═══ FORMULAS SECTION ═══ */
+  .evformulas--dark {
+    background: var(--c-dark);
+    color: #fff;
+  }
+
+  .evformulas__header {
+    text-align: center;
+    margin-bottom: var(--s-12);
+  }
+
+  .evformulas--dark .evformulas__header h2 {
+    color: #fff !important;
+  }
+
+  .evformulas__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+
+  /* ═══ GLASS FORMULA CARDS ═══ */
+  .evcard {
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    background: rgb(255 255 255 / 0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    transition: transform var(--t-normal) var(--ease), box-shadow var(--t-normal) var(--ease);
+  }
+
+  .evcard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgb(0 0 0 / 0.3);
+  }
+
+  .evcard--light {
+    background: var(--c-surface);
+    backdrop-filter: none;
+    border: 1px solid var(--c-border-light);
+  }
+
+  .evcard--light:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .evcard__img-wrap {
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+  }
+
+  .evcard__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .evcard:hover .evcard__img {
+    transform: scale(1.05);
+  }
+
+  .evcard__body {
+    padding: var(--s-6) var(--s-6) var(--s-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+
+  .evcard__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .evformulas--dark .evcard__title { color: #fff; }
+
+  .evcard__desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgb(255 255 255 / 0.6);
+  }
+
+  .evcard--light .evcard__desc {
+    color: var(--c-text-secondary);
+  }
+
+  .evcard__features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    padding-top: var(--s-2);
+  }
+
+  .evcard__features li {
+    font-size: 0.8rem;
+    color: rgb(255 255 255 / 0.5);
+    padding-left: var(--s-5);
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .evcard__features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 2px;
+    background: var(--c-orange);
+    border-radius: 1px;
+  }
+
+  .evcard--light .evcard__features li {
+    color: var(--c-text-muted);
+  }
+
+  .evcard__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    padding-top: var(--s-4);
+    border-top: 1px solid rgb(255 255 255 / 0.08);
+    margin-top: var(--s-2);
+  }
+
+  .evcard--light .evcard__footer {
+    border-color: var(--c-border-light);
+  }
+
+  .evcard__cap {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgb(255 255 255 / 0.4);
+  }
+
+  .evcard--light .evcard__cap {
+    color: var(--c-text-muted);
+  }
+
+  @media (min-width: 768px) {
+    .evformulas__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .evformulas__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ═══ GLASS CONTACT FORM ═══ */
+  .evcontact {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .evcontact__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .evcontact__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.15;
+    filter: grayscale(0.3);
+  }
+
+  .evcontact__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .evcontact__glass {
+    background: rgb(255 255 255 / 0.04);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: var(--r-xl);
+    padding: var(--s-10) var(--s-8);
+    width: 100%;
+    max-width: 720px;
+  }
+
+  [data-theme='light'] .evcontact__glass {
+    background: rgb(255 255 255 / 0.85);
+    border-color: var(--c-border);
+  }
+
+  .evcontact__lead {
+    font-size: 0.9rem;
+    color: var(--c-text-muted);
+    margin-top: var(--s-3);
+    margin-bottom: var(--s-8);
+  }
+
+  .evcontact__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+
+  .evcontact__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-5);
+  }
+
+  .evcontact__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+
+  .evcontact__field label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--c-text-muted);
+  }
+
+  .evcontact__field input,
+  .evcontact__field select,
+  .evcontact__field textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    background: var(--c-surface);
+    color: var(--c-text);
+    font-size: 0.88rem;
+    transition: border-color var(--t-fast);
+  }
+
+  .evcontact__field input:focus,
+  .evcontact__field select:focus,
+  .evcontact__field textarea:focus {
+    border-color: var(--c-orange);
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(247 123 70 / 0.15);
+  }
+
+  .evcontact__field textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .evcontact__form .btn {
+    align-self: flex-start;
+    margin-top: var(--s-4);
+  }
+
+  @media (min-width: 600px) {
+    .evcontact__row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .evcontact__glass {
+      padding: var(--s-12) var(--s-10);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .evhero__inner {
+      padding-bottom: var(--s-24);
+    }
+
+    .evintro__block {
+      padding: var(--s-24) 0;
+    }
+  }
+</style>

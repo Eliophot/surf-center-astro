@@ -1,0 +1,309 @@
+---
+import LayoutMarketing from '../../../layouts/LayoutMarketing.astro';
+import { locationDetails } from '../../../data/locations';
+import { blogPostsV8, type BlogPostV8 } from '../../../data/blog-posts';
+
+export function getStaticPaths() {
+  return blogPostsV8.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props { post: BlogPostV8; }
+const { post } = Astro.props as Props;
+const relatedPosts = blogPostsV8.filter((p) => p.slug !== post.slug).slice(0, 2);
+const suggestedActivities = locationDetails.slice(0, 3);
+---
+
+<LayoutMarketing
+  title={`${post.title} — Blog Surf Center`}
+  description={post.excerpt}
+>
+  <!-- ARTICLE HEADER -->
+  <section class="m8__arthero" aria-labelledby="m8-art-title">
+    <div class="m8__arthero-bg" style={`background-image: url('${post.image}')`}></div>
+    <div class="m8__arthero-overlay" aria-hidden="true"></div>
+    <div class="container m8__arthero-inner">
+      <nav class="m8__arthero-bread" aria-label="Fil d'Ariane">
+        <a href="/v8">Accueil</a>
+        <span aria-hidden="true">›</span>
+        <a href="/v8/blog">Blog</a>
+        <span aria-hidden="true">›</span>
+        <span>{post.category}</span>
+      </nav>
+      <span class="m8__arthero-cat">{post.category}</span>
+      <h1 id="m8-art-title" class="m8__arthero-title">{post.title}</h1>
+      <div class="m8__arthero-meta">
+        <span>{post.date}</span>
+        <span class="m8__arthero-sep">·</span>
+        <span>{post.readTime} de lecture</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE CONTENT -->
+  <section class="section" aria-label="Contenu de l'article">
+    <div class="container">
+      <div class="m8__art-layout">
+        <article class="m8__art-main reveal">
+          <div class="m8__art-prose" set:html={post.content} />
+        </article>
+
+        <!-- SIDEBAR -->
+        <aside class="m8__art-sidebar">
+          <div class="m8__art-widget reveal">
+            <h3 class="m8__art-widget-title">Réservez votre activité</h3>
+            <p class="m8__art-widget-text">Paddle, bateau, pédalo — réservez en quelques clics.</p>
+            <div class="m8__art-widget-price">Dès <strong>10€</strong>/h</div>
+            <button type="button" class="btn btn--primary btn--lg m8__art-widget-btn" data-booking>
+              <span class="btn-flip__inner"><span class="btn-flip__front">Réserver</span><span class="btn-flip__back">Réserver</span></span>
+            </button>
+            <p class="m8__art-widget-note">Annulation gratuite 24h · Paiement sécurisé</p>
+          </div>
+
+          <div class="m8__art-related-activities reveal">
+            <h3 class="m8__art-sidebar-title">Activités populaires</h3>
+            {suggestedActivities.map((a) => (
+              <a href={`/v8/nos-locations/${a.slug}`} class="m8__art-activity-link">
+                <div class="m8__art-activity-img">
+                  <img src={a.heroImage} alt={a.heroAlt} loading="lazy" decoding="async" width="80" height="60" />
+                </div>
+                <div>
+                  <span class="m8__art-activity-name">{a.title}</span>
+                  <span class="m8__art-activity-price">Dès {a.price}€/{a.priceUnit}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED PRODUCTS -->
+  <section class="section section--surface" aria-labelledby="m8-artprod-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Activités associées</span>
+        <h2 id="m8-artprod-title">Passez à l'action</h2>
+      </header>
+      <div class="m8__art-products">
+        {locationDetails.slice(0, 4).map((loc, i) => (
+          <a href={`/v8/nos-locations/${loc.slug}`} class={`m8__art-product reveal reveal-d${i + 1}`}>
+            <div class="m8__art-product-img">
+              <img src={loc.heroImage} alt={loc.heroAlt} loading="lazy" decoding="async" width="400" height="300" />
+            </div>
+            <div class="m8__art-product-body">
+              <h3 class="m8__art-product-title">{loc.title}</h3>
+              <p class="m8__art-product-tag">{loc.tagline}</p>
+              <div class="m8__art-product-price">
+                <span>dès </span><strong>{loc.price}€</strong><span>/{loc.priceUnit}</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED ARTICLES -->
+  <section class="section" aria-labelledby="m8-artrelated-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">À lire aussi</span>
+        <h2 id="m8-artrelated-title">Articles similaires</h2>
+      </header>
+      <div class="m8__art-related-grid">
+        {relatedPosts.map((rp, i) => (
+          <a href={`/v8/blog/${rp.slug}`} class={`m8__art-related-card reveal reveal-d${i + 1}`}>
+            <div class="m8__art-related-card-img">
+              <img src={rp.image} alt={rp.title} loading="lazy" decoding="async" width="500" height="350" />
+              <span class="m8__art-related-card-cat">{rp.category}</span>
+            </div>
+            <div class="m8__art-related-card-body">
+              <h3 class="m8__art-related-card-title">{rp.title}</h3>
+              <p class="m8__art-related-card-excerpt">{rp.excerpt}</p>
+              <span class="m8__art-related-card-link">Lire →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section class="m8__art-cta" aria-labelledby="m8-artcta-title">
+    <div class="m8__art-cta-overlay" aria-hidden="true"></div>
+    <div class="container m8__art-cta-inner reveal">
+      <span class="section__eyebrow" style="color: var(--c-orange);">Prêt pour l'aventure ?</span>
+      <h2 id="m8-artcta-title" class="m8__art-cta-title">Réservez votre<br/>activité nautique</h2>
+      <p class="m8__art-cta-text">
+        Dès 10€/h · Sans permis requis · Annulation gratuite 24h
+      </p>
+      <div class="m8__art-cta-actions">
+        <button type="button" class="btn btn--primary btn--lg" data-booking>
+          <span class="btn-flip__inner"><span class="btn-flip__front">Réserver maintenant</span><span class="btn-flip__back">Réserver maintenant</span></span>
+        </button>
+        <a href="/v8/nos-locations" class="btn btn--ghost btn--lg">Voir toutes les activités</a>
+      </div>
+    </div>
+  </section>
+</LayoutMarketing>
+
+<style>
+  /* ARTICLE HERO */
+  .m8__arthero {
+    position: relative; min-height: 60vh; display: flex;
+    align-items: flex-end; color: #fff;
+  }
+  .m8__arthero-bg {
+    position: absolute; inset: 0; background-size: cover;
+    background-position: center 40%; z-index: 0;
+  }
+  .m8__arthero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.3) 0%, rgb(0 0 0 / 0.7) 70%, rgb(0 0 0 / 0.85) 100%);
+  }
+  .m8__arthero-inner {
+    position: relative; z-index: 2; max-width: 48rem;
+    padding-block: calc(var(--header-h) + var(--s-10)) var(--s-12);
+  }
+  .m8__arthero-bread {
+    display: flex; align-items: center; gap: var(--s-2);
+    font-size: 0.65rem; color: rgb(255 255 255 / 0.5); margin-bottom: var(--s-6);
+  }
+  .m8__arthero-bread a { color: rgb(255 255 255 / 0.6); text-decoration: none; }
+  .m8__arthero-bread a:hover { color: #fff; }
+  .m8__arthero-cat {
+    display: inline-block; padding: 0.25rem 0.65rem; border-radius: var(--r-full);
+    background: var(--c-orange); color: #fff; font-size: 0.58rem;
+    font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: var(--s-4);
+  }
+  .m8__arthero-title {
+    font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; line-height: 1.15;
+    letter-spacing: -0.02em; color: #fff !important; margin-bottom: var(--s-4);
+  }
+  .m8__arthero-meta {
+    display: flex; align-items: center; gap: var(--s-2);
+    font-size: 0.72rem; color: rgb(255 255 255 / 0.5);
+  }
+  .m8__arthero-sep { opacity: 0.4; }
+
+  /* ARTICLE LAYOUT */
+  .m8__art-layout { display: grid; grid-template-columns: 1fr; gap: var(--s-10); }
+  @media (min-width: 900px) { .m8__art-layout { grid-template-columns: 1fr 320px; } }
+
+  /* PROSE */
+  .m8__art-prose { font-size: 0.95rem; color: var(--c-text-secondary); line-height: 1.85; }
+  .m8__art-prose :global(h2) {
+    font-size: 1.3rem; font-weight: 800; color: var(--c-text);
+    margin-top: var(--s-10); margin-bottom: var(--s-4);
+  }
+  .m8__art-prose :global(p) { margin-bottom: var(--s-5); }
+  .m8__art-prose :global(p:last-child) { margin-bottom: 0; }
+
+  /* SIDEBAR */
+  .m8__art-sidebar { display: flex; flex-direction: column; gap: var(--s-6); }
+  @media (min-width: 900px) {
+    .m8__art-sidebar { position: sticky; top: calc(var(--header-h) + var(--s-6)); align-self: start; }
+  }
+
+  .m8__art-widget {
+    padding: var(--s-6); background: var(--c-surface); border-radius: var(--r-lg);
+    border: 1.5px solid var(--c-border-light); text-align: center;
+  }
+  .m8__art-widget-title { font-size: 1rem; font-weight: 700; margin-bottom: var(--s-2); }
+  .m8__art-widget-text { font-size: 0.78rem; color: var(--c-text-muted); margin-bottom: var(--s-4); }
+  .m8__art-widget-price { font-size: 0.85rem; color: var(--c-text-secondary); margin-bottom: var(--s-4); }
+  .m8__art-widget-price strong { font-size: 1.5rem; font-weight: 800; color: var(--c-orange); }
+  .m8__art-widget-btn { width: 100%; justify-content: center; }
+  .m8__art-widget-note { font-size: 0.6rem; color: var(--c-text-muted); margin-top: var(--s-3); }
+
+  .m8__art-sidebar-title {
+    font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; margin-bottom: var(--s-4);
+  }
+  .m8__art-related-activities {
+    padding: var(--s-5); background: var(--c-surface);
+    border-radius: var(--r-lg); border: 1px solid var(--c-border-light);
+  }
+  .m8__art-activity-link {
+    display: flex; align-items: center; gap: var(--s-3);
+    text-decoration: none; color: inherit; padding: var(--s-2) 0;
+    border-bottom: 1px solid var(--c-border-light);
+    transition: opacity var(--t-fast);
+  }
+  .m8__art-activity-link:last-child { border-bottom: none; }
+  .m8__art-activity-link:hover { opacity: 0.8; }
+  .m8__art-activity-img { width: 56px; height: 42px; border-radius: var(--r-sm); overflow: hidden; flex-shrink: 0; }
+  .m8__art-activity-img img { width: 100%; height: 100%; object-fit: cover; }
+  .m8__art-activity-name { display: block; font-size: 0.78rem; font-weight: 700; }
+  .m8__art-activity-price { display: block; font-size: 0.65rem; color: var(--c-orange); font-weight: 600; }
+
+  /* RELATED PRODUCTS */
+  .m8__art-products { display: grid; grid-template-columns: 1fr; gap: var(--s-5); }
+  .m8__art-product {
+    display: flex; flex-direction: column; background: var(--c-bg);
+    border-radius: var(--r-lg); border: 1.5px solid var(--c-border-light);
+    overflow: hidden; text-decoration: none; color: inherit;
+    transition: border-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
+  }
+  .m8__art-product:hover { border-color: var(--c-orange); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .m8__art-product-img { aspect-ratio: 16 / 10; overflow: hidden; }
+  .m8__art-product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+  .m8__art-product:hover .m8__art-product-img img { transform: scale(1.04); }
+  .m8__art-product-body { padding: var(--s-4) var(--s-5); }
+  .m8__art-product-title { font-size: 0.92rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
+  .m8__art-product-tag { font-size: 0.68rem; color: var(--c-text-muted); margin-bottom: var(--s-2); }
+  .m8__art-product-price { font-size: 0.78rem; color: var(--c-text-secondary); }
+  .m8__art-product-price strong { font-weight: 800; color: var(--c-orange); }
+  @media (min-width: 600px) { .m8__art-products { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1000px) { .m8__art-products { grid-template-columns: repeat(4, 1fr); } }
+
+  /* RELATED ARTICLES */
+  .m8__art-related-grid { display: grid; grid-template-columns: 1fr; gap: var(--s-6); }
+  .m8__art-related-card {
+    display: flex; flex-direction: column; background: var(--c-bg);
+    border-radius: var(--r-lg); border: 1.5px solid var(--c-border-light);
+    overflow: hidden; text-decoration: none; color: inherit;
+    transition: border-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
+  }
+  .m8__art-related-card:hover { border-color: var(--c-border); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .m8__art-related-card-img { position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
+  .m8__art-related-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+  .m8__art-related-card:hover .m8__art-related-card-img img { transform: scale(1.04); }
+  .m8__art-related-card-cat {
+    position: absolute; top: var(--s-3); left: var(--s-3); z-index: 2;
+    padding: 0.25rem 0.6rem; border-radius: var(--r-full);
+    background: var(--c-orange); color: #fff; font-size: 0.55rem;
+    font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .m8__art-related-card-body { padding: var(--s-5); }
+  .m8__art-related-card-title { font-size: 1rem; font-weight: 700; line-height: 1.35; margin-bottom: var(--s-3); }
+  .m8__art-related-card-excerpt { font-size: 0.82rem; color: var(--c-text-secondary); line-height: 1.6; margin-bottom: var(--s-3); }
+  .m8__art-related-card-link {
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--c-orange);
+  }
+  @media (min-width: 600px) { .m8__art-related-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  /* CLOSING CTA */
+  .m8__art-cta {
+    position: relative; overflow: hidden; color: #fff;
+    min-height: 50vh; display: flex; align-items: center;
+    background: #0a0a0a;
+  }
+  .m8__art-cta-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(135deg, rgb(247 123 70 / 0.12) 0%, transparent 60%);
+  }
+  .m8__art-cta-inner {
+    position: relative; z-index: 2; text-align: center;
+    max-width: 42rem; margin-inline: auto; padding-block: var(--s-16);
+  }
+  .m8__art-cta-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; color: #fff; margin-bottom: var(--s-5); }
+  .m8__art-cta-text { font-size: 0.85rem; color: rgb(255 255 255 / 0.5); margin-bottom: var(--s-10); }
+  .m8__art-cta-actions { display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap; }
+</style>

@@ -1,0 +1,563 @@
+---
+import LayoutDesign from '../../layouts/LayoutDesign.astro';
+import { Image } from 'astro:assets';
+import lacImg from '../../assets/images/location-lac-sainte-croix-gorges-verdon.png';
+import yogaImg from '../../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import concertImg from '../../assets/images/concert-joulik-lac-sainte-croix-surfcenter.jpg';
+import concertBgImg from '../../assets/images/framboise-et-ceatera-lac-sainte-croix-concert-surfcenter.jpg';
+
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'EventSeries',
+  name: 'Animations & Événements — Surf Center',
+  description: 'Yoga, concerts, soirées coucher de soleil et animations estivales au Surf Center, lac de Sainte-Croix, Gorges du Verdon.',
+  url: `${siteUrl}/v2/animations`,
+  image: `${siteUrl}/concert-surfcenter-lac-sainte-croix.png`,
+  location: {
+    '@type': 'Place',
+    name: 'Surf Center',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Plage des Salles-sur-Verdon',
+      addressLocality: 'Les Salles-sur-Verdon',
+      postalCode: '83630',
+      addressCountry: 'FR',
+    },
+    geo: { '@type': 'GeoCoordinates', latitude: 43.7766, longitude: 6.21 },
+  },
+  organizer: {
+    '@type': 'Organization',
+    name: 'Surf Center',
+    url: siteUrl,
+  },
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  isAccessibleForFree: true,
+};
+
+const upcomingEvents = [
+  { date: '12 Juil', title: 'Yoga sunrise', desc: 'Session de yoga au lever du soleil, face au lac. Tapis fournis.', tag: 'Yoga' },
+  { date: '19 Juil', title: 'Concert acoustique', desc: 'Soirée acoustique les pieds dans le sable, coucher de soleil.', tag: 'Concert' },
+  { date: '26 Juil', title: 'DJ set sunset', desc: 'DJ set au coucher du soleil, ambiance chill sur la plage.', tag: 'DJ' },
+  { date: '02 Août', title: 'Nuit des étoiles', desc: 'Observation astronomique depuis le lac. Ciel pur garanti.', tag: 'Événement' },
+  { date: '09 Août', title: 'Soirée tropicale', desc: 'Cocktails, musique live et ambiance festive au bord de l\'eau.', tag: 'Soirée' },
+  { date: '16 Août', title: 'Yoga full moon', desc: 'Session de yoga sous la pleine lune, une expérience unique.', tag: 'Yoga' },
+];
+
+const galleryPhotos = [
+  { src: '/concert-surfcenter-lac-sainte-croix.png', alt: 'Concert au coucher de soleil — Surf Center' },
+  { src: '/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg', alt: 'Yoga au bord du lac de Sainte-Croix' },
+  { src: '/framboise-et-ceatera-lac-sainte-croix-concert-surfcenter.jpg', alt: 'Concert live — Framboise et Cætera' },
+  { src: '/concert-joulik-lac-sainte-croix-surfcenter.jpg', alt: 'Concert Joulik au Surf Center' },
+];
+---
+
+<LayoutDesign
+  title="Animations — Surf Center | Yoga, Concerts & Événements"
+  description="Yoga, concerts acoustiques, DJ sets et animations estivales au Surf Center. Programmation de l'été au lac de Sainte-Croix, Gorges du Verdon."
+  jsonLd={jsonLd}
+>
+  <!-- CINEMA HERO -->
+  <section class="danm-hero">
+    <div class="danm-hero__bg" aria-hidden="true">
+      <Image
+        src={lacImg}
+        alt=""
+        width={1920}
+        height={820}
+        class="danm-hero__bgimg"
+        loading="eager"
+      />
+    </div>
+    <div class="danm-hero__overlay" aria-hidden="true"></div>
+    <div class="container danm-hero__inner">
+      <span class="danm-hero__eyebrow">Été 2026 · Programmation</span>
+      <h1 class="danm-hero__title reveal">Animations</h1>
+      <p class="danm-hero__sub reveal">Yoga au lever du soleil, concerts les pieds dans le sable, soirées coucher de soleil — une programmation estivale unique au bord du lac.</p>
+    </div>
+  </section>
+
+  <!-- STICKY SCROLL: YOGA -->
+  <section class="section danm-sticky" aria-labelledby="danm-yoga-title">
+    <div class="container danm-sticky__wrap">
+      <div class="danm-sticky__text reveal">
+        <span class="danm-sticky__eyebrow">Bien-être</span>
+        <h2 id="danm-yoga-title" class="danm-sticky__heading">Yoga<br/>face au lac</h2>
+        <p class="danm-sticky__desc">Chaque semaine en saison, retrouvez des sessions de yoga au lever du soleil sur la plage du Surf Center. Guidé par Sarah, face aux eaux calmes du lac de Sainte-Croix, commencez votre journée par un moment de sérénité absolue.</p>
+        <ul class="danm-sticky__list" role="list">
+          <li>Yoga Hatha & Vinyasa</li>
+          <li>Sessions au lever du soleil</li>
+          <li>Tous niveaux bienvenus</li>
+          <li>Tapis fournis</li>
+          <li>Gratuit pour les clients</li>
+        </ul>
+      </div>
+      <div class="danm-sticky__images">
+        <div class="danm-sticky__imgwrap reveal">
+          <Image
+            src={yogaImg}
+            alt="Cours de yoga au lever du soleil — Surf Center"
+            width={600}
+            height={750}
+            class="danm-sticky__img"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STICKY SCROLL: CONCERTS -->
+  <section class="section danm-sticky danm-sticky--reverse" aria-labelledby="danm-concerts-title">
+    <div class="container danm-sticky__wrap">
+      <div class="danm-sticky__text reveal">
+        <span class="danm-sticky__eyebrow">Musique</span>
+        <h2 id="danm-concerts-title" class="danm-sticky__heading">Concerts &<br/>soirées</h2>
+        <p class="danm-sticky__desc">Tout l'été, le Surf Center accueille des artistes locaux et nationaux pour des concerts acoustiques au coucher du soleil. Les pieds dans le sable, face au lac, profitez de sets musicaux uniques dans un cadre naturel exceptionnel.</p>
+        <ul class="danm-sticky__list" role="list">
+          <li>Concerts acoustiques live</li>
+          <li>DJ sets au coucher du soleil</li>
+          <li>Soirées thématiques</li>
+          <li>Entrée libre</li>
+          <li>Bar & restauration</li>
+        </ul>
+      </div>
+      <div class="danm-sticky__images">
+        <div class="danm-sticky__imgwrap reveal">
+          <Image
+            src={concertImg}
+            alt="Concert live au Surf Center — lac de Sainte-Croix"
+            width={600}
+            height={750}
+            class="danm-sticky__img"
+            loading="lazy"
+          />
+        </div>
+        <div class="danm-sticky__imgwrap reveal">
+          <Image
+            src={concertBgImg}
+            alt="Ambiance concert — Surf Center"
+            width={600}
+            height={750}
+            class="danm-sticky__img"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE: UPCOMING EVENTS -->
+  <section class="section danm-timeline" aria-labelledby="danm-tl-title">
+    <div class="container">
+      <header class="danm-timeline__header reveal">
+        <span class="danm-timeline__eyebrow">Prochains rendez-vous</span>
+        <h2 id="danm-tl-title" class="danm-timeline__heading">Agenda<br/>été 2026</h2>
+      </header>
+      <div class="danm-timeline__list">
+        {upcomingEvents.map((ev) => (
+          <div class="danm-timeline__item reveal">
+            <div class="danm-timeline__date">
+              <span class="danm-timeline__day">{ev.date.split(' ')[0]}</span>
+              <span class="danm-timeline__month">{ev.date.split(' ')[1]}</span>
+            </div>
+            <div class="danm-timeline__body">
+              <div class="danm-timeline__top">
+                <h3 class="danm-timeline__title">{ev.title}</h3>
+                <span class="danm-timeline__tag">{ev.tag}</span>
+              </div>
+              <p class="danm-timeline__desc">{ev.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SMALL CINEMA GALLERY -->
+  <section class="section danm-gallery" aria-labelledby="danm-gal-title">
+    <div class="container">
+      <header class="danm-gallery__header reveal">
+        <span class="danm-timeline__eyebrow">En images</span>
+        <h2 id="danm-gal-title" class="danm-timeline__heading">Moments<br/>capturés</h2>
+      </header>
+    </div>
+    <div class="danm-gallery__track" data-danm-track>
+      {galleryPhotos.map((p) => (
+        <div class="danm-gallery__item reveal">
+          <img
+            src={p.src}
+            alt={p.alt}
+            width="800"
+            height="450"
+            loading="lazy"
+            decoding="async"
+            class="danm-gallery__img"
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+</LayoutDesign>
+
+<style>
+  /* ========================
+     DANM — Animations (Design v2)
+     ======================== */
+
+  /* --- Cinema hero --- */
+  .danm-hero {
+    position: relative;
+    min-height: 65vh;
+    display: flex;
+    align-items: flex-end;
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+
+  .danm-hero__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .danm-hero__bgimg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.3;
+    filter: grayscale(0.2);
+  }
+
+  .danm-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #0a0a0a 0%, transparent 55%);
+  }
+
+  .danm-hero__inner {
+    position: relative;
+    z-index: 1;
+    padding-block: calc(var(--header-h) + var(--s-16)) var(--s-16);
+    max-width: 680px;
+  }
+
+  .danm-hero__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    display: block;
+    margin-bottom: var(--s-4);
+  }
+
+  .danm-hero__title {
+    font-size: clamp(3rem, 7vw, 6rem) !important;
+    font-weight: 800 !important;
+    line-height: 0.9 !important;
+    letter-spacing: -0.04em !important;
+    text-transform: uppercase;
+    color: #fff !important;
+    margin-bottom: var(--s-6);
+  }
+
+  .danm-hero__sub {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgb(255 255 255 / 0.5);
+    max-width: 48ch;
+  }
+
+  /* --- Sticky scroll sections --- */
+  .danm-sticky {
+    background: #0a0a0a;
+    color: #fff;
+  }
+
+  .danm-sticky__wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+  }
+
+  .danm-sticky__text {
+    max-width: 480px;
+  }
+
+  .danm-sticky__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    display: block;
+    margin-bottom: var(--s-3);
+  }
+
+  .danm-sticky__heading {
+    font-size: clamp(1.8rem, 4vw, 2.8rem) !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.03em !important;
+    color: #fff !important;
+    text-transform: uppercase;
+    margin-bottom: var(--s-4);
+  }
+
+  .danm-sticky__desc {
+    font-size: 0.92rem;
+    color: rgb(255 255 255 / 0.55);
+    line-height: 1.75;
+    margin-bottom: var(--s-6);
+    max-width: 40ch;
+  }
+
+  .danm-sticky__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .danm-sticky__list li {
+    font-size: 0.82rem;
+    color: rgb(255 255 255 / 0.6);
+    padding-left: var(--s-5);
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .danm-sticky__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 2px;
+    background: var(--c-orange);
+    border-radius: 1px;
+  }
+
+  .danm-sticky__images {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .danm-sticky__imgwrap {
+    overflow: hidden;
+    border-radius: var(--r-xl);
+  }
+
+  .danm-sticky__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .danm-sticky__imgwrap:hover .danm-sticky__img {
+    transform: scale(1.03);
+  }
+
+  /* --- Timeline --- */
+  .danm-timeline {
+    background: #0e0e0e;
+    color: #fff;
+  }
+
+  .danm-timeline__header {
+    margin-bottom: var(--s-12);
+  }
+
+  .danm-timeline__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    display: block;
+    margin-bottom: var(--s-3);
+  }
+
+  .danm-timeline__heading {
+    font-size: clamp(1.8rem, 4vw, 2.8rem) !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.03em !important;
+    color: #fff !important;
+    text-transform: uppercase;
+  }
+
+  .danm-timeline__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+
+  .danm-timeline__item {
+    display: flex;
+    gap: var(--s-6);
+    background: rgb(255 255 255 / 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: var(--r-lg);
+    padding: var(--s-6) var(--s-8);
+    transition: border-color var(--t-fast), transform var(--t-fast);
+  }
+
+  .danm-timeline__item:hover {
+    border-color: var(--c-orange);
+    transform: translateX(4px);
+  }
+
+  .danm-timeline__date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 56px;
+    flex-shrink: 0;
+  }
+
+  .danm-timeline__day {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--c-orange);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .danm-timeline__month {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgb(255 255 255 / 0.45);
+    margin-top: 2px;
+  }
+
+  .danm-timeline__body {
+    flex: 1;
+  }
+
+  .danm-timeline__top {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    margin-bottom: var(--s-2);
+    flex-wrap: wrap;
+  }
+
+  .danm-timeline__title {
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+  }
+
+  .danm-timeline__tag {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    border: 1px solid rgb(247 123 70 / 0.3);
+    padding: 2px 8px;
+    border-radius: var(--r-full);
+  }
+
+  .danm-timeline__desc {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: rgb(255 255 255 / 0.5);
+    max-width: 52ch;
+  }
+
+  /* --- Cinema gallery --- */
+  .danm-gallery {
+    background: #0a0a0a;
+    color: #fff;
+  }
+
+  .danm-gallery__header {
+    margin-bottom: var(--s-10);
+  }
+
+  .danm-gallery__track {
+    display: flex;
+    gap: var(--s-6);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 var(--s-6);
+    scroll-behavior: smooth;
+  }
+
+  .danm-gallery__track::-webkit-scrollbar { display: none; }
+
+  .danm-gallery__item {
+    flex: 0 0 80%;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+
+  .danm-gallery__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .danm-gallery__item:hover .danm-gallery__img {
+    transform: scale(1.03);
+  }
+
+  /* --- Responsive --- */
+  @media (min-width: 600px) {
+    .danm-gallery__item { flex: 0 0 52%; }
+  }
+
+  @media (min-width: 900px) {
+    .danm-hero {
+      min-height: 70vh;
+      aspect-ratio: 21 / 9;
+    }
+
+    .danm-hero__inner {
+      padding-block: calc(var(--header-h) + var(--s-20)) var(--s-20);
+    }
+
+    .danm-sticky__wrap {
+      grid-template-columns: 0.45fr 1fr;
+      gap: var(--s-20);
+      align-items: start;
+    }
+
+    .danm-sticky__text {
+      position: sticky;
+      top: calc(var(--header-h) + var(--s-8));
+    }
+
+    .danm-sticky--reverse .danm-sticky__images {
+      order: -1;
+    }
+
+    .danm-sticky__images {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--s-6);
+    }
+
+    .danm-gallery__item { flex: 0 0 38%; }
+  }
+
+  @media (min-width: 1200px) {
+    .danm-gallery__item { flex: 0 0 32%; }
+  }
+</style>

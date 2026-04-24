@@ -1,0 +1,545 @@
+---
+import LayoutHyper from '../../layouts/LayoutHyper.astro';
+import MeshGradient from '../../components/v11/MeshGradient.astro';
+import GlowText from '../../components/v11/GlowText.astro';
+import HolographicCard from '../../components/v11/HolographicCard.astro';
+import WaveDivider from '../../components/v11/WaveDivider.astro';
+import { proFormulas, privateFormulas } from '../../data/events';
+
+const stats = [
+  { value: '500+', label: 'Événements organisés', color: '#26cfff' },
+  { value: '15k', label: 'Participants accueillis', color: '#6b21a8' },
+  { value: '100%', label: 'Satisfaction client', color: '#3b82f6' },
+  { value: '200', label: 'Places max', color: '#f77b46' },
+];
+---
+
+<LayoutHyper
+  title="Groupes & Événements — Surf Center Hyper Design"
+  description="Organisez votre événement au Surf Center : team building, EVJF, séminaire, concerts privés au bord du lac de Sainte-Croix."
+>
+  <!-- HERO -->
+  <section class="hyev__hero">
+    <MeshGradient />
+    <div class="hyev__hero-inner">
+      <p class="hyev__hero-tag reveal">Privatisation & sur mesure</p>
+      <GlowText tag="h1" color="#26cfff" intensity="high" class="hyev__hero-title reveal">
+        Groupes & Événements
+      </GlowText>
+      <p class="hyev__hero-sub reveal">
+        Team building, EVJF, séminaires, concerts privés — vivez l'exceptionnel au bord du lac de Sainte-Croix.
+      </p>
+    </div>
+  </section>
+
+  <WaveDivider color="#26cfff" />
+
+  <!-- STATS -->
+  <section class="hyev__stats reveal">
+    <div class="hyev__stats-grid">
+      {stats.map((s) => (
+        <div class="hyev__stat">
+          <GlowText tag="span" color={s.color} intensity="high" class="hyev__stat-value">
+            {s.value}
+          </GlowText>
+          <span class="hyev__stat-label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <WaveDivider color="#6b21a8" flip />
+
+  <!-- PRO FORMULAS -->
+  <section class="hyev__section reveal">
+    <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyev__section-title">
+      Formules Professionnelles
+    </GlowText>
+    <p class="hyev__section-sub">Des solutions clé en main pour vos événements d'entreprise</p>
+    <div class="hyev__formulas-grid">
+      {proFormulas.map((f) => (
+        <HolographicCard class="hyev__formula-card">
+          <div class="hyev__formula-img-wrap">
+            <img src={f.image} alt={f.alt} class="hyev__formula-img" loading="lazy" />
+            <span class="hyev__formula-badge">{f.capacity}</span>
+          </div>
+          <div class="hyev__formula-body">
+            <GlowText tag="h3" color="#26cfff" intensity="low" class="hyev__formula-title">
+              {f.title}
+            </GlowText>
+            <p class="hyev__formula-desc">{f.description}</p>
+            <ul class="hyev__formula-features">
+              {f.features.map((feat) => (
+                <li class="hyev__formula-feat">
+                  <span class="hyev__formula-feat-dot" aria-hidden="true"></span>
+                  {feat}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </HolographicCard>
+      ))}
+    </div>
+  </section>
+
+  <WaveDivider color="#3b82f6" />
+
+  <!-- PRIVATE FORMULAS -->
+  <section class="hyev__section reveal">
+    <GlowText tag="h2" color="#f77b46" intensity="medium" class="hyev__section-title">
+      Formules Privées
+    </GlowText>
+    <p class="hyev__section-sub">Anniversaires, EVJF, concerts — célébrez en beauté</p>
+    <div class="hyev__formulas-grid">
+      {privateFormulas.map((f) => (
+        <HolographicCard class="hyev__formula-card">
+          <div class="hyev__formula-img-wrap">
+            <img src={f.image} alt={f.alt} class="hyev__formula-img" loading="lazy" />
+            <span class="hyev__formula-badge hyev__formula-badge--warm">{f.capacity}</span>
+          </div>
+          <div class="hyev__formula-body">
+            <GlowText tag="h3" color="#f77b46" intensity="low" class="hyev__formula-title">
+              {f.title}
+            </GlowText>
+            <p class="hyev__formula-desc">{f.description}</p>
+            <ul class="hyev__formula-features">
+              {f.features.map((feat) => (
+                <li class="hyev__formula-feat">
+                  <span class="hyev__formula-feat-dot hyev__formula-feat-dot--warm" aria-hidden="true"></span>
+                  {feat}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </HolographicCard>
+      ))}
+    </div>
+  </section>
+
+  <WaveDivider color="#26cfff" flip />
+
+  <!-- CONTACT FORM -->
+  <section class="hyev__contact reveal">
+    <div class="hyev__contact-inner">
+      <div class="hyev__contact-info">
+        <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyev__contact-title">
+          Demandez votre devis
+        </GlowText>
+        <p class="hyev__contact-desc">
+          Décrivez-nous votre projet et recevez une proposition personnalisée sous 24h. Privatisation, restauration, animations — tout est possible.
+        </p>
+        <div class="hyev__contact-highlights">
+          <div class="hyev__contact-hl">
+            <GlowText tag="span" color="#26cfff" intensity="low" class="hyev__contact-hl-icon">✦</GlowText>
+            <span>Réponse sous 24h</span>
+          </div>
+          <div class="hyev__contact-hl">
+            <GlowText tag="span" color="#6b21a8" intensity="low" class="hyev__contact-hl-icon">✦</GlowText>
+            <span>Devis gratuit & sans engagement</span>
+          </div>
+          <div class="hyev__contact-hl">
+            <GlowText tag="span" color="#f77b46" intensity="low" class="hyev__contact-hl-icon">✦</GlowText>
+            <span>Interlocuteur dédié</span>
+          </div>
+        </div>
+      </div>
+
+      <HolographicCard class="hyev__form-card">
+        <form class="hyev__form" data-hyev-form>
+          <div class="hyev__field">
+            <label class="hyev__label" for="hyev-name">Nom complet</label>
+            <input class="hyev__input" type="text" id="hyev-name" name="name" required placeholder="Jean Dupont" />
+          </div>
+          <div class="hyev__field">
+            <label class="hyev__label" for="hyev-email">Email</label>
+            <input class="hyev__input" type="email" id="hyev-email" name="email" required placeholder="jean@example.com" />
+          </div>
+          <div class="hyev__field">
+            <label class="hyev__label" for="hyev-phone">Téléphone</label>
+            <input class="hyev__input" type="tel" id="hyev-phone" name="phone" placeholder="06 12 34 56 78" />
+          </div>
+          <div class="hyev__field">
+            <label class="hyev__label" for="hyev-type">Type d'événement</label>
+            <select class="hyev__input hyev__select" id="hyev-type" name="type" required>
+              <option value="">Choisir...</option>
+              <option value="team-building">Team Building</option>
+              <option value="seminaire">Séminaire</option>
+              <option value="soiree">Soirée d'entreprise</option>
+              <option value="evjf">EVJF / EVG</option>
+              <option value="anniversaire">Anniversaire</option>
+              <option value="concert">Concert privé</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+          <div class="hyev__field">
+            <label class="hyev__label" for="hyev-guests">Nombre de personnes</label>
+            <input class="hyev__input" type="number" id="hyev-guests" name="guests" min="1" placeholder="30" />
+          </div>
+          <div class="hyev__field hyev__field--full">
+            <label class="hyev__label" for="hyev-msg">Votre message</label>
+            <textarea class="hyev__input hyev__textarea" id="hyev-msg" name="message" rows="4" placeholder="Décrivez votre projet..."></textarea>
+          </div>
+          <button class="hyev__submit" type="submit">
+            <span class="hyev__submit-text">Envoyer la demande</span>
+            <span class="hyev__submit-glow" aria-hidden="true"></span>
+          </button>
+        </form>
+      </HolographicCard>
+    </div>
+  </section>
+</LayoutHyper>
+
+<style>
+  /* HERO */
+  .hyev__hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 1.5rem 4rem;
+    overflow: hidden;
+  }
+  .hyev__hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+  .hyev__hero-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #f77b46;
+    border: 1px solid rgba(247, 123, 70, 0.3);
+    background: rgba(247, 123, 70, 0.08);
+    padding: 0.4rem 1.2rem;
+    border-radius: 9999px;
+    margin-bottom: 1.5rem;
+  }
+  .hyev__hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 1.5rem;
+  }
+  .hyev__hero-sub {
+    font-size: 1.15rem;
+    color: rgba(240, 240, 235, 0.65);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* STATS */
+  .hyev__stats {
+    padding: 4rem 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hyev__stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .hyev__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(38, 207, 255, 0.08);
+    backdrop-filter: blur(12px);
+  }
+  .hyev__stat-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .hyev__stat-label {
+    font-size: 0.85rem;
+    color: rgba(240, 240, 235, 0.55);
+    letter-spacing: 0.02em;
+  }
+
+  /* SECTIONS */
+  .hyev__section {
+    padding: 5rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hyev__section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    text-align: center;
+    margin: 0 0 0.75rem;
+  }
+  .hyev__section-sub {
+    text-align: center;
+    color: rgba(240, 240, 235, 0.55);
+    font-size: 1.05rem;
+    margin: 0 0 3rem;
+  }
+
+  /* FORMULA GRID */
+  .hyev__formulas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2rem;
+  }
+  .hyev__formula-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .hyev__formula-img-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.25rem 1.25rem 0 0;
+    aspect-ratio: 16 / 10;
+  }
+  .hyev__formula-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hyev__formula-card:hover .hyev__formula-img {
+    transform: scale(1.05);
+  }
+  .hyev__formula-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #26cfff;
+    background: rgba(5, 5, 16, 0.7);
+    border: 1px solid rgba(38, 207, 255, 0.3);
+    padding: 0.35rem 0.9rem;
+    border-radius: 9999px;
+    backdrop-filter: blur(8px);
+  }
+  .hyev__formula-badge--warm {
+    color: #f77b46;
+    border-color: rgba(247, 123, 70, 0.3);
+  }
+  .hyev__formula-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .hyev__formula-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+  }
+  .hyev__formula-desc {
+    font-size: 0.9rem;
+    color: rgba(240, 240, 235, 0.6);
+    line-height: 1.7;
+    margin: 0 0 1.25rem;
+  }
+  .hyev__formula-features {
+    list-style: none;
+    padding: 0;
+    margin: auto 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .hyev__formula-feat {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.82rem;
+    color: rgba(240, 240, 235, 0.7);
+  }
+  .hyev__formula-feat-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #26cfff;
+    box-shadow: 0 0 8px rgba(38, 207, 255, 0.5);
+    flex-shrink: 0;
+  }
+  .hyev__formula-feat-dot--warm {
+    background: #f77b46;
+    box-shadow: 0 0 8px rgba(247, 123, 70, 0.5);
+  }
+
+  /* CONTACT */
+  .hyev__contact {
+    padding: 5rem 1.5rem 6rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hyev__contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .hyev__contact-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    margin: 0 0 1rem;
+  }
+  .hyev__contact-desc {
+    color: rgba(240, 240, 235, 0.6);
+    line-height: 1.7;
+    margin: 0 0 2rem;
+    font-size: 1rem;
+  }
+  .hyev__contact-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+  .hyev__contact-hl {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.92rem;
+    color: rgba(240, 240, 235, 0.75);
+  }
+  .hyev__contact-hl-icon {
+    font-size: 1rem;
+  }
+
+  /* FORM */
+  .hyev__form-card {
+    padding: 2rem;
+  }
+  .hyev__form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .hyev__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .hyev__field--full {
+    grid-column: 1 / -1;
+  }
+  .hyev__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(240, 240, 235, 0.5);
+  }
+  .hyev__input {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(38, 207, 255, 0.15);
+    border-radius: 0.75rem;
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    color: #f0f0eb;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hyev__input::placeholder {
+    color: rgba(240, 240, 235, 0.25);
+  }
+  .hyev__input:focus {
+    border-color: rgba(38, 207, 255, 0.5);
+    box-shadow: 0 0 16px rgba(38, 207, 255, 0.1), inset 0 0 8px rgba(38, 207, 255, 0.03);
+  }
+  .hyev__select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2326cfff' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+  .hyev__textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  .hyev__submit {
+    grid-column: 1 / -1;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #050510;
+    background: linear-gradient(135deg, #26cfff, #3b82f6);
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    font-family: inherit;
+  }
+  .hyev__submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(38, 207, 255, 0.3), 0 0 16px rgba(38, 207, 255, 0.15);
+  }
+  .hyev__submit:active {
+    transform: translateY(0) scale(0.98);
+  }
+  .hyev__submit-text {
+    position: relative;
+    z-index: 2;
+  }
+  .hyev__submit-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  .hyev__submit:hover .hyev__submit-glow {
+    transform: translateX(100%);
+  }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hyev__stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .hyev__contact-inner {
+      grid-template-columns: 1fr;
+    }
+    .hyev__formulas-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 600px) {
+    .hyev__hero {
+      min-height: 55vh;
+      padding: 6rem 1rem 3rem;
+    }
+    .hyev__form {
+      grid-template-columns: 1fr;
+    }
+    .hyev__stat-value {
+      font-size: 2rem;
+    }
+  }
+</style>

@@ -1,0 +1,430 @@
+---
+import LayoutMarketing from '../../layouts/LayoutMarketing.astro';
+import { Image } from 'astro:assets';
+import imgDroneSnack from '../../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+import imgEsprit from '../../assets/images/esprit.png';
+import imgPlat1 from '../../assets/images/IMG20220610131419.jpg';
+import imgPlat2 from '../../assets/images/IMG20220618204351.jpg';
+import TrustBadges from '../../components/v8/TrustBadges.astro';
+
+const menuPizzas = [
+  { name: "Margherita", desc: "Tomate, mozzarella, basilic frais", price: "11" },
+  { name: "Reine", desc: "Tomate, mozzarella, jambon, champignons", price: "13" },
+  { name: "Végétarienne", desc: "Légumes grillés, mozzarella, olives", price: "13" },
+  { name: "Provençale", desc: "Tomate, chèvre, miel, noix", price: "14" },
+  { name: "Surf Special", desc: "Tomate, mozzarella, parme, roquette, parmesan", price: "15" },
+  { name: "Calzone", desc: "Pliée, tomate, mozzarella, jambon, œuf", price: "14" },
+];
+
+const menuSalades = [
+  { name: "Salade du Lac", desc: "Mesclun, tomates, concombre, olive", price: "10" },
+  { name: "Salade Chèvre Chaud", desc: "Mesclun, toasts chèvre, miel, noix", price: "13" },
+  { name: "Salade Italienne", desc: "Roquette, parme, parmesan, tomates confites", price: "14" },
+];
+
+const menuBoissons = [
+  { name: "Soft (33cl)", desc: "Coca, Orangina, Ice Tea, eau", price: "3" },
+  { name: "Bière pression", desc: "Blonde locale (25cl / 50cl)", price: "4/6" },
+  { name: "Rosé de Provence", desc: "Verre / Bouteille", price: "4/18" },
+  { name: "Cocktail du jour", desc: "Création maison selon arrivage", price: "8" },
+  { name: "Glaces artisanales", desc: "2 boules au choix", price: "4" },
+];
+
+const reviews = [
+  { quote: "Les meilleures pizzas qu'on ait mangées au bord d'un lac. Cuisson parfaite, produits frais. Les enfants ont adoré !", author: "Marie C.", context: "Famille — Août 2025", rating: 5 },
+  { quote: "Super spot pour déjeuner après le paddle. La salade chèvre chaud est top et la vue sur le lac est juste dingue.", author: "Lucas P.", context: "Entre amis — Juillet 2025", rating: 5 },
+  { quote: "On y revient chaque été. L'ambiance est géniale, les prix corrects et le rosé bien frais. Le combo parfait.", author: "Nathalie & Éric", context: "Couple — Septembre 2025", rating: 5 },
+];
+---
+
+<LayoutMarketing
+  title="Restauration — Snack-Pizzeria face au lac | Surf Center"
+  description="Pizzas au feu de bois, salades fraîches et boissons glacées avec vue sur le lac de Sainte-Croix. Snack-pizzeria du Surf Center, Les Salles-sur-Verdon."
+>
+  <!-- HERO -->
+  <section class="m8__rhero" aria-label="Restaurant Surf Center">
+    <Image
+      class="m8__rhero-img"
+      src={imgDroneSnack}
+      alt="Vue aérienne du snack-pizzeria Surf Center au bord du lac de Sainte-Croix"
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      format="webp"
+      quality={80}
+    />
+    <div class="m8__rhero-overlay" aria-hidden="true"></div>
+
+    <div class="m8__rhero-badge">
+      <span class="m8__rhero-badge-dot" aria-hidden="true"></span>
+      Ouvert 7j/7 en saison
+    </div>
+
+    <div class="m8__rhero-content">
+      <div class="m8__rhero-proof">
+        <span class="m8__rhero-stars" aria-label="4.8 étoiles sur 5">★★★★★</span>
+        <span class="m8__rhero-proof-text">4.8/5 — « Meilleur snack du lac »</span>
+      </div>
+      <h1 class="m8__rhero-title">Gourmandise<br/>au bord de l'eau</h1>
+      <p class="m8__rhero-baseline">Pizzas au feu de bois · Salades fraîches · Vue imprenable</p>
+      <div class="m8__rhero-actions">
+        <a href="#carte" class="btn btn--primary btn--lg">
+          <span class="btn-flip__inner">
+            <span class="btn-flip__front">Voir la carte</span>
+            <span class="btn-flip__back">Voir la carte</span>
+          </span>
+        </a>
+        <a href="#reserver-table" class="btn btn--ghost btn--lg">Réserver une table</a>
+      </div>
+      <p class="m8__rhero-sub">Service continu 11h–18h30 · Terrasse face au lac · Sans réservation</p>
+    </div>
+  </section>
+
+  <!-- PHOTOS AMBIANCE -->
+  <section class="section" aria-label="Ambiance restaurant">
+    <div class="container">
+      <div class="m8__r-photos reveal">
+        <div class="m8__r-photo m8__r-photo--wide">
+          <Image src={imgEsprit} alt="Terrasse du Surf Center face au lac de Sainte-Croix" width={800} height={500} loading="lazy" decoding="async" format="webp" quality={75} />
+        </div>
+        <div class="m8__r-photo">
+          <Image src={imgPlat1} alt="Pizza au feu de bois du Surf Center" width={400} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
+        </div>
+        <div class="m8__r-photo">
+          <Image src={imgPlat2} alt="Salade fraîche servie au Surf Center" width={400} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU CARDS -->
+  <section id="carte" class="section section--surface" aria-labelledby="m8__menu-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Notre carte</span>
+        <h2 id="m8__menu-title">Des produits frais,<br/>un cadre unique</h2>
+        <p class="section__lead">Pizzas cuites au feu de bois, salades du marché et boissons fraîches.</p>
+      </header>
+
+      <div class="m8__menu-grid">
+        <!-- Pizzas -->
+        <div class="m8__menu-cat reveal">
+          <div class="m8__menu-cat-head">
+            <h3 class="m8__menu-cat-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M8 12s1.5 2 4 2 4-2 4-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Pizzas
+            </h3>
+            <span class="m8__menu-badge">Feu de bois</span>
+          </div>
+          {menuPizzas.map((item) => (
+            <div class="m8__menu-item">
+              <div class="m8__menu-item-info">
+                <strong class="m8__menu-item-name">{item.name}</strong>
+                <span class="m8__menu-item-desc">{item.desc}</span>
+              </div>
+              <span class="m8__menu-item-price">{item.price}€</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Salades -->
+        <div class="m8__menu-cat reveal reveal-d1">
+          <div class="m8__menu-cat-head">
+            <h3 class="m8__menu-cat-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 21h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12 21V11" stroke="currentColor" stroke-width="1.5"/><path d="M15 3c0 4-3 8-3 8s-3-4-3-8a3 3 0 0 1 6 0Z" stroke="currentColor" stroke-width="1.5"/></svg>
+              Salades
+            </h3>
+            <span class="m8__menu-badge">Fraîcheur</span>
+          </div>
+          {menuSalades.map((item) => (
+            <div class="m8__menu-item">
+              <div class="m8__menu-item-info">
+                <strong class="m8__menu-item-name">{item.name}</strong>
+                <span class="m8__menu-item-desc">{item.desc}</span>
+              </div>
+              <span class="m8__menu-item-price">{item.price}€</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Boissons & Desserts -->
+        <div class="m8__menu-cat reveal reveal-d2">
+          <div class="m8__menu-cat-head">
+            <h3 class="m8__menu-cat-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 2h8l-1 9H9L8 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 11v7" stroke="currentColor" stroke-width="1.5"/><path d="M8 22h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7 18h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Boissons & Desserts
+            </h3>
+          </div>
+          {menuBoissons.map((item) => (
+            <div class="m8__menu-item">
+              <div class="m8__menu-item-info">
+                <strong class="m8__menu-item-name">{item.name}</strong>
+                <span class="m8__menu-item-desc">{item.desc}</span>
+              </div>
+              <span class="m8__menu-item-price">{item.price}€</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section" aria-labelledby="m8__r-reviews-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Avis clients</span>
+        <h2 id="m8__r-reviews-title">Ils ont goûté,<br/>ils approuvent</h2>
+        <p class="section__lead">4.8/5 sur Google — Le snack préféré des visiteurs du lac.</p>
+      </header>
+
+      <div class="m8__r-reviews-grid">
+        {reviews.map((r, i) => (
+          <blockquote class={`m8__r-review reveal reveal-d${i + 1}`}>
+            <div class="m8__r-review-stars" aria-label={`${r.rating} étoiles sur 5`}>★★★★★</div>
+            <p class="m8__r-review-text">&ldquo;{r.quote}&rdquo;</p>
+            <footer class="m8__r-review-footer">
+              <cite class="m8__r-review-author">{r.author}</cite>
+              <span class="m8__r-review-context">{r.context}</span>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <TrustBadges />
+
+  <!-- CTA RESERVE TABLE -->
+  <section id="reserver-table" class="section m8__r-cta-section" aria-labelledby="m8__r-cta-title">
+    <Image
+      class="m8__r-cta-bg"
+      src={imgDroneSnack}
+      alt=""
+      widths={[640, 1024, 1440]}
+      sizes="100vw"
+      loading="lazy"
+      decoding="async"
+      format="webp"
+      quality={70}
+    />
+    <div class="m8__r-cta-overlay" aria-hidden="true"></div>
+    <div class="container m8__r-cta-inner reveal">
+      <span class="section__eyebrow" style="color: var(--c-orange)">Restauration</span>
+      <h2 id="m8__r-cta-title" class="m8__r-cta-title">Réservez votre table<br/>face au lac</h2>
+      <p class="m8__r-cta-text">Terrasse les pieds dans le sable, vue panoramique sur les Gorges du Verdon.<br/>Service continu de 11h à 18h30, pas de réservation nécessaire en semaine.</p>
+      <div class="m8__r-cta-proof">
+        <span class="m8__r-cta-dot" aria-hidden="true"></span>
+        <span>Produits frais · Cuisson au feu de bois · Prix doux</span>
+      </div>
+      <div class="m8__r-cta-actions">
+        <a href="tel:+33492771450" class="btn btn--primary btn--lg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="margin-right:6px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.11 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.35a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.75.32 1.54.55 2.35.68A2 2 0 0 1 22 16.92Z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Appeler · 04 92 77 14 50
+        </a>
+        <button type="button" class="btn btn--ghost btn--lg" data-booking>
+          <span class="btn-flip__inner"><span class="btn-flip__front">Réserver une activité</span><span class="btn-flip__back">Réserver une activité</span></span>
+        </button>
+      </div>
+      <p class="m8__r-cta-micro">Week-ends & jours fériés : réservation conseillée par téléphone</p>
+    </div>
+  </section>
+</LayoutMarketing>
+
+<style>
+  /* ── HERO ── */
+  .m8__rhero {
+    position: relative; height: 85svh; min-height: 550px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; background: #0a0a0a;
+  }
+  .m8__rhero-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 35%; z-index: 0;
+    animation: m8r-zoom 25s ease forwards;
+  }
+  @keyframes m8r-zoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+  .m8__rhero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.5) 0%, rgb(0 0 0 / 0.2) 40%, rgb(0 0 0 / 0.7) 100%);
+  }
+  .m8__rhero-badge {
+    position: absolute; top: calc(var(--header-h, 80px) + 1rem); left: 50%; transform: translateX(-50%); z-index: 3;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.45rem 1rem; border-radius: var(--r-full);
+    background: rgb(247 123 70 / 0.15); border: 1px solid rgb(247 123 70 / 0.3);
+    backdrop-filter: blur(12px); font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-orange-light, #fbbf80);
+    white-space: nowrap; animation: m8r-fade 700ms ease 100ms both;
+  }
+  .m8__rhero-badge-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+    animation: m8r-pulse 2s ease-in-out infinite;
+  }
+  @keyframes m8r-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  @keyframes m8r-fade {
+    from { opacity: 0; transform: translateX(-50%) translateY(16px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+  .m8__rhero-content {
+    position: relative; z-index: 2; text-align: center;
+    padding-inline: var(--s-6); max-width: 52rem;
+    margin-top: calc(var(--header-h, 80px) * 0.4);
+  }
+  .m8__rhero-proof {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.5rem; margin-bottom: var(--s-6);
+    animation: m8r-up 900ms ease 200ms both;
+  }
+  @keyframes m8r-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .m8__rhero-stars { font-size: 0.8rem; color: #fbbf24; letter-spacing: 2px; }
+  .m8__rhero-proof-text { font-size: 0.7rem; font-weight: 500; color: rgb(255 255 255 / 0.6); }
+  .m8__rhero-title {
+    font-size: clamp(2.8rem, 9vw, 6rem); font-weight: 800; line-height: 0.92;
+    letter-spacing: -0.04em; text-transform: uppercase; color: #fff !important;
+    margin-bottom: var(--s-5); text-shadow: 0 4px 40px rgb(0 0 0 / 0.5);
+    animation: m8r-up 900ms ease 400ms both;
+  }
+  .m8__rhero-baseline {
+    font-size: clamp(0.85rem, 1.6vw, 1.1rem); font-weight: 500;
+    color: rgb(255 255 255 / 0.75) !important; margin-bottom: var(--s-8);
+    animation: m8r-up 900ms ease 550ms both;
+  }
+  .m8__rhero-actions {
+    display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap;
+    animation: m8r-up 900ms ease 700ms both;
+  }
+  .m8__rhero-sub {
+    margin-top: var(--s-4); font-size: 0.7rem; font-weight: 500;
+    color: rgb(255 255 255 / 0.4); letter-spacing: 0.04em;
+    animation: m8r-up 900ms ease 850ms both;
+  }
+
+  /* ── PHOTOS ── */
+  .m8__r-photos {
+    display: grid; grid-template-columns: 1fr; gap: var(--s-4);
+  }
+  @media (min-width: 768px) {
+    .m8__r-photos { grid-template-columns: 1.5fr 1fr; grid-template-rows: auto auto; }
+    .m8__r-photo--wide { grid-row: span 2; }
+  }
+  .m8__r-photo { border-radius: var(--r-lg); overflow: hidden; }
+  .m8__r-photo :global(img) {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+  .m8__r-photo:hover :global(img) { transform: scale(1.04); }
+
+  /* ── MENU ── */
+  .m8__menu-grid {
+    display: grid; grid-template-columns: 1fr; gap: var(--s-8);
+  }
+  @media (min-width: 900px) { .m8__menu-grid { grid-template-columns: repeat(3, 1fr); } }
+  .m8__menu-cat {
+    padding: var(--s-7); background: var(--c-bg); border-radius: var(--r-lg);
+    border: 1px solid var(--c-border-light);
+    transition: border-color var(--t-fast);
+  }
+  .m8__menu-cat:hover { border-color: var(--c-orange); }
+  .m8__menu-cat-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--s-3); margin-bottom: var(--s-6);
+    padding-bottom: var(--s-4); border-bottom: 1px solid var(--c-border-light);
+  }
+  .m8__menu-cat-title {
+    display: flex; align-items: center; gap: var(--s-2);
+    font-size: 1rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.04em; color: var(--c-text);
+  }
+  .m8__menu-cat-title svg { color: var(--c-orange); }
+  .m8__menu-badge {
+    font-size: 0.56rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; padding: 0.2rem 0.55rem; border-radius: var(--r-full);
+    background: var(--c-orange); color: #fff;
+  }
+  .m8__menu-item {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: var(--s-4); padding: var(--s-3) 0;
+    border-bottom: 1px dotted var(--c-border-light);
+  }
+  .m8__menu-item:last-child { border-bottom: none; }
+  .m8__menu-item-info { display: flex; flex-direction: column; gap: 2px; }
+  .m8__menu-item-name { font-size: 0.88rem; font-weight: 600; color: var(--c-text); }
+  .m8__menu-item-desc { font-size: 0.72rem; color: var(--c-text-muted); line-height: 1.4; }
+  .m8__menu-item-price {
+    font-size: 1rem; font-weight: 800; color: var(--c-orange);
+    white-space: nowrap; flex-shrink: 0;
+  }
+
+  /* ── REVIEWS ── */
+  .m8__r-reviews-grid {
+    display: grid; grid-template-columns: 1fr; gap: var(--s-5);
+  }
+  @media (min-width: 768px) { .m8__r-reviews-grid { grid-template-columns: repeat(3, 1fr); } }
+  .m8__r-review {
+    padding: var(--s-6) var(--s-7); background: var(--c-surface);
+    border-radius: var(--r-lg); border: 1px solid var(--c-border-light);
+    margin: 0; display: flex; flex-direction: column;
+    transition: border-color var(--t-fast);
+  }
+  .m8__r-review:hover { border-color: var(--c-border); }
+  .m8__r-review-stars { font-size: 0.85rem; color: #fbbf24; letter-spacing: 2px; margin-bottom: var(--s-3); }
+  .m8__r-review-text {
+    font-size: 0.9rem; line-height: 1.7; color: var(--c-text);
+    font-style: italic; margin-bottom: auto; padding-bottom: var(--s-5);
+  }
+  .m8__r-review-footer {
+    display: flex; flex-direction: column; gap: 2px;
+    padding-top: var(--s-4); border-top: 1px solid var(--c-border-light);
+  }
+  .m8__r-review-author { font-style: normal; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--c-text); }
+  .m8__r-review-context { font-size: 0.68rem; color: var(--c-text-muted); }
+
+  /* ── CTA ── */
+  .m8__r-cta-section {
+    position: relative; overflow: hidden; color: #fff;
+    min-height: 60vh; display: flex; align-items: center;
+  }
+  .m8__r-cta-bg {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 0;
+  }
+  .m8__r-cta-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgb(10 10 10 / 0.65) 0%, rgb(10 10 10 / 0.85) 100%);
+  }
+  .m8__r-cta-inner {
+    position: relative; z-index: 2; text-align: center;
+    max-width: 42rem; margin-inline: auto;
+  }
+  .m8__r-cta-title {
+    font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800;
+    letter-spacing: -0.03em; color: #fff; margin-bottom: var(--s-4);
+  }
+  .m8__r-cta-text {
+    font-size: 0.92rem; color: rgb(255 255 255 / 0.6);
+    line-height: 1.7; margin-bottom: var(--s-6);
+  }
+  .m8__r-cta-proof {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 1rem; border-radius: var(--r-full);
+    background: rgb(255 255 255 / 0.08); border: 1px solid rgb(255 255 255 / 0.1);
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgb(255 255 255 / 0.5); margin-bottom: var(--s-8);
+  }
+  .m8__r-cta-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+    animation: m8r-pulse 2s ease-in-out infinite;
+  }
+  .m8__r-cta-actions { display: flex; gap: var(--s-4); justify-content: center; flex-wrap: wrap; }
+  .m8__r-cta-micro {
+    margin-top: var(--s-5); font-size: 0.68rem;
+    color: rgb(255 255 255 / 0.35); letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 600px) {
+    .m8__rhero-actions, .m8__r-cta-actions { flex-direction: column; align-items: center; }
+  }
+</style>

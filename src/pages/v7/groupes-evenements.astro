@@ -1,0 +1,546 @@
+---
+import LayoutKinetic from '../../layouts/LayoutKinetic.astro';
+import { proFormulas, privateFormulas } from '../../data/events';
+---
+
+<LayoutKinetic
+  title="Groupes & Événements | Surf Center — Lac de Sainte-Croix"
+  description="Organisez votre événement au Surf Center : team building, EVJF, anniversaire, concert privé au bord du lac de Sainte-Croix."
+>
+  <!-- KINETIC HERO -->
+  <section class="k7ev__hero" aria-label="Groupes & Événements">
+    <div class="k7ev__hero-bg" aria-hidden="true">
+      <div class="k7ev__hero-stripes"></div>
+    </div>
+    <div class="container k7ev__hero-inner">
+      <span class="k7ev__hero-tag">Privatisation · Sur mesure</span>
+      <h1 class="k7ev__hero-title">
+        <span class="k7ev__hero-t1">Groupes</span>
+        <span class="k7ev__hero-t2">&amp; Événements</span>
+      </h1>
+      <p class="k7ev__hero-sub">Team building, EVJF, anniversaires, concerts — vivez l'exceptionnel au bord du lac de Sainte-Croix.</p>
+    </div>
+  </section>
+
+  <!-- PULSE INTRO -->
+  <section class="k7ev__pulse" aria-labelledby="k7ev-pulse-title">
+    <div class="container">
+      <div class="k7ev__pulse-head reveal">
+        <div class="k7ev__pulse-stripe" aria-hidden="true"></div>
+        <span class="k7ev__pulse-label">Pourquoi le Surf Center</span>
+      </div>
+      <div class="k7ev__pulse-stats reveal">
+        <div class="k7ev__pulse-stat">
+          <span class="k7ev__pulse-num">200</span>
+          <span class="k7ev__pulse-unit">personnes max</span>
+        </div>
+        <div class="k7ev__pulse-stat">
+          <span class="k7ev__pulse-num">10+</span>
+          <span class="k7ev__pulse-unit">ans d'expérience</span>
+        </div>
+        <div class="k7ev__pulse-stat">
+          <span class="k7ev__pulse-num">100%</span>
+          <span class="k7ev__pulse-unit">sur mesure</span>
+        </div>
+      </div>
+      <h2 id="k7ev-pulse-title" class="k7ev__pulse-manifesto reveal">
+        Un cadre exceptionnel entre lac et Gorges du Verdon, une équipe dédiée, des formules clé en main — votre événement mérite le Surf Center.
+      </h2>
+    </div>
+  </section>
+
+  <!-- SLANT CARDS — PRO -->
+  <section class="k7ev__formulas" aria-labelledby="k7ev-pro-title">
+    <div class="container">
+      <div class="k7ev__formulas-head reveal">
+        <div class="k7ev__formulas-stripe" aria-hidden="true"></div>
+        <h2 id="k7ev-pro-title" class="k7ev__formulas-title">Formules Pro</h2>
+      </div>
+      <div class="k7ev__cards">
+        {proFormulas.map((f, i) => (
+          <article class="k7ev__card reveal" style={`--d:${i * 120}ms`}>
+            <div class="k7ev__card-img">
+              <img src={f.image} alt={f.alt} width="600" height="400" loading="lazy" decoding="async" />
+              <div class="k7ev__card-slant" aria-hidden="true"></div>
+            </div>
+            <div class="k7ev__card-body">
+              <h3 class="k7ev__card-name">{f.title}</h3>
+              <p class="k7ev__card-desc">{f.description}</p>
+              <ul class="k7ev__card-features" role="list">
+                {f.features.map((feat) => (
+                  <li>{feat}</li>
+                ))}
+              </ul>
+              <span class="k7ev__card-cap">{f.capacity}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SLANT CARDS — PRIVATE -->
+  <section class="k7ev__formulas k7ev__formulas--alt" aria-labelledby="k7ev-priv-title">
+    <div class="container">
+      <div class="k7ev__formulas-head reveal">
+        <div class="k7ev__formulas-stripe" aria-hidden="true"></div>
+        <h2 id="k7ev-priv-title" class="k7ev__formulas-title">Formules Privées</h2>
+      </div>
+      <div class="k7ev__cards">
+        {privateFormulas.map((f, i) => (
+          <article class="k7ev__card reveal" style={`--d:${i * 120}ms`}>
+            <div class="k7ev__card-img">
+              <img src={f.image} alt={f.alt} width="600" height="400" loading="lazy" decoding="async" />
+              <div class="k7ev__card-slant" aria-hidden="true"></div>
+            </div>
+            <div class="k7ev__card-body">
+              <h3 class="k7ev__card-name">{f.title}</h3>
+              <p class="k7ev__card-desc">{f.description}</p>
+              <ul class="k7ev__card-features" role="list">
+                {f.features.map((feat) => (
+                  <li>{feat}</li>
+                ))}
+              </ul>
+              <span class="k7ev__card-cap">{f.capacity}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ANGULAR CONTACT FORM -->
+  <section class="k7ev__contact" aria-labelledby="k7ev-contact-title">
+    <div class="k7ev__contact-angle" aria-hidden="true"></div>
+    <div class="container">
+      <div class="k7ev__contact-head reveal">
+        <div class="k7ev__contact-stripe" aria-hidden="true"></div>
+        <h2 id="k7ev-contact-title" class="k7ev__contact-title">Demander un devis</h2>
+        <p class="k7ev__contact-sub">Décrivez votre projet, nous revenons vers vous sous 24h.</p>
+      </div>
+      <form class="k7ev__form reveal" action="#" method="POST">
+        <div class="k7ev__form-row">
+          <div class="k7ev__field">
+            <label for="k7ev-name">Nom / Société</label>
+            <input type="text" id="k7ev-name" name="name" required autocomplete="organization" />
+          </div>
+          <div class="k7ev__field">
+            <label for="k7ev-email">E-mail</label>
+            <input type="email" id="k7ev-email" name="email" required autocomplete="email" />
+          </div>
+        </div>
+        <div class="k7ev__form-row">
+          <div class="k7ev__field">
+            <label for="k7ev-phone">Téléphone</label>
+            <input type="tel" id="k7ev-phone" name="phone" autocomplete="tel" />
+          </div>
+          <div class="k7ev__field">
+            <label for="k7ev-type">Type d'événement</label>
+            <select id="k7ev-type" name="type" required>
+              <option value="">Choisir…</option>
+              <option value="team-building">Team Building</option>
+              <option value="seminaire">Séminaire</option>
+              <option value="soiree">Soirée d'entreprise</option>
+              <option value="evjf-evg">EVJF / EVG</option>
+              <option value="anniversaire">Anniversaire</option>
+              <option value="concert">Concert privé</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+        </div>
+        <div class="k7ev__field k7ev__field--full">
+          <label for="k7ev-msg">Votre projet</label>
+          <textarea id="k7ev-msg" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary k7ev__form-btn">Envoyer la demande</button>
+      </form>
+    </div>
+  </section>
+</LayoutKinetic>
+
+<style>
+  /* ═══════════════ HERO ═══════════════ */
+  .k7ev__hero {
+    position: relative;
+    min-height: 70svh;
+    display: flex;
+    align-items: flex-end;
+    background: var(--c-dark);
+    overflow: hidden;
+  }
+
+  .k7ev__hero-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .k7ev__hero-stripes {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgb(255 255 255 / 0.02) 40px,
+      rgb(255 255 255 / 0.02) 42px
+    );
+  }
+
+  .k7ev__hero-inner {
+    position: relative;
+    z-index: 1;
+    padding: calc(var(--header-h) + var(--s-16)) 0 var(--s-16);
+    animation: k7ev-up 800ms var(--ease-smooth) both;
+  }
+
+  @keyframes k7ev-up {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .k7ev__hero-tag {
+    display: inline-block;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    background: rgb(247 123 70 / 0.1);
+    padding: 5px 16px;
+    border-radius: var(--r-full);
+    margin-bottom: var(--s-6);
+  }
+
+  .k7ev__hero-title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--s-6);
+  }
+
+  .k7ev__hero-t1 {
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .k7ev__hero-t2 {
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    font-weight: 100;
+    letter-spacing: -0.04em;
+    line-height: 0.85;
+    color: #fff;
+    text-transform: uppercase;
+    padding-left: clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .k7ev__hero-sub {
+    font-size: 0.88rem;
+    color: rgb(255 255 255 / 0.45);
+    line-height: 1.7;
+    max-width: 40ch;
+  }
+
+  /* ═══════════════ PULSE ═══════════════ */
+  .k7ev__pulse {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+  }
+
+  .k7ev__pulse-head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    margin-bottom: var(--s-12);
+  }
+
+  .k7ev__pulse-stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .k7ev__pulse-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+  }
+
+  .k7ev__pulse-stats {
+    display: flex;
+    gap: var(--s-12);
+    margin-bottom: var(--s-12);
+    flex-wrap: wrap;
+  }
+
+  .k7ev__pulse-stat { display: flex; flex-direction: column; }
+
+  .k7ev__pulse-num {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--c-text);
+  }
+
+  .k7ev__pulse-unit {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    margin-top: var(--s-1);
+  }
+
+  .k7ev__pulse-manifesto {
+    font-size: clamp(1.3rem, 3vw, 2.4rem);
+    font-weight: 300;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    color: var(--c-text);
+    max-width: 650px;
+  }
+
+  /* ═══════════════ SLANT CARDS ═══════════════ */
+  .k7ev__formulas {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .k7ev__formulas--alt { background: var(--c-surface); }
+
+  .k7ev__formulas-head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    margin-bottom: var(--s-10);
+  }
+
+  .k7ev__formulas-stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .k7ev__formulas-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .k7ev__cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-8);
+  }
+
+  .k7ev__card {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--c-surface);
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    border: 1px solid var(--c-border-light);
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+
+  .k7ev__formulas--alt .k7ev__card { background: var(--c-bg); }
+
+  .k7ev__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgb(0 0 0 / 0.12);
+  }
+
+  .k7ev__card-img {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .k7ev__card-img img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .k7ev__card:hover .k7ev__card-img img { transform: scale(1.05); }
+
+  .k7ev__card-slant {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: var(--c-surface);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  }
+
+  .k7ev__formulas--alt .k7ev__card-slant { background: var(--c-bg); }
+
+  .k7ev__card-body { padding: var(--s-6); }
+
+  .k7ev__card-name {
+    font-size: 1.15rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--s-3);
+  }
+
+  .k7ev__card-desc {
+    font-size: 0.82rem;
+    color: var(--c-text-secondary);
+    line-height: 1.65;
+    margin-bottom: var(--s-5);
+  }
+
+  .k7ev__card-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    margin-bottom: var(--s-5);
+  }
+
+  .k7ev__card-features li {
+    font-size: 0.75rem;
+    color: var(--c-text-secondary);
+    padding-left: var(--s-5);
+    position: relative;
+  }
+
+  .k7ev__card-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 8px;
+    height: 2px;
+    background: var(--c-orange);
+  }
+
+  .k7ev__card-cap {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    background: rgb(247 123 70 / 0.08);
+    padding: 4px 12px;
+    border-radius: var(--r-full);
+  }
+
+  @media (min-width: 768px) {
+    .k7ev__cards { grid-template-columns: repeat(3, 1fr); }
+    .k7ev__card-img img { aspect-ratio: 4 / 3; }
+  }
+
+  /* ═══════════════ ANGULAR CONTACT ═══════════════ */
+  .k7ev__contact {
+    position: relative;
+    padding: var(--s-section) 0;
+    background: var(--c-dark);
+  }
+
+  .k7ev__contact-angle {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--c-surface);
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+  }
+
+  .k7ev__contact-head { margin-bottom: var(--s-10); }
+
+  .k7ev__contact-stripe {
+    width: 40px;
+    height: 4px;
+    background: var(--c-orange);
+    margin-bottom: var(--s-5);
+  }
+
+  .k7ev__contact-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: var(--s-4);
+  }
+
+  .k7ev__contact-sub {
+    font-size: 0.85rem;
+    color: rgb(255 255 255 / 0.45);
+    line-height: 1.6;
+  }
+
+  .k7ev__form {
+    max-width: 700px;
+  }
+
+  .k7ev__form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-5);
+    margin-bottom: var(--s-5);
+  }
+
+  .k7ev__field { display: flex; flex-direction: column; gap: 6px; }
+
+  .k7ev__field--full { margin-bottom: var(--s-6); }
+
+  .k7ev__field label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.5);
+  }
+
+  .k7ev__field input,
+  .k7ev__field select,
+  .k7ev__field textarea {
+    background: rgb(255 255 255 / 0.06);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: var(--r-sm);
+    color: #fff;
+    font-size: 0.88rem;
+    padding: 12px 16px;
+    font-family: var(--font-sans);
+    transition: border-color var(--t-fast);
+  }
+
+  .k7ev__field input:focus,
+  .k7ev__field select:focus,
+  .k7ev__field textarea:focus {
+    outline: none;
+    border-color: var(--c-orange);
+  }
+
+  .k7ev__field select option { background: var(--c-dark); color: #fff; }
+
+  .k7ev__form-btn { margin-top: var(--s-2); }
+
+  @media (min-width: 600px) {
+    .k7ev__form-row { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ═══════════════ MOTION ═══════════════ */
+  @media (prefers-reduced-motion: reduce) {
+    .k7ev__hero-inner { animation: none; }
+    .k7ev__card { transition: none; }
+    .k7ev__card-img img { transition: none; }
+  }
+</style>

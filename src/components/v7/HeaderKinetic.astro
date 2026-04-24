@@ -1,0 +1,628 @@
+---
+import { Image } from 'astro:assets';
+import logoImg from '../../assets/images/logo-surf-center.png';
+
+const navLinks = [
+  { label: 'Nos locations', href: '/v7/nos-locations' },
+  { label: "L'esprit Surf Center", href: '/v7/esprit-surf-center' },
+  { label: 'Restauration', href: '/v7/restauration' },
+  { label: 'Animations', href: '/v7/animations' },
+  { label: 'Groupes & Événements', href: '/v7/groupes-evenements' },
+  { label: 'Blog', href: '/v7/blog' },
+];
+---
+
+<a href="#main-content" class="hk7__skip">Aller au contenu principal</a>
+
+<header class="hk7" data-header>
+  <div class="hk7__accent" aria-hidden="true"></div>
+  <div class="hk7__inner container">
+    <a href="/v7" class="hk7__logo" aria-label="Surf Center — Accueil">
+      <Image
+        class="hk7__logo-img hk7__logo-img--light"
+        src={logoImg}
+        alt=""
+        width={60}
+        height={56}
+        loading="eager"
+        format="webp"
+        quality={85}
+      />
+      <Image
+        class="hk7__logo-img hk7__logo-img--dark"
+        src={logoImg}
+        alt=""
+        width={60}
+        height={56}
+        loading="eager"
+        format="webp"
+        quality={85}
+      />
+    </a>
+
+    <nav class="hk7__nav" aria-label="Navigation principale">
+      <ul role="list">
+        {navLinks.map((link) => (
+          <li>
+            <a href={link.href} class="hk7__nav-link">{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="hk7__end">
+      <button
+        class="hk7__theme"
+        type="button"
+        data-theme-toggle
+        aria-label="Changer de thème"
+      >
+        <svg class="hk7__theme-icon hk7__theme-icon--sun" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="3.5" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M9 2v1.5M9 14.5V16M2 9h1.5M14.5 9H16M4.05 4.05l1.06 1.06M12.89 12.89l1.06 1.06M4.05 13.95l1.06-1.06M12.89 5.11l1.06-1.06" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <svg class="hk7__theme-icon hk7__theme-icon--moon" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M15.1 10.63A6.5 6.5 0 0 1 7.37 2.9 6.5 6.5 0 1 0 15.1 10.63Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <button type="button" class="hk7__cta" data-booking>
+        <span class="hk7__cta-inner">Réserver</span>
+        <svg class="hk7__cta-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <button
+        class="hk7__burger"
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-label="Menu de navigation"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="hk7__mobile" id="hk7-mobile" hidden>
+  <div class="hk7__mobile-inner">
+    <nav class="hk7__mobile-nav" aria-label="Navigation mobile">
+      <ul role="list">
+        {navLinks.map((link, i) => (
+          <li class="hk7__mobile-item" style={`--delay: ${i * 70}ms`}>
+            <a href={link.href} class="hk7__mobile-link">
+              <span class="hk7__mobile-idx">{String(i + 1).padStart(2, '0')}</span>
+              <span class="hk7__mobile-label">{link.label}</span>
+              <svg class="hk7__mobile-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="hk7__mobile-actions" style="--delay: 420ms">
+      <button type="button" class="hk7__mobile-book" data-booking>Réserver maintenant</button>
+    </div>
+
+    <div class="hk7__mobile-footer" style="--delay: 500ms">
+      <a href="tel:+33492771450" class="hk7__mobile-tel">04 92 77 14 50</a>
+      <p class="hk7__mobile-loc">Les Salles-sur-Verdon · Gorges du Verdon</p>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var header = document.querySelector('[data-header]');
+    var hero = document.querySelector('[data-hero]');
+
+    if (header && hero) {
+      var obs = new IntersectionObserver(
+        function (entries) {
+          header.classList.toggle('is-scrolled', !entries[0].isIntersecting);
+        },
+        { threshold: 0 }
+      );
+      obs.observe(hero);
+    } else if (header) {
+      window.addEventListener('scroll', function () {
+        header.classList.toggle('is-scrolled', window.scrollY > 60);
+      }, { passive: true });
+    }
+
+    var toggle = document.querySelector('[data-menu-toggle]');
+    var mobileMenu = document.getElementById('hk7-mobile');
+
+    if (toggle && mobileMenu) {
+      function setMenu(open) {
+        toggle.setAttribute('aria-expanded', String(open));
+        mobileMenu.hidden = !open;
+        document.body.style.overflow = open ? 'hidden' : '';
+        if (open) {
+          mobileMenu.classList.add('is-open');
+        } else {
+          mobileMenu.classList.remove('is-open');
+        }
+      }
+
+      toggle.addEventListener('click', function () {
+        setMenu(toggle.getAttribute('aria-expanded') !== 'true');
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+          setMenu(false);
+          toggle.focus();
+        }
+      });
+
+      mobileMenu.querySelectorAll('a, button').forEach(function (el) {
+        el.addEventListener('click', function () { setMenu(false); });
+      });
+    }
+
+    var themeToggle = document.querySelector('[data-theme-toggle]');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function () {
+        var current = document.documentElement.getAttribute('data-theme');
+        var next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        var meta = document.getElementById('meta-theme-color');
+        if (meta) meta.setAttribute('content', next === 'dark' ? '#0a0a0a' : '#ffffff');
+      });
+    }
+  })();
+</script>
+
+<style>
+  /* =============================================
+     Header Kinetic v7 — Bold / Diagonal / Sport
+     ============================================= */
+
+  .hk7__skip {
+    position: absolute;
+    top: -100%;
+    left: var(--s-4);
+    z-index: 200;
+    padding: var(--s-2) var(--s-6);
+    background: var(--c-orange);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .hk7__skip:focus { top: var(--s-2); }
+
+  .hk7 {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: 100;
+    height: var(--header-h);
+    transition: background 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  }
+
+  .hk7__accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--c-orange) 0%, var(--c-blue) 50%, var(--c-rose) 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease);
+  }
+
+  .hk7.is-scrolled .hk7__accent {
+    transform: scaleX(1);
+  }
+
+  .hk7.is-scrolled {
+    background: var(--c-header-bg);
+    backdrop-filter: blur(24px) saturate(1.5);
+    -webkit-backdrop-filter: blur(24px) saturate(1.5);
+    border-bottom: 2px solid var(--c-orange);
+    box-shadow: 0 2px 20px rgb(247 123 70 / 0.15);
+  }
+
+  .hk7__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: var(--s-8);
+  }
+
+  /* ── Logo ── */
+
+  .hk7__logo {
+    z-index: 101;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .hk7__logo::after {
+    content: '';
+    position: absolute;
+    right: -12px;
+    top: 50%;
+    transform: translateY(-50%) skewX(-20deg);
+    width: 3px;
+    height: 24px;
+    background: var(--c-orange);
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+  }
+
+  .hk7.is-scrolled .hk7__logo::after { opacity: 1; }
+
+  .hk7__logo-img {
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .hk7__logo-img--light { display: block; }
+  .hk7__logo-img--dark { display: none; }
+
+  .hk7.is-scrolled .hk7__logo-img--light { display: none; }
+  .hk7.is-scrolled .hk7__logo-img--dark { display: block; }
+
+  :global([data-theme='dark']) .hk7.is-scrolled .hk7__logo-img--light { display: block; }
+  :global([data-theme='dark']) .hk7.is-scrolled .hk7__logo-img--dark { display: none; }
+
+  /* ── Nav ── */
+
+  .hk7__nav { display: none; }
+
+  .hk7__nav ul {
+    display: flex;
+    align-items: center;
+    gap: var(--s-7);
+    flex-wrap: nowrap;
+  }
+
+  .hk7__nav-link {
+    position: relative;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgb(255 255 255 / 0.75);
+    transition: color 0.25s var(--ease);
+    white-space: nowrap;
+    padding: var(--s-2) 0;
+  }
+
+  .hk7__nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--c-orange);
+    transform: scaleX(0) skewX(-20deg);
+    transform-origin: right;
+    transition: transform 0.35s var(--ease);
+  }
+
+  .hk7__nav-link:hover { color: #fff; }
+  .hk7__nav-link:hover::after {
+    transform: scaleX(1) skewX(-20deg);
+    transform-origin: left;
+  }
+
+  .hk7.is-scrolled .hk7__nav-link { color: var(--c-header-text); }
+  .hk7.is-scrolled .hk7__nav-link:hover { color: var(--c-header-text-hover); }
+
+  /* ── End controls ── */
+
+  .hk7__end {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    z-index: 101;
+  }
+
+  /* Theme toggle */
+  .hk7__theme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: rgb(255 255 255 / 0.7);
+    transition: color 0.2s, transform 0.2s var(--ease);
+  }
+  .hk7__theme:hover { color: #fff; transform: rotate(15deg); }
+  .hk7.is-scrolled .hk7__theme { color: var(--c-header-text); }
+  .hk7.is-scrolled .hk7__theme:hover { color: var(--c-header-text-hover); }
+
+  .hk7__theme-icon--sun { display: none; }
+  .hk7__theme-icon--moon { display: block; }
+  :global([data-theme='dark']) .hk7__theme-icon--sun { display: block; }
+  :global([data-theme='dark']) .hk7__theme-icon--moon { display: none; }
+
+  /* CTA */
+  .hk7__cta {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    padding: 0.6rem 1.4rem;
+    background: var(--c-orange);
+    color: #fff;
+    border: none;
+    font-family: inherit;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+    transition: background 0.25s var(--ease), clip-path 0.35s var(--ease);
+  }
+
+  .hk7__cta:hover {
+    background: var(--c-orange-dark);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .hk7__cta-arrow {
+    transition: transform 0.25s var(--ease);
+  }
+
+  .hk7__cta:hover .hk7__cta-arrow { transform: translateX(3px); }
+
+  /* Burger */
+  .hk7__burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgb(0 0 0 / 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1.5px solid rgb(255 255 255 / 0.12);
+    cursor: pointer;
+    padding: 0;
+    clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
+    transition: background 0.25s, border-color 0.25s;
+  }
+
+  .hk7.is-scrolled .hk7__burger {
+    background: var(--c-surface);
+    border-color: var(--c-border-light);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .hk7__burger span {
+    display: block;
+    width: 1.1rem;
+    height: 2px;
+    background: #fff;
+    transition: all 0.3s var(--ease);
+    transform-origin: center;
+  }
+
+  .hk7__burger span:nth-child(2) {
+    width: 0.75rem;
+    align-self: flex-end;
+  }
+
+  .hk7.is-scrolled .hk7__burger span { background: var(--c-header-burger); }
+
+  .hk7__burger[aria-expanded='true'] {
+    background: transparent;
+    border-color: transparent;
+    clip-path: none;
+  }
+  .hk7__burger[aria-expanded='true'] span { background: var(--c-text) !important; }
+  .hk7__burger[aria-expanded='true'] span:first-child { transform: translateY(6px) rotate(45deg); }
+  .hk7__burger[aria-expanded='true'] span:nth-child(2) { opacity: 0; width: 1.1rem; }
+  .hk7__burger[aria-expanded='true'] span:last-child { transform: translateY(-6px) rotate(-45deg); }
+
+  /* =============================================
+     Mobile menu — Kinetic
+     ============================================= */
+
+  .hk7__mobile {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: var(--c-bg);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hk7__mobile[hidden] { display: none; }
+
+  .hk7__mobile::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: -40%;
+    width: 80%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 18px,
+      rgb(247 123 70 / 0.04) 18px,
+      rgb(247 123 70 / 0.04) 20px
+    );
+    pointer-events: none;
+  }
+
+  .hk7__mobile-inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: calc(var(--header-h) + var(--s-8)) var(--s-6) var(--s-8);
+  }
+
+  .hk7__mobile-nav { flex: 1; }
+  .hk7__mobile-nav ul { display: flex; flex-direction: column; }
+
+  .hk7__mobile-item {
+    border-bottom: 1px solid var(--c-border-light);
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay);
+  }
+
+  .hk7__mobile.is-open .hk7__mobile-item {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .hk7__mobile-link {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    width: 100%;
+    padding: var(--s-5) 0;
+    text-decoration: none;
+    color: var(--c-text);
+    transition: color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .hk7__mobile-link:hover { color: var(--c-orange); }
+
+  .hk7__mobile-idx {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--c-orange);
+    font-variant-numeric: tabular-nums;
+    min-width: 1.5rem;
+  }
+
+  .hk7__mobile-label {
+    flex: 1;
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .hk7__mobile-arrow {
+    flex-shrink: 0;
+    color: var(--c-text-muted);
+    transition: transform 0.2s var(--ease), color 0.2s;
+  }
+
+  .hk7__mobile-link:hover .hk7__mobile-arrow {
+    color: var(--c-orange);
+    transform: translateX(5px);
+  }
+
+  .hk7__mobile-actions {
+    margin-top: var(--s-8);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay);
+  }
+
+  .hk7__mobile.is-open .hk7__mobile-actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hk7__mobile-book {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: var(--c-orange);
+    color: #fff;
+    border: none;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-align: center;
+    cursor: pointer;
+    clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+    transition: background 0.25s var(--ease);
+  }
+
+  .hk7__mobile-book:hover { background: var(--c-orange-dark); }
+
+  .hk7__mobile-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-2);
+    margin-top: var(--s-10);
+    padding-top: var(--s-6);
+    border-top: 2px solid var(--c-orange);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay);
+  }
+
+  .hk7__mobile.is-open .hk7__mobile-footer {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hk7__mobile-tel {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--c-text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .hk7__mobile-tel:hover { color: var(--c-orange); }
+
+  .hk7__mobile-loc {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+  }
+
+  /* ── Desktop ── */
+
+  @media (min-width: 960px) {
+    .hk7__nav { display: block; }
+    .hk7__cta { display: inline-flex; }
+    .hk7__burger { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hk7,
+    .hk7__accent,
+    .hk7__nav-link::after,
+    .hk7__cta,
+    .hk7__burger span,
+    .hk7__mobile-item,
+    .hk7__mobile-actions,
+    .hk7__mobile-footer { transition: none; }
+  }
+</style>

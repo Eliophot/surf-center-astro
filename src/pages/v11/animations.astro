@@ -1,0 +1,634 @@
+---
+import LayoutHyper from '../../layouts/LayoutHyper.astro';
+import { Image } from 'astro:assets';
+import MeshGradient from '../../components/v11/MeshGradient.astro';
+import GlowText from '../../components/v11/GlowText.astro';
+import HolographicCard from '../../components/v11/HolographicCard.astro';
+import WaveDivider from '../../components/v11/WaveDivider.astro';
+import imgYoga from '../../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import imgPaddle from '../../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+import imgPlanche from '../../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+import imgConcert from '../../assets/images/concert-surfcenter-lac-sainte-croix.png';
+import imgEvjf from '../../assets/images/location-bateau-electriques-evjf-lac-sainte-croix.jpg';
+import imgConcert2 from '../../assets/images/concert-joulik-lac-sainte-croix-surfcenter.jpg';
+import imgTrophee from '../../assets/images/trophee-hobie-shop-lac-sainte-croix-surf-center.jpeg';
+
+const animations = [
+  {
+    title: "Yoga face au lac",
+    tagline: "Sérénité & bien-être",
+    description: "Sessions au lever du soleil sur la plage, face aux eaux turquoise. Accessibles à tous les niveaux, encadrées par Sarah, professeure certifiée.",
+    schedule: "Lundi, mercredi, vendredi — 7h30",
+    price: "15€",
+    badge: "Populaire",
+    image: imgYoga,
+    alt: "Cours de yoga au bord du lac de Sainte-Croix",
+    color: "#6b21a8",
+  },
+  {
+    title: "Cours de paddle",
+    tagline: "Initiation & perfectionnement",
+    description: "Apprenez les bases du stand-up paddle ou perfectionnez votre technique. Cours collectifs ou privés, matériel inclus.",
+    schedule: "Tous les jours — 10h & 14h",
+    price: "25€",
+    badge: "",
+    image: imgPaddle,
+    alt: "Cours de paddle sur le lac de Sainte-Croix",
+    color: "#26cfff",
+  },
+  {
+    title: "Initiation planche à voile",
+    tagline: "Adrénaline pour tous",
+    description: "Découvrez la planche à voile sur le spot idéal : vent thermique régulier, eau plate, cadre spectaculaire.",
+    schedule: "Mardi, jeudi, samedi — 14h",
+    price: "35€",
+    badge: "Nouveau",
+    image: imgPlanche,
+    alt: "Initiation planche à voile au lac de Sainte-Croix",
+    color: "#3b82f6",
+  },
+  {
+    title: "Soirées musicales",
+    tagline: "Concerts au coucher du soleil",
+    description: "Chaque vendredi soir en été, concert live face au lac. Artistes locaux, ambiance décontractée, coucher de soleil garanti.",
+    schedule: "Vendredis — 19h à 22h",
+    price: "Gratuit",
+    badge: "Incontournable",
+    image: imgConcert,
+    alt: "Concert au coucher du soleil — Surf Center",
+    color: "#f77b46",
+  },
+  {
+    title: "EVJF / EVG nautiques",
+    tagline: "Moments inoubliables",
+    description: "Activités fun sur le lac pour enterrements de vie. Paddle géant, bataille de pédalos, apéro flottant.",
+    schedule: "Sur réservation",
+    price: "Sur devis",
+    badge: "",
+    image: imgEvjf,
+    alt: "EVJF en bateau sur le lac de Sainte-Croix",
+    color: "#ec4899",
+  },
+  {
+    title: "Trophée Hobie",
+    tagline: "Compétition catamaran",
+    description: "Événement annuel de catamaran Hobie Cat. Régate ouverte aux amateurs et confirmés sur le lac de Sainte-Croix.",
+    schedule: "Septembre — week-end",
+    price: "Inscription 40€",
+    badge: "Événement",
+    image: imgTrophee,
+    alt: "Trophée Hobie au Surf Center — catamaran",
+    color: "#26cfff",
+  },
+];
+
+const timelineEvents = [
+  { month: "Avril", events: ["Ouverture saison", "Premiers cours paddle"] },
+  { month: "Mai", events: ["Yoga matinal", "Randonnées paddle"] },
+  { month: "Juin", events: ["Soirées musicales", "Cours planche à voile"] },
+  { month: "Juillet", events: ["Concerts hebdo", "EVJF/EVG", "Stages enfants"] },
+  { month: "Août", events: ["Concerts hebdo", "Trophée Hobie", "Soirées DJ"] },
+  { month: "Septembre", events: ["Trophée Hobie", "Sunset sessions", "Fermeture"] },
+];
+
+const galleryImages = [
+  { src: imgConcert2, alt: "Concert Joulik au Surf Center" },
+  { src: imgYoga, alt: "Yoga face au lac" },
+  { src: imgEvjf, alt: "EVJF sur le lac" },
+  { src: imgTrophee, alt: "Trophée Hobie" },
+];
+---
+
+<LayoutHyper
+  title="Animations & Événements — Surf Center | Lac de Sainte-Croix"
+  description="Yoga, concerts, cours de paddle, soirées musicales et événements au Surf Center. Animations tout l'été au lac de Sainte-Croix."
+>
+  <!-- HERO -->
+  <section class="hyan__hero" aria-label="Animations et événements">
+    <MeshGradient class="hyan__hero-mesh" />
+    <Image
+      class="hyan__hero-img"
+      src={imgConcert}
+      alt="Soirée concert au Surf Center — lac de Sainte-Croix"
+      widths={[640, 1024, 1440]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      format="webp"
+      quality={75}
+    />
+    <div class="hyan__hero-overlay" aria-hidden="true"></div>
+    <div class="hyan__hero-content reveal">
+      <GlowText tag="h1" color="#26cfff" intensity="high" class="hyan__hero-title">
+        Animations
+      </GlowText>
+      <p class="hyan__hero-sub">Cours · Concerts · Événements — tout l'été au bord de l'eau</p>
+    </div>
+  </section>
+
+  <WaveDivider color="#26cfff" />
+
+  <!-- ANIMATION CARDS -->
+  <section class="hyan__cards" aria-label="Nos animations">
+    <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyan__section-title">Nos animations</GlowText>
+    <p class="hyan__section-sub">Sport, culture et convivialité face au lac</p>
+
+    <div class="hyan__cards-grid">
+      {animations.map((anim) => (
+        <HolographicCard class="hyan__anim-card">
+          <div class="hyan__anim-img-wrap">
+            <Image
+              class="hyan__anim-img"
+              src={anim.image}
+              alt={anim.alt}
+              widths={[400, 600]}
+              sizes="(max-width: 768px) 100vw, 33vw"
+              format="webp"
+              quality={75}
+            />
+            <div class="hyan__anim-img-overlay" aria-hidden="true"></div>
+            {anim.badge && (
+              <span class="hyan__anim-badge" style={`--badge-color: ${anim.color};`}>
+                {anim.badge}
+              </span>
+            )}
+          </div>
+          <div class="hyan__anim-body">
+            <GlowText tag="h3" color={anim.color} intensity="low" class="hyan__anim-title">{anim.title}</GlowText>
+            <span class="hyan__anim-tagline">{anim.tagline}</span>
+            <p class="hyan__anim-desc">{anim.description}</p>
+            <div class="hyan__anim-meta">
+              <div class="hyan__anim-schedule">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>{anim.schedule}</span>
+              </div>
+              <GlowText tag="span" color={anim.color} intensity="medium" class="hyan__anim-price">{anim.price}</GlowText>
+            </div>
+          </div>
+        </HolographicCard>
+      ))}
+    </div>
+  </section>
+
+  <WaveDivider color="#6b21a8" flip />
+
+  <!-- TIMELINE -->
+  <section class="hyan__timeline" aria-label="Calendrier saison">
+    <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyan__section-title">Calendrier de la saison</GlowText>
+    <p class="hyan__section-sub">D'avril à septembre, il se passe toujours quelque chose</p>
+
+    <div class="hyan__tl-track">
+      <div class="hyan__tl-line" aria-hidden="true"></div>
+      {timelineEvents.map((t, i) => (
+        <div class="hyan__tl-item reveal" style={`--tl-delay: ${i * 100}ms;`}>
+          <div class="hyan__tl-dot" aria-hidden="true">
+            <span class="hyan__tl-dot-ring"></span>
+          </div>
+          <HolographicCard class="hyan__tl-card">
+            <div class="hyan__tl-inner">
+              <GlowText tag="h3" color="#f77b46" intensity="medium" class="hyan__tl-month">{t.month}</GlowText>
+              <ul class="hyan__tl-events">
+                {t.events.map((ev) => (
+                  <li class="hyan__tl-event">{ev}</li>
+                ))}
+              </ul>
+            </div>
+          </HolographicCard>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <WaveDivider color="#3b82f6" />
+
+  <!-- GALLERY -->
+  <section class="hyan__gallery" aria-label="Galerie animations">
+    <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyan__section-title">En images</GlowText>
+
+    <div class="hyan__gallery-grid">
+      {galleryImages.map((img, idx) => (
+        <div class="hyan__gallery-item reveal" style={`--gal-delay: ${idx * 80}ms;`}>
+          <Image
+            class="hyan__gallery-img"
+            src={img.src}
+            alt={img.alt}
+            widths={[400, 600]}
+            sizes="(max-width: 768px) 100vw, 25vw"
+            format="webp"
+            quality={75}
+          />
+          <div class="hyan__gallery-glass" aria-hidden="true">
+            <div class="hyan__gallery-glass-inner"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="hyan__cta reveal" aria-label="Réserver une animation">
+    <div class="hyan__cta-wrap">
+      <MeshGradient class="hyan__cta-mesh" />
+      <div class="hyan__cta-content">
+        <GlowText tag="h2" color="#26cfff" intensity="high" class="hyan__cta-title">Envie de participer ?</GlowText>
+        <p class="hyan__cta-desc">Réservez votre animation ou organisez votre événement privé au bord du lac.</p>
+        <div class="hyan__cta-actions">
+          <a href="/v11/acces-contact" class="hyan__cta-btn">
+            <span>Nous contacter</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="/v11/groupes-evenements" class="hyan__cta-btn hyan__cta-btn--alt">
+            <span>Événements privés</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</LayoutHyper>
+
+<style>
+  /* HERO */
+  .hyan__hero {
+    position: relative;
+    min-height: 55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hyan__hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+    z-index: 0;
+  }
+  .hyan__hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5,5,16,0.5) 0%, rgba(5,5,16,0.95) 100%);
+    z-index: 1;
+  }
+  .hyan__hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 6rem 1.5rem 4rem;
+  }
+  .hyan__hero-title {
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+  }
+  .hyan__hero-sub {
+    font-size: 1.1rem;
+    color: rgba(240,240,235,0.6);
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  /* SECTION COMMON */
+  .hyan__section-title {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin: 0 0 0.5rem;
+  }
+  .hyan__section-sub {
+    text-align: center;
+    color: rgba(240,240,235,0.5);
+    font-size: 1rem;
+    margin: 0 0 3rem;
+  }
+
+  /* ANIMATION CARDS */
+  .hyan__cards {
+    padding: 5rem 1.5rem;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .hyan__cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .hyan__anim-img-wrap {
+    position: relative;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    border-radius: var(--r-lg, 1.25rem) var(--r-lg, 1.25rem) 0 0;
+  }
+  .hyan__anim-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+  }
+  .hyan__anim-img-wrap:hover .hyan__anim-img {
+    transform: scale(1.06);
+  }
+  .hyan__anim-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(5,5,16,0.6) 100%);
+    pointer-events: none;
+  }
+  .hyan__anim-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.3rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: rgba(5,5,16,0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid color-mix(in srgb, var(--badge-color) 30%, transparent);
+    color: var(--badge-color);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--badge-color) 20%, transparent);
+  }
+  .hyan__anim-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .hyan__anim-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .hyan__anim-tagline {
+    font-size: 0.78rem;
+    color: rgba(240,240,235,0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .hyan__anim-desc {
+    color: rgba(240,240,235,0.6);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin: 0.25rem 0 0;
+    flex: 1;
+  }
+  .hyan__anim-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(38,207,255,0.08);
+  }
+  .hyan__anim-schedule {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: rgba(240,240,235,0.45);
+  }
+  .hyan__anim-price {
+    font-size: 1.1rem;
+    font-weight: 800;
+  }
+
+  /* TIMELINE */
+  .hyan__timeline {
+    padding: 5rem 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hyan__tl-track {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    padding-top: 2rem;
+  }
+  .hyan__tl-line {
+    position: absolute;
+    top: 0.9rem;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(38,207,255,0.4) 0%, rgba(107,33,168,0.3) 33%, rgba(247,123,70,0.3) 66%, rgba(38,207,255,0.2) 100%);
+    z-index: 0;
+  }
+  .hyan__tl-item {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation-delay: var(--tl-delay, 0ms);
+  }
+  .hyan__tl-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #050510;
+    border: 2px solid rgba(38,207,255,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+  }
+  .hyan__tl-dot-ring {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #f77b46;
+    box-shadow: 0 0 8px rgba(247,123,70,0.6);
+  }
+  .hyan__tl-inner {
+    padding: 1.25rem 1rem;
+    text-align: center;
+  }
+  .hyan__tl-month {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+  }
+  .hyan__tl-events {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .hyan__tl-event {
+    font-size: 0.78rem;
+    color: rgba(240,240,235,0.55);
+    line-height: 1.4;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid rgba(38,207,255,0.05);
+  }
+  .hyan__tl-event:last-child {
+    border-bottom: none;
+  }
+
+  /* GALLERY */
+  .hyan__gallery {
+    padding: 5rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hyan__gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  .hyan__gallery-item {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+    animation-delay: var(--gal-delay, 0ms);
+  }
+  .hyan__gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+  }
+  .hyan__gallery-item:hover .hyan__gallery-img {
+    transform: scale(1.06);
+  }
+  .hyan__gallery-glass {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .hyan__gallery-glass-inner {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(38,207,255,0.12) 0%, rgba(107,33,168,0.08) 50%, rgba(247,123,70,0.06) 100%);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+  .hyan__gallery-item:hover .hyan__gallery-glass {
+    opacity: 1;
+  }
+
+  /* CTA */
+  .hyan__cta {
+    padding: 4rem 1.5rem 6rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .hyan__cta-wrap {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 1px solid rgba(38,207,255,0.12);
+    background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .hyan__cta-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 3.5rem 2rem;
+  }
+  .hyan__cta-title {
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+  }
+  .hyan__cta-desc {
+    color: rgba(240,240,235,0.6);
+    font-size: 1rem;
+    margin: 0 0 2rem;
+  }
+  .hyan__cta-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hyan__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.9rem 2.2rem;
+    border: 1px solid rgba(38,207,255,0.3);
+    border-radius: 9999px;
+    background: linear-gradient(135deg, rgba(38,207,255,0.12) 0%, rgba(107,33,168,0.1) 100%);
+    color: #26cfff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.02em;
+  }
+  .hyan__cta-btn:hover {
+    border-color: rgba(38,207,255,0.6);
+    box-shadow: 0 0 24px rgba(38,207,255,0.2), 0 0 48px rgba(38,207,255,0.08);
+    background: linear-gradient(135deg, rgba(38,207,255,0.2) 0%, rgba(107,33,168,0.15) 100%);
+  }
+  .hyan__cta-btn--alt {
+    border-color: rgba(107,33,168,0.3);
+    background: linear-gradient(135deg, rgba(107,33,168,0.12) 0%, rgba(38,207,255,0.06) 100%);
+    color: #a855f7;
+  }
+  .hyan__cta-btn--alt:hover {
+    border-color: rgba(107,33,168,0.6);
+    box-shadow: 0 0 24px rgba(107,33,168,0.2);
+    background: linear-gradient(135deg, rgba(107,33,168,0.2) 0%, rgba(38,207,255,0.1) 100%);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .hyan__cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .hyan__tl-track {
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 2rem;
+    }
+    .hyan__tl-line {
+      display: none;
+    }
+  }
+  @media (max-width: 768px) {
+    .hyan__cards-grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .hyan__gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .hyan__tl-track {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .hyan__gallery-grid {
+      grid-template-columns: 1fr;
+    }
+    .hyan__tl-track {
+      grid-template-columns: 1fr;
+    }
+    .hyan__hero-content {
+      padding: 5rem 1rem 3rem;
+    }
+  }
+</style>

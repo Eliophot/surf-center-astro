@@ -1,0 +1,567 @@
+---
+import { Image } from 'astro:assets';
+import logoImg from '../../assets/images/logo-surf-center.png';
+
+const navLinks = [
+  { label: 'Nos locations', href: '/v11/nos-locations' },
+  { label: "L'esprit Surf Center", href: '/v11/esprit-surf-center' },
+  { label: 'Restauration', href: '/v11/restauration' },
+  { label: 'Animations', href: '/v11/animations' },
+  { label: 'Groupes & Événements', href: '/v11/groupes-evenements' },
+  { label: 'Blog', href: '/v11/blog' },
+];
+---
+
+<a href="#main-content" class="hh11__skip">Aller au contenu principal</a>
+
+<header class="hh11" data-hh11>
+  <div class="hh11__inner">
+    <a href="/v11" class="hh11__logo" aria-label="Surf Center — Accueil">
+      <Image
+        class="hh11__logo-img"
+        src={logoImg}
+        alt=""
+        width={52}
+        height={48}
+        loading="eager"
+        format="webp"
+        quality={85}
+      />
+      <span class="hh11__logo-glow" aria-hidden="true"></span>
+    </a>
+
+    <nav class="hh11__nav" aria-label="Navigation principale">
+      <ul role="list">
+        {navLinks.map((link) => (
+          <li>
+            <a href={link.href} class="hh11__link">
+              <span class="hh11__link-text">{link.label}</span>
+              <span class="hh11__link-glow" aria-hidden="true"></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="hh11__end">
+      <button
+        class="hh11__theme"
+        type="button"
+        data-theme-toggle-h11
+        aria-label="Changer de thème"
+      >
+        <svg class="hh11__theme-icon hh11__theme-icon--sun" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="3.5" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M9 2v1.5M9 14.5V16M2 9h1.5M14.5 9H16M4.05 4.05l1.06 1.06M12.89 12.89l1.06 1.06M4.05 13.95l1.06-1.06M12.89 5.11l1.06-1.06" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <svg class="hh11__theme-icon hh11__theme-icon--moon" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M15.1 10.63A6.5 6.5 0 0 1 7.37 2.9 6.5 6.5 0 1 0 15.1 10.63Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <a href="/v11/reservation" class="hh11__cta">
+        <span>Réserver</span>
+      </a>
+
+      <button
+        class="hh11__burger"
+        type="button"
+        data-burger-h11
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+      >
+        <span class="hh11__burger-line"></span>
+        <span class="hh11__burger-line"></span>
+        <span class="hh11__burger-line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="hh11__mobile" data-mobile-h11 aria-hidden="true">
+  <div class="hh11__mobile-particles" aria-hidden="true">
+    <span class="hh11__dot"></span><span class="hh11__dot"></span>
+    <span class="hh11__dot"></span><span class="hh11__dot"></span>
+    <span class="hh11__dot"></span><span class="hh11__dot"></span>
+    <span class="hh11__dot"></span><span class="hh11__dot"></span>
+    <span class="hh11__dot"></span><span class="hh11__dot"></span>
+    <span class="hh11__dot"></span><span class="hh11__dot"></span>
+  </div>
+  <nav class="hh11__mobile-nav" aria-label="Menu mobile">
+    <ul role="list">
+      {navLinks.map((link) => (
+        <li>
+          <a href={link.href} class="hh11__mobile-link">{link.label}</a>
+        </li>
+      ))}
+    </ul>
+    <a href="/v11/reservation" class="hh11__mobile-cta">Réserver</a>
+  </nav>
+</div>
+
+<script is:inline>
+(function () {
+  var header = document.querySelector('[data-hh11]');
+  var burger = document.querySelector('[data-burger-h11]');
+  var mobile = document.querySelector('[data-mobile-h11]');
+  var themeBtn = document.querySelector('[data-theme-toggle-h11]');
+  if (!header) return;
+
+  var scrolled = false;
+  function onScroll() {
+    var s = window.scrollY > 40;
+    if (s !== scrolled) {
+      scrolled = s;
+      header.classList.toggle('hh11--scrolled', s);
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  if (burger && mobile) {
+    var open = false;
+    burger.addEventListener('click', function () {
+      open = !open;
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.classList.toggle('is-open', open);
+      mobile.classList.toggle('is-open', open);
+      mobile.setAttribute('aria-hidden', open ? 'false' : 'true');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    mobile.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        open = false;
+        burger.setAttribute('aria-expanded', 'false');
+        burger.classList.remove('is-open');
+        mobile.classList.remove('is-open');
+        mobile.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function () {
+      var cur = document.documentElement.getAttribute('data-theme');
+      var next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      var meta = document.getElementById('meta-theme-color');
+      if (meta) meta.setAttribute('content', next === 'dark' ? '#050510' : '#ffffff');
+    });
+  }
+})();
+</script>
+
+<style>
+  .hh11__skip {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 1000;
+    padding: 0.75rem 1.5rem;
+    background: #26cfff;
+    color: #050510;
+    border-radius: var(--r-sm, 0.5rem);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .hh11__skip:focus {
+    top: 1rem;
+  }
+
+  .hh11 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    transition: background 0.5s ease, backdrop-filter 0.5s ease, border-color 0.5s ease;
+    border-bottom: 1px solid transparent;
+  }
+
+  .hh11--scrolled {
+    background: rgba(5, 5, 16, 0.7);
+    backdrop-filter: blur(24px) saturate(1.6);
+    -webkit-backdrop-filter: blur(24px) saturate(1.6);
+    border-bottom-color: rgba(38, 207, 255, 0.08);
+  }
+
+  .hh11__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: var(--max-w, 1200px);
+    margin-inline: auto;
+    padding-inline: var(--s-6, 1.5rem);
+  }
+
+  .hh11__logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .hh11__logo-img {
+    width: 52px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    filter: brightness(1.1);
+  }
+
+  .hh11__logo-glow {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(38, 207, 255, 0.25) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+  }
+
+  .hh11__logo:hover .hh11__logo-glow {
+    opacity: 1;
+  }
+
+  .hh11__nav {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .hh11__nav {
+      display: block;
+    }
+  }
+
+  .hh11__nav ul {
+    display: flex;
+    gap: var(--s-6, 1.5rem);
+    align-items: center;
+  }
+
+  .hh11__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.3s ease;
+    overflow: hidden;
+  }
+
+  .hh11__link:hover {
+    color: #fff;
+  }
+
+  .hh11__link-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hh11__link-glow {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 100%;
+    height: 2px;
+    background: #26cfff;
+    box-shadow: 0 0 8px #26cfff, 0 0 16px rgba(38, 207, 255, 0.4);
+    border-radius: 1px;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center;
+  }
+
+  .hh11__link:hover .hh11__link-glow {
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  .hh11__link::before {
+    content: '';
+    position: absolute;
+    inset: -0.5rem -1rem;
+    background: radial-gradient(ellipse at center, rgba(38, 207, 255, 0.06) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: var(--r-lg, 1.25rem);
+  }
+
+  .hh11__link:hover::before {
+    opacity: 1;
+  }
+
+  .hh11__end {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4, 1rem);
+    flex-shrink: 0;
+  }
+
+  .hh11__theme {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hh11__theme:hover {
+    border-color: rgba(38, 207, 255, 0.4);
+    color: #26cfff;
+    box-shadow: 0 0 12px rgba(38, 207, 255, 0.15);
+  }
+
+  .hh11__theme-icon {
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .hh11__theme-icon--moon {
+    opacity: 0;
+    transform: rotate(-30deg) scale(0.8);
+  }
+
+  [data-theme='dark'] .hh11__theme-icon--sun {
+    opacity: 0;
+    transform: rotate(30deg) scale(0.8);
+  }
+
+  [data-theme='dark'] .hh11__theme-icon--moon {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+
+  .hh11__cta {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.6rem;
+    border: 1.5px solid #26cfff;
+    border-radius: var(--r-full, 9999px);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #26cfff;
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    animation: hh11-cta-pulse 3s ease-in-out infinite;
+  }
+
+  @media (min-width: 768px) {
+    .hh11__cta {
+      display: inline-flex;
+    }
+  }
+
+  .hh11__cta:hover {
+    background: rgba(38, 207, 255, 0.1);
+    color: #fff;
+    box-shadow:
+      0 0 16px rgba(38, 207, 255, 0.3),
+      0 0 32px rgba(38, 207, 255, 0.1);
+  }
+
+  @keyframes hh11-cta-pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(38, 207, 255, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 16px 4px rgba(38, 207, 255, 0.15);
+    }
+  }
+
+  .hh11__burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 38px;
+    height: 38px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    transition: border-color 0.3s ease;
+  }
+
+  @media (min-width: 1024px) {
+    .hh11__burger {
+      display: none;
+    }
+  }
+
+  .hh11__burger:hover {
+    border-color: rgba(38, 207, 255, 0.4);
+  }
+
+  .hh11__burger-line {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 1px;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    transform-origin: center;
+  }
+
+  .hh11__burger.is-open .hh11__burger-line:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+
+  .hh11__burger.is-open .hh11__burger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hh11__burger.is-open .hh11__burger-line:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* Mobile menu */
+  .hh11__mobile {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: rgba(5, 5, 16, 0.95);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .hh11__mobile.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hh11__mobile-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .hh11__dot {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(38, 207, 255, 0.3);
+    animation: hh11-float-dot 8s linear infinite;
+  }
+
+  .hh11__dot:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 9s; }
+  .hh11__dot:nth-child(2) { left: 20%; animation-delay: -2s; animation-duration: 7s; }
+  .hh11__dot:nth-child(3) { left: 35%; animation-delay: -4s; animation-duration: 11s; }
+  .hh11__dot:nth-child(4) { left: 50%; animation-delay: -1s; animation-duration: 8s; }
+  .hh11__dot:nth-child(5) { left: 65%; animation-delay: -3s; animation-duration: 10s; }
+  .hh11__dot:nth-child(6) { left: 75%; animation-delay: -5s; animation-duration: 6s; }
+  .hh11__dot:nth-child(7) { left: 85%; animation-delay: -2.5s; animation-duration: 9s; }
+  .hh11__dot:nth-child(8) { left: 15%; animation-delay: -6s; animation-duration: 12s; width: 2px; height: 2px; }
+  .hh11__dot:nth-child(9) { left: 45%; animation-delay: -3.5s; animation-duration: 7s; width: 4px; height: 4px; background: rgba(107, 33, 168, 0.3); }
+  .hh11__dot:nth-child(10) { left: 55%; animation-delay: -1.5s; animation-duration: 10s; width: 2px; height: 2px; }
+  .hh11__dot:nth-child(11) { left: 90%; animation-delay: -4.5s; animation-duration: 8s; background: rgba(59, 130, 246, 0.3); }
+  .hh11__dot:nth-child(12) { left: 30%; animation-delay: -7s; animation-duration: 11s; width: 4px; height: 4px; }
+
+  @keyframes hh11-float-dot {
+    0% { transform: translateY(100vh); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-20px); opacity: 0; }
+  }
+
+  .hh11__mobile-nav {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-4, 1rem);
+    text-align: center;
+  }
+
+  .hh11__mobile-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3, 0.75rem);
+  }
+
+  .hh11__mobile-link {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.5rem 0;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    letter-spacing: 0.02em;
+  }
+
+  .hh11__mobile-link:hover {
+    color: #26cfff;
+    text-shadow: 0 0 12px rgba(38, 207, 255, 0.4);
+  }
+
+  .hh11__mobile-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--s-6, 1.5rem);
+    padding: 0.8rem 2.4rem;
+    border: 1.5px solid #26cfff;
+    border-radius: var(--r-full, 9999px);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #26cfff;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hh11__mobile-cta:hover {
+    background: rgba(38, 207, 255, 0.15);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(38, 207, 255, 0.3);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hh11,
+    .hh11__link-glow,
+    .hh11__burger-line,
+    .hh11__mobile,
+    .hh11__cta {
+      transition: none;
+      animation: none;
+    }
+    .hh11__dot {
+      animation: none;
+      display: none;
+    }
+  }
+</style>

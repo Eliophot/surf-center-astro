@@ -1,0 +1,535 @@
+---
+import LayoutDesign from '../../../layouts/LayoutDesign.astro';
+import { locationDetails, getLocationBySlug, getOtherLocations } from '../../../data/locations';
+
+export function getStaticPaths() {
+  return locationDetails.map((loc) => ({
+    params: { slug: loc.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const loc = getLocationBySlug(slug as string)!;
+const others = getOtherLocations(slug as string);
+
+const title = `${loc.title} — Location au lac de Sainte-Croix | Surf Center`;
+const description = loc.longDescription;
+const siteUrl = 'https://surfcenter-verdon.fr';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: `Location ${loc.title} — Surf Center`,
+    description: loc.longDescription,
+    url: `${siteUrl}/v2/nos-locations/${loc.slug}`,
+    image: `${siteUrl}${loc.heroImage}`,
+    brand: { '@type': 'Brand', name: 'Surf Center' },
+    offers: {
+      '@type': 'Offer',
+      price: loc.price,
+      priceCurrency: 'EUR',
+      unitText: loc.priceUnit,
+      availability: 'https://schema.org/InStock',
+      seller: { '@type': 'Organization', name: 'Surf Center', url: siteUrl },
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${siteUrl}/v2` },
+      { '@type': 'ListItem', position: 2, name: 'Nos locations', item: `${siteUrl}/v2/nos-locations` },
+      { '@type': 'ListItem', position: 3, name: loc.title, item: `${siteUrl}/v2/nos-locations/${loc.slug}` },
+    ],
+  },
+];
+---
+
+<LayoutDesign title={title} description={description} jsonLd={jsonLd}>
+
+  <!-- ═══ SPLIT HERO ═══ -->
+  <section class="locdet-hero" aria-label={loc.title}>
+    <div class="locdet-hero__left">
+      <div class="locdet-hero__content">
+        <a href="/v2/nos-locations" class="locdet-hero__back">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Nos locations
+        </a>
+        <span class="locdet-hero__eyebrow">{loc.tagline}</span>
+        <h1 class="locdet-hero__title">{loc.title}</h1>
+        <p class="locdet-hero__desc">{loc.description}</p>
+        <div class="locdet-hero__actions">
+          <button type="button" class="btn btn--primary btn--lg" data-booking>Réserver</button>
+          <a href="#tarif" class="locdet-hero__link">
+            Voir le tarif
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v10M4 8.5l3 3.5 3-3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="locdet-hero__right">
+      <img
+        class="locdet-hero__img"
+        src={loc.heroImage}
+        alt={loc.heroAlt}
+        width="960" height="1080"
+        loading="eager" fetchpriority="high" decoding="async"
+      />
+    </div>
+  </section>
+
+  <!-- ═══ GLASS PRICING CARD ═══ -->
+  <section id="tarif" class="section locdet-pricing" aria-labelledby="locdet-price-title">
+    <div class="container locdet-pricing__inner">
+      <div class="locdet-pricing__card reveal">
+        <div class="locdet-pricing__top">
+          <span class="section__eyebrow">Tarif</span>
+          <h2 id="locdet-price-title">{loc.shortTitle}</h2>
+        </div>
+        <div class="locdet-pricing__price">
+          <span class="locdet-pricing__amount">{loc.price}€</span>
+          <span class="locdet-pricing__unit">/ {loc.priceUnit}</span>
+        </div>
+        <ul class="locdet-pricing__meta" role="list">
+          <li>
+            <strong>Capacité</strong>
+            <span>{loc.capacity}</span>
+          </li>
+          <li>
+            <strong>Durée</strong>
+            <span>{loc.duration}</span>
+          </li>
+          <li>
+            <strong>Niveau</strong>
+            <span>{loc.level}</span>
+          </li>
+        </ul>
+        <button type="button" class="btn btn--primary btn--lg locdet-pricing__btn" data-booking>
+          Réserver maintenant
+        </button>
+      </div>
+      <div class="locdet-pricing__img-wrap reveal reveal-d2">
+        <img src={loc.detailImage} alt={loc.detailAlt} width="640" height="480" loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BENTO SERVICES GRID ═══ -->
+  <section class="section section--surface locdet-svc" aria-labelledby="locdet-svc-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Inclus</span>
+        <h2 id="locdet-svc-title">Services & équipements</h2>
+      </header>
+      <div class="locdet-bento reveal">
+        {loc.services.map((svc) => (
+          <div class="locdet-bento__cell">
+            <span class="locdet-bento__dot" aria-hidden="true"></span>
+            <span class="locdet-bento__label">{svc.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CINEMA ITINERARY CARDS ═══ -->
+  <section class="section locdet-itin" aria-labelledby="locdet-itin-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Parcours</span>
+        <h2 id="locdet-itin-title">Itinéraires suggérés</h2>
+      </header>
+      <div class="locdet-itin__grid">
+        {loc.itinerary.map((item, i) => (
+          <div class={`locdet-itin__card reveal reveal-d${(i % 3) + 1}`}>
+            <span class="locdet-itin__num">0{i + 1}</span>
+            <h3 class="locdet-itin__title">{item.title}</h3>
+            <p class="locdet-itin__text">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ OTHER LOCATIONS ═══ -->
+  <section class="section section--surface locdet-others" aria-labelledby="locdet-others-title">
+    <div class="container">
+      <header class="section__header reveal">
+        <span class="section__eyebrow">Voir aussi</span>
+        <h2 id="locdet-others-title">Autres locations</h2>
+      </header>
+      <div class="locdet-others__grid">
+        {others.map((other, i) => (
+          <a href={`/v2/nos-locations/${other.slug}`} class={`locdet-others__card reveal reveal-d${(i % 4) + 1}`}>
+            <div class="locdet-others__frame">
+              <img src={other.heroImage} alt={other.heroAlt} width="400" height="260" loading="lazy" decoding="async" />
+            </div>
+            <div class="locdet-others__info">
+              <span class="locdet-others__name">{other.title}</span>
+              <span class="locdet-others__price">dès {other.price}€/{other.priceUnit}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</LayoutDesign>
+
+<style>
+  /* ═══ SPLIT HERO ═══ */
+  .locdet-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 100svh;
+  }
+
+  .locdet-hero__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: calc(var(--header-h) + var(--s-8)) var(--s-6) var(--s-8);
+    background: var(--c-dark);
+    color: #fff;
+    position: relative;
+  }
+
+  .locdet-hero__content {
+    max-width: 540px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+
+  .locdet-hero__back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgb(255 255 255 / 0.4);
+    transition: color var(--t-fast);
+    margin-bottom: var(--s-4);
+  }
+
+  .locdet-hero__back:hover { color: var(--c-orange); }
+
+  .locdet-hero__eyebrow {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+  }
+
+  .locdet-hero__title {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: #fff !important;
+  }
+
+  .locdet-hero__desc {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: rgb(255 255 255 / 0.55);
+    max-width: 40ch;
+  }
+
+  .locdet-hero__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--s-8);
+    margin-top: var(--s-4);
+  }
+
+  .locdet-hero__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgb(255 255 255 / 0.5);
+    transition: color var(--t-fast);
+  }
+
+  .locdet-hero__link:hover { color: #fff; }
+
+  .locdet-hero__right {
+    position: relative;
+    min-height: 50vh;
+  }
+
+  .locdet-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (min-width: 900px) {
+    .locdet-hero { grid-template-columns: 1fr 1fr; }
+    .locdet-hero__left { padding: var(--s-20) var(--s-16) var(--s-12); }
+    .locdet-hero__title { font-size: clamp(4rem, 7vw, 9rem); }
+    .locdet-hero__right { min-height: 100svh; }
+  }
+
+  /* ═══ GLASS PRICING ═══ */
+  .locdet-pricing__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-8);
+    align-items: center;
+  }
+
+  .locdet-pricing__card {
+    background: rgb(255 255 255 / 0.04);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--c-border-light);
+    border-radius: var(--r-xl);
+    padding: var(--s-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  [data-theme='light'] .locdet-pricing__card {
+    background: var(--c-surface);
+  }
+
+  .locdet-pricing__top {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+
+  .locdet-pricing__price {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-2);
+  }
+
+  .locdet-pricing__amount {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--c-orange);
+    line-height: 1;
+  }
+
+  .locdet-pricing__unit {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--c-text-muted);
+  }
+
+  .locdet-pricing__meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--c-border-light);
+  }
+
+  .locdet-pricing__meta li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-4);
+  }
+
+  .locdet-pricing__meta strong {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--c-text-muted);
+  }
+
+  .locdet-pricing__meta span {
+    font-size: 0.88rem;
+    color: var(--c-text);
+    text-align: right;
+  }
+
+  .locdet-pricing__btn { width: 100%; }
+
+  .locdet-pricing__img-wrap {
+    border-radius: var(--r-xl);
+    overflow: hidden;
+  }
+
+  .locdet-pricing__img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+  }
+
+  @media (min-width: 768px) {
+    .locdet-pricing__inner {
+      grid-template-columns: 1fr 1.2fr;
+    }
+  }
+
+  /* ═══ BENTO SERVICES ═══ */
+  .locdet-bento {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-4);
+  }
+
+  .locdet-bento__cell {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border-light);
+    border-radius: var(--r-lg);
+    padding: var(--s-5) var(--s-6);
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    transition: transform var(--t-fast), box-shadow var(--t-fast);
+  }
+
+  .locdet-bento__cell:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .locdet-bento__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--r-full);
+    background: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .locdet-bento__label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--c-text-secondary);
+  }
+
+  @media (min-width: 768px) {
+    .locdet-bento { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ═══ CINEMA ITINERARY ═══ */
+  .locdet-itin__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+
+  .locdet-itin__card {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border-light);
+    border-radius: var(--r-xl);
+    padding: var(--s-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    transition: transform var(--t-normal) var(--ease), box-shadow var(--t-normal) var(--ease);
+  }
+
+  .locdet-itin__card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .locdet-itin__num {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--c-orange);
+    line-height: 1;
+    opacity: 0.5;
+  }
+
+  .locdet-itin__title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .locdet-itin__text {
+    font-size: 0.88rem;
+    color: var(--c-text-secondary);
+    line-height: 1.7;
+  }
+
+  @media (min-width: 768px) {
+    .locdet-itin__grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+  }
+
+  /* ═══ OTHER LOCATIONS ═══ */
+  .locdet-others__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-6);
+  }
+
+  .locdet-others__card {
+    text-decoration: none;
+    color: var(--c-text);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .locdet-others__frame {
+    overflow: hidden;
+    border-radius: var(--r-lg);
+  }
+
+  .locdet-others__frame img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .locdet-others__card:hover .locdet-others__frame img {
+    transform: scale(1.05);
+  }
+
+  .locdet-others__info {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-3);
+  }
+
+  .locdet-others__name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .locdet-others__price {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--c-orange);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 768px) {
+    .locdet-others__grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  @media (max-width: 480px) {
+    .locdet-others__grid { grid-template-columns: 1fr; }
+  }
+</style>

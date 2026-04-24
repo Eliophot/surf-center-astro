@@ -1,0 +1,80 @@
+---
+interface Props {
+  flip?: boolean;
+  color?: string;
+}
+
+const { flip = false, color = '#26cfff' } = Astro.props;
+---
+
+<div class={`wd11 ${flip ? 'wd11--flip' : ''}`} aria-hidden="true">
+  <svg
+    class="wd11__svg"
+    viewBox="0 0 1440 120"
+    preserveAspectRatio="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      class="wd11__wave wd11__wave--1"
+      d="M0,60 C240,120 480,0 720,60 C960,120 1200,0 1440,60 L1440,120 L0,120 Z"
+      style={`fill: ${color}; opacity: 0.15;`}
+    />
+    <path
+      class="wd11__wave wd11__wave--2"
+      d="M0,80 C180,40 360,100 540,70 C720,40 900,100 1080,70 C1260,40 1440,80 1440,80 L1440,120 L0,120 Z"
+      style={`fill: ${color}; opacity: 0.25;`}
+    />
+    <path
+      class="wd11__wave wd11__wave--3"
+      d="M0,90 C160,70 320,110 480,90 C640,70 800,110 960,90 C1120,70 1280,100 1440,90 L1440,120 L0,120 Z"
+      style={`fill: ${color}; opacity: 0.4;`}
+    />
+  </svg>
+</div>
+
+<style>
+  .wd11 {
+    position: relative;
+    width: 100%;
+    height: 80px;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .wd11--flip {
+    transform: rotate(180deg);
+  }
+
+  .wd11__svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+  }
+
+  .wd11__wave--1 {
+    animation: wd11-drift 8s linear infinite;
+  }
+
+  .wd11__wave--2 {
+    animation: wd11-drift 12s linear infinite reverse;
+  }
+
+  .wd11__wave--3 {
+    animation: wd11-drift 6s linear infinite;
+  }
+
+  @keyframes wd11-drift {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wd11__wave--1,
+    .wd11__wave--2,
+    .wd11__wave--3 {
+      animation: none;
+    }
+  }
+</style>

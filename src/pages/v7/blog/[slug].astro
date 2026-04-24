@@ -1,0 +1,393 @@
+---
+import LayoutKinetic from '../../../layouts/LayoutKinetic.astro';
+import { blogPostsV7 } from '../../../data/blog-posts';
+
+export function getStaticPaths() {
+  return blogPostsV7.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: {
+    slug: string;
+    title: string;
+    excerpt: string;
+    image: string;
+    alt: string;
+    date: string;
+    category: string;
+    content: string;
+  };
+}
+
+const { post } = Astro.props;
+const otherPosts = blogPostsV7.filter(p => p.slug !== post.slug);
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+---
+
+<LayoutKinetic
+  title={`${post.title} | Blog Surf Center`}
+  description={post.excerpt}
+>
+  <!-- KINETIC ARTICLE HERO -->
+  <section class="k7ba__hero" aria-label={post.title}>
+    <div class="k7ba__hero-bg" aria-hidden="true">
+      <img src={post.image} alt={post.alt} width="1600" height="900" loading="eager" fetchpriority="high" decoding="async" />
+      <div class="k7ba__hero-dim"></div>
+      <div class="k7ba__hero-stripes"></div>
+    </div>
+    <div class="container k7ba__hero-inner">
+      <a href="/v7/blog" class="k7ba__hero-back">← Retour au blog</a>
+      <div class="k7ba__hero-meta">
+        <span class="k7ba__hero-cat">{post.category}</span>
+        <time datetime={post.date}>{formatDate(post.date)}</time>
+      </div>
+      <h1 class="k7ba__hero-title">{post.title}</h1>
+    </div>
+  </section>
+
+  <!-- BOLD ARTICLE + ANGULAR SIDEBAR -->
+  <section class="k7ba__body">
+    <div class="container k7ba__layout">
+      <article class="k7ba__article reveal" set:html={post.content} />
+
+      <aside class="k7ba__sidebar">
+        <!-- CTA -->
+        <div class="k7ba__sidebar-cta reveal">
+          <div class="k7ba__sidebar-stripe" aria-hidden="true"></div>
+          <h3 class="k7ba__sidebar-heading">Réservez votre activité</h3>
+          <p class="k7ba__sidebar-text">Bateaux, paddle, pédalo, canoë — réservez en ligne et profitez du lac.</p>
+          <button type="button" class="btn btn--primary k7ba__sidebar-btn" data-booking>Réserver</button>
+        </div>
+
+        <!-- OTHER POSTS -->
+        <div class="k7ba__sidebar-related reveal">
+          <h3 class="k7ba__sidebar-heading">À lire aussi</h3>
+          <ul class="k7ba__sidebar-list" role="list">
+            {otherPosts.map((p) => (
+              <li>
+                <a href={`/v7/blog/${p.slug}`} class="k7ba__sidebar-link">
+                  <img src={p.image} alt={p.alt} width="120" height="80" loading="lazy" decoding="async" />
+                  <div>
+                    <span class="k7ba__sidebar-cat">{p.category}</span>
+                    <span class="k7ba__sidebar-title">{p.title}</span>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- INFO -->
+        <div class="k7ba__sidebar-info reveal">
+          <h3 class="k7ba__sidebar-heading">Infos pratiques</h3>
+          <ul class="k7ba__sidebar-details" role="list">
+            <li><strong>Adresse</strong><span>Les Salles-sur-Verdon, 83630</span></li>
+            <li><strong>Saison</strong><span>Avril — Octobre</span></li>
+            <li><strong>Parking</strong><span>Gratuit sur place</span></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</LayoutKinetic>
+
+<style>
+  /* ═══════════════ ARTICLE HERO ═══════════════ */
+  .k7ba__hero {
+    position: relative;
+    min-height: 60svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .k7ba__hero-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .k7ba__hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .k7ba__hero-dim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.2) 0%, rgb(0 0 0 / 0.75) 100%);
+  }
+
+  .k7ba__hero-stripes {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgb(255 255 255 / 0.03) 40px,
+      rgb(255 255 255 / 0.03) 42px
+    );
+  }
+
+  .k7ba__hero-inner {
+    position: relative;
+    z-index: 1;
+    padding: calc(var(--header-h) + var(--s-10)) 0 var(--s-16);
+    max-width: 700px;
+    animation: k7ba-up 800ms var(--ease-smooth) both;
+  }
+
+  @keyframes k7ba-up {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .k7ba__hero-back {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.5);
+    margin-bottom: var(--s-8);
+    transition: color var(--t-fast);
+  }
+
+  .k7ba__hero-back:hover { color: #fff; }
+
+  .k7ba__hero-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    margin-bottom: var(--s-5);
+  }
+
+  .k7ba__hero-cat {
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    background: rgb(247 123 70 / 0.15);
+    padding: 4px 14px;
+    border-radius: var(--r-full);
+  }
+
+  .k7ba__hero-meta time {
+    font-size: 0.65rem;
+    color: rgb(255 255 255 / 0.5);
+  }
+
+  .k7ba__hero-title {
+    font-size: clamp(1.8rem, 5vw, 3.2rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: #fff;
+  }
+
+  /* ═══════════════ BOLD ARTICLE LAYOUT ═══════════════ */
+  .k7ba__body {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+  }
+
+  .k7ba__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+  }
+
+  .k7ba__article {
+    max-width: 100%;
+  }
+
+  .k7ba__article :global(h2) {
+    font-size: 1.35rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-top: var(--s-10);
+    margin-bottom: var(--s-4);
+    padding-left: var(--s-5);
+    border-left: 4px solid var(--c-orange);
+  }
+
+  .k7ba__article :global(p) {
+    font-size: 0.92rem;
+    color: var(--c-text-secondary);
+    line-height: 1.85;
+    margin-bottom: var(--s-5);
+  }
+
+  .k7ba__article :global(p:first-child) {
+    font-size: 1.05rem;
+    color: var(--c-text);
+    line-height: 1.75;
+  }
+
+  /* ═══════════════ ANGULAR SIDEBAR ═══════════════ */
+  .k7ba__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+
+  .k7ba__sidebar-cta {
+    background: var(--c-dark);
+    border-radius: var(--r-sm);
+    padding: var(--s-8);
+    color: #fff;
+  }
+
+  .k7ba__sidebar-stripe {
+    width: 32px;
+    height: 3px;
+    background: var(--c-orange);
+    margin-bottom: var(--s-5);
+  }
+
+  .k7ba__sidebar-heading {
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: var(--s-3);
+  }
+
+  .k7ba__sidebar-text {
+    font-size: 0.78rem;
+    color: rgb(255 255 255 / 0.5);
+    line-height: 1.6;
+    margin-bottom: var(--s-5);
+  }
+
+  .k7ba__sidebar-btn { width: 100%; }
+
+  .k7ba__sidebar-related {
+    background: var(--c-surface);
+    border-radius: var(--r-sm);
+    padding: var(--s-6);
+    border: 1px solid var(--c-border-light);
+  }
+
+  .k7ba__sidebar-related .k7ba__sidebar-heading {
+    color: var(--c-text);
+    margin-bottom: var(--s-5);
+  }
+
+  .k7ba__sidebar-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+
+  .k7ba__sidebar-link {
+    display: flex;
+    gap: var(--s-4);
+    align-items: center;
+    padding: var(--s-3);
+    border-radius: var(--r-sm);
+    transition: background var(--t-fast);
+  }
+
+  .k7ba__sidebar-link:hover { background: var(--c-bg); }
+
+  .k7ba__sidebar-link img {
+    width: 72px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .k7ba__sidebar-link div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .k7ba__sidebar-link .k7ba__sidebar-cat {
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+  }
+
+  .k7ba__sidebar-link .k7ba__sidebar-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--c-text);
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .k7ba__sidebar-info {
+    background: var(--c-surface);
+    border-radius: var(--r-sm);
+    padding: var(--s-6);
+    border: 1px solid var(--c-border-light);
+  }
+
+  .k7ba__sidebar-info .k7ba__sidebar-heading {
+    color: var(--c-text);
+    margin-bottom: var(--s-5);
+  }
+
+  .k7ba__sidebar-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .k7ba__sidebar-details li {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid var(--c-border-light);
+    font-size: 0.78rem;
+  }
+
+  .k7ba__sidebar-details strong {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.6rem;
+    color: var(--c-text-muted);
+  }
+
+  .k7ba__sidebar-details span {
+    color: var(--c-text);
+    font-weight: 500;
+  }
+
+  @media (min-width: 900px) {
+    .k7ba__layout {
+      grid-template-columns: 1fr 340px;
+      gap: var(--s-16);
+    }
+
+    .k7ba__sidebar {
+      position: sticky;
+      top: calc(var(--header-h) + var(--s-6));
+      align-self: start;
+    }
+  }
+
+  /* ═══════════════ MOTION ═══════════════ */
+  @media (prefers-reduced-motion: reduce) {
+    .k7ba__hero-inner { animation: none; }
+  }
+</style>

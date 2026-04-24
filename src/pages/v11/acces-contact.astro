@@ -1,0 +1,575 @@
+---
+import LayoutHyper from '../../layouts/LayoutHyper.astro';
+import { Image } from 'astro:assets';
+import MeshGradient from '../../components/v11/MeshGradient.astro';
+import GlowText from '../../components/v11/GlowText.astro';
+import HolographicCard from '../../components/v11/HolographicCard.astro';
+import WaveDivider from '../../components/v11/WaveDivider.astro';
+import imgLac from '../../assets/images/location-lac-sainte-croix-gorges-verdon.png';
+
+const routesData = [
+  { from: "Aix-en-Provence", duration: "1h30", distance: "95 km", via: "A51 → D952" },
+  { from: "Marseille", duration: "2h00", distance: "135 km", via: "A51 → D952" },
+  { from: "Nice", duration: "2h30", distance: "170 km", via: "A8 → RN85" },
+  { from: "Lyon", duration: "4h30", distance: "400 km", via: "A7 → A51" },
+  { from: "Toulouse", duration: "4h30", distance: "430 km", via: "A61 → A54" },
+  { from: "Paris", duration: "7h30", distance: "800 km", via: "A6 → A7/A51" },
+];
+
+const climateData = [
+  { month: "Avril", temp: "18°C", water: "14°C", sun: "7h", icon: "🌤" },
+  { month: "Mai", temp: "22°C", water: "17°C", sun: "9h", icon: "☀️" },
+  { month: "Juin", temp: "27°C", water: "21°C", sun: "11h", icon: "☀️" },
+  { month: "Juillet", temp: "31°C", water: "24°C", sun: "12h", icon: "🔥" },
+  { month: "Août", temp: "30°C", water: "25°C", sun: "11h", icon: "🔥" },
+  { month: "Septembre", temp: "25°C", water: "22°C", sun: "9h", icon: "☀️" },
+];
+---
+
+<LayoutHyper
+  title="Accès & Contact — Surf Center | Hyper Design"
+  description="Trouvez votre itinéraire, contactez le Surf Center et découvrez le climat idéal du lac de Sainte-Croix."
+>
+  <!-- HERO -->
+  <section class="hyct__hero" aria-label="Accès et contact">
+    <MeshGradient class="hyct__hero-mesh" />
+    <Image
+      class="hyct__hero-img"
+      src={imgLac}
+      alt="Vue aérienne du lac de Sainte-Croix"
+      widths={[640, 1024, 1440]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      format="webp"
+      quality={75}
+    />
+    <div class="hyct__hero-overlay" aria-hidden="true"></div>
+    <div class="hyct__hero-content reveal">
+      <GlowText tag="h1" color="#26cfff" intensity="high" class="hyct__hero-title">
+        Accès & Contact
+      </GlowText>
+      <p class="hyct__hero-sub">Base nautique N°1 du lac de Sainte-Croix</p>
+    </div>
+  </section>
+
+  <WaveDivider color="#26cfff" />
+
+  <!-- CONTACT INFO -->
+  <section class="hyct__info" aria-label="Coordonnées">
+    <div class="hyct__info-grid">
+      <HolographicCard class="hyct__info-card">
+        <div class="hyct__info-inner">
+          <div class="hyct__info-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#26cfff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <GlowText tag="h3" color="#26cfff" intensity="medium" class="hyct__info-title">Adresse</GlowText>
+          <p class="hyct__info-text">Plage des Salles-sur-Verdon<br/>83630 Les Salles-sur-Verdon</p>
+          <p class="hyct__info-sub">GPS : 43.7766, 6.2100</p>
+        </div>
+      </HolographicCard>
+
+      <HolographicCard class="hyct__info-card">
+        <div class="hyct__info-inner">
+          <div class="hyct__info-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6b21a8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <GlowText tag="h3" color="#6b21a8" intensity="medium" class="hyct__info-title">Téléphone</GlowText>
+          <a href="tel:+33492771450" class="hyct__info-link">04 92 77 14 50</a>
+          <p class="hyct__info-sub">Lun–Dim · 9h–19h (saison)</p>
+        </div>
+      </HolographicCard>
+
+      <HolographicCard class="hyct__info-card">
+        <div class="hyct__info-inner">
+          <div class="hyct__info-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <GlowText tag="h3" color="#3b82f6" intensity="medium" class="hyct__info-title">Email</GlowText>
+          <a href="mailto:contact@surfcenter-verdon.fr" class="hyct__info-link">contact@surfcenter-verdon.fr</a>
+          <p class="hyct__info-sub">Réponse en moins de 24h</p>
+        </div>
+      </HolographicCard>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="hyct__form-section" aria-label="Formulaire de contact">
+    <div class="hyct__form-wrap">
+      <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyct__section-title">Envoyez-nous un message</GlowText>
+      <p class="hyct__section-sub">Nous vous répondons sous 24 heures</p>
+
+      <form class="hyct__form" action="#" method="post">
+        <div class="hyct__form-row">
+          <div class="hyct__field">
+            <label for="hyct-name" class="hyct__label">Nom complet</label>
+            <input type="text" id="hyct-name" name="name" required class="hyct__input" placeholder="Jean Dupont" autocomplete="name" />
+          </div>
+          <div class="hyct__field">
+            <label for="hyct-email" class="hyct__label">Email</label>
+            <input type="email" id="hyct-email" name="email" required class="hyct__input" placeholder="jean@exemple.fr" autocomplete="email" />
+          </div>
+        </div>
+        <div class="hyct__form-row">
+          <div class="hyct__field">
+            <label for="hyct-phone" class="hyct__label">Téléphone</label>
+            <input type="tel" id="hyct-phone" name="phone" class="hyct__input" placeholder="06 12 34 56 78" autocomplete="tel" />
+          </div>
+          <div class="hyct__field">
+            <label for="hyct-subject" class="hyct__label">Sujet</label>
+            <select id="hyct-subject" name="subject" class="hyct__input hyct__select">
+              <option value="">Choisir…</option>
+              <option value="reservation">Réservation</option>
+              <option value="groupe">Groupe / Événement</option>
+              <option value="info">Renseignement</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+        </div>
+        <div class="hyct__field">
+          <label for="hyct-message" class="hyct__label">Message</label>
+          <textarea id="hyct-message" name="message" rows="5" required class="hyct__input hyct__textarea" placeholder="Votre message…"></textarea>
+        </div>
+        <button type="submit" class="hyct__submit">
+          <span>Envoyer</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <WaveDivider color="#6b21a8" flip />
+
+  <!-- ROUTES -->
+  <section class="hyct__routes" aria-label="Itinéraires">
+    <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyct__section-title">Comment venir</GlowText>
+    <p class="hyct__section-sub">Les Salles-sur-Verdon — au cœur de la Provence</p>
+
+    <div class="hyct__routes-grid">
+      {routesData.map((r) => (
+        <HolographicCard class="hyct__route-card">
+          <div class="hyct__route-inner">
+            <span class="hyct__route-from">{r.from}</span>
+            <div class="hyct__route-time">
+              <GlowText tag="span" color="#f77b46" intensity="high" class="hyct__route-duration">{r.duration}</GlowText>
+            </div>
+            <div class="hyct__route-meta">
+              <span class="hyct__route-dist">{r.distance}</span>
+              <span class="hyct__route-via">{r.via}</span>
+            </div>
+          </div>
+        </HolographicCard>
+      ))}
+    </div>
+  </section>
+
+  <WaveDivider color="#3b82f6" />
+
+  <!-- CLIMATE -->
+  <section class="hyct__climate" aria-label="Climat">
+    <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyct__section-title">Climat & Saison idéale</GlowText>
+    <p class="hyct__section-sub">Un ensoleillement exceptionnel d'avril à octobre</p>
+
+    <div class="hyct__climate-grid">
+      {climateData.map((c) => (
+        <HolographicCard class="hyct__climate-card">
+          <div class="hyct__climate-inner">
+            <span class="hyct__climate-icon" aria-hidden="true">{c.icon}</span>
+            <GlowText tag="h3" color="#26cfff" intensity="low" class="hyct__climate-month">{c.month}</GlowText>
+            <div class="hyct__climate-stats">
+              <div class="hyct__climate-stat">
+                <span class="hyct__climate-val">{c.temp}</span>
+                <span class="hyct__climate-label">Air</span>
+              </div>
+              <div class="hyct__climate-stat">
+                <span class="hyct__climate-val hyct__climate-val--water">{c.water}</span>
+                <span class="hyct__climate-label">Eau</span>
+              </div>
+              <div class="hyct__climate-stat">
+                <span class="hyct__climate-val hyct__climate-val--sun">{c.sun}</span>
+                <span class="hyct__climate-label">Soleil</span>
+              </div>
+            </div>
+          </div>
+        </HolographicCard>
+      ))}
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="hyct__map" aria-label="Carte">
+    <div class="hyct__map-wrap">
+      <GlowText tag="h2" color="#26cfff" intensity="medium" class="hyct__section-title">Nous trouver</GlowText>
+      <div class="hyct__map-frame">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2880!2d6.21!3d43.7766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDQ2JzM2LjAiTiA2wrAxMicyNC4wIkU!5e0!3m2!1sfr!2sfr!4v1"
+          width="100%"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Carte — Surf Center, Les Salles-sur-Verdon"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</LayoutHyper>
+
+<style>
+  /* HERO */
+  .hyct__hero {
+    position: relative;
+    min-height: 55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hyct__hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    z-index: 0;
+  }
+  .hyct__hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5,5,16,0.6) 0%, rgba(5,5,16,0.95) 100%);
+    z-index: 1;
+  }
+  .hyct__hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 6rem 1.5rem 4rem;
+  }
+  .hyct__hero-title {
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+  }
+  .hyct__hero-sub {
+    font-size: 1.1rem;
+    color: rgba(240,240,235,0.6);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* SECTION COMMON */
+  .hyct__section-title {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin: 0 0 0.5rem;
+  }
+  .hyct__section-sub {
+    text-align: center;
+    color: rgba(240,240,235,0.5);
+    font-size: 1rem;
+    margin: 0 0 3rem;
+  }
+
+  /* CONTACT INFO */
+  .hyct__info {
+    padding: 5rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hyct__info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .hyct__info-inner {
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+  .hyct__info-icon {
+    margin-bottom: 1.25rem;
+    display: flex;
+    justify-content: center;
+  }
+  .hyct__info-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+  }
+  .hyct__info-text {
+    color: rgba(240,240,235,0.75);
+    line-height: 1.6;
+    margin: 0 0 0.5rem;
+    font-size: 0.95rem;
+  }
+  .hyct__info-sub {
+    font-size: 0.82rem;
+    color: rgba(240,240,235,0.4);
+    margin: 0;
+  }
+  .hyct__info-link {
+    display: block;
+    color: #26cfff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+    transition: text-shadow 0.3s ease;
+  }
+  .hyct__info-link:hover {
+    text-shadow: 0 0 12px rgba(38,207,255,0.5);
+  }
+
+  /* FORM */
+  .hyct__form-section {
+    padding: 5rem 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .hyct__form-wrap {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(38,207,255,0.12);
+    border-radius: 1.5rem;
+    padding: 3rem 2.5rem;
+  }
+  .hyct__form {
+    margin-top: 2rem;
+  }
+  .hyct__form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .hyct__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0;
+  }
+  .hyct__form-row + .hyct__field {
+    margin-bottom: 1.5rem;
+  }
+  .hyct__label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(240,240,235,0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .hyct__input {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(38,207,255,0.15);
+    border-radius: 0.75rem;
+    padding: 0.85rem 1rem;
+    color: #f0f0eb;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+  }
+  .hyct__input::placeholder {
+    color: rgba(240,240,235,0.25);
+  }
+  .hyct__input:focus {
+    border-color: rgba(38,207,255,0.5);
+    box-shadow: 0 0 16px rgba(38,207,255,0.15), inset 0 0 8px rgba(38,207,255,0.05);
+  }
+  .hyct__select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2326cfff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+  .hyct__textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  .hyct__submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.9rem 2.2rem;
+    border: 1px solid rgba(38,207,255,0.3);
+    border-radius: 9999px;
+    background: linear-gradient(135deg, rgba(38,207,255,0.12) 0%, rgba(107,33,168,0.1) 100%);
+    color: #26cfff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    letter-spacing: 0.02em;
+    margin-top: 0.5rem;
+  }
+  .hyct__submit:hover {
+    border-color: rgba(38,207,255,0.6);
+    box-shadow: 0 0 24px rgba(38,207,255,0.2), 0 0 48px rgba(38,207,255,0.08);
+    background: linear-gradient(135deg, rgba(38,207,255,0.2) 0%, rgba(107,33,168,0.15) 100%);
+  }
+
+  /* ROUTES */
+  .hyct__routes {
+    padding: 5rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hyct__routes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .hyct__route-inner {
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  .hyct__route-from {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: rgba(240,240,235,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+  .hyct__route-time {
+    margin-bottom: 1rem;
+  }
+  .hyct__route-duration {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .hyct__route-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .hyct__route-dist {
+    font-size: 0.9rem;
+    color: rgba(240,240,235,0.6);
+    font-weight: 500;
+  }
+  .hyct__route-via {
+    font-size: 0.78rem;
+    color: rgba(240,240,235,0.35);
+  }
+
+  /* CLIMATE */
+  .hyct__climate {
+    padding: 5rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hyct__climate-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+  }
+  .hyct__climate-inner {
+    padding: 1.75rem 1rem;
+    text-align: center;
+  }
+  .hyct__climate-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .hyct__climate-month {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+  }
+  .hyct__climate-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .hyct__climate-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .hyct__climate-val {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #f77b46;
+    font-variant-numeric: tabular-nums;
+  }
+  .hyct__climate-val--water {
+    color: #26cfff;
+  }
+  .hyct__climate-val--sun {
+    color: #fbbf24;
+  }
+  .hyct__climate-label {
+    font-size: 0.72rem;
+    color: rgba(240,240,235,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  /* MAP */
+  .hyct__map {
+    padding: 5rem 1.5rem 6rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .hyct__map-frame {
+    border-radius: 1.25rem;
+    overflow: hidden;
+    border: 1px solid rgba(38,207,255,0.15);
+    box-shadow: 0 0 40px rgba(38,207,255,0.06);
+    margin-top: 2rem;
+  }
+  .hyct__map-frame iframe {
+    display: block;
+    filter: brightness(0.7) contrast(1.1) saturate(0.5) hue-rotate(180deg);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .hyct__climate-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 768px) {
+    .hyct__info-grid {
+      grid-template-columns: 1fr;
+    }
+    .hyct__form-row {
+      grid-template-columns: 1fr;
+    }
+    .hyct__routes-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .hyct__climate-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .hyct__form-wrap {
+      padding: 2rem 1.5rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .hyct__routes-grid {
+      grid-template-columns: 1fr;
+    }
+    .hyct__climate-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .hyct__hero-content {
+      padding: 5rem 1rem 3rem;
+    }
+  }
+</style>

@@ -4,11 +4,11 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 const versionPrefixes = ['/', '/v2', '/v7', '/v8', '/v11'];
 
 const versions = [
-  { label: 'Standard', prefix: '/' },
-  { label: 'Design', prefix: '/v2' },
-  { label: 'Kinetic', prefix: '/v7' },
-  { label: 'Marketing', prefix: '/v8' },
-  { label: 'Hyper Design', prefix: '/v11' },
+  { label: 'Standard', prefix: '/', icon: 'S' },
+  { label: 'Design', prefix: '/v2', icon: 'D' },
+  { label: 'Kinetic', prefix: '/v7', icon: 'K' },
+  { label: 'Marketing', prefix: '/v8', icon: 'M' },
+  { label: 'Hyper Design', prefix: '/v11', icon: 'H' },
 ];
 const count = versions.length;
 
@@ -37,8 +37,10 @@ function isActive(prefix: string): boolean {
 }
 
 const activeIdx = versions.findIndex((v) => isActive(v.prefix));
+const activeVersion = versions[activeIdx];
 ---
 
+<!-- ── Desktop version switcher ── -->
 <nav class="vsw" aria-label="Changer de version">
   <button class="vsw__trigger" type="button" aria-expanded="false" aria-haspopup="true">
     <svg class="vsw__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -67,25 +69,107 @@ const activeIdx = versions.findIndex((v) => isActive(v.prefix));
   </div>
 </nav>
 
+<!-- ── Mobile version switcher (bottom sheet) ── -->
+<div class="vsm" data-vsm>
+  <button class="vsm__fab" type="button" aria-label="Changer de version" data-vsm-trigger>
+    <span class="vsm__fab-icon">{activeVersion.icon}</span>
+    <svg class="vsm__fab-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+      <path d="M2.5 6L5 3.5 7.5 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <div class="vsm__overlay" data-vsm-overlay></div>
+
+  <div class="vsm__sheet" role="dialog" aria-label="Versions du site" data-vsm-sheet>
+    <div class="vsm__handle" aria-hidden="true"><span></span></div>
+    <div class="vsm__header">
+      <span class="vsm__title">Version du site</span>
+      <span class="vsm__preprod">preprod</span>
+    </div>
+    <div class="vsm__list">
+      {versions.map((v, i) => (
+        <a
+          href={buildHref(v.prefix)}
+          class:list={['vsm__item', { 'is-active': isActive(v.prefix) }]}
+          aria-current={isActive(v.prefix) ? 'page' : undefined}
+        >
+          <span class="vsm__item-icon">{v.icon}</span>
+          <span class="vsm__item-content">
+            <span class="vsm__item-label">{v.label}</span>
+            <span class="vsm__item-path">{v.prefix === '/' ? '/' : v.prefix}</span>
+          </span>
+          {isActive(v.prefix) && (
+            <svg class="vsm__item-check" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          )}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
 <script>
+  // Desktop switcher
   const nav = document.querySelector('.vsw') as HTMLElement | null;
   const trigger = nav?.querySelector('.vsw__trigger') as HTMLButtonElement | null;
-  if (!nav || !trigger) throw new Error('vsw not found');
+  if (nav && trigger) {
+    trigger.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('is-open');
+      trigger.setAttribute('aria-expanded', String(isOpen));
+    });
 
-  trigger.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('is-open');
-    trigger.setAttribute('aria-expanded', String(isOpen));
-  });
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target as Node)) {
+        nav.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 
-  document.addEventListener('click', (e) => {
-    if (!nav.contains(e.target as Node)) {
-      nav.classList.remove('is-open');
-      trigger.setAttribute('aria-expanded', 'false');
+  // Mobile switcher
+  const vsm = document.querySelector('[data-vsm]') as HTMLElement | null;
+  const vsmTrigger = document.querySelector('[data-vsm-trigger]') as HTMLButtonElement | null;
+  const vsmOverlay = document.querySelector('[data-vsm-overlay]') as HTMLElement | null;
+  const vsmSheet = document.querySelector('[data-vsm-sheet]') as HTMLElement | null;
+
+  if (vsm && vsmTrigger && vsmOverlay && vsmSheet) {
+    function openSheet() {
+      vsm!.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
     }
-  });
+
+    function closeSheet() {
+      vsm!.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    vsmTrigger.addEventListener('click', openSheet);
+    vsmOverlay.addEventListener('click', closeSheet);
+
+    vsmSheet.addEventListener('click', (e) => {
+      const link = (e.target as HTMLElement).closest('.vsm__item');
+      if (link) closeSheet();
+    });
+
+    // Swipe-down to close
+    let startY = 0;
+    vsmSheet.addEventListener('touchstart', (e) => {
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+
+    vsmSheet.addEventListener('touchend', (e) => {
+      const dy = e.changedTouches[0].clientY - startY;
+      if (dy > 60) closeSheet();
+    }, { passive: true });
+  }
 </script>
 
 <style>
+  /* ══════════════════════════════════════
+     DESKTOP — left sidebar trigger
+     ══════════════════════════════════════ */
+
   .vsw {
     position: fixed;
     left: var(--s-5);
@@ -99,8 +183,6 @@ const activeIdx = versions.findIndex((v) => isActive(v.prefix));
     from { opacity: 0; transform: translateY(-50%) translateX(-16px); }
     to { opacity: 1; transform: translateY(-50%) translateX(0); }
   }
-
-  /* ── Trigger ── */
 
   .vsw__trigger {
     display: flex;
@@ -144,8 +226,6 @@ const activeIdx = versions.findIndex((v) => isActive(v.prefix));
     max-width: 80px;
     opacity: 1;
   }
-
-  /* ── Dropdown (clic uniquement) ── */
 
   .vsw__dropdown {
     position: absolute;
@@ -224,40 +304,8 @@ const activeIdx = versions.findIndex((v) => isActive(v.prefix));
     opacity: 0.6;
   }
 
-  /* ── Mobile ── */
-
   @media (max-width: 768px) {
-    .vsw {
-      left: auto;
-      right: var(--s-4);
-      top: auto;
-      bottom: var(--s-5);
-      transform: none;
-    }
-
-    @keyframes vsw-enter {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .vsw__dropdown {
-      left: auto;
-      right: 0;
-      top: auto;
-      bottom: calc(100% + 8px);
-      transform: translateY(6px);
-    }
-
-    .vsw.is-open .vsw__dropdown {
-      transform: translateY(0);
-    }
-
-    .vsw__link {
-      padding: 8px 10px;
-      font-size: 0.48rem;
-    }
-
-    .vsw__badge { display: none; }
+    .vsw { display: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -265,5 +313,248 @@ const activeIdx = versions.findIndex((v) => isActive(v.prefix));
     .vsw__indicator { transition: none; }
     .vsw__dropdown { transition: none; }
     .vsw__hint { transition: none; }
+  }
+
+  /* ══════════════════════════════════════
+     MOBILE — bottom sheet switcher
+     ══════════════════════════════════════ */
+
+  .vsm {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .vsm {
+      display: block;
+      position: fixed;
+      z-index: 950;
+    }
+
+    /* ── FAB trigger ── */
+
+    .vsm__fab {
+      position: fixed;
+      left: var(--s-4);
+      bottom: var(--s-5);
+      z-index: 951;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      background: #111;
+      border: 1px solid rgb(255 255 255 / 0.1);
+      border-radius: var(--r-full);
+      color: rgb(255 255 255 / 0.6);
+      cursor: pointer;
+      box-shadow: 0 4px 24px rgb(0 0 0 / 0.35);
+      font-family: inherit;
+      -webkit-tap-highlight-color: transparent;
+      animation: vsm-fab-in 500ms var(--ease-smooth) 800ms both;
+    }
+
+    @keyframes vsm-fab-in {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .vsm__fab:active {
+      transform: scale(0.95);
+    }
+
+    .vsm__fab-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background: var(--c-orange);
+      color: #fff;
+      border-radius: 6px;
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .vsm__fab-chevron {
+      transition: transform 300ms var(--ease);
+    }
+
+    .vsm.is-open .vsm__fab-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* ── Overlay ── */
+
+    .vsm__overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 949;
+      background: rgb(0 0 0 / 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 300ms, visibility 0ms 300ms;
+    }
+
+    .vsm.is-open .vsm__overlay {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 300ms, visibility 0ms 0ms;
+    }
+
+    /* ── Sheet ── */
+
+    .vsm__sheet {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 952;
+      background: #111;
+      border-radius: 20px 20px 0 0;
+      border-top: 1px solid rgb(255 255 255 / 0.08);
+      padding: 0 var(--s-5) calc(env(safe-area-inset-bottom, 0px) + var(--s-6));
+      transform: translateY(100%);
+      transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 85vh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      box-shadow: 0 -8px 40px rgb(0 0 0 / 0.4);
+    }
+
+    .vsm.is-open .vsm__sheet {
+      transform: translateY(0);
+    }
+
+    /* ── Handle ── */
+
+    .vsm__handle {
+      display: flex;
+      justify-content: center;
+      padding: 10px 0 6px;
+    }
+
+    .vsm__handle span {
+      width: 36px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgb(255 255 255 / 0.15);
+    }
+
+    /* ── Header ── */
+
+    .vsm__header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: var(--s-3) 0 var(--s-4);
+    }
+
+    .vsm__title {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgb(255 255 255 / 0.4);
+    }
+
+    .vsm__preprod {
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-orange);
+      opacity: 0.7;
+      padding: 2px 8px;
+      border: 1px solid rgb(255 255 255 / 0.06);
+      border-radius: var(--r-full);
+    }
+
+    /* ── List ── */
+
+    .vsm__list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .vsm__item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 12px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: rgb(255 255 255 / 0.45);
+      transition: background 200ms, color 200ms;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .vsm__item:active {
+      background: rgb(255 255 255 / 0.04);
+    }
+
+    .vsm__item.is-active {
+      background: rgb(255 255 255 / 0.06);
+      color: #fff;
+    }
+
+    .vsm__item-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: rgb(255 255 255 / 0.05);
+      border: 1px solid rgb(255 255 255 / 0.06);
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: rgb(255 255 255 / 0.4);
+      flex-shrink: 0;
+    }
+
+    .vsm__item.is-active .vsm__item-icon {
+      background: var(--c-orange);
+      border-color: transparent;
+      color: #fff;
+    }
+
+    .vsm__item-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .vsm__item-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .vsm__item-path {
+      font-size: 0.65rem;
+      color: rgb(255 255 255 / 0.2);
+      font-family: monospace;
+    }
+
+    .vsm__item.is-active .vsm__item-path {
+      color: rgb(255 255 255 / 0.35);
+    }
+
+    .vsm__item-check {
+      flex-shrink: 0;
+      color: var(--c-orange);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vsm__fab { animation: none; }
+    .vsm__sheet { transition: none; }
+    .vsm__overlay { transition: none; }
+    .vsm__fab-chevron { transition: none; }
   }
 </style>

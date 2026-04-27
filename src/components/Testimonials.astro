@@ -5,18 +5,56 @@ const reviews = [
       "Un cadre magnifique, un accueil au top et des bateaux en très bon état. On a passé une journée incroyable sur le lac avec les enfants.",
     author: "Sophie L.",
     context: "Famille — Août 2025",
+    rating: 5,
   },
   {
     quote:
       "La meilleure base nautique du Verdon. Le paddle au lever du soleil sur le lac de Sainte-Croix, c'est juste magique.",
     author: "Maxime R.",
     context: "Paddle — Juillet 2025",
+    rating: 5,
   },
   {
     quote:
       "Super spot, super équipe. Les pizzas du snack sont excellentes. L'endroit idéal pour une journée complète au lac.",
     author: "Camille & Julien",
     context: "Couple — Septembre 2025",
+    rating: 5,
+  },
+  {
+    quote:
+      "On y retourne chaque été. Les enfants adorent les pédalos et la pizzeria est excellente.",
+    author: "Sophie & Marc",
+    context: "Famille — Été 2025",
+    rating: 5,
+  },
+  {
+    quote:
+      "Meilleur spot du Verdon. Le canoë dans les gorges est une expérience unique à vivre absolument.",
+    author: "Lucas R.",
+    context: "Canoë — Juin 2025",
+    rating: 4,
+  },
+  {
+    quote:
+      "Accueil chaleureux, matériel récent et propre, et la vue depuis le ponton est à couper le souffle.",
+    author: "Élodie M.",
+    context: "Bateau électrique — Juillet 2025",
+    rating: 5,
+  },
+  {
+    quote:
+      "Un endroit qu'on aime retrouver. Concert au coucher de soleil, bonne ambiance, équipe au petit soin.",
+    author: "Antoine D.",
+    context: "Soirée — Août 2025",
+    rating: 5,
+  },
+  {
+    quote:
+      "Initiation windsurf au top, le moniteur est super pédagogue. On reviendra pour la planche à voile !",
+    author: "Inès T.",
+    context: "Windsurf — Juillet 2025",
+    rating: 5,
   },
 ];
 ---
@@ -28,70 +66,361 @@ const reviews = [
       <h2 id="reviews-title">Ce qu'ils<br/>en disent</h2>
     </header>
 
-    <div class="reviews-grid">
-      {reviews.map((r, i) => (
-        <blockquote class={`review reveal reveal-d${i + 1}`}>
-          <p class="review__text">&ldquo;{r.quote}&rdquo;</p>
-          <footer class="review__footer">
-            <cite class="review__author">{r.author}</cite>
-            <span class="review__context">{r.context}</span>
-          </footer>
-        </blockquote>
-      ))}
+    <div class="rv-wrap reveal">
+      <button
+        class="rv__arrow rv__arrow--prev"
+        type="button"
+        data-rv-prev
+        aria-label="Avis précédents"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="rv" data-rv>
+        <div class="rv__track" data-rv-track>
+          {reviews.map((r, i) => (
+            <article
+              class="rv__card"
+              data-rv-card
+              style={`--reveal-d: ${(i % 4) * 70}ms`}
+            >
+              <span class="rv__shimmer" aria-hidden="true"></span>
+              <div class="rv__content">
+                <div class="rv__stars" aria-label={`${r.rating} étoiles sur 5`}>
+                  {Array.from({ length: 5 }).map((_, s) => (
+                    <svg
+                      class={`rv__star ${s < r.rating ? 'rv__star--filled' : ''}`}
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  ))}
+                </div>
+                <blockquote class="rv__quote">
+                  <p class="rv__text">&ldquo;{r.quote}&rdquo;</p>
+                  <footer class="rv__footer">
+                    <cite class="rv__author">{r.author}</cite>
+                    <span class="rv__context">{r.context}</span>
+                  </footer>
+                </blockquote>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <button
+        class="rv__arrow rv__arrow--next"
+        type="button"
+        data-rv-next
+        aria-label="Avis suivants"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
   </div>
 </section>
 
 <style>
-  .reviews-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--s-6);
+  /* ── Theme tokens (light = défaut) ────────────────── */
+  .rv-wrap {
+    --rv-card-bg: var(--c-bg);
+    --rv-card-border: rgb(250 128 61 / 0.18);
+    --rv-card-border-hover: rgb(237 102 122 / 0.45);
+    --rv-card-glow: 0 0 0 rgb(0 0 0 / 0);
+    --rv-card-glow-hover:
+      0 12px 30px rgb(250 128 61 / 0.10),
+      0 0 0 1px rgb(237 102 122 / 0.06);
+    --rv-shimmer-c1: rgb(250 128 61 / 0.22);
+    --rv-shimmer-c2: rgb(237 102 122 / 0.18);
+    --rv-shimmer-blend: multiply;
+    --rv-star-empty: rgb(0 0 0 / 0.12);
+    --rv-arrow-bg: var(--c-bg);
+    --rv-arrow-border: var(--c-border);
+    --rv-arrow-color: var(--c-text);
+    --rv-arrow-bg-hover: var(--c-surface);
+    position: relative;
   }
 
-  .review {
-    padding: var(--s-8);
-    background: var(--c-surface);
+  [data-theme='dark'] .rv-wrap {
+    --rv-card-bg: var(--c-surface);
+    --rv-card-border: rgb(250 128 61 / 0.18);
+    --rv-card-border-hover: rgb(237 102 122 / 0.50);
+    --rv-card-glow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.02);
+    --rv-card-glow-hover:
+      0 0 24px rgb(250 128 61 / 0.16),
+      0 0 60px rgb(237 102 122 / 0.10),
+      inset 0 0 24px rgb(250 128 61 / 0.05);
+    --rv-shimmer-c1: rgb(250 128 61 / 0.30);
+    --rv-shimmer-c2: rgb(237 102 122 / 0.24);
+    --rv-shimmer-blend: screen;
+    --rv-star-empty: rgb(255 255 255 / 0.18);
+    --rv-arrow-bg: var(--c-surface);
+    --rv-arrow-border: var(--c-border);
+    --rv-arrow-color: var(--c-text);
+    --rv-arrow-bg-hover: var(--c-surface-alt);
+  }
+
+  /* ── Slider track ─────────────────────────────────── */
+  .rv {
+    overflow: hidden;
+    margin-inline: 0;
+  }
+
+  .rv__track {
+    display: flex;
+    gap: var(--s-4);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-block: var(--s-2);
+    padding-inline: 2px;
+  }
+  .rv__track::-webkit-scrollbar { display: none; }
+
+  /* ── Card (holographic) ───────────────────────────── */
+  .rv__card {
+    --holo-x: 50%;
+    --holo-y: 50%;
+    --holo-angle: 180deg;
+    position: relative;
+    flex: 0 0 100%;
     border-radius: var(--r-lg);
-    border: none;
-    margin: 0;
+    background: var(--rv-card-bg);
+    border: 1px solid var(--rv-card-border);
+    overflow: hidden;
+    scroll-snap-align: start;
+    box-shadow: var(--rv-card-glow);
+    transition:
+      border-color 0.4s var(--ease),
+      box-shadow 0.4s var(--ease),
+      transform 0.4s var(--ease);
+  }
+
+  .rv__card:hover {
+    border-color: var(--rv-card-border-hover);
+    box-shadow: var(--rv-card-glow-hover);
+    transform: translateY(-2px);
+  }
+
+  .rv__shimmer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease);
+    background:
+      radial-gradient(
+        circle at var(--holo-x) var(--holo-y),
+        var(--rv-shimmer-c1) 0%,
+        transparent 55%
+      ),
+      conic-gradient(
+        from var(--holo-angle) at var(--holo-x) var(--holo-y),
+        var(--rv-shimmer-c1),
+        var(--rv-shimmer-c2),
+        var(--rv-shimmer-c1)
+      );
+    mix-blend-mode: var(--rv-shimmer-blend);
+  }
+
+  .rv__card:hover .rv__shimmer { opacity: 1; }
+
+  .rv__content {
+    position: relative;
+    z-index: 2;
+    padding: var(--s-7);
     display: flex;
     flex-direction: column;
+    gap: var(--s-4);
+    height: 100%;
   }
 
-  .review__text {
-    font-size: 1.05rem;
-    line-height: 1.7;
+  /* ── Stars ────────────────────────────────────────── */
+  .rv__stars {
+    display: flex;
+    gap: 0.18rem;
+  }
+  .rv__star { color: var(--rv-star-empty); }
+  .rv__star path { stroke: none; fill: currentColor; }
+  .rv__star--filled {
+    color: var(--c-orange);
+    filter: drop-shadow(0 0 4px rgb(247 123 70 / 0.35));
+  }
+
+  /* ── Quote ────────────────────────────────────────── */
+  .rv__quote {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .rv__text {
+    font-size: 0.95rem;
+    line-height: 1.65;
     color: var(--c-text);
-    margin-bottom: auto;
-    padding-bottom: var(--s-6);
-    max-width: none;
     font-style: italic;
+    margin: 0 0 var(--s-5);
+    flex: 1;
   }
 
-  .review__footer {
+  .rv__footer {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    padding-top: var(--s-5);
+    padding-top: var(--s-4);
     border-top: 1px solid var(--c-border-light);
   }
 
-  .review__author {
+  .rv__author {
     font-style: normal;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--c-text);
+    color: var(--c-blue, #26cfff);
+    text-shadow: 0 0 8px rgb(38 207 255 / 0.18);
   }
 
-  .review__context {
-    font-size: 0.72rem;
+  .rv__context {
+    font-size: 0.7rem;
     color: var(--c-text-muted);
   }
 
-  @media (min-width: 768px) {
-    .reviews-grid { grid-template-columns: repeat(3, 1fr); }
+  /* ── Arrows ───────────────────────────────────────── */
+  .rv__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-full);
+    border: 1px solid var(--rv-arrow-border);
+    background: var(--rv-arrow-bg);
+    color: var(--rv-arrow-color);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    transition:
+      background var(--t-fast) var(--ease),
+      border-color var(--t-fast) var(--ease),
+      box-shadow var(--t-fast) var(--ease),
+      opacity var(--t-fast) var(--ease);
+  }
+  .rv__arrow:hover {
+    background: var(--rv-arrow-bg-hover);
+    border-color: rgb(38 207 255 / 0.45);
+    box-shadow: var(--shadow-md);
+  }
+  .rv__arrow:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .rv__arrow--prev { left: calc(-1 * var(--s-3)); }
+  .rv__arrow--next { right: calc(-1 * var(--s-3)); }
+
+  /* ── Responsive: nb de cartes par page ───────────── */
+  @media (min-width: 600px) {
+    .rv__card { flex: 0 0 calc((100% - var(--s-4)) / 2); }
+  }
+
+  @media (min-width: 900px) {
+    .rv__card { flex: 0 0 calc((100% - var(--s-4) * 2) / 3); }
+  }
+
+  @media (min-width: 1100px) {
+    .rv__card { flex: 0 0 calc((100% - var(--s-4) * 3) / 4); }
+  }
+
+  @media (max-width: 599px) {
+    .rv__arrow { width: 38px; height: 38px; }
+    .rv__arrow--prev { left: calc(-1 * var(--s-2)); }
+    .rv__arrow--next { right: calc(-1 * var(--s-2)); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rv__card,
+    .rv__shimmer,
+    .rv__arrow { transition: none; }
+    .rv__card:hover { transform: none; }
   }
 </style>
+
+<script>
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLElement>('[data-rv]').forEach((slider) => {
+    const wrap = slider.closest<HTMLElement>('.rv-wrap');
+    if (!wrap) return;
+
+    const track = slider.querySelector<HTMLElement>('[data-rv-track]');
+    if (!track) return;
+
+    const prevBtn = wrap.querySelector<HTMLButtonElement>('[data-rv-prev]');
+    const nextBtn = wrap.querySelector<HTMLButtonElement>('[data-rv-next]');
+
+    const updateArrows = () => {
+      if (prevBtn) prevBtn.disabled = track.scrollLeft <= 2;
+      if (nextBtn)
+        nextBtn.disabled =
+          track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    };
+
+    updateArrows();
+    track.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+
+    prevBtn?.addEventListener('click', () =>
+      track.scrollBy({ left: -track.clientWidth, behavior: 'smooth' }),
+    );
+    nextBtn?.addEventListener('click', () =>
+      track.scrollBy({ left: track.clientWidth, behavior: 'smooth' }),
+    );
+
+    if (reducedMotion) return;
+
+    track.querySelectorAll<HTMLElement>('[data-rv-card]').forEach((card) => {
+      let pending = 0;
+      const onMove = (e: MouseEvent) => {
+        if (pending) return;
+        pending = requestAnimationFrame(() => {
+          pending = 0;
+          const rect = card.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+          card.style.setProperty('--holo-x', `${x}%`);
+          card.style.setProperty('--holo-y', `${y}%`);
+          card.style.setProperty('--holo-angle', `${Math.round(x * 3.6)}deg`);
+        });
+      };
+      const onLeave = () => {
+        if (pending) {
+          cancelAnimationFrame(pending);
+          pending = 0;
+        }
+        card.style.setProperty('--holo-x', '50%');
+        card.style.setProperty('--holo-y', '50%');
+      };
+      card.addEventListener('mousemove', onMove, { passive: true });
+      card.addEventListener('mouseleave', onLeave);
+    });
+  });
+</script>

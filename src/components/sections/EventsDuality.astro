@@ -1,0 +1,291 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface ListItem {
+  text: string;
+}
+
+interface CTA {
+  label: string;
+  href?: string;
+  booking?: boolean;
+}
+
+interface Block {
+  eyebrow: string;
+  title: string;
+  text: string;
+  list: ListItem[];
+  cta: CTA;
+  image: { src: string | ImageMetadata; alt: string };
+}
+
+interface Props {
+  id?: string;
+  title?: string;
+  privateBlock: Block;
+  proBlock: Block;
+  surface?: boolean;
+}
+
+const {
+  id = 'evenements',
+  privateBlock,
+  proBlock,
+  surface = false,
+} = Astro.props;
+
+const sectionTitleId = `${id}-title`;
+---
+
+<section
+  id={id}
+  class:list={['ev-dual', { 'ev-dual--surface': surface }]}
+  aria-labelledby={sectionTitleId}
+>
+  <h2 id={sectionTitleId} class="sr-only">Événements privés et professionnels</h2>
+
+  <div class="container">
+    <article class="ev-dual__row ev-dual__row--privates">
+      <div class="ev-dual__copy reveal">
+        <span class="section__eyebrow ev-dual__eyebrow">{privateBlock.eyebrow}</span>
+        <h3 class="ev-dual__title">{privateBlock.title}</h3>
+        <p class="ev-dual__desc">{privateBlock.text}</p>
+
+        <ul class="ev-dual__list" role="list">
+          {privateBlock.list.map((item) => (
+            <li>
+              <span class="ev-dual__dash" aria-hidden="true">—</span>
+              <span>{item.text}</span>
+            </li>
+          ))}
+        </ul>
+
+        {privateBlock.cta.booking ? (
+          <button type="button" class="btn btn--primary ev-dual__cta" data-booking>
+            <span class="btn-flip__inner">
+              <span class="btn-flip__front">{privateBlock.cta.label}</span>
+              <span class="btn-flip__back">{privateBlock.cta.label}</span>
+            </span>
+          </button>
+        ) : (
+          <a href={privateBlock.cta.href} class="btn btn--primary ev-dual__cta">
+            <span class="btn-flip__inner">
+              <span class="btn-flip__front">{privateBlock.cta.label}</span>
+              <span class="btn-flip__back">{privateBlock.cta.label}</span>
+            </span>
+          </a>
+        )}
+      </div>
+
+      <div class="ev-dual__media reveal reveal-d1">
+        {typeof privateBlock.image.src === 'string' ? (
+          <img
+            src={privateBlock.image.src}
+            alt={privateBlock.image.alt}
+            width="640"
+            height="800"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <Image
+            src={privateBlock.image.src}
+            alt={privateBlock.image.alt}
+            width={640}
+            height={800}
+            loading="lazy"
+            decoding="async"
+            format="webp"
+            quality={75}
+          />
+        )}
+      </div>
+    </article>
+
+    <article class="ev-dual__row ev-dual__row--pros">
+      <div class="ev-dual__media reveal">
+        {typeof proBlock.image.src === 'string' ? (
+          <img
+            src={proBlock.image.src}
+            alt={proBlock.image.alt}
+            width="640"
+            height="800"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <Image
+            src={proBlock.image.src}
+            alt={proBlock.image.alt}
+            width={640}
+            height={800}
+            loading="lazy"
+            decoding="async"
+            format="webp"
+            quality={75}
+          />
+        )}
+      </div>
+
+      <div class="ev-dual__copy reveal reveal-d1">
+        <span class="section__eyebrow ev-dual__eyebrow">{proBlock.eyebrow}</span>
+        <h3 class="ev-dual__title">{proBlock.title}</h3>
+        <p class="ev-dual__desc">{proBlock.text}</p>
+
+        <ul class="ev-dual__list" role="list">
+          {proBlock.list.map((item) => (
+            <li>
+              <span class="ev-dual__dash" aria-hidden="true">—</span>
+              <span>{item.text}</span>
+            </li>
+          ))}
+        </ul>
+
+        {proBlock.cta.booking ? (
+          <button type="button" class="btn btn--primary ev-dual__cta" data-booking>
+            <span class="btn-flip__inner">
+              <span class="btn-flip__front">{proBlock.cta.label}</span>
+              <span class="btn-flip__back">{proBlock.cta.label}</span>
+            </span>
+          </button>
+        ) : (
+          <a href={proBlock.cta.href} class="btn btn--primary ev-dual__cta">
+            <span class="btn-flip__inner">
+              <span class="btn-flip__front">{proBlock.cta.label}</span>
+              <span class="btn-flip__back">{proBlock.cta.label}</span>
+            </span>
+          </a>
+        )}
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .ev-dual {
+    position: relative;
+    padding-block: var(--s-section);
+  }
+
+  .ev-dual--surface { background: var(--c-surface); }
+
+  .ev-dual__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+    align-items: center;
+  }
+
+  .ev-dual__row + .ev-dual__row {
+    margin-top: clamp(3rem, 8vw, 6rem);
+  }
+
+  .ev-dual__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 460px;
+  }
+
+  .ev-dual__eyebrow {
+    margin-bottom: var(--s-5);
+  }
+
+  .ev-dual__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--c-text);
+    text-wrap: balance;
+  }
+
+  .ev-dual__desc {
+    margin-top: var(--s-6);
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--c-text-secondary);
+    max-width: 38ch;
+  }
+
+  .ev-dual__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-top: var(--s-6);
+  }
+
+  .ev-dual__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-3);
+    font-size: 0.82rem;
+    color: var(--c-text-secondary);
+    line-height: 1.5;
+  }
+
+  .ev-dual__list li > span:last-child {
+    padding-top: 1px;
+  }
+
+  .ev-dual__dash {
+    color: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .ev-dual__cta {
+    margin-top: var(--s-8);
+  }
+
+  .ev-dual__media {
+    overflow: hidden;
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  .ev-dual__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .ev-dual__media:hover img {
+    transform: scale(1.04);
+  }
+
+  @media (min-width: 900px) {
+    .ev-dual__row {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+      gap: clamp(3rem, 6vw, 5rem);
+    }
+
+    .ev-dual__row--privates {
+      /* Texte à gauche, image à droite (ordre naturel) */
+    }
+
+    .ev-dual__row--pros .ev-dual__media {
+      order: 1;
+    }
+
+    .ev-dual__row--pros .ev-dual__copy {
+      order: 2;
+      margin-inline-start: auto;
+    }
+
+    .ev-dual__media img {
+      aspect-ratio: 4 / 5;
+      max-height: 640px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ev-dual__media img { transition: none; }
+    .ev-dual__media:hover img { transform: none; }
+  }
+</style>

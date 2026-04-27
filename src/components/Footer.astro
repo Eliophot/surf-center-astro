@@ -1,178 +1,384 @@
 ---
+import { Image } from 'astro:assets';
+import logoImg from '../assets/images/logo-surf-center.png';
+
 const currentYear = new Date().getFullYear();
 
-const navColumns = [
+const navCols = [
   {
-    title: "Nos locations",
+    title: 'Activités',
     links: [
-      { label: "Bateau électrique", href: "/nos-locations" },
-      { label: "Paddle board", href: "/nos-locations" },
-      { label: "Pédalo", href: "/nos-locations" },
-      { label: "Canoë", href: "/nos-locations" },
-      { label: "Planche à voile", href: "/nos-locations" },
+      { label: 'Bateaux électriques', href: '/nos-locations' },
+      { label: 'Paddle', href: '/nos-locations' },
+      { label: 'Pédalo', href: '/nos-locations' },
+      { label: 'Canoë & kayak', href: '/nos-locations' },
+      { label: 'Planche à voile', href: '/nos-locations' },
     ],
   },
   {
-    title: "Surf Center",
+    title: 'Découvrir',
     links: [
-      { label: "L'esprit Surf Center", href: "/esprit-surf-center" },
-      { label: "Restauration", href: "/restauration" },
-      { label: "Animations", href: "/animations" },
-      { label: "Groupes & Événements", href: "/groupes-evenements" },
-      { label: "Blog", href: "/blog" },
+      { label: "L'esprit Surf Center", href: '/esprit-surf-center' },
+      { label: 'Restauration', href: '/restauration' },
+      { label: 'Animations', href: '/animations' },
+      { label: 'Galerie', href: '/galerie' },
+      { label: 'Blog', href: '/blog' },
     ],
   },
   {
-    title: "Légal",
+    title: 'Pratique',
     links: [
-      { label: "Mentions légales", href: "/mentions-legales" },
-      { label: "Confidentialité", href: "/confidentialite" },
-      { label: "CGV", href: "/cgv" },
+      { label: 'Réserver', href: '/reservation', booking: true },
+      { label: 'Tarifs', href: '/tarifs', shop: true },
+      { label: 'Groupes & Événements', href: '/groupes-evenements' },
+      { label: 'Accès & Contact', href: '/acces-contact' },
     ],
   },
 ];
+
+const legalLinks = [
+  { label: 'Mentions légales', href: '/mentions-legales' },
+  { label: 'CGV', href: '/cgv' },
+  { label: 'Confidentialité', href: '/confidentialite' },
+];
 ---
 
-<footer class="footer" role="contentinfo">
-  <div class="footer__top">
-    <div class="container footer__inner">
-      <div class="footer__brand">
-        <a href="/" class="footer__logo" aria-label="Surf Center — Accueil">
-          <img
-            class="footer__logo-img"
-            src="/logo-surf-center2.png"
-            alt=""
-            width="120"
-            height="36"
-            loading="lazy"
-          />
-        </a>
-        <p class="footer__tagline">
-          Base nautique au lac de Sainte-Croix,<br />
-          Les Salles-sur-Verdon · Gorges du Verdon.
-        </p>
-        <address class="footer__address">
-          <p><a href="tel:+33492771450">04 92 77 14 50</a></p>
-          <p><a href="mailto:contact@surfcenter-verdon.fr">contact@surfcenter-verdon.fr</a></p>
-        </address>
-      </div>
-
-      {navColumns.map((col) => (
-        <nav class="footer__col" aria-label={col.title}>
-          <p class="footer__col-title">{col.title}</p>
-          <ul role="list">
-            {col.links.map((link) => (
-              <li>
-                {link.href === '/reservation'
-                  ? <button type="button" class="footer__modal-btn" data-booking>{link.label}</button>
-                  : link.href === '/tarifs'
-                    ? <button type="button" class="footer__modal-btn" data-shop>{link.label}</button>
-                    : <a href={link.href}>{link.label}</a>}
-              </li>
-            ))}
-          </ul>
-        </nav>
-      ))}
-    </div>
+<footer class="fh11" role="contentinfo">
+  <div class="fh11__particles" aria-hidden="true">
+    <span class="fh11__dot"></span><span class="fh11__dot"></span>
+    <span class="fh11__dot"></span><span class="fh11__dot"></span>
+    <span class="fh11__dot"></span><span class="fh11__dot"></span>
+    <span class="fh11__dot"></span><span class="fh11__dot"></span>
+    <span class="fh11__dot"></span><span class="fh11__dot"></span>
+    <span class="fh11__dot"></span><span class="fh11__dot"></span>
+    <span class="fh11__dot"></span><span class="fh11__dot"></span>
+    <span class="fh11__dot"></span><span class="fh11__dot"></span>
   </div>
 
-  <div class="footer__bottom">
-    <div class="container">
-      <p>© {currentYear} Surf Center · Les Salles-sur-Verdon</p>
+  <div class="fh11__inner">
+    <div class="fh11__brand">
+      <a href="/" class="fh11__logo" aria-label="Surf Center — Accueil">
+        <Image
+          class="fh11__logo-img"
+          src={logoImg}
+          alt=""
+          width={60}
+          height={56}
+          format="webp"
+          quality={85}
+        />
+        <span class="fh11__logo-glow" aria-hidden="true"></span>
+      </a>
+      <p class="fh11__tagline">
+        Base nautique au lac de Sainte-Croix,<br/>
+        Les Salles-sur-Verdon · Gorges du Verdon.
+      </p>
+      <address class="fh11__address">
+        <a href="tel:+33492771450">04 92 77 14 50</a>
+        <a href="mailto:contact@surfcenter-verdon.fr">contact@surfcenter-verdon.fr</a>
+      </address>
+      <div class="fh11__socials">
+        <a href="https://www.facebook.com/surfcenterverdon/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="fh11__social">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://www.instagram.com/surfcenter_verdon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="fh11__social">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@surfcenterverdon" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="fh11__social">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.96-1.96C18.88 4 12 4 12 4s-6.88 0-8.58.46a2.78 2.78 0 0 0-1.96 1.96A29.94 29.94 0 0 0 1 12a29.94 29.94 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.96 1.96C5.12 20 12 20 12 20s6.88 0 8.58-.46a2.78 2.78 0 0 0 1.96-1.96A29.94 29.94 0 0 0 23 12a29.94 29.94 0 0 0-.46-5.58Z" stroke="currentColor" stroke-width="1.5"/><path d="m9.75 15.02 5.75-3.27-5.75-3.27v6.54Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    {navCols.map((col) => (
+      <div class="fh11__col">
+        <h4 class="fh11__col-title">{col.title}</h4>
+        <ul role="list">
+          {col.links.map((link) => (
+            <li>
+              {link.booking ? (
+                <button type="button" class="fh11__col-link fh11__col-btn" data-booking>{link.label}</button>
+              ) : link.shop ? (
+                <button type="button" class="fh11__col-link fh11__col-btn" data-shop>{link.label}</button>
+              ) : (
+                <a href={link.href} class="fh11__col-link">{link.label}</a>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <div class="fh11__bottom">
+    <div class="fh11__bottom-inner">
+      <p class="fh11__copy">
+        © {currentYear} Surf Center — Les Salles-sur-Verdon
+      </p>
+      <div class="fh11__legal">
+        {legalLinks.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </div>
     </div>
   </div>
 </footer>
 
 <style>
-  .footer {
-    background: var(--c-dark);
-    color: rgb(255 255 255 / 0.6);
+  .fh11 {
+    position: relative;
+    background: linear-gradient(180deg, #050510 0%, #020208 100%);
+    color: rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+    padding-top: var(--s-section, 5rem);
+    font-family: var(--font-sans);
   }
 
-  .footer__top {
-    padding-block: var(--s-20);
+  .fh11__particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
   }
 
-  .footer__inner {
+  .fh11__dot {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: rgba(38, 207, 255, 0.25);
+    animation: fh11-rise 10s linear infinite;
+  }
+
+  .fh11__dot:nth-child(1) { left: 5%; bottom: 0; animation-delay: 0s; animation-duration: 12s; }
+  .fh11__dot:nth-child(2) { left: 12%; bottom: 0; animation-delay: -3s; animation-duration: 9s; width: 3px; height: 3px; }
+  .fh11__dot:nth-child(3) { left: 22%; bottom: 0; animation-delay: -6s; animation-duration: 14s; }
+  .fh11__dot:nth-child(4) { left: 30%; bottom: 0; animation-delay: -1s; animation-duration: 11s; background: rgba(247, 123, 70, 0.22); }
+  .fh11__dot:nth-child(5) { left: 40%; bottom: 0; animation-delay: -4s; animation-duration: 8s; width: 3px; height: 3px; }
+  .fh11__dot:nth-child(6) { left: 48%; bottom: 0; animation-delay: -7s; animation-duration: 13s; }
+  .fh11__dot:nth-child(7) { left: 55%; bottom: 0; animation-delay: -2s; animation-duration: 10s; }
+  .fh11__dot:nth-child(8) { left: 62%; bottom: 0; animation-delay: -5s; animation-duration: 15s; background: rgba(237, 102, 122, 0.20); }
+  .fh11__dot:nth-child(9) { left: 70%; bottom: 0; animation-delay: -8s; animation-duration: 9s; width: 3px; height: 3px; }
+  .fh11__dot:nth-child(10) { left: 76%; bottom: 0; animation-delay: -3.5s; animation-duration: 12s; }
+  .fh11__dot:nth-child(11) { left: 82%; bottom: 0; animation-delay: -6.5s; animation-duration: 11s; }
+  .fh11__dot:nth-child(12) { left: 88%; bottom: 0; animation-delay: -1.5s; animation-duration: 14s; background: rgba(247, 123, 70, 0.18); }
+  .fh11__dot:nth-child(13) { left: 93%; bottom: 0; animation-delay: -9s; animation-duration: 10s; }
+  .fh11__dot:nth-child(14) { left: 17%; bottom: 0; animation-delay: -4.5s; animation-duration: 16s; width: 1px; height: 1px; }
+  .fh11__dot:nth-child(15) { left: 58%; bottom: 0; animation-delay: -7.5s; animation-duration: 13s; width: 1px; height: 1px; }
+  .fh11__dot:nth-child(16) { left: 37%; bottom: 0; animation-delay: -10s; animation-duration: 11s; }
+
+  @keyframes fh11-rise {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 1; }
+    85% { opacity: 0.6; }
+    100% { transform: translateY(-60vh); opacity: 0; }
+  }
+
+  .fh11__inner {
+    position: relative;
+    z-index: 1;
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--s-10);
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: var(--s-8, 2rem);
+    max-width: var(--max-w, 1200px);
+    margin-inline: auto;
+    padding-inline: var(--s-6, 1.5rem);
+    padding-bottom: var(--s-16, 4rem);
   }
 
-  .footer__brand { max-width: 280px; }
-
-  .footer__logo {
-    display: flex;
-    align-items: center;
-    margin-bottom: var(--s-5);
+  @media (max-width: 900px) {
+    .fh11__inner {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
-  .footer__logo-img {
-    height: 24px;
-    width: auto;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    opacity: 0.6;
+  @media (max-width: 540px) {
+    .fh11__inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
   }
 
-  .footer__tagline {
-    font-size: 0.8rem;
-    line-height: 1.55;
-    color: rgb(255 255 255 / 0.35);
-    margin-bottom: var(--s-5);
-  }
-
-  .footer__address {
-    font-style: normal;
-    font-size: 0.78rem;
-    line-height: 1.8;
-    color: rgb(255 255 255 / 0.4);
-  }
-  .footer__address a:hover { color: var(--c-orange); }
-
-  .footer__col-title {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgb(255 255 255 / 0.3);
-    margin-bottom: var(--s-5);
-  }
-
-  .footer__col ul {
+  .fh11__brand {
     display: flex;
     flex-direction: column;
-    gap: var(--s-3);
+    gap: var(--s-5, 1.25rem);
   }
 
-  .footer__col a {
-    font-size: 0.8rem;
-    color: rgb(255 255 255 / 0.5);
-    transition: color var(--t-fast);
+  .fh11__logo {
+    position: relative;
+    display: inline-flex;
+    align-self: flex-start;
   }
-  .footer__col a:hover { color: #fff; }
 
-  .footer__modal-btn {
+  @media (max-width: 540px) {
+    .fh11__logo {
+      align-self: center;
+    }
+  }
+
+  .fh11__logo-img {
+    width: 60px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .fh11__logo-glow {
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(38, 207, 255, 0.2) 0%, transparent 70%);
+    z-index: 0;
+    animation: fh11-logo-breathe 4s ease-in-out infinite;
+  }
+
+  @keyframes fh11-logo-breathe {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+  }
+
+  .fh11__tagline {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .fh11__address {
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .fh11__address a {
+    color: inherit;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+
+  .fh11__address a:hover {
+    color: #26cfff;
+    text-shadow: 0 0 10px rgba(38, 207, 255, 0.3);
+  }
+
+  .fh11__socials {
+    display: flex;
+    gap: var(--s-3, 0.75rem);
+  }
+
+  @media (max-width: 540px) {
+    .fh11__socials {
+      justify-content: center;
+    }
+  }
+
+  .fh11__social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.4);
+    transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .fh11__social:hover {
+    color: #26cfff;
+    border-color: rgba(38, 207, 255, 0.4);
+    box-shadow: 0 0 12px rgba(38, 207, 255, 0.15);
+  }
+
+  .fh11__col-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #26cfff;
+    margin-bottom: var(--s-5, 1.25rem);
+    text-shadow: 0 0 8px rgba(38, 207, 255, 0.3);
+  }
+
+  .fh11__col ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3, 0.75rem);
+  }
+
+  .fh11__col-link {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
     background: none;
-    border: none;
+    border: 0;
     padding: 0;
-    font: inherit;
-    font-size: 0.8rem;
-    color: rgb(255 255 255 / 0.5);
+    font-family: inherit;
     cursor: pointer;
-    transition: color var(--t-fast);
-  }
-  .footer__modal-btn:hover { color: #fff; }
-
-  .footer__bottom {
-    padding-block: var(--s-6);
-    border-top: 1px solid rgb(255 255 255 / 0.08);
-    font-size: 0.68rem;
-    color: rgb(255 255 255 / 0.25);
-    letter-spacing: 0.04em;
+    text-align: left;
   }
 
-  @media (min-width: 768px) {
-    .footer__inner { grid-template-columns: 1.5fr repeat(3, 1fr); }
+  .fh11__col-link:hover {
+    color: #26cfff;
+    text-shadow: 0 0 10px rgba(38, 207, 255, 0.3);
+  }
+
+  .fh11__bottom {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid rgba(38, 207, 255, 0.06);
+  }
+
+  .fh11__bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--s-4, 1rem);
+    max-width: var(--max-w, 1200px);
+    margin-inline: auto;
+    padding: var(--s-6, 1.5rem);
+  }
+
+  .fh11__copy {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .fh11__legal {
+    display: flex;
+    gap: var(--s-5, 1.25rem);
+    flex-wrap: wrap;
+  }
+
+  .fh11__legal a {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.25);
+    transition: color 0.3s ease;
+  }
+
+  .fh11__legal a:hover {
+    color: rgba(38, 207, 255, 0.7);
+  }
+
+  @media (max-width: 540px) {
+    .fh11__bottom-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+    .fh11__address { align-items: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fh11__dot {
+      animation: none;
+      display: none;
+    }
+    .fh11__logo-glow {
+      animation: none;
+    }
   }
 </style>

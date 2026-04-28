@@ -13,6 +13,7 @@ import SlantLinks from '../components/v7/SlantLinks.astro';
 
 import imgEventPrives from '../assets/images/location-bateau-electriques-evjf-lac-sainte-croix.jpg';
 import imgEventPros from '../assets/images/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg';
+import heroImg from '../assets/images/hero-home.jpg';
 
 const title =
   'Surf Center — Base nautique au lac de Sainte-Croix | Gorges du Verdon';
@@ -287,7 +288,7 @@ const jsonLd = [
 ];
 ---
 
-<Layout title={title} description={description} jsonLd={jsonLd}>
+<Layout title={title} description={description} jsonLd={jsonLd} preloadHero={heroImg}>
   <Hero />
   <TrustBar />
   <ProductSlider />

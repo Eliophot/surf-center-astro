@@ -39,8 +39,8 @@ const { privateBlock, proBlock } = Astro.props;
       </div>
 
       <div class="epp__copy reveal reveal-d1">
-        <h2 class="section__eyebrow home-h2">{privateBlock.eyebrow}</h2>
-        <h3 class="epp__title">{privateBlock.title}</h3>
+        <h2 class="epp__eyebrow home-h2">{privateBlock.eyebrow}</h2>
+        <h3 class="home-h3 epp__title">{privateBlock.title}</h3>
         <p class="epp__desc">{privateBlock.text}</p>
 
         <ul class="epp__list" role="list">
@@ -57,17 +57,22 @@ const { privateBlock, proBlock } = Astro.props;
         </a>
 
         {privateBlock.secondaryImage && (
-          <div class="epp__secondary reveal reveal-d2">
-            <Image
-              src={privateBlock.secondaryImage.src}
-              alt={privateBlock.secondaryImage.alt}
-              width={900}
-              height={600}
-              loading="lazy"
-              decoding="async"
-              format="webp"
-              quality={75}
-            />
+          <div class="epp__secondary-wrap">
+            <div class="epp__secondary reveal reveal-d2">
+              <Image
+                src={privateBlock.secondaryImage.src}
+                alt={privateBlock.secondaryImage.alt}
+                width={900}
+                height={600}
+                loading="lazy"
+                decoding="async"
+                format="webp"
+                quality={75}
+              />
+            </div>
+            <span class="epp__ellipse" aria-hidden="true">
+              <img src="/figma/events-ellipse.svg" alt="" width="84" height="101" loading="lazy" decoding="async" />
+            </span>
           </div>
         )}
       </div>
@@ -75,8 +80,8 @@ const { privateBlock, proBlock } = Astro.props;
 
     <article class="epp__row epp__row--pro">
       <div class="epp__copy reveal">
-        <h2 class="section__eyebrow home-h2">{proBlock.eyebrow}</h2>
-        <h3 class="epp__title">{proBlock.title}</h3>
+        <h2 class="epp__eyebrow home-h2">{proBlock.eyebrow}</h2>
+        <h3 class="home-h3 epp__title">{proBlock.title}</h3>
         <p class="epp__desc">{proBlock.text}</p>
 
         <ul class="epp__list" role="list">
@@ -112,7 +117,12 @@ const { privateBlock, proBlock } = Astro.props;
 <style>
   .epp {
     padding: var(--s-section) 0;
-    background: var(--c-surface);
+    background: linear-gradient(
+      180deg,
+      rgba(39, 207, 255, 0.10) 0%,
+      rgba(147, 231, 255, 0.10) 23.077%,
+      rgba(255, 255, 255, 0.10) 61.058%
+    );
     overflow: hidden;
   }
 
@@ -129,7 +139,7 @@ const { privateBlock, proBlock } = Astro.props;
 
   .epp__media {
     overflow: hidden;
-    border-radius: var(--r-lg);
+    border-radius: 20px;
     box-shadow: var(--shadow-md);
     background: #0a0a0a;
   }
@@ -150,39 +160,43 @@ const { privateBlock, proBlock } = Astro.props;
   }
 
   .epp__copy {
-    max-width: 360px;
+    max-width: 380px;
+  }
+
+  .epp__eyebrow {
+    display: block;
+    text-align: left;
+    margin: 0 0 var(--s-5);
   }
 
   .epp__title {
-    margin-top: var(--s-5);
-    font-size: clamp(2.2rem, 5vw, 3.2rem);
-    font-weight: 800;
-    letter-spacing: -0.06em;
-    text-transform: uppercase;
-    line-height: 1.05;
+    text-align: left;
+    margin-top: 0;
   }
 
   .epp__desc {
     margin-top: var(--s-6);
-    font-size: 0.9rem;
-    line-height: 1.75;
-    color: var(--c-text-secondary);
+    color: #4A4A4A;
+    font-family: Montserrat, var(--font-sans);
+    font-size: 14.4px;
+    line-height: 25.2px;
     max-width: 42ch;
   }
 
   .epp__list {
     display: flex;
     flex-direction: column;
-    gap: var(--s-3);
+    gap: 12px;
     margin-top: var(--s-7);
   }
 
   .epp__list li {
     display: flex;
     gap: var(--s-3);
-    font-size: 0.82rem;
-    color: var(--c-text-secondary);
-    line-height: 1.5;
+    color: #4A4A4A;
+    font-family: Montserrat, var(--font-sans);
+    font-size: 13.1px;
+    line-height: 19.68px;
   }
 
   .epp__dash {
@@ -194,11 +208,17 @@ const { privateBlock, proBlock } = Astro.props;
     margin-top: var(--s-8);
   }
 
-  .epp__secondary {
+  .epp__secondary-wrap {
+    position: relative;
     margin-top: var(--s-10);
+  }
+
+  .epp__secondary {
     overflow: hidden;
-    border-radius: var(--r-lg);
+    border-radius: 20px;
     box-shadow: var(--shadow-md);
+    position: relative;
+    z-index: 1;
   }
 
   .epp__secondary :global(img) {
@@ -209,26 +229,62 @@ const { privateBlock, proBlock } = Astro.props;
     object-fit: cover;
   }
 
+  .epp__ellipse {
+    position: absolute;
+    width: 84px;
+    height: 101px;
+    top: -50px;
+    right: -64px;
+    z-index: 0;
+    display: none;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .epp__ellipse img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
   @media (min-width: 900px) {
+    .epp__ellipse { display: block; }
+
     .epp__row--private {
-      grid-template-columns: minmax(0, 564px) minmax(0, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: clamp(3rem, 6vw, 5rem);
-      align-items: start;
+      align-items: stretch;
     }
 
     .epp__row--private .epp__copy {
       padding-top: var(--s-2);
-      margin-left: auto;
+      max-width: none;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .epp__row--pro {
-      grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
       gap: clamp(3rem, 6vw, 5rem);
-      align-items: start;
+      align-items: stretch;
     }
 
     .epp__row--pro .epp__copy {
       padding-top: var(--s-2);
+    }
+
+    .epp__row--pro .epp__media {
+      height: 100%;
+      min-height: 100%;
+    }
+
+    .epp__row--pro .epp__media :global(img) {
+      aspect-ratio: auto;
+      height: 100%;
+      min-height: 100%;
     }
   }
 </style>

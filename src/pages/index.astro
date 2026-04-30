@@ -9,7 +9,9 @@ import OverlapGrid from '../components/v5/OverlapGrid.astro';
 import StickyScroll from '../components/v2/StickyScroll.astro';
 import AnimationFullBleed from '../components/v11/AnimationFullBleed.astro';
 import EventsProPrive from '../components/v11/EventsProPrive.astro';
-import UniverseRail from '../components/v11/UniverseRail.astro';
+import LocationsScroll from '../components/v11/LocationsScroll.astro';
+import CtaReservation from '../components/v11/CtaReservation.astro';
+import TrustBadges from '../components/v11/TrustBadges.astro';
 
 import imgEventPrives from '../assets/images/location-bateau-electriques-evjf-lac-sainte-croix.jpg';
 import imgEventPros from '../assets/images/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg';
@@ -304,7 +306,7 @@ const jsonLd = [
   <EventsProPrive
     privateBlock={{
       eyebrow: 'Évènements privés',
-      title: 'Un lieu, une énergie',
+      title: 'Créez vos souvenirs',
       text: 'EVJF, EVG, anniversaires, mariages ou retrouvailles entre amis : privatisez la base nautique pour vivre une journée hors du commun, les pieds dans le sable et au cœur du Verdon.',
       list: [
         'Privatisation totale ou partielle de la plage',
@@ -324,7 +326,7 @@ const jsonLd = [
     }}
     proBlock={{
       eyebrow: 'Événements PRO',
-      title: 'Events professionnels',
+      title: 'Renforcer les liens',
       text: 'Séminaires, team buildings, journées d’étude ou lancements produits : offrez à vos équipes et clients une parenthèse nature au bord du lac, à seulement 1h15 d’Aix-en-Provence.',
       list: [
         'Séminaires & journées team building',
@@ -340,6 +342,8 @@ const jsonLd = [
     }}
   />
 
-  <UniverseRail />
+  <LocationsScroll />
   <Instagram />
+  <CtaReservation />
+  <TrustBadges />
 </Layout>

@@ -1,0 +1,239 @@
+---
+import { locations } from '../../data/home';
+---
+
+<section id="activites" class="lscroll" aria-label="Nos locations">
+  <div class="lscroll__header container reveal">
+    <div class="lscroll__title-wrap">
+      <span class="lscroll__icon" aria-hidden="true">
+        <img src="/figma/locations-icon.svg" alt="" width="82" height="87" loading="lazy" decoding="async" />
+      </span>
+      <h3 class="home-h3 lscroll__title">Locations</h3>
+    </div>
+    <div class="lscroll__header-right">
+      <p class="lscroll__count">{String(locations.length).padStart(2, '0')} activités</p>
+      <div class="lscroll__nav">
+        <button class="lscroll__arrow" type="button" data-lscroll-prev aria-label="Précédent">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="lscroll__arrow" type="button" data-lscroll-next aria-label="Suivant">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="lscroll__track" data-lscroll-track>
+    {locations.map((loc) => (
+      <button type="button" class="lscroll__card" data-product-book data-tag={loc.tag} aria-label={`Réserver ${loc.title}`}>
+        <div class="lscroll__visual">
+          <img src={loc.image} alt={loc.alt} width="600" height="800" loading="lazy" decoding="async" />
+        </div>
+        <div class="lscroll__info">
+          <h4 class="lscroll__name">{loc.title}</h4>
+          <span class="lscroll__price">dès {loc.price}€</span>
+        </div>
+      </button>
+    ))}
+  </div>
+</section>
+
+<style>
+  .lscroll {
+    padding: var(--s-section) 0 var(--s-16);
+    background: var(--c-bg);
+    overflow: hidden;
+  }
+
+  .lscroll__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--s-6);
+    margin-bottom: var(--s-10);
+  }
+
+  .lscroll__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .lscroll__icon {
+    width: 60px;
+    height: 64px;
+    flex: 0 0 auto;
+    display: inline-flex;
+  }
+
+  .lscroll__icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .lscroll__title {
+    text-align: left;
+  }
+
+  .lscroll__header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+  }
+
+  .lscroll__count {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+  }
+
+  .lscroll__nav {
+    display: flex;
+    gap: var(--s-2);
+  }
+
+  .lscroll__arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-full);
+    border: 1.5px solid var(--c-border);
+    background: var(--c-bg);
+    color: var(--c-text-secondary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--t-fast) var(--ease);
+  }
+
+  .lscroll__arrow:hover {
+    border-color: var(--c-orange);
+    color: var(--c-orange);
+    background: var(--c-surface);
+  }
+
+  .lscroll__arrow:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .lscroll__track {
+    display: flex;
+    gap: var(--s-4);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 var(--s-6);
+    scroll-snap-type: x mandatory;
+  }
+
+  .lscroll__track::-webkit-scrollbar { display: none; }
+
+  .lscroll__card {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--c-text);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .lscroll__visual {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--r-md);
+    margin-bottom: var(--s-4);
+  }
+
+  .lscroll__visual img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .lscroll__card:hover .lscroll__visual img { transform: scale(1.04); }
+
+  .lscroll__info {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-4);
+    padding: 0 var(--s-1);
+  }
+
+  .lscroll__name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+
+  .lscroll__price {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--c-orange);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 599px) {
+    .lscroll__icon { width: 44px; height: 47px; }
+    .lscroll__header { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (min-width: 600px) { .lscroll__card { flex: 0 0 48%; } }
+  @media (min-width: 900px) { .lscroll__card { flex: 0 0 35%; } }
+  @media (min-width: 1200px) { .lscroll__card { flex: 0 0 28%; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lscroll__visual img { transition: none; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-lscroll-track]').forEach((track) => {
+    const section = track.closest('.lscroll');
+    const prevBtn = section?.querySelector('[data-lscroll-prev]') as HTMLButtonElement | null;
+    const nextBtn = section?.querySelector('[data-lscroll-next]') as HTMLButtonElement | null;
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const el = track as HTMLElement;
+
+    const getScrollAmount = () => {
+      const card = el.querySelector('.lscroll__card') as HTMLElement | null;
+      if (!card) return 300;
+      return card.offsetWidth + 16;
+    };
+
+    const updateArrows = () => {
+      prevBtn.disabled = el.scrollLeft <= 2;
+      nextBtn.disabled = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+    };
+
+    updateArrows();
+    el.addEventListener('scroll', updateArrows, { passive: true });
+
+    prevBtn.addEventListener('click', () => {
+      el.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      el.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+  });
+</script>

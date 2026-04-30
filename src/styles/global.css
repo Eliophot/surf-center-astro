@@ -128,6 +128,31 @@
   text-transform: uppercase;
 }
 
+.home-h3 {
+  color: #1A1A1A;
+  text-align: center;
+  font-family: Montserrat, var(--font-sans);
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 52.8px; /* 110% */
+  letter-spacing: -0.96px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+@media (max-width: 599px) {
+  .home-h3 {
+    font-size: clamp(2rem, 8vw, 2.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+}
+
+[data-theme='dark'] .home-h3 {
+  color: var(--c-text);
+}
+
 /* ===== Dark theme ===== */
 
 [data-theme='dark'] {

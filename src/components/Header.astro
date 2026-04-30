@@ -120,14 +120,24 @@ const navLinks = [
 
 <script>
   const header = document.querySelector('[data-header]') as HTMLElement;
-  const hero = document.querySelector('[data-hero]') as HTMLElement;
 
-  if (header && hero) {
-    const obs = new IntersectionObserver(
-      ([entry]) => header.classList.toggle('is-scrolled', !entry.isIntersecting),
-      { threshold: 0 },
+  if (header) {
+    let ticking = false;
+    const onScroll = () => {
+      ticking = false;
+      header.classList.toggle('is-scrolled', window.scrollY > 60);
+    };
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(onScroll);
+        }
+      },
+      { passive: true },
     );
-    obs.observe(hero);
+    onScroll();
   }
 
   const toggle = document.querySelector('[data-menu-toggle]') as HTMLButtonElement;
@@ -225,6 +235,7 @@ const navLinks = [
   .header__logo-img {
     height: 50px;
     width: auto;
+    aspect-ratio: 65 / 92;
     object-fit: contain;
   }
 
@@ -544,6 +555,12 @@ const navLinks = [
     .header__nav { display: block; }
     .header__cta { display: inline-flex; align-items: center; justify-content: center; }
     .header__burger { display: none; }
+
+    .header__logo-img {
+      width: 71px;
+      height: 100.506px;
+      aspect-ratio: 65 / 92;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

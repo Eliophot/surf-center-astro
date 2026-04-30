@@ -44,10 +44,24 @@ const links: { title: string; href: string; image: ImageMetadata; alt: string }[
 
 <section class="mscards" aria-labelledby="maillage-title">
   <div class="mscards__header container reveal">
-    <span class="mscards__icon" aria-hidden="true">
-      <img src="/figma/locations-icon.svg" alt="" width="82" height="87" loading="lazy" decoding="async" />
-    </span>
-    <h2 id="maillage-title" class="home-h3 mscards__title">Tout Surf Center</h2>
+    <div class="mscards__title-wrap">
+      <span class="mscards__icon" aria-hidden="true">
+        <img src="/figma/locations-icon.svg" alt="" width="82" height="87" loading="lazy" decoding="async" />
+      </span>
+      <h2 id="maillage-title" class="home-h3 mscards__title">Tout Surf Center</h2>
+    </div>
+    <div class="mscards__nav">
+      <button class="mscards__arrow" type="button" data-mscards-prev aria-label="Précédent">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="mscards__arrow" type="button" data-mscards-next aria-label="Suivant">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
   </div>
 
   <div class="mscards__track" data-mscards-track>
@@ -83,8 +97,16 @@ const links: { title: string; href: string; image: ImageMetadata; alt: string }[
   .mscards__header {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    justify-content: space-between;
+    gap: var(--s-6);
     margin-bottom: var(--s-10);
+  }
+
+  .mscards__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    min-width: 0;
   }
 
   .mscards__icon {
@@ -103,6 +125,37 @@ const links: { title: string; href: string; image: ImageMetadata; alt: string }[
   .mscards__title {
     margin: 0;
     text-align: left;
+  }
+
+  .mscards__nav {
+    display: flex;
+    gap: var(--s-2);
+    flex: 0 0 auto;
+  }
+
+  .mscards__arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-full);
+    border: 1.5px solid var(--c-border);
+    background: var(--c-bg);
+    color: var(--c-text-secondary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--t-fast) var(--ease);
+  }
+
+  .mscards__arrow:hover {
+    border-color: var(--c-orange);
+    color: var(--c-orange);
+    background: var(--c-surface);
+  }
+
+  .mscards__arrow:disabled {
+    opacity: 0.3;
+    pointer-events: none;
   }
 
   .mscards__track {
@@ -167,6 +220,10 @@ const links: { title: string; href: string; image: ImageMetadata; alt: string }[
     .mscards__header { flex-wrap: wrap; }
   }
 
+  @media (max-width: 480px) {
+    .mscards__nav { display: none; }
+  }
+
   @media (min-width: 600px) { .mscards__card { flex: 0 0 48%; } }
   @media (min-width: 900px) { .mscards__card { flex: 0 0 35%; } }
   @media (min-width: 1200px) { .mscards__card { flex: 0 0 28%; } }
@@ -175,3 +232,36 @@ const links: { title: string; href: string; image: ImageMetadata; alt: string }[
     .mscards__visual :global(img) { transition: none; }
   }
 </style>
+
+<script>
+  document.querySelectorAll('[data-mscards-track]').forEach((track) => {
+    const section = track.closest('.mscards');
+    const prevBtn = section?.querySelector('[data-mscards-prev]') as HTMLButtonElement | null;
+    const nextBtn = section?.querySelector('[data-mscards-next]') as HTMLButtonElement | null;
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const el = track as HTMLElement;
+
+    const getScrollAmount = () => {
+      const card = el.querySelector('.mscards__card') as HTMLElement | null;
+      if (!card) return 300;
+      return card.offsetWidth + 16;
+    };
+
+    const updateArrows = () => {
+      prevBtn.disabled = el.scrollLeft <= 2;
+      nextBtn.disabled = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+    };
+
+    updateArrows();
+    el.addEventListener('scroll', updateArrows, { passive: true });
+
+    prevBtn.addEventListener('click', () => {
+      el.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      el.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+  });
+</script>

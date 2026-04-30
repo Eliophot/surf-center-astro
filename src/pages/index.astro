@@ -1,15 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
+import HeroSales from '../components/v8/HeroSales.astro';
 import TrustBar from '../components/v8/TrustBar.astro';
 import ProductSlider from '../components/v8/ProductSlider.astro';
-import EventsDuality from '../components/sections/EventsDuality.astro';
 import Testimonials from '../components/Testimonials.astro';
 import Instagram from '../components/Instagram.astro';
-import StickyScroll from '../components/v2/StickyScroll.astro';
 import OverlapGrid from '../components/v5/OverlapGrid.astro';
-import MotionGrid from '../components/v7/MotionGrid.astro';
-import SlantLinks from '../components/v7/SlantLinks.astro';
+import StickyScroll from '../components/v2/StickyScroll.astro';
+import AnimationFullBleed from '../components/v11/AnimationFullBleed.astro';
+import EventsProPrive from '../components/v11/EventsProPrive.astro';
+import UniverseRail from '../components/v11/UniverseRail.astro';
 
 import imgEventPrives from '../assets/images/location-bateau-electriques-evjf-lac-sainte-croix.jpg';
 import imgEventPros from '../assets/images/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg';
@@ -289,7 +289,7 @@ const jsonLd = [
 ---
 
 <Layout title={title} description={description} jsonLd={jsonLd} preloadHero={heroImg}>
-  <Hero />
+  <HeroSales />
   <TrustBar />
   <ProductSlider />
 
@@ -299,45 +299,47 @@ const jsonLd = [
 
   <OverlapGrid />
 
-  <MotionGrid />
+  <AnimationFullBleed />
 
-  <EventsDuality
-    id="evenements"
+  <EventsProPrive
     privateBlock={{
-      eyebrow: 'Événements',
-      title: 'Events privés',
+      eyebrow: 'Évènements privés',
+      title: 'Un lieu, une énergie',
       text: 'EVJF, EVG, anniversaires, mariages ou retrouvailles entre amis : privatisez la base nautique pour vivre une journée hors du commun, les pieds dans le sable et au cœur du Verdon.',
       list: [
-        { text: 'Privatisation totale ou partielle de la plage' },
-        { text: 'Mix activités nautiques, snack & bar' },
-        { text: 'Concerts acoustiques & DJ sets sur demande' },
-        { text: 'Coordination clé en main par notre équipe' },
+        'Privatisation totale ou partielle de la plage',
+        'Mix activités nautiques, snack & bar',
+        'Concerts acoustiques & DJ sets sur demande',
+        'Coordination clé en main par notre équipe',
       ],
       cta: { label: 'Découvrir', href: '/groupes-evenements#prives' },
       image: {
         src: imgEventPrives,
-        alt: 'Événement privé EVJF en bateau électrique sur le lac de Sainte-Croix',
+        alt: 'Ambiance conviviale au Surf Center — lac de Sainte-Croix',
+      },
+      secondaryImage: {
+        src: imgEventPros,
+        alt: 'Paddle et bateaux électriques au bord du lac de Sainte-Croix',
       },
     }}
     proBlock={{
-      eyebrow: 'Événements',
+      eyebrow: 'Événements PRO',
       title: 'Events professionnels',
       text: 'Séminaires, team buildings, journées d’étude ou lancements produits : offrez à vos équipes et clients une parenthèse nature au bord du lac, à seulement 1h15 d’Aix-en-Provence.',
       list: [
-        { text: 'Séminaires & journées team building' },
-        { text: 'Salles modulables et terrasse vue lac' },
-        { text: 'Restauration sur mesure (snack, traiteur, BBQ)' },
-        { text: 'Activités nautiques encadrées par nos moniteurs' },
+        'Séminaires & journées team building',
+        'Salles modulables et terrasse vue lac',
+        'Restauration sur mesure (snack, traiteur, BBQ)',
+        'Activités nautiques encadrées par nos moniteurs',
       ],
       cta: { label: 'Découvrir', href: '/groupes-evenements#pro' },
       image: {
         src: imgEventPros,
-        alt: 'Groupe en bateau électrique au cœur des Gorges du Verdon, ambiance séminaire d’entreprise',
+        alt: 'Événements professionnels au Surf Center — lac de Sainte-Croix',
       },
     }}
-    surface
   />
 
-  <SlantLinks />
+  <UniverseRail />
   <Instagram />
 </Layout>

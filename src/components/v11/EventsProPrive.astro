@@ -1,0 +1,235 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Block {
+  eyebrow: string;
+  title: string;
+  text: string;
+  list: string[];
+  cta: { label: string; href: string };
+  image: { src: ImageMetadata; alt: string };
+  secondaryImage?: { src: ImageMetadata; alt: string };
+}
+
+interface Props {
+  privateBlock: Block;
+  proBlock: Block;
+}
+
+const { privateBlock, proBlock } = Astro.props;
+---
+
+<section class="epp" aria-labelledby="epp-title">
+  <p id="epp-title" class="sr-only">Événements privés et professionnels</p>
+
+  <div class="container">
+    <article class="epp__row epp__row--private">
+      <div class="epp__media reveal">
+        <Image
+          src={privateBlock.image.src}
+          alt={privateBlock.image.alt}
+          width={900}
+          height={1400}
+          loading="lazy"
+          decoding="async"
+          format="webp"
+          quality={75}
+        />
+      </div>
+
+      <div class="epp__copy reveal reveal-d1">
+        <h2 class="section__eyebrow home-h2">{privateBlock.eyebrow}</h2>
+        <h3 class="epp__title">{privateBlock.title}</h3>
+        <p class="epp__desc">{privateBlock.text}</p>
+
+        <ul class="epp__list" role="list">
+          {privateBlock.list.map((t) => (
+            <li><span class="epp__dash" aria-hidden="true">—</span><span>{t}</span></li>
+          ))}
+        </ul>
+
+        <a href={privateBlock.cta.href} class="btn btn--primary epp__cta">
+          <span class="btn-flip__inner">
+            <span class="btn-flip__front">{privateBlock.cta.label}</span>
+            <span class="btn-flip__back">{privateBlock.cta.label}</span>
+          </span>
+        </a>
+
+        {privateBlock.secondaryImage && (
+          <div class="epp__secondary reveal reveal-d2">
+            <Image
+              src={privateBlock.secondaryImage.src}
+              alt={privateBlock.secondaryImage.alt}
+              width={900}
+              height={600}
+              loading="lazy"
+              decoding="async"
+              format="webp"
+              quality={75}
+            />
+          </div>
+        )}
+      </div>
+    </article>
+
+    <article class="epp__row epp__row--pro">
+      <div class="epp__copy reveal">
+        <h2 class="section__eyebrow home-h2">{proBlock.eyebrow}</h2>
+        <h3 class="epp__title">{proBlock.title}</h3>
+        <p class="epp__desc">{proBlock.text}</p>
+
+        <ul class="epp__list" role="list">
+          {proBlock.list.map((t) => (
+            <li><span class="epp__dash" aria-hidden="true">—</span><span>{t}</span></li>
+          ))}
+        </ul>
+
+        <a href={proBlock.cta.href} class="btn btn--primary epp__cta">
+          <span class="btn-flip__inner">
+            <span class="btn-flip__front">{proBlock.cta.label}</span>
+            <span class="btn-flip__back">{proBlock.cta.label}</span>
+          </span>
+        </a>
+      </div>
+
+      <div class="epp__media reveal reveal-d1">
+        <Image
+          src={proBlock.image.src}
+          alt={proBlock.image.alt}
+          width={1200}
+          height={760}
+          loading="lazy"
+          decoding="async"
+          format="webp"
+          quality={75}
+        />
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .epp {
+    padding: var(--s-section) 0;
+    background: var(--c-surface);
+    overflow: hidden;
+  }
+
+  .epp__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+    align-items: start;
+  }
+
+  .epp__row + .epp__row {
+    margin-top: clamp(3.5rem, 9vw, 7rem);
+  }
+
+  .epp__media {
+    overflow: hidden;
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-md);
+    background: #0a0a0a;
+  }
+
+  .epp__media :global(img) {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .epp__row--private .epp__media :global(img) {
+    aspect-ratio: 564 / 958;
+  }
+
+  .epp__row--pro .epp__media :global(img) {
+    aspect-ratio: 1137 / 619;
+  }
+
+  .epp__copy {
+    max-width: 360px;
+  }
+
+  .epp__title {
+    margin-top: var(--s-5);
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.06em;
+    text-transform: uppercase;
+    line-height: 1.05;
+  }
+
+  .epp__desc {
+    margin-top: var(--s-6);
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--c-text-secondary);
+    max-width: 42ch;
+  }
+
+  .epp__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-top: var(--s-7);
+  }
+
+  .epp__list li {
+    display: flex;
+    gap: var(--s-3);
+    font-size: 0.82rem;
+    color: var(--c-text-secondary);
+    line-height: 1.5;
+  }
+
+  .epp__dash {
+    color: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .epp__cta {
+    margin-top: var(--s-8);
+  }
+
+  .epp__secondary {
+    margin-top: var(--s-10);
+    overflow: hidden;
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  .epp__secondary :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 564 / 376;
+    object-fit: cover;
+  }
+
+  @media (min-width: 900px) {
+    .epp__row--private {
+      grid-template-columns: minmax(0, 564px) minmax(0, 1fr);
+      gap: clamp(3rem, 6vw, 5rem);
+      align-items: start;
+    }
+
+    .epp__row--private .epp__copy {
+      padding-top: var(--s-2);
+      margin-left: auto;
+    }
+
+    .epp__row--pro {
+      grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+      gap: clamp(3rem, 6vw, 5rem);
+      align-items: start;
+    }
+
+    .epp__row--pro .epp__copy {
+      padding-top: var(--s-2);
+    }
+  }
+</style>
+

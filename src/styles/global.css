@@ -86,7 +86,8 @@
   /* — Layout — */
   --max-w: 1200px;
   --max-w-narrow: 720px;
-  --header-h: 5rem;
+  /* Figma HOME header height ~115px */
+  --header-h: 7.2rem;
 
   /* — Motion — */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -109,6 +110,22 @@
   --shadow-glow: 0 4px 30px rgb(247 123 70 / 0.3);
 
   color-scheme: light dark;
+}
+
+/* =============================================
+   HOME — Small orange H2 style (Figma)
+   ============================================= */
+
+.home-h2 {
+  color: #F77B46;
+  text-align: center;
+  font-family: Montserrat, var(--font-sans);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18.5px; /* 115.625% */
+  letter-spacing: 2.176px;
+  text-transform: uppercase;
 }
 
 /* ===== Dark theme ===== */

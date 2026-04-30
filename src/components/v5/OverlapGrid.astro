@@ -1,17 +1,21 @@
 <section class="ovlap" aria-labelledby="v5-resto-title">
+  <div class="ovlap__deco" aria-hidden="true">
+    <img src="/figma/resto-deco.svg" alt="" width="440" height="484" loading="lazy" decoding="async" />
+  </div>
   <div class="container">
     <div class="ovlap__layout">
       <div class="ovlap__img-block reveal">
         <img class="ovlap__img" src="/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg" alt="Vue aérienne du snack Surf Center" width="800" height="600" loading="lazy" decoding="async" />
-        <div class="ovlap__float">
-          <span class="ovlap__float-label">Ouvert en saison</span>
-          <span class="ovlap__float-sub">11h — 18h30</span>
+        <div class="ovlap__img-icon" aria-hidden="true">
+          <img src="/figma/resto-icon.svg" alt="" width="91" height="91" loading="lazy" decoding="async" />
         </div>
       </div>
 
       <div class="ovlap__copy reveal reveal-d1">
-        <span class="ovlap__eyebrow">Restauration</span>
-        <h2 id="v5-resto-title" class="ovlap__title">Pizzas,<br/>snack &<br/>vue sur<br/>le lac</h2>
+        <h2 id="v5-resto-title" class="ovlap__eyebrow home-h2">
+          Restauration
+        </h2>
+        <h3 class="ovlap__title">Pizzas,<br/>snack &<br/>vue sur le lac</h3>
         <p class="ovlap__text">Pause gourmande à notre snack-pizzeria. Pizzas artisanales au feu de bois, salades fraîches, glaces — vue directe sur le lac.</p>
         <div class="ovlap__tags">
           <span>Feu de bois</span>
@@ -28,18 +32,61 @@
 <style>
   .ovlap {
     padding: var(--s-section) 0;
-    background: var(--c-surface);
+    position: relative;
+    background: linear-gradient(
+      0deg,
+      rgba(237, 103, 118, 0.10) 0%,
+      rgba(255, 255, 255, 0.10) 100%
+    );
     overflow: hidden;
+  }
+
+  .ovlap__deco {
+    position: absolute;
+    left: max(-14px, calc((100vw - var(--w-container)) / 2 - 10px));
+    bottom: -40px;
+    width: 440px;
+    height: 484px;
+    opacity: 0.4;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  .ovlap__deco img {
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
   .ovlap__layout {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--s-10);
+    position: relative;
+    z-index: 1;
   }
 
   .ovlap__img-block {
     position: relative;
+  }
+
+  .ovlap__img-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(42%, -42%);
+    width: 91px;
+    height: 91px;
+    pointer-events: none;
+    user-select: none;
+    display: none;
+  }
+
+  .ovlap__img-icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
   .ovlap__img {
@@ -48,52 +95,32 @@
     display: block;
     aspect-ratio: 4 / 3;
     object-fit: cover;
-    border-radius: var(--r-md);
-  }
-
-  .ovlap__float {
-    position: absolute;
-    bottom: var(--s-4);
-    right: var(--s-4);
-    background: var(--c-dark);
-    color: #fff;
-    padding: var(--s-3) var(--s-5);
-    border-radius: var(--r-sm);
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .ovlap__float-label {
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .ovlap__float-sub {
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: rgb(255 255 255 / 0.5);
+    border-radius: 14px;
   }
 
   .ovlap__eyebrow {
     display: block;
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--c-orange);
     margin-bottom: var(--s-5);
   }
 
   .ovlap__title {
-    font-size: clamp(2.5rem, 7vw, 5rem);
-    font-weight: bold;
-    letter-spacing: -0.04em;
-    line-height: 0.95;
+    color: #1A1A1A;
+    font-family: Montserrat, var(--font-sans);
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 76px; /* 135.714% */
+    letter-spacing: -3.2px;
     text-transform: uppercase;
     margin-bottom: var(--s-6);
+  }
+
+  @media (max-width: 599px) {
+    .ovlap__title {
+      font-size: clamp(2.25rem, 9vw, 3rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
   }
 
   .ovlap__text {
@@ -117,7 +144,7 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--c-text-muted);
-    background: var(--c-bg);
+    background: #fff;
     padding: 5px 14px;
     border-radius: var(--r-full);
   }
@@ -129,7 +156,7 @@
       align-items: center;
     }
 
-
+    .ovlap__img-icon { display: inline-flex; }
 
     .ovlap__copy {
       padding-left: var(--s-10);

@@ -18,18 +18,16 @@ import heroImg from '../../assets/images/hero-home.jpg';
   />
   <div class="hero__overlay" aria-hidden="true"></div>
 
-  <div class="hero__badge" aria-label="Saison 2026 ouverte">
-    <span class="hero__badge-dot" aria-hidden="true"></span>
-    Saison 2026 — Réservations ouvertes
+  <div class="hero__badge-wrap" aria-label="Saison 2026 ouverte">
+    <div class="hero__badge">
+      <span class="hero__badge-dot" aria-hidden="true"></span>
+      Saison 2026 — Réservations ouvertes
+    </div>
   </div>
 
   <div class="hero__content">
-    <p class="hero__eyebrow">
-      <span class="hero__dot" aria-hidden="true"></span>
-      Lac de Sainte-Croix · Gorges du Verdon
-    </p>
     <h1 class="hero__title">Surf<br/>Center</h1>
-    <p class="hero__baseline">Votre journée parfaite au lac commence ici</p>
+    <p class="hero__baseline">Location bateaux & activités nautiques lac de saint-Croix Gorges du verdon</p>
 
     <div class="hero__proof">
       <div class="hero__proof-item">
@@ -98,14 +96,20 @@ import heroImg from '../../assets/images/hero-home.jpg';
         rgb(0 0 0 / 0.7) 100%);
   }
 
-  .hero__badge {
+  /* Wrapper: keeps translateX(-50%) intact even with animations */
+  .hero__badge-wrap {
     position: absolute;
     top: calc(var(--header-h) + var(--s-4));
     left: 50%;
     transform: translateX(-50%);
     z-index: 3;
+  }
+
+  /* Actual badge: can animate without breaking centering */
+  .hero__badge {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: var(--s-2);
     padding: 0.45rem 1rem;
     border-radius: var(--r-full);
@@ -119,6 +123,8 @@ import heroImg from '../../assets/images/hero-home.jpg';
     text-transform: uppercase;
     color: var(--c-orange-light);
     white-space: nowrap;
+    line-height: 1;
+    text-align: center;
     animation: fade-up 700ms var(--ease-smooth) 100ms both;
   }
 
@@ -179,12 +185,17 @@ import heroImg from '../../assets/images/hero-home.jpg';
   }
 
   .hero__baseline {
-    font-size: clamp(0.9rem, 1.8vw, 1.15rem);
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    color: rgb(255 255 255 / 0.8) !important;
+    color: #F77B46 !important;
+    text-align: center;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.50);
+    font-family: Montserrat, var(--font-sans);
+    font-size: 16.8px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28.56px; /* 170% */
+    letter-spacing: 3.024px;
+    text-transform: uppercase;
     margin-bottom: var(--s-8);
-    text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
     animation: fade-up 900ms var(--ease-smooth) 550ms both;
   }
 

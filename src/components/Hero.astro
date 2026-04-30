@@ -19,24 +19,39 @@ import heroImg from '../assets/images/hero-home.jpg';
   <div class="hero__overlay" aria-hidden="true"></div>
 
   <div class="hero__content">
+    <div class="hero__season reveal">
+      <span class="hero__season-dot" aria-hidden="true"></span>
+      <span>Saison 2026 — Réservations ouvertes</span>
+    </div>
+
     <p class="hero__eyebrow">
-      <span class="hero__dot" aria-hidden="true"></span>
       Lac de Sainte-Croix · Gorges du Verdon
     </p>
     <h1 class="hero__title">Surf<br/>Center</h1>
     <p class="hero__baseline">Location bateaux & activités nautiques</p>
 
     <div class="hero__actions">
-      <button type="button" class="btn btn--primary btn--lg" data-booking><span class="btn-flip__inner"><span class="btn-flip__front">Réserver</span><span class="btn-flip__back">Réserver</span></span></button>
+      <button type="button" class="btn btn--primary btn--lg" data-booking><span class="btn-flip__inner"><span class="btn-flip__front">Réserver maintenant</span><span class="btn-flip__back">Réserver maintenant</span></span></button>
       <a href="#activites" class="btn btn--ghost btn--lg">Découvrir</a>
     </div>
+
+    <div class="hero__trust reveal">
+      <span class="hero__stars" aria-label="4.8 étoiles sur 5">
+        <span aria-hidden="true">★★★★★</span>
+      </span>
+      <span class="hero__trust-text">4.8/5 — 320+ avis</span>
+      <span class="hero__sep" aria-hidden="true">·</span>
+      <span class="hero__trust-text">N°1 base nautique Sainte-Croix</span>
+    </div>
+
+    <p class="hero__note reveal">Dès 10€/h · Aucun permis requis · Annulation gratuite</p>
   </div>
 
   <div class="hero__bottom">
     <div class="hero__scroll" aria-hidden="true">
       <span class="hero__scroll-line"></span>
     </div>
-    <p class="hero__location">Les Salles-sur-Verdon, Provence</p>
+    <p class="hero__location">Base nautique en Provence</p>
   </div>
 </section>
 
@@ -89,26 +104,43 @@ import heroImg from '../assets/images/hero-home.jpg';
     margin-top: calc(var(--header-h) * -0.5);
   }
 
-  .hero__eyebrow {
+  .hero__season {
     display: inline-flex;
     align-items: center;
     gap: var(--s-3);
+    padding: 0.55rem 1.1rem;
+    border-radius: var(--r-full);
+    background: rgb(0 0 0 / 0.25);
+    border: 1px solid rgb(255 255 255 / 0.18);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: rgb(255 255 255 / 0.85);
     font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgb(255 255 255 / 0.85) !important;
-    margin-bottom: var(--s-8);
-    text-shadow: 0 1px 8px rgb(0 0 0 / 0.5);
-    animation: fade-up 900ms var(--ease-smooth) 200ms both;
+    letter-spacing: 0.02em;
+    margin-inline: auto;
+    margin-bottom: var(--s-6);
   }
 
-  .hero__dot {
+  .hero__season-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
     background: var(--c-orange);
     flex-shrink: 0;
+  }
+
+  .hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.85) !important;
+    margin-bottom: var(--s-6);
+    text-shadow: 0 1px 8px rgb(0 0 0 / 0.5);
+    animation: fade-up 900ms var(--ease-smooth) 200ms both;
   }
 
   .hero__title {
@@ -128,7 +160,7 @@ import heroImg from '../assets/images/hero-home.jpg';
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    color: var(--c-orange) !important;
+    color: #fff !important;
     margin-bottom: var(--s-12);
     text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
     animation: fade-up 900ms var(--ease-smooth) 600ms both;
@@ -140,6 +172,38 @@ import heroImg from '../assets/images/hero-home.jpg';
     justify-content: center;
     flex-wrap: wrap;
     animation: fade-up 900ms var(--ease-smooth) 800ms both;
+  }
+
+  .hero__trust {
+    margin-top: var(--s-6);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+    color: rgb(255 255 255 / 0.8);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .hero__stars {
+    color: rgb(255 255 255 / 0.85);
+    letter-spacing: 0.12em;
+  }
+
+  .hero__sep {
+    color: rgb(255 255 255 / 0.35);
+  }
+
+  .hero__note {
+    margin-top: var(--s-3);
+    color: rgb(255 255 255 / 0.55);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
   .hero__bottom {

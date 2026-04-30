@@ -21,8 +21,8 @@ const navLinks = [
         class="header__logo-img header__logo-img--light"
         src={logoImg}
         alt=""
-        width={60}
-        height={56}
+        width={71}
+        height={100}
         loading="eager"
         format="webp"
         quality={85}
@@ -31,8 +31,8 @@ const navLinks = [
         class="header__logo-img header__logo-img--dark"
         src={logoImg}
         alt=""
-        width={60}
-        height={56}
+        width={71}
+        height={100}
         loading="eager"
         format="webp"
         quality={85}
@@ -43,9 +43,7 @@ const navLinks = [
       <ul role="list">
         {navLinks.map((link) => (
           <li>
-            {link.modal
-              ? <button type="button" class="header__nav-btn link-anim" data-shop>{link.label}</button>
-              : <a href={link.href} class="link-anim">{link.label}</a>}
+            <a href={link.href} class="link-anim">{link.label}</a>
           </li>
         ))}
       </ul>
@@ -67,7 +65,9 @@ const navLinks = [
         </svg>
       </button>
 
-      <button type="button" class="btn btn--primary btn--sm header__cta" data-booking><span class="btn-flip__inner"><span class="btn-flip__front">Réserver</span><span class="btn-flip__back">Réserver</span></span></button>
+      <button type="button" class="header__cta" data-booking>
+        Réserver maintenant
+      </button>
 
       <button
         class="header__burger"
@@ -90,19 +90,12 @@ const navLinks = [
       <ul role="list">
         {navLinks.map((link, i) => (
           <li class="mmenu__item" style={`--delay: ${i * 60}ms`}>
-            {link.modal
-              ? <button type="button" class="mmenu__link" data-shop>
-                  <span class="mmenu__link-label">{link.label}</span>
-                  <svg class="mmenu__link-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                    <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </button>
-              : <a href={link.href} class="mmenu__link">
-                  <span class="mmenu__link-label">{link.label}</span>
-                  <svg class="mmenu__link-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                    <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </a>}
+            <a href={link.href} class="mmenu__link">
+              <span class="mmenu__link-label">{link.label}</span>
+              <svg class="mmenu__link-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
           </li>
         ))}
       </ul>
@@ -230,7 +223,7 @@ const navLinks = [
   }
 
   .header__logo-img {
-    height: 28px;
+    height: 50px;
     width: auto;
     object-fit: contain;
   }
@@ -284,7 +277,7 @@ const navLinks = [
   .header__end {
     display: flex;
     align-items: center;
-    gap: var(--s-3);
+    gap: 18px;
     z-index: 101;
   }
 
@@ -292,8 +285,8 @@ const navLinks = [
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
+    width: 18px;
+    height: 18px;
     background: none;
     border: none;
     cursor: pointer;
@@ -309,6 +302,39 @@ const navLinks = [
   .header__theme-icon--moon { display: block; }
   :global([data-theme='dark']) .header__theme-icon--sun { display: block; }
   :global([data-theme='dark']) .header__theme-icon--moon { display: none; }
+
+  .header__cta {
+    display: none;
+    height: 38px;
+    padding: 0 1.55rem;
+    border-radius: var(--r-full);
+    background: var(--c-orange);
+    border: 2px solid var(--c-orange);
+    color: #fff;
+    font-size: 0.7rem; /* ~11.2px */
+    font-weight: 700;
+    letter-spacing: 0.1em; /* close to 1.12px at 11px */
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      transform var(--t-fast) var(--ease),
+      background var(--t-fast),
+      box-shadow var(--t-fast);
+    box-shadow: var(--shadow-glow);
+    white-space: nowrap;
+  }
+
+  .header__cta:hover {
+    background: var(--c-orange-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 40px rgb(247 123 70 / 0.35);
+  }
+
+  .header__cta:active { transform: scale(0.98); }
+
+  .header.is-scrolled .header__cta {
+    box-shadow: none;
+  }
 
   .header__burger {
     display: flex;
@@ -514,11 +540,9 @@ const navLinks = [
     color: var(--c-text-muted);
   }
 
-  .header__cta { display: none; }
-
   @media (min-width: 960px) {
     .header__nav { display: block; }
-    .header__cta { display: inline-flex; }
+    .header__cta { display: inline-flex; align-items: center; justify-content: center; }
     .header__burger { display: none; }
   }
 

@@ -1,0 +1,148 @@
+---
+import { Image } from 'astro:assets';
+import imgBg from '../../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
+---
+
+<section class="afb" aria-labelledby="afb-title">
+  <div class="afb__bg" aria-hidden="true">
+    <Image
+      class="afb__img"
+      src={imgBg}
+      alt=""
+      widths={[960, 1440, 1920]}
+      sizes="100vw"
+      loading="lazy"
+      decoding="async"
+      format="webp"
+      quality={75}
+    />
+    <div class="afb__grad"></div>
+  </div>
+
+  <div class="container afb__inner">
+    <div class="afb__panel reveal">
+      <h2 id="afb-title" class="afb__eyebrow home-h2">Animations</h2>
+      <h3 class="afb__title">Animations<br/>au Surf Center</h3>
+      <p class="afb__text">
+        Yoga au lever du soleil, cours de paddle, initiations au windsurf — chaque
+        journée au Surf Center est une invitation à bouger, respirer, s'amuser.
+      </p>
+      <a href="/animations" class="afb__link">En savoir plus</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .afb {
+    position: relative;
+    min-height: 720px;
+    height: 960px;
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+
+  .afb__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .afb__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .afb__grad {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(1000px 700px at 80% 40%, rgb(0 0 0 / 0.15), transparent 70%),
+      linear-gradient(90deg, rgb(0 0 0 / 0.25), rgb(0 0 0 / 0.65));
+  }
+
+  .afb__inner {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-block: var(--s-12);
+  }
+
+  .afb__panel {
+    width: min(440px, 100%);
+    background: rgb(255 255 255 / 0.06);
+    border: 1px solid rgb(255 255 255 / 0.12);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    border-radius: 14px;
+    padding: 3rem 2.5rem;
+    color: #fff;
+    box-shadow: 0 30px 80px rgb(0 0 0 / 0.35);
+  }
+
+  .afb__eyebrow {
+    display: inline-block;
+    margin-bottom: var(--s-5);
+  }
+
+  .afb__title {
+    font-size: clamp(2rem, 4vw, 3.1rem);
+    font-weight: 800;
+    letter-spacing: -0.06em;
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin: 0 0 var(--s-6);
+  }
+
+  .afb__text {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: rgb(255 255 255 / 0.7);
+    margin: 0 0 var(--s-8);
+  }
+
+  .afb__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 1.4rem;
+    border-radius: var(--r-full);
+    border: 1px solid rgb(255 255 255 / 0.22);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: transform var(--t-fast) var(--ease), border-color var(--t-fast), background var(--t-fast);
+  }
+
+  .afb__link:hover {
+    background: rgb(255 255 255 / 0.08);
+    border-color: rgb(255 255 255 / 0.35);
+    transform: translateY(-1px);
+    color: #fff;
+  }
+
+  .afb__link:active { transform: scale(0.98); }
+
+  @media (max-width: 700px) {
+    .afb {
+      height: auto;
+      min-height: 720px;
+    }
+    .afb__inner {
+      justify-content: center;
+    }
+    .afb__panel {
+      padding: 2.25rem 1.6rem;
+    }
+  }
+</style>
+

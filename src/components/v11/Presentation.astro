@@ -1,0 +1,160 @@
+---
+import { Image } from 'astro:assets';
+import imgYoga from '../../assets/images/sarah-cours-yoga-surfcenter-lac-sainte-croix.jpg';
+import imgPaddle from '../../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
+import imgWindsurf from '../../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+---
+
+<section class="pres" aria-labelledby="pres-title">
+  <div class="container pres__grid">
+    <div class="pres__text reveal">
+      <span class="section__eyebrow">Présentation</span>
+      <h2 id="pres-title" class="pres__title">Des<br/>moments<br/>à partager</h2>
+      <p class="pres__desc">
+        Depuis plus de dix ans, Surf Center est bien plus qu'une base nautique. C'est
+        un rendez-vous au bord du lac de Sainte-Croix pour celles et ceux qui aiment
+        l'eau, le soleil et les grands espaces.
+      </p>
+
+      <ul class="pres__list" role="list">
+        <li>Un lac d'exception, des paysages préservés</li>
+        <li>Du bon matériel, un bon accueil</li>
+        <li>Chacun trouve ici sa façon de profiter</li>
+        <li>Bateaux récents, équipe passionnée</li>
+      </ul>
+
+      <a href="/esprit-surf-center" class="btn btn--primary">Découvrir</a>
+    </div>
+
+    <div class="pres__media">
+      <span class="pres__orb" aria-hidden="true"></span>
+
+      <div class="pres__img reveal">
+        <Image src={imgYoga} alt="Cours de yoga au bord du lac de Sainte-Croix" width={740} height={924} loading="lazy" decoding="async" format="webp" quality={75} />
+      </div>
+      <div class="pres__img reveal reveal-d1">
+        <Image src={imgPaddle} alt="Stand-up paddle sur le lac de Sainte-Croix" width={740} height={924} loading="lazy" decoding="async" format="webp" quality={75} />
+      </div>
+      <div class="pres__img reveal reveal-d2">
+        <Image src={imgWindsurf} alt="Planche à voile et windsurf" width={740} height={924} loading="lazy" decoding="async" format="webp" quality={75} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pres {
+    padding: var(--s-section) 0;
+    background: var(--c-bg);
+    overflow: hidden;
+  }
+
+  .pres__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: start;
+  }
+
+  .pres__text {
+    max-width: 340px;
+  }
+
+  .pres__title {
+    margin-top: var(--s-5);
+    font-size: clamp(2.6rem, 6vw, 3.6rem);
+    font-weight: 800;
+    letter-spacing: -0.06em;
+    text-transform: uppercase;
+    line-height: 0.95;
+  }
+
+  .pres__desc {
+    margin-top: var(--s-6);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--c-text-secondary);
+    max-width: 36ch;
+  }
+
+  .pres__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin: var(--s-8) 0 var(--s-8);
+    padding: 0;
+  }
+
+  .pres__list li {
+    list-style: none;
+    font-size: 0.82rem;
+    color: var(--c-text-secondary);
+    padding-left: var(--s-5);
+    position: relative;
+  }
+
+  .pres__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 2px;
+    background: var(--c-orange);
+    border-radius: 1px;
+  }
+
+  .pres__media {
+    position: relative;
+    display: grid;
+    gap: var(--s-6);
+  }
+
+  .pres__orb {
+    position: absolute;
+    left: -18px;
+    top: calc(33% - 8px);
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.5);
+    border: 1px solid rgb(255 255 255 / 0.65);
+    box-shadow: 0 12px 40px rgb(0 0 0 / 0.12);
+    display: none;
+  }
+
+  .pres__img {
+    overflow: hidden;
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-md);
+  }
+
+  .pres__img :global(img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (min-width: 900px) {
+    .pres__grid {
+      grid-template-columns: 0.38fr 1fr;
+      gap: clamp(3rem, 7vw, 6rem);
+      align-items: start;
+    }
+
+    .pres__text {
+      position: sticky;
+      top: calc(var(--header-h) + var(--s-10));
+    }
+
+    .pres__media {
+      max-width: 740px;
+      margin-left: auto;
+    }
+
+    .pres__orb { display: block; }
+  }
+</style>
+

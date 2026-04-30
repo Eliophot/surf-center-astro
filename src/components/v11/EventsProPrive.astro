@@ -183,6 +183,8 @@ const { privateBlock, proBlock } = Astro.props;
     max-width: 42ch;
   }
 
+  :global([data-theme='dark']) .epp__desc { color: var(--c-text-secondary); }
+
   .epp__list {
     display: flex;
     flex-direction: column;
@@ -198,6 +200,8 @@ const { privateBlock, proBlock } = Astro.props;
     font-size: 13.1px;
     line-height: 19.68px;
   }
+
+  :global([data-theme='dark']) .epp__list li { color: var(--c-text-secondary); }
 
   .epp__dash {
     color: var(--c-orange);

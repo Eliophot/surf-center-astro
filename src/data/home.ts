@@ -67,6 +67,14 @@ export const locations: Location[] = [
     alt: "Canoë sur le lac de Sainte-Croix",
     tag: "e57bf5a3-2296-4226-94a8-06295b1415d8",
   },
+  {
+    title: "Catamaran",
+    description: "Exploration · Face aux falaises",
+    price: 10,
+    image: "/catamaran-lac-sainte-croix-falaises.jpg",
+    alt: "Catamaran sur le lac de Sainte-Croix face aux falaises",
+    tag: "c47a7a17-4a60-4cba-9b3f-d3b401717172",
+  },
 ];
 
 export const reviews: Review[] = [

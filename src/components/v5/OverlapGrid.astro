@@ -1,3 +1,8 @@
+---
+import { Image } from 'astro:assets';
+import imgSnack from '../../assets/images/snack-pizzeria-wraps-salades-surfcenter.png';
+---
+
 <section class="ovlap" aria-labelledby="v5-resto-title">
   <div class="ovlap__deco" aria-hidden="true">
     <img src="/figma/resto-deco.svg" alt="" width="440" height="484" loading="lazy" decoding="async" />
@@ -5,7 +10,17 @@
   <div class="container">
     <div class="ovlap__layout">
       <div class="ovlap__img-block reveal">
-        <img class="ovlap__img" src="/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg" alt="Vue aérienne du snack Surf Center" width="800" height="600" loading="lazy" decoding="async" />
+        <Image
+          class="ovlap__img"
+          src={imgSnack}
+          alt="Snack-pizzeria du Surf Center — wraps, salades et bière artisanale"
+          widths={[480, 720, 960, 1200]}
+          sizes="(min-width: 900px) 56vw, 92vw"
+          loading="lazy"
+          decoding="async"
+          format="webp"
+          quality={75}
+        />
         <div class="ovlap__img-icon" aria-hidden="true">
           <img src="/figma/resto-icon.svg" alt="" width="91" height="91" loading="lazy" decoding="async" />
         </div>
@@ -115,6 +130,8 @@
     margin-bottom: var(--s-6);
   }
 
+  :global([data-theme='dark']) .ovlap__title { color: var(--c-text); }
+
   @media (max-width: 599px) {
     .ovlap__title {
       font-size: clamp(2.25rem, 9vw, 3rem);
@@ -144,9 +161,15 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--c-text-muted);
-    background: #fff;
+    background: var(--c-bg);
     padding: 5px 14px;
     border-radius: var(--r-full);
+    border: 1px solid var(--c-border-light);
+  }
+
+  :global([data-theme='dark']) .ovlap__tags span {
+    background: var(--c-surface);
+    border-color: var(--c-border);
   }
 
   @media (min-width: 900px) {

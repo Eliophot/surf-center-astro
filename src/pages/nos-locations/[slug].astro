@@ -16,12 +16,14 @@ import imgHeroPaddle from '../../assets/images/location-paddle-bateaux-electriqu
 import imgHeroPedalo from '../../assets/images/location-pedalo-lac-sainte-croix-plage-surfcenter.jpeg';
 import imgHeroCanoe from '../../assets/images/location-canoe-lac-sainte-croix-surfcenter.jpg';
 import imgHeroVoile from '../../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+import imgHeroCatamaran from '../../assets/images/catamaran-lac-sainte-croix-falaises.jpg';
 
 import imgDetailBateau from '../../assets/images/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg';
 import imgDetailPaddle from '../../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
 import imgDetailPedalo from '../../assets/images/location-pedalo-lac-sainte-croix.jpeg';
 import imgDetailCanoe from '../../assets/images/canoe.jpeg';
 import imgDetailVoile from '../../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
+import imgDetailCatamaran from '../../assets/images/catamaran-lac-sainte-croix-falaises.jpg';
 
 const heroImageMap: Record<string, ImageMetadata> = {
   'bateau-electrique': imgHeroBateau,
@@ -29,6 +31,7 @@ const heroImageMap: Record<string, ImageMetadata> = {
   'pedalo': imgHeroPedalo,
   'canoe': imgHeroCanoe,
   'planche-a-voile': imgHeroVoile,
+  'catamaran': imgHeroCatamaran,
 };
 
 const detailImageMap: Record<string, ImageMetadata> = {
@@ -37,6 +40,7 @@ const detailImageMap: Record<string, ImageMetadata> = {
   'pedalo': imgDetailPedalo,
   'canoe': imgDetailCanoe,
   'planche-a-voile': imgDetailVoile,
+  'catamaran': imgDetailCatamaran,
 };
 
 export function getStaticPaths() {

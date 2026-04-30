@@ -21,21 +21,23 @@ const navLinks = [
         class="header__logo-img header__logo-img--light"
         src={logoImg}
         alt=""
-        width={71}
-        height={100}
+        width={213}
+        height={302}
+        densities={[1, 2, 3]}
         loading="eager"
         format="webp"
-        quality={85}
+        quality={90}
       />
       <Image
         class="header__logo-img header__logo-img--dark"
         src={logoImg}
         alt=""
-        width={71}
-        height={100}
+        width={213}
+        height={302}
+        densities={[1, 2, 3]}
         loading="eager"
         format="webp"
-        quality={85}
+        quality={90}
       />
     </a>
 
@@ -230,13 +232,15 @@ const navLinks = [
     z-index: 101;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
   }
 
   .header__logo-img {
-    height: 50px;
-    width: auto;
+    width: 50px;
+    height: auto;
     aspect-ratio: 65 / 92;
     object-fit: contain;
+    max-width: none;
   }
 
   /* Over hero: show colored logo (visible on dark overlay) */
@@ -557,9 +561,10 @@ const navLinks = [
     .header__burger { display: none; }
 
     .header__logo-img {
-      width: 71px;
-      height: 100.506px;
-      aspect-ratio: 65 / 92;
+      width: 71px !important;
+      height: 100.506px !important;
+      aspect-ratio: 65 / 92 !important;
+      max-width: none;
     }
   }
 

@@ -120,8 +120,8 @@ const { privateBlock, proBlock } = Astro.props;
     background: linear-gradient(
       180deg,
       rgba(39, 207, 255, 0.10) 0%,
-      rgba(147, 231, 255, 0.10) 23.077%,
-      rgba(255, 255, 255, 0.10) 61.058%
+      rgba(147, 231, 255, 0.10) 23.08%,
+      rgba(255, 255, 255, 0.10) 61.06%
     );
     overflow: hidden;
   }
@@ -206,6 +206,7 @@ const { privateBlock, proBlock } = Astro.props;
 
   .epp__cta {
     margin-top: var(--s-8);
+    align-self: baseline;
   }
 
   .epp__secondary-wrap {
@@ -235,7 +236,7 @@ const { privateBlock, proBlock } = Astro.props;
     height: 101px;
     top: -50px;
     right: -64px;
-    z-index: 0;
+    z-index: 1;
     display: none;
     pointer-events: none;
     user-select: none;

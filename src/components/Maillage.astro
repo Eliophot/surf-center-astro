@@ -47,144 +47,246 @@ const links: { title: string; description: string; href: string; image: ImageMet
 ];
 ---
 
-<section class="mesh" aria-labelledby="maillage-title">
-  <div class="container">
-    <header class="mesh__header reveal">
-      <span class="mesh__eyebrow">Explorer</span>
-      <h2 id="maillage-title" class="mesh__title">Tout Surf Center</h2>
-    </header>
+<section class="mscroll" aria-label="Tout Surf Center">
+  <div class="mscroll__header container reveal">
+    <div class="mscroll__title-wrap">
+      <span class="mscroll__icon" aria-hidden="true">
+        <img src="/figma/locations-icon.svg" alt="" width="82" height="87" loading="lazy" decoding="async" />
+      </span>
+      <h3 class="home-h3 mscroll__title">Tout Surf Center</h3>
+    </div>
+    <div class="mscroll__header-right">
+      <p class="mscroll__count">{String(links.length).padStart(2, '0')} sections</p>
+      <div class="mscroll__nav">
+        <button class="mscroll__arrow" type="button" data-mscroll-prev aria-label="Précédent">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="mscroll__arrow" type="button" data-mscroll-next aria-label="Suivant">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
 
-    <div class="mesh-grid">
-      {links.map((link, i) => (
-        <a href={link.href} class={`mesh-card reveal reveal-d${Math.min(i + 1, 4)}`}>
+  <div class="mscroll__track" data-mscroll-track>
+    {links.map((link) => (
+      <a href={link.href} class="mscroll__card" aria-label={link.title}>
+        <div class="mscroll__visual">
           <Image
-            class="mesh-card__img"
             src={link.image}
             alt={link.alt}
-            width={320}
-            height={200}
+            width={600}
+            height={800}
             loading="lazy"
             decoding="async"
             format="webp"
             quality={75}
           />
-          <div class="mesh-card__overlay"></div>
-          <div class="mesh-card__content">
-            <h3 class="mesh-card__title">{link.title}</h3>
-            <p class="mesh-card__desc">{link.description}</p>
-          </div>
-        </a>
-      ))}
-    </div>
+        </div>
+        <div class="mscroll__info">
+          <h4 class="mscroll__name">{link.title}</h4>
+          <span class="mscroll__desc">{link.description}</span>
+        </div>
+      </a>
+    ))}
   </div>
 </section>
 
 <style>
-  .mesh {
-    padding-block: clamp(2.5rem, 6vw, 4rem);
-  }
-
-  .mesh__header {
-    text-align: center;
-    margin-bottom: var(--s-8);
-  }
-
-  .mesh__eyebrow {
-    display: inline-block;
-    font-size: 0.62rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--c-orange);
-    margin-bottom: var(--s-3);
-  }
-
-  .mesh__title {
-    font-size: clamp(1.4rem, 3vw, 1.9rem);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
-    color: var(--c-text);
-    margin: 0;
-  }
-
-  .mesh-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s-3);
-  }
-
-  .mesh-card {
-    position: relative;
-    display: block;
-    aspect-ratio: 16 / 10;
+  .mscroll {
+    padding: var(--s-section) 0 var(--s-16);
+    background: var(--c-bg);
     overflow: hidden;
-    border-radius: var(--r-md);
-    text-decoration: none;
-    color: #fff;
   }
 
-  .mesh-card__img {
-    position: absolute;
-    inset: 0;
+  .mscroll__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--s-6);
+    margin-bottom: var(--s-10);
+  }
+
+  .mscroll__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .mscroll__icon {
+    width: 60px;
+    height: 64px;
+    flex: 0 0 auto;
+    display: inline-flex;
+  }
+
+  .mscroll__icon img {
     width: 100%;
     height: 100%;
+    display: block;
+  }
+
+  .mscroll__title {
+    text-align: left;
+  }
+
+  .mscroll__header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+  }
+
+  .mscroll__count {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+  }
+
+  .mscroll__nav {
+    display: flex;
+    gap: var(--s-2);
+  }
+
+  .mscroll__arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-full);
+    border: 1.5px solid var(--c-border);
+    background: var(--c-bg);
+    color: var(--c-text-secondary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--t-fast) var(--ease);
+  }
+
+  .mscroll__arrow:hover {
+    border-color: var(--c-orange);
+    color: var(--c-orange);
+    background: var(--c-surface);
+  }
+
+  .mscroll__arrow:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .mscroll__track {
+    display: flex;
+    gap: var(--s-4);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 var(--s-6);
+    scroll-snap-type: x mandatory;
+  }
+
+  .mscroll__track::-webkit-scrollbar { display: none; }
+
+  .mscroll__card {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--c-text);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mscroll__visual {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--r-md);
+    margin-bottom: var(--s-4);
+  }
+
+  .mscroll__visual :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 5;
     object-fit: cover;
-    transition: transform 0.6s var(--ease);
+    transition: transform 0.8s var(--ease);
   }
 
-  .mesh-card:hover .mesh-card__img { transform: scale(1.05); }
+  .mscroll__card:hover .mscroll__visual :global(img) { transform: scale(1.04); }
 
-  .mesh-card__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(0deg,
-      rgb(0 0 0 / 0.7) 0%,
-      rgb(0 0 0 / 0.1) 65%,
-      rgb(0 0 0 / 0.15) 100%);
-    transition: background var(--t-normal);
+  .mscroll__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 var(--s-1);
   }
 
-  .mesh-card:hover .mesh-card__overlay {
-    background: linear-gradient(0deg,
-      rgb(0 0 0 / 0.78) 0%,
-      rgb(0 0 0 / 0.15) 65%,
-      rgb(0 0 0 / 0.22) 100%);
-  }
-
-  .mesh-card__content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: var(--s-3) var(--s-4);
-    z-index: 1;
-  }
-
-  .mesh-card__title {
-    font-size: 0.78rem;
+  .mscroll__name {
+    font-size: 1.1rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #fff;
-    margin: 0 0 1px;
-    line-height: 1.2;
-  }
-
-  .mesh-card__desc {
-    font-size: 0.62rem;
-    color: rgb(255 255 255 / 0.65);
     letter-spacing: 0.02em;
     margin: 0;
-    line-height: 1.3;
   }
 
-  @media (min-width: 600px) {
-    .mesh-grid { grid-template-columns: repeat(3, 1fr); }
+  .mscroll__desc {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--c-text-muted);
+    letter-spacing: 0.02em;
   }
 
-  @media (min-width: 1000px) {
-    .mesh-grid { grid-template-columns: repeat(5, 1fr); }
+  @media (max-width: 599px) {
+    .mscroll__icon { width: 44px; height: 47px; }
+    .mscroll__header { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (min-width: 600px) { .mscroll__card { flex: 0 0 48%; } }
+  @media (min-width: 900px) { .mscroll__card { flex: 0 0 35%; } }
+  @media (min-width: 1200px) { .mscroll__card { flex: 0 0 28%; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mscroll__visual :global(img) { transition: none; }
   }
 </style>
+
+<script>
+  document.querySelectorAll('[data-mscroll-track]').forEach((track) => {
+    const section = track.closest('.mscroll');
+    const prevBtn = section?.querySelector('[data-mscroll-prev]') as HTMLButtonElement | null;
+    const nextBtn = section?.querySelector('[data-mscroll-next]') as HTMLButtonElement | null;
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const el = track as HTMLElement;
+
+    const getScrollAmount = () => {
+      const card = el.querySelector('.mscroll__card') as HTMLElement | null;
+      if (!card) return 300;
+      return card.offsetWidth + 16;
+    };
+
+    const updateArrows = () => {
+      prevBtn.disabled = el.scrollLeft <= 2;
+      nextBtn.disabled = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+    };
+
+    updateArrows();
+    el.addEventListener('scroll', updateArrows, { passive: true });
+
+    prevBtn.addEventListener('click', () => {
+      el.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      el.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+  });
+</script>

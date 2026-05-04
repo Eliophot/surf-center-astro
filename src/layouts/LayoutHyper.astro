@@ -278,16 +278,8 @@ const siteUrl = 'https://surfcenter-verdon.fr';
         transform: translateY(0);
       }
 
-      @media (max-width: 480px) {
-        .spct11 {
-          bottom: 1.25rem;
-          right: 1.25rem;
-          height: 40px;
-        }
-        .spct11__left { width: 46px; }
-        .spct11__num { font-size: 0.82rem; }
-        .spct11__right { padding: 0 0.8rem; }
-        .spct11__label-scroll, .spct11__label-top { font-size: 0.56rem; }
+      @media (max-width: 768px) {
+        .spct11 { display: none; }
       }
 
       @media (prefers-reduced-motion: reduce) {

@@ -186,7 +186,7 @@ export const locationDetails: LocationDetail[] = [
     tagline: 'Exploration · Face aux falaises',
     description: 'Embarquez à bord d\'un catamaran pour explorer le lac de Sainte-Croix dans le plus grand confort, face aux falaises des Gorges du Verdon.',
     longDescription: 'Notre catamaran accueille votre groupe pour une croisière privilégiée sur le lac de Sainte-Croix. Stable, spacieux et silencieux, il est idéal pour profiter du paysage sans aucune contrainte. Glissez le long des falaises calcaires, ancrez dans une crique abritée pour une baignade, et profitez d\'une vue panoramique sur les Gorges du Verdon depuis les filets avant.',
-    price: 10,
+    price: 80,
     priceUnit: 'heure',
     capacity: 'Jusqu\'à 8 personnes',
     duration: '2h, demi-journée, journée',

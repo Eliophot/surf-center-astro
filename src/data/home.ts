@@ -70,7 +70,7 @@ export const locations: Location[] = [
   {
     title: "Catamaran",
     description: "Exploration · Face aux falaises",
-    price: 10,
+    price: 80,
     image: "/catamaran-lac-sainte-croix-falaises.jpg",
     alt: "Catamaran sur le lac de Sainte-Croix face aux falaises",
     tag: "c47a7a17-4a60-4cba-9b3f-d3b401717172",

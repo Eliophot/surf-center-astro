@@ -6,17 +6,19 @@ import { meshLinks } from '../../data/home';
   <div class="container">
     <h2 id="v6-mesh-title" class="dnav__heading reveal">Explorer</h2>
 
-    <div class="dnav__list">
-      {meshLinks.map((link, i) => (
-        <a href={link.href} class="dnav__item reveal" style={`--d:${i * 60}ms`}>
-          <span class="dnav__dot" aria-hidden="true"></span>
-          <div class="dnav__info">
-            <span class="dnav__name">{link.title}</span>
-            <span class="dnav__sub">{link.description}</span>
-          </div>
-        </a>
-      ))}
-    </div>
+    <nav aria-label="Navigation rapide">
+      <div class="dnav__list">
+        {meshLinks.map((link, i) => (
+          <a href={link.href} class="dnav__item reveal" style={`--d:${i * 60}ms`}>
+            <span class="dnav__dot" aria-hidden="true"></span>
+            <div class="dnav__info">
+              <span class="dnav__name">{link.title}</span>
+              <span class="dnav__sub">{link.description}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </nav>
   </div>
 </section>
 

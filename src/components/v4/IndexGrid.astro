@@ -16,7 +16,7 @@ import { meshLinks } from '../../data/home';
           <span class="idxgrid__num">{String(i + 1).padStart(2, '0')}</span>
           <span class="idxgrid__name">{link.title}</span>
           <span class="idxgrid__desc">{link.description}</span>
-          <span class="idxgrid__arrow">→</span>
+          <span class="idxgrid__arrow" aria-hidden="true">→</span>
         </a>
       ))}
     </div>

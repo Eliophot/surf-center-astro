@@ -68,6 +68,7 @@ const navLinks = [
         data-menu-toggle
         aria-expanded="false"
         aria-label="Menu de navigation"
+        aria-controls="mobile-menu"
       >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -76,7 +77,7 @@ const navLinks = [
   </div>
 </header>
 
-<div class="hd2__mobile" id="mobile-menu" hidden>
+<div class="hd2__mobile" id="mobile-menu" role="dialog" aria-label="Menu de navigation" hidden>
   <div class="hd2__mobile-inner">
     <nav class="hd2__mobile-nav" aria-label="Navigation mobile">
       <ul role="list">

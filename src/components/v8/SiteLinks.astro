@@ -24,28 +24,30 @@ const links: { title: string; description: string; href: string; image: ImageMet
       <h2 id="v8-links-title">Tout Surf Center</h2>
     </header>
 
-    <div class="sl8__grid">
-      {links.map((link, i) => (
-        <a href={link.href} class={`sl8__card reveal reveal-d${Math.min(i + 1, 4)}`}>
-          <Image
-            class="sl8__img"
-            src={link.image}
-            alt={link.alt}
-            width={400}
-            height={300}
-            loading="lazy"
-            decoding="async"
-            format="webp"
-            quality={75}
-          />
-          <div class="sl8__overlay"></div>
-          <div class="sl8__content">
-            <h3 class="sl8__title">{link.title}</h3>
-            <p class="sl8__desc">{link.description}</p>
-          </div>
-        </a>
-      ))}
-    </div>
+    <nav aria-label="Sections du site">
+      <div class="sl8__grid">
+        {links.map((link, i) => (
+          <a href={link.href} class={`sl8__card reveal reveal-d${Math.min(i + 1, 4)}`}>
+            <Image
+              class="sl8__img"
+              src={link.image}
+              alt={link.alt}
+              width={400}
+              height={300}
+              loading="lazy"
+              decoding="async"
+              format="webp"
+              quality={75}
+            />
+            <div class="sl8__overlay" aria-hidden="true"></div>
+            <div class="sl8__content">
+              <h3 class="sl8__title">{link.title}</h3>
+              <p class="sl8__desc">{link.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </nav>
   </div>
 </section>
 

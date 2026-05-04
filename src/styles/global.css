@@ -520,3 +520,22 @@ p { text-wrap: pretty; }
   .section { padding-block: clamp(3rem, 8vw, 5rem); }
   .section__header { margin-bottom: var(--s-10); }
 }
+
+/* =============================================
+   Mobile accessibility — typography readability
+   Strategy:
+   - html font-size 16 → 17 = +6% scale on every rem-based value
+     → adds ~+1px to body text and most rem-based fonts
+   - Explicit overrides on the smallest GLOBAL classes to reach +2px total
+     (the smallest fonts only got ~+0.6px from the rem bump alone).
+   Component-scoped tiny fonts get an additional +1px directly inside their
+   own <style> block (search for "Mobile a11y" in *.astro to locate them).
+   ============================================= */
+
+@media (max-width: 768px) {
+  html { font-size: 17px; }
+
+  .home-h2 { font-size: 18px; line-height: 1.15; letter-spacing: 0.13em; }
+  .section__eyebrow { font-size: calc(0.68rem + 1px); }
+  .btn--sm { font-size: calc(0.72rem + 1px); }
+}

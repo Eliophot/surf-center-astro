@@ -7,11 +7,11 @@ import imgCanoe from '../../assets/images/location-canoe.jpeg';
 import imgPlanche from '../../assets/images/location-planche-a-voile.png';
 
 const collection = [
-  { title: "Bateau électrique", note: "Sans permis · 7 pers.", price: "55", image: imgBateau, alt: "Bateau électrique", tag: "62329049-d954-482c-82a1-faa16321e3bf" },
-  { title: "Paddle board", note: "Rigide · Tous niveaux", price: "15", image: imgPaddle, alt: "Paddle board", tag: "52bf76b6-6f0a-43ff-b0a2-4c1332d5ede5" },
-  { title: "Pédalo", note: "Famille · Toboggan", price: "15", image: imgPedalo, alt: "Pédalo", tag: "03a55e88-44ac-4161-ad03-aa857b1d0dc0" },
-  { title: "Canoë", note: "Exploration · Criques", price: "10", image: imgCanoe, alt: "Canoë", tag: "e57bf5a3-2296-4226-94a8-06295b1415d8" },
-  { title: "Planche à voile", note: "Vent du Verdon", price: "20", image: imgPlanche, alt: "Planche à voile", tag: "7a524907-97b7-42bd-bfdc-deb401767b21" },
+  { title: "Bateau électrique", note: "Sans permis · 7 pers.", price: "55", image: imgBateau, alt: "Location de bateau électrique sur le lac de Sainte-Croix", tag: "62329049-d954-482c-82a1-faa16321e3bf" },
+  { title: "Paddle board", note: "Rigide · Tous niveaux", price: "15", image: imgPaddle, alt: "Paddle board rigide sur le lac de Sainte-Croix", tag: "52bf76b6-6f0a-43ff-b0a2-4c1332d5ede5" },
+  { title: "Pédalo", note: "Famille · Toboggan", price: "15", image: imgPedalo, alt: "Pédalo familial avec toboggan sur le lac de Sainte-Croix", tag: "03a55e88-44ac-4161-ad03-aa857b1d0dc0" },
+  { title: "Canoë", note: "Exploration · Criques", price: "10", image: imgCanoe, alt: "Canoë pour explorer les criques du lac de Sainte-Croix", tag: "e57bf5a3-2296-4226-94a8-06295b1415d8" },
+  { title: "Planche à voile", note: "Vent du Verdon", price: "20", image: imgPlanche, alt: "Planche à voile sur le lac de Sainte-Croix avec le vent du Verdon", tag: "7a524907-97b7-42bd-bfdc-deb401767b21" },
 ];
 ---
 
@@ -23,9 +23,9 @@ const collection = [
       <p class="lc__lead">Cinq façons de vivre le lac. Chacune unique.</p>
     </div>
 
-    <div class="lc__grid">
+    <div class="lc__grid" role="list">
       {collection.map((item, i) => (
-        <button type="button" class={`lc__card reveal reveal-d${Math.min(i + 1, 4)}`} data-product-book data-tag={item.tag} aria-label={`${item.title} — dès ${item.price}€/h`}>
+        <button type="button" class={`lc__card reveal reveal-d${Math.min(i + 1, 4)}`} role="listitem" data-product-book data-tag={item.tag} aria-label={`${item.title} — dès ${item.price}€/h`}>
           <div class="lc__img-wrap">
             <Image class="lc__img" src={item.image} alt={item.alt} width={500} height={700} loading="lazy" decoding="async" format="webp" quality={75} />
           </div>

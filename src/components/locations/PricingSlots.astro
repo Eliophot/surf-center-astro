@@ -31,7 +31,7 @@ const { price, priceUnit, tag, title } = Astro.props;
           <li>Équipe sur place toute la journée</li>
         </ul>
       </div>
-      <button type="button" class="btn btn--primary btn--lg" data-product-book data-tag={tag}>Réserver maintenant</button>
+      <button type="button" class="btn btn--primary btn--lg" data-product-book data-tag={tag} aria-label={`Réserver ${title} maintenant`}>Réserver maintenant</button>
     </div>
   </div>
 </section>

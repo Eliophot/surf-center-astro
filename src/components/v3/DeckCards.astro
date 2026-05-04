@@ -17,7 +17,7 @@ import { meshLinks } from '../../data/home';
           style={`--i: ${i}; --total: ${meshLinks.length};`}
         >
           <img class="deck__img" src={link.image} alt={link.alt} width="400" height="300" loading="lazy" decoding="async" />
-          <div class="deck__overlay"></div>
+          <div class="deck__overlay" aria-hidden="true"></div>
           <div class="deck__content">
             <h3 class="deck__title">{link.title}</h3>
             <p class="deck__desc">{link.description}</p>

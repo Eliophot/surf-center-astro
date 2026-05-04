@@ -96,4 +96,9 @@ const { title, tagline, image, alt } = Astro.props;
   @media (prefers-reduced-motion: reduce) {
     .lochero__content { animation: none; }
   }
+
+  /* Mobile a11y — extra +1px on smallest type */
+  @media (max-width: 768px) {
+    .lochero__tagline { font-size: calc(0.62rem + 1px); }
+  }
 </style>

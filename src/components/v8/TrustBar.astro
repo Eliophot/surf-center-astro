@@ -9,9 +9,9 @@ const stats = [
 
 <section class="trust" aria-label="Chiffres clés Surf Center">
   <div class="container">
-    <div class="trust__grid">
+    <div class="trust__grid" role="list" aria-label="Chiffres clés">
       {stats.map((stat, i) => (
-        <div class={`trust__item reveal ${i > 0 ? `reveal-d${i}` : ''}`}>
+        <div class={`trust__item reveal ${i > 0 ? `reveal-d${i}` : ''}`} role="listitem">
           <strong class="trust__value">{stat.value}</strong>
           <span class="trust__label">{stat.label}</span>
         </div>
@@ -62,5 +62,10 @@ const stats = [
     .trust { padding-block: var(--s-16); }
     .trust__grid { grid-template-columns: repeat(4, 1fr); }
     .trust__item { padding: var(--s-6); }
+  }
+
+  /* Mobile a11y — extra +1px on smallest type */
+  @media (max-width: 768px) {
+    .trust__label { font-size: calc(0.68rem + 1px); }
   }
 </style>

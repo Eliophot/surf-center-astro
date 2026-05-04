@@ -57,7 +57,7 @@ const { title, description, image, alt, price, priceUnit, capacity, duration, le
         {highlights.map((h) => <span>{h}</span>)}
       </div>
 
-      <button type="button" class="btn btn--primary" data-product-book data-tag={tag}>Réserver maintenant</button>
+      <button type="button" class="btn btn--primary" data-product-book data-tag={tag} aria-label={`Réserver ${title} maintenant`}>Réserver maintenant</button>
     </div>
   </div>
 </section>
@@ -144,5 +144,10 @@ const { title, description, image, alt, price, priceUnit, capacity, duration, le
 
   @media (min-width: 900px) {
     .locdet__layout { grid-template-columns: 1fr 1.1fr; gap: var(--s-20); }
+  }
+
+  /* Mobile a11y — extra +1px on smallest type */
+  @media (max-width: 768px) {
+    .locdet__meta-label { font-size: calc(0.55rem + 1px); }
   }
 </style>

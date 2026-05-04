@@ -1,4 +1,4 @@
-<dialog class="umodal" id="umodal" aria-label="Surf Center">
+<dialog class="umodal" id="umodal" aria-labelledby="umodal-title">
   <div class="umodal__header">
     <p class="umodal__title" id="umodal-title"></p>
     <button
@@ -14,7 +14,7 @@
   </div>
   <div class="umodal__body">
     <div class="umodal__loader" id="umodal-loader" aria-hidden="true">
-      <span class="umodal__spinner"></span>
+      <span class="umodal__spinner" role="status" aria-label="Chargement en cours"></span>
     </div>
     <iframe
       id="umodal-iframe"

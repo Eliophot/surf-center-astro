@@ -19,15 +19,17 @@ const links: { title: string; href: string; image: ImageMetadata; alt: string }[
 <section class="section clink section--surface" aria-labelledby="v9-links-title">
   <div class="container">
     <h2 id="v9-links-title" class="clink__title reveal">Tout le Surf Center</h2>
-    <div class="clink__row">
-      {links.map((l, i) => (
-        <a href={l.href} class={`clink__item reveal reveal-d${Math.min(i + 1, 4)}`}>
-          <Image class="clink__img" src={l.image} alt={l.alt} width={300} height={200} loading="lazy" decoding="async" format="webp" quality={70} />
-          <div class="clink__overlay"></div>
-          <span class="clink__label">{l.title}</span>
-        </a>
-      ))}
-    </div>
+    <nav aria-label="Sections du site">
+      <div class="clink__row">
+        {links.map((l, i) => (
+          <a href={l.href} class={`clink__item reveal reveal-d${Math.min(i + 1, 4)}`}>
+            <Image class="clink__img" src={l.image} alt={l.alt} width={300} height={200} loading="lazy" decoding="async" format="webp" quality={70} />
+            <div class="clink__overlay" aria-hidden="true"></div>
+            <span class="clink__label">{l.title}</span>
+          </a>
+        ))}
+      </div>
+    </nav>
   </div>
 </section>
 

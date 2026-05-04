@@ -57,7 +57,7 @@ const locations = [
       <h2 id="activities-title">Tout le lac,<br/>à votre façon</h2>
     </header>
 
-    <div class="slider-wrap reveal">
+    <div class="slider-wrap reveal" role="region" aria-roledescription="carrousel" aria-label="Nos locations disponibles">
       <button class="slider__arrow slider__arrow--prev" type="button" data-slider-prev aria-label="Précédent">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
           <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -65,7 +65,7 @@ const locations = [
       </button>
 
       <div class="slider" data-slider>
-        <div class="slider__track" data-slider-track>
+        <div class="slider__track" data-slider-track aria-live="polite">
           {locations.map((loc, i) => (
             <button
               type="button"
@@ -85,7 +85,7 @@ const locations = [
                 format="webp"
                 quality={75}
               />
-              <div class="slider__overlay"></div>
+              <div class="slider__overlay" aria-hidden="true"></div>
               <div class="slider__price">
                 <span class="slider__price-label">dès</span>
                 <span class="slider__price-amount">{loc.price}<span class="slider__price-cur">€</span></span>

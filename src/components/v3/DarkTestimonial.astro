@@ -22,7 +22,7 @@ const totalDuration = reviews.length * 6;
       ))}
     </div>
 
-    <div class="dtesti__carousel" style={`--total-duration: ${totalDuration}s`}>
+    <div class="dtesti__carousel" style={`--total-duration: ${totalDuration}s`} aria-roledescription="carrousel" aria-label="Témoignages clients" aria-live="polite">
       {reviews.map((r, i) => (
         <blockquote class="dtesti__slide" style={`--i: ${i}; --count: ${reviews.length}`}>
           <p class="dtesti__quote">&ldquo;{r.quote}&rdquo;</p>

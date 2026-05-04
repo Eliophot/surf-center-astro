@@ -73,13 +73,14 @@ const products = [
       <p class="section__lead">Choisissez votre activité et réservez en quelques clics. Tarifs à partir de 10€/h.</p>
     </header>
 
-    <div class="pc__grid">
+    <div class="pc__grid" role="list" aria-label="Nos tarifs de location">
       {products.map((p, i) => (
         <button
           type="button"
           class={`pc__card reveal reveal-d${Math.min(i + 1, 4)} ${p.popular ? 'pc__card--pop' : ''}`}
           data-product-book
           data-tag={p.tag}
+          role="listitem"
           aria-label={`Réserver ${p.title} — dès ${p.price}€/${p.unit}`}
         >
           {p.popular && <span class="pc__badge">Le + populaire</span>}

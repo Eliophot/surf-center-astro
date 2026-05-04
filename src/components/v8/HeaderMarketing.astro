@@ -90,6 +90,7 @@ const navLinks = [
         data-menu-toggle-m8
         aria-expanded="false"
         aria-label="Menu de navigation"
+        aria-controls="mobile-menu-m8"
       >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -98,7 +99,7 @@ const navLinks = [
   </div>
 </header>
 
-<div class="hm8__mmenu" id="mobile-menu-m8" hidden>
+<div class="hm8__mmenu" id="mobile-menu-m8" role="dialog" aria-label="Menu de navigation" hidden>
   <div class="hm8__mmenu-inner">
     <nav class="hm8__mmenu-nav" aria-label="Navigation mobile">
       <ul role="list">

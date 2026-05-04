@@ -33,7 +33,7 @@ const navCols = [
 ];
 ---
 
-<footer class="fh11">
+<footer class="fh11" role="contentinfo" aria-label="Pied de page">
   <div class="fh11__particles" aria-hidden="true">
     <span class="fh11__dot"></span><span class="fh11__dot"></span>
     <span class="fh11__dot"></span><span class="fh11__dot"></span>
@@ -77,7 +77,7 @@ const navCols = [
     </div>
 
     {navCols.map((col) => (
-      <div class="fh11__col">
+      <nav class="fh11__col" aria-label={col.title}>
         <h4 class="fh11__col-title">{col.title}</h4>
         <ul role="list">
           {col.links.map((link) => (
@@ -86,7 +86,7 @@ const navCols = [
             </li>
           ))}
         </ul>
-      </div>
+      </nav>
     ))}
   </div>
 
@@ -289,7 +289,7 @@ const navCols = [
   .fh11__bottom-inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     gap: var(--s-4, 1rem);
     max-width: var(--max-w, 1200px);

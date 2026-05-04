@@ -19,9 +19,9 @@ const { routes } = Astro.props;
       <p class="section__lead">Nos parcours conseillés au départ du Surf Center sur le lac de Sainte-Croix.</p>
     </header>
 
-    <div class="itin__grid">
+    <div class="itin__grid" role="list">
       {routes.map((route, i) => (
-        <div class={`itin__card reveal reveal-d${Math.min(i + 1, 3)}`}>
+        <div class={`itin__card reveal reveal-d${Math.min(i + 1, 3)}`} role="listitem">
           <span class="itin__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
           <h3 class="itin__name">{route.title}</h3>
           <p class="itin__desc">{route.text}</p>
@@ -70,5 +70,10 @@ const { routes } = Astro.props;
 
   @media (min-width: 768px) {
     .itin__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* Mobile a11y — extra +1px on smallest type */
+  @media (max-width: 768px) {
+    .itin__num { font-size: calc(0.55rem + 1px); }
   }
 </style>

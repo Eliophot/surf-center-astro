@@ -67,8 +67,9 @@ const navLinks = [
         class="hh11__burger"
         type="button"
         data-burger-h11
-        aria-label="Ouvrir le menu"
+        aria-label="Menu de navigation"
         aria-expanded="false"
+        aria-controls="hh11-mobile"
       >
         <span class="hh11__burger-line"></span>
         <span class="hh11__burger-line"></span>
@@ -78,7 +79,7 @@ const navLinks = [
   </div>
 </header>
 
-<div class="hh11__mobile" data-mobile-h11 aria-hidden="true">
+<div class="hh11__mobile" id="hh11-mobile" data-mobile-h11 role="dialog" aria-label="Menu de navigation" aria-hidden="true">
   <div class="hh11__mobile-particles" aria-hidden="true">
     <span class="hh11__dot"></span><span class="hh11__dot"></span>
     <span class="hh11__dot"></span><span class="hh11__dot"></span>
@@ -138,6 +139,18 @@ const navLinks = [
         mobile.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
       });
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && open) {
+        open = false;
+        burger.setAttribute('aria-expanded', 'false');
+        burger.classList.remove('is-open');
+        mobile.classList.remove('is-open');
+        mobile.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        burger.focus();
+      }
     });
   }
 

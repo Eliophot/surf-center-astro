@@ -40,9 +40,9 @@ const faqs = [
       <h2 id="faq-title">Tout savoir</h2>
     </header>
 
-    <div class="faq-list reveal">
+    <div class="faq-list reveal" role="list" aria-label="Questions fréquentes">
       {faqs.map((faq) => (
-        <details class="faq-item">
+        <details class="faq-item" role="listitem">
           <summary class="faq-item__q">
             <span>{faq.question}</span>
             <svg class="faq-item__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">

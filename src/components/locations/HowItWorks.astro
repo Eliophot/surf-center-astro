@@ -7,21 +7,21 @@
 
       <ol class="hiw__steps" role="list">
         <li>
-          <span class="hiw__step-num">01</span>
+          <span class="hiw__step-num" aria-hidden="true">01</span>
           <div>
             <strong>Réservez</strong>
             <p>En ligne ou au comptoir d'accueil</p>
           </div>
         </li>
         <li>
-          <span class="hiw__step-num">02</span>
+          <span class="hiw__step-num" aria-hidden="true">02</span>
           <div>
             <strong>Briefing</strong>
             <p>Sécurité, carte du lac et conseils</p>
           </div>
         </li>
         <li>
-          <span class="hiw__step-num">03</span>
+          <span class="hiw__step-num" aria-hidden="true">03</span>
           <div>
             <strong>Profitez</strong>
             <p>Naviguez librement sur le lac</p>
@@ -103,5 +103,10 @@
 
   @media (min-width: 900px) {
     .hiw__layout { grid-template-columns: 1fr 1.2fr; gap: var(--s-20); }
+  }
+
+  /* Mobile a11y — extra +1px on smallest type */
+  @media (max-width: 768px) {
+    .hiw__step-num { font-size: calc(0.58rem + 1px); }
   }
 </style>

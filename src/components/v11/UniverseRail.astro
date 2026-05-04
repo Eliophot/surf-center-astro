@@ -34,8 +34,8 @@ const univers = [
     </div>
   </div>
 
-  <div class="ur__rail" data-ur>
-    <div class="ur__track" data-ur-track>
+  <div class="ur__rail" data-ur role="region" aria-roledescription="carrousel" aria-label="Nos univers de location">
+    <div class="ur__track" data-ur-track aria-live="polite">
       {univers.map((u) => (
         <a class="ur__card" href={u.href} aria-label={u.title}>
           <div class="ur__media">

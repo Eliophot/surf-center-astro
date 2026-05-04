@@ -29,9 +29,9 @@ const locs = locationDetails;
       <p class="section__lead">Bateaux électriques, paddle, pédalo, canoë, planche à voile, catamaran — tout le lac à votre façon.</p>
     </header>
 
-    <div class="loccards__grid">
+    <div class="loccards__grid" role="list">
       {locs.map((loc, i) => (
-        <div class={`loccards__card reveal reveal-d${Math.min(i + 1, 4)}`}>
+        <div class={`loccards__card reveal reveal-d${Math.min(i + 1, 4)}`} role="listitem">
           <a href={`/nos-locations/${loc.slug}`} class="loccards__img-link">
             {imageMap[loc.slug] ? (
               <Image src={imageMap[loc.slug]} alt={loc.heroAlt} width={600} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
@@ -44,8 +44,8 @@ const locs = locationDetails;
             <h3 class="loccards__name">{loc.title}</h3>
             <p class="loccards__desc">{loc.tagline}</p>
             <div class="loccards__actions">
-              <a href={`/nos-locations/${loc.slug}`} class="btn btn--outline btn--sm">Découvrir</a>
-              <button type="button" class="btn btn--primary btn--sm" data-product-book data-tag={loc.tag}>Réserver</button>
+              <a href={`/nos-locations/${loc.slug}`} class="btn btn--outline btn--sm" aria-label={`Découvrir ${loc.title}`}>Découvrir</a>
+              <button type="button" class="btn btn--primary btn--sm" data-product-book data-tag={loc.tag} aria-label={`Réserver ${loc.title}`}>Réserver</button>
             </div>
           </div>
         </div>
@@ -139,5 +139,10 @@ const locs = locationDetails;
 
   @media (prefers-reduced-motion: reduce) {
     .loccards__img-link img { transition: none; }
+  }
+
+  /* Mobile a11y — extra +1px on smallest type */
+  @media (max-width: 768px) {
+    .loccards__badge { font-size: calc(0.62rem + 1px); }
   }
 </style>

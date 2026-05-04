@@ -9,9 +9,9 @@ const stats = [
 
 <section class="proof" aria-label="Chiffres clés Surf Center">
   <div class="container">
-    <div class="proof__grid">
+    <div class="proof__grid" role="list">
       {stats.map((stat, i) => (
-        <div class={`proof__item reveal ${i > 0 ? `reveal-d${i}` : ''}`}>
+        <div class={`proof__item reveal ${i > 0 ? `reveal-d${i}` : ''}`} role="listitem">
           <strong class="proof__value">{stat.value}</strong>
           <span class="proof__label">{stat.label}</span>
         </div>

@@ -32,15 +32,15 @@ const { locations } = Astro.props;
       <h2 id="otherloc-title">Les autres locations</h2>
     </header>
 
-    <div class="otherloc__grid">
+    <div class="otherloc__grid" role="list">
       {locations.map((loc, i) => (
-        <a href={`/nos-locations/${loc.slug}`} class={`otherloc__card reveal reveal-d${Math.min(i + 1, 4)}`}>
+        <a href={`/nos-locations/${loc.slug}`} class={`otherloc__card reveal reveal-d${Math.min(i + 1, 4)}`} role="listitem" aria-label={`${loc.title} — dès ${loc.price}€/${loc.priceUnit}`}>
           {imageMap[loc.slug] ? (
             <Image src={imageMap[loc.slug]} alt={loc.heroAlt} width={400} height={300} loading="lazy" decoding="async" format="webp" quality={75} />
           ) : (
             <img src={loc.detailImage} alt={loc.heroAlt} width="400" height="300" loading="lazy" decoding="async" />
           )}
-          <div class="otherloc__overlay"></div>
+          <div class="otherloc__overlay" aria-hidden="true"></div>
           <div class="otherloc__content">
             <h3 class="otherloc__name">{loc.title}</h3>
             <span class="otherloc__price">dès {loc.price}€/{loc.priceUnit}</span>
@@ -114,5 +114,10 @@ const { locations } = Astro.props;
 
   @media (prefers-reduced-motion: reduce) {
     .otherloc__card img { transition: none; }
+  }
+
+  /* Mobile a11y — extra +1px on smallest type */
+  @media (max-width: 768px) {
+    .otherloc__price { font-size: calc(0.68rem + 1px); }
   }
 </style>

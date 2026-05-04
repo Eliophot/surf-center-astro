@@ -15,7 +15,7 @@ const reviews = [
 
     <div class="lt__grid">
       {reviews.map((r, i) => (
-        <blockquote class={`lt__card reveal reveal-d${i + 1}`}>
+        <blockquote class={`lt__card reveal reveal-d${i + 1}`} role="figure" aria-label={`Témoignage de ${r.author}`}>
           <p class="lt__quote">&ldquo;{r.quote}&rdquo;</p>
           <footer class="lt__footer">
             <cite class="lt__author">{r.author}</cite>

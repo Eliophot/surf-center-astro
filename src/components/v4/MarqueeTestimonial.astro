@@ -6,7 +6,7 @@ const doubled = [...reviews, ...reviews];
 <section class="mtesti" aria-label="Témoignages clients">
   <h2 class="sr-only">Témoignages</h2>
   <div class="mtesti__rule" aria-hidden="true"></div>
-  <div class="mtesti__track" data-marquee-testi>
+  <div class="mtesti__track" data-marquee-testi aria-roledescription="carrousel">
     <div class="mtesti__scroll">
       {doubled.map((r, i) => (
         <blockquote class="mtesti__item" aria-hidden={i >= reviews.length ? 'true' : undefined}>

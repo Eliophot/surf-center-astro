@@ -73,7 +73,7 @@ const locations = [
       <p class="section__lead">Bateaux, paddle, pédalo — trouvez l'activité qui vous ressemble.</p>
     </header>
 
-    <div class="sl-wrap reveal">
+    <div class="sl-wrap reveal" role="region" aria-roledescription="carrousel" aria-label="Nos locations disponibles">
       <button class="sl__arrow sl__arrow--prev" type="button" data-v8-slider-prev aria-label="Précédent">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
           <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -81,7 +81,7 @@ const locations = [
       </button>
 
       <div class="sl" data-v8-slider>
-        <div class="sl__track" data-v8-slider-track>
+        <div class="sl__track" data-v8-slider-track aria-live="polite">
           {locations.map((loc) => (
             <button
               type="button"
@@ -101,7 +101,7 @@ const locations = [
                 format="webp"
                 quality={75}
               />
-              <div class="sl__overlay"></div>
+              <div class="sl__overlay" aria-hidden="true"></div>
               {loc.badge && <span class="sl__badge">{loc.badge}</span>}
               <div class="sl__price">
                 <span class="sl__price-label">dès</span>
@@ -309,6 +309,13 @@ const locations = [
   @media (min-width: 600px) { .sl__card { flex: 0 0 45%; } }
   @media (min-width: 900px) { .sl__card { flex: 0 0 30%; } }
   @media (min-width: 1200px) { .sl__card { flex: 0 0 23%; } }
+
+  /* Mobile a11y — extra +1px on smallest type */
+  @media (max-width: 768px) {
+    .sl__badge { font-size: calc(0.58rem + 1px); }
+    .sl__price-label { font-size: calc(0.52rem + 1px); }
+    .sl__price-unit { font-size: calc(0.55rem + 1px); }
+  }
 </style>
 
 <script>

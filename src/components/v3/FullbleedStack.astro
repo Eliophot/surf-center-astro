@@ -7,7 +7,7 @@ import { locations } from '../../data/home';
   {locations.map((loc, i) => (
     <div class:list={['fbs', { 'fbs--right': i % 2 !== 0 }]}>
       <img class="fbs__img" src={loc.image} alt={loc.alt} width="1920" height="800" loading="lazy" decoding="async" />
-      <div class="fbs__overlay"></div>
+      <div class="fbs__overlay" aria-hidden="true"></div>
       <div class="fbs__content">
         <span class="fbs__idx">{String(i + 1).padStart(2, '0')}</span>
         <h3 class="fbs__title">{loc.title}</h3>

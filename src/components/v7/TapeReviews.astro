@@ -5,7 +5,7 @@ const tape = [...reviews, ...reviews, ...reviews];
 
 <section class="tape" aria-label="Témoignages clients">
   <h2 class="sr-only">Témoignages</h2>
-  <div class="tape__band tape__band--top" data-tape-track>
+  <div class="tape__band tape__band--top" data-tape-track aria-roledescription="carrousel">
     <div class="tape__scroll">
       {tape.map((r, i) => (
         <span class="tape__item" aria-hidden={i >= reviews.length ? 'true' : undefined}>

@@ -10,8 +10,8 @@ import { locations } from '../../data/home';
     </header>
   </div>
 
-  <div class="cinema" data-cinema>
-    <div class="cinema__track" data-cinema-track>
+  <div class="cinema" data-cinema role="region" aria-roledescription="carrousel" aria-label="Nos locations disponibles">
+    <div class="cinema__track" data-cinema-track aria-live="polite">
       {locations.map((loc) => (
         <button type="button" class="cinema__item" data-product-book data-tag={loc.tag} aria-label={`Réserver ${loc.title}`}>
           <div class="cinema__frame">
@@ -27,7 +27,7 @@ import { locations } from '../../data/home';
     </div>
 
     <div class="cinema__controls container">
-      <div class="cinema__bar"><span class="cinema__progress" data-cinema-progress></span></div>
+      <div class="cinema__bar" role="progressbar" aria-label="Progression du défilement" aria-valuemin="0" aria-valuemax="100"><span class="cinema__progress" data-cinema-progress></span></div>
       <div class="cinema__nav">
         <button class="cinema__btn" type="button" data-cinema-prev aria-label="Précédent">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>

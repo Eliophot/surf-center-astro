@@ -13,9 +13,9 @@ const steps = [
       <h2 id="v8-steps-title">Réservez en<br/>3 étapes</h2>
     </header>
 
-    <div class="stb__grid">
+    <div class="stb__grid" role="list" aria-label="Étapes de réservation">
       {steps.map((s, i) => (
-        <div class={`stb__item reveal reveal-d${i + 1}`}>
+        <div class={`stb__item reveal reveal-d${i + 1}`} role="listitem">
           <span class="stb__num" aria-hidden="true">{s.num}</span>
           <h3 class="stb__title">{s.title}</h3>
           <p class="stb__text">{s.text}</p>

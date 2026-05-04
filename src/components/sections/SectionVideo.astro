@@ -84,6 +84,7 @@ if (video.poster) {
           data-autoplay-video
           data-src={video.src}
           data-type={video.src.endsWith('.webm') ? 'video/webm' : 'video/mp4'}
+          aria-label={title}
         >
         </video>
         <button class="sv__play" type="button" aria-label="Lire la vidéo" data-video-play>

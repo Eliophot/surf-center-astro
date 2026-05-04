@@ -41,9 +41,9 @@ const benefits = [
       <p class="section__lead">Tout est pensé pour que vous profitiez pleinement de votre journée au lac.</p>
     </header>
 
-    <div class="vp__grid">
+    <div class="vp__grid" role="list">
       {benefits.map((b, i) => (
-        <div class={`vp__card reveal reveal-d${Math.min(i + 1, 4)}`}>
+        <div class={`vp__card reveal reveal-d${Math.min(i + 1, 4)}`} role="listitem">
           <div class="vp__icon" aria-hidden="true">
             {b.icon === 'anchor' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12 8v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 12H2a10 10 0 0 0 20 0h-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>}
             {b.icon === 'mountain' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="m8 3 4 8 5-5 5 15H2L8 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>}

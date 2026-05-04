@@ -6,7 +6,7 @@ import { reviews } from '../../data/home';
   <div class="container stesti">
     <h2 id="v2-reviews-title" class="sr-only">Témoignages</h2>
 
-    <div class="stesti__wrap" data-testi-rotator>
+    <div class="stesti__wrap" data-testi-rotator aria-roledescription="carrousel" aria-label="Témoignages clients" aria-live="polite">
       <span class="stesti__glyph" aria-hidden="true">&ldquo;</span>
 
       {reviews.map((r, i) => (

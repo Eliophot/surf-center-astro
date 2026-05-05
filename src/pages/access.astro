@@ -13,25 +13,29 @@ const nextUrl = url.searchParams.get('next') ?? '/';
     <style>
       :root {
         color-scheme: light dark;
-        --bg: #050510;
-        --card: rgba(255, 255, 255, 0.06);
-        --border: rgba(255, 255, 255, 0.12);
+        --bg: #03040c;
+        --card: rgba(255, 255, 255, 0.055);
+        --border: rgba(255, 255, 255, 0.1);
         --text: rgba(255, 255, 255, 0.92);
-        --muted: rgba(255, 255, 255, 0.65);
-        --accent: #26cfff;
+        --muted: rgba(255, 255, 255, 0.64);
+        --accent: #22d3ee; /* cyan */
+        --accent2: #a78bfa; /* violet */
+        --lime: #84cc16;
         --danger: #ff5a7a;
-        --orange: #f77b46;
+        --orange: #fb7185;
+        --ease-ui: cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       body {
         margin: 0;
         min-height: 100vh;
         background:
-          radial-gradient(1200px 600px at 10% 10%, rgba(38, 207, 255, 0.25), transparent 55%),
-          radial-gradient(1000px 500px at 90% 30%, rgba(247, 123, 70, 0.18), transparent 60%),
+          radial-gradient(1200px 680px at 18% 8%, rgba(34, 211, 238, 0.18), transparent 58%),
+          radial-gradient(900px 520px at 88% 24%, rgba(167, 139, 250, 0.14), transparent 62%),
+          radial-gradient(900px 520px at 70% 92%, rgba(251, 113, 133, 0.08), transparent 62%),
           var(--bg);
         color: var(--text);
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
         overflow-x: hidden;
       }
 
@@ -57,22 +61,75 @@ const nextUrl = url.searchParams.get('next') ?? '/';
         inset: 0;
         z-index: 1;
         background:
-          radial-gradient(800px 420px at 50% 40%, rgba(255, 255, 255, 0.08), transparent 62%),
-          linear-gradient(to bottom, rgba(5, 5, 16, 0.72), rgba(5, 5, 16, 0.88));
+          radial-gradient(900px 520px at 50% 35%, rgba(255, 255, 255, 0.075), transparent 62%),
+          linear-gradient(to bottom, rgba(3, 4, 12, 0.62), rgba(3, 4, 12, 0.9));
         pointer-events: none;
       }
 
       .card {
         position: relative;
         z-index: 2;
-        width: min(600px, calc(100% - 2.5rem));
-        border: 1px solid var(--border);
+        width: min(640px, calc(100% - 2.5rem));
+        border: 1px solid rgba(255, 255, 255, 0.12);
         background: var(--card);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border-radius: 18px;
-        padding: 1.75rem;
-        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(18px) saturate(1.35);
+        -webkit-backdrop-filter: blur(18px) saturate(1.35);
+        border-radius: 20px;
+        padding: 1.85rem;
+        box-shadow:
+          0 30px 110px rgba(0, 0, 0, 0.55),
+          0 0 0 1px rgba(34, 211, 238, 0.06) inset;
+      }
+      .card::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        border-radius: 22px;
+        background: conic-gradient(
+          from 180deg,
+          rgba(34, 211, 238, 0.95),
+          rgba(167, 139, 250, 0.65),
+          rgba(251, 113, 133, 0.55),
+          rgba(34, 211, 238, 0.95)
+        );
+        filter: blur(14px);
+        opacity: 0.26;
+        z-index: -2;
+        animation: spin 8.5s linear infinite;
+      }
+      .card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        background:
+          /* holo grid */
+          linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+          radial-gradient(900px 420px at 18% 8%, rgba(34, 211, 238, 0.13), transparent 55%),
+          radial-gradient(900px 420px at 85% 0%, rgba(167, 139, 250, 0.09), transparent 55%);
+        background-size: 46px 46px, 46px 46px, auto, auto;
+        background-position: 0 0, 0 0, 0 0, 0 0;
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0.9;
+      }
+      .card .scan {
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        pointer-events: none;
+        z-index: 3;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.06) 0px,
+          rgba(255, 255, 255, 0.06) 1px,
+          transparent 2px,
+          transparent 6px
+        );
+        opacity: 0.06;
+        mix-blend-mode: overlay;
+        mask-image: radial-gradient(60% 70% at 50% 35%, #000 70%, transparent 100%);
       }
 
       .badge {
@@ -80,12 +137,12 @@ const nextUrl = url.searchParams.get('next') ?? '/';
         align-items: center;
         gap: 0.55rem;
         padding: 0.4rem 0.75rem;
-        border: 1px solid rgba(38, 207, 255, 0.25);
+        border: 1px solid rgba(34, 211, 238, 0.28);
         border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.04);
+        background: rgba(255, 255, 255, 0.03);
         box-shadow:
-          0 0 18px rgba(38, 207, 255, 0.12),
-          inset 0 0 14px rgba(38, 207, 255, 0.05);
+          0 0 18px rgba(34, 211, 238, 0.12),
+          inset 0 0 14px rgba(34, 211, 238, 0.05);
         margin-bottom: 0.9rem;
       }
 
@@ -93,8 +150,8 @@ const nextUrl = url.searchParams.get('next') ?? '/';
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: radial-gradient(circle at 30% 30%, #fff, var(--accent) 55%, rgba(38, 207, 255, 0.2) 75%);
-        box-shadow: 0 0 14px rgba(38, 207, 255, 0.55);
+        background: radial-gradient(circle at 30% 30%, #fff, var(--accent) 55%, rgba(34, 211, 238, 0.2) 75%);
+        box-shadow: 0 0 14px rgba(34, 211, 238, 0.6);
         animation: pulse 1.2s ease-in-out infinite;
       }
 
@@ -108,8 +165,9 @@ const nextUrl = url.searchParams.get('next') ?? '/';
 
       h1 {
         margin: 0 0 0.5rem 0;
-        font-size: 1.55rem;
-        letter-spacing: -0.02em;
+        font-size: 1.7rem;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
       }
 
       p {
@@ -121,9 +179,12 @@ const nextUrl = url.searchParams.get('next') ?? '/';
       .loop {
         margin: 0.25rem 0 1.35rem;
         padding: 0.95rem 1rem;
-        border-radius: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: rgba(0, 0, 0, 0.18);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        background:
+          radial-gradient(900px 280px at 10% 0%, rgba(34, 211, 238, 0.08), transparent 58%),
+          radial-gradient(900px 280px at 90% 0%, rgba(167, 139, 250, 0.06), transparent 58%),
+          rgba(0, 0, 0, 0.24);
       }
 
       .loop .label {
@@ -135,7 +196,8 @@ const nextUrl = url.searchParams.get('next') ?? '/';
         margin-bottom: 0.45rem;
       }
 
-      .loop .line {
+      .loop .line,
+      .loop .mono {
         font-size: 1.05rem;
         font-weight: 750;
         letter-spacing: -0.01em;
@@ -146,6 +208,119 @@ const nextUrl = url.searchParams.get('next') ?? '/';
         background-clip: text;
         -webkit-text-fill-color: transparent;
         animation: shimmer 3.5s ease-in-out infinite;
+      }
+      .loop .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-weight: 700;
+        font-size: 0.92rem;
+        letter-spacing: 0.02em;
+        opacity: 0.95;
+      }
+
+      .hud {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin: 0.25rem 0 0.75rem;
+      }
+      .hud__left {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      .hud__kicker {
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.45);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+      .hud__title {
+        margin: 0;
+        font-size: 1.02rem;
+        font-weight: 820;
+        letter-spacing: -0.02em;
+      }
+      .hud__right {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.35rem 0.6rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(0, 0, 0, 0.14);
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 0.75rem;
+        font-weight: 650;
+        letter-spacing: 0.02em;
+        font-variant-numeric: tabular-nums;
+      }
+      .pill__dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 9999px;
+        background: rgba(132, 204, 22, 0.95);
+        box-shadow: 0 0 10px rgba(132, 204, 22, 0.35);
+      }
+
+      .progress {
+        position: relative;
+        height: 10px;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.055);
+        border: 1px solid rgba(255, 255, 255, 0.085);
+        overflow: hidden;
+      }
+      .progress__bar {
+        position: absolute;
+        inset: 0;
+        width: 55%;
+        border-radius: 9999px;
+        background: linear-gradient(90deg, rgba(34, 211, 238, 0.95), rgba(167, 139, 250, 0.92), rgba(251, 113, 133, 0.88));
+        filter: saturate(1.1);
+        animation: load 2.8s var(--ease, cubic-bezier(0.16, 1, 0.3, 1)) infinite;
+      }
+      .progress__shine {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+        transform: translateX(-100%);
+        animation: shine 1.6s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      .log {
+        margin-top: 0.85rem;
+        padding-top: 0.85rem;
+        border-top: 1px dashed rgba(255, 255, 255, 0.12);
+        display: grid;
+        gap: 0.35rem;
+      }
+      .log__row {
+        display: flex;
+        gap: 0.65rem;
+        align-items: baseline;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 0.82rem;
+        line-height: 1.4;
+      }
+      .log__ts {
+        color: rgba(255, 255, 255, 0.45);
+        font-variant-numeric: tabular-nums;
+        min-width: 4.2rem;
+      }
+      .log__msg {
+        color: rgba(255, 255, 255, 0.72);
+      }
+      .log__tag {
+        color: rgba(34, 211, 238, 0.85);
       }
 
       .subline {
@@ -263,10 +438,24 @@ const nextUrl = url.searchParams.get('next') ?? '/';
         0%, 100% { transform: scale(0.9); opacity: 0.75; }
         50% { transform: scale(1.15); opacity: 1; }
       }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      @keyframes load {
+        0% { transform: translateX(-35%); width: 35%; }
+        50% { transform: translateX(20%); width: 70%; }
+        100% { transform: translateX(110%); width: 35%; }
+      }
+      @keyframes shine {
+        0% { transform: translateX(-100%); opacity: 0; }
+        30% { opacity: 1; }
+        100% { transform: translateX(100%); opacity: 0; }
+      }
 
       @media (prefers-reduced-motion: reduce) {
         .dot { animation: none; }
         .loop .line { animation: none; }
+        .card::before,
+        .progress__bar,
+        .progress__shine { animation: none; }
       }
     </style>
   </head>
@@ -276,6 +465,7 @@ const nextUrl = url.searchParams.get('next') ?? '/';
       <div class="scrim" aria-hidden="true"></div>
 
       <main class="card">
+        <div class="scan" aria-hidden="true"></div>
         <div class="badge">
           <span class="dot" aria-hidden="true"></span>
           <span>Validation en cours</span>
@@ -285,9 +475,33 @@ const nextUrl = url.searchParams.get('next') ?? '/';
         <p>Cette section est en train d’être finalisée. La home est accessible, le reste est temporairement protégé.</p>
 
         <div class="loop" aria-live="polite">
-          <span class="label">Petite note pendant le chargement</span>
-          <p class="line" id="loopLine">En cours de création… ne soyez pas trop curieux.</p>
-          <p class="subline">On peaufine les détails (et on évite de vous spoiler).</p>
+          <div class="hud">
+            <div class="hud__left">
+              <span class="hud__kicker">Preview gate</span>
+              <p class="hud__title">Build en cours…</p>
+            </div>
+            <div class="hud__right">
+              <span class="pill"><span class="pill__dot" aria-hidden="true"></span><span id="hudState">compilation</span></span>
+              <span class="pill" id="hudPct">42%</span>
+            </div>
+          </div>
+
+          <div class="progress" role="progressbar" aria-label="Chargement" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress__bar" aria-hidden="true"></div>
+            <div class="progress__shine" aria-hidden="true"></div>
+          </div>
+
+          <div style="margin-top:0.85rem;">
+            <span class="label">Petite note pendant le chargement</span>
+            <p class="line" id="loopLine">En cours de création… ne soyez pas trop curieux.</p>
+            <p class="subline">On peaufine les détails (et on évite de vous spoiler).</p>
+          </div>
+
+          <div class="log" aria-hidden="true">
+            <div class="log__row"><span class="log__ts" id="t1">00:00</span><span class="log__msg"><span class="log__tag">[assets]</span> optimisation des images…</span></div>
+            <div class="log__row"><span class="log__ts" id="t2">00:00</span><span class="log__msg"><span class="log__tag">[ui]</span> alignement des détails & micro-interactions…</span></div>
+            <div class="log__row"><span class="log__ts" id="t3">00:00</span><span class="log__msg"><span class="log__tag">[seo]</span> dernières retouches avant validation…</span></div>
+          </div>
         </div>
 
         <div class="divider" aria-hidden="true"></div>
@@ -356,6 +570,25 @@ const nextUrl = url.searchParams.get('next') ?? '/';
           "On finalise l’expérience — curiosité autorisée, accès limité.",
         ];
 
+        // HUD (état + % + timestamps)
+        var hudState = document.getElementById('hudState');
+        var hudPct = document.getElementById('hudPct');
+        var tsEls = [document.getElementById('t1'), document.getElementById('t2'), document.getElementById('t3')];
+        var states = ['compilation', 'bundle', 'optimisation', 'polish UI', 'préparation', 'presque prêt'];
+        var pct = 42;
+        var lastHud = 0;
+
+        function pad2(n) { return (n < 10 ? '0' : '') + n; }
+        function setTS() {
+          var d = new Date();
+          var s = pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+          for (var ii = 0; ii < tsEls.length; ii++) {
+            if (tsEls[ii]) tsEls[ii].textContent = s;
+          }
+        }
+        setTS();
+        setInterval(setTS, 25000);
+
         var line = document.getElementById('loopLine');
         var i = 0;
         var lastSwitch = 0;
@@ -373,6 +606,17 @@ const nextUrl = url.searchParams.get('next') ?? '/';
             line.style.opacity = '1';
             line.style.transform = 'translateY(0)';
           }, 220);
+        }
+
+        function tickHud(t) {
+          if (!hudState && !hudPct) return;
+          if (!lastHud) lastHud = t;
+          if (t - lastHud < 1200) return;
+          lastHud = t;
+          pct = pct + 1 + Math.round(Math.random() * 2);
+          if (pct > 97) pct = 42;
+          if (hudPct) hudPct.textContent = pct + '%';
+          if (hudState) hudState.textContent = states[Math.floor((pct / 100) * states.length) % states.length];
         }
 
         if (line) {
@@ -478,6 +722,7 @@ const nextUrl = url.searchParams.get('next') ?? '/';
           }
 
           switchLine(now);
+          tickHud(now);
           requestAnimationFrame(draw);
         }
 

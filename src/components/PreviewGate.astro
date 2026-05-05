@@ -1,0 +1,27 @@
+---
+// Verrou "preview" côté client (SSG). Objectif: UX, pas sécurité forte.
+const storageKey = 'sc_preview_auth';
+---
+
+<script is:inline>
+  (function () {
+    try {
+      var key = 'sc_preview_auth';
+      var p = location.pathname || '/';
+
+      // Home standard + page d'accès toujours OK
+      if (p === '/' || p === '/access' || p === '/access/' ) return;
+
+      // Laisse passer les routes internes / assets
+      if (p.startsWith('/_astro/') || p === '/favicon.ico' || p === '/robots.txt' || p === '/sitemap.xml' || p === '/sitemap-index.xml' || p === '/_image') return;
+
+      if (localStorage.getItem(key) === '1') return;
+
+      location.replace('/access?next=' + encodeURIComponent(p + location.search));
+    } catch (_) {
+      // Si localStorage indisponible, on redirige quand même (meilleure expérience client)
+      location.replace('/access?next=' + encodeURIComponent((location.pathname || '/') + location.search));
+    }
+  })();
+</script>
+

@@ -7,6 +7,7 @@ import Footer from '../components/Footer.astro';
 import UniversalModal from '../components/UniversalModal.astro';
 import VersionSwitcher from '../components/VersionSwitcher.astro';
 import StickyActions from '../components/StickyActions.astro';
+import PreviewGate from '../components/PreviewGate.astro';
 
 interface Props {
   title: string;
@@ -111,6 +112,7 @@ if (preloadHero) {
     )}
   </head>
   <body>
+    <PreviewGate />
     <Header />
     <main id="main-content">
       <slot />

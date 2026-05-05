@@ -15,6 +15,7 @@ interface Props {
   ogImage?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   preloadHero?: ImageMetadata;
+  showVersionSwitcher?: boolean;
 }
 
 const {
@@ -24,6 +25,7 @@ const {
   ogImage = '/og-default.jpg',
   jsonLd,
   preloadHero,
+  showVersionSwitcher = true,
 } = Astro.props;
 
 const siteUrl = 'https://surfcenter-verdon.fr';
@@ -115,7 +117,7 @@ if (preloadHero) {
     </main>
     <Footer />
     <UniversalModal />
-    <VersionSwitcher />
+    {showVersionSwitcher && <VersionSwitcher />}
     <StickyActions />
 
     <button class="spct" id="scrollPct" type="button" aria-label="Retour en haut">

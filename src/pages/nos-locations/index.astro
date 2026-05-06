@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import LocationHero from '../../components/locations/LocationHero.astro';
-import LocationCards from '../../components/locations/LocationCards.astro';
+import ProductSlider from '../../components/v8/ProductSlider.astro';
 import HowItWorks from '../../components/locations/HowItWorks.astro';
 import ServicesGrid from '../../components/locations/ServicesGrid.astro';
 import Maillage from '../../components/Maillage.astro';
@@ -41,8 +41,7 @@ const jsonLd = [
 
 <Layout title={title} description={description} jsonLd={jsonLd}>
   <LocationHero
-    title="Nos locations"
-    tagline="Lac de Sainte-Croix · Gorges du Verdon"
+    title="Nos Locations"
     image={imgHeroLocations}
     alt="Paddle et bateaux électriques sur le lac de Sainte-Croix — Surf Center"
   />
@@ -50,7 +49,7 @@ const jsonLd = [
     { label: 'Accueil', href: '/' },
     { label: 'Nos locations' },
   ]} />
-  <LocationCards />
+  <ProductSlider showAllLink={false} />
   <HowItWorks />
   <ServicesGrid services={sharedServices} title="Inclus avec chaque location" />
   <Maillage />

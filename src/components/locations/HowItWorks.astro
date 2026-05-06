@@ -1,144 +1,118 @@
----
-const steps = [
-  { num: '01', title: 'Choisissez', text: 'Sélectionnez votre activité et votre créneau. Bateau, paddle, pédalo — tout est disponible en quelques clics.' },
-  { num: '02', title: 'Réservez', text: 'Confirmez votre réservation en ligne ou sur place. Paiement sécurisé, annulation gratuite jusqu\'à 24h.' },
-  { num: '03', title: 'Profitez', text: 'Récupérez votre matériel après un bref briefing sécurité et partez explorer le lac.' },
-];
----
-
 <section class="hiw section section--surface" aria-labelledby="hiw-title">
-  <div class="container">
-    <!-- Header avec titre et sous-titre -->
-    <header class="section__header reveal">
+  <div class="container hiw__layout">
+    <div class="hiw__content reveal">
       <span class="section__eyebrow">Notre fonctionnement</span>
       <h2 id="hiw-title">Simple, rapide<br/>& accompagné</h2>
-      <p class="section__lead">Réservez en ligne ou sur place, récupérez votre matériel au comptoir, profitez du lac.<br/>Notre équipe est là pour vous accompagner du briefing au retour.</p>
-    </header>
+      <p class="hiw__text">Réservez en ligne ou sur place, récupérez votre matériel au comptoir, profitez du lac. Notre équipe est là pour vous accompagner du briefing au retour.</p>
 
-    <!-- Frise chronologique horizontale -->
-    <div class="hiw__timeline-grid" role="list" aria-label="Étapes de location">
-      {steps.map((s, i) => (
-        <div class={`hiw__step reveal reveal-d${i + 1}`} role="listitem">
-          <span class="hiw__step-num" aria-hidden="true">{s.num}</span>
-          <h3 class="hiw__step-title">{s.title}</h3>
-          <p class="hiw__step-text">{s.text}</p>
-          {i < steps.length - 1 && <div class="hiw__connector" aria-hidden="true"></div>}
-        </div>
-      ))}
+      <ol class="hiw__steps" role="list">
+        <li>
+          <span class="hiw__step-num" aria-hidden="true">01</span>
+          <div>
+            <strong>Réservez</strong>
+            <p>En ligne ou au comptoir d'accueil</p>
+          </div>
+        </li>
+        <li>
+          <span class="hiw__step-num" aria-hidden="true">02</span>
+          <div>
+            <strong>Briefing</strong>
+            <p>Sécurité, carte du lac et conseils</p>
+          </div>
+        </li>
+        <li>
+          <span class="hiw__step-num" aria-hidden="true">03</span>
+          <div>
+            <strong>Profitez</strong>
+            <p>Naviguez librement sur le lac</p>
+          </div>
+        </li>
+      </ol>
     </div>
 
-    <!-- Visuel en dernier -->
-    <div class="hiw__visual reveal">
-      <img src="/surfcenter-location-lac-sainte-croix.JPG" alt="Équipe Surf Center au comptoir de location — lac de Sainte-Croix" width="1200" height="500" loading="lazy" decoding="async" />
+    <div class="hiw__visual reveal reveal-d2">
+      <img src="/surfcenter-location-lac-sainte-croix.JPG" alt="Équipe Surf Center au comptoir de location — lac de Sainte-Croix" width="640" height="800" loading="lazy" decoding="async" />
     </div>
   </div>
 </section>
 
 <style>
-  /* Frise chronologique - style marketing */
-  .hiw__timeline-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--s-10);
-    max-width: var(--max-w-narrow);
-    margin-inline: auto;
+  .hiw {
+    background: var(--dgrad-rose, linear-gradient(0deg, rgba(237, 103, 118, 0.10) 0%, rgba(255, 255, 255, 0.10) 100%));
   }
 
-  .hiw__step {
-    position: relative;
-    text-align: center;
+  .hiw__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: center;
+  }
+
+  .hiw__text {
+    font-size: 0.95rem;
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    max-width: 38ch;
+    margin-top: var(--s-6);
+    margin-bottom: var(--s-10);
+  }
+
+  .hiw__steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .hiw__steps li {
+    display: flex;
+    gap: var(--s-4);
+    align-items: flex-start;
   }
 
   .hiw__step-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    border-radius: var(--r-full);
-    background: var(--c-orange);
-    color: #fff;
-    font-size: 1.15rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-bottom: var(--s-5);
-    box-shadow: 0 4px 20px rgb(247 123 70 / 0.25);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--c-orange);
+    min-width: 2rem;
+    padding-top: 2px;
   }
 
-  .hiw__step-title {
-    font-size: 1.1rem;
+  .hiw__steps strong {
+    display: block;
+    font-size: 0.88rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    margin-bottom: var(--s-3);
     color: var(--c-text);
+    margin-bottom: 2px;
   }
 
-  .hiw__step-text {
-    font-size: 0.88rem;
-    color: var(--c-text-secondary);
-    line-height: 1.7;
-    max-width: 30ch;
-    margin-inline: auto;
+  .hiw__steps p {
+    font-size: 0.78rem;
+    color: var(--c-text-muted);
+    line-height: 1.5;
   }
 
-  .hiw__connector {
-    display: none;
-  }
-
-  /* Visuel panoramique */
   .hiw__visual {
-    position: relative;
-    border-radius: var(--r-xl);
+    border-radius: var(--r-lg);
     overflow: hidden;
-    margin-top: var(--s-12);
   }
 
   .hiw__visual img {
     width: 100%;
     height: auto;
     display: block;
-    aspect-ratio: 21 / 9;
+    aspect-ratio: 4 / 5;
     object-fit: cover;
   }
 
-  /* Desktop : frise horizontale avec connecteurs */
   @media (min-width: 900px) {
-    .hiw__timeline-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--s-8);
-      max-width: none;
-    }
-    
-    .hiw__visual {
-      margin-top: var(--s-16);
-    }
-
-    .hiw__step-num {
-      width: 64px;
-      height: 64px;
-      font-size: 1.25rem;
-    }
-
-    .hiw__connector {
-      display: block;
-      position: absolute;
-      top: 32px;
-      left: calc(50% + 44px);
-      width: calc(100% - 88px + var(--s-8));
-      height: 2px;
-      background: linear-gradient(90deg, var(--c-orange), var(--c-border));
-    }
-
-    .hiw__visual img {
-      aspect-ratio: 3 / 1;
-    }
+    .hiw__layout { grid-template-columns: 1fr 1.2fr; gap: var(--s-20); }
   }
 
-  /* Tablette */
-  @media (min-width: 600px) and (max-width: 899px) {
-    .hiw__visual img {
-      aspect-ratio: 16 / 7;
-    }
+  /* Mobile a11y — extra +1px on smallest type */
+  @media (max-width: 768px) {
+    .hiw__step-num { font-size: calc(0.58rem + 1px); }
   }
 </style>

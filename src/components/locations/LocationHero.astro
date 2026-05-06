@@ -4,12 +4,14 @@ import type { ImageMetadata } from 'astro';
 
 interface Props {
   title: string;
-  tagline?: string;
+  subtitle?: string;
   image: string | ImageMetadata;
   alt: string;
 }
 
-const { title, tagline, image, alt } = Astro.props;
+const { title, subtitle, image, alt } = Astro.props;
+
+const currentYear = new Date().getFullYear();
 ---
 
 <section class="lochero" data-hero aria-label={title}>
@@ -30,18 +32,27 @@ const { title, tagline, image, alt } = Astro.props;
     />
   )}
   <div class="lochero__overlay" aria-hidden="true"></div>
-  <div class="container lochero__content">
-    {tagline && <span class="lochero__tagline">{tagline}</span>}
-    <h1 class="lochero__title">{title}</h1>
+  <div class="lochero__content">
+    <div class="lochero__badge">
+      <span class="lochero__badge-dot" aria-hidden="true"></span>
+      <span class="lochero__badge-text">Saison {currentYear} — Réservations ouvertes</span>
+    </div>
+    <h1 class="lochero__title">
+      {title.split(' ').map((word, i) => (
+        <span class="lochero__title-line">{word}</span>
+      ))}
+    </h1>
+    {subtitle && <p class="lochero__subtitle">{subtitle}</p>}
   </div>
 </section>
 
 <style>
   .lochero {
     position: relative;
-    min-height: 55vh;
+    height: 70vh;
+    min-height: 500px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     overflow: hidden;
   }
 
@@ -51,19 +62,26 @@ const { title, tagline, image, alt } = Astro.props;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 40%;
+    object-position: center 30%;
   }
 
   .lochero__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgb(0 0 0 / 0.1) 0%, rgb(0 0 0 / 0.55) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.48) 0%,
+      rgba(0, 0, 0, 0.28) 30%,
+      rgba(0, 0, 0, 0.24) 55%,
+      rgba(0, 0, 0, 0.56) 100%
+    );
   }
 
   .lochero__content {
     position: relative;
     z-index: 1;
-    padding-bottom: var(--s-12);
+    padding-left: max(1.5rem, calc((100vw - 1200px) / 2 + 1.5rem));
+    padding-top: 6rem;
     animation: lochero-up 800ms var(--ease-smooth) both;
   }
 
@@ -72,33 +90,88 @@ const { title, tagline, image, alt } = Astro.props;
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .lochero__tagline {
-    display: inline-block;
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--c-orange);
-    background: rgb(0 0 0 / 0.3);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 5px 16px;
+  .lochero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    background: rgba(247, 123, 70, 0.15);
+    border: 1px solid rgba(247, 123, 70, 0.3);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 0.5rem 1rem;
     border-radius: var(--r-full);
-    margin-bottom: var(--s-4);
+    margin-bottom: 1.5rem;
+  }
+
+  .lochero__badge-dot {
+    width: 6px;
+    height: 6px;
+    background: #4ade80;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .lochero__badge-text {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-orange-light);
   }
 
   .lochero__title {
-    color: #fff !important;
-    font-size: clamp(2.4rem, 7vw, 4.5rem);
-    max-width: 12ch;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: clamp(3.5rem, 10vw, 8.6875rem); /* 139px @ desktop */
+    font-style: normal;
+    font-weight: 800;
+    line-height: clamp(3rem, 8.6vw, 7.5rem); /* 120px @ desktop */
+    letter-spacing: -0.052em; /* -7.2px @ 139px */
+    text-transform: uppercase;
+    text-shadow:
+      0 4px 40px rgba(0, 0, 0, 0.50),
+      0 1px 3px rgba(0, 0, 0, 0.30);
+    margin: 0;
+  }
+
+  .lochero__title-line {
+    display: block;
+  }
+
+  .lochero__subtitle {
+    margin-top: 2rem;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    text-shadow: 0px 1px 6px rgba(0, 0, 0, 0.4);
   }
 
   @media (prefers-reduced-motion: reduce) {
     .lochero__content { animation: none; }
   }
 
-  /* Mobile a11y — extra +1px on smallest type */
   @media (max-width: 768px) {
-    .lochero__tagline { font-size: calc(0.62rem + 1px); }
+    .lochero {
+      height: 60vh;
+      min-height: 420px;
+    }
+
+    .lochero__content {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      padding-top: 4rem;
+    }
+
+    .lochero__badge-text {
+      font-size: calc(0.65rem + 1px);
+    }
+
+    .lochero__subtitle {
+      font-size: calc(0.62rem + 1px);
+    }
   }
 </style>

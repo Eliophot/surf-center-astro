@@ -1,4 +1,9 @@
 ---
+interface Props {
+  showAllLink?: boolean;
+}
+const { showAllLink = true } = Astro.props;
+
 import { Image } from 'astro:assets';
 import imgPlanche from '../../assets/images/location-planche-a-voile.png';
 import imgBateau from '../../assets/images/location-bateau-electrique.jpeg';
@@ -129,7 +134,7 @@ const locations = [
     </div>
 
     <div class="sl-cta reveal reveal-d1">
-      <a href="/nos-locations" class="btn btn--secondary">Toutes nos locations</a>
+      {showAllLink && <a href="/nos-locations" class="btn btn--secondary">Toutes nos locations</a>}
       <BookingButton label="Réserver" />
     </div>
   </div>

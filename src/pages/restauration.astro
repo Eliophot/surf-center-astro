@@ -1,17 +1,13 @@
 ---
-import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import LocationHero from '../components/locations/LocationHero.astro';
 import SectionOneImage from '../components/sections/SectionOneImage.astro';
-import SectionTwoImages from '../components/sections/SectionTwoImages.astro';
 import Maillage from '../components/Maillage.astro';
-import BookingCTA from '../components/locations/BookingCTA.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 import imgSnack from '../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
 import imgEsprit from '../assets/images/esprit.png';
 import imgBar from '../assets/images/IMG20220610131419.jpg';
-import imgSunset from '../assets/images/IMG20220618204351.jpg';
 
 const title = 'Restauration — Snack-pizzeria face au lac | Surf Center Verdon';
 const description = 'Pizzas artisanales au feu de bois, salades fraîches, glaces et boissons avec terrasse face au lac de Sainte-Croix. Snack-pizzeria Surf Center, Les Salles-sur-Verdon, Gorges du Verdon.';
@@ -57,7 +53,7 @@ const jsonLd = [
 <Layout title={title} description={description} jsonLd={jsonLd}>
   <LocationHero
     title="Restauration"
-    tagline="Snack-pizzeria · Terrasse face au lac"
+    subtitle="Snack-pizzeria · Terrasse face au lac"
     image={imgSnack}
     alt="Vue aérienne du snack-pizzeria Surf Center au lac de Sainte-Croix"
   />
@@ -94,8 +90,8 @@ const jsonLd = [
       { text: 'Ingrédients frais de saison', icon: 'leaf' },
       { text: 'Formules midi et goûter', icon: 'clock' },
     ]}
+    tags={['Feu de bois', 'Pâte maison', 'Ingrédients frais', 'Formules midi']}
     reverse
-    surface
   />
 
   <!-- Le bar -->
@@ -111,113 +107,175 @@ const jsonLd = [
       { text: 'Glaces artisanales', icon: 'sun' },
       { text: 'Café & thé', icon: 'flame' },
     ]}
+    style="background: linear-gradient(0deg, rgba(38, 207, 255, 0.10) 0%, rgba(38, 207, 255, 0.00) 100%);"
   />
 
   <!-- Horaires & infos -->
-  <section class="section section--surface" aria-labelledby="horaires-title">
-    <div class="container restoinfo__layout">
-      <div class="restoinfo__content reveal">
+  <section class="infocard section" aria-labelledby="horaires-title">
+    <div class="container">
+      <header class="section__header reveal">
         <span class="section__eyebrow">Infos pratiques</span>
         <h2 id="horaires-title">Horaires & accès</h2>
-        <p class="restoinfo__text">Le snack-pizzeria est ouvert tous les jours en saison, de 11h à 18h30. Pas de réservation nécessaire — venez quand vous voulez.</p>
+        <p class="infocard__intro">Ouvert tous les jours en saison, sans réservation — venez quand vous voulez.</p>
+      </header>
 
-        <div class="restoinfo__grid">
-          <div class="restoinfo__card">
-            <span class="restoinfo__card-label">Horaires</span>
-            <span class="restoinfo__card-value">11h — 18h30</span>
-            <span class="restoinfo__card-sub">Tous les jours, avril à octobre</span>
+      <div class="infocard__grid" role="list">
+        <div class="infocard__item reveal reveal-d1" role="listitem">
+          <div class="infocard__icon-wrap" aria-hidden="true">
+            <div class="infocard__icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
           </div>
-          <div class="restoinfo__card">
-            <span class="restoinfo__card-label">Service continu</span>
-            <span class="restoinfo__card-value">Non-stop</span>
-            <span class="restoinfo__card-sub">Pas de coupure midi</span>
-          </div>
-          <div class="restoinfo__card">
-            <span class="restoinfo__card-label">Paiement</span>
-            <span class="restoinfo__card-value">CB & espèces</span>
-            <span class="restoinfo__card-sub">Sans minimum</span>
-          </div>
-          <div class="restoinfo__card">
-            <span class="restoinfo__card-label">Accès</span>
-            <span class="restoinfo__card-value">Plage directe</span>
-            <span class="restoinfo__card-sub">Parking gratuit à 50m</span>
-          </div>
+          <span class="infocard__label">Horaires</span>
+          <span class="infocard__value">11h — 18h30</span>
+          <span class="infocard__sub">Tous les jours, avril à octobre</span>
         </div>
-      </div>
 
-      <div class="restoinfo__visual reveal reveal-d2">
-        <Image src={imgSunset} alt="Coucher de soleil au Surf Center — restauration face au lac" width={640} height={800} loading="lazy" decoding="async" format="webp" quality={75} />
+        <div class="infocard__item reveal reveal-d2" role="listitem">
+          <div class="infocard__icon-wrap" aria-hidden="true">
+            <div class="infocard__icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            </div>
+          </div>
+          <span class="infocard__label">Service continu</span>
+          <span class="infocard__value">Non-stop</span>
+          <span class="infocard__sub">Pas de coupure midi</span>
+        </div>
+
+        <div class="infocard__item reveal reveal-d3" role="listitem">
+          <div class="infocard__icon-wrap" aria-hidden="true">
+            <div class="infocard__icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            </div>
+          </div>
+          <span class="infocard__label">Paiement</span>
+          <span class="infocard__value">CB & espèces</span>
+          <span class="infocard__sub">Sans minimum</span>
+        </div>
+
+        <div class="infocard__item reveal reveal-d4" role="listitem">
+          <div class="infocard__icon-wrap" aria-hidden="true">
+            <div class="infocard__icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+          </div>
+          <span class="infocard__label">Accès</span>
+          <span class="infocard__value">Plage directe</span>
+          <span class="infocard__sub">Parking gratuit à 50m</span>
+        </div>
       </div>
     </div>
   </section>
 
   <Maillage />
-  <BookingCTA title="Rendez-vous au lac" text="Retrouvez-nous sur la plage des Salles-sur-Verdon pour une journée sport, détente et gourmandise." />
 </Layout>
 
 <style>
-  .restoinfo__layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--s-12);
-    align-items: center;
+  .infocard {
+    background: linear-gradient(180deg, rgba(38, 207, 255, 0.10) 0%, rgba(38, 207, 255, 0.00) 100%);
   }
 
-  .restoinfo__text {
-    font-size: 0.95rem;
+  .infocard .section__header {
+    text-align: center;
+  }
+
+  .infocard__intro {
+    font-size: 1rem;
     color: var(--c-text-secondary);
-    line-height: 1.75;
+    line-height: 1.7;
     max-width: 42ch;
-    margin-top: var(--s-6);
-    margin-bottom: var(--s-10);
+    margin-inline: auto;
+    margin-top: var(--s-4);
   }
 
-  .restoinfo__grid {
+  .infocard__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s-4);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-5);
+    max-width: 900px;
+    margin-inline: auto;
+    margin-top: var(--s-12);
   }
 
-  .restoinfo__card {
-    padding: var(--s-5);
-    background: var(--c-bg);
-    border-radius: var(--r-md);
-    border: 1px solid var(--c-border-light);
+  .infocard__item {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--s-3);
+    padding: var(--s-8) var(--s-5);
+    background: var(--c-bg);
+    border-radius: var(--r-xl);
+    border: 1px solid var(--c-border-light);
+    transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
   }
 
-  .restoinfo__card-label {
-    font-size: 0.55rem;
+  .infocard__item:hover {
+    border-color: rgba(38, 207, 255, 0.45);
+    transform: translateY(-3px);
+  }
+
+  [data-theme='dark'] .infocard__item {
+    background: var(--c-surface);
+    border-color: var(--c-border);
+  }
+
+  .infocard__icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-full);
+    background: linear-gradient(180deg, #ED6776 0%, #F47456 71.742%, #F77B46 100%);
+    color: #fff;
+    margin-bottom: var(--s-2);
+  }
+
+  .infocard__label {
+    font-size: 0.65rem;
     font-weight: 600;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--c-text-muted);
-    margin-bottom: 4px;
   }
 
-  .restoinfo__card-value {
-    font-size: 1.1rem;
+  .infocard__value {
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--c-text);
-    margin-bottom: 2px;
+    line-height: 1.2;
   }
 
-  .restoinfo__card-sub {
-    font-size: 0.7rem;
+  .infocard__sub {
+    font-size: 0.78rem;
     color: var(--c-text-muted);
+    line-height: 1.4;
   }
 
-  .restoinfo__visual img {
-    width: 100%;
-    height: auto;
-    display: block;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: var(--r-lg);
+  @media (min-width: 600px) {
+    .infocard__grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--s-6);
+    }
+
+    .infocard__item {
+      padding: var(--s-10) var(--s-5);
+    }
+
+    .infocard__icon {
+      width: 80px;
+      height: 80px;
+    }
+
+    .infocard__icon svg {
+      width: 32px;
+      height: 32px;
+    }
   }
 
-  @media (min-width: 900px) {
-    .restoinfo__layout { grid-template-columns: 1.1fr 1fr; gap: var(--s-20); }
+  @media (prefers-reduced-motion: reduce) {
+    .infocard__item { transition: none; }
+    .infocard__item:hover { transform: none; }
   }
 </style>

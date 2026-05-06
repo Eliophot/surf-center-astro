@@ -3,18 +3,19 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
-  title: string;
+  title: string | string[];
   subtitle?: string;
   image: string | ImageMetadata;
   alt: string;
 }
 
 const { title, subtitle, image, alt } = Astro.props;
+const titleLines = Array.isArray(title) ? title : title.split(' ');
 
 const currentYear = new Date().getFullYear();
 ---
 
-<section class="lochero" data-hero aria-label={title}>
+<section class="lochero" data-hero aria-label={Array.isArray(title) ? title.join(' ') : title}>
   {typeof image === 'string' ? (
     <img class="lochero__bg" src={image} alt={alt} width="1920" height="900" loading="eager" fetchpriority="high" decoding="async" />
   ) : (
@@ -38,8 +39,8 @@ const currentYear = new Date().getFullYear();
       <span class="lochero__badge-text">Saison {currentYear} — Réservations ouvertes</span>
     </div>
     <h1 class="lochero__title">
-      {title.split(' ').map((word, i) => (
-        <span class="lochero__title-line">{word}</span>
+      {titleLines.map((line) => (
+        <span class="lochero__title-line">{line}</span>
       ))}
     </h1>
     {subtitle && <p class="lochero__subtitle">{subtitle}</p>}

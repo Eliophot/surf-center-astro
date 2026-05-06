@@ -13,9 +13,12 @@ interface Props {
   text: string;
   image: { src: string | ImageMetadata; alt: string; };
   list?: ListItem[];
+  tags?: string[];
   cta?: { label: string; href?: string; booking?: boolean; };
   reverse?: boolean;
   surface?: boolean;
+  className?: string;
+  style?: string;
 }
 
 const {
@@ -25,9 +28,12 @@ const {
   text,
   image,
   list,
+  tags,
   cta,
   reverse = false,
   surface = false,
+  className,
+  style,
 } = Astro.props;
 
 const sectionId = id || eyebrow.toLowerCase().replace(/\s+/g, '-');
@@ -35,8 +41,9 @@ const titleId = `${sectionId}-title`;
 ---
 
 <section
-  class:list={['section', { 'section--surface': surface }]}
+  class:list={['section', className, { 'section--surface': surface }]}
   aria-labelledby={titleId}
+  style={style}
 >
   <div class:list={['container s1', { 's1--reverse': reverse }]}>
     <div class="s1__content reveal">
@@ -44,15 +51,10 @@ const titleId = `${sectionId}-title`;
       <h2 id={titleId} set:html={title} />
       <p class="s1__text">{text}</p>
 
-      {list && list.length > 0 && (
-        <ul class="s1__list" role="list">
-          {list.map((item) => (
-            <li>
-              <span class="s1__dash" aria-hidden="true">—</span>
-              <span>{item.text}</span>
-            </li>
-          ))}
-        </ul>
+      {tags && tags.length > 0 && (
+        <div class="s1__tags">
+          {tags.map((tag) => <span>{tag}</span>)}
+        </div>
       )}
 
       {cta && (
@@ -139,6 +141,30 @@ const titleId = `${sectionId}-title`;
     aspect-ratio: 4 / 5;
     object-fit: cover;
     border-radius: var(--r-lg);
+  }
+
+  .s1__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    margin-top: var(--s-8);
+  }
+
+  .s1__tags span {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    background: var(--c-bg);
+    padding: 5px 14px;
+    border-radius: var(--r-full);
+    border: 1px solid var(--c-border-light);
+  }
+
+  :global([data-theme='dark']) .s1__tags span {
+    background: var(--c-surface);
+    border-color: var(--c-border);
   }
 
   @media (min-width: 900px) {

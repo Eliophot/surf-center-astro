@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import LocationHero from '../components/locations/LocationHero.astro';
 import SectionOneImage from '../components/sections/SectionOneImage.astro';
 import Maillage from '../components/Maillage.astro';
 import BookingCTA from '../components/locations/BookingCTA.astro';
@@ -52,18 +53,11 @@ const jsonLd = [
 ---
 
 <Layout title={title} description={description} jsonLd={jsonLd}>
-  <!-- Hero vidéo pleine page -->
-  <section class="espvideo" data-hero aria-label="L'esprit Surf Center">
-    <video class="espvideo__bg" autoplay muted loop playsinline poster="/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg">
-      <source src="/concert-surfcenter-lac-sainte-croix.mp4" type="video/mp4" />
-    </video>
-    <img class="espvideo__fallback" src="/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg" alt="Lac de Sainte-Croix — Gorges du Verdon" width="1920" height="1080" loading="eager" fetchpriority="high" decoding="async" />
-    <div class="espvideo__overlay" aria-hidden="true"></div>
-    <div class="container espvideo__content">
-      <span class="espvideo__tag">Depuis plus de 10 ans</span>
-      <h1 class="espvideo__title">L'esprit<br/>Surf Center</h1>
-    </div>
-  </section>
+  <LocationHero
+    title={["Esprit", "Surf Center"]}
+    image={imgPaddleBateaux}
+    alt="Paddle et bateaux électriques sur le lac de Sainte-Croix — Surf Center"
+  />
   <Breadcrumbs items={[
     { label: 'Accueil', href: '/' },
     { label: "L'esprit Surf Center" },
@@ -162,75 +156,6 @@ const jsonLd = [
 </Layout>
 
 <style>
-  /* ── Hero vidéo ── */
-  .espvideo {
-    position: relative;
-    min-height: 65vh;
-    display: flex;
-    align-items: flex-end;
-    overflow: hidden;
-    background: #000;
-  }
-
-  .espvideo__bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 50%;
-  }
-
-  .espvideo__fallback {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-  }
-
-  .espvideo__bg + .espvideo__fallback { display: none; }
-
-  .espvideo__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgb(0 0 0 / 0.15) 0%, rgb(0 0 0 / 0.6) 100%);
-    z-index: 1;
-  }
-
-  .espvideo__content {
-    position: relative;
-    z-index: 2;
-    padding-bottom: var(--s-12);
-    animation: espvideo-up 800ms var(--ease-smooth) both;
-  }
-
-  @keyframes espvideo-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .espvideo__tag {
-    display: inline-block;
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--c-orange);
-    background: rgb(0 0 0 / 0.3);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 5px 16px;
-    border-radius: var(--r-full);
-    margin-bottom: var(--s-4);
-  }
-
-  .espvideo__title {
-    color: #fff !important;
-    font-size: clamp(2.4rem, 7vw, 4.5rem);
-  }
-
   /* ── Cadre grid ── */
   .espcadre__grid {
     display: grid;
@@ -317,7 +242,6 @@ const jsonLd = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .espvideo__content { animation: none; }
     .espact__img-wrap img { transition: none; }
   }
 </style>

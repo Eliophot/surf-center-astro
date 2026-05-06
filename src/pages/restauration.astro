@@ -53,7 +53,6 @@ const jsonLd = [
 <Layout title={title} description={description} jsonLd={jsonLd}>
   <LocationHero
     title="Restauration"
-    subtitle="Snack-pizzeria · Terrasse face au lac"
     image={imgSnack}
     alt="Vue aérienne du snack-pizzeria Surf Center au lac de Sainte-Croix"
   />
@@ -120,7 +119,8 @@ const jsonLd = [
       </header>
 
       <div class="infocard__grid" role="list">
-        <div class="infocard__item reveal reveal-d1" role="listitem">
+        <div class="infocard__item reveal reveal-d1" role="listitem" data-info-card>
+          <span class="infocard__shimmer" aria-hidden="true"></span>
           <div class="infocard__icon-wrap" aria-hidden="true">
             <div class="infocard__icon">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -131,7 +131,8 @@ const jsonLd = [
           <span class="infocard__sub">Tous les jours, avril à octobre</span>
         </div>
 
-        <div class="infocard__item reveal reveal-d2" role="listitem">
+        <div class="infocard__item reveal reveal-d2" role="listitem" data-info-card>
+          <span class="infocard__shimmer" aria-hidden="true"></span>
           <div class="infocard__icon-wrap" aria-hidden="true">
             <div class="infocard__icon">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
@@ -142,7 +143,8 @@ const jsonLd = [
           <span class="infocard__sub">Pas de coupure midi</span>
         </div>
 
-        <div class="infocard__item reveal reveal-d3" role="listitem">
+        <div class="infocard__item reveal reveal-d3" role="listitem" data-info-card>
+          <span class="infocard__shimmer" aria-hidden="true"></span>
           <div class="infocard__icon-wrap" aria-hidden="true">
             <div class="infocard__icon">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
@@ -153,7 +155,8 @@ const jsonLd = [
           <span class="infocard__sub">Sans minimum</span>
         </div>
 
-        <div class="infocard__item reveal reveal-d4" role="listitem">
+        <div class="infocard__item reveal reveal-d4" role="listitem" data-info-card>
+          <span class="infocard__shimmer" aria-hidden="true"></span>
           <div class="infocard__icon-wrap" aria-hidden="true">
             <div class="infocard__icon">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -171,13 +174,12 @@ const jsonLd = [
 </Layout>
 
 <style>
+  /* ── Section ─────────────────────────────────────── */
   .infocard {
     background: linear-gradient(180deg, rgba(38, 207, 255, 0.10) 0%, rgba(38, 207, 255, 0.00) 100%);
   }
 
-  .infocard .section__header {
-    text-align: center;
-  }
+  .infocard .section__header { text-align: center; }
 
   .infocard__intro {
     font-size: 1rem;
@@ -188,7 +190,18 @@ const jsonLd = [
     margin-top: var(--s-4);
   }
 
+  /* ── Grid tokens ─────────────────────────────────── */
   .infocard__grid {
+    --ic-border:       rgb(237 103 118 / 0.28);
+    --ic-border-hover: rgb(237 103 118 / 0.55);
+    --ic-glow:         0 0 0 rgb(0 0 0 / 0);
+    --ic-glow-hover:
+      0 12px 30px rgb(237 103 118 / 0.12),
+      0 0 0 1px rgb(237 103 118 / 0.06);
+    --ic-shimmer-c1:   rgb(237 103 118 / 0.28);
+    --ic-shimmer-c2:   rgb(250 128 61 / 0.20);
+    --ic-shimmer-blend: multiply;
+
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--s-5);
@@ -197,7 +210,25 @@ const jsonLd = [
     margin-top: var(--s-12);
   }
 
+  [data-theme='dark'] .infocard__grid {
+    --ic-border:       rgb(237 103 118 / 0.22);
+    --ic-border-hover: rgb(237 103 118 / 0.55);
+    --ic-glow:         inset 0 0 0 1px rgb(255 255 255 / 0.02);
+    --ic-glow-hover:
+      0 0 24px rgb(237 103 118 / 0.18),
+      0 0 60px rgb(250 128 61 / 0.10),
+      inset 0 0 24px rgb(237 103 118 / 0.06);
+    --ic-shimmer-c1:   rgb(237 103 118 / 0.34);
+    --ic-shimmer-c2:   rgb(250 128 61 / 0.26);
+    --ic-shimmer-blend: screen;
+  }
+
+  /* ── Card ────────────────────────────────────────── */
   .infocard__item {
+    --holo-x: 50%;
+    --holo-y: 50%;
+    --holo-angle: 180deg;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -206,21 +237,54 @@ const jsonLd = [
     padding: var(--s-8) var(--s-5);
     background: var(--c-bg);
     border-radius: var(--r-xl);
-    border: 1px solid var(--c-border-light);
-    transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+    border: 1px solid var(--ic-border);
+    overflow: hidden;
+    box-shadow: var(--ic-glow);
+    transition:
+      border-color 0.4s var(--ease),
+      box-shadow   0.4s var(--ease),
+      transform    0.4s var(--ease);
   }
 
   .infocard__item:hover {
-    border-color: rgba(38, 207, 255, 0.45);
+    border-color: var(--ic-border-hover);
+    box-shadow: var(--ic-glow-hover);
     transform: translateY(-3px);
   }
 
-  [data-theme='dark'] .infocard__item {
-    background: var(--c-surface);
-    border-color: var(--c-border);
+  [data-theme='dark'] .infocard__item { background: var(--c-surface); }
+
+  /* ── Shimmer ─────────────────────────────────────── */
+  .infocard__shimmer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease);
+    background:
+      radial-gradient(
+        circle at var(--holo-x) var(--holo-y),
+        var(--ic-shimmer-c1) 0%,
+        transparent 55%
+      ),
+      conic-gradient(
+        from var(--holo-angle) at var(--holo-x) var(--holo-y),
+        var(--ic-shimmer-c1),
+        var(--ic-shimmer-c2),
+        var(--ic-shimmer-c1)
+      );
+    mix-blend-mode: var(--ic-shimmer-blend);
   }
 
+  .infocard__item:hover .infocard__shimmer { opacity: 1; }
+
+  /* ── Icon ────────────────────────────────────────── */
+  .infocard__icon-wrap { position: relative; z-index: 2; }
+
   .infocard__icon {
+    position: relative;
+    z-index: 1;
     width: 64px;
     height: 64px;
     display: flex;
@@ -232,7 +296,9 @@ const jsonLd = [
     margin-bottom: var(--s-2);
   }
 
+  /* ── Typography ──────────────────────────────────── */
   .infocard__label {
+    position: relative; z-index: 2;
     font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 0.16em;
@@ -241,6 +307,7 @@ const jsonLd = [
   }
 
   .infocard__value {
+    position: relative; z-index: 2;
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--c-text);
@@ -248,34 +315,51 @@ const jsonLd = [
   }
 
   .infocard__sub {
+    position: relative; z-index: 2;
     font-size: 0.78rem;
     color: var(--c-text-muted);
     line-height: 1.4;
   }
 
+  /* ── Responsive ──────────────────────────────────── */
   @media (min-width: 600px) {
-    .infocard__grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--s-6);
-    }
-
-    .infocard__item {
-      padding: var(--s-10) var(--s-5);
-    }
-
-    .infocard__icon {
-      width: 80px;
-      height: 80px;
-    }
-
-    .infocard__icon svg {
-      width: 32px;
-      height: 32px;
-    }
+    .infocard__grid { grid-template-columns: repeat(4, 1fr); gap: var(--s-6); }
+    .infocard__item { padding: var(--s-10) var(--s-5); }
+    .infocard__icon { width: 80px; height: 80px; }
+    .infocard__icon svg { width: 32px; height: 32px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .infocard__item { transition: none; }
+    .infocard__item,
+    .infocard__shimmer { transition: none; }
     .infocard__item:hover { transform: none; }
   }
 </style>
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) {
+    document.querySelectorAll<HTMLElement>('[data-info-card]').forEach((card) => {
+      let raf = 0;
+      const onMove = (e: MouseEvent) => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          const r = card.getBoundingClientRect();
+          const x = ((e.clientX - r.left) / r.width) * 100;
+          const y = ((e.clientY - r.top) / r.height) * 100;
+          card.style.setProperty('--holo-x', `${x}%`);
+          card.style.setProperty('--holo-y', `${y}%`);
+          card.style.setProperty('--holo-angle', `${Math.round(x * 3.6)}deg`);
+        });
+      };
+      const onLeave = () => {
+        if (raf) { cancelAnimationFrame(raf); raf = 0; }
+        card.style.setProperty('--holo-x', '50%');
+        card.style.setProperty('--holo-y', '50%');
+      };
+      card.addEventListener('mousemove', onMove, { passive: true });
+      card.addEventListener('mouseleave', onLeave);
+    });
+  }
+</script>

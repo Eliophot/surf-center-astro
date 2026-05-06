@@ -51,6 +51,17 @@ const titleId = `${sectionId}-title`;
       <h2 id={titleId} set:html={title} />
       <p class="s1__text">{text}</p>
 
+      {list && list.length > 0 && (
+        <ul class="s1__list" role="list">
+          {list.map((item) => (
+            <li>
+              <span class="s1__dash" aria-hidden="true">—</span>
+              <span>{item.text}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
       {tags && tags.length > 0 && (
         <div class="s1__tags">
           {tags.map((tag) => <span>{tag}</span>)}

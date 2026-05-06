@@ -60,7 +60,12 @@ const jsonLd = [
         <h1 class="locdet-hero__title">{loc.title}</h1>
         <p class="locdet-hero__desc">{loc.description}</p>
         <div class="locdet-hero__actions">
-          <button type="button" class="btn btn--primary btn--lg" data-booking>Réserver</button>
+          <button type="button" class="btn btn--primary btn--lg" data-booking>
+            <span class="btn-flip__inner">
+              <span class="btn-flip__front">Réserver</span>
+              <span class="btn-flip__back">Réserver</span>
+            </span>
+          </button>
           <a href="#tarif" class="locdet-hero__link">
             Voir le tarif
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v10M4 8.5l3 3.5 3-3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -106,7 +111,10 @@ const jsonLd = [
           </li>
         </ul>
         <button type="button" class="btn btn--primary btn--lg locdet-pricing__btn" data-booking>
-          Réserver maintenant
+          <span class="btn-flip__inner">
+            <span class="btn-flip__front">Réserver maintenant</span>
+            <span class="btn-flip__back">Réserver maintenant</span>
+          </span>
         </button>
       </div>
       <div class="locdet-pricing__img-wrap reveal reveal-d2">

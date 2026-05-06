@@ -1,4 +1,6 @@
 ---
+import BookingButton from './BookingButton.astro';
+
 const steps = [
   { num: "01", title: "Choisissez", text: "Sélectionnez votre activité et votre créneau en ligne. Bateau, paddle, pédalo — tout est disponible en quelques clics." },
   { num: "02", title: "Réservez", text: "Confirmez votre réservation instantanément. Paiement sécurisé, annulation gratuite jusqu'à 24h avant." },
@@ -25,9 +27,7 @@ const steps = [
     </div>
 
     <div class="stb__cta reveal">
-      <button type="button" class="btn btn--primary btn--lg" data-booking>
-        <span class="btn-flip__inner"><span class="btn-flip__front">Réserver maintenant</span><span class="btn-flip__back">Réserver maintenant</span></span>
-      </button>
+      <BookingButton size="lg" />
     </div>
   </div>
 </section>

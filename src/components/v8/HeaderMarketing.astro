@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logoImg from '../../assets/images/logo-surf-center.png';
+import BookingButton from './BookingButton.astro';
 
 const navLinks = [
   { label: "Nos locations", href: "/v8/nos-locations" },
@@ -79,10 +80,7 @@ const navLinks = [
         </svg>
       </button>
 
-      <a href="/v8/nos-locations" class="hm8__cta">
-        <span class="hm8__cta-pulse" aria-hidden="true"></span>
-        Réserver maintenant
-      </a>
+      <BookingButton desktopOnly pulse />
 
       <button
         class="hm8__burger"
@@ -363,51 +361,6 @@ const navLinks = [
   :global([data-theme='dark']) .hm8__theme-icon--sun { display: block; }
   :global([data-theme='dark']) .hm8__theme-icon--moon { display: none; }
 
-  /* ========== CTA button ========== */
-  .hm8__cta {
-    position: relative;
-    display: none;
-    align-items: center;
-    gap: var(--s-2);
-    padding: 0.6rem 1.6rem;
-    background: var(--c-orange);
-    color: #fff;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    border-radius: var(--r-full);
-    white-space: nowrap;
-    transition: background var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
-  }
-
-  .hm8__cta:hover {
-    background: var(--c-orange-dark);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-glow);
-    color: #fff;
-  }
-
-  .hm8__cta:active { transform: scale(0.97); }
-
-  .hm8__cta-pulse {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-    transform: translate(-50%, -50%);
-    border: 2px solid var(--c-orange);
-    animation: hm8-pulse 2.5s ease-out infinite;
-    pointer-events: none;
-  }
-
-  @keyframes hm8-pulse {
-    0% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.35); }
-  }
-
   /* ========== Burger ========== */
   .hm8__burger {
     display: flex;
@@ -612,7 +565,6 @@ const navLinks = [
   /* ========== Responsive ========== */
   @media (min-width: 960px) {
     .hm8__nav { display: block; }
-    .hm8__cta { display: inline-flex; }
     .hm8__burger { display: none; }
   }
 
@@ -630,6 +582,5 @@ const navLinks = [
       opacity: 1;
       transform: none;
     }
-    .hm8__cta-pulse { animation: none; }
   }
 </style>

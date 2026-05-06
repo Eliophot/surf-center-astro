@@ -60,7 +60,12 @@ const others = getOtherLocations(location.slug);
             <li><strong>Durée</strong><span>{location.duration}</span></li>
             <li><strong>Niveau</strong><span>{location.level}</span></li>
           </ul>
-          <button type="button" class="btn btn--primary k7ld__pricing-btn" data-product-book data-tag={location.tag}>Réserver</button>
+          <button type="button" class="btn btn--primary k7ld__pricing-btn" data-product-book data-tag={location.tag}>
+            <span class="btn-flip__inner">
+              <span class="btn-flip__front">Réserver</span>
+              <span class="btn-flip__back">Réserver</span>
+            </span>
+          </button>
         </div>
       </div>
     </div>

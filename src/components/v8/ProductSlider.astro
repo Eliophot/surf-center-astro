@@ -6,6 +6,7 @@ import imgPedalo from '../../assets/images/location-pedalo.jpg';
 import imgPaddle from '../../assets/images/location-paddle.jpeg';
 import imgCanoe from '../../assets/images/location-canoe.jpeg';
 import imgCatamaran from '../../assets/images/catamaran-lac-sainte-croix-falaises.jpg';
+import BookingButton from './BookingButton.astro';
 
 const locations = [
   {
@@ -129,7 +130,7 @@ const locations = [
 
     <div class="sl-cta reveal reveal-d1">
       <a href="/nos-locations" class="btn btn--secondary">Toutes nos locations</a>
-      <button type="button" class="btn btn--primary" data-booking><span class="btn-flip__inner"><span class="btn-flip__front">Réserver</span><span class="btn-flip__back">Réserver</span></span></button>
+      <BookingButton label="Réserver" />
     </div>
   </div>
 </section>

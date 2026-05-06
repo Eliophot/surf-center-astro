@@ -108,7 +108,12 @@ const navLinks = [
     </nav>
 
     <div class="hk7__mobile-actions" style="--delay: 420ms">
-      <button type="button" class="hk7__mobile-book" data-booking>Réserver maintenant</button>
+      <button type="button" class="hk7__mobile-book btn btn--primary" data-booking>
+        <span class="btn-flip__inner">
+          <span class="btn-flip__front">Réserver maintenant</span>
+          <span class="btn-flip__back">Réserver maintenant</span>
+        </span>
+      </button>
     </div>
 
     <div class="hk7__mobile-footer" style="--delay: 500ms">
@@ -567,6 +572,10 @@ const navLinks = [
     cursor: pointer;
     clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
     transition: background 0.25s var(--ease);
+  }
+
+  .hk7__mobile-book .btn-flip__inner {
+    height: 1em;
   }
 
   .hk7__mobile-book:hover { background: var(--c-orange-dark); }

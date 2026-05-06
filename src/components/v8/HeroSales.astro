@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import heroImg from '../../assets/images/hero-home.jpg';
+import BookingButton from './BookingButton.astro';
 ---
 
 <section class="hero" data-hero aria-label="Surf Center — base nautique au lac de Sainte-Croix">
@@ -41,12 +42,7 @@ import heroImg from '../../assets/images/hero-home.jpg';
     </div>
 
     <div class="hero__actions">
-      <button type="button" class="btn btn--primary btn--lg hero__cta-main" data-booking>
-        <span class="btn-flip__inner">
-          <span class="btn-flip__front">Réserver maintenant</span>
-          <span class="btn-flip__back">Réserver maintenant</span>
-        </span>
-      </button>
+      <BookingButton size="lg" class="hero__cta-main" />
       <a href="#tarifs" class="btn btn--ghost btn--lg">Découvrir</a>
     </div>
 

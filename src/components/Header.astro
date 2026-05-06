@@ -105,7 +105,12 @@ const navLinks = [
     </nav>
 
     <div class="mmenu__actions" style="--delay: 300ms">
-      <button type="button" class="btn btn--primary mmenu__book" data-booking>Réserver une activité</button>
+      <button type="button" class="btn btn--primary mmenu__book" data-booking>
+        <span class="btn-flip__inner">
+          <span class="btn-flip__front">Réserver une activité</span>
+          <span class="btn-flip__back">Réserver une activité</span>
+        </span>
+      </button>
       <button type="button" class="btn btn--outline mmenu__cart" data-cart>Mon panier</button>
     </div>
 
@@ -332,12 +337,30 @@ const navLinks = [
     letter-spacing: 0.1em; /* close to 1.12px at 11px */
     text-transform: uppercase;
     cursor: pointer;
+    position: relative;
     transition:
       transform var(--t-fast) var(--ease),
       background var(--t-fast),
       box-shadow var(--t-fast);
     box-shadow: var(--shadow-glow);
     white-space: nowrap;
+  }
+
+  .header__cta::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    border: 2px solid var(--c-orange);
+    opacity: 0.55;
+    transform: scale(1);
+    animation: header-cta-pulse 2.6s ease-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes header-cta-pulse {
+    0% { opacity: 0.55; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.35); }
   }
 
   .header__cta:hover {
@@ -577,6 +600,7 @@ const navLinks = [
       opacity: 1;
       transform: none;
     }
+    .header__cta::after { animation: none; }
   }
 
   /* Mobile a11y — extra +1px on smallest nav/menu type */

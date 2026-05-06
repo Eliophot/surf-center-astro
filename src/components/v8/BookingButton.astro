@@ -1,0 +1,95 @@
+---
+export type BookingButtonProps = {
+  href?: string;
+  label?: string;
+  size?: 'md' | 'lg';
+  desktopOnly?: boolean;
+  pulse?: boolean;
+  class?: string;
+};
+
+const {
+  href = '/v8/nos-locations',
+  label = 'Réserver maintenant',
+  size = 'md',
+  desktopOnly = false,
+  pulse = false,
+  class: className = '',
+} = Astro.props as BookingButtonProps;
+
+const classes = [
+  'm8-booking',
+  size === 'lg' ? 'm8-booking--lg' : '',
+  desktopOnly ? 'm8-booking--desktop' : '',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<a href={href} class={classes}>
+  {pulse && <span class="m8-booking__pulse" aria-hidden="true"></span>}
+  {label}
+</a>
+
+<style>
+  .m8-booking {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 0.6rem 1.6rem;
+    background: var(--c-orange);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: var(--r-full);
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
+  }
+
+  .m8-booking:hover {
+    background: var(--c-orange-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-glow);
+    color: #fff;
+  }
+
+  .m8-booking:active { transform: scale(0.97); }
+
+  .m8-booking__pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    transform: translate(-50%, -50%);
+    border: 2px solid var(--c-orange);
+    animation: m8-booking-pulse 2.5s ease-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes m8-booking-pulse {
+    0% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.35); }
+  }
+
+  .m8-booking--lg {
+    padding: 0.85rem 2.1rem;
+    font-size: 0.78rem;
+  }
+
+  .m8-booking--desktop { display: none; }
+
+  @media (min-width: 960px) {
+    .m8-booking--desktop { display: inline-flex; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m8-booking__pulse { animation: none; }
+  }
+</style>

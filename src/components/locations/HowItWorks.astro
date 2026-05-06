@@ -28,10 +28,21 @@
           </div>
         </li>
       </ol>
+
+      <div class="hiw__cta">
+        <button type="button" class="btn btn--primary" data-booking>
+          <span class="btn-flip__inner"><span class="btn-flip__front">Réserver maintenant</span><span class="btn-flip__back">Réserver maintenant</span></span>
+        </button>
+      </div>
     </div>
 
-    <div class="hiw__visual reveal reveal-d2">
-      <img src="/surfcenter-location-lac-sainte-croix.JPG" alt="Équipe Surf Center au comptoir de location — lac de Sainte-Croix" width="640" height="800" loading="lazy" decoding="async" />
+    <div class="hiw__visual-wrap reveal reveal-d2">
+      <div class="hiw__visual">
+        <img src="/belle_photo_verdon.png" alt="Eau turquoise et falaises du Verdon" width="640" height="800" loading="lazy" decoding="async" />
+      </div>
+      <span class="epp__ellipse" aria-hidden="true">
+        <img src="/figma/events-ellipse.svg" alt="" width="84" height="101" loading="lazy" decoding="async" />
+      </span>
     </div>
   </div>
 </section>
@@ -63,6 +74,10 @@
     gap: var(--s-6);
   }
 
+  .hiw__cta {
+    margin-top: var(--s-14);
+  }
+
   .hiw__steps li {
     display: flex;
     gap: var(--s-4);
@@ -70,7 +85,7 @@
   }
 
   .hiw__step-num {
-    font-size: 0.58rem;
+    font-size: 0.80rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     color: var(--c-orange);
@@ -94,6 +109,10 @@
     line-height: 1.5;
   }
 
+  .hiw__visual-wrap {
+    position: relative;
+  }
+
   .hiw__visual {
     border-radius: var(--r-lg);
     overflow: hidden;
@@ -107,8 +126,28 @@
     object-fit: cover;
   }
 
+  /* Reuse same ellipse pattern as home (EventsProPrive) */
+  .epp__ellipse {
+    position: absolute;
+    width: 84px;
+    height: 101px;
+    top: -50px;
+    right: -64px;
+    z-index: 2;
+    display: none;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .epp__ellipse img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
   @media (min-width: 900px) {
     .hiw__layout { grid-template-columns: 1fr 1.2fr; gap: var(--s-20); }
+    .epp__ellipse { display: block; }
   }
 
   /* Mobile a11y — extra +1px on smallest type */

@@ -39,17 +39,27 @@ const jsonLd = [
 ---
 
 <Layout title={title} description={description} jsonLd={jsonLd}>
-  <LocationHero
-    title="Nos Locations"
-    image={imgHeroLocations}
-    alt="Paddle et bateaux électriques sur le lac de Sainte-Croix — Surf Center"
-  />
-  <Breadcrumbs items={[
-    { label: 'Accueil', href: '/' },
-    { label: 'Nos locations' },
-  ]} />
-  <ProductSlider showAllLink={false} />
-  <HowItWorks />
-  <ServicesGrid services={sharedServices} title="Inclus avec chaque location" />
-  <Maillage />
+  <div data-page="nos-locations">
+    <LocationHero
+      title="Nos Locations"
+      image={imgHeroLocations}
+      alt="Paddle et bateaux électriques sur le lac de Sainte-Croix — Surf Center"
+    />
+    <Breadcrumbs items={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Nos locations' },
+    ]} />
+    <ProductSlider showAllLink={false} />
+    <HowItWorks />
+    <ServicesGrid services={sharedServices} title="Inclus avec chaque location" />
+    <Maillage />
+  </div>
 </Layout>
+
+<style is:global>
+  @media (min-width: 769px) {
+    [data-page="nos-locations"] .section {
+      --s-section: clamp(3.5rem, 7vw, 5.5rem);
+    }
+  }
+</style>

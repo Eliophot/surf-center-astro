@@ -150,33 +150,22 @@ const { services, title = 'Services inclus' } = Astro.props;
     z-index: 2;
   }
 
-  .svcgrid__icon-wrap::before {
-    content: '';
-    position: absolute;
-    inset: -6px;
-    border-radius: var(--r-full);
-    background: linear-gradient(135deg, rgb(247 123 70 / 0.15), rgb(247 123 70 / 0.05));
-    z-index: 0;
-  }
-
   .svcgrid__icon {
     position: relative;
     z-index: 1;
-    width: 72px;
-    height: 72px;
+    width: 96px;
+    height: 96px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: var(--r-full);
     background: linear-gradient(180deg, #ED6776 0%, #F47456 71.742%, #F77B46 100%);
     color: #fff;
-    box-shadow: 
-      0 4px 16px rgb(237 103 118 / 0.40),
-      inset 0 1px 0 rgb(255 255 255 / 0.2);
   }
 
   .svcgrid__icon svg {
-    filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.15));
+    width: 34px;
+    height: 28px;
   }
 
   .svcgrid__label {
@@ -200,15 +189,6 @@ const { services, title = 'Services inclus' } = Astro.props;
       padding: var(--s-10) var(--s-6);
     }
 
-    .svcgrid__icon {
-      width: 80px;
-      height: 80px;
-    }
-
-    .svcgrid__icon svg {
-      width: 40px;
-      height: 40px;
-    }
 
     .svcgrid__label {
       font-size: 0.88rem;
@@ -216,19 +196,6 @@ const { services, title = 'Services inclus' } = Astro.props;
   }
 
   @media (min-width: 900px) {
-    .svcgrid__icon {
-      width: 88px;
-      height: 88px;
-    }
-
-    .svcgrid__icon svg {
-      width: 44px;
-      height: 44px;
-    }
-
-    .svcgrid__icon-wrap::before {
-      inset: -8px;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {

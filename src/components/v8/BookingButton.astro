@@ -29,7 +29,10 @@ const classes = [
 
 <a href={href} class={classes}>
   {pulse && <span class="m8-booking__pulse" aria-hidden="true"></span>}
-  {label}
+  <span class="m8-booking__flip">
+    <span class="m8-booking__front">{label}</span>
+    <span class="m8-booking__back">{label}</span>
+  </span>
 </a>
 
 <style>
@@ -59,6 +62,37 @@ const classes = [
   }
 
   .m8-booking:active { transform: scale(0.97); }
+
+  .m8-booking__flip {
+    display: grid;
+    grid-template: 1fr / 1fr;
+    overflow: hidden;
+    height: 1.4em;
+    line-height: 1.4;
+    perspective: 200px;
+  }
+
+  .m8-booking__front,
+  .m8-booking__back {
+    grid-area: 1 / 1;
+    backface-visibility: hidden;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease;
+  }
+
+  .m8-booking__back {
+    transform: rotateX(90deg) translateZ(0.55em);
+    opacity: 0;
+  }
+
+  .m8-booking:hover .m8-booking__front {
+    transform: rotateX(-90deg) translateZ(0.55em);
+    opacity: 0;
+  }
+
+  .m8-booking:hover .m8-booking__back {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
 
   .m8-booking__pulse {
     position: absolute;
@@ -91,5 +125,7 @@ const classes = [
 
   @media (prefers-reduced-motion: reduce) {
     .m8-booking__pulse { animation: none; }
+    .m8-booking__front,
+    .m8-booking__back { transition: none; }
   }
 </style>

@@ -340,7 +340,8 @@ p { text-wrap: pretty; }
   display: grid;
   grid-template: 1fr / 1fr;
   overflow: hidden;
-  height: 1.1em;
+  height: 1.4em;
+  line-height: 1.4;
   perspective: 200px;
 }
 .btn-flip__front,

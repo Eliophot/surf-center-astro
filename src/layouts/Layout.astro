@@ -326,6 +326,19 @@ if (preloadHero) {
       }
     </script>
 
+    <!-- Auto-flip: add flip animation to all primary buttons -->
+    <script is:inline>
+      (function () {
+        document.querySelectorAll('.btn--primary, .btn--secondary').forEach(function (btn) {
+          if (btn.querySelector('.btn-flip__inner') || btn.querySelector('.m8-booking__flip')) return;
+          if (btn.tagName === 'INPUT') return;
+          var text = btn.textContent.trim();
+          if (!text) return;
+          btn.innerHTML = '<span class="btn-flip__inner"><span class="btn-flip__front">' + text + '</span><span class="btn-flip__back">' + text + '</span></span>';
+        });
+      })();
+    </script>
+
     <script is:inline>
       (function () {
         var el = document.getElementById('scrollPct');

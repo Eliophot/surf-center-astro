@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Layout from './Layout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
-import BookingCTA from '../components/locations/BookingCTA.astro';
 import TrustBadges from '../components/v11/TrustBadges.astro';
 
 export interface Props {
@@ -172,10 +171,6 @@ const jsonLd = [
   </section>
 
   <TrustBadges />
-  <BookingCTA
-    title="Envie d'y être ?"
-    text="Réservez votre activité nautique et venez profiter du lac de Sainte-Croix."
-  />
 </Layout>
 
 <style>

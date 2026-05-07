@@ -7,7 +7,6 @@ import ServicesGrid from '../../components/locations/ServicesGrid.astro';
 import Itineraries from '../../components/locations/Itineraries.astro';
 import PricingSlots from '../../components/locations/PricingSlots.astro';
 import OtherLocations from '../../components/locations/OtherLocations.astro';
-import BookingCTA from '../../components/locations/BookingCTA.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { locationDetails, getLocationBySlug, getOtherLocations } from '../../data/locations';
 
@@ -96,7 +95,7 @@ const jsonLd = [
 <Layout title={title} description={description} jsonLd={jsonLd}>
   <LocationHero
     title={loc.title}
-    tagline={loc.tagline}
+    subtitle={loc.tagline}
     image={heroImageMap[loc.slug] || loc.heroImage}
     alt={loc.heroAlt}
   />
@@ -122,8 +121,4 @@ const jsonLd = [
   <Itineraries routes={loc.itinerary} />
   <PricingSlots price={loc.price} priceUnit={loc.priceUnit} tag={loc.tag} title={loc.shortTitle.toLowerCase()} />
   <OtherLocations locations={others} />
-  <BookingCTA
-    title={`Réservez votre ${loc.shortTitle.toLowerCase()}`}
-    text={`Choisissez votre créneau en quelques clics et retrouvez-nous au bord du lac de Sainte-Croix.`}
-  />
 </Layout>

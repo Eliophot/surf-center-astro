@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import LocationHero from '../components/locations/LocationHero.astro';
-import BookingCTA from '../components/locations/BookingCTA.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 import imgBateauxLac from '../assets/images/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg';
@@ -72,7 +71,7 @@ const jsonLd = [
 <Layout title={title} description={description} jsonLd={jsonLd}>
   <LocationHero
     title="Galerie photos"
-    tagline="Lac de Sainte-Croix · Gorges du Verdon"
+    subtitle="Lac de Sainte-Croix · Gorges du Verdon"
     image={imgBateauxLac}
     alt="Vue panoramique du lac de Sainte-Croix — Gorges du Verdon"
   />
@@ -98,8 +97,6 @@ const jsonLd = [
       </div>
     </div>
   </section>
-
-  <BookingCTA title="Envie d'y être ?" text="Réservez votre activité et venez créer vos propres souvenirs au lac de Sainte-Croix." />
 </Layout>
 
 <style>

@@ -115,7 +115,7 @@ const jsonLd = [
   </section>
 
   <!-- Comment venir -->
-  <section class="section section--surface" aria-labelledby="routes-title">
+  <section class="section ctbluefade" aria-labelledby="routes-title">
     <div class="container">
       <header class="section__header reveal">
         <span class="section__eyebrow">Itinéraire</span>
@@ -123,15 +123,17 @@ const jsonLd = [
         <p class="section__lead">Le Surf Center est situé directement sur la plage du lac de Sainte-Croix, aux Salles-sur-Verdon. Parking gratuit.</p>
       </header>
 
-      <div class="ctroutes__grid">
+      <div class="infocard__grid ctroutes__grid" role="list">
         {routes.map((r, i) => (
-          <div class={`ctroutes__card reveal reveal-d${Math.min(i + 1, 4)}`}>
-            <span class="ctroutes__city">{r.city}</span>
-            <span class="ctroutes__time">{r.time}</span>
-            <div class="ctroutes__details">
-              <span>{r.distance}</span>
-              <span>{r.via}</span>
-            </div>
+          <div
+            class={`infocard__item reveal reveal-d${Math.min(i + 1, 4)}`}
+            role="listitem"
+            data-info-card
+          >
+            <span class="infocard__shimmer" aria-hidden="true"></span>
+            <span class="infocard__label">{r.city}</span>
+            <span class="infocard__value">{r.time}</span>
+            <span class="infocard__sub">{r.distance} · {r.via}</span>
           </div>
         ))}
       </div>
@@ -156,29 +158,35 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- Météo -->
-  <section class="section" aria-labelledby="meteo-title">
-    <div class="container ctmeteo__inner">
-      <div class="ctmeteo__content reveal">
+  <!-- Météo (reprend le bloc “Horaires & accès” de restauration) -->
+  <section class="infocard section" aria-labelledby="meteo-title">
+    <div class="container">
+      <header class="section__header reveal">
         <span class="section__eyebrow">Météo</span>
         <h2 id="meteo-title">Le climat du Verdon</h2>
-        <p class="ctmeteo__text">Le lac de Sainte-Croix bénéficie d'un climat méditerranéen avec plus de 300 jours de soleil par an. L'eau atteint 22-24°C en été — idéale pour la baignade et les activités nautiques.</p>
-      </div>
-      <div class="ctmeteo__cards reveal reveal-d1">
-        <div class="ctmeteo__card">
-          <span class="ctmeteo__card-icon" aria-hidden="true">☀️</span>
-          <span class="ctmeteo__card-value">300+</span>
-          <span class="ctmeteo__card-label">jours de soleil / an</span>
+        <p class="infocard__intro">Un ensoleillement exceptionnel et une eau idéale pour les activités nautiques, d’avril à octobre.</p>
+      </header>
+
+      <div class="infocard__grid" role="list">
+        <div class="infocard__item reveal reveal-d1" role="listitem" data-info-card>
+          <span class="infocard__shimmer" aria-hidden="true"></span>
+          <span class="infocard__label">Soleil</span>
+          <span class="infocard__value">300+</span>
+          <span class="infocard__sub">jours de soleil / an</span>
         </div>
-        <div class="ctmeteo__card">
-          <span class="ctmeteo__card-icon" aria-hidden="true">🌊</span>
-          <span class="ctmeteo__card-value">22—24°C</span>
-          <span class="ctmeteo__card-label">eau en été</span>
+
+        <div class="infocard__item reveal reveal-d2" role="listitem" data-info-card>
+          <span class="infocard__shimmer" aria-hidden="true"></span>
+          <span class="infocard__label">Température de l’eau</span>
+          <span class="infocard__value">22—24°C</span>
+          <span class="infocard__sub">en été</span>
         </div>
-        <div class="ctmeteo__card">
-          <span class="ctmeteo__card-icon" aria-hidden="true">🌡️</span>
-          <span class="ctmeteo__card-value">28—35°C</span>
-          <span class="ctmeteo__card-label">air en été</span>
+
+        <div class="infocard__item reveal reveal-d3" role="listitem" data-info-card>
+          <span class="infocard__shimmer" aria-hidden="true"></span>
+          <span class="infocard__label">Température de l’air</span>
+          <span class="infocard__value">28—35°C</span>
+          <span class="infocard__sub">en été</span>
         </div>
       </div>
     </div>
@@ -295,46 +303,9 @@ const jsonLd = [
   /* NB: le formulaire est stylé directement dans `AccessContactForm.svelte`
      pour être 1:1 avec le form de la page Groupes & Événements. */
 
-  /* ── Routes ── */
+  /* ── Routes (mêmes cartes que Météo / infocard) ── */
   .ctroutes__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--s-4);
     margin-bottom: var(--s-10);
-  }
-
-  .ctroutes__card {
-    padding: var(--s-5);
-    background: var(--c-bg);
-    border-radius: var(--r-md);
-    border: 1px solid var(--c-border-light);
-    display: flex;
-    flex-direction: column;
-    transition: border-color var(--t-fast);
-  }
-
-  .ctroutes__card:hover { border-color: var(--c-orange); }
-
-  .ctroutes__city {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--c-text);
-    margin-bottom: 4px;
-  }
-
-  .ctroutes__time {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--c-orange);
-    letter-spacing: -0.02em;
-    margin-bottom: var(--s-2);
-  }
-
-  .ctroutes__details {
-    display: flex;
-    flex-direction: column;
-    font-size: 0.68rem;
-    color: var(--c-text-muted);
   }
 
   .ctroutes__tip {
@@ -357,6 +328,11 @@ const jsonLd = [
     font-size: 0.85rem;
     color: var(--c-text-secondary);
     line-height: 1.5;
+  }
+
+  /* ── Dégradé bleu vers le bas (remplace section--surface) ── */
+  .ctbluefade {
+    background: linear-gradient(180deg, rgba(38, 207, 255, 0.00) 0%, rgba(38, 207, 255, 0.10) 100%);
   }
 
   /* ── Liens coordonnées ── */
@@ -387,71 +363,181 @@ const jsonLd = [
 
   .ctmap iframe { display: block; }
 
-  /* ── Météo ── */
-  .ctmeteo__inner {
+  /* ── Météo (bloc infocard, repris de restauration) ── */
+  .infocard {
+    background: linear-gradient(180deg, rgba(38, 207, 255, 0.10) 0%, rgba(38, 207, 255, 0.00) 100%);
+  }
+
+  .infocard .section__header { text-align: center; }
+
+  .infocard__intro {
+    font-size: 1rem;
+    color: var(--c-text-secondary);
+    line-height: 1.7;
+    max-width: 52ch;
+    margin-inline: auto;
+    margin-top: var(--s-4);
+  }
+
+  /* ── Grid tokens ─────────────────────────────────── */
+  .infocard__grid {
+    --ic-border:       rgb(237 103 118 / 0.28);
+    --ic-border-hover: rgb(237 103 118 / 0.55);
+    --ic-glow:         0 0 0 rgb(0 0 0 / 0);
+    --ic-glow-hover:
+      0 12px 30px rgb(237 103 118 / 0.12),
+      0 0 0 1px rgb(237 103 118 / 0.06);
+    --ic-shimmer-c1:   rgb(237 103 118 / 0.28);
+    --ic-shimmer-c2:   rgb(250 128 61 / 0.20);
+    --ic-shimmer-blend: multiply;
+
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--s-10);
-    align-items: center;
+    gap: var(--s-5);
+    max-width: 900px;
+    margin-inline: auto;
+    margin-top: var(--s-12);
   }
 
-  .ctmeteo__text {
-    font-size: 0.95rem;
-    color: var(--c-text-secondary);
-    line-height: 1.75;
-    max-width: 42ch;
-    margin-top: var(--s-5);
+  [data-theme='dark'] .infocard__grid {
+    --ic-border:       rgb(237 103 118 / 0.22);
+    --ic-border-hover: rgb(237 103 118 / 0.55);
+    --ic-glow:         inset 0 0 0 1px rgb(255 255 255 / 0.02);
+    --ic-glow-hover:
+      0 0 24px rgb(237 103 118 / 0.18),
+      0 0 60px rgb(250 128 61 / 0.10),
+      inset 0 0 24px rgb(237 103 118 / 0.06);
+    --ic-shimmer-c1:   rgb(237 103 118 / 0.34);
+    --ic-shimmer-c2:   rgb(250 128 61 / 0.26);
+    --ic-shimmer-blend: screen;
   }
 
-  .ctmeteo__cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-4);
-  }
-
-  .ctmeteo__card {
-    padding: var(--s-6);
-    background: var(--c-surface);
-    border-radius: var(--r-md);
-    border: 1px solid var(--c-border-light);
-    text-align: center;
+  /* ── Card ────────────────────────────────────────── */
+  .infocard__item {
+    --holo-x: 50%;
+    --holo-y: 50%;
+    --holo-angle: 180deg;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    text-align: center;
+    gap: var(--s-3);
+    padding: var(--s-8) var(--s-5);
+    background: var(--c-bg);
+    border-radius: var(--r-xl);
+    border: 1px solid var(--ic-border);
+    overflow: hidden;
+    box-shadow: var(--ic-glow);
+    transition:
+      border-color 0.4s var(--ease),
+      box-shadow   0.4s var(--ease),
+      transform    0.4s var(--ease);
   }
 
-  .ctmeteo__card-icon {
-    font-size: 1.5rem;
-    margin-bottom: var(--s-2);
+  .infocard__item:hover {
+    border-color: var(--ic-border-hover);
+    box-shadow: var(--ic-glow-hover);
+    transform: translateY(-3px);
   }
 
-  .ctmeteo__card-value {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: var(--c-text);
-    letter-spacing: -0.02em;
+  [data-theme='dark'] .infocard__item { background: var(--c-surface); }
+
+  /* ── Shimmer ─────────────────────────────────────── */
+  .infocard__shimmer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease);
+    background:
+      radial-gradient(
+        circle at var(--holo-x) var(--holo-y),
+        var(--ic-shimmer-c1) 0%,
+        transparent 55%
+      ),
+      conic-gradient(
+        from var(--holo-angle) at var(--holo-x) var(--holo-y),
+        var(--ic-shimmer-c1),
+        var(--ic-shimmer-c2),
+        var(--ic-shimmer-c1)
+      );
+    mix-blend-mode: var(--ic-shimmer-blend);
   }
 
-  .ctmeteo__card-label {
-    font-size: 0.62rem;
+  .infocard__item:hover .infocard__shimmer { opacity: 1; }
+
+  /* ── Typography ──────────────────────────────────── */
+  .infocard__label {
+    position: relative; z-index: 2;
+    font-size: 0.65rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--c-text-muted);
+  }
+
+  .infocard__value {
+    position: relative; z-index: 2;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--c-text);
+    line-height: 1.2;
+  }
+
+  .infocard__sub {
+    position: relative; z-index: 2;
+    font-size: 0.78rem;
+    color: var(--c-text-muted);
+    line-height: 1.4;
+  }
+
+  /* ── Responsive ──────────────────────────────────── */
+  @media (min-width: 600px) {
+    .infocard__grid { grid-template-columns: repeat(3, 1fr); gap: var(--s-6); }
+    .infocard__item { padding: var(--s-10) var(--s-5); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .infocard__item,
+    .infocard__shimmer { transition: none; }
+    .infocard__item:hover { transform: none; }
   }
 
   /* ── Responsive ── */
   @media (min-width: 900px) {
     .ctpage__layout { grid-template-columns: 0.9fr 1.1fr; gap: var(--s-16); }
-    .ctmeteo__inner { grid-template-columns: 1fr 1fr; }
-  }
-
-  @media (min-width: 768px) {
-    .ctroutes__grid { grid-template-columns: repeat(3, 1fr); }
   }
 
   @media (max-width: 480px) {
-    .ctmeteo__cards { grid-template-columns: 1fr; }
   }
 </style>
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) {
+    document.querySelectorAll<HTMLElement>('[data-info-card]').forEach((card) => {
+      let raf = 0;
+      const onMove = (e: MouseEvent) => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          const r = card.getBoundingClientRect();
+          const x = ((e.clientX - r.left) / r.width) * 100;
+          const y = ((e.clientY - r.top) / r.height) * 100;
+          card.style.setProperty('--holo-x', `${x}%`);
+          card.style.setProperty('--holo-y', `${y}%`);
+          card.style.setProperty('--holo-angle', `${Math.round(x * 3.6)}deg`);
+        });
+      };
+      const onLeave = () => {
+        if (raf) { cancelAnimationFrame(raf); raf = 0; }
+        card.style.setProperty('--holo-x', '50%');
+        card.style.setProperty('--holo-y', '50%');
+      };
+      card.addEventListener('mousemove', onMove, { passive: true });
+      card.addEventListener('mouseleave', onLeave);
+    });
+  }
+</script>

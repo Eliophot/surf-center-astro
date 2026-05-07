@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import LocationHero from '../components/locations/LocationHero.astro';
 import Maillage from '../components/Maillage.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AccessContactForm from '../components/contact/AccessContactForm.svelte';
 
 import imgLac from '../assets/images/location-lac-sainte-croix-gorges-verdon.png';
 
@@ -107,51 +108,7 @@ const jsonLd = [
         <div class="ctpage__form-card">
           <h3 class="ctpage__form-title">Écrivez-nous</h3>
           <p class="ctpage__form-sub">Un renseignement, une demande spéciale ? On vous répond sous 24h.</p>
-
-          <form class="ctform" action="#" method="POST" data-contact-form>
-            <div class="ctform__row">
-              <div class="ctform__field">
-                <label for="ct-firstname">Prénom</label>
-                <input type="text" id="ct-firstname" name="firstname" required autocomplete="given-name" placeholder="Votre prénom" />
-              </div>
-              <div class="ctform__field">
-                <label for="ct-lastname">Nom</label>
-                <input type="text" id="ct-lastname" name="lastname" required autocomplete="family-name" placeholder="Votre nom" />
-              </div>
-            </div>
-
-            <div class="ctform__field">
-              <label for="ct-email">Email</label>
-              <input type="email" id="ct-email" name="email" required autocomplete="email" placeholder="vous@exemple.com" />
-            </div>
-
-            <div class="ctform__field">
-              <label for="ct-phone">Téléphone <span class="ctform__optional">(optionnel)</span></label>
-              <input type="tel" id="ct-phone" name="phone" autocomplete="tel" placeholder="+33 6 00 00 00 00" />
-            </div>
-
-            <div class="ctform__field">
-              <label for="ct-subject">Sujet</label>
-              <select id="ct-subject" name="subject" required>
-                <option value="" disabled selected>Choisir un sujet...</option>
-                <option value="info">Renseignement général</option>
-                <option value="reservation">Question réservation</option>
-                <option value="groupe">Groupe & événement</option>
-                <option value="partenariat">Partenariat</option>
-                <option value="autre">Autre</option>
-              </select>
-            </div>
-
-            <div class="ctform__field">
-              <label for="ct-message">Message</label>
-              <textarea id="ct-message" name="message" rows="5" required placeholder="Votre message..."></textarea>
-            </div>
-
-            <button type="submit" class="btn btn--primary ctform__submit">
-              <span>Envoyer</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            </button>
-          </form>
+          <AccessContactForm client:load />
         </div>
       </div>
     </div>
@@ -335,89 +292,6 @@ const jsonLd = [
     margin-bottom: var(--s-8);
   }
 
-  .ctform {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-5);
-  }
-
-  .ctform__row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s-4);
-  }
-
-  .ctform__field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .ctform__field label {
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--c-text-secondary);
-  }
-
-  .ctform__optional {
-    font-weight: 400;
-    text-transform: none;
-    letter-spacing: 0;
-    color: var(--c-text-muted);
-    font-size: 0.62rem;
-  }
-
-  .ctform__field input,
-  .ctform__field select,
-  .ctform__field textarea {
-    width: 100%;
-    padding: 12px 16px;
-    background: var(--c-bg);
-    border: 1.5px solid var(--c-border);
-    border-radius: var(--r-sm);
-    font-family: inherit;
-    font-size: 0.88rem;
-    color: var(--c-text);
-    transition: border-color var(--t-fast), box-shadow var(--t-fast);
-    -webkit-appearance: none;
-  }
-
-  .ctform__field input::placeholder,
-  .ctform__field textarea::placeholder {
-    color: var(--c-text-muted);
-    font-weight: 400;
-  }
-
-  .ctform__field input:focus,
-  .ctform__field select:focus,
-  .ctform__field textarea:focus {
-    outline: none;
-    border-color: var(--c-orange);
-    box-shadow: 0 0 0 4px rgb(247 123 70 / 0.08);
-  }
-
-  .ctform__field textarea {
-    resize: vertical;
-    min-height: 110px;
-  }
-
-  .ctform__field select { cursor: pointer; }
-
-  .ctform__submit {
-    align-self: flex-start;
-    margin-top: var(--s-2);
-  }
-
-  .ctform__submit svg {
-    transition: transform var(--t-fast) var(--ease);
-  }
-
-  .ctform__submit:hover svg {
-    transform: translate(3px, -3px);
-  }
-
   /* ── Routes ── */
   .ctroutes__grid {
     display: grid;
@@ -481,6 +355,34 @@ const jsonLd = [
     color: var(--c-text-secondary);
     line-height: 1.5;
   }
+
+  /* ── Liens coordonnées ── */
+  .ctpage__link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .ctpage__link:hover {
+    text-decoration: underline;
+    text-decoration-color: rgb(247 123 70 / 0.55);
+  }
+
+  /* ── Carte ── */
+  .ctmap {
+    margin-top: var(--s-10);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    border: 1px solid var(--c-border-light);
+    background: var(--c-bg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  [data-theme='dark'] .ctmap {
+    background: var(--c-surface);
+    border-color: var(--c-border);
+  }
+
+  .ctmap iframe { display: block; }
 
   /* ── Météo ── */
   .ctmeteo__inner {
@@ -547,7 +449,6 @@ const jsonLd = [
   }
 
   @media (max-width: 480px) {
-    .ctform__row { grid-template-columns: 1fr; }
     .ctmeteo__cards { grid-template-columns: 1fr; }
   }
 </style>

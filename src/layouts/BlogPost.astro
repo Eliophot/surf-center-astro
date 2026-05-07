@@ -4,8 +4,9 @@ import type { ImageMetadata } from 'astro';
 import Layout from './Layout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import BookingCTA from '../components/locations/BookingCTA.astro';
+import TrustBadges from '../components/v11/TrustBadges.astro';
 
-interface Props {
+export interface Props {
   title: string;
   description: string;
   date: Date;
@@ -14,9 +15,24 @@ interface Props {
   author: string;
   tags: string[];
   slug: string;
+  prevPost?: { slug: string; title: string; image: string; imageAlt: string };
+  nextPost?: { slug: string; title: string; image: string; imageAlt: string };
+  relatedPosts?: { slug: string; title: string; description: string; date: Date; image: string; imageAlt: string; tags: string[] }[];
 }
 
-const { title, description, date, image, imageAlt, author, tags, slug } = Astro.props;
+const {
+  title,
+  description,
+  date,
+  image,
+  imageAlt,
+  author,
+  tags,
+  slug,
+  prevPost,
+  nextPost,
+  relatedPosts = [],
+} = Astro.props;
 
 const siteUrl = 'https://surfcenter-verdon.fr';
 
@@ -34,10 +50,14 @@ const jsonLd = [
     description,
     image: `${siteUrl}${image}`,
     datePublished: date.toISOString(),
+    dateModified: date.toISOString(),
     author: { '@type': 'Organization', name: author, url: siteUrl },
     publisher: { '@type': 'Organization', name: 'Surf Center', url: siteUrl },
     url: `${siteUrl}/blog/${slug}`,
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${slug}` },
+    keywords: tags.join(', '),
+    articleSection: tags?.[0],
+    isPartOf: { '@type': 'Blog', name: 'Blog Surf Center', url: `${siteUrl}/blog` },
   },
   {
     '@context': 'https://schema.org',
@@ -78,12 +98,80 @@ const jsonLd = [
     { label: title },
   ]} />
 
-  <article class="bpost section">
-    <div class="container bpost__body">
-      <slot />
-    </div>
-  </article>
+  <section class="bpost section" aria-label="Article de blog">
+    <div class="container bpost__layout">
+      <article class="bpost__article">
+        <p class="bpost__lede">{description}</p>
+        <div class="bpost__prose">
+          <slot />
+        </div>
 
+        {relatedPosts.length > 0 && (
+          <section class="brel" aria-label="Articles liés">
+            <header class="brel__head">
+              <span class="brel__eyebrow">À lire aussi</span>
+              <h2 class="brel__title">Articles liés</h2>
+            </header>
+            <div class="brel__grid">
+              {relatedPosts.map((p) => (
+                <a class="brel__card" href={`/blog/${p.slug}`}>
+                  <div class="brel__img">
+                    <img src={p.image} alt={p.imageAlt} width="900" height="560" loading="lazy" decoding="async" />
+                  </div>
+                  <div class="brel__body">
+                    <div class="brel__tags">
+                      {p.tags.slice(0, 2).map((t) => <span class="brel__tag">{t}</span>)}
+                    </div>
+                    <h3 class="brel__name">{p.title}</h3>
+                    <p class="brel__desc">{p.description}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {(prevPost || nextPost) && (
+          <nav class="bnav" aria-label="Navigation entre articles">
+            {prevPost ? (
+              <a class="bnav__item" href={`/blog/${prevPost.slug}`} aria-label={`Article précédent : ${prevPost.title}`}>
+                <span class="bnav__kicker">Précédent</span>
+                <span class="bnav__title">{prevPost.title}</span>
+              </a>
+            ) : <span />}
+            {nextPost ? (
+              <a class="bnav__item bnav__item--next" href={`/blog/${nextPost.slug}`} aria-label={`Article suivant : ${nextPost.title}`}>
+                <span class="bnav__kicker">Suivant</span>
+                <span class="bnav__title">{nextPost.title}</span>
+              </a>
+            ) : <span />}
+          </nav>
+        )}
+      </article>
+
+      <aside class="bpost__aside" aria-label="Actions">
+        <div class="bside">
+          <span class="bside__eyebrow">Planifiez votre journée</span>
+          <h2 class="bside__title">Réservez au Surf Center</h2>
+          <p class="bside__text">Bateau électrique, paddle, pédalo… réservez en ligne et profitez du lac de Sainte‑Croix.</p>
+          <div class="bside__actions">
+            <button type="button" class="btn btn--primary" data-booking>
+              <span class="btn-flip__inner"><span class="btn-flip__front">Réserver</span><span class="btn-flip__back">Réserver</span></span>
+            </button>
+            <a class="btn btn--secondary" href="/nos-locations">Voir les locations</a>
+            <a class="btn btn--secondary" href="/animations">Voir les animations</a>
+          </div>
+          <div class="bside__badges">
+            <span>Paiement sécurisé</span>
+            <span>Annulation 24h</span>
+            <span>Sur place</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <TrustBadges />
   <BookingCTA
     title="Envie d'y être ?"
     text="Réservez votre activité nautique et venez profiter du lac de Sainte-Croix."
@@ -168,74 +256,93 @@ const jsonLd = [
   .bphero__sep { opacity: 0.4; }
 
   /* Article body — prose styling */
-  .bpost__body {
+  .bpost__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-12);
+    align-items: start;
+  }
+
+  .bpost__article {
     max-width: var(--max-w-narrow);
   }
 
-  .bpost__body :global(h2) {
+  .bpost__lede {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--c-text-secondary);
+    margin-top: 0;
+    margin-bottom: var(--s-10);
+  }
+
+  .bpost__prose {
+    max-width: var(--max-w-narrow);
+  }
+
+  .bpost__prose :global(h2) {
     font-size: clamp(1.3rem, 3vw, 1.8rem);
     margin-top: var(--s-12);
     margin-bottom: var(--s-5);
   }
 
-  .bpost__body :global(h3) {
+  .bpost__prose :global(h3) {
     font-size: clamp(1.05rem, 2vw, 1.25rem);
     margin-top: var(--s-8);
     margin-bottom: var(--s-3);
   }
 
-  .bpost__body :global(p) {
+  .bpost__prose :global(p) {
     font-size: 0.95rem;
     color: var(--c-text-secondary);
     line-height: 1.85;
     margin-bottom: var(--s-6);
   }
 
-  .bpost__body :global(strong) {
+  .bpost__prose :global(strong) {
     color: var(--c-text);
     font-weight: 600;
   }
 
-  .bpost__body :global(a) {
+  .bpost__prose :global(a) {
     color: var(--c-orange);
     text-decoration: underline;
     text-underline-offset: 3px;
     transition: color var(--t-fast);
   }
 
-  .bpost__body :global(a:hover) {
+  .bpost__prose :global(a:hover) {
     color: var(--c-orange-dark);
   }
 
-  .bpost__body :global(ul),
-  .bpost__body :global(ol) {
+  .bpost__prose :global(ul),
+  .bpost__prose :global(ol) {
     padding-left: 1.5rem;
     margin-bottom: var(--s-6);
   }
 
-  .bpost__body :global(ul) {
+  .bpost__prose :global(ul) {
     list-style: disc;
   }
 
-  .bpost__body :global(ol) {
+  .bpost__prose :global(ol) {
     list-style: decimal;
   }
 
-  .bpost__body :global(li) {
+  .bpost__prose :global(li) {
     font-size: 0.95rem;
     color: var(--c-text-secondary);
     line-height: 1.75;
     margin-bottom: var(--s-2);
   }
 
-  .bpost__body :global(table) {
+  .bpost__prose :global(table) {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: var(--s-8);
     font-size: 0.85rem;
   }
 
-  .bpost__body :global(th) {
+  .bpost__prose :global(th) {
     text-align: left;
     font-weight: 700;
     font-size: 0.7rem;
@@ -246,28 +353,263 @@ const jsonLd = [
     border-bottom: 2px solid var(--c-border);
   }
 
-  .bpost__body :global(td) {
+  .bpost__prose :global(td) {
     padding: var(--s-3) var(--s-4);
     color: var(--c-text-secondary);
     border-bottom: 1px solid var(--c-border-light);
   }
 
-  .bpost__body :global(blockquote) {
+  .bpost__prose :global(blockquote) {
     border-left: 3px solid var(--c-orange);
     padding-left: var(--s-6);
     margin-block: var(--s-8);
     font-style: italic;
   }
 
-  .bpost__body :global(blockquote p) {
+  .bpost__prose :global(blockquote p) {
     color: var(--c-text);
   }
 
-  .bpost__body :global(hr) {
+  .bpost__prose :global(hr) {
     border: none;
     height: 1px;
     background: var(--c-border-light);
     margin-block: var(--s-10);
+  }
+
+  /* Aside CTA */
+  .bpost__aside {
+    position: relative;
+  }
+
+  .bside {
+    border-radius: var(--r-xl);
+    border: 1px solid var(--c-border-light);
+    background: linear-gradient(180deg, rgba(38, 207, 255, 0.10) 0%, rgba(38, 207, 255, 0.00) 100%), var(--c-bg);
+    padding: var(--s-7);
+  }
+
+  :global([data-theme='dark']) .bside {
+    border-color: var(--c-border);
+    background: linear-gradient(180deg, rgba(38, 207, 255, 0.12) 0%, rgba(38, 207, 255, 0.00) 100%), var(--c-surface);
+  }
+
+  .bside__eyebrow {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    margin-bottom: var(--s-4);
+  }
+
+  .bside__title {
+    font-size: 1.35rem;
+    line-height: 1.15;
+    margin: 0 0 var(--s-4);
+    color: var(--c-text);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .bside__text {
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    margin-bottom: var(--s-6);
+    font-size: 0.95rem;
+  }
+
+  .bside__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .bside__actions :global(.btn) {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .bside__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    margin-top: var(--s-6);
+  }
+
+  .bside__badges span {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    background: var(--c-bg);
+    padding: 5px 12px;
+    border-radius: var(--r-full);
+    border: 1px solid var(--c-border-light);
+  }
+
+  :global([data-theme='dark']) .bside__badges span {
+    background: var(--c-surface);
+    border-color: var(--c-border);
+  }
+
+  /* Related */
+  .brel {
+    margin-top: var(--s-16);
+    border-top: 1px solid var(--c-border-light);
+    padding-top: var(--s-10);
+  }
+
+  .brel__eyebrow {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    margin-bottom: var(--s-3);
+  }
+
+  .brel__title {
+    margin: 0 0 var(--s-6);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .brel__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+
+  .brel__card {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    border: 1px solid var(--c-border-light);
+    background: var(--c-bg);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  :global([data-theme='dark']) .brel__card {
+    background: var(--c-surface);
+    border-color: var(--c-border);
+  }
+
+  .brel__img {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+
+  .brel__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .brel__body {
+    padding: var(--s-6);
+  }
+
+  .brel__tags {
+    display: flex;
+    gap: var(--s-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--s-3);
+  }
+
+  .brel__tag {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    background: rgb(247 123 70 / 0.08);
+    padding: 3px 10px;
+    border-radius: var(--r-full);
+  }
+
+  .brel__name {
+    font-size: 1.05rem;
+    line-height: 1.25;
+    margin: 0 0 var(--s-3);
+    color: var(--c-text);
+  }
+
+  .brel__desc {
+    font-size: 0.85rem;
+    color: var(--c-text-muted);
+    line-height: 1.7;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Prev/next */
+  .bnav {
+    margin-top: var(--s-12);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-5);
+  }
+
+  .bnav__item {
+    border-radius: var(--r-lg);
+    border: 1px solid var(--c-border-light);
+    background: var(--c-bg);
+    padding: var(--s-6);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+
+  :global([data-theme='dark']) .bnav__item {
+    background: var(--c-surface);
+    border-color: var(--c-border);
+  }
+
+  .bnav__item--next { text-align: right; }
+
+  .bnav__kicker {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+  }
+
+  .bnav__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--c-text);
+  }
+
+  @media (min-width: 1100px) {
+    .bpost__layout {
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: var(--s-16);
+    }
+
+    .bpost__aside {
+      position: sticky;
+      top: calc(var(--header-h) + var(--s-6));
+      align-self: start;
+    }
+
+    .brel__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

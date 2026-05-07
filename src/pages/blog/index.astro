@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import LocationHero from '../../components/locations/LocationHero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import BookingCTA from '../../components/locations/BookingCTA.astro';
+import TrustBadges from '../../components/v11/TrustBadges.astro';
 
 import imgHeroBlog from '../../assets/images/lac-sainte-croix-gorges-verdon-location-bateaux-electriques.jpg';
 
@@ -41,9 +42,10 @@ function formatDate(date: Date): string {
 ---
 
 <Layout title={title} description={description} jsonLd={jsonLd}>
+  <div class="blogpage">
   <LocationHero
     title="Blog"
-    tagline="Guides · Actualités · Bons plans"
+    subtitle="Guides · Actualités · Bons plans"
     image={imgHeroBlog}
     alt="Vue panoramique du lac de Sainte-Croix — Gorges du Verdon"
   />
@@ -64,45 +66,105 @@ function formatDate(date: Date): string {
         <p class="blg-empty">Aucun article pour le moment. Revenez bientôt !</p>
       )}
 
-      <div class="blg-grid">
-        {posts.map((post, i) => (
-          <a href={`/blog/${post.id}`} class={`blg-card reveal`} style={`--d:${i * 80}ms`}>
-            <div class="blg-card__visual">
-              <img
-                src={post.data.image}
-                alt={post.data.imageAlt}
-                width="800"
-                height="500"
-                loading={i < 3 ? 'eager' : 'lazy'}
-                decoding="async"
-              />
-            </div>
-            <div class="blg-card__body">
-              <div class="blg-card__tags">
-                {post.data.tags.slice(0, 2).map((tag) => (
-                  <span class="blg-card__tag">{tag}</span>
-                ))}
+      {posts.length > 0 && (
+        <div class="blg-layout">
+          <div class="blg-main">
+            <a href={`/blog/${posts[0].id}`} class="blg-feature reveal" aria-label={`Lire : ${posts[0].data.title}`}>
+              <div class="blg-feature__media">
+                <img
+                  class="blg-feature__img"
+                  src={posts[0].data.image}
+                  alt={posts[0].data.imageAlt}
+                  width="1400"
+                  height="800"
+                  loading="eager"
+                  decoding="async"
+                />
+                <div class="blg-feature__overlay" aria-hidden="true"></div>
               </div>
-              <h3 class="blg-card__title">{post.data.title}</h3>
-              <p class="blg-card__excerpt">{post.data.description}</p>
-              <div class="blg-card__footer">
-                <time datetime={post.data.date.toISOString().slice(0, 10)}>{formatDate(post.data.date)}</time>
-                <span class="blg-card__read">Lire <span aria-hidden="true">→</span></span>
+              <div class="blg-feature__content">
+                <div class="blg-feature__tags">
+                  {posts[0].data.tags.slice(0, 3).map((tag) => (
+                    <span class="blg-tag blg-tag--dark">{tag}</span>
+                  ))}
+                </div>
+                <h3 class="blg-feature__title">{posts[0].data.title}</h3>
+                <p class="blg-feature__excerpt">{posts[0].data.description}</p>
+                <div class="blg-feature__meta">
+                  <time datetime={posts[0].data.date.toISOString().slice(0, 10)}>{formatDate(posts[0].data.date)}</time>
+                  <span class="blg-feature__dot" aria-hidden="true">·</span>
+                  <span class="blg-feature__cta">Lire l’article <span aria-hidden="true">→</span></span>
+                </div>
+              </div>
+            </a>
+
+            <div class="blg-grid">
+              {posts.slice(1).map((post, i) => (
+                <a href={`/blog/${post.id}`} class="blg-card reveal" aria-label={`Lire : ${post.data.title}`}>
+                  <div class="blg-card__visual">
+                    <img
+                      src={post.data.image}
+                      alt={post.data.imageAlt}
+                      width="900"
+                      height="560"
+                      loading={i < 5 ? 'lazy' : 'lazy'}
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="blg-card__body">
+                    <div class="blg-card__tags">
+                      {post.data.tags.slice(0, 2).map((tag) => (
+                        <span class="blg-tag">{tag}</span>
+                      ))}
+                    </div>
+                    <h3 class="blg-card__title">{post.data.title}</h3>
+                    <p class="blg-card__excerpt">{post.data.description}</p>
+                    <div class="blg-card__footer">
+                      <time datetime={post.data.date.toISOString().slice(0, 10)}>{formatDate(post.data.date)}</time>
+                      <span class="blg-card__read">Lire <span aria-hidden="true">→</span></span>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <aside class="blg-aside reveal reveal-d1" aria-label="Actions rapides">
+            <div class="blg-cta">
+              <span class="blg-cta__eyebrow">À faire au lac</span>
+              <h3 class="blg-cta__title">Passez du guide à l’expérience</h3>
+              <p class="blg-cta__text">Réservez votre activité (bateau, paddle, pédalo…) et profitez du lac de Sainte‑Croix.</p>
+              <div class="blg-cta__actions">
+                <button type="button" class="btn btn--primary" data-booking>
+                  <span class="btn-flip__inner"><span class="btn-flip__front">Réserver</span><span class="btn-flip__back">Réserver</span></span>
+                </button>
+                <a href="/nos-locations" class="btn btn--secondary">Voir les locations</a>
+              </div>
+              <div class="blg-cta__badges">
+                <span>Annulation 24h</span>
+                <span>Paiement sécurisé</span>
+                <span>Sur place</span>
               </div>
             </div>
-          </a>
-        ))}
-      </div>
+          </aside>
+        </div>
+      )}
     </div>
   </section>
 
+  <TrustBadges />
   <BookingCTA
     title="Envie de lac ?"
     text="Réservez votre activité nautique et venez profiter du lac de Sainte-Croix."
   />
+  </div>
 </Layout>
 
 <style>
+  .blogpage :global(.section) {
+    padding-block: clamp(2.5rem, 6vw, 5rem);
+  }
+
   .blg-empty {
     text-align: center;
     color: var(--c-text-muted);
@@ -110,10 +172,123 @@ function formatDate(date: Date): string {
     padding: var(--s-16) 0;
   }
 
+  .blg-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+    align-items: start;
+  }
+
+  .blg-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-10);
+    min-width: 0;
+  }
+
+  .blg-feature {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--c-border-light);
+    background: var(--c-bg);
+  }
+
+  :global([data-theme='dark']) .blg-feature {
+    border-color: var(--c-border);
+    background: var(--c-surface);
+  }
+
+  .blg-feature__media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+
+  .blg-feature__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .blg-feature__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 30%, rgb(0 0 0 / 0.62) 100%);
+    pointer-events: none;
+  }
+
+  .blg-feature__content {
+    padding: var(--s-7);
+  }
+
+  .blg-feature__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    margin-bottom: var(--s-4);
+  }
+
+  .blg-tag {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    background: rgb(247 123 70 / 0.08);
+    padding: 3px 10px;
+    border-radius: var(--r-full);
+  }
+
+  .blg-tag--dark {
+    color: #fff;
+    background: rgb(0 0 0 / 0.35);
+    border: 1px solid rgb(255 255 255 / 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .blg-feature__title {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    line-height: 1.15;
+    margin-bottom: var(--s-3);
+    color: var(--c-text);
+  }
+
+  .blg-feature__excerpt {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--c-text-secondary);
+    max-width: 60ch;
+    margin-bottom: var(--s-5);
+  }
+
+  .blg-feature__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+  }
+
+  .blg-feature__cta {
+    color: var(--c-orange);
+    font-weight: 800;
+  }
+
   .blg-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--s-8);
+    min-width: 0;
   }
 
   .blg-card {
@@ -121,11 +296,16 @@ function formatDate(date: Date): string {
     flex-direction: column;
     border-radius: var(--r-lg);
     overflow: hidden;
-    background: var(--c-surface);
+    background: var(--c-bg);
     border: 1px solid var(--c-border-light);
     text-decoration: none;
     color: inherit;
     transition: transform var(--t-normal) var(--ease), box-shadow var(--t-normal) var(--ease);
+  }
+
+  :global([data-theme='dark']) .blg-card {
+    background: var(--c-surface);
+    border-color: var(--c-border);
   }
 
   .blg-card:hover {
@@ -162,21 +342,6 @@ function formatDate(date: Date): string {
     gap: var(--s-2);
     flex-wrap: wrap;
     margin-bottom: var(--s-3);
-  }
-
-  .blg-card__tag {
-    font-size: 0.58rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--c-orange);
-    background: rgb(247 123 70 / 0.08);
-    padding: 3px 10px;
-    border-radius: var(--r-full);
-  }
-
-  [data-theme='dark'] .blg-card__tag {
-    background: rgb(247 123 70 / 0.15);
   }
 
   .blg-card__title {
@@ -228,7 +393,87 @@ function formatDate(date: Date): string {
   }
 
   @media (min-width: 1100px) {
-    .blg-grid { grid-template-columns: repeat(3, 1fr); }
+    .blg-layout { grid-template-columns: 1fr 360px; gap: var(--s-12); }
+    .blg-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .blg-aside {
+      position: sticky;
+      top: calc(var(--header-h) + var(--s-6));
+      align-self: start;
+    }
+  }
+
+  .blg-cta {
+    border-radius: var(--r-xl);
+    border: 1px solid var(--c-border-light);
+    background: linear-gradient(180deg, rgba(38, 207, 255, 0.10) 0%, rgba(38, 207, 255, 0.00) 100%), var(--c-bg);
+    padding: var(--s-7);
+  }
+
+  :global([data-theme='dark']) .blg-cta {
+    border-color: var(--c-border);
+    background: linear-gradient(180deg, rgba(38, 207, 255, 0.12) 0%, rgba(38, 207, 255, 0.00) 100%), var(--c-surface);
+  }
+
+  .blg-cta__eyebrow {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    margin-bottom: var(--s-4);
+  }
+
+  .blg-cta__title {
+    font-size: 1.35rem;
+    line-height: 1.15;
+    margin: 0 0 var(--s-4);
+    color: var(--c-text);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .blg-cta__text {
+    color: var(--c-text-secondary);
+    line-height: 1.75;
+    margin-bottom: var(--s-6);
+    font-size: 0.95rem;
+  }
+
+  .blg-cta__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .blg-cta__actions :global(.btn) {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .blg-cta__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    margin-top: var(--s-6);
+  }
+
+  .blg-cta__badges span {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    background: var(--c-bg);
+    padding: 5px 12px;
+    border-radius: var(--r-full);
+    border: 1px solid var(--c-border-light);
+  }
+
+  :global([data-theme='dark']) .blg-cta__badges span {
+    background: var(--c-surface);
+    border-color: var(--c-border);
   }
 
   @media (prefers-reduced-motion: reduce) {

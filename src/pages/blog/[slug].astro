@@ -14,6 +14,25 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+const allPosts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const idx = allPosts.findIndex((p) => p.id === post.id);
+const prevPost = idx >= 0 ? allPosts[idx + 1] : undefined;
+const nextPost = idx > 0 ? allPosts[idx - 1] : undefined;
+
+const related = allPosts
+  .filter((p) => p.id !== post.id)
+  .map((p) => {
+    const overlap = p.data.tags.filter((t) => post.data.tags.includes(t)).length;
+    return { p, overlap };
+  })
+  .filter((x) => x.overlap > 0)
+  .sort((a, b) => b.overlap - a.overlap || b.p.data.date.valueOf() - a.p.data.date.valueOf())
+  .slice(0, 3)
+  .map((x) => x.p);
 ---
 
 <BlogPost
@@ -25,6 +44,9 @@ const { Content } = await render(post);
   author={post.data.author}
   tags={post.data.tags}
   slug={post.id}
+  prevPost={prevPost && { slug: prevPost.id, title: prevPost.data.title, image: prevPost.data.image, imageAlt: prevPost.data.imageAlt }}
+  nextPost={nextPost && { slug: nextPost.id, title: nextPost.data.title, image: nextPost.data.image, imageAlt: nextPost.data.imageAlt }}
+  relatedPosts={related.map((p) => ({ slug: p.id, title: p.data.title, description: p.data.description, date: p.data.date, image: p.data.image, imageAlt: p.data.imageAlt, tags: p.data.tags }))}
 >
   <Content />
 </BlogPost>

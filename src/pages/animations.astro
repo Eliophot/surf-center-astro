@@ -28,6 +28,45 @@ const upcomingEvents = [
   { date: '16 Août', title: 'Régate des familles', type: 'Sport' },
 ];
 
+const currentYear = new Date().getFullYear();
+const monthMap: Record<string, string> = {
+  'Janv.': '01',
+  'Févr.': '02',
+  'Mars': '03',
+  'Avr.': '04',
+  'Mai': '05',
+  'Juin': '06',
+  'Juil.': '07',
+  'Août': '08',
+  'Sept.': '09',
+  'Oct.': '10',
+  'Nov.': '11',
+  'Déc.': '12',
+};
+
+const toIsoDate = (d: string) => {
+  // Formats attendus: "12 Juil." / "2 Août"
+  const m = d.trim().match(/^(\d{1,2})\s+([^\s]+)$/);
+  if (!m) return undefined;
+  const day = m[1].padStart(2, '0');
+  const month = monthMap[m[2]];
+  if (!month) return undefined;
+  return `${currentYear}-${month}-${day}`;
+};
+
+const eventLocation = {
+  '@type': 'Place',
+  name: 'Surf Center',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Plage des Salles-sur-Verdon',
+    addressLocality: 'Les Salles-sur-Verdon',
+    postalCode: '83630',
+    addressCountry: 'FR',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: 43.7766, longitude: 6.21 },
+};
+
 const galleryImages: { src: ImageMetadata; alt: string }[] = [
   { src: imgYoga, alt: 'Yoga au lever du soleil — Surf Center' },
   { src: imgConcertJoulik, alt: 'Concert Joulik — Surf Center' },
@@ -44,6 +83,38 @@ const jsonLd = [
     name: 'Animations — Surf Center',
     description,
     url: `${siteUrl}/animations`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'EventSeries',
+    name: 'Animations & événements — Surf Center',
+    description,
+    url: `${siteUrl}/animations`,
+    location: eventLocation,
+    organizer: { '@type': 'Organization', name: 'Surf Center', url: siteUrl },
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    isAccessibleForFree: true,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Prochains événements',
+    itemListOrder: 'https://schema.org/ItemListOrderAscending',
+    numberOfItems: upcomingEvents.length,
+    itemListElement: upcomingEvents.map((evt, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      item: {
+        '@type': 'Event',
+        name: evt.title,
+        startDate: toIsoDate(evt.date),
+        eventStatus: 'https://schema.org/EventScheduled',
+        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+        location: eventLocation,
+        organizer: { '@type': 'Organization', name: 'Surf Center', url: siteUrl },
+        isAccessibleForFree: true,
+      },
+    })),
   },
   {
     '@context': 'https://schema.org',

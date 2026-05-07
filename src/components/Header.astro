@@ -186,6 +186,7 @@ const navLinks = [
       const current = document.documentElement.getAttribute('data-theme');
       const next = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
+      document.documentElement.classList.toggle('dark', next === 'dark');
       localStorage.setItem('theme', next);
 
       const meta = document.getElementById('meta-theme-color');

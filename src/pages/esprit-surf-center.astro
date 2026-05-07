@@ -3,29 +3,17 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import LocationHero from '../components/locations/LocationHero.astro';
 import SectionOneImage from '../components/sections/SectionOneImage.astro';
+import ProductSlider from '../components/v8/ProductSlider.astro';
+import TrustBadges from '../components/v11/TrustBadges.astro';
 import Maillage from '../components/Maillage.astro';
 import BookingCTA from '../components/locations/BookingCTA.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
-import { locationDetails } from '../data/locations';
 
 import imgEsprit from '../assets/images/esprit.png';
 import imgLac from '../assets/images/location-lac-sainte-croix-gorges-verdon.png';
 import imgGetty from '../assets/images/GettyImages-577312024.jpg';
 import imgSnack from '../assets/images/drone-snack-pedalo-lac-sainte-croix-surfcenter-salades.jpeg';
 import imgPaddleBateaux from '../assets/images/location-paddle-bateaux-electriques-lac-sainte-croix-gorges-verdon.jpeg';
-import imgBateau from '../assets/images/location-bateau-electrique-lac-sainte-croix-surfcenter.jpeg';
-import imgPaddle from '../assets/images/location-paddle-lac-sainte-croix-surfcenter.jpeg';
-import imgPedalo from '../assets/images/location-pedalo-lac-sainte-croix.jpeg';
-import imgCanoe from '../assets/images/canoe.jpeg';
-import imgVoile from '../assets/images/location-planche-a-voile-windsurf-lac-sainte-croix.png';
-
-const detailImageMap: Record<string, ImageMetadata> = {
-  'bateau-electrique': imgBateau,
-  'paddle': imgPaddle,
-  'pedalo': imgPedalo,
-  'canoe': imgCanoe,
-  'planche-a-voile': imgVoile,
-};
 
 const title = "L'esprit Surf Center — Notre histoire & nos valeurs | Surf Center Verdon";
 const description = "Découvrez l'esprit Surf Center : une base nautique au bord du lac de Sainte-Croix, au cœur des Gorges du Verdon. Nature, convivialité, qualité et simplicité depuis plus de 10 ans.";
@@ -53,195 +41,175 @@ const jsonLd = [
 ---
 
 <Layout title={title} description={description} jsonLd={jsonLd}>
-  <LocationHero
-    title={["Esprit", "Surf Center"]}
-    image={imgPaddleBateaux}
-    alt="Paddle et bateaux électriques sur le lac de Sainte-Croix — Surf Center"
-  />
-  <Breadcrumbs items={[
-    { label: 'Accueil', href: '/' },
-    { label: "L'esprit Surf Center" },
-  ]} />
+  <div class="esppage">
+    <LocationHero
+      title={["Esprit", "Surf Center"]}
+      image={imgPaddleBateaux}
+      alt="Paddle et bateaux électriques sur le lac de Sainte-Croix — Surf Center"
+    />
+    <Breadcrumbs items={[
+      { label: 'Accueil', href: '/' },
+      { label: "L'esprit Surf Center" },
+    ]} />
 
-  <!-- Ambiance / Esprit -->
-  <SectionOneImage
-    id="ambiance"
-    eyebrow="Notre histoire"
-    title="Un lieu,<br/>une énergie"
-    text="Surf Center est né d'une idée simple : proposer un lieu où le lac, le soleil et la convivialité font le reste. Depuis plus de dix ans, nous accueillons familles, couples, groupes d'amis et aventuriers au bord du lac de Sainte-Croix."
-    image={{ src: imgEsprit, alt: "L'ambiance Surf Center — convivialité au bord du lac" }}
-    list={[
-      { text: 'Créé par des passionnés du lac', icon: 'heart' },
-      { text: 'Équipe locale et engagée', icon: 'users' },
-      { text: 'Esprit familial et décontracté', icon: 'sun' },
-      { text: 'Ouvert d\'avril à octobre', icon: 'calendar' },
-    ]}
-  />
+    <!-- Notre histoire -->
+    <SectionOneImage
+      id="histoire"
+      eyebrow="Notre histoire"
+      title="Un lieu,<br/>une énergie"
+      text="Surf Center est né d'une idée simple : proposer un lieu où le lac, le soleil et la convivialité font le reste. Depuis plus de dix ans, nous accueillons familles, couples, groupes d'amis et aventuriers au bord du lac de Sainte-Croix."
+      image={{ src: imgEsprit, alt: "L'ambiance Surf Center — convivialité au bord du lac" }}
+      imgIcon={{ src: '/figma/resto-icon.svg', alt: '' }}
+      tags={['Créé par des passionnés', 'Équipe locale', 'Esprit familial', 'Ouvert avril–octobre']}
+      style="background: linear-gradient(180deg, rgba(237, 103, 118, 0.00) 0%, rgba(237, 103, 118, 0.10) 100%);"
+    />
 
-  <!-- Le cadre / les espaces -->
-  <section class="section section--surface" aria-labelledby="cadre-title">
-    <div class="container">
-      <header class="section__header reveal">
-        <span class="section__eyebrow">Le cadre</span>
-        <h2 id="cadre-title">Un cadre exceptionnel</h2>
-        <p class="section__lead">Au pied des Gorges du Verdon, sur les rives du lac de Sainte-Croix — un des plus beaux lacs d'Europe.</p>
-      </header>
+    <!-- Le cadre -->
+    <section class="cadre section" aria-labelledby="cadre-title">
+      <div class="container">
+        <header class="section__header reveal">
+          <span class="section__eyebrow">Le cadre</span>
+          <h2 id="cadre-title">Un cadre exceptionnel</h2>
+          <p class="section__lead">Au pied des Gorges du Verdon, sur les rives du lac de Sainte-Croix — un des plus beaux lacs d'Europe.</p>
+        </header>
 
-      <div class="espcadre__grid">
-        <div class="espcadre__card reveal">
-          <Image src={imgLac} alt="Lac de Sainte-Croix vu du ciel" width={600} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
-          <h3>Le lac</h3>
-          <p>2 200 hectares d'eaux turquoise entre les Gorges du Verdon et le plateau de Valensole.</p>
-        </div>
-        <div class="espcadre__card reveal reveal-d1">
-          <Image src={imgGetty} alt="Gorges du Verdon en kayak" width={600} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
-          <h3>Les Gorges</h3>
-          <p>Le plus grand canyon d'Europe, accessible directement depuis notre base nautique.</p>
-        </div>
-        <div class="espcadre__card reveal reveal-d2">
-          <Image src={imgSnack} alt="Base nautique Surf Center vue du ciel" width={600} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
-          <h3>La base</h3>
-          <p>Plage, location, snack-pizzeria, scène concerts — tout sur place, les pieds dans l'eau.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Nos activités slider -->
-  <section class="section" aria-labelledby="espact-title">
-    <div class="container">
-      <header class="section__header reveal">
-        <span class="section__eyebrow">Activités</span>
-        <h2 id="espact-title">Tout le lac, à votre façon</h2>
-        <p class="section__lead">5 activités nautiques, un snack face au lac, des animations tout l'été.</p>
-      </header>
-
-      <div class="espact__grid">
-        {locationDetails.map((loc, i) => (
-          <a href={`/nos-locations/${loc.slug}`} class={`espact__card reveal reveal-d${Math.min(i + 1, 4)}`}>
-            <div class="espact__img-wrap">
-              {detailImageMap[loc.slug] ? (
-                <Image src={detailImageMap[loc.slug]} alt={loc.heroAlt} width={400} height={300} loading="lazy" decoding="async" format="webp" quality={75} />
-              ) : (
-                <img src={loc.detailImage} alt={loc.heroAlt} width="400" height="300" loading="lazy" decoding="async" />
-              )}
+        <div class="cadre__grid" role="list">
+          <article class="cadre__card reveal" role="listitem">
+            <div class="cadre__img-wrap">
+              <Image src={imgLac} alt="Lac de Sainte-Croix vu du ciel" width={600} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
             </div>
-            <h3 class="espact__name">{loc.title}</h3>
-            <span class="espact__price">dès {loc.price}€</span>
-          </a>
-        ))}
+            <div class="cadre__body">
+              <h3>Le lac</h3>
+              <p>2 200 hectares d'eaux turquoise entre les Gorges du Verdon et le plateau de Valensole.</p>
+            </div>
+          </article>
+          <article class="cadre__card reveal reveal-d1" role="listitem">
+            <div class="cadre__img-wrap">
+              <Image src={imgGetty} alt="Gorges du Verdon en kayak" width={600} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
+            </div>
+            <div class="cadre__body">
+              <h3>Les Gorges</h3>
+              <p>Le plus grand canyon d'Europe, accessible directement depuis notre base nautique.</p>
+            </div>
+          </article>
+          <article class="cadre__card reveal reveal-d2" role="listitem">
+            <div class="cadre__img-wrap">
+              <Image src={imgSnack} alt="Base nautique Surf Center vue du ciel" width={600} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
+            </div>
+            <div class="cadre__body">
+              <h3>La base</h3>
+              <p>Plage, location, snack-pizzeria, scène concerts — tout sur place, les pieds dans l'eau.</p>
+            </div>
+          </article>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- La destination -->
-  <SectionOneImage
-    id="destination"
-    eyebrow="La destination"
-    title="Le Verdon,<br/>côté lac"
-    text="Les Salles-sur-Verdon, c'est un village provençal posé au bord du lac de Sainte-Croix. À 1h15 d'Aix-en-Provence, 1h30 de Marseille, 2h de Nice — un accès facile pour un dépaysement total."
-    image={{ src: imgPaddleBateaux, alt: 'Paddle et bateaux sur le lac de Sainte-Croix — Gorges du Verdon' }}
-    list={[
-      { text: '1h15 depuis Aix-en-Provence', icon: 'compass' },
-      { text: '1h30 depuis Marseille', icon: 'compass' },
-      { text: '2h depuis Nice', icon: 'compass' },
-      { text: 'Parking gratuit sur place', icon: 'check' },
-    ]}
-    cta={{ label: 'Voir les locations', href: '/nos-locations' }}
-    surface
-  />
+    <!-- Nos activités -->
+    <ProductSlider showAllLink={true} />
 
-  <Maillage />
-  <BookingCTA title="Venez vivre l'expérience" text="Réservez en ligne et retrouvez-nous sur la plage du lac de Sainte-Croix." />
+    <!-- La destination -->
+    <SectionOneImage
+      id="destination"
+      eyebrow="La destination"
+      title="Le Verdon,<br/>côté lac"
+      text="Les Salles-sur-Verdon, c'est un village provençal posé au bord du lac de Sainte-Croix. À 1h15 d'Aix-en-Provence, 1h30 de Marseille, 2h de Nice — un accès facile pour un dépaysement total."
+      image={{ src: imgPaddleBateaux, alt: 'Paddle et bateaux sur le lac de Sainte-Croix — Gorges du Verdon' }}
+      ellipse={{ src: '/figma/events-ellipse.svg', alt: '', position: 'left', width: 84, height: 101 }}
+      tags={['1h15 depuis Aix', '1h30 depuis Marseille', '2h depuis Nice', 'Parking gratuit']}
+      cta={{ label: 'Voir les locations', href: '/nos-locations' }}
+      fill
+      vCenterContent
+    />
+
+    <Maillage />
+    <TrustBadges />
+    <BookingCTA title="Venez vivre l'expérience" text="Réservez en ligne et retrouvez-nous sur la plage du lac de Sainte-Croix." />
+  </div>
 </Layout>
 
 <style>
-  /* ── Cadre grid ── */
-  .espcadre__grid {
+  /* ── Padding réduit sur toute la page ────────────── */
+  .esppage :global(.section) {
+    padding-block: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  /* ── Section Cadre ───────────────────────────────── */
+  .cadre {
+    background: linear-gradient(180deg, rgba(237, 103, 118, 0.10) 0%, rgba(237, 103, 118, 0.00) 100%);
+  }
+
+  .cadre__grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--s-8);
   }
 
-  .espcadre__card img {
+  .cadre__card {
+    background: var(--c-bg);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    border: 1px solid var(--c-border-light);
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+
+  .cadre__card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  :global([data-theme='dark']) .cadre__card {
+    background: var(--c-surface);
+    border-color: var(--c-border);
+  }
+
+  .cadre__img-wrap {
+    overflow: hidden;
+  }
+
+  .cadre__img-wrap :global(img) {
     width: 100%;
     height: auto;
     display: block;
     aspect-ratio: 16 / 10;
     object-fit: cover;
-    border-radius: var(--r-lg);
-    margin-bottom: var(--s-4);
+    transition: transform 0.6s var(--ease);
   }
 
-  .espcadre__card h3 {
+  .cadre__card:hover .cadre__img-wrap :global(img) {
+    transform: scale(1.04);
+  }
+
+  .cadre__body {
+    padding: var(--s-6);
+  }
+
+  .cadre__body h3 {
     font-size: 1.1rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     margin-bottom: var(--s-2);
+    color: var(--c-text);
   }
 
-  .espcadre__card p {
-    font-size: 0.85rem;
+  .cadre__body p {
+    font-size: 0.88rem;
     color: var(--c-text-secondary);
     line-height: 1.65;
   }
 
   @media (min-width: 768px) {
-    .espcadre__grid { grid-template-columns: repeat(3, 1fr); }
-  }
-
-  /* ── Activités slider ── */
-  .espact__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--s-4);
-  }
-
-  .espact__card {
-    text-decoration: none;
-    color: var(--c-text);
-  }
-
-  .espact__img-wrap {
-    overflow: hidden;
-    border-radius: var(--r-md);
-    margin-bottom: var(--s-3);
-  }
-
-  .espact__img-wrap img {
-    width: 100%;
-    height: auto;
-    display: block;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    transition: transform 0.6s var(--ease);
-  }
-
-  .espact__card:hover .espact__img-wrap img { transform: scale(1.04); }
-
-  .espact__name {
-    font-size: 0.88rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    margin-bottom: 2px;
-    transition: color var(--t-fast);
-  }
-
-  .espact__card:hover .espact__name { color: var(--c-orange); }
-
-  .espact__price {
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--c-orange);
-  }
-
-  @media (min-width: 768px) {
-    .espact__grid { grid-template-columns: repeat(5, 1fr); }
+    .cadre__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--s-6);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .espact__img-wrap img { transition: none; }
+    .cadre__card,
+    .cadre__img-wrap :global(img) { transition: none; }
+    .cadre__card:hover { transform: none; }
+    .cadre__card:hover .cadre__img-wrap :global(img) { transform: none; }
   }
 </style>

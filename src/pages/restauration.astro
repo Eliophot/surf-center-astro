@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import LocationHero from '../components/locations/LocationHero.astro';
 import SectionOneImage from '../components/sections/SectionOneImage.astro';
@@ -51,6 +52,7 @@ const jsonLd = [
 ---
 
 <Layout title={title} description={description} jsonLd={jsonLd}>
+  <div class="rpage">
   <LocationHero
     title="Restauration"
     image={imgSnack}
@@ -68,24 +70,42 @@ const jsonLd = [
     title="Pause gourmande<br/>face au lac"
     text="Notre snack-pizzeria vous accueille tout au long de la journée, directement sur la plage du lac de Sainte-Croix. Commandez au comptoir, installez-vous en terrasse les pieds dans le sable et profitez de la vue."
     image={{ src: imgSnack, alt: 'Terrasse du snack Surf Center face au lac de Sainte-Croix' }}
-    list={[
-      { text: 'Service continu de 11h à 18h30', icon: 'clock' },
-      { text: 'Terrasse vue lac', icon: 'sun' },
-      { text: 'Commande au comptoir', icon: 'check' },
-      { text: 'À emporter disponible', icon: 'utensils' },
-    ]}
+    imgIcon={{ src: '/figma/resto-icon.svg', alt: '' }}
+    tags={['Service 11h–18h30', 'Terrasse vue lac', 'Commande au comptoir', 'À emporter']}
   />
 
   <!-- Les Pizzas -->
-  <SectionOneImage
-    id="pizzas"
-    eyebrow="Les pizzas"
-    title="Au feu de bois,<br/>comme en Italie"
-    text="Nos pizzas sont préparées chaque jour avec des ingrédients frais et cuites au feu de bois. Pâte faite maison, mozzarella di bufala, légumes de saison — le goût de l'Italie face au lac de Sainte-Croix."
-    image={{ src: imgEsprit, alt: 'Pizzas artisanales au feu de bois — Surf Center' }}
-    tags={['Feu de bois', 'Pâte maison', 'Ingrédients frais', 'Formules midi']}
-    reverse
-  />
+  <section id="pizzas" class="rp section" aria-labelledby="rp-title">
+    <div class="container">
+      <article class="rp__row">
+        <div class="rp__media reveal">
+          <Image
+            src={imgEsprit}
+            alt="Pizzas artisanales au feu de bois — Surf Center"
+            width={1200}
+            height={760}
+            loading="lazy"
+            decoding="async"
+            format="webp"
+            quality={75}
+          />
+        </div>
+
+        <div class="rp__copy reveal reveal-d1">
+          <h2 class="rp__eyebrow home-h2">Les pizzas</h2>
+          <h3 id="rp-title" class="home-h3 rp__title">Au feu de bois,<br/>comme en Italie</h3>
+          <p class="rp__desc">Nos pizzas sont préparées chaque jour avec des ingrédients frais et cuites au feu de bois. Pâte faite maison, mozzarella di bufala, légumes de saison — le goût de l'Italie face au lac de Sainte-Croix.</p>
+
+          <div class="rp__tags">
+            <span>Feu de bois</span>
+            <span>Pâte maison</span>
+            <span>Ingrédients frais</span>
+            <span>Formules midi</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
 
   <!-- Le bar -->
   <SectionOneImage
@@ -94,12 +114,10 @@ const jsonLd = [
     title="Boissons fraîches<br/>& glaces"
     text="Jus de fruits pressés, smoothies, bières artisanales, rosé de Provence et glaces artisanales — tout ce qu'il faut pour se rafraîchir entre deux sessions nautiques."
     image={{ src: imgBar, alt: 'Boissons et glaces au bar Surf Center' }}
-    list={[
-      { text: 'Jus frais & smoothies', icon: 'leaf' },
-      { text: 'Bières artisanales & rosé', icon: 'star' },
-      { text: 'Glaces artisanales', icon: 'sun' },
-      { text: 'Café & thé', icon: 'flame' },
-    ]}
+    ellipse={{ src: '/figma/events-ellipse.svg', alt: '', position: 'left', width: 84, height: 101 }}
+    tags={['Jus frais & smoothies', 'Bières artisanales & rosé', 'Glaces artisanales', 'Café & thé']}
+    fill
+    vCenterContent
     style="background: linear-gradient(0deg, rgba(38, 207, 255, 0.10) 0%, rgba(38, 207, 255, 0.00) 100%);"
   />
 
@@ -165,9 +183,137 @@ const jsonLd = [
   </section>
 
   <Maillage />
+  </div>
 </Layout>
 
 <style>
+  /* ── Padding réduit sur toute la page ────────────── */
+  .rpage :global(.section) {
+    padding-block: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  /* ── Pizzas (layout bloc pro) ────────────────────── */
+  .rp {
+    overflow: hidden;
+  }
+
+  .rp__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+    align-items: stretch;
+  }
+
+  .rp__media {
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    background: #0a0a0a;
+  }
+
+  .rp__media :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+  }
+
+  .rp__copy {
+    max-width: 380px;
+  }
+
+  .rp__eyebrow {
+    display: block;
+    text-align: left;
+    margin: 0 0 var(--s-5);
+  }
+
+  .rp__title {
+    text-align: left;
+    margin-top: 0;
+  }
+
+  .rp__desc {
+    margin-top: var(--s-6);
+    color: #4A4A4A;
+    font-family: Montserrat, var(--font-sans);
+    font-size: 14.4px;
+    line-height: 25.2px;
+    max-width: 42ch;
+  }
+
+  :global([data-theme='dark']) .rp__desc { color: var(--c-text-secondary); }
+
+  .rp__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: var(--s-7);
+  }
+
+  .rp__list li {
+    display: flex;
+    gap: var(--s-3);
+    color: #4A4A4A;
+    font-family: Montserrat, var(--font-sans);
+    font-size: 13.1px;
+    line-height: 19.68px;
+  }
+
+  :global([data-theme='dark']) .rp__list li { color: var(--c-text-secondary); }
+
+  .rp__dash {
+    color: var(--c-orange);
+    flex-shrink: 0;
+  }
+
+  .rp__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    margin-top: var(--s-8);
+  }
+
+  .rp__tags span {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    background: var(--c-bg);
+    padding: 5px 14px;
+    border-radius: var(--r-full);
+    border: 1px solid var(--c-border-light);
+  }
+
+  :global([data-theme='dark']) .rp__tags span {
+    background: var(--c-surface);
+    border-color: var(--c-border);
+  }
+
+  @media (min-width: 900px) {
+    .rp__row {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+      gap: clamp(3rem, 6vw, 5rem);
+      align-items: stretch;
+    }
+
+    .rp__media {
+      height: 100%;
+      min-height: 100%;
+    }
+
+    .rp__media :global(img) {
+      height: 100%;
+      min-height: 100%;
+    }
+
+    .rp__copy {
+      padding-top: var(--s-2);
+    }
+  }
+
   /* ── Section ─────────────────────────────────────── */
   .infocard {
     background: linear-gradient(180deg, rgba(38, 207, 255, 0.10) 0%, rgba(38, 207, 255, 0.00) 100%);

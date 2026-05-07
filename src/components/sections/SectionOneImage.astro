@@ -12,11 +12,15 @@ interface Props {
   title: string;
   text: string;
   image: { src: string | ImageMetadata; alt: string; };
+  imgIcon?: { src: string; alt?: string; width?: number; height?: number };
+  ellipse?: { src: string; alt?: string; width?: number; height?: number; position?: 'left' | 'right' };
   list?: ListItem[];
   tags?: string[];
   cta?: { label: string; href?: string; booking?: boolean; };
   reverse?: boolean;
   surface?: boolean;
+  fill?: boolean;
+  vCenterContent?: boolean;
   className?: string;
   style?: string;
 }
@@ -27,11 +31,15 @@ const {
   title,
   text,
   image,
+  imgIcon,
+  ellipse,
   list,
   tags,
   cta,
   reverse = false,
   surface = false,
+  fill = false,
+  vCenterContent = false,
   className,
   style,
 } = Astro.props;
@@ -45,7 +53,7 @@ const titleId = `${sectionId}-title`;
   aria-labelledby={titleId}
   style={style}
 >
-  <div class:list={['container s1', { 's1--reverse': reverse }]}>
+  <div class:list={['container s1', { 's1--reverse': reverse, 's1--fill': fill, 's1--vcenter': vCenterContent }]}>
     <div class="s1__content reveal">
       <span class="section__eyebrow">{eyebrow}</span>
       <h2 id={titleId} set:html={title} />
@@ -69,35 +77,73 @@ const titleId = `${sectionId}-title`;
       )}
 
       {cta && (
-        cta.booking
-          ? <button type="button" class="btn btn--primary" data-booking><span class="btn-flip__inner"><span class="btn-flip__front">{cta.label}</span><span class="btn-flip__back">{cta.label}</span></span></button>
-          : <a href={cta.href} class="btn btn--primary">{cta.label}</a>
+        <div class="s1__cta">
+          {cta.booking
+            ? (
+              <button type="button" class="btn btn--primary" data-booking>
+                <span class="btn-flip__inner">
+                  <span class="btn-flip__front">{cta.label}</span>
+                  <span class="btn-flip__back">{cta.label}</span>
+                </span>
+              </button>
+            )
+            : (
+              <a href={cta.href} class="btn btn--primary">{cta.label}</a>
+            )
+          }
+        </div>
       )}
     </div>
 
     <div class="s1__visual reveal reveal-d2">
-      {typeof image.src === 'string' ? (
-        <img
-          class="s1__img"
-          src={image.src}
-          alt={image.alt}
-          width="640"
-          height="800"
-          loading="lazy"
-          decoding="async"
-        />
-      ) : (
-        <Image
-          class="s1__img"
-          src={image.src}
-          alt={image.alt}
-          width={640}
-          height={800}
-          loading="lazy"
-          decoding="async"
-          format="webp"
-          quality={75}
-        />
+      <div class="s1__visual-inner">
+        {typeof image.src === 'string' ? (
+          <img
+            class="s1__img"
+            src={image.src}
+            alt={image.alt}
+            width="640"
+            height="800"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <Image
+            class="s1__img"
+            src={image.src}
+            alt={image.alt}
+            width={640}
+            height={800}
+            loading="lazy"
+            decoding="async"
+            format="webp"
+            quality={75}
+          />
+        )}
+      </div>
+      {imgIcon?.src && (
+        <div class="ovlap__img-icon" aria-hidden="true">
+          <img
+            src={imgIcon.src}
+            alt={imgIcon.alt ?? ''}
+            width={imgIcon.width ?? 91}
+            height={imgIcon.height ?? 91}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      )}
+      {ellipse?.src && (
+        <span class:list={['epp__ellipse', { 'epp__ellipse--left': ellipse.position === 'left' }]} aria-hidden="true">
+          <img
+            src={ellipse.src}
+            alt={ellipse.alt ?? ''}
+            width={ellipse.width ?? 84}
+            height={ellipse.height ?? 101}
+            loading="lazy"
+            decoding="async"
+          />
+        </span>
       )}
     </div>
   </div>
@@ -154,11 +200,71 @@ const titleId = `${sectionId}-title`;
     border-radius: var(--r-lg);
   }
 
+  .s1__visual {
+    position: relative;
+  }
+
+  .s1__visual-inner {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--r-lg);
+    z-index: 1;
+  }
+
+  .ovlap__img-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(42%, -70%);
+    width: 91px;
+    height: 91px;
+    z-index: 3;
+    pointer-events: none;
+    user-select: none;
+    display: none;
+  }
+
+  .ovlap__img-icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .epp__ellipse {
+    position: absolute;
+    width: 84px;
+    height: 101px;
+    max-width: 84px;
+    max-height: 101px;
+    top: -50px;
+    right: -64px;
+    z-index: 3;
+    display: none;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .epp__ellipse--left {
+    right: auto;
+    left: -40px;
+  }
+
+  .epp__ellipse img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
   .s1__tags {
     display: flex;
     flex-wrap: wrap;
     gap: var(--s-2);
     margin-top: var(--s-8);
+  }
+
+  .s1__cta {
+    padding-top: var(--s-8);
+    align-self: flex-start;
   }
 
   .s1__tags span {
@@ -182,5 +288,29 @@ const titleId = `${sectionId}-title`;
     .s1 { grid-template-columns: 1fr 1.2fr; gap: var(--s-20); }
     .s1--reverse { grid-template-columns: 1.2fr 1fr; }
     .s1--reverse .s1__visual { order: -1; }
+
+    .s1--vcenter .s1__content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Image qui épouse la hauteur du contenu (comme le bloc pro de la home) */
+    .s1--fill { align-items: stretch; }
+    .s1--fill .s1__visual-inner {
+      box-shadow: var(--shadow-md);
+      height: 100%;
+      min-height: 100%;
+    }
+    .s1--fill .s1__img {
+      aspect-ratio: auto;
+      height: 100%;
+      min-height: 100%;
+      border-radius: 0;
+    }
+
+    .ovlap__img-icon { display: inline-flex; }
+    .epp__ellipse { display: block; }
   }
 </style>

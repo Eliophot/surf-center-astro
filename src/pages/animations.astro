@@ -57,68 +57,60 @@ const jsonLd = [
 ---
 
 <Layout title={title} description={description} jsonLd={jsonLd}>
-  <LocationHero
-    title="Animations"
-    tagline="Yoga · Cours · Concerts · Soirées"
-    image={imgYoga}
-    alt="Cours de yoga au lever du soleil au bord du lac de Sainte-Croix — Surf Center"
-  />
-  <Breadcrumbs items={[
-    { label: 'Accueil', href: '/' },
-    { label: 'Animations' },
-  ]} />
+  <div class="anipage">
+    <LocationHero
+      title="Animations"
+      subtitle="Yoga · Cours · Concerts · Soirées"
+      image={imgYoga}
+      alt="Cours de yoga au lever du soleil au bord du lac de Sainte-Croix — Surf Center"
+    />
+    <Breadcrumbs items={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Animations' },
+    ]} />
 
-  <!-- Présentation types d'animations -->
-  <SectionOneImage
-    id="types"
-    eyebrow="Activités"
-    title="Bien plus qu'une<br/>base nautique"
-    text="Au Surf Center, chaque journée propose son lot d'expériences : cours encadrés, ateliers bien-être, animations sportives et soirées musicales. Le tout face au lac de Sainte-Croix, dans un cadre exceptionnel."
-    image={{ src: imgPaddle, alt: 'Activités nautiques encadrées au Surf Center' }}
-    list={[
-      { text: 'Cours de paddle & windsurf', icon: 'waves' },
-      { text: 'Yoga & bien-être au lever du soleil', icon: 'yoga' },
-      { text: 'Bouée tractée & sensations', icon: 'zap' },
-      { text: 'Concerts live & soirées thématiques', icon: 'music' },
-    ]}
-    cta={{ label: 'Réserver', booking: true }}
-  />
+    <!-- Présentation types d'animations -->
+    <SectionOneImage
+      id="types"
+      eyebrow="Activités"
+      title="Bien plus qu'une<br/>base nautique"
+      text="Au Surf Center, chaque journée propose son lot d'expériences : cours encadrés, ateliers bien-être, animations sportives et soirées musicales. Le tout face au lac de Sainte-Croix, dans un cadre exceptionnel."
+      image={{ src: imgPaddle, alt: 'Activités nautiques encadrées au Surf Center' }}
+      imgIcon={{ src: '/figma/resto-icon.svg', alt: '' }}
+      tags={['Cours encadrés', 'Bien-être sunrise', 'Sensations', 'Concerts & soirées']}
+      cta={{ label: 'Réserver', booking: true }}
+    />
 
-  <!-- Yoga -->
-  <SectionOneImage
-    id="yoga"
-    eyebrow="Bien-être"
-    title="Yoga face au lac"
-    text="Chaque matin d'été, notre professeure Sarah vous accueille pour une session de yoga face au lac de Sainte-Croix. Au lever du soleil, dans le calme absolu, reconnectez-vous à la nature."
-    image={{ src: imgYoga, alt: 'Sarah — cours de yoga au Surf Center, lac de Sainte-Croix' }}
-    list={[
-      { text: 'Sessions sunrise 7h30 — 8h30', icon: 'sunset' },
-      { text: 'Tous niveaux bienvenus', icon: 'users' },
-      { text: 'Tapis fournis', icon: 'check' },
-      { text: 'Sur réservation', icon: 'calendar' },
-    ]}
-    reverse
-    surface
-  />
+    <!-- Yoga -->
+    <SectionOneImage
+      id="yoga"
+      eyebrow="Bien-être"
+      title="Yoga face au lac"
+      text="Chaque matin d'été, notre professeure Sarah vous accueille pour une session de yoga face au lac de Sainte-Croix. Au lever du soleil, dans le calme absolu, reconnectez-vous à la nature."
+      image={{ src: imgYoga, alt: 'Sarah — cours de yoga au Surf Center, lac de Sainte-Croix' }}
+      ellipse={{ src: '/figma/events-ellipse.svg', alt: '', position: 'right', width: 84, height: 101 }}
+      tags={['Sunrise 7h30 — 8h30', 'Tous niveaux', 'Tapis fournis', 'Sur réservation']}
+      reverse
+    />
 
-  <!-- Concerts -->
-  <SectionOneImage
-    id="concerts"
-    eyebrow="Concerts"
-    title="Live au<br/>coucher du soleil"
-    text="Le Surf Center accueille des artistes tout l'été pour des concerts acoustiques, DJ sets et soirées thématiques les pieds dans le sable, face au coucher de soleil sur le lac."
-    image={{ src: imgConcertJoulik, alt: 'Concert live Joulik au Surf Center — lac de Sainte-Croix' }}
-    list={[
-      { text: 'Concerts acoustiques live', icon: 'music' },
-      { text: 'DJ sets coucher de soleil', icon: 'disc' },
-      { text: 'Soirées à thème', icon: 'star' },
-      { text: 'Entrée libre', icon: 'check' },
-    ]}
-    cta={{ label: 'Voir les événements', href: '/groupes-evenements' }}
-  />
+    <!-- Concerts -->
+    <SectionOneImage
+      id="concerts"
+      eyebrow="Concerts"
+      title="Live au<br/>coucher du soleil"
+      text="Le Surf Center accueille des artistes tout l'été pour des concerts acoustiques, DJ sets et soirées thématiques les pieds dans le sable, face au coucher de soleil sur le lac."
+      image={{ src: imgConcertJoulik, alt: 'Concert live Joulik au Surf Center — lac de Sainte-Croix' }}
+      tags={['Concerts live', 'DJ sets', 'Soirées à thème', 'Entrée libre']}
+      cta={{ label: 'Voir les événements', href: '/groupes-evenements' }}
+      style="background: linear-gradient(0deg, rgba(38, 207, 255, 0.10) 0%, rgba(38, 207, 255, 0.00) 100%);"
+    />
 
   <!-- Prochains événements -->
-  <section class="section section--surface" aria-labelledby="upcoming-title">
+  <section
+    class="section"
+    aria-labelledby="upcoming-title"
+    style="background: linear-gradient(180deg, rgba(38, 207, 255, 0.10) 0%, rgba(38, 207, 255, 0.00) 65%);"
+  >
     <div class="container">
       <header class="section__header reveal">
         <span class="section__eyebrow">Agenda</span>
@@ -138,28 +130,56 @@ const jsonLd = [
   </section>
 
   <!-- Galerie photos -->
-  <section class="section" aria-labelledby="gallery-title">
+  <section class="section gal" aria-labelledby="gallery-title">
     <div class="container">
       <header class="section__header reveal">
         <span class="section__eyebrow">Galerie</span>
         <h2 id="gallery-title">En images</h2>
       </header>
 
-      <div class="anigal__grid">
-        {galleryImages.map((img, i) => (
-          <div class={`anigal__item reveal reveal-d${Math.min(i + 1, 4)}`}>
-            <Image src={img.src} alt={img.alt} width={600} height={400} loading="lazy" decoding="async" format="webp" quality={75} />
-          </div>
-        ))}
+      <div class="gal__slider-wrap reveal">
+        <button type="button" class="gal__arrow gal__arrow--prev" data-gal-prev aria-label="Précédent">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="gal__track" data-gal-track>
+          {galleryImages.map((img) => (
+            <div class="gal__slide">
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={600}
+                height={400}
+                loading="lazy"
+                decoding="async"
+                format="webp"
+                quality={75}
+              />
+            </div>
+          ))}
+        </div>
+
+        <button type="button" class="gal__arrow gal__arrow--next" data-gal-next aria-label="Suivant">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
       </div>
     </div>
   </section>
 
   <Maillage />
-  <BookingCTA title="Envie de bouger ?" text="Réservez votre activité en ligne et retrouvez-nous au bord du lac de Sainte-Croix." />
+  </div>
 </Layout>
 
 <style>
+  /* ── Padding réduit sur toute la page ────────────── */
+  .anipage :global(.section) {
+    padding-block: clamp(2.5rem, 6vw, 5rem);
+  }
+
   .anievt__list {
     display: flex;
     flex-direction: column;
@@ -204,38 +224,119 @@ const jsonLd = [
     white-space: nowrap;
   }
 
-  .anigal__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s-3);
+  /* ── Galerie Slider moderne ────────────────────────── */
+  .gal {
+    background: transparent;
   }
 
-  .anigal__item {
+  .gal__slider-wrap {
+    position: relative;
+  }
+
+  .gal__track {
+    display: flex;
+    gap: var(--s-4);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--s-2) 0;
+  }
+
+  .gal__track::-webkit-scrollbar { display: none; }
+
+  .gal__slide {
+    flex: 0 0 80%;
+    scroll-snap-align: center;
+    border-radius: var(--r-xl);
     overflow: hidden;
-    border-radius: var(--r-md);
+    position: relative;
   }
 
-  .anigal__item:first-child { grid-column: 1 / -1; }
-
-  .anigal__item img {
+  .gal__slide :global(img) {
     width: 100%;
     height: auto;
     display: block;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 2;
     object-fit: cover;
-    transition: transform 0.6s var(--ease);
   }
 
-  .anigal__item:first-child img { aspect-ratio: 21 / 9; }
+  .gal__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: var(--r-full);
+    border: 1px solid var(--c-border);
+    background: var(--c-bg);
+    color: var(--c-text);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transition: all var(--t-fast) var(--ease);
+  }
 
-  .anigal__item:hover img { transform: scale(1.04); }
+  .gal__arrow:hover {
+    background: var(--c-orange);
+    border-color: var(--c-orange);
+    color: #fff;
+    box-shadow: var(--shadow-glow);
+  }
 
-  @media (min-width: 768px) {
-    .anigal__grid { grid-template-columns: repeat(3, 1fr); }
-    .anigal__item:first-child { grid-column: 1 / 3; }
+  .gal__arrow:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .gal__arrow--prev { left: var(--s-3); }
+  .gal__arrow--next { right: var(--s-3); }
+
+  @media (min-width: 600px) {
+    .gal__slide { flex: 0 0 45%; }
+    .gal__arrow--prev { left: calc(-1 * var(--s-6)); }
+    .gal__arrow--next { right: calc(-1 * var(--s-6)); }
+  }
+
+  @media (min-width: 900px) {
+    .gal__slide { flex: 0 0 35%; }
+  }
+
+  @media (min-width: 1200px) {
+    .gal__slide { flex: 0 0 30%; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .anigal__item img { transition: none; }
+    .gal__track { scroll-behavior: auto; }
+    .gal__slide,
+    .gal__slide :global(img) { transition: none; }
   }
 </style>
+
+<script>
+  document.querySelectorAll('.gal__slider-wrap').forEach((wrap) => {
+    const track = wrap.querySelector<HTMLElement>('[data-gal-track]');
+    const prevBtn = wrap.querySelector<HTMLButtonElement>('[data-gal-prev]');
+    const nextBtn = wrap.querySelector<HTMLButtonElement>('[data-gal-next]');
+    if (!track) return;
+
+    const getScrollAmount = () => {
+      const slide = track.querySelector('.gal__slide') as HTMLElement | null;
+      return slide ? slide.offsetWidth + 16 : 300;
+    };
+
+    const updateArrows = () => {
+      if (prevBtn) prevBtn.disabled = track.scrollLeft <= 2;
+      if (nextBtn) nextBtn.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    };
+
+    updateArrows();
+    track.addEventListener('scroll', updateArrows, { passive: true });
+    prevBtn?.addEventListener('click', () => track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' }));
+    nextBtn?.addEventListener('click', () => track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' }));
+  });
+</script>

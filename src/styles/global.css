@@ -492,9 +492,11 @@ p { text-wrap: pretty; }
 
 .section__eyebrow {
   display: inline-block;
-  font-size: 0.68rem;
+  font-size: 16px;
+  font-style: normal;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  line-height: 18.5px;
+  letter-spacing: 2.176px;
   text-transform: uppercase;
   color: var(--c-orange);
   margin-bottom: var(--s-5);
@@ -612,7 +614,7 @@ p { text-wrap: pretty; }
   html { font-size: 17px; }
 
   .home-h2 { font-size: 18px; line-height: 1.15; letter-spacing: 0.13em; }
-  .section__eyebrow { font-size: calc(0.68rem + 1px); }
+  .section__eyebrow { font-size: 16px; line-height: 18.5px; letter-spacing: 2.176px; }
   .btn--sm { font-size: calc(0.72rem + 1px); }
 }
 

@@ -16,6 +16,9 @@ const siteUrl = 'https://surfcenter-verdon.fr';
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const POSTS_PER_PAGE = 5;
+const totalPages = Math.max(1, Math.ceil(posts.length / POSTS_PER_PAGE));
+const pagePosts = posts.slice(0, POSTS_PER_PAGE);
 
 const jsonLd = [
   {
@@ -66,15 +69,15 @@ function formatDate(date: Date): string {
         <p class="blg-empty">Aucun article pour le moment. Revenez bientôt !</p>
       )}
 
-      {posts.length > 0 && (
+      {pagePosts.length > 0 && (
         <div class="blg-layout">
           <div class="blg-main">
-            <a href={`/blog/${posts[0].id}`} class="blg-feature reveal" aria-label={`Lire : ${posts[0].data.title}`}>
+            <a href={`/blog/${pagePosts[0].id}`} class="blg-feature reveal" aria-label={`Lire : ${pagePosts[0].data.title}`}>
               <div class="blg-feature__media">
                 <img
                   class="blg-feature__img"
-                  src={posts[0].data.image}
-                  alt={posts[0].data.imageAlt}
+                  src={pagePosts[0].data.image}
+                  alt={pagePosts[0].data.imageAlt}
                   width="1400"
                   height="800"
                   loading="eager"
@@ -84,14 +87,14 @@ function formatDate(date: Date): string {
               </div>
               <div class="blg-feature__content">
                 <div class="blg-feature__tags">
-                  {posts[0].data.tags.slice(0, 3).map((tag) => (
+                  {pagePosts[0].data.tags.slice(0, 3).map((tag) => (
                     <span class="blg-tag blg-tag--dark">{tag}</span>
                   ))}
                 </div>
-                <h3 class="blg-feature__title">{posts[0].data.title}</h3>
-                <p class="blg-feature__excerpt">{posts[0].data.description}</p>
+                <h3 class="blg-feature__title">{pagePosts[0].data.title}</h3>
+                <p class="blg-feature__excerpt">{pagePosts[0].data.description}</p>
                 <div class="blg-feature__meta">
-                  <time datetime={posts[0].data.date.toISOString().slice(0, 10)}>{formatDate(posts[0].data.date)}</time>
+                  <time datetime={pagePosts[0].data.date.toISOString().slice(0, 10)}>{formatDate(pagePosts[0].data.date)}</time>
                   <span class="blg-feature__dot" aria-hidden="true">·</span>
                   <span class="blg-feature__cta">Lire l’article <span aria-hidden="true">→</span></span>
                 </div>
@@ -99,7 +102,7 @@ function formatDate(date: Date): string {
             </a>
 
             <div class="blg-grid">
-              {posts.slice(1).map((post, i) => (
+              {pagePosts.slice(1).map((post, i) => (
                 <a href={`/blog/${post.id}`} class="blg-card reveal" aria-label={`Lire : ${post.data.title}`}>
                   <div class="blg-card__visual">
                     <img
@@ -127,6 +130,13 @@ function formatDate(date: Date): string {
                 </a>
               ))}
             </div>
+
+            {totalPages > 1 && (
+              <nav class="blg-pagi" aria-label="Pagination du blog">
+                <a class="blg-pagi__btn" href="/blog/page/2">Page suivante <span aria-hidden="true">→</span></a>
+                <span class="blg-pagi__info">1 / {totalPages}</span>
+              </nav>
+            )}
           </div>
 
           <aside class="blg-aside reveal reveal-d1" aria-label="Actions rapides">
@@ -291,6 +301,46 @@ function formatDate(date: Date): string {
     min-width: 0;
   }
 
+  .blg-pagi {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    margin-top: var(--s-10);
+  }
+
+  .blg-pagi__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    text-decoration: none;
+    color: var(--c-text);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    padding: 0.9rem 1.4rem;
+    border-radius: var(--r-full);
+    border: 1px solid var(--c-border-light);
+    background: var(--c-bg);
+  }
+
+  :global([data-theme='dark']) .blg-pagi__btn {
+    border-color: var(--c-border);
+    background: var(--c-surface);
+  }
+
+  .blg-pagi__btn:hover {
+    border-color: var(--c-orange);
+  }
+
+  .blg-pagi__info {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--c-text-muted);
+    letter-spacing: 0.04em;
+  }
+
   .blg-card {
     display: flex;
     flex-direction: column;
@@ -406,13 +456,13 @@ function formatDate(date: Date): string {
   .blg-cta {
     border-radius: var(--r-xl);
     border: 1px solid var(--c-border-light);
-    background: linear-gradient(180deg, rgba(38, 207, 255, 0.10) 0%, rgba(38, 207, 255, 0.00) 100%), var(--c-bg);
+    background: linear-gradient(180deg, rgba(38, 207, 255, 0.00) 0%, rgba(38, 207, 255, 0.10) 100%), var(--c-bg);
     padding: var(--s-7);
   }
 
   :global([data-theme='dark']) .blg-cta {
     border-color: var(--c-border);
-    background: linear-gradient(180deg, rgba(38, 207, 255, 0.12) 0%, rgba(38, 207, 255, 0.00) 100%), var(--c-surface);
+    background: linear-gradient(180deg, rgba(38, 207, 255, 0.00) 0%, rgba(38, 207, 255, 0.12) 100%), var(--c-surface);
   }
 
   .blg-cta__eyebrow {

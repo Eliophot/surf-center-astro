@@ -5,6 +5,8 @@ import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import cloudflare from "@astrojs/cloudflare";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const isProduction = process.env.NODE_ENV === 'production' && !process.env.NOINDEX;
@@ -30,4 +32,6 @@ export default defineConfig({
       },
     },
   },
+
+  adapter: cloudflare()
 });

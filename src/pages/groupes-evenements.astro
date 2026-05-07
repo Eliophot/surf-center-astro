@@ -1,12 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import EventHero from '../components/events/EventHero.astro';
-import EventIntro from '../components/events/EventIntro.astro';
-import FormulaTable from '../components/events/FormulaTable.astro';
+import LocationHero from '../components/locations/LocationHero.astro';
+import SectionOneImage from '../components/sections/SectionOneImage.astro';
+import FormulaSwitcher from '../components/events/FormulaSwitcher.astro';
 import ContactForm from '../components/events/ContactForm.astro';
-import BookingCTA from '../components/locations/BookingCTA.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import TrustBadges from '../components/v11/TrustBadges.astro';
 import { proFormulas, privateFormulas } from '../data/events';
+
+import imgHero from '../assets/images/concert-surfcenter-lac-sainte-croix.png';
+import imgEvjf from '../assets/images/location-bateau-electriques-evjf-lac-sainte-croix.jpg';
 
 const title = 'Groupes & Événements — Team building, EVJF, concerts | Surf Center Verdon';
 const description = 'Organisez votre événement au lac de Sainte-Croix : team building, séminaire, EVJF, anniversaire, concert privé. Privatisation, activités nautiques, restauration — Surf Center, Gorges du Verdon.';
@@ -56,28 +59,42 @@ const jsonLd = [
 ---
 
 <Layout title={title} description={description} jsonLd={jsonLd}>
-  <EventHero />
-  <Breadcrumbs items={[
-    { label: 'Accueil', href: '/' },
-    { label: 'Groupes & Événements' },
-  ]} />
-  <EventIntro />
-  <FormulaTable
-    eyebrow="Professionnels"
-    title="Formules entreprises"
-    formulas={proFormulas}
-    id="pro"
-    surface
-  />
-  <FormulaTable
-    eyebrow="Privés"
-    title="Événements privés"
-    formulas={privateFormulas}
-    id="prives"
-  />
+  <div class="gepage">
+    <LocationHero
+      title={['Groupes', '& Événements']}
+      subtitle="Team building · EVJF/EVG · Privatisation · Concerts"
+      image={imgHero}
+      alt="Concert au coucher de soleil au Surf Center — lac de Sainte-Croix"
+    />
+
+    <Breadcrumbs items={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Groupes & Événements' },
+    ]} />
+
+    <SectionOneImage
+      id="intro"
+      eyebrow="Organisation"
+      title="Votre événement<br/>au bord du lac"
+      text="Le Surf Center accueille vos événements professionnels et privés dans un cadre exceptionnel. Face au lac de Sainte-Croix, au cœur des Gorges du Verdon, nous organisons avec vous une expérience sur mesure : activités nautiques, restauration, concerts et privatisation."
+      image={{ src: imgEvjf, alt: "Groupe d'amis au lac — événement privé au Surf Center" }}
+      imgIcon={{ src: '/figma/resto-icon.svg', alt: '' }}
+      tags={['Cadre unique', 'Sur mesure', 'Restauration sur place', 'Interlocuteur dédié']}
+      style="background: linear-gradient(180deg, rgba(38, 207, 255, 0.00) 0%, rgba(38, 207, 255, 0.10) 100%);"
+    />
+
+    <FormulaSwitcher
+      proFormulas={proFormulas}
+      privateFormulas={privateFormulas}
+      id="formulas"
+    />
   <ContactForm />
-  <BookingCTA
-    title="Un projet en tête ?"
-    text="Contactez-nous pour recevoir un devis personnalisé. Nous vous répondons sous 24h."
-  />
+  <TrustBadges />
+  </div>
 </Layout>
+
+<style>
+  .gepage :global(.section) {
+    padding-block: clamp(2.5rem, 6vw, 5rem);
+  }
+</style>

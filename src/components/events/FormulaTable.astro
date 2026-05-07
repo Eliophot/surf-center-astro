@@ -7,12 +7,17 @@ interface Props {
   formulas: EventFormula[];
   id: string;
   surface?: boolean;
+  style?: string;
 }
 
-const { eyebrow, title, formulas, id, surface = false } = Astro.props;
+const { eyebrow, title, formulas, id, surface = false, style } = Astro.props;
 ---
 
-<section class:list={['fmtable section', { 'section--surface': surface }]} aria-labelledby={`${id}-title`}>
+<section
+  class:list={['fmtable section', { 'section--surface': surface }]}
+  aria-labelledby={`${id}-title`}
+  style={style}
+>
   <div class="container">
     <header class="section__header reveal">
       <span class="section__eyebrow">{eyebrow}</span>
